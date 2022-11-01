@@ -1,0 +1,12 @@
+{
+    "panelSection_PartUnfoldGroup": "분류",
+    "l2Product" : "대분류",
+    "l2ParentAssy" : "중분류",
+    "registrationButton":"저장",
+    "cancelButton":"취소",
+    "panelSection_StnadardGroup":"SOD 기준",
+    "severity":"심각도",
+    "occurence":"발생도",
+    "detection":"검출도",
+    "objectName" :"기준 명"
+}

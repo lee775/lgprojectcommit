@@ -1,0 +1,280 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-break.directive",
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-textarea.directive",
+        "js/aw-popup2.directive",
+        "js/aw-listbox.directive",
+        "js/exist-when.directive",
+        "js/aw-checkbox.directive",
+        "css/questionAnswerView.css",
+        "js/aw-widget.directive"
+    ],
+    "data": {
+        "questionTitle": {
+            "displayName": "{{i18n.questionContent}}",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "maxLength": 128,
+            "renderingHint": "textbox",
+            "arrayLength": 1
+        },
+        "answerContent": {
+            "displayName": "{{i18n.answerContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "faqAnswerContent":{
+            "displayName": "{{i18n.answerContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "answerEdit":{
+            "displayName": "{{i18n.answerContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "numberOfLines": 6
+        },
+        "listPart": {
+            "displayName": "{{i18n.questionCategory}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listIssue": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listPartValues": {
+            "type": "STRING",
+            "dbValue": []
+        },
+        "listIssueValues": {
+            "type": "STRING",
+            "dbValue": []
+        },
+        "listExpertDiv": {
+            "displayName": "{{i18n.expertDiv}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listExpert": {
+            "displayName": "{{i18n.expert}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listExpertDivValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "",
+                    "propInternalValue": ""
+                },
+                {
+                    "propDisplayValue": "O",
+                    "propInternalValue": "O"
+                },
+                {
+                    "propDisplayValue": "X",
+                    "propInternalValue": "X"
+                }
+            ]
+        },
+        "listExpertValues": {
+            "type": "STRING",
+            "dbValue": []
+        },
+        "checkExpertQ":{
+            "displayName": "{{i18n.expertQuestion}}",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.expertQuestion}}",
+            "labelPosition": "PROPERTY_LABEL_AT_TOP"
+        },
+        "qnaAnswerEdit":{
+            "displayName": "{{i18n.questionContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "actions": {
+        "editQna":{
+            "actionType":"JSFunction",
+            "method":"editQna",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "closePopup":{
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "loadBeforeData":{
+            "actionType":"JSFunction",
+            "method":"loadBeforeData",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "addFaq":{
+            "actionType":"JSFunction",
+            "method":"addFaq",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "editFaq":{
+            "actionType":"JSFunction",
+            "method":"editFaq",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "editExpert":{
+            "actionType":"JSFunction",
+            "method":"editExpert",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "initializeEdit": {
+            "actionType": "JSFunction",
+            "method": "initializeEdit",
+            "deps": "js/popUpsService"
+        },
+        "initializeEditAnswer": {
+            "actionType": "JSFunction",
+            "method": "initializeEditAnswer",
+            "deps": "js/popUpsService"
+        },
+        "loadEdit":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                    "action": "initializeEdit"
+                },
+                {
+                    "action":"initializeEditAnswer"
+                },
+                {
+                    "action": "loadBeforeData"
+                }
+            ]
+        },
+        "popViewResizing":{
+            "actionType":"JSFunction",
+            "method": "popViewResizing",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "changeExpert":{
+            "actionType":"JSFunction",
+            "method": "changeExpert",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "checkExpert":{
+            "actionType":"JSFunction",
+            "method": "checkExpert",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "changeIssue":{
+            "actionType":"JSFunction",
+            "method": "changeIssue",
+            "deps": "js/knowledgeSidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        }
+    },
+    "i18n": {
+        "helloText": [ "lgepKnowldegeManageMessages" ],
+        "ok" : [ "lgepKnowldegeManageMessages" ],
+        "close" : [ "lgepKnowldegeManageMessages" ],
+        "edit" : [ "lgepKnowldegeManageMessages" ],
+        "editing":[ "lgepKnowldegeManageMessages" ],
+        "answerContent":[ "lgepKnowldegeManageMessages" ],
+        "questionContent":[ "lgepKnowldegeManageMessages" ],
+        "find": ["lgepKnowldegeManageMessages"],
+        "choose":["lgepKnowldegeManageMessages"],
+        "expert":["lgepKnowldegeManageMessages"],
+        "expertQuestion":["lgepKnowldegeManageMessages"],
+        "expertDiv":["lgepKnowldegeManageMessages"],
+        "questionTitle":["lgepKnowldegeManageMessages"],
+        "questionPoint":["lgepKnowldegeManageMessages"],
+        "questionCategory":["lgepKnowldegeManageMessages"]
+    },
+    "conditions": {
+        "showCategory": {
+            "expression": "data.showCategory === 'show'"
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "aw.windowResize",
+            "action": "popViewResizing"
+        },
+        {
+            "eventId": "editPopupOpen.complete",
+            "action": "loadEdit"
+        },
+        {
+            "eventId": "PopupEditQna.contentLoaded",
+            "action": "loadEdit"
+        }
+    ]
+}

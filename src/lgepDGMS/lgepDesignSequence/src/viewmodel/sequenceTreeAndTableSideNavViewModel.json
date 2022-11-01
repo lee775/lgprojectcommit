@@ -1,0 +1,407 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-icon-button.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-command-panel.directive",
+        "js/aw-textbox.directive",
+        "js/aw-header-props.directive",
+        "js/aw-command-bar.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-enter-key.directive",
+        "js/aw-include.directive",
+        "js/visible-when.directive"
+    ],
+    "onEvent": [
+    ],
+    "actions": {
+        "deleteSequenceRelationAndObject": {
+            "actionType": "JSFunction",
+            "method": "deleteSequenceRelationAndObject",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "deps": "js/sequenceDatesetCreateService"
+        },
+        "treeReload": {
+            "actionType": "JSFunction",
+            "method": "treeReload",
+            "outputData": {
+                "searchState": "searchState"
+            },
+            "deps": "js/sequenceService"
+        },
+        "CreateObjPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "sequenceCreateObjPopup",
+                    "locals": {
+                        "caption": "{{i18n.createProcedure}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "{{data.setSequenceAddWidth}}",
+                        "height": "{{data.setSequenceAddHeight}}"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "openMoreinfoComplete"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "selDataSet": {
+            "actionType": "JSFunction",
+            "method": "selDataSet",
+            "inputData": {
+                "data": "{{data.eventData.selectedObjects[0]}}",
+                "state": "1"
+            },
+            "outputData": {
+                "result": "result"
+            },
+            "deps": "js/sequenceService"
+        },
+        "selDataSetItem": {
+            "actionType": "JSFunction",
+            "method": "selDataSetItem",
+            "inputData": {
+                "data": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "result": "result",
+                "setSequenceAddWidth": "setWidth",
+                "setSequenceAddHeight": "setHeight"
+            },
+            "deps": "js/sequenceService"
+        },
+        "selectCheckItem": {
+            "actionType": "JSFunction",
+            "method": "selectCheckItem",
+            "inputData": {
+                "data": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "resultItem": "resultItem"
+            },
+            "deps": "js/sequenceService"
+        },
+        "searchResult": {
+            "actionType": "JSFunction",
+            "method": "searchData",
+            "inputData": {
+                "value": "{{data.searchingName.dbValue}}"
+            },
+            "outputData": {
+                "searchState": "searchState",
+                "result": "result",
+                "searchResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "checkListCopyResult": {
+            "actionType": "JSFunction",
+            "method": "checkListCopyResult",
+            "outputData": {
+                "result": "result",
+                "checkListCopyResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "applyFilterFacets": {
+            "actionType": "JSFunction",
+            "method": "subDataLoad",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "getFilterFacetData": {
+            "actionType": "JSFunction",
+            "method": "getFilterFacetData",
+            "inputData": {
+                "filterFacetInput": "{{filterFacetInput}}"
+            },
+            "outputData": {
+                "fullData": ""
+            },
+            "deps": "js/sequenceService"
+        },
+        "getDataUrlSetting": {
+            "actionType": "JSFunction",
+            "method": "getDataUrlSetting",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "designStdTableLoad": {
+            "actionType": "JSFunction",
+            "method": "designStdTableLoad",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "result": "result",
+                "designStdResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "dataSetLoad": {
+            "actionType": "JSFunction",
+            "method": "dataSetLoad",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "result": "result",
+                "dataSetResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "createObjAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "selDataSetItem"
+                },
+                {
+                    "condition": "conditions.cond1",
+                    "action": "CreateObjPopup"
+                }
+            ]
+        },
+        "searching": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "treeReload"
+                },
+                {
+                    "action": "searchResult"
+                }
+            ]
+        },
+        "onInitAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getDataUrlSetting"
+                }
+            ]
+        }
+    },
+    "data": {
+        "addBtn": {
+            "action": "createObjAction",
+            "iconName": "Add",
+            "tooltip": "{{i18n.add}}"
+        },
+        "deleteBtn": {
+            "action": "deleteSequenceRelationAndObject",
+            "iconName": "Remove",
+            "tooltip": "{{i18n.delete}}"
+        },
+        "relodeBtn": {
+            "action": "treeReload",
+            "iconName": "Refresh",
+            "tooltip": "{{i18n.refresh}}"
+        },
+        "searchBtn": {
+            "action": "searching",
+            "iconName": "Search",
+            "tooltip": "{{i18n.search}}"
+        },
+        "pageSize": 40,
+        "searchingName": {
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "requiredText": "{{i18n.requiredText}}"
+        }
+    },
+    "dataProviders": {
+        "searchData": {
+            "action": "searchResult",
+            "response": "{{data.searchResults}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetResults": "{{data.filterFacetResults}}"
+        }
+    },
+    "columnProviders": {
+        "searchColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "이름",
+                    "minWidth": 60,
+                    "width": 150
+                }
+            ],
+            "sortCriteria": []
+        }
+    },
+    "grids": {
+        "sequenceSearchTable": {
+            "dataProvider": "searchData",
+            "columnProvider": "searchColumn",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": true,
+                "enableGridMenu": true
+            }
+        }
+    },
+    "functions": {
+        "applySortAndFilterRows": {
+            "functionName": "applySortAndFilterRows",
+            "parameters": [
+                "{{data.columnProviders.searchColumn.columnFilters}}",
+                "{{data.columnProviders.searchColumn.sortCriteria}}",
+                "{{data.dataProviders.searchData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.searchColumn.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        },
+        "filterRowsWithSort": {
+            "functionName": "filterRowsWithSort",
+            "parameters": [
+                "{{data.columnProviders.searchColumn.sortCriteria}}",
+                "{{data.dataProviders.searchData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        }
+    },
+    "conditions": {
+        "cond1": {
+            "expression": "data.result===true"
+        },
+        "showCheck": {
+            "expression": "data.selectedTab.tabKey === 'checkList'"
+        },
+        "showDesign": {
+            "expression": "data.selectedTab.tabKey === 'design'"
+        },
+        "showDataset": {
+            "expression": "data.selectedTab.tabKey === 'dataset'"
+        },
+        "itemSel": {
+            "expression": "data.resultItem === true"
+        },
+        "datasetSel": {
+            "expression": "data.resultDatasetSel === true"
+        },
+        "sequenceDeleteReady": {
+            "expression": "data.deleteReady === true"
+        }
+    },
+    "i18n": {
+        "edit": [
+            "lgepDesignSequenceMessages"
+        ],
+        "close": [
+            "lgepDesignSequenceMessages"
+        ],
+        "lookup": [
+            "lgepDesignSequenceMessages"
+        ],
+        "large": [
+            "lgepDesignSequenceMessages"
+        ],
+        "medium": [
+            "lgepDesignSequenceMessages"
+        ],
+        "small": [
+            "lgepDesignSequenceMessages"
+        ],
+        "checkCriteria": [
+            "lgepDesignSequenceMessages"
+        ],
+        "type": [
+            "lgepDesignSequenceMessages"
+        ],
+        "code": [
+            "lgepDesignSequenceMessages"
+        ],
+        "category": [
+            "lgepDesignSequenceMessages"
+        ],
+        "goals": [
+            "lgepDesignSequenceMessages"
+        ],
+        "add": [
+            "lgepDesignSequenceMessages"
+        ],
+        "docuNumber": ["lgepDesignSequenceMessages"],
+        "title": ["lgepDesignSequenceMessages"],
+        "rev": ["lgepDesignSequenceMessages"],
+        "Type": ["lgepDesignSequenceMessages"],
+        "user": ["lgepDesignSequenceMessages"],
+        "system": ["lgepDesignSequenceMessages"],
+        "createDate": ["lgepDesignSequenceMessages"],
+        "dataset": ["lgepDesignSequenceMessages"],
+        "datasetType": ["lgepDesignSequenceMessages"],
+        "datasetUser": ["lgepDesignSequenceMessages"],
+        "datasetDate": ["lgepDesignSequenceMessages"],
+        "sequenceEdit": ["lgepDesignSequenceMessages"],
+        "selectChecklist": ["lgepDesignSequenceMessages"],
+        "designStandardSelect": ["lgepDesignSequenceMessages"],
+        "treeEdit": ["lgepDesignSequenceMessages"],
+        "createProcedure": ["lgepDesignSequenceMessages"],
+        "refresh": ["lgepDesignSequenceMessages"],
+        "search": ["lgepDesignSequenceMessages"],
+        "requiredText": ["lgepDesignSequenceMessages"],
+        "writer": ["lgepDesignSequenceMessages"],
+        "dateCreated": ["lgepDesignSequenceMessages"],
+        "delete": ["lgepDesignSequenceMessages"],
+        "lastModifiedDate": ["lgepDesignSequenceMessages"],
+        "name": ["lgepDesignSequenceMessages"],
+        "attachment": ["lgepDesignSequenceMessages"],
+        "datasetDownLoad": ["lgepDesignSequenceMessages"],
+        "designStdAdd": ["lgepDesignSequenceMessages"],
+        "checklistAdd": ["lgepDesignSequenceMessages"],
+        "editItem": ["lgepDesignSequenceMessages"],
+        "treeManage": ["lgepDesignSequenceMessages"],
+        "datasetSize": ["lgepDesignSequenceMessages"],
+        "addCheckListTooltip": ["lgepDesignSequenceMessages"],
+        "addDesignListTooltip": ["lgepDesignSequenceMessages"],
+        "editTooltip": ["lgepDesignSequenceMessages"],
+        "treeEditTooltip" : ["lgepDesignSequenceMessages"],
+        "downLoadTooltip" : ["lgepDesignSequenceMessages"],
+        "checkListTooltip" : "",
+        "designTooltip" : "",
+        "datasetTooltip" : "",
+        "fileUploadTooltip": ["lgepDesignSequenceMessages"],
+        "checkList": ["lgepDesignSequenceMessages"],
+        "designStandard": ["lgepDesignSequenceMessages"],
+        "download": ["lgepDesignSequenceMessages"],
+        "treeView": ["lgepDesignSequenceMessages"],
+        "sequenceTree": ["lgepDesignSequenceMessages"]
+    },
+    "lifecycleHooks": {
+        "onInit": "onInitAction"
+    }
+}

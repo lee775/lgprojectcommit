@@ -1,0 +1,250 @@
+{
+    "commands": {
+        "editQaListCommand": {
+            "iconId": "cmdEdit",
+            "isGroup": false,
+            "title": "{{i18n.edit}}"
+        },
+        "createQaListCommand": {
+            "iconId": "cmdNew",
+            "isGroup": false,
+            "title": "생성"
+        },
+        "deleteQaListCommand": {
+            "iconId": "cmdDelete",
+            "isGroup": false,
+            "title": "{{i18n.delete}}"
+        },
+        "addListCommand": {
+            "iconId": "cmdAdd",
+            "isGroup": false,
+            "title": "{{i18n.add}}"
+        },
+        "createGroupCommand": {
+            "iconId": "cmdNew",
+            "isGroup": true,
+            "title": "{{i18n.add}}"
+        },
+        "createGroupChildA":{
+            "iconId": "cmdAdd",
+            "isGroup": false,
+            "title": "{{i18n.add}}"
+        },
+        "createGroupChildB":{
+            "iconId": "cmdAdd",
+            "title": "{{i18n.addAnswer}}"
+        },
+        "cmdKnowledgeManagement": {
+            "iconId": "cmdReuseDocument",
+            "title": "{{i18n.cmdKnowledgeManagementTitle}}",
+            "description": "{{i18n.cmdKnowledgeManagementTitle}}"
+        }
+    },
+    "commandHandlers": {
+        "editQaListCommandHandler": {
+            "id": "editQaListCommand",
+            "action": "editQaListCommandAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "createQaListCommandHandler": {
+            "id": "createQaListCommand",
+            "action": "createQaListCommandAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "deleteQaListCommandHandler": {
+            "id": "deleteQaListCommand",
+            "action": "deleteQaListCommandAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "addListCommandHandler": {
+            "id": "addListCommand",
+            "action": "addListCommandAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "createGroupChildAHandler":{
+            "id":"createGroupChildA",
+            "action": "createGroupChildAAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "createGroupChildBHandler":{
+            "id":"createGroupChildB",
+            "action": "createGroupChildBAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "cmdKnowledgeManagementHandler": {
+            "id":"cmdKnowledgeManagement",
+            "action": "cmdKnowledgeManagementAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        }
+    },
+    "commandPlacements": {
+        "createGroupCommand":{
+            "id":"createGroupCommand",
+            "priority": 100
+        },
+        "editQaListCommandPlace": {
+            "id": "editQaListCommand",
+            "uiAnchor": "qaCommand",
+            "priority": 200
+        },
+        "deleteQaListCommandPlace": {
+            "id": "deleteQaListCommand",
+            "uiAnchor": "qaCommand",
+            "priority": 300
+        },
+        "addTableListCommandPlace": {
+            "id": "addListCommand",
+            "uiAnchor": "tableCommand",
+            "priority": 400
+        },
+        "editTableListCommandPlace": {
+            "id": "editQaListCommand",
+            "uiAnchor": "tableCommand",
+            "priority": 500
+        },
+        "deleteTableListCommandPlace": {
+            "id": "deleteQaListCommand",
+            "uiAnchor": "tableCommand",
+            "priority": 600
+        },
+        "editOnlyTableCommandPlace": {
+            "id": "editQaListCommand",
+            "uiAnchor": "editOnlytableCommand",
+            "priority": 700
+        },
+        "createGroupChildAPlacement":{
+            "id":"createGroupChildA",
+            "uiAnchor": "qaCommand",
+            "priority": 100
+        },
+        "createGroupChildBPlacement":{
+            "id":"createGroupChildB",
+            "parentGroupId": "createGroupCommand",
+            "priority": 300
+        },
+        "createFaqListCommandPlace":{
+            "id": "addListCommand",
+            "uiAnchor": "faqCommand",
+            "priority": 20
+        },
+        "editFaqListCommandPlace": {
+            "id": "editQaListCommand",
+            "uiAnchor": "faqCommand",
+            "priority": 200
+        },
+        "deleteFaqListCommandPlace": {
+            "id": "deleteQaListCommand",
+            "uiAnchor": "faqCommand",
+            "priority": 300
+        }
+    },
+    "actions": {
+        "editQaListCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "qaList.edit"
+                    }
+                ]
+            }
+        },
+        "createQaListCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "qaList.new"
+                    }
+                ]
+            }
+        },
+        "deleteQaListCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "qaList.del"
+                    }
+                ]
+            }
+        },
+        "addListCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "qaList.add"
+                    }
+                ]
+            }
+        },
+        "createGroupChildAAction":{
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "question.add"
+                    }
+                ]
+            }
+        },
+        "createGroupChildBAction":{
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "answer.add"
+                    }
+                ]
+            }
+        },
+        "cmdKnowledgeManagementAction": {
+            "actionType": "Navigate",
+            "navigateTo": "KnowledgeManageDashboardList",
+            "navigationParams": {}
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "tcWorkspace": {
+            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+        },
+        "selectedDba": {
+            "expression": "ctx.userSession.props.group_name.uiValue == 'dba'"
+        }
+    },
+    "i18n": {
+        "cmdKnowledgeManagementTitle": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "add": ["lgepTechnicalMessages"],
+        "edit": ["lgepTechnicalMessages"],
+        "delete": ["lgepTechnicalMessages"],
+        "ok": ["lgepKnowldegeManageMessages"],
+        "addQuestion": ["lgepKnowldegeManageMessages"],
+        "addAnswer": ["lgepKnowldegeManageMessages"]
+    }
+}

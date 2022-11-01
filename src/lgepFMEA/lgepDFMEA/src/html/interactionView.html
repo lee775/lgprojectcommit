@@ -1,0 +1,21 @@
+<aw-command-panel caption="i18n.interactionPanelCaption" context="data">
+  <aw-panel>
+    <aw-panel-body>
+      <aw-flex-row class="interaction-partsection">
+        <aw-label  prop="data.selectPart"></aw-label>
+        <span class="partsection__value"> {{data.selectPart.dispValue}}</span>
+    </aw-flex-row>
+      <!-- <aw-textbox prop="data.selectPart"></aw-textbox> -->
+      <aw-widget prop="data.effectType" hint="checkboxoptionlov"></aw-widget>
+      <!-- <aw-listbox action="selectionEffectType" prop="data.effectType" list="data.effectTypes.dbValue"></aw-listbox> -->
+      <aw-tab-set tabs="data.tabModels">
+        <aw-panel-body visible-when="conditions.influencing">
+          <aw-splm-table exist-when="conditions.influencing" gridid="influencingTable"></aw-splm-table>
+        </aw-panel-body>
+        <aw-panel-body visible-when="conditions.affected">
+          <aw-splm-table exist-when="conditions.affected" gridid="affectedTable"></aw-splm-table>
+        </aw-panel-body>
+      </aw-tab-set>
+    </aw-panel-body>
+  </aw-panel>
+</aw-command-panel>

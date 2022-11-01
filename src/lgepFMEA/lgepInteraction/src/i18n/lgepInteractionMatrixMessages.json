@@ -1,0 +1,17 @@
+{
+    "helloText": "!! Hello World !!",
+    "interactionMatrixLocationHeaderTitle": "interactionMatrixLocation",
+    "interactionMatrixLocationBrowserTitle": "interactionMatrixLocation",
+    "interactionMatrixLocationBrowserSubTitle": "interactionMatrixLocation",
+    "interactionMatrixSubLocationTitle": "interactionMatrixSubLocation",
+    "interactionMatrixSubLocationChartTitle": "interactionMatrixSubLocation",
+    "interactionPopupDescRightTitle": "Interaccton Impact Review Guide",
+    "interactionTypeA": "A : mechanical",
+    "interactionTypeB": "B : Electrical",
+    "interactionTypeC": "C : Heat",
+    "interactionTypeD": "D : Chemical",
+    "interactionTypeE": "E : Radiative",
+    "interactionTypeAB": "AB : Mechanical - Electric",
+    "interactionTypeAC": "AC : Mechanical - Heat",
+    "interactionTypeAD": "AD : Mechanical - Chemical"
+}

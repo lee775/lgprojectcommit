@@ -1,0 +1,21 @@
+<style>
+
+.addTextBox{
+    width : 90%;
+    padding-left:3px;
+}
+
+</style>
+
+<aw-command-panel caption="add Folder">
+    <aw-flex-row>
+        <aw-textbox prop="data.addPartTitle" class = addTextBox></aw-textbox>
+    </aw-flex-row>
+    <aw-panel-footer>
+        <aw-action-section>
+            <aw-button action="addPartData" size="auto">생성</aw-button>
+            <aw-button action="buttonAction1" size="auto" button-type="negative">Close</aw-button>
+        </aw-action-section>
+    </aw-panel-footer>
+</aw-command-panel>
+

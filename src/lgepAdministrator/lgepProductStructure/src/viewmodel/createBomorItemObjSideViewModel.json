@@ -1,0 +1,157 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-command-panel.directive",
+        "js/aw-button.directive",
+        "js/aw-textbox.directive",
+        "js/aw-label.directive"
+
+        
+        
+    ],
+    "data": {
+        "addModelTitle":{
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "{{i18n.name}}",
+            "dispValue": ""
+        },
+        "addModelTitleText":{
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+
+    "actions": {
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "productStructureTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "result" : "result",
+                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}",
+                "uid": "uid"
+            },
+            "deps": "js/lgepProductStructureService"
+        },
+        "productStructureTree": {
+            "actionType": "JSFunction",
+            "method": "productStructureTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data":"{{data}}"
+            },
+            "deps": "js/lgepProductStructureService"
+        },
+        "selectedCtx":{
+            "actionType": "JSFunction",
+            "method": "selectedCtx",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepProductStructureService"
+        },
+        "closeSide": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose"
+                    }
+                ]
+            }
+        },
+        "addModel":{
+            "actionType": "JSFunction",
+            "method": "addModel",
+            "deps": "js/lgepProductStructureService",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            }
+        }
+    },
+
+    "dataProviders": {
+        "productStructureTreeDataProvider": {
+            "action": "loadData",
+            "initializeAction": "loadData",
+            "treeLoadResult": "{{data.treeLoadResult}}",
+            "inputData": {
+                "ctx":"{{ctx}}",
+                "accessMode": "tree",
+                "topNodeUid": "{{data.top}}"
+            }
+        }
+    },
+    "columnProviders": {
+        "productStructureTreeColumnProvider": {
+            "frozenColumnIndex": 1,
+            "columns": [
+                {
+                    "name": "",
+                    "minWidth": 80,
+                    "width": 80,
+                    "isTreeNavigation": true,
+                    "pinnedLeft": true
+                },
+                {
+                    "name": "object_name",
+                    "displayName": "이름",
+                    "minWidth": 80,
+                    "width": 100,
+                    "isTreeNavigation": false,
+                    "pinnedLeft": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "productStructureTree": {
+            "dataProvider": "productStructureTreeDataProvider",
+            "columnProvider": "productStructureTreeColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": false,
+                "enableGridMenu": false
+            }
+        }
+    },
+    "functions": {
+        "loadEmployeeTreeTableData": {
+            "functionName": "loadEmployeeTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}",
+                "{{data.columnProviders.productStructureTreeColumnProvider.sortCriteria}}",
+                "{{data.treeLoadInput}}"
+            ]
+        }
+    },
+
+    "i18n": {
+        "helloText": [ "lgepProductStructureMessages" ],
+        "name": [ "lgepProductStructureMessages" ],
+        "createButton":[ "lgepProductStructureMessages" ],
+        "closeButton":[ "lgepProductStructureMessages" ],
+        "add":[ "lgepProductStructureMessages" ]
+    },
+    
+    "onEvent": [
+        {
+            "eventId": "cdm.created",
+            "action": "closeSide"
+        }
+    ]
+}

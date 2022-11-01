@@ -1,0 +1,23 @@
+<aw-popup2>
+  <aw-progress-indicator name="fmeaPopupProgIndicator"></aw-progress-indicator>
+  <aw-panel>
+    <aw-panel-body class="popup-body">
+      <div class="create-additionalinfo">
+        <!-- 제품 -->
+        <aw-flex-row>
+          <aw-label class="label-column" prop="data.l2Product"></aw-label>
+          <span>{{data.l2Product.dbValue}}</span>
+          <!-- <aw-listbox isSelectOnly="true" class="form__listbox" prop="data.l2Product" list="data.l2ProductValues.dbValue"></aw-listbox> -->
+        </aw-flex-row>
+        <!-- FMEA명 -->
+        <aw-flex-row class="text-row">
+          <aw-textbox prop="data.dfmeaName"></aw-textbox>
+        </aw-flex-row>
+      </div>
+      </div>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="save">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

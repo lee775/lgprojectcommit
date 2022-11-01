@@ -1,0 +1,17 @@
+<aw-flex-column>
+    <aw-flex-row height="6f">
+        <aw-command-panel-section caption="i18n.expertChartTitle"></aw-command-panel-section>
+    </aw-flex-row>
+    <aw-flex-row height="fill">
+        <aw-flex-column class="relativeE">
+            <aw-flex-row height="5f">
+                <aw-listbox prop="data.chartModeChange" list="data.chartModeChangeValues.dbValue" isSelectOnly="true">
+                </aw-listbox>
+            </aw-flex-row>
+        </aw-flex-column>
+        <aw-chart chart-provider="data.chartProviders.columnChartProviderExpert"
+            visible-when="data.chartModeChange.dbValue==i18n.column"></aw-chart>
+        <aw-chart chart-provider="data.chartProviders.pieChartProviderExpert"
+            visible-when="data.chartModeChange.dbValue==i18n.pie"></aw-chart>
+    </aw-flex-row>
+</aw-flex-column>

@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-splm-table.directive",
+    "js/aw-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-row.directive",
+    "js/aw-sidenav.directive",
+    "css/masterListView.css"
+  ],
+  "data": {
+    "structureCreateInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    }
+  },
+  "actions": {
+    "getFilteredData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "outputData": {
+        "filterResults": "{{function:applySortAndFilterRows}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/structureListService"
+    },
+    "loadColumns": {
+      "actionType": "JSFunction",
+      "method": "loadColumns",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.fStructureTableProvider}}"
+      },
+      "deps": "js/structureListService"
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
+        },
+        {
+          "action": "applyFilterFacets"
+        }
+      ]
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/structureListService"
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/utils/fmeaTableSortFilterUtils"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRowAction",
+      "inputData": {
+        "selectionModel": "{{data.eventData.selectedObjects[0]}}",
+        "ctx":"{{ctx}}"
+      },
+      "deps": "js/cmListService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "pageUnMount",
+      "deps": "js/utils/fmeaCommonUtils"
+    }
+  },
+  "columnProviders": {
+    "fStructureTableColumnProvider": {
+      "loadColumnAction": "loadColumns"
+    }
+  },
+  "dataProviders": {
+    "fStructureTableProvider": {
+      "action": "getFilteredData",
+      "response": "{{data.filterResults}}",
+      "totalFound": "{{data.totalFound}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.fStructureTableColumnProvider.columnFilters}}",
+        "{{data.columnProviders.fStructureTableColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.fStructureTableProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ],
+      "deps": "js/utils/fmeaTableSortFilterUtils"
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": [
+        "{{data.columnProviders.fStructureTableColumnProvider.columnFilters}}",
+        "{{data.fullData}}"
+      ],
+      "deps": "js/utils/fmeaTableSortFilterUtils"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "fStructureTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    }
+  ],
+  "grids": {
+    "fmeaStructureTableGrid": {
+      "dataProvider": "fStructureTableProvider",
+      "columnProvider": "fStructureTableColumnProvider",
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true
+      }
+    }
+  },
+  "lifecycleHooks": {
+    "onUnmount": "unMount"
+  }
+}

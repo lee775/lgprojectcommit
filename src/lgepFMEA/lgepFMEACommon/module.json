@@ -1,0 +1,202 @@
+{
+  "name": "lgepFMEACommon",
+  "description": "This is the lgepFMEACommon module",
+  "skipTest": true,
+  "typeProperties": {
+    "typeProperties": {
+      "L2_DFMEARevision": {
+        "additionalProperties": [
+          {
+            "name": "item_revision_id"
+          },
+          {
+            "name": "l2_product"
+          }
+        ]
+      },
+      "L2_DFMEA": {
+        "additionalProperties": [
+          {
+            "name": "revision_list"
+          }
+        ]
+      },
+      "Item": {
+        "additionalProperties": [
+          {
+            "name": "revision_list"
+          },
+          {
+            "name": "items_tag"
+          }
+        ]
+      },
+      "L2_FMEAStructureRevision": {
+        "additionalProperties": [
+          {
+            "name": "l2_class"
+          },
+          {
+            "name": "object_name"
+          },
+          {
+            "name": "item_revision_id"
+          }
+        ]
+      },
+      "L2_FMEAFuncRevision": {
+        "additionalProperties": [
+          {
+            "name": "l2_function"
+          },
+          {
+            "name": "l2_function_s"
+          },
+          {
+            "name": "object_name"
+          },
+          {
+            "name": "item_revision_id"
+          },
+          {
+            "name": "l2_reqs"
+          }
+        ]
+      },
+      "L2_FMEAFailureRevision": {
+        "additionalProperties": [
+          {
+            "name": "l2_potential_failure_mode"
+          },
+          {
+            "name": "l2_potential_failure_mode_s"
+          },
+          {
+            "name": "l2_cause_of_failure_s"
+          },
+          {
+            "name": "l2_failure_effect_s"
+          },
+          {
+            "name": "l2_prevention_action"
+          },
+          {
+            "name": "l2_detection_action"
+          },
+          {
+            "name": "l2_classification"
+          },
+          {
+            "name": "l2_failure_effect"
+          },
+          {
+            "name": "l2_cause_of_failure"
+          },
+          {
+            "name": "object_name"
+          }
+        ]
+      },
+      "L2_FRequirementRevision": {
+        "additionalProperties": [
+          {
+            "name": "l2_requirements"
+          },
+          {
+            "name": "l2_requirements_s"
+          },
+          {
+            "name": "object_name"
+          }
+        ]
+      },
+      "BOMLine": {
+        "additionalProperties": [
+          {
+            "name": "L2_Precaution_Action"
+          },
+          {
+            "name": "L2_Detection_Action"
+          },
+          {
+            "name": "L2_Failure_Effect"
+          },
+          {
+            "name": "L2_Cause_Failure"
+          },
+          {
+            "name": "L2_Requirement"
+          },
+          {
+            "name": "L2_Severity"
+          },
+          {
+            "name": "L2_Occurence"
+          },
+          {
+            "name": "L2_Detection"
+          },
+          {
+            "name": "L2_Result_Severity"
+          },
+          {
+            "name": "L2_Result_Occurence"
+          },
+          {
+            "name": "L2_Result_Detection"
+          },
+          {
+            "name": "L2_Precautions"
+          },
+          {
+            "name": "L2_EtcNote"
+          },
+          {
+            "name": "L2_InspectionResults"
+          },
+          {
+            "name": "L2_Result_AP"
+          },
+          {
+            "name": "L2_AP"
+          }
+        ]
+      },
+      "L2_DetectionAction": {
+        "additionalProperties": [
+          {
+            "name": "l2_detection_action"
+          },
+          {
+            "name": "l2_detection_action_s"
+          },
+          {
+            "name": "l2_detection"
+          },
+          {
+            "name": "object_name"
+          }
+        ]
+      },
+      "L2_PrecautionAction": {
+        "additionalProperties": [
+          {
+            "name": "l2_precautions_action"
+          },
+          {
+            "name": "l2_precautions_action_s"
+          },
+          {
+            "name": "l2_occurence"
+          },
+          {
+            "name": "object_name"
+          },
+          {
+            "name": "l2_related_sources"
+          }
+        ]
+      }
+    }
+  }
+}

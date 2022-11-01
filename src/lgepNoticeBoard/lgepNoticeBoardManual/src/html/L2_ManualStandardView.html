@@ -1,0 +1,318 @@
+<style>
+    #summernoteBodyId {
+        position: relative;
+        /* width: 100%;
+        height: 100%; */
+    }
+
+    /* .noPading{
+        position: relative;
+    } */
+
+    .upArrowSpace {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 50px;
+        z-index: 999;
+    }
+
+    .upArrowSpace:hover {
+        background-color: rgba(175, 215, 225, 0.5);
+        cursor: pointer;
+    }
+
+    .upArrowSpace:hover .upArrow2 {
+        visibility: visible;
+    }
+
+    .upArrow {
+        display: none;
+    }
+
+    .upArrow2 {
+        position: absolute;
+        left: 45%;
+        top: 8%;
+        width: 100%;
+        height: 100%;
+        transform: rotate(90deg);
+        visibility: hidden;
+    }
+
+    .upArrow2 svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .downArrowSpace {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 25px;
+        z-index: 999;
+    }
+
+    .downArrowSpace:hover .downArrow2 {
+        visibility: visible;
+    }
+
+    .downArrowSpace:hover {
+        background-color: rgba(175, 215, 225, 0.5);
+        cursor: pointer;
+    }
+
+    .downArrow {
+        display: none;
+    }
+
+    .downArrow2 {
+        position: absolute;
+        left: 45%;
+        top: 8%;
+        transform: rotate(270deg);
+        visibility: hidden;
+    }
+
+    .downArrow2 svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .title {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: left;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    .btnTop {
+        padding: 7px 7px;
+    }
+
+    .txtTop {
+        margin-top: 8px;
+    }
+
+    .tableTop {
+        height: 30px;
+    }
+
+    .docHeader {
+        margin-top: 12px;
+    }
+
+    .checkCate {
+        margin-left: 3px;
+        margin-right: 15px;
+    }
+
+    .commandbar {
+        margin-right: 40px;
+    }
+
+    .addCheckTap {
+        margin-right: 2%;
+        padding: 0 35px;
+    }
+
+    .marginD {
+        margin: 0;
+    }
+
+    .mama {
+        padding: 0 15px;
+    }
+
+    .bye .aw-splm-tableHeaderRow {
+        display: none;
+    }
+
+    .bye .aw-splm-tableMenuButton {
+        display: none;
+    }
+
+    .tabtab {
+        margin-right: 40px;
+    }
+
+    form div div.aw-file-upload-fileName.ng-binding.ng-scope {
+        display: none;
+    }
+
+    .fileBtn div div.aw-file-upload-fileLabel.ng-binding {
+        background-color: #dc6914;
+        border-color: #843f0c;
+        color: #ffffff;
+        border-radius: 2px;
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        min-height: 1.5rem;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        padding: 0px 25px 0px 25px;
+    }
+
+    .fileBtn {
+        margin-top: 8px;
+        margin-right: -8px;
+        margin-left: -8px;
+    }
+
+    .noPading {
+        padding: 0;
+        overflow: scroll;
+    }
+
+    .noColor {
+        background: #F0F0F0;
+    }
+
+    .checkBoxCenter {
+        margin-top: 0.9%;
+        width: 11%;
+    }
+
+    .checkBoxCenter .aw-widgets-propertyContainer.aw-layout-flexRow {
+        margin-left: 5%;
+    }
+
+    .flas {
+        float: left;
+    }
+
+    .noSelCenter {
+        text-align: center;
+    }
+
+    .noneToolbar {
+        display: none;
+    }
+
+    .noneDisplay {
+        display: none;
+    }
+
+    .rowBasisDefault {
+        flex-basis: 114px;
+    }
+
+    .summernoteBasisDefault {
+        flex-basis: 1204px;
+    }
+
+    .importantBackground {
+        background: #f0f0f0 !important;
+    }
+
+    .aw-layout-panelSectionTitle {
+        background-color: #e0e0e0 !important;
+    }
+
+    #listboxIdStd>aw-widget>div>div>div>aw-property-val>div>div>aw-property-string-val>div>aw-property-lov-val>div>aw-property-error>div {
+        margin: -20px 0;
+    }
+
+    .checkBoxCenter {
+        margin-right: -20px;
+    }
+
+    #checkBoxCssId>div>aw-property-label {
+        margin-right: -258px;
+    }
+
+    #checkBoxCssId>div>div {
+        margin-right: -207px;
+    }
+
+    .marginRight{
+        margin-right: 10px;
+    }
+
+    .checkboxPosition{
+        margin-right: 10px;
+        margin-top: 12px;
+    }
+</style>
+<aw-flex-row class="afx-alt-content-background" justify="center" id="L2DesignStandardData">
+    <aw-sidenav id="treeNavPushLeft" config="data.treeNavPushLeftData"></aw-sidenav>
+    <!-- <aw-flex-column width="2">
+        <aw-include name="L2_DesignStandardTree" visible-when="!conditions.selValueConditions"></aw-include>
+        <aw-include name="L2_DesignStandardListOrTree" exist-when="conditions.selValueConditions"></aw-include>
+    </aw-flex-column> -->
+    <aw-splitter> </aw-splitter>
+    <aw-flex-column width="fill">
+        <aw-flex-row class="summernoteBasisDefault" id="summernoteId">
+            <aw-flex-column>
+                <aw-flex-row height="3f" justify="right" class="importantBackground">
+                    <aw-flex-column justify="center">
+                        <aw-flex-row justify="right" class="noColor" align-content="center">
+                            <!-- <aw-listbox prop="data.revisionListBox" list="data.revisionListBoxValues.dbValue" id="listboxIdStd" visible-when="conditions.selValueConditions"></aw-listbox> -->
+                            <!-- <aw-checkbox prop="data.summerNoteWidthMax" action="summerNoteImageWidthMax"
+                                class="checkBoxCenter" id="checkBoxCssId"></aw-checkbox> -->
+                                <aw-checkbox prop="data.chapterMergeView" class="checkboxPosition"></aw-checkbox>
+                            <aw-flex-column width="10f" class="marginRight">
+                                <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
+                            </aw-flex-column>
+                            <aw-button size="auto" class="checkCate mama" action="attachPopupAction" visible-when="conditions.selectedBookCond">{{i18n.FileAttach}}</aw-button>
+                            <aw-button size="auto" class="checkCate mama"
+                                action="createDgnBookPopup" visible-when="!conditions.selectedBookNoneManual">{{i18n.createDgnBook}}</aw-button>
+                            <aw-button size="auto" id="checkboxTabBtnId" class="checkCate mama"
+                                action="navModeBat">{{i18n.treeViewShowOrHide}}</aw-button>
+                            <!-- <aw-button button-type="sole" size="auto" class="checkCate mama"
+                                action="sidenavPushCommandRight">{{i18n.viewDetails}}</aw-button> -->
+                    </aw-flex-column>
+                </aw-flex-row>
+                <aw-separator></aw-separator>
+                <!-- <aw-flex-row visible-when="!conditions.pageOpenConditions">
+                    <aw-flex-column width="9">
+                        <aw-panel-section caption="기술문서 점수">
+                        </aw-panel-section>
+                        <aw-include name="L2_DesignStandardChart" visible-when="!conditions.selValueConditions">
+                        </aw-include>
+                    </aw-flex-column>
+                    <aw-separator is-vertical="true"></aw-separator>
+                    <aw-flex-column width="3">
+                        <aw-panel-section caption="{{i18n.mostPosts}}">
+                            <aw-list dataprovider="data.dataProviders.postList">
+                                <aw-flex-row>
+                                    <h4 style="margin-top: 15px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(243, 66, 95);"
+                                        exist-when="item.rank == 1">{{item.rank}}</h4>
+                                    <h4 style="margin-top: 15px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(0, 122, 179);"
+                                        exist-when="item.rank != 1">{{item.rank}}</h4>
+                                    <aw-default-cell vmo="item"></aw-default-cell>
+                                </aw-flex-row>
+                            </aw-list>
+                        </aw-panel-section>
+                    </aw-flex-column>
+                </aw-flex-row> -->
+                <aw-panel-body class="noPading" visible-when="conditions.pageOpenConditions">
+
+                    <body>
+                        <div id="summernoteBodyId">
+                            <div class="upArrowSpace">
+                                <aw-icon-button class="upArrow" size="large" command="data.upArrow">
+                                </aw-icon-button>
+                                <aw-icon-button class="upArrow2" size="large" command="data.upArrow2">
+                                </aw-icon-button>
+                            </div>
+                            <div class="downArrowSpace">
+                                <aw-icon-button class="downArrow" size="large" command="data.downArrow">
+                                </aw-icon-button>
+                                <aw-icon-button class="downArrow2" size="large" command="data.downArrow2">
+                                </aw-icon-button>
+                            </div>
+                            <div id="pxToEmChange" width="100%">
+                                <textarea id="designStandardSummernote"></textarea>
+                            </div>
+                        </div>
+                    </body>
+                </aw-panel-body>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-flex-column>
+</aw-flex-row>
+<aw-sidenav id="sidenavPushRight" config="data.sideNavRightData"></aw-sidenav>

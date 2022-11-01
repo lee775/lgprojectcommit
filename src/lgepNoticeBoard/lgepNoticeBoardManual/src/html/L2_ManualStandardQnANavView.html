@@ -1,0 +1,39 @@
+<style>
+    .disNone {
+        display: none;
+    }
+    .columnMargin{
+        margin-top: 15px;
+    }
+</style>
+<aw-flex-column id="dgnStdViewDetailData">
+    <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background">
+        <aw-flex-column width="2">
+            <aw-flex-row justify="center">
+                <aw-command-bar anchor="backArrowViewDetailcmd"></aw-command-bar>
+            </aw-flex-row>
+        </aw-flex-column>
+        <aw-flex-column width="2">
+            <aw-flex-row justify="center">
+                <aw-command-bar anchor="editCmd"></aw-command-bar>
+            </aw-flex-row>
+        </aw-flex-column>
+    </aw-flex-row>
+    <aw-flex-row height="12" justify="center">
+        <aw-flex-column width="11" class="columnMargin">
+            <aw-panel-section caption="{{i18n.bookViewDetail}}">
+                <aw-label prop="data.bookId"></aw-label>
+                <aw-label prop="data.bookName"></aw-label>
+                <aw-link prop="data.datasetLink" action="datasetLinkAction"></aw-link>
+            </aw-panel-section>
+            <aw-panel-section caption="{{i18n.chapterViewDetail}}" visible-when="data.treeType=='chapter'"
+                id="chapterId">
+                <aw-label prop="data.chapterName"></aw-label>
+            </aw-panel-section>
+            <aw-panel-section caption="{{i18n.pageViewDetail}}" visible-when="data.treeType=='page'" id="pageId">
+                <aw-label prop="data.pageName"></aw-label>
+                <aw-label prop="data.pageIndex"></aw-label>
+            </aw-panel-section>
+        </aw-flex-column>
+    </aw-flex-row>
+</aw-flex-column>

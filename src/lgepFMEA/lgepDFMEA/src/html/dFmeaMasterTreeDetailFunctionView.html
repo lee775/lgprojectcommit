@@ -1,0 +1,24 @@
+  <aw-panel>
+    <aw-panel-body class="detail-body">
+      <div class="create-additionalinfo" visible-when="ctx.fmea_detail_init">
+        <!-- 기능 EDITOR VIEW -->
+        <aw-flex-row class="list-row" visible-when="ctx.fmea_row_edit">
+          <aw-listbox
+            action="selectionFunction"
+            isSelectOnly="true"
+            prop="data.functionData"
+            list="data.functionValues.dbValue"
+          ></aw-listbox>
+        </aw-flex-row>
+        <aw-flex-row class="editor-row" >
+          <label class="list-editor" visible-when="ctx.fmea_label_init">{{i18n.function}}</label>
+          <div id="l2_function" class="html-editor"></div>
+        </aw-flex-row>
+        <!-- 요구사항 EDITOR -->
+        <!-- <aw-flex-row class="editor-row">
+          <label visible-when="ctx.fmea_label_init">{{i18n.requirement}}</label>
+          <div id="l2_requirements" class="html-editor"></div>
+        </aw-flex-row> -->
+      </div>
+    </aw-panel-body>
+  </aw-panel>

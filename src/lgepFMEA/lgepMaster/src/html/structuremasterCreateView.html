@@ -1,0 +1,14 @@
+<aw-command-panel caption="i18n.structureCaption" context="data">
+  <aw-panel>
+    <aw-panel-body>
+      <!-- <aw-flex-row>
+        <aw-label class="label-column" prop="data.l2Product"></aw-label>
+        <span>{{data.l2Product.dbValue}}</span>
+      </aw-flex-row> -->
+      <aw-xrt type="CREATE" object-type="L2_FMEAStructure"></aw-xrt>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button action="save">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-command-panel>

@@ -1,0 +1,570 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-label.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-splitter.directive",
+        "js/aw-textarea.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-command-bar.directive",
+        "js/aw-tab-set.directive",
+        "js/aw-icon-button.directive",
+        "js/aw-link.directive",
+        "js/visible-when.directive",
+        "js/aw-chip-list.directive",
+        "js/aw-search-box.directive",
+        "css/technicalDocumentationView.css"
+    ],
+    "onEvent": [
+        {
+            "eventId": "awPopup.close",
+            "action":"closePopupWindow"
+        },
+        {
+            "eventId": "technicalDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "inLabel"
+        },
+        {
+            "eventId": "qaList.del",
+            "condition": "data.dataProviders.technicalDataProvider.selectedObjects[0].props.owning_user.dbValues[0] === ctx.user.uid",
+            "action": "deleteTechnical"
+        },
+        {
+            "eventId": "qaList.del",
+            "condition": "data.dataProviders.technicalDataProvider.selectedObjects[0].props.owning_user.dbValues[0] != ctx.user.uid",
+            "message": "cantDeleteQuestion"
+        },
+        {
+            "eventId": "qaList.add",
+            "action": "technicalDocumentationAddPopup"
+        },
+        {
+            "eventId": "qaList.edit",
+            "condition": "data.dataProviders.technicalDataProvider.selectedObjects[0].props.owning_user.dbValues[0] === ctx.user.uid",
+            "action": "technicalDocumentationEditPopupBat"
+        },
+        {
+            "eventId": "qaList.edit",
+            "condition": "data.dataProviders.technicalDataProvider.selectedObjects[0].props.owning_user.dbValues[0] != ctx.user.uid",
+            "message": "cantEditQuestion"
+        },
+        {
+            "eventId": "technicalDataProvider.modelObjectsUpdated",
+            "action": "checkURLData"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "resetCount"
+        },
+        {
+            "eventId": "aw-splitter-update",
+            "action": "setSplitterAction"
+        }
+    ],
+    "data": {
+        "datasetLink": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "likeBtn": {
+            "action": "likeUp",
+            "iconName": "ThumbsUp",
+            "tooltip": "Like"
+        },
+        "summaryTab": [
+            {
+                "name": "{{i18n.summary}}",
+                "tabKey": "summary"
+            }
+        ],
+        "wriId": {
+            "displayName": "ID",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "wriTitle": {
+            "displayName": "{{i18n.title}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "wriContent": {
+            "displayName": "{{i18n.content}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "false",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "wriDataSet": {
+            "displayName": "{{i18n.dataset}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "writer": {
+            "displayName": "{{i18n.writer}}",
+            "type": "STRING",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "wriCreationDate": {
+            "displayName": "{{i18n.dateCreated}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "wriViews": {
+            "displayName": "{{i18n.views}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+        ,
+        "wriLike": {
+            "displayName": "{{i18n.like}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "uiValue": ""
+        },
+        "firstPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforePage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "searchBox": {
+            "displayName": "",
+            "type": "STRING"
+        },
+        "pageSize": 40
+    },
+    "actions": {
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "datasetLinkAction": {
+            "actionType": "JSFunction",
+            "method": "datasetLinkAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "likeUp":{
+            "actionType": "JSFunction",
+            "method": "likeUp",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}",
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "tableSelectedCheck": {
+            "actionType": "JSFunction",
+            "method": "tableSelectedCheck",
+            "inputData": {
+                "value": "{{data.dataProviders}}"
+            },
+            "outputData": {
+                "tableSelectedState": "tableSelectedState"
+            },
+            "deps": "js/technicalService"
+        },
+        "technicalDocumentationAddPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "technicalDocumentationAddPopup",
+                    "locals": {
+                        "caption": "{{i18n.technicalDocCreate}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "900",
+                        "width": "1350"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "technicalDocumentationAddPopupSuccessEvent"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "technicalDocumentationEditPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "technicalDocumentationEditPopup",
+                    "locals": {
+                        "caption": "{{i18n.technicalDocumentEdit}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "900",
+                        "width": "1350"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "technicalDocumentationEditPopupSuccessEvent"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "deleteTechnical" : {
+            "actionType": "JSFunction",
+            "method": "deleteTechnical",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "inLabel":{
+            "actionType": "JSFunction",
+            "method": "inLabel",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "initialize": {
+            "actionType": "JSFunction",
+            "method": "initialize",
+            "deps": "js/technicalService"
+        },
+        "getTechnicalTable": {
+            "actionType": "JSFunction",
+            "method": "getTechnicalTable",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "result": "result",
+                "filterResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "applyFilterFacets": {
+            "actionType": "JSFunction",
+            "method": "getTechnicalTable",
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "getFilterFacetData": {
+            "actionType": "JSFunction",
+            "method": "getFilterFacetData",
+            "inputData": {
+                "filterFacetInput": "{{filterFacetInput}}"
+            },
+            "outputData": {
+                "fullData": ""
+            },
+            "deps": "js/technicalService"
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyFilterFacets"
+                }
+            ]
+        },
+        "technicalDocumentationEditPopupBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "tableSelectedCheck"
+                },
+                {
+                    "condition": "conditions.cond1",
+                    "action": "technicalDocumentationEditPopup"
+                }
+            ]
+        },
+        "checkURLData":{
+            "actionType": "JSFunction",
+            "method": "checkURLData",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}",
+                "providerName":"technicalDataProvider"
+            }
+        },
+        "resetCount":{
+            "actionType": "JSFunction",
+            "method": "resetCount",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "setSplitterAction":{
+            "actionType": "JSFunction",
+            "method": "setSplitterAction",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "firstPageAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "lastPageAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "pagingBeforeAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "pagingAfterAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "setPageNumber":{
+            "actionType": "JSFunction",
+            "method": "setPageNumber",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "pageResponse": "pageResponse",
+                "pageLength": "pageLength"
+            },
+            "deps": "js/technicalService"
+        },
+        "clickedPageAction":{
+            "actionType": "JSFunction",
+            "method": "clickedPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "questionSearch":{
+            "actionType": "JSFunction",
+            "method": "questionSearch",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/technicalService"
+        }
+    },
+    "dataProviders": {
+        "technicalDataProvider": {
+            "action": "getTechnicalTable",
+            "response": "{{data.filterResults}}",
+            "totalFound": "{{data.totalFound}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetAction": "filterFacetBatchAction",
+            "filterFacetResults": "{{data.filterFacetResults}}"
+        },
+        "pageChipDataProvider": {
+            "type": "Static",
+            "action": "setPageNumber",
+            "response": "{{data.pageResponse}}",
+            "totalFound": "{{data.pageLength}}"
+        }
+    },
+    "columnProviders": {
+        "technicalColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.title}}",
+                    "maxWidth":400,
+                    "minWidth": 50,
+                    "width": 300,
+                    "enableColumnMenu": true
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.dateCreated}}",
+                    "maxWidth":300,
+                    "minWidth": 60,
+                    "width": 150,
+                    "enableColumnMenu": true
+                },
+                {
+                    "name": "l2_views",
+                    "displayName": "{{i18n.views}}",
+                    "maxWidth":200,
+                    "minWidth": 60,
+                    "width": 80,
+                    "enableColumnMenu": true
+                },
+                {
+                    "name": "l2_like_count",
+                    "displayName": "{{i18n.like}}",
+                    "maxWidth":200,
+                    "minWidth": 60,
+                    "width": 80,
+                    "enableColumnMenu": true
+                }
+            ]
+        }
+    },
+    "grids": {
+        "technicalDocumentationTable": {
+            "dataProvider": "technicalDataProvider",
+            "columnProvider": "technicalColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": false,
+                "isFilteringEnabled": false,
+                "enableGridMenu": false
+            }
+        }
+    },
+    "functions": {
+        "applySortAndFilterRows": {
+            "functionName": "applySortAndFilterRows",
+            "parameters": [
+                "{{data.columnProviders.technicalColumnProvider.columnFilters}}",
+                "{{data.columnProviders.technicalColumnProvider.sortCriteria}}",
+                "{{data.dataProviders.technicalDataProvider.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.technicalColumnProvider.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        }
+    },
+    "conditions": {
+        "showSummaryTab": {
+            "expression": "data.selectedTab.tabKey === 'summary'"
+        },
+            "cond1": {
+                "expression": "data.tableSelectedState===true"
+            }
+    },
+    "i18n": {
+        "pleaseSelectDocument": ["lgepKnowldegeManageMessages"],
+        "property": ["lgepTechnicalMessages"],
+        "title": ["lgepTechnicalMessages"],
+        "dateCreated": ["lgepTechnicalMessages"],
+        "views": ["lgepTechnicalMessages"],
+        "like": ["lgepTechnicalMessages"],
+        "summary": ["lgepTechnicalMessages"],
+        "content": ["lgepTechnicalMessages"],
+        "writer": ["lgepTechnicalMessages"],
+        "dataset": ["lgepTechnicalMessages"],
+        "technicalDocumentEdit": ["lgepTechnicalMessages"],
+        "technicalDocCreate": ["lgepTechnicalMessages"],
+        "noPost": [ "lgepKnowldegeManageMessages" ],
+        "cantEditQuestion": [ "lgepKnowldegeManageMessages" ],
+        "cantDeleteQuestion": [ "lgepKnowldegeManageMessages" ]
+    },
+    "lifecycleHooks": {
+        "onMount": "initialize"
+    },
+    "messages": {
+        "cantEditQuestion": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantEditQuestion}}"
+        },
+        "cantDeleteQuestion": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantDeleteQuestion}}"
+        }
+    }
+}

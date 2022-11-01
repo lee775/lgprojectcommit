@@ -1,0 +1,97 @@
+/* Copyright (c) 2020 Siemens */
+
+/*
+    Import the Apollo Default Theme Palette
+*/
+
+@import 'afx-base-themeColors';
+/*
+    Import the Legacy Theme Palette
+*/
+
+@import 'ui-base-themeColors';
+/*
+    Import the Afx Theme "brand" variables
+*/
+
+@import 'afx-theme-vars';
+/*
+    Import the LegacyAfx Theme variables
+*/
+
+@import 'ui-theme-vars';
+/*
+    Import the Afx Theme variable assignments
+*/
+
+/*
+    PLACEHOLDER
+    Alternate theme-specific color VARs
+*/
+
+/*
+    PLACEHOLDER
+    Assign Alternate theme-specific VARS to the generic VARs (from _afx-theme-vars.scss) you'd like to override
+*/
+
+@import 'afx-theme-settings';
+/*
+    Import the Legacy Theme variable assignments
+*/
+
+@import 'ui-theme-settings';
+
+/*
+    Import the Legacy Theme Palette
+*/
+
+@import 'ui-theme';
+/*
+    color isolation for new elements
+*/
+
+@import 'afx-widgets-theme';
+
+/*
+    consumer contributions
+*/
+@import 'consumer-themes';
+
+.aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
+    width: auto;
+    height: auto;
+    margin: 0;
+    font-size: var(--nav_bar_font_size);
+    display: block;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    max-height: 28px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+
+.aw-session-tcLoginView {
+    background-image: url("./images/lgMainWall.jpg");
+}
+
+.aw-session-companyLogo {
+    background-image: url(images/lgMainLogo.svg);
+    background-repeat: no-repeat;
+    width: 281px;
+    height: 119px;
+    left: 70px;
+    display: flex;
+    position: relative;
+    background-size: contain;
+    top: 70px;
+}
+
+.backGroundWhiteImportant {
+    background-color: #ffffff !important;
+}
+
+.backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
+    background-color: #ffffff !important;
+}

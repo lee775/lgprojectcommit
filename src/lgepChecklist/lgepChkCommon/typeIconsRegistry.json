@@ -1,0 +1,32 @@
+[
+    {
+        "type": {
+            "names": ["L2_Structure"],
+            "prop": {
+                "names": ["l2_is_checklist"],
+                "iconFileName": "typeChecklist48",
+                "conditions": {
+                    "l2_is_checklist": {
+                        "$eq": "Y"
+                    }
+                }
+            }
+        },
+        "priority": 100
+    },
+    {
+        "type": {
+            "names": ["L2_Structure"],
+            "prop": {
+                "names": ["l2_is_template"],
+                "iconFileName": "typeChecklistQuality48",
+                "conditions": {
+                    "l2_is_template": {
+                        "$eq": "Y"
+                    }
+                }
+            }
+        },
+        "priority": 110
+    }
+]

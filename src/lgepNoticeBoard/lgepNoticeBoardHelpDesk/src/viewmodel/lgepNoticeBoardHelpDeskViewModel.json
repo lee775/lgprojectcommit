@@ -1,0 +1,832 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-label.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-icon-button.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-splitter.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-panel.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-command-bar.directive",
+        "js/aw-include.directive",
+        "js/aw-textarea.directive",
+        "js/aw-list.directive",
+        "js/aw-default-cell.directive",
+        "js/aw-button.directive",
+        "js/exist-when.directive",
+        "js/aw-listbox.directive",
+        "js/aw-repeat.directive",
+        "js/aw-link.directive",
+        "js/visible-when.directive",
+        "js/aw-separator.directive",
+        "js/aw-chip-list.directive",
+        "js/aw-search-box.directive",
+        "css/questionAnswerView.css"
+    ],
+    "data": {
+        "answerContent":{
+            "displayName": "{{i18n.answerContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "labelPosition": "PROPERTY_LABEL_AT_TOP"
+        },
+        "linkRepeat": {
+            "type": "STRING",
+            "dbValue": []
+        },
+        "relationItem": {
+            "displayName": "{{i18n.relationItem}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "labelPosition": "PROPERTY_LABEL_AT_TOP"
+        },
+        "qaID": {
+            "displayName": "ID",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaPoint": {
+            "displayName": "{{i18n.point}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaTitle": {
+            "displayName": "{{i18n.title}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaContent": {
+            "displayName": "{{i18n.content}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaWriter": {
+            "displayName": "{{i18n.user}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaWriteDate": {
+            "displayName": "{{i18n.createDate}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "buttonCommand": {
+            "action": "iconTest",
+            "iconName": "ThumbsUp"
+        },
+        "listPaging":{
+            "type":"STRING",
+            "dbValue":[]
+        },
+        "arrowBack":{
+            "displayName": "<",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "arrowAfter":{
+            "displayName": ">",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "plusButton": {
+            "action": "answerChange",
+            "iconName": "Add"
+        },
+        "firstPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforePage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "searchBox": {
+            "displayName": "",
+            "type": "STRING"
+        }
+    },
+    "actions": {
+        "setAnswerListStyle": {
+            "actionType": "JSFunction",
+            "method": "setAnswerListStyle",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "setAnswerListBgStyle": {
+            "actionType": "JSFunction",
+            "method": "setAnswerListBgStyle",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "qnaLinkEventAction": {
+            "actionType": "JSFunction",
+            "method": "qnaLinkEventAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "qnaLinkAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "qnaLinkAction"
+                    }
+                ]
+            }
+        },
+        "getDataProvider": {
+            "actionType": "dataProvider",
+            "methods": [
+                "qaAnswerList"
+            ]
+        },
+        "adopt":{
+            "actionType": "JSFunction",
+            "method": "adopt",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "value": "{{data.dataProviders.qaAnswerList.selectedObjects[0]}}",
+                "valueQuestion": "{{data.dataProviders.qaListDataProvider.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "adoptState": "adoptState"
+            }
+        },
+        "adopted":{
+            "actionType": "JSFunction",
+            "method": "adopted",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "value": "{{data.dataProviders.qaAnswerList.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "adoptState": "adoptState"
+            }
+        },
+        "loadQaList": {
+            "actionType": "JSFunction",
+            "method": "loadQaList",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "searchResponse": "{{function:filterList}}",
+                "totalFound": "totalFound"
+            }
+        },
+        "loadAnswerList": {
+            "actionType": "JSFunction",
+            "method": "loadAnswerList",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "listResponse": "{{function:answerList}}",
+                "totalFound": "totalFound",
+                "adoptState": "adoptState"
+            }
+        },
+        "questionAdd": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupAddNoticeBoard",
+                    "locals": {
+                        "caption": "{{i18n.addVoe}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": 820,
+                        "width": 1300
+                    }
+                }
+            },
+            "events": {
+                "success":[
+                    {
+                        "name": "addPopupOpen.complete"
+                    }
+                ]
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "deps": "js/popupService"
+        },
+        "editPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupEditNoticeBoard",
+                    "locals": {
+                        "caption": "{{data.editing}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": 900,
+                        "width": 1100
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "events": {
+                "success":[
+                    {
+                        "name": "editPopupOpen.complete"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "initialize": {
+            "actionType": "JSFunction",
+            "method": "initialize",
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "qaListSelected": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "resetCount"
+                },
+                {
+                    "action": "checkURLData"
+                }
+            ]
+        },
+        "showQuestionProp": {
+            "actionType": "JSFunction",
+            "method": "showQuestionProp",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "questionDelete": {
+            "actionType": "JSFunction",
+            "method": "questionDelete",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data.dataProviders}}",
+                "list": "{{data.listResponse}}",
+                "ctx":"{{ctx}}",
+                "id":"{{data.qaID}}",
+                "title":"{{data.qaTitle}}",
+                "writer":"{{data.qaWriter}}",
+                "writerDate":"{{data.qaWriteDate}}",
+                "point":"{{data.qaPoint}}"
+            }
+        },
+        "likeAdd":{
+            "actionType": "JSFunction",
+            "method": "likeAdd",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx":"{{ctx}}"
+            }
+            
+        },
+        "iconTest":{
+            "actionType":"Event",
+            "method":"Event",
+            "inputData":
+            {
+                "events":
+                [
+                    {
+                        "name":"icontest.click"
+                    }
+                ]
+            }
+        },
+        "loadSelection":{
+            "actionType": "JSFunction",
+            "method": "loadSelection",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "checkUser":{
+            "actionType": "JSFunction",
+            "method": "checkUser",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data.dataProviders}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "checkURLData":{
+            "actionType": "JSFunction",
+            "method": "checkURLData",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "providerName":"qaListDataProvider"
+            }
+        },
+        "resetCount":{
+            "actionType": "JSFunction",
+            "method": "resetCount",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "pagingAction":{
+            "actionType": "JSFunction",
+            "method": "pagingAction",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "changePage":{
+            "actionType":"Event",
+            "method":"Event",
+            "inputData":
+            {
+                "events":
+                [
+                    {
+                        "name":"change.page"
+                    }
+                ]
+            }
+        },
+        "arrowBackAction":{
+            "actionType": "JSFunction",
+            "method": "arrowBackAction",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "arrowAfterAction":{
+            "actionType": "JSFunction",
+            "method": "arrowAfterAction",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "setSplitterAction":{
+            "actionType": "JSFunction",
+            "method": "setSplitterAction",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "initSummer":{
+            "actionType": "JSFunction",
+            "method": "initSummer",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "updateList":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                    "action": "getDataProvider"
+                },
+                {
+                    "action": "showQuestionProp"
+                }
+            ]
+        },
+        "answerAddNow":{
+            "actionType": "JSFunction",
+            "method": "answerAddNow",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "answerChange":{
+            "actionType": "JSFunction",
+            "method": "answerChange",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "answerAddCancel":{
+            "actionType": "JSFunction",
+            "method": "answerAddCancel",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "editCancel":{
+            "actionType": "JSFunction",
+            "method": "editCancel",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "answerEdit":{
+            "actionType": "JSFunction",
+            "method":"answerEdit",
+            "deps": "js/lgepNoticeBoardHelpDeskService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "firstPageAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "lastPageAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "pagingBeforeAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "pagingAfterAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "setPageNumber":{
+            "actionType": "JSFunction",
+            "method": "setPageNumber",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "pageResponse": "pageResponse",
+                "pageLength": "pageLength"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "clickedPageAction":{
+            "actionType": "JSFunction",
+            "method": "clickedPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        },
+        "questionSearch":{
+            "actionType": "JSFunction",
+            "method": "questionSearch",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardHelpDeskService"
+        }
+    },
+    "dataProviders": {
+        "qaListDataProvider": {
+            "action": "loadQaList",
+            "response": "{{data.searchResponse}}",
+            "totalFound": "{{data.totalFound}}"
+        },
+        "qaAnswerList": {
+            "action": "loadAnswerList",
+            "response": "{{data.listResponse}}",
+            "totalFound": "{{data.totalFound}}"
+        },
+        "pageChipDataProvider": {
+            "type": "Static",
+            "action": "setPageNumber",
+            "response": "{{data.pageResponse}}",
+            "totalFound": "{{data.pageLength}}"
+        }
+    },
+    "columnProviders": {
+        "qaListColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.title}}",
+                    "minWidth": 80,
+                    "width": 300,
+                    "enableColumnMenu": false
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.createDate}}",
+                    "minWidth": 60,
+                    "width": 150,
+                    "enableColumnMenu": false
+                },
+                {
+                    "name": "owning_user",
+                    "displayName": "{{i18n.user}}",
+                    "minWidth": 60,
+                    "width": 100,
+                    "enableColumnMenu": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "qaList": {
+            "dataProvider": "qaListDataProvider",
+            "columnProvider": "qaListColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": false
+            }
+        }
+    },
+    "functions": {
+        "answerList": {
+            "functionName": "answerList",
+            "parameters": [
+                "{{data}}"
+            ]
+        },
+        "filterList":{
+            "functionName": "filterList",
+            "parameters": [
+                "{{data}}"
+            ]
+        }
+    },
+    "i18n": {
+        "chartMode": [ "L2_DesignStandardMessages" ],
+        "column": [ "L2_DesignStandardMessages" ],
+        "pie": [ "L2_DesignStandardMessages" ],
+        "helloText": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "relationItem": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "property": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "answer": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "title":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "createDate":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "editing":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "addAnswer":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "addVoe":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "content":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "point":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "user":[
+            "lgepKnowldegeManageMessages"
+        ],
+        "pleaseSelectDocument": ["lgepKnowldegeManageMessages"],
+        "qnaChartTitle": ["lgepKnowldegeManageMessages"],
+        "cantAddAnswer": ["lgepKnowldegeManageMessages"],
+        "noPost": [ "lgepKnowldegeManageMessages" ],
+        "cantEditQuestion": [ "lgepKnowldegeManageMessages" ],
+        "cantDeleteQuestion": [ "lgepKnowldegeManageMessages" ],
+        "answerContent":[ "lgepKnowldegeManageMessages" ],
+        "cancle":[ "lgepKnowldegeManageMessages" ],
+        "add":[ "lgepKnowldegeManageMessages" ],
+        "id":[ "ID" ]
+    },
+    "onEvent": [
+        {
+            "eventId": "qnaLinkAction",
+            "cacheEventData": true,
+            "action": "qnaLinkEventAction"
+        },
+        {
+            "eventId": "question.add",
+            "action": "questionAdd"
+        },
+        {
+            "eventId": "answer.add",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] === 'Y'",
+            "message": "cantAddAnswer"
+        },
+        {
+            "eventId": "answer.before",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] != 'Y'",
+            "action": "answerAdd"
+        },
+        {
+            "eventId": "answer.add",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] != 'Y'",
+            "action": "answerAdd"
+        },
+        {
+            "eventId": "qaList.edit",
+            "action": "checkUser"
+        },
+        {
+            "eventId": "qaListDataProvider.selectionChangeEvent",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects.length > 0",
+            "action": "updateList"
+        },
+        {
+            "eventId": "answerCreate.complete",
+            "action": "updateList"
+        },
+        {
+            "eventId": "qaListDataProvider.createdObject",
+            "action": "qaListSelected"
+        },
+        {
+            "eventId": "qaList.del",
+            "action": "questionDelete"
+        },
+        {
+            "eventId":"qaAnswerList.listUpdated",
+            "action":"updateList"
+        },
+        {
+            "eventId": "icontest.click",
+            "action": "likeAdd"
+        },
+        {
+            "eventId": "qaAnswerList.selectionChangeEvent",
+            "action": "loadSelection"
+        },
+        {
+            "eventId": "editPopup.open",
+            "action":  "editPopup"
+        },
+        {
+            "eventId": "awPopup.close",
+            "action":"closePopupWindow"
+        },
+        {
+            "eventId": "qaListDataProvider.modelObjectsUpdated",
+            "action": "checkURLData"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "resetCount"
+        },
+        {
+            "eventId": "change.page",
+            "action": "pagingAction",
+            "cacheEventData": true
+        },
+        {
+            "eventId": "aw-splitter-update",
+            "action": "setSplitterAction"
+        },
+        {
+            "eventId": "initSummernote",
+            "action":"initSummer"
+        },
+        {
+            "eventId": "initSummernote",
+            "action":"setAnswerListStyle"
+        },
+        {
+            "eventId": "ThemeChangeEvent",
+            "action":"setAnswerListBgStyle"
+        }
+    ],
+    "conditions": {
+        "checkAnswerAdd":{
+            "expression": "data.answerAdd === true"
+        }
+    },
+    "messages": {
+        "cantAddAnswer": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantAddAnswer}}"
+        },
+        "cantEditQuestion": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantEditQuestion}}"
+        },
+        "cantDeleteQuestion": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantDeleteQuestion}}"
+        }
+    }
+}

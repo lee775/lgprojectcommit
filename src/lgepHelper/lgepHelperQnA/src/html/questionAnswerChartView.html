@@ -1,0 +1,17 @@
+<aw-flex-column>
+    <aw-flex-row height="6f">
+        <aw-command-panel-section caption="i18n.qnaChartTitle"></aw-command-panel-section>
+    </aw-flex-row>
+    <aw-flex-row height="fill">
+        <aw-flex-column class="relativeW">
+            <aw-flex-row height="5f">
+                <aw-listbox prop="data.chartModeChange" list="data.chartModeChangeValues.dbValue" isSelectOnly="true">
+                </aw-listbox>
+            </aw-flex-row>
+        </aw-flex-column>
+        <aw-chart chart-provider="data.chartProviders.columnChartProviderQnA"
+            exist-when="data.chartModeChange.dbValue==i18n.column" class="chartSize"></aw-chart>
+        <aw-chart chart-provider="data.chartProviders.pieChartProviderQnA" exist-when="data.chartModeChange.dbValue==i18n.pie"
+            class="chartSize"></aw-chart>
+    </aw-flex-row>
+</aw-flex-column>

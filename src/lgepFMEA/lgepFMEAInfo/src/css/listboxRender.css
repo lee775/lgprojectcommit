@@ -1,0 +1,16 @@
+.dfmea-listbox {
+    height: 90%;
+    width: 100%;
+    background-color: inherit;
+    border-radius: 3px;
+}
+
+.dfmea-listbox:hover {
+    cursor: default;
+    background-color: inherit;
+}
+
+
+.dfmea-listbox-clicked {
+    background-color: rgb(165, 185, 198) !important;
+}

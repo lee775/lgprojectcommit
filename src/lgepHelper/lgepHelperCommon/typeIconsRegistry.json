@@ -1,0 +1,77 @@
+[
+    {
+        "type": {
+            "names": ["L2_KnowledgeRevision"],
+            "prop": {
+                "names": ["l2_knowledge_type"],
+                "iconFileName": "typeTranslationRevision48_custom",
+                "conditions": {
+                    "l2_knowledge_type": {
+                        "$eq": "0"
+                    }
+                }
+            }
+        },
+        "priority": 100
+    },
+    {
+        "type": {
+            "names": ["L2_KnowledgeRevision"],
+            "prop": {
+                "names": ["l2_knowledge_type"],
+                "iconFileName": "typeTestProcedureRevision48_custom",
+                "conditions": {
+                    "l2_knowledge_type": {
+                        "$eq": "1"
+                    }
+                }
+            }
+        },
+        "priority": 100
+    },
+    {
+        "type": {
+            "names": ["L2_KnowledgeRevision"],
+            "prop": {
+                "names": ["l2_knowledge_type"],
+                "iconFileName": "typeWorkBreakdownStructureRevision48_custom",
+                "conditions": {
+                    "l2_knowledge_type": {
+                        "$eq": "2"
+                    }
+                }
+            }
+        },
+        "priority": 100
+    },
+    {
+        "type": {
+            "names": ["L2_KnowledgeRevision"],
+            "prop": {
+                "names": ["l2_knowledge_type"],
+                "iconFileName": "typeGroup48_custom",
+                "conditions": {
+                    "l2_knowledge_type": {
+                        "$eq": "3"
+                    }
+                }
+            }
+        },
+        "priority": 100
+    },
+    {
+        "type": {
+            "names": ["L2_KnowledgeRevision"],
+            "prop": {
+                "names": ["l2_knowledge_type"],
+                "iconFileName": "typeToggleRating48_custom",
+                "conditions": {
+                    "l2_knowledge_type": {
+                        "$eq": "4"
+                    }
+                }
+            }
+        },
+        "priority": 100
+    }
+]

@@ -1,0 +1,146 @@
+{
+    "KnowledgeManageDashboardList": {
+        "url": "/KnowledgeManageDashboardList",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "dashboardListSubLocationTitle"
+            },
+            "nameToken": "KnowledgeManageDashboardList",
+            "clientScopeURI": ""
+        },
+        "view": "KnowledgeManageDashboardList",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "questionAnswer": {
+        "url": "/questionAnswer",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "questionAnswerSubLocationTitle"
+            },
+            "nameToken": "questionAnswer",
+            "clientScopeURI": ""
+        },
+        "view": "questionAnswer",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "faq": {
+        "url": "/faq",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "faqSubLocationTitle"
+            },
+            "nameToken": "faq",
+            "clientScopeURI": ""
+        },
+        "view": "faq",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "technicalDocumentation": {
+        "url": "/technicalDocumentation",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "technicalDocumentationSubLocationTitle"
+            },
+            "nameToken": "technicalDocumentation",
+            "clientScopeURI": ""
+        },
+        "view": "technicalDocumentation",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "askExpert": {
+        "url": "/askExpert",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "askExpertSubLocationTitle"
+            },
+            "nameToken": "askExpert",
+            "clientScopeURI": ""
+        },
+        "view": "askExpert",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "expertManage": {
+        "url": "/expertManage",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "expertManageSubLocationTitle"
+            },
+            "nameToken": "expertManage",
+            "clientScopeURI": ""
+        },
+        "view": "expertManage",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "pointManage": {
+        "url": "/pointManage",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "pointManageSubLocationTitle"
+            },
+            "nameToken": "pointManage",
+            "clientScopeURI": ""
+        },
+        "view": "pointManage",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepKnowledgeManageLocation"
+    },
+    "lgepKnowledgeManageLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "lgepKnowledgeManageLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "lgepKnowledgeManageLocationSubBrowserTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepKnowldegeManageMessages",
+                "key": "lgepKnowledgeManageLocationTitle"
+            },
+            "viewBase": "KnowledgeManageDashboardList"
+        },
+        "type": "location"
+    }
+}

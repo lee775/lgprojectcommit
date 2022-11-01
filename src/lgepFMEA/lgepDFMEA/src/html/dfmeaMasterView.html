@@ -1,0 +1,64 @@
+<aw-flex-row height="4f" class="top-header-container">
+  <aw-column class="header__left-container">
+    <aw-button class="homeButton" exist-when="ctx.fmea_table_init" aw-class="{'disabled': ctx.fmea_popup}"
+      action="goList">{{i18n.fmeaHome}}</aw-button>
+    <aw-button exist-when="ctx.fmea_table_init" aw-class="{'disabled': ctx.fmea_popup}" action="sodOpen">
+      {{i18n.sodStandardButton}}</aw-button>
+    <aw-button exist-when="ctx.fmea_table_init" aw-class="{'disabled': ctx.fmea_popup}" action="interactionOpen">
+      {{i18n.interactionMatrixButton}}</aw-button>
+  </aw-column>
+  <aw-column class="header__right-container">
+    <aw-button exist-when="ctx.fmea_table_init && ctx.fmea_all_master_datas && !ctx.fmea_edit_init" action="editAction"
+      aw-class="{'disabled': ctx.fmea_popup}">{{i18n.editButton}}</aw-button>
+    <aw-button exist-when="ctx.fmea_table_init && ctx.fmea_edit_init" action="saveAction"
+      aw-class="{'disabled': ctx.fmea_popup}">{{i18n.saveButton}}</aw-button>
+    <aw-button exist-when="ctx.fmea_table_init && ctx.fmea_edit_init" action="editCancelAction"
+      aw-class="{'disabled': ctx.fmea_popup}">{{i18n.cancelButton}}</aw-button>
+    <aw-button exist-when="ctx.fmea_table_init && ctx.fmea_all_master_datas && !ctx.fmea_edit_init"
+      action="duplicateAction" aw-class="{'disabled': ctx.fmea_popup}">{{i18n.duplicateButton}}</aw-button>
+    <!-- <aw-button exist-when="ctx.fmea_table_init && ctx.fmea_all_master_datas && !ctx.fmea_edit_init" action="exportExcel"
+      aw-class="{'disabled': ctx.fmea_popup}">EXCEL</aw-button> -->
+  </aw-column>
+</aw-flex-row>
+<aw-row height="fill" class="main-container">
+  <aw-column class="table-container" width="6">
+    <aw-flex-row class="controller-container" height="3.5f">
+      <aw-column class="table__left-container">
+        <aw-listbox aw-class="{'disabled': ctx.fmea_edit_init}" exist-when="ctx.fmea_table_init"
+          class="tableselect-listbox" isSelectOnly="true" prop="data.tableView" list="data.tableViewValues.dbValue"
+          action="selectionTableChange"></aw-listbox>
+        <aw-button exist-when="ctx.fmea_table_init && ctx.fmea_table_mode !=='treeTable'" action="changeView"
+          class="changeViewButton" aw-class="{'disabled': ctx.fmea_popup}">{{data.detailButtonName.dbValue}}</aw-button>
+        <aw-command-bar exist-when="ctx.fmea_table_init && ctx.fmea_edit_init" class="dmaster-table-command-header"
+          anchor="fmea_fmea_table_list_commands" alignment="HORIZONTAL"></aw-command-bar>
+      </aw-column>
+      <aw-column class="table__right-container">
+        <aw-button action="interactionAction" exist-when="ctx.fmea_table_init" class="changeViewButton"
+          aw-class="{'disabled': ctx.fmea_popup}">{{i18n.interactionButton}}</aw-button>
+      </aw-column>
+    </aw-flex-row>
+    <aw-include exist-when="ctx.fmea_table_mode !== 'treeTable' && ctx.fmea_table_mode !== 'textTable'"
+      name="dfmeaMasterImageTable"></aw-include>
+    <aw-include exist-when="ctx.fmea_table_mode === 'textTable'" name="dfmeaMasterTextGridTable"></aw-include>
+    <aw-include exist-when="ctx.fmea_table_mode === 'treeTable'" name="dfmeaMasterTreeTable"></aw-include>
+  </aw-column>
+  <aw-splitter isPrimarySplitter="ctx.fmea_detail_mode"> </aw-splitter>
+  <aw-column class="detail-view-container" width="6" exist-when="ctx.fmea_detail_mode">
+    <aw-include exist-when="ctx.fmea_table_mode === 'treeTable'" name="dFmeaMasterTreeDetail"></aw-include>
+    <aw-include exist-when="ctx.fmea_table_mode !== 'treeTable' && !ctx.fmea_tree_structure" name="dFmeaMasterDetail">
+    </aw-include>
+  </aw-column>
+  <aw-sidenav id="fmeaInteraction" config="data.interactionInfo"></aw-sidenav>
+</aw-row>
+<aw-row exist-when="ctx.fmea_table_list.length > 0" class="sliderBtn">
+  <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
+  <aw-icon-button size="large" command="data.zoomSliderInit" class="zoom-sliderBtn"></aw-icon-button>
+</aw-row>
+<!-- <aw-row class="plusBtnIco">
+  <aw-icon-button size="large" command="data.plusCommand"></aw-icon-button>
+  <aw-button action="plusHtml">PLUS</aw-button>
+</aw-row>
+<aw-row class="minusBtnIco">
+  <aw-icon-button size="large" command="data.minusCommand"></aw-icon-button>
+  <aw-button action="minusHtml">MINUS</aw-button>
+</aw-row> -->

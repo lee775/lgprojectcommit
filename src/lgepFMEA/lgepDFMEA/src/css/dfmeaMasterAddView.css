@@ -1,0 +1,70 @@
+.create-additionalinfo {
+  padding: 0 0 0 12px;
+}
+
+.create-footer button {
+  height: 30px;
+  max-width: 850px;
+}
+
+.editor-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.editor-row label {
+  font-weight: 600;
+  margin: 10px 0 5px 0;
+}
+
+.required {
+  margin-left: 3px;
+}
+
+.aw-layout-panelSectionTitle,
+.aw-layout-panelSectionTitle label,
+.aw-layout-panelSectionTitle .gwt-Label {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.list-section {
+  max-width: 800px;
+  padding: 0 15px 0 15px;
+}
+
+.create-additionalinfo {
+  margin-bottom: 15px;
+}
+
+.form__textbox {
+  max-width: 600px;
+  display: flex;
+}
+
+.text-row {
+  margin: 10px 0 10px 0;
+}
+
+.list-section__popup {
+  margin-top: 10px;
+}
+
+.failure-addInfo {
+  padding-right: 25px;
+}
+
+.note-editable b,
+.note-editable strong {
+  font-weight: bold;
+}
+
+.note-editable b {
+  font-weight: 800;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false],
+.note-editor.note-airframe .note-editing-area .note-editable[contenteditable=false] {
+  background-color: #fff;
+}

@@ -1,0 +1,21 @@
+<aw-popup2>
+    <style>
+        .marginT{
+            margin-top: 15px;
+        }
+        .marginB{
+            margin-bottom: 15px;
+        }
+        .addPart{
+            text-align: right;
+        }
+    </style>
+    <aw-panel-body>
+        <aw-textbox prop="data.addPartItemTitle"></aw-textbox>
+        <aw-textbox prop="data.addPartItemDesc"></aw-textbox>
+    </aw-panel-body>
+    <aw-panel-footer class = "addPart">
+        <aw-button action="addPartItemData" size="auto">생성</aw-button>
+        <aw-button button-type="base" action="closePopupWindow" size="auto">닫기</aw-button>
+    </aw-panel-footer>
+</aw-popup2>

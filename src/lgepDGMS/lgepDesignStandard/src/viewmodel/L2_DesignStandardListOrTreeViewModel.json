@@ -1,0 +1,108 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-panel-body.directive",
+        "js/aw-sidenav.directive",
+        "js/aw-tree.directive",
+        "js/aw-icon-button.directive",
+        "js/aw-textbox.directive",
+        "js/aw-command-bar.directive",
+        "css/knowledgeWarehouseView.css",
+        "js/aw-flex-row.directive",
+        "js/aw-enter-key.directive",
+        "js/aw-flex-column.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "cmdSearchIconEvent",
+            "action": "searchIconEvent"
+        }
+    ],
+    "actions": {
+        "listReload": {
+            "actionType": "dataProvider",
+            "methods": [
+                "fileList"
+            ]
+        },
+        "loadList": {
+            "actionType": "JSFunction",
+            "method": "loadList",
+            "outputData": {
+                "lists": "lists",
+                "listsFound": "listsFound"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "awtreeSearching": {
+            "actionType": "JSFunction",
+            "method": "awtreeSearching",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "awtreeSearchingfront": {
+            "actionType": "JSFunction",
+            "method": "awtreeSearchingfront",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "awtreeSearchingBack": {
+            "actionType": "JSFunction",
+            "method": "awtreeSearchingBack",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "searchIconEvent": {
+            "actionType": "JSFunction",
+            "method": "searchIconEvent",
+            "deps": "js/L2_DesignStandardService"
+        }
+    },
+    "data": {
+        "searchBtn": {
+            "iconName": "Search",
+            "tooltip": "{{i18n.search}}",
+            "action": "awtreeSearching"
+        },
+        "chevronDown": {
+            "iconName": "miscChevronDown",
+            "tooltip": "{{i18n.chevronDown}}",
+            "action": "awtreeSearchingfront"
+        },
+        "chevronUp": {
+            "iconName": "miscChevronUp",
+            "tooltip": "{{i18n.chevronUp}}",
+            "action": "awtreeSearchingBack"
+        },
+        "bomLineTree": [],
+        "searchingName": {
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "requiredText": "{{i18n.requiredText}}"
+        }
+    },
+    "conditions": {
+        "searchingMode": {
+            "expression": "data.searchMode === true"
+        },
+        "searchingStart":{
+            "expression": "data.searchingStart === true"
+        }
+    },
+    "i18n": {
+        "search": [
+            "L2_DesignStandardMessages"
+        ],
+        "requiredText": [
+            "L2_DesignStandardMessages"
+        ]
+    }
+}

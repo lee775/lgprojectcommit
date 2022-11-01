@@ -1,0 +1,21 @@
+<aw-popup2>
+  <aw-progress-indicator name="fmeaPopupProgIndicator"></aw-progress-indicator>
+  <aw-panel>
+    <aw-panel-body class="popup-body">
+      <div class="create-additionalinfo">
+        <aw-flex-row>
+          <aw-label class="label-column" prop="data.l2Product"></aw-label>
+          <span>{{data.l2Product.dbValue}}</span>
+        </aw-flex-row>
+        <!-- 기능 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label>{{i18n.function}}</label>
+          <div id="l2_function_create" class="html-createeditor"></div>
+        </aw-flex-row>
+      </div>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button action="save" aw-class="{'disabled': data.disabledButtonChk.dbValue}">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

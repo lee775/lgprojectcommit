@@ -1,0 +1,317 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-command-panel.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-splm-table.directive"
+    ],
+    "actions": {
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "parent",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "getChildrenData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "eventTable": "{{data.eventMap['specManagementDataProvider.selectionChangeEvent']}}"
+            },
+            "outputData": {
+                "totalFound": "totalFound",
+                "example": "{{function:sortAction}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "clearSearch": {
+            "actionType": "JSFunction",
+            "method": "clearSearch",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "reload": {
+            "actionType": "JSFunction",
+            "method": "reload",
+            "deps": "js/SpecManagementService"
+        },
+        "applyData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyData"
+                }
+            ]
+        },
+        "tableReloadBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "clearSearch"
+                },
+                {
+                    "action": "getChildrenData"
+                },
+                {
+                    "action": "reload"
+                }
+            ]
+        },
+        "trueSelection": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specManagementChildrenDataProvider.multiSelectModeAction",
+                        "response": "{{data.example}}",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "specAddPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupSpecAdd",
+                    "locals": {
+                        "caption": "{{i18n.addPopup}}"
+                    },
+                    "options": {
+                        "reference": "addId",
+                        "isModal": true,
+                        "clickOutsideToClose": true,
+                        "draggable": true,
+                        "placement": "center",
+                        "width": 700,
+                        "height": 900
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "addId"
+            },
+            "deps": "js/popupService"
+        },
+        "specAddFolderPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "specAddFolderPopup",
+                    "locals": {
+                        "caption": "{{i18n.addFolderPopup}}"
+                    },
+                    "options": {
+                        "reference": "addId",
+                        "isModal": true,
+                        "clickOutsideToClose": true,
+                        "draggable": true,
+                        "placement": "center",
+                        "width": 400,
+                        "height": 250
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "addId"
+            },
+            "deps": "js/popupService"
+        },
+        "showAddNoty": {
+            "actionType": "JSFunction",
+            "method": "showAddNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "createWarningNoty": {
+            "actionType": "JSFunction",
+            "method": "createWarningNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "createLimitNoty": {
+            "actionType": "JSFunction",
+            "method": "createLimitNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "closeFilter": {
+            "actionType": "JSFunction",
+            "method": "closeFilter",
+            "deps": "js/SpecManagementService"
+        },
+        "closePopupWindow": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose"
+                    }
+                ]
+            }
+        },
+        "limitCreate": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specMgmt.limitCreate"
+                    }
+                ]
+            }
+        }
+    },
+    "data": {
+        "pageSize": 40,
+        "closeAnchor": "commandPanelCloseAnchor22"
+    },
+    "dataProviders": {
+        "specManagementDataProvider": {
+            "action": "loadData",
+            "initializeAction": "loadData",
+            "treeLoadResult": "{{data.treeLoadResult}}",
+            "inputData": {
+                "accessMode": "tree",
+                "topNodeUid": "garJI3FyZx_JkD"
+            }
+        },
+        "specManagementChildrenDataProvider": {
+            "action": "getChildrenData",
+            "response": "{{data.example}}",
+            "totalFound": "{{data.totalFound}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetAction": "filterFacetBatchAction",
+            "filterFacetResults": "{{data.filterFacetResults}}",
+            "selectionModelMode": "multiple"
+        }
+    },
+    "columnProviders": {
+        "specManagementColumnProvider": {
+            "columns": [
+                {
+                    "name": "object_string",
+                    "displayName": "{{i18n.individual}}",
+                    "minWidth": 150,
+                    "width": 330,
+                    "isTreeNavigation": true,
+                    "pinnedLeft": true
+                }
+            ],
+            "frozenColumnIndex": -1
+        }
+    },
+    "grids": {
+        "specManagementTree": {
+            "dataProvider": "specManagementDataProvider",
+            "columnProvider": "specManagementColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": true,
+                "enableSorting": false,
+                "enableExpansionStateCaching": true
+            }
+        }
+    },
+    "functions": {
+        "loadEmployeeTreeTableData": {
+            "functionName": "loadEmployeeTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}",
+                "{{data}}",
+                "{{ctx}}"
+            ]
+        },
+        "sortAction": {
+            "functionName": "sortAction",
+            "parameters": [
+                "{{data.columnProviders.specManagementChildrenColumnProvider.sortCriteria}}",
+                "{{data.dataProviders.specManagementChildrenDataProvider.startIndex}}",
+                "{{data.pageSize}}",
+                "{{data.columnProviders.specManagementChildrenColumnProvider.columnFilters}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.specManagementChildrenColumnProvider.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        }
+    },
+    "i18n": {
+        "filter": ["lgepSpecManagementMessages"],
+        "addPopup": ["lgepSpecManagementMessages"],
+        "addFolderPopup": ["lgepSpecManagementMessages"],
+        "individual": ["lgepSpecManagementMessages"]
+    },
+    "lifecycleHooks": {
+        "onMount": "trueSelection"
+    },
+    "onEvent": [
+        {
+            "eventId": "specManagementDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "tableReloadBatchAction"
+        },
+        {
+            "eventId": "specManagement.add",
+            "condition": "data.dataProviders.specManagementDataProvider.selectedObjects[0].childNdx == 3",
+            "action": "specAddPopup"
+        },
+        {
+            "eventId": "specManagement.add",
+            "condition": "data.dataProviders.specManagementDataProvider.selectedObjects[0].childNdx != 3",
+            "action": "createWarningNoty"
+        },
+        {
+            "eventId": "specManagement.add",
+            "condition": "data.dataProviders.specManagementDataProvider.selectedObjects.length != 1",
+            "action": "showAddNoty"
+        },
+        {
+            "eventId": "filterClose",
+            "action": "closeFilter"
+        },
+        {
+            "eventId": "specTree.addFolder",
+            "condition": "data.dataProviders.specManagementDataProvider.selectedObjects[0].childNdx != 3",
+            "action": "specAddFolderPopup"
+        },
+        {
+            "eventId": "specTree.addFolder",
+            "condition": "data.dataProviders.specManagementDataProvider.selectedObjects[0].childNdx == 3",
+            "action": "createLimitNoty"
+        }
+    ]
+}

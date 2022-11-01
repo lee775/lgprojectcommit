@@ -1,0 +1,54 @@
+<style>
+    #tableLayout {
+        margin-right: 2%;
+    }
+
+    .aw-widgets-propertyLabelTopValueContainer {
+        margin-left: -18%;
+    }
+
+    .aw-widgets-propertyContainer > aw-property-label {
+        margin-left: 1%;
+    }
+   
+    .aw-layout-fxbreadCrumbs > div {
+        margin-left: 0.5%;
+    }
+</style>
+
+<aw-flex-row height="fill" justify="center" id="defectMgmtData">
+    <aw-flex-column width="12" justify="center">
+        <aw-panel-body>
+            <aw-flex-row>
+                <aw-flex-column width="3" id="defectTree">
+                    <aw-splm-table gridid="defectMgmtTree" use-tree="true" show-decorate="true">
+                    </aw-splm-table>
+                </aw-flex-column>
+                <aw-splitter> </aw-splitter>
+                <aw-flex-column width="9">
+                    <aw-flex-row height="2f">
+                        <aw-flex-column>
+                            <aw-navigate-breadcrumb provider="data.provider" breadcrumb-config="data.defectConfig.navigationdefectConfig" compact="true" id="locationToBread"></aw-navigate-breadcrumb>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row height="2f">
+                        <aw-flex-column width="fill">
+                            <aw-label prop="data.defectLbl"></aw-label>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row height="2f">
+                        <aw-flex-column width="fill">
+                            <aw-label prop="data.classificationLbl"></aw-label>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column id="tableLayout">
+                            <aw-splm-table gridid="defectMgmtTable" show-decorate="true" show-check-box=true>
+                            </aw-splm-table>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                </aw-flex-column>
+            </aw-flex-row>
+        </aw-panel-body>
+    </aw-flex-column>
+</aw-flex-row>

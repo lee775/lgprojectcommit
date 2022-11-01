@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-row.directive",
+    "js/aw-sidenav.directive",
+    "css/masterListView.css"
+  ],
+  "data": {
+    "sodCreateInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    }
+  },
+  "actions": {
+    "getFilteredData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "outputData": {
+        "filterResults": "{{function:applySortAndFilterRows}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/sodTableListService"
+    },
+    "loadColumns": {
+      "actionType": "JSFunction",
+      "method": "loadColumns",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.fSodTableProvider}}"
+      },
+      "deps": "js/sodTableListService"
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
+        },
+        {
+          "action": "applyFilterFacets"
+        }
+      ]
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/structureListService"
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/utils/fmeaTableSortFilterUtils"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRowAction",
+      "inputData": {
+        "selectionModel": "{{data.eventData.selectedObjects[0]}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/cmListService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "pageUnMount",
+      "deps": "js/utils/fmeaCommonUtils"
+    },
+    "setTabInSummary": {
+      "actionType": "JSFunction",
+      "method": "setTabInSummary",
+      "deps": "js/sodTableEditService"
+    },
+    "setVmoXrt": {
+      "actionType": "JSFunction",
+      "method": "setVmoXrt",
+      "deps": "js/sodTableListService"
+    }
+  },
+  "columnProviders": {
+    "fSodTableColumnProvider": {
+      "loadColumnAction": "loadColumns"
+    }
+  },
+  "dataProviders": {
+    "fSodTableProvider": {
+      "action": "getFilteredData",
+      "response": "{{data.filterResults}}",
+      "totalFound": "{{data.totalFound}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.fSodTableColumnProvider.columnFilters}}",
+        "{{data.columnProviders.fSodTableColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.fSodTableProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ],
+      "deps": "js/utils/fmeaTableSortFilterUtils"
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": [
+        "{{data.columnProviders.fSodTableColumnProvider.columnFilters}}",
+        "{{data.fullData}}"
+      ],
+      "deps": "js/utils/fmeaTableSortFilterUtils"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "fSodTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    },
+    {
+      "eventId": "secondary.tabSetRegistered",
+      "cacheEventData": true,
+      "action": "setTabInSummary"
+    }
+  ],
+  "grids": {
+    "fmeaSodTableGrid": {
+      "dataProvider": "fSodTableProvider",
+      "columnProvider": "fSodTableColumnProvider",
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true
+      }
+    }
+  },
+  "lifecycleHooks": {
+    "onUnmount": "unMount",
+    "onMount": "setVmoXrt"
+  }
+}

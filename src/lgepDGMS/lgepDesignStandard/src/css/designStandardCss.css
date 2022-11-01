@@ -1,0 +1,190 @@
+#border1 {
+    display: block; 
+    width: 300px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+
+#imgSize {
+    width: 16rem;
+    height: 12rem;
+}
+.minColumn {
+    min-width: 360px;
+}
+aw-image-cell img {
+    width: 16rem;
+    height: 12rem;
+}
+.star-ratings {
+    color: #aaa9a9;
+    position: relative;
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    width: max-content;
+    -webkit-text-fill-color: transparent;
+    /* Will override color (regardless of order) */
+}
+.star-ratings-fill {
+    color: orangered;
+    font-size: 1.2rem;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-text-fill-color: orangered;
+}
+.star-ratings-base {
+    font-size: 1.2rem;
+    z-index: 0;
+    padding: 0;
+    -webkit-text-fill-color: #aaa9a9;
+}
+#showPercent{
+    display: inline-block;
+    font-size: 0.8rem;
+}
+#showReview{
+    display: inline-block;
+    font-size: 0.8rem;
+}
+.mainNav, .avatarBox {
+    width: 98%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.sideNav {
+    width: 95%;
+    margin: 2.5%;
+}
+.aw-avatar-small {
+    height: 180px !important;
+    width: 180px !important;
+    /* clip: rect( 0px, 100%, 100% ); */
+}
+.navBox {
+    border: 1px solid #dcdcdc;
+}
+.parentPosition {
+    position : relative;
+}
+/* .positionControll {
+    position : absolute;
+    margin-top: 0.5%;
+    margin-right: 2%;
+    right: 0;
+} */
+.clearPositionControll {
+    position : absolute;
+    margin-top: 0.5%;
+    margin-right: 2%;
+    right: 0;
+}
+
+.boderUp{
+    border-top: solid #aaa9a9 1px;
+    padding-top: 10px;
+}
+
+#linkTableAllId{
+    background-color: #464646;
+}
+
+#linkTableAllId div div div div div div{
+    background-color: #707070;
+}
+
+#addFolder{
+    margin : 15px;
+}
+
+#addFolder div a{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.marginNobottom{
+    margin: 15px 15px 0px 15px;
+}
+
+.inBgColor{
+    background-color: #464646;
+}
+
+#panelId{
+    padding: 0px;
+}
+
+#myDocument{
+    margin-bottom: 10px;
+}
+
+.GoToPostedBtnClass{
+    padding: 10px 25px;
+}
+
+.marginBottom{
+    margin-bottom: 10px;
+}
+
+#imageListId div div div ul .aw-widgets-cellListItemSelected {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+#imageListId div div div ul li:hover {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+#imageListId div div div ul .aw-widgets-cellListItemSelected div div div img {
+    border: 7px solid darkred;
+}
+
+#imageListId div div div ul li:hover div div div img {
+    border: 7px solid darkred;
+}
+
+#imageListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
+    font-weight: 900;
+    text-decoration: underline;
+    font-size: 1.2rem !important;
+    color: darkred;
+}
+
+#imageListId div div div ul li:hover div div div h2 {
+    font-weight: 900;
+    text-decoration: underline;
+    font-size: 1.2rem !important;
+    color: darkred;
+}
+
+#expertListId div div div ul li ng-transclude group-header-cell a {
+    color: darkred;
+    font-weight: bold;
+}
+
+.dataDefaultCell div div aw-default-cell-content div .aw-widgets-cellListCellItemType.aw-base-small.ng-scope.ng-isolate-scope {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+#qnaListId div div div ul li ng-transclude group-header-cell a {
+    color: darkred;
+    font-weight: bold;
+}
+
+.dataDefaultCell div div aw-default-cell-content div .aw-widgets-cellListCellItemType.aw-base-small.ng-scope.ng-isolate-scope {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+#folderNameData .aw-widgets-cellListCellImage img {
+    border-radius: 70%;
+    overflow: hidden;
+}

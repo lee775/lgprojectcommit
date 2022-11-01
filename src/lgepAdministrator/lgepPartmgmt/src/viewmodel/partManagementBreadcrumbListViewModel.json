@@ -1,0 +1,98 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-list.directive",
+        "js/aw-default-cell.directive"
+    ],
+    "actions": {
+        "onChevronClick": {
+            "actionType": "dataProvider",
+            "method": "partMgmtBreadcrumListData"
+        },
+        "getSelectPartList": {
+            "actionType": "JSFunction",
+            "method": "getSelectPartList",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "partMgmtBreadcrumList": "partMgmtBreadcrumList",
+                "totalFound": "totalFound"
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "breadcrumb.popUpLoading"
+                    }
+                ]
+            },
+            "deps": "js/partManagementService"
+        },
+        "breadcrumListDataSelect": {
+            "actionType": "JSFunction",
+            "method": "breadcrumListDataSelect",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/partManagementService"
+        },
+        "hideLoading": {
+            "actionType": "JSFunction",
+            "method": "toggle",
+            "inputData": {
+                "id": "d_uids",
+                "data": "{{data}}",
+                "key": "loading",
+                "value": false,
+                "unRegister": false
+            },
+            "deps": "js/breadcrumbUtils"
+        },
+        "closePopUp": {
+            "actionType": "JSFunction",
+            "method": "toggle",
+            "inputData": {
+                "id": "d_uids",
+                "data": "{{data}}",
+                "key": "showPopup",
+                "value": false,
+                "unRegister": true
+            },
+            "deps": "js/breadcrumbUtils"
+        }
+    },
+    "dataProviders": {
+        "partMgmtBreadcrumListData": {
+            "action": "getSelectPartList",
+            "response": "{{data.partMgmtBreadcrumList}}",
+            "totalFound": "{{data.totalFound}}"
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "d_uids.chevronClicked",
+            "cacheEventData": true,
+            "action": "onChevronClick"
+        },
+        {
+            "eventId": "partMgmtBreadcrumListData.selectionChangeEvent",
+            "cacheEventData": true,
+            "condition": "conditions.showPopup",
+            "action": "breadcrumListDataSelect"
+        },
+        {
+            "eventId": "breadcrumb.update",
+            "action": "closePopUp"
+        },
+        {
+            "eventId": "breadcrumb.popUpLoading",
+            "action": "hideLoading"
+        }
+    ],
+    "conditions": {
+        "showPopup": {
+            "expression": "selectedObjects.length > 0"
+        }
+    }
+}

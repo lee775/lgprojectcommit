@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-splm-table.directive", "css/dfmeaMasterTreeTableView.css"],
+  "actions": {
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "treeLoadResult": "{{function:loadTreeTableData}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableLoadService"
+    },
+    "reLoad": {
+      "actionType": "JSFunction",
+      "method": "reLoad",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "treeLoadResult": "{{function:loadTreeTableData}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableLoadService"
+    },
+    "loadColumns": {
+      "actionType": "JSFunction",
+      "method": "loadColumns",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.dfmeaTreeTableProvider}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableLoadService"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRowAction",
+      "inputData": {
+        "selectionRow": "{{data.eventData.selectedObjects[0]}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableService"
+    },
+    "initSelectRow": {
+      "actionType": "JSFunction",
+      "method": "initSelectRow",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableService"
+    },
+    "interactionFocusRow": {
+      "actionType": "JSFunction",
+      "method": "focusRowByInteraction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "provider": "{{data.dataProviders.dfmeaTreeTableProvider}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableInteractionService"
+    },
+    "initSelect": {
+      "actionType": "JSFunction",
+      "method": "initSelect",
+      "inputData": {
+        "provider": "{{data.dataProviders.dfmeaTreeTableProvider}}"
+      },
+      "deps": "js/dfmeaMasterTreeTableInteractionService"
+    }
+  },
+  "functions": {
+    "loadTreeTableData": {
+      "functionName": "loadTreeTableData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}"],
+      "deps": "js/dfmeaMasterTreeTableLoadService"
+    }
+  },
+  "columnProviders": {
+    "dfmeaTreeTableColumnProvider": {
+      "loadColumnAction": "loadColumns",
+      "frozenColumnIndex": -1
+    }
+  },
+  "dataProviders": {
+    "dfmeaTreeTableProvider": {
+      "action": "loadData",
+      "initializeAction": "loadData",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "dfmeaTreeTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    },
+    {
+      "eventId": "dfmeaTreeTable.reLoad",
+      "action": "reLoad"
+    },
+    {
+      "eventId": "fmea.treeTable.initSelectRow",
+      "action": "initSelectRow"
+    },
+    {
+      "eventId": "fmea.treeTable.focusInteraction",
+      "action": "interactionFocusRow"
+    },
+    {
+      "eventId": "fmea.treeTable.initSelect",
+      "action": "initSelect"
+    },
+    {
+      "eventId": "fmea.treeTable.initRest",
+      "action": "initSelect"
+    }
+  ],
+  "grids": {
+    "dfmeaTreeTable": {
+      "dataProvider": "dfmeaTreeTableProvider",
+      "columnProvider": "dfmeaTreeTableColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
+      }
+    }
+  }
+}

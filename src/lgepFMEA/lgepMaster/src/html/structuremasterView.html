@@ -1,0 +1,16 @@
+<aw-row height="fill" class="fmea-view">
+  <aw-column class="table-container" width="5" class="left-view">
+    <aw-flex-row height="3.5f" class="table-command">
+      <aw-command-bar exist-when="ctx.fmea_table_init" anchor="fmea_structure_table_list_commands" alignment="HORIZONTAL"></aw-command-bar>
+    </aw-flex-row>
+    <aw-splm-table gridid="fmeaStructureTableGrid"></aw-splm-table>
+  </aw-column>
+  <aw-splitter isPrimarySplitter="true" min-size-1="600" min-size-2="600" class="fmea-splitter"> </aw-splitter>
+  <aw-column width="7" class="right-view">
+    <aw-flex-row height="3.5f" class="table-command">
+      <aw-command-bar exist-when="ctx.fmea_table_init" anchor="fmeaStructure_summary_list_commands" alignment="HORIZONTAL"></aw-command-bar>
+    </aw-flex-row>
+    <aw-xrt-summary model-object="ctx.fmea_row_select"></aw-xrt-summary>
+  </aw-column>
+  <aw-sidenav id="fmeaStructureCreate" config="data.structureCreateInfo"></aw-sidenav>
+</aw-row>

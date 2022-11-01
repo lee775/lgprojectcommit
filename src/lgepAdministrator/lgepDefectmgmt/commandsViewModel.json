@@ -1,0 +1,49 @@
+{
+    "commands": {
+        "cmdDefectmgmt": {
+            "iconId": "cmdConfiguration",
+            "title": "{{i18n.cmdDefectmgmtTitle}}",
+            "description": "{{i18n.cmdDefectmgmtDescription}}"
+        }
+    },
+    "commandHandlers": {
+        "cmdDefectmgmtHandler": {
+            "id": "cmdDefectmgmt",
+            "action": "activatecmdDefectmgmt",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.onlyDBA"
+            }
+        }
+    },
+    "commandPlacements": {
+        "cmdDefectmgmtaw_globalNavigationbar": {
+            "id": "cmdDefectmgmt",
+            "uiAnchor": "aw_globalNavigationbar",
+            "priority": 110
+        }
+    },
+    "actions": {
+        "activatecmdDefectmgmt": {
+            "actionType": "Navigate",
+            "navigateTo": "defectManagement",
+            "navigationParams": {}
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "onlyDBA": {
+            "expression": "ctx.userSession.props.role.uiValue == 'DBA'"
+        }
+    },
+    "i18n": {
+        "cmdDefectmgmtTitle": [
+            "lgepDefectmgmtMessages"
+        ],
+        "cmdDefectmgmtDescription": [
+            "lgepDefectmgmtMessages"
+        ]
+    }
+}

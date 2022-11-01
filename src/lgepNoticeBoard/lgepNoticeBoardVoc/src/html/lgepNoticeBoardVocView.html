@@ -1,0 +1,109 @@
+<aw-flex-column id="qnaDatas">
+    <aw-flex-row class="borderShadow3">
+        <aw-flex-column width="4" justify="top" class="leftPadding">
+            <aw-panel-body>
+                <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadow2">
+                    <aw-command-bar anchor="qaCommand" alignment="HORIZONTAL" id="commandColorId"></aw-command-bar>
+                </aw-flex-row>
+                <div class="divColor" style="text-align: center;"
+                    visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length === 0">
+                    <h3>{{i18n.noPost}}</h3>
+                </div>
+                <aw-flex-row height="fill" class="borderShadow">
+                    <aw-splm-table gridid="qaList"
+                        visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
+                        align-content="center"></aw-splm-table>
+                </aw-flex-row>
+            </aw-panel-body>
+        </aw-flex-column>
+        <aw-splitter min-size-1="300" min-size-2="300"></aw-splitter>
+        <aw-flex-column>
+            <aw-include name="lgepNoticeBoardChart"
+                exist-when="data.dataProviders.qaListDataProvider.selectedObjects.length == 0 && data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0">
+            </aw-include>
+            <aw-panel-body visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length > 0">
+                <aw-command-panel-section caption="i18n.property" anchor="data.qaOptionAnchor" collapsed="false"
+                    class="question">
+                    <aw-flex-row>
+                        <aw-flex-column class="firstRow1">
+                            <aw-label prop="data.qaID" class="lblHeight"></aw-label>
+                        </aw-flex-column>
+                        <aw-flex-column>
+                            <aw-label prop="data.qaPoint" class="lblHeight"></aw-label>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-separator class="separatorHeight"></aw-separator>
+                    <aw-label prop="data.qaTitle" class="lblHeight"></aw-label>
+                    <aw-separator class="separatorHeight"></aw-separator>
+                    <aw-label prop="data.qaContent" class="lblHeight"></aw-label>
+                    <textarea id="qaContentSummernote"></textarea>
+                    <aw-label style="height: 48px;" prop="data.qaWriter" class="marginTopWriter"></aw-label>
+                    <aw-separator class="separatorHeight"></aw-separator>
+                    <aw-label style="height: 45px;" prop="data.qaWriteDate" class="lblHeight qaWriteDate">
+                    </aw-label>
+                    <aw-separator class="separatorHeight"></aw-separator>
+                    <aw-flex-row>
+                        <aw-label prop="data.relationItem" class="noMaxWidth"></aw-label>
+                        <aw-flex-column class="fitContent">
+                            <aw-flex-row>
+                                <aw-flex-column exist-when="data.linkRepeat.dbValue.length == 0">
+                                    &nbsp;-&nbsp;
+                                </aw-flex-column>
+                                <aw-flex-column width="auto" aw-repeat="result : data.linkRepeat.dbValue"
+                                    class="fitContent">
+                                    <aw-flex-row>
+                                        <aw-flex-column>
+                                            <aw-link prop="result" action="qnaLinkAction"
+                                                exist-when="data.linkRepeat.dbValue.length > 0" class="widthFit">
+                                            </aw-link>
+                                        </aw-flex-column>
+                                        <aw-flex-column exist-when="result.displayName != data.linkRepeat.dbValue[data.linkRepeat.dbValue.length - 1].displayName">
+                                            &nbsp;/&nbsp;
+                                        </aw-flex-column>
+                                    </aw-flex-row>
+                                </aw-flex-column>
+                            </aw-flex-row>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                </aw-command-panel-section>
+                <aw-command-panel-section caption="i18n.answer" anchor="data.qaAnswerAnchor" collapsed="false" id="test"
+                    class="answerSection">
+                    <aw-list dataprovider="data.dataProviders.qaAnswerList" height="auto" class="listClass">
+                        <div>
+                            <aw-default-cell vmo="item">
+                                <aw-flex-row>
+                                    <aw-button button-type="base" class="btnAdopt"
+                                        exist-when="data.adoptState==false && data.dataProviders.qaListDataProvider.selectedObjects[0].props.owning_user.uiValue == ctx.user.props.object_string.dbValue"
+                                        action="adopt">{{item.adopt}}</aw-button>
+                                    <h4 exist-when="data.dataProviders.qaAnswerList.selectedObjects[0].props.l2_is_selected.dbValues[0]=='Y' && data.adoptState==true"
+                                        id="marginLeft" class="fontRed">{{item.adopt}} &nbsp;&nbsp;&nbsp;</h4>
+                                    <aw-icon-button command="data.buttonCommand" class="positionControll">
+                                    </aw-icon-button>
+                                    <h4 id="marginLeft" class="positionControll">
+                                        {{item.props.l2_good_count}}
+                                    </h4>
+                                </aw-flex-row>
+                            </aw-default-cell>
+                            <textarea id="{{item.props.item_id.dbValue}}"></textarea>
+                            <div class="{{item.props.item_id.dbValue}}" style="display:none;">
+                                <aw-button button-type="base" action="editCancel" size="auto">{{data.i18n.cancle}}</aw-button>
+                                <aw-button action="answerEdit" size="auto">{{data.i18n.editing}}</aw-button>
+                            </div>
+                        </div>
+                    </aw-list>
+                    <aw-icon-button size="large" command="data.plusButton" visible-when="!conditions.checkAnswerAdd"></aw-icon-button>
+                    <aw-panel visible-when="conditions.checkAnswerAdd" id="addAnswerCss">
+                        <aw-panel-body>
+                            <aw-label prop="data.answerContent"></aw-label>
+                            <textarea id="qnaAnswerContent"></textarea>
+                        </aw-panel-body>
+                        <aw-panel-footer>
+                            <aw-button button-type="base" action="answerAddCancel" size="auto">{{i18n.cancle}}</aw-button>
+                            <aw-button action="answerAddNow" size="auto">{{i18n.add}}</aw-button>
+                        </aw-panel-footer>
+                    </aw-panel>
+                </aw-command-panel-section>
+            </aw-panel-body>
+        </aw-flex-column>
+    </aw-flex-row>
+</aw-flex-column>

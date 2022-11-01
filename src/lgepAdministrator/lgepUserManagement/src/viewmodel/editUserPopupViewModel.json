@@ -1,0 +1,111 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-textbox.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-label.directive",
+        "js/aw-listbox.directive",
+        "js/exist-when.directive",
+        "js/aw-widget.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "editApprovalPopupLoadSuccess",
+            "action": "editInitialize"
+        }
+    ],
+    "actions": {
+        "editUserProps":{
+            "actionType": "JSFunction",
+            "method": "editUserProps",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepUserManagementService"
+        },
+        "editInitialize":{
+            "actionType": "JSFunction",
+            "method": "editPopupInitialize",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepUserManagementService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "editUserPropsBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "editUserProps"
+                },
+                {
+                    "action": "closePopupWindow"
+                }
+            ]
+        }
+    },
+    "data": {
+        "userPoint": {
+            "displayName": "{{i18n.knowledgePoint}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "expertCoveragesList": {
+            "displayName": "{{i18n.expertCoverages}}",
+            "type": "STRINGARRAY",
+            "isRequired": "false",
+            "isEditable": "true",
+            "isArray": "true"
+        },
+        "expertState": {
+            "displayName": "{{i18n.expertStatus}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "false"
+        },
+        "expertStateValue": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "X",
+                    "propDisplayDescription": "전문가 권한 해제",
+                    "dispValue": "X",
+                    "propInternalValue": "X"
+                },
+                {
+                    "propDisplayValue": "O",
+                    "propDisplayDescription": "전문가 권한 지급",
+                    "dispValue": "O",
+                    "propInternalValue": "O"
+                }
+            ]
+        },
+        "userName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "i18n": {
+        "name": ["lgepUserManagementMessages"],
+        "knowledgePoint": ["lgepUserManagementMessages"],
+        "expertStatus": ["lgepUserManagementMessages"],
+        "expertCoverages": ["lgepUserManagementMessages"]
+    }
+}

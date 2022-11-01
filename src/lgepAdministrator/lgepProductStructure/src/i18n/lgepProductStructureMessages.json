@@ -1,0 +1,19 @@
+{
+    "helloText": "!! Hello World !!",
+    "lgepProductStructureLocationHeaderTitle": "partmgmtLocation",
+    "lgepProductStructureLocationBrowserTitle": "Digital DGMS",
+    "lgepProductStructureLocationBrowserSubTitle": "partManagement",
+    "lgepProductStructureSubLocationTitle": "partmgmtSubLocation",
+    "lgepProductStructureSubLocationChartTitle": "partmgmtSubLocation",
+    "lgepProductStrtTitle": "lgepProductStrt",
+    "lgepProductStrtChartTitle": "lgepProductStrt",
+    "createButton": "Create",
+    "closeButton": "Close",
+    "name":"Name",
+    "add" :"Add",
+    "edit":"Edit",
+    "save" :"Save",
+    "cancel":"Cancel",
+    "delete" :"Delete"
+
+}

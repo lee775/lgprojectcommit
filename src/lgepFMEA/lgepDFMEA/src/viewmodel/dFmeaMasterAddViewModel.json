@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-listbox.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-textbox.directive",
+    "js/aw-progress-indicator.directive",
+    "css/dfmeaMasterAddView.css"
+  ],
+  "data": {
+    "parentAssy": {
+      "displayName": "{{i18n.topAssy}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "isRequired": "true"
+    },
+    "subAssy": {
+      "displayName": "{{i18n.bottomAssy}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "singleItem": {
+      "displayName": "{{i18n.singleItem}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "functionData": {
+      "displayName": "{{i18n.function}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "isRequired": "true"
+    },
+    "failure": {
+      "displayName": "{{i18n.potentialFailureModeLabel}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "isRequired": "true"
+    },
+    "disabledButtonChk": {
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "l2Severity": {
+      "displayName": "{{i18n.severityPlaceholder}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2SodValues": {
+      "type": "STRING",
+      "dbValue": [
+        {
+          "propDisplayValue": "",
+          "propInternalValue": ""
+        },
+        {
+          "propDisplayValue": "1",
+          "propInternalValue": "1"
+        },
+        {
+          "propDisplayValue": "2",
+          "propInternalValue": "2"
+        },
+        {
+          "propDisplayValue": "3",
+          "propInternalValue": "3"
+        },
+        {
+          "propDisplayValue": "4",
+          "propInternalValue": "4"
+        },
+        {
+          "propDisplayValue": "5",
+          "propInternalValue": "5"
+        },
+        {
+          "propDisplayValue": "6",
+          "propInternalValue": "6"
+        },
+        {
+          "propDisplayValue": "7",
+          "propInternalValue": "7"
+        },
+        {
+          "propDisplayValue": "8",
+          "propInternalValue": "8"
+        },
+        {
+          "propDisplayValue": "9",
+          "propInternalValue": "9"
+        },
+        {
+          "propDisplayValue": "10",
+          "propInternalValue": "10"
+        }
+      ]
+    },
+    "parentAssyValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "subAssyValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "singleItemValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "functionValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "failureValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "l2RelatedSources": {
+      "displayName": "{{i18n.l2RelatedSources}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "requiredText": "{{i18n.l2RelatedSourcesPlaceholder}}"
+    },
+    "l2Occurence": {
+      "displayName": "{{i18n.occurencePlaceHolder}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2Detection": {
+      "displayName": "{{i18n.detectionPlaceHolder}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "classification": {
+      "displayName": "{{i18n.l2ClassificationTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "requiredText": "{{i18n.l2ClassificationPlaceholder}}"
+    }
+  },
+  "actions": {
+    "save": {
+      "actionType": "JSFunction",
+      "method": "saveAction",
+      "deps": "js/fmeaMasterAddService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "deps": "js/fmeaMasterAddInitService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "parentAssyValues.dbValue": "result.l2_parent_assy",
+        "subAssyValues.dbValue": "result.l2_sub_assy",
+        "singleItemValues.dbValue": "result.l2_single_item",
+        "functionValues.dbValue": "result.l2_function",
+        "failureValues.dbValue": "result.l2_potential_failure_mode"
+      }
+    },
+    "selectionFunction": {
+      "actionType": "JSFunction",
+      "method": "selectionFunction",
+      "deps": "js/fmeaMasterAddService",
+      "inputData": {
+        "functionData": "{{data.functionData}}"
+      }
+    },
+    "selectionFailure": {
+      "actionType": "JSFunction",
+      "method": "selectionFailure",
+      "deps": "js/fmeaMasterAddService",
+      "inputData": {
+        "failureData": "{{data.failure}}"
+      }
+    },
+    "selectionSeverity": {
+      "actionType": "JSFunction",
+      "method": "selectionSeverity",
+      "inputData": {
+        "currentValue": "{{data.l2Severity}}"
+      },
+      "outputData": {
+        "l2Severity.dbValues": "severity"
+      },
+      "deps": "js/fmeaMasterAddService"
+    },
+    "selectionOccurence": {
+      "actionType": "JSFunction",
+      "method": "selectionOccurence",
+      "inputData": {
+        "currentValue": "{{data.l2Occurence}}"
+      },
+      "outputData": {
+        "l2Occurence.dbValues": "occurence"
+      },
+      "deps": "js/fmeaMasterAddService"
+    },
+    "selectionDetection": {
+      "actionType": "JSFunction",
+      "method": "selectionDetection",
+      "inputData": {
+        "currentValue": "{{data.l2Detection}}"
+      },
+      "outputData": {
+        "l2Detection.dbValues": "detection"
+      },
+      "deps": "js/fmeaMasterAddService"
+    }
+  },
+  "lifecycleHooks": {},
+  "onEvent": [
+    {
+      "eventId": "dfmeaadd.onmount",
+      "action": "onMount"
+    }
+  ],
+  "i18n": {
+    "potentialFailureMode": ["lgepDFMEAViewMessages"],
+    "potentialFailureMode_explanation": ["lgepMasterViewMessages"],
+    "failureEffect": ["lgepMasterViewMessages"],
+    "failureEffect_explanation": ["lgepMasterViewMessages"],
+    "causeOfFailure": ["lgepMasterViewMessages"],
+    "causeOfFailure_explanation": ["lgepMasterViewMessages"],
+    "save": ["lgepMasterViewMessages"],
+    "severityPlaceholder": ["lgepMasterViewMessages"],
+    "panelSection_precautionGroup": ["lgepMasterViewMessages"],
+    "precautionsAction": ["lgepMasterViewMessages"],
+    "precautionsAction_explanation": ["lgepMasterViewMessages"],
+    "l2RelatedSources": ["lgepMasterViewMessages"],
+    "detectionAciton": ["lgepMasterViewMessages"],
+    "detectionAciton_explanation": ["lgepMasterViewMessages"],
+    "occurencePlaceHolder": ["lgepMasterViewMessages"],
+    "detectionPlaceHolder": ["lgepMasterViewMessages"],
+    "l2classification": ["lgepMasterViewMessages"],
+    "panelSection_ChangesGroup": ["lgepMasterViewMessages"],
+    "l2RelatedSourcesPlaceholder": ["lgepMasterViewMessages"],
+    "l2ClassificationPlaceholder": ["lgepMasterViewMessages"],
+    "l2ClassificationTitle": ["lgepMasterViewMessages"],
+    "topAssy": ["lgepDFMEAViewMessages"],
+    "bottomAssy": ["lgepDFMEAViewMessages"],
+    "singleItem": ["lgepDFMEAViewMessages"],
+    "function": ["lgepDFMEAViewMessages"],
+    "requirement": ["lgepMasterViewMessages"],
+    "potentialFailureModeLabel": ["lgepDFMEAViewMessages"]
+  }
+}

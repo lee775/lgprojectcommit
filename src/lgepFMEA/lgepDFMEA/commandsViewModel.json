@@ -1,0 +1,261 @@
+{
+  "commands": {
+    "dfmeaMasterCreate": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.addTitle}}",
+      "description": "{{i18n.dfmeaMasterAddDesc}}"
+    },
+    "dfmeaMasterNameEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.dfmeaNameEdit}}",
+      "description": "{{i18n.dfmeaNameEditDesc}}"
+    },
+    "dmasterAdd": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.addTitle}}",
+      "description": "{{i18n.masterAddDesc}}"
+    },
+    "dmasterRemove": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.deleteTitle}}",
+      "description": "{{i18n.masterDeleteDesc}}"
+    },
+    "fmeaRowEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.rowEditTitle}}",
+      "description": "{{i18n.rotEditDesc}}"
+    },
+    "fmeaRowEditSave": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.fmeaRowEditSaveTitle}}",
+      "description": "{{i18n.fmeaRowEditSaveDesc}}"
+    },
+    "fmeaRowEditCancel": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.fmeaRowEditCancelTitle}}",
+      "description": "{{i18n.fmeaRowEditCancelDesc}}"
+    }
+  },
+  "commandHandlers": {
+    "dmasterAddHandler": {
+      "id": "dmasterAdd",
+      "action": "addDfmeaMaster",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.isPopupClose"
+      },
+      "visibleWhen": {
+        "condition": "conditions.dMasterlocation"
+      }
+    },
+    "dfmeaMasterCreateHandler": {
+      "id": "dfmeaMasterCreate",
+      "action": "createDfmeaMaster",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.isAddView"
+      },
+      "visibleWhen": true
+    },
+    "dfmeaMasterNameEditHandler": {
+      "id": "dfmeaMasterNameEdit",
+      "action": "editDfmeaMaster",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.isEditView"
+      },
+      "visibleWhen": true
+    },
+    "fmeaRowEditHandler": {
+      "id": "fmeaRowEdit",
+      "action": "editRowAction",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.isPopupClose"
+      },
+      "visibleWhen": {
+        "condition": "conditions.viewEditRow"
+      }
+    },
+    "fmeaRowEditSaveHandler": {
+      "id": "fmeaRowEditSave",
+      "action": "editRowSaveAction",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.isRowEdit"
+      }
+    },
+    "fmeaRowEditCancelHandler": {
+      "id": "fmeaRowEditCancel",
+      "action": "editRowCancelAction",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.isRowEdit"
+      }
+    },
+    "pinCommandHandler": {
+      "id": "fMasterPin",
+      "action": "setPin",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.pinSetView"
+      }
+    },
+    "unPinCommandHandler": {
+      "id": "fMasterUnpin",
+      "action": "setUnpin",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.unPinSetView"
+      }
+    }
+  },
+  "commandPlacements": {
+    "dfmeaMasterCreatePlacements": {
+      "id": "dfmeaMasterCreate",
+      "uiAnchor": "fmea_dfmea_master_table_list_commands",
+      "priority": 100
+    },
+    "dfmeaMasterNameEditPlacements": {
+      "id": "dfmeaMasterNameEdit",
+      "uiAnchor": "fmea_dfmea_master_table_list_commands",
+      "priority": 200
+    },
+    "masterAdddPlacements": {
+      "id": "dmasterAdd",
+      "uiAnchor": "fmea_fmea_table_list_commands",
+      "priority": 100
+    },
+    "masterDeletePlacements": {
+      "id": "dmasterRemove",
+      "uiAnchor": "fmea_fmea_table_list_commands",
+      "priority": 200
+    },
+    "fmeaMasterRowEditPlacements": {
+      "id": "fmeaRowEdit",
+      "uiAnchor": "fmea_dfmea_detail_view_commands",
+      "priority": 100
+    },
+    "fmeaMasterRowEditSavePlacements": {
+      "id": "fmeaRowEditSave",
+      "uiAnchor": "fmea_dfmea_detail_view_commands",
+      "priority": 200
+    },
+    "fmeaMasterRowEditCancelPlacements": {
+      "id": "fmeaRowEditCancel",
+      "uiAnchor": "fmea_dfmea_detail_view_commands",
+      "priority": 300
+    }
+  },
+  "actions": {
+    "createDfmeaMaster": {
+      "actionType": "JSFunction",
+      "method": "openCreateView",
+      "deps": "js/fmeaMasterCreateService",
+      "inputData": {
+        "htmlPanel": "dFmeaMasterCreate",
+        "title:": "{{i18n.dfmeaCreateCaption}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editDfmeaMaster": {
+      "actionType": "JSFunction",
+      "method": "editDfmeaMaster",
+      "deps": "js/fmeaMasterEditService",
+      "inputData": {
+        "htmlPanel": "dFmeaMasterEdit",
+        "title:": "{{i18n.dfmeaEditCaption}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "addDfmeaMaster": {
+      "actionType": "JSFunction",
+      "method": "openCreateView",
+      "deps": "js/fmeaMasterAddInitService",
+      "inputData": {
+        "htmlPanel": "dFmeaMasterAdd",
+        "title:": "{{i18n.dfmeaCaption}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "removeDfmeaMaster": {
+      "actionType": "JSFunction",
+      "method": "removeRowAction",
+      "deps": "js/dfmeaMasterEditRemoveService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editRowAction": {
+      "actionType": "JSFunction",
+      "method": "editRowAction",
+      "deps": "js/dfmeaMasterDetailService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editRowCancelAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "dfmeaDetail.edit.cancel"
+          }
+        ]
+      }
+    },
+    "editRowSaveAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "dfmeaDetail.edit.save"
+          }
+        ]
+      }
+    }
+  },
+  "conditions": {
+    "dfmealocation": {
+      "expression": "ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklist'"
+    },
+    "dMasterlocation": {
+      "expression": "ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklistm'"
+    },
+    "isPopupClose": {
+      "expression": "conditions.dMasterlocation && ctx.fmea_popup !== true"
+    },
+    "viewEditRow": {
+      "expression": "conditions.dMasterlocation && ctx.fmea_detail_init && ctx.fmea_edit_init === true && ctx.fmea_row_edit !== true"
+    },
+    "isRowEdit": {
+      "expression": "conditions.dMasterlocation && ctx.fmea_edit_init === true && ctx.fmea_row_edit === true"
+    },
+    "isAddView": {
+      "expression": "conditions.dfmealocation && ctx.fmea_popup !== true"
+    },
+    "isEditView": {
+      "expression": "conditions.dfmealocation && ctx.fmea_popup !== true && ctx.fmea_select"
+    }
+  },
+  "i18n": {
+    "addTitle": ["lgepMasterMessages"],
+    "deleteTitle": ["lgepMasterMessages"],
+    "masterAddDesc": ["lgepDFMEAMessages"],
+    "masterDeleteDesc": ["lgepDFMEAMessages"],
+    "dfmeaCaption": ["lgepDFMEAViewMessages"],
+    "isPin": ["lgepMasterMessages"],
+    "isPinDesc": ["lgepMasterMessages"],
+    "isUnPin": ["lgepMasterMessages"],
+    "isUnPinDesc": ["lgepMasterMessages"],
+    "dfmeaMasterAddDesc": ["lgepDFMEAMessages"],
+    "dfmeaCreateCaption": ["lgepDFMEAViewMessages"],
+    "dfmeaNameEdit": ["lgepMasterMessages"],
+    "dfmeaNameEditDesc": ["lgepMasterMessages"],
+    "dfmeaEditCaption": ["lgepDFMEAViewMessages"]
+  }
+}

@@ -1,0 +1,99 @@
+{
+    "L2_ChkMainLocationHeaderTitle": "Checklist",
+    "L2_ChkMainLocationBrowserTitle": "Digital DGMS",
+    "L2_ChkMainLocationBrowserSubTitle": "Checklist",
+
+
+    "L2_ChkMainSubLocationTitle": "Checklist",
+    "L2_ChkMainSubLocationChartTitle": "Checklist",
+
+
+    "L2_ChkOpenLocationHeaderTitle": "Checklist Overview",
+    "L2_ChkOpenLocationBrowserTitle": "Digital DGMS",
+    "L2_ChkOpenLocationBrowserSubTitle": "Checklist Overview",
+
+
+    "L2_ChkOpenSubLocationTitle": "Checklist Overview",
+    "L2_ChkOpenSubLocationChartTitle": "Checklist Overview",
+
+    
+    "backToSelectionPage": "Back",
+    "backToSelectionPageDesc": "Back to the Checklist List view.",
+
+    "addChecklist": "Add",
+    "addChecklistDesc": "Add Checklist from Standard BOM List.",
+
+
+    "modifyChecklist": "Edit",
+    "modifyChecklistDesc": "Edit the name of Checklist",
+
+
+    "openChecklistSod": "SOD",
+    "openChecklistSodDesc1": "Review the content of SOD Tables",
+    "openChecklistSodDesc2": "Standard SOD Grade with Severity, Occurence, Detection.",
+
+    
+    "interactionGroup": "Interaction",
+    "interactionGroupDesc": "Check the Interaction menus of this checklist.",
+
+
+    "openInteractionMatrix": "Interaction Matrix",
+    "openInteractionMatrixDesc": "Review and Edit Interaction Matrix.",
+
+    "openEffectivityCheck": "Effectivity Check",
+    "openEffectivityCheckDesc": "Check the effectivity of parts from Interaction Matrix.",
+    
+    "editGroup": "Edit",
+    "editGroupDesc": "Check the Edit menus of this checklist.",
+
+
+    "openChecklistBomEdit": "Start Edit",
+    "openChecklistBomEditDesc": "Edit the row of Checklist",
+
+
+    "openChecklistBomAdd": "Add",
+    "openChecklistBomAddDesc": "Add the row of Checklist",
+
+
+    "openChecklistBomRemove": "Remove",
+    "openChecklistBomRemoveDesc": "Remove the row of Checklist",
+
+
+    "openChecklistBomSave": "Save",
+    "openChecklistBomSaveDesc": "Save changes of Checklist.",
+
+
+    "openChecklistBomCancelEdit": "Cancel Edit",
+    "openChecklistBomCancelEditDesc": "Discard changes of editing.",
+
+    
+    "openChecklistBomClone": "Clone",
+    "openChecklistBomCloneDesc": "Clone the Checklist",
+    
+
+    "openChecklistFreeze": "Freeze",
+    "openChecklistFreezeDesc": "Freeze the checklist and makes it fix.",
+
+
+    "openChecklistBomRevise": "Revise",
+    "openChecklistBomReviseDesc1": "Revises the checklist.",
+    "openChecklistBomReviseDesc2": "Revises the checklist row.",
+
+
+    "openChecklistTitle": "Name",
+    "openChecklistRevId": "Revision ID",
+    "openChecklistLastModUser": "Last Modified User",
+
+    "L2_InteractionPanelCaption" : "Interaction Check",
+
+
+    "functionDetail": "Function Detail",
+    "requirementDetail": "Requirement Detail",
+    "failureModeDetail": "Failure Mode Detail",
+    "failureEffect": "Failure Effect Detail",
+    "failureDetail": "Failure Detail",
+    "prevention": "Prevention Detail",
+    "referenceData": "Reference Data",
+    "detectivity": "Detectivity",
+    "classification": "Classification"
+}

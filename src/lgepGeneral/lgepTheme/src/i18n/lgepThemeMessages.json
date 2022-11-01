@@ -1,0 +1,14 @@
+{
+    "lgepThemeConfig": "Theme Settings",
+    "lgepRedTitle": "LG Red",
+    "lgepGrayTitle": "LG Gray",
+    "lgepDarkTitle": "LG Dark",
+    "lgepWhiteTitle": "LG White",
+    "lgepMainTitleName" : "Digital DGMS",
+    "lgepMainSubTitle": "Home",
+    "fontSizeSection": "Font Size Setting",
+    "setThemeConfig": "Save Configuration",
+    "fontSizeWarningMsg": "Font Size cannot be set lower than 10px.",
+    "fontSizeCompleteMsg": "Theme setting has been saved.",
+    "fontSizeErrorMsg": "Theme setting has been failed. Please check below errors."
+}

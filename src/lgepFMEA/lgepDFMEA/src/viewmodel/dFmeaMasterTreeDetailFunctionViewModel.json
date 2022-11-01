@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-section.directive",
+    "css/dfmeaMasterAddView.css"
+  ],
+  "data": {
+    "functionData": {
+      "displayName": "{{i18n.function}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "isEditable": "true"
+    }
+  },
+  "actions": {
+    "save": {
+      "actionType": "JSFunction",
+      "method": "saveAction",
+      "deps": "js/fmeaMasterAddService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "selectionFunction": {
+      "actionType": "JSFunction",
+      "method": "selectionFunction",
+      "deps": "js/dfmeaMasterRowEditService",
+      "inputData": {
+        "functionData": "{{data.functionData}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editRow": {
+      "actionType": "JSFunction",
+      "method": "editRow",
+      "deps": "js/dfmeaMasterRowEditInitService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "functionData.dbValue": "result.functionValue",
+        "functionData.dispValue": "result.functionValue",
+        "functionValues.dbValue": "result.l2_function"
+      }
+    },
+    "editRowCancelAction": {
+      "actionType": "JSFunction",
+      "method": "editRowCancelAction",
+      "deps": "js/dfmeaMasterRowEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editRowSaveAction": {
+      "actionType": "JSFunction",
+      "method": "editRowSaveAction",
+      "deps": "js/dfmeaMasterRowEditSaveService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "functionData": "{{data.functionData}}",
+        "failureData": "{{data.failure}}"
+      }
+    }
+  },
+  "i18n": {
+    "function": ["lgepDFMEAViewMessages"]
+  }
+}

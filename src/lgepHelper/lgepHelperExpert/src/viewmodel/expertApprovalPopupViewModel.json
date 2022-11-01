@@ -1,0 +1,107 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-textbox.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-label.directive",
+        "js/aw-listbox.directive",
+        "js/exist-when.directive",
+        "css/askExpertView.css"
+    ],
+    "onEvent": [
+        {
+            "eventId": "expertApprovalPopupLoadSuccess",
+            "action": "expertInitialize"
+        }
+    ],
+    "actions": {
+        "expertStateChange":{
+            "actionType": "JSFunction",
+            "method": "expertStateChange",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "expertInitialize":{
+            "actionType": "JSFunction",
+            "method": "expertInitialize",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/technicalService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "expertStateChangeBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "expertStateChange"
+                },
+                {
+                    "action": "closePopupWindow"
+                }
+            ]
+        }
+    },
+    "data": {
+        "specializedField": {
+            "displayName": "{{i18n.expertCoverages}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "expertState": {
+            "displayName": "{{i18n.expertStatus}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "false"
+        },
+        "expertStateValue": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "X",
+                    "propDisplayDescription": "{{i18n.expertAuthorizationCancel}}",
+                    "dispValue": "X",
+                    "propInternalValue": "X"
+                },
+                {
+                    "propDisplayValue": "O",
+                    "propDisplayDescription": "{{i18n.expertAuthorization}}",
+                    "dispValue": "O",
+                    "propInternalValue": "O"
+                }
+            ]
+        },
+        "userName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "i18n": {
+        "edit": ["lgepKnowldegeManageMessages"],
+        "close": ["lgepKnowldegeManageMessages"],
+        "expertAuthorization": ["lgepTechnicalMessages"],
+        "expertAuthorizationCancel": ["lgepTechnicalMessages"],
+        "expertStatus": ["lgepTechnicalMessages"],
+        "name": ["lgepTechnicalMessages"],
+        "expertCoverages": ["lgepTechnicalMessages"]
+    }
+}

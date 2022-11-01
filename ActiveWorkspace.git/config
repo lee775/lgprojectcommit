@@ -6,5 +6,3 @@
 	ignorecase = true
 [remote "origin"]
 	url = http://10.162.210.76:3003/Digital_DGMS/ActiveWorkspace.git
-	fetch = +refs/*:refs/*
-	mirror = true

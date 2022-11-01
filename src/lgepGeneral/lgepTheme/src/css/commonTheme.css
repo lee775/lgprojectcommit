@@ -1,0 +1,15 @@
+
+
+/* Setting height,width of the Siemens Logo in svg as per the values which were previously defined for the png */
+.aw-base-logoImage .aw-base-icon {
+    height: 80%;
+    width: 80%;
+}
+
+.aw-tile-tileGroups {
+    border-radius: 10px;
+    background: #e4e4e4;
+    text-align: center;
+    margin-right: 15px;
+}
+

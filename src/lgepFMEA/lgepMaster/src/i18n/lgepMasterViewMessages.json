@@ -1,0 +1,49 @@
+{
+  "save": "Create",
+  "structureCaption": "Structure Create",
+  "functionCaption": "Function Create",
+  "function": "Function:",
+  "requirement": "Requirement",
+  "requirementCaption": "Requirement Create",
+
+  "potentialFailureMode": "Potential Failure MOde",
+  "potentialFailureMode_explanation": "(Design Failure Mode):",
+  "failureEffect": "Failure Effect",
+  "failureEffect_explanation": "(Consumer Failure Mode):",
+  "causeOfFailure": "Failure Mechanism ",
+  "causeOfFailure_explanation": "(Cause Of Failure):",
+  "severity": "Severity",
+  "severityPlaceholder": "Severity (Degree of impact on customers)",
+  "failureCaption": "Failure Create",
+  "panelSection_precatuionGroup": "Preventive Design Group",
+  "precautionsAction": "Precatuions Action",
+  "precautionsAction_explanation": "(Exam Point Of View):",
+  "l2RelatedSources": "Related Sources",
+  "detectionAciton": "Detection Aciton",
+  "detectionAciton_explanation": "(Design Perspective):",
+  "occurence": "Occurence",
+  "detection": "Detection",
+  "occurencePlaceHolder": "Occurence (The degree of likelihood that a potential cause of failure will occur)",
+  "detectionPlaceHolder": "Detection (The degree of likelihood of being discovered by current management practices)",
+
+  "detectionActionCaption": "Detection Aciton Create",
+  "precatuionsActionCaption": "precatuions Aciton Create",
+
+  "detectionActionAddDesc": "Detection Action Create",
+  "detectionActionDeleteDesc": "Detection Action Delete",
+  "detectionActionEditDesc": "Detection Action Edit",
+  "detectionActionEditSaveDesc": "Detection Action Edit Save",
+  "detectionActionEditCancelDesc": "Detection Action Edit Cancel",
+
+  "precautionsActionCaption": "Precatuions Action Create",
+  "precatuionsActionAddDesc": "Precatuions Action Create",
+  "precatuionsActionDeleteDesc": "Precatuions Action Delete",
+  "precatuionsActionEditDesc": "Precatuions Action Edit",
+  "precatuionsActionEditSaveDesc": "Precatuions Action Edit Save",
+  "precatuionsActionEditCancelDesc": "Precatuions Action Edit Cancel",
+
+  "l2RelatedSourcesPlaceholder":"DGMS, QMS, standards, drawings, etc.",
+  "l2ClassificationPlaceholder":"CTQ",
+
+  "l2ClassificationTitle":"Classification"
+}

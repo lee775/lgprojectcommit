@@ -1,0 +1,27 @@
+.create-additionalinfo {
+  padding: 0 0 0 12px;
+}
+
+.editor-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.editor-row>label {
+  font-weight: 600;
+  margin: 10px 0 5px 0;
+}
+
+.note-editable b,
+.note-editable strong {
+  font-weight: bold;
+}
+
+.note-editable b {
+  font-weight: 800;
+}
+
+.label-column {
+  min-width: 250px;
+}

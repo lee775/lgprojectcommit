@@ -1,0 +1,30 @@
+{
+    "dataSetTable_Link": {
+        "grids": [
+            "dataSetTable"
+        ],
+        "columns": [
+            "object_string"
+        ],
+        "tooltip": [],
+        "template": "<a href='<%=vmo.basicUrl%>#/com.siemens.splm.clientfx.tcui.xrt.showObject?uid=<%=vmo.uid%>'><%=vmo.props.object_string.uiValue%></a>",
+        "templateUrl": "",
+        "renderFunction": "",
+        "deps": "",
+        "dependentServices": []
+    },
+    "dataSetTable_DownLoad": {
+        "grids": [
+            "dataSetTable"
+        ],
+        "columns": [
+            "ref_list"
+        ],
+        "tooltip": [],
+        "template": "<a href='<%=vmo.basicUrl%>#/downloadFile?uid=<%=vmo.props.ref_list.dbValues[0]%>' style='text-align: center;'><button class='aw-base-blk-button ng-scope ng-isolate-scope aw-accent-caution aw-base-size-auto' aw-click='doit(action, $event)' aw-click-options='{ debounceDoubleClick: true }' ng-transclude='' button-type='sole' size='auto'>DownLoad</button></a>",
+        "templateUrl": "",
+        "renderFunction": "",
+        "deps": "",
+        "dependentServices": []
+    }
+}

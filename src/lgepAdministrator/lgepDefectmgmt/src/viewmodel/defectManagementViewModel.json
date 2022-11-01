@@ -1,0 +1,290 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-label.directive",
+        "js/aw-navigate-breadcrumb.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-splitter.directive",
+        "js/aw-splm-table.directive"
+    ],
+    "actions": {
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "defectMgmtTree",
+            "outputData": {
+                "result": "result",
+                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "defectMgmtTree": {
+            "actionType": "JSFunction",
+            "method": "defectMgmtTree",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "result": "result",
+                "defectMgmtTreeResults": "{{function:sortAction}}",
+                "totalFound": "totalFound"
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "getFilterFacetData": {
+            "actionType": "JSFunction",
+            "method": "getFilterFacetData",
+            "inputData": {
+                "filterFacetInput": "{{filterFacetInput}}"
+            },
+            "outputData": {
+                "fullData": ""
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "getChildrenData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "eventTable": "{{data.eventMap['defectMgmtTreeDataProvider.selectionChangeEvent']}}"
+            },
+            "outputData": {
+                "totalFound": "totalFound",
+                "example": "{{function:sortAction}}"
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "makeGroupBreadcrumb": {
+            "actionType": "JSFunction",
+            "method": "makeGroupBreadcrumb",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "makeBreadcrumb": {
+            "actionType": "JSFunction",
+            "method": "makeBreadcrumb",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "reload": {
+            "actionType": "JSFunction",
+            "method": "reload",
+            "deps": "js/defectmgmtService"
+        },
+        "applyData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/defectmgmtService"
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyData"
+                },
+                {
+                    "action": "reload"
+                }
+            ]
+        }
+    },
+    "data": {
+        "pageSize": 40,
+        "defectLbl": {
+            "displayName": "{{i18n.grouping}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.defect}}"
+        },
+        "classificationLbl": {
+            "displayName": "{{i18n.classification}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "provider": {
+            "crumbs": []
+        },
+        "defectConfig": {
+            "navigationdefectConfig": {
+                "type": "navigate",
+                "vm": "defectManagementBreadcrumbList",
+                "chevronDataProvider": "defectMgmtBreadcrumListData",
+                "id": "d_uids",
+                "noUpdate": true,
+                "displayProperty": "object_string",
+                "popuplist": "/html/defectManagementBreadcrumbListView.html"
+            }
+        }
+    },
+    "dataProviders": {
+        "defectMgmtTreeDataProvider": {
+            "action": "loadData",
+            "initializeAction": "loadData",
+            "treeLoadResult": "{{data.treeLoadResult}}",
+            "inputData": {
+                "accessMode": "tree",
+                "topNodeUid": "{{data.top}}"
+            }
+        },
+        "defectMgmtTableDataProvider": {
+            "action": "getChildrenData",
+            "response": "{{data.example}}",
+            "totalFound": "{{data.totalFound}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetAction": "filterFacetBatchAction",
+            "filterFacetResults": "{{data.filterFacetResults}}",
+            "selectionModelMode": "single"
+        }
+    },
+    "columnProviders": {
+        "defectMgmtTreeColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_string",
+                    "displayName": "{{i18n.treeHeaderDefect}}",
+                    "minWidth": 80,
+                    "width": 360,
+                    "isTreeNavigation": true,
+                    "pinnedLeft": true
+                }
+            ]
+        },
+        "defectMgmtTableColumnProvider": {
+            "frozenColumnIndex": 1,
+            "columns": [
+                {
+                    "name": "object_string",
+                    "displayName": "이름",
+                    "minWidth": 150,
+                    "width": 300,
+                    "isTableCommand": true,
+                    "pinnedLeft": true
+                },
+                {
+                    "name": "l2_division",
+                    "displayName": "{{i18n.division}}",
+                    "minWidth": 100,
+                    "width": 100
+                }
+            ]
+        }
+    },
+    "grids": {
+        "defectMgmtTree": {
+            "dataProvider": "defectMgmtTreeDataProvider",
+            "columnProvider": "defectMgmtTreeColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": false,
+                "isFilteringEnabled": true,
+                "enableGridMenu": false
+            }
+        },
+        "defectMgmtTable": {
+            "dataProvider": "defectMgmtTableDataProvider",
+            "columnProvider": "defectMgmtTableColumnProvider",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": true,
+                "enableExpandAndPaginationInEdit": true,
+                "enableGridMenu": true,
+                "isFilteringEnabled": true
+            }
+        }
+    },
+    "functions": {
+        "loadEmployeeTreeTableData": {
+            "functionName": "loadEmployeeTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}",
+                "{{data.columnProviders.defectMgmtTreeColumnProvider.sortCriteria}}",
+                "{{data.treeLoadInput}}",
+                "{{ctx}}"
+            ]
+        },
+        "sortAction": {
+            "functionName": "sortAction",
+            "parameters": [
+                "{{data.columnProviders.defectMgmtTableColumnProvider.sortCriteria}}",
+                "{{data.dataProviders.defectMgmtTableDataProvider.startIndex}}",
+                "{{data.pageSize}}",
+                "{{data.columnProviders.defectMgmtTableColumnProvider.columnFilters}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.defectMgmtTreeColumnProvider.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "defectMgmtTreeDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "getChildrenData"
+        },
+        {
+            "eventId": "defectMgmtTreeDataProvider.treeNodesLoaded",
+            "cacheEventData": true,
+            "action": "makeGroupBreadcrumb"
+        },
+        {
+            "eventId": "defectMgmtTreeDataProvider.selectionChangeEvent",
+            "condition": "data.dataProviders.defectMgmtTreeDataProvider.selectedObjects.length == 1",
+            "cacheEventData": true,
+            "action": "makeBreadcrumb"
+        },
+        {
+            "eventId": "defectMgmtTable.gridSelection",
+            "cacheEventData": true,
+            "action": "reload"
+        }
+    ],
+    "i18n": {
+        "treeHeaderDefect": [
+            "lgepDefectmgmtMessages"
+        ],
+        "grouping": [
+            "lgepDefectmgmtMessages"
+        ],
+        "defect": [
+            "lgepDefectmgmtMessages"
+        ],
+        "classification": [
+            "lgepDefectmgmtMessages"
+        ],
+        "division": [
+            "lgepDefectmgmtMessages"
+        ]
+    }
+}

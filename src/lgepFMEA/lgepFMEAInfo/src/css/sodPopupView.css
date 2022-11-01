@@ -1,0 +1,11 @@
+#sod-container {
+   min-height: 460px;
+}
+
+.tui-grid-border-line-left{
+   background-color: #E0E0E0;
+}
+
+.tui-grid-cell-content{
+   text-align: center;
+}

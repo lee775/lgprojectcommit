@@ -1,0 +1,76 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+      "js/aw-splm-table.directive"
+    ],
+    "data": {
+    },
+    "actions": {
+      "loadColumnDetection": {
+        "actionType": "JSFunction",
+        "method": "loadColumnDetection",
+        "inputData": {
+          "dataProvider": "{{data.dataProviders.detectionTableProvider}}"
+        },
+        "deps": "js/sodBallonService"
+      },
+      "loadDataDetection": {
+        "actionType": "JSFunction",
+        "method": "loadDataDetection",
+        "inputData": {
+          "ctx": "{{ctx}}"
+        },
+        "outputData": {
+          "detectionResults": "result.filterResults",
+          "detectionTotalFound": "result.totalFound"
+        },
+        "deps": "js/sodBallonService"
+      },
+      "selectTableRow": {
+        "actionType": "JSFunction",
+        "method": "selectTableRow",
+        "inputData": {
+          "selectionModel": "{{data.eventData.selectedObjects[0]}}",
+          "ctx": "{{ctx}}"
+        },
+        "deps": "js/listboxRenderService"
+      }
+    },
+    "columnProviders": {
+      "detectionTableColumnProvider": {
+        "loadColumnAction": "loadColumnDetection",
+        "frozenColumnIndex": -1
+      }
+    },
+    "dataProviders": {
+      "detectionTableProvider": {
+        "action": "loadDataDetection",
+        "response": "{{data.detectionResults}}",
+        "totalFound": "{{data.detectionTotalFound}}"
+      }
+    },
+    "grids": {
+      "detectionTable": {
+        "dataProvider": "detectionTableProvider",
+        "columnProvider": "detectionTableColumnProvider",
+        "addIconColumn": false,
+        "gridOptions": {
+          "enablePinning": true,
+          "enableSorting": false
+        }
+      }
+    },
+    "i18n": {
+      "detectionName": ["lgepDFMEAViewMessages"]
+    },
+    "conditions": {
+    },
+    "onEvent": [
+        {
+            "eventId": "detectionTableProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "selectTableRow"
+        }
+    ]
+  }
+  

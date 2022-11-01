@@ -1,0 +1,346 @@
+<style>
+    .techBorder {
+        border: solid 1px lightgray;
+    }
+
+    .navName {
+        background-color: rgb(240, 240, 240);
+    }
+
+    .sectionBorder {
+        border: solid 1px black;
+        padding: 4px;
+    }
+
+    .techDivision.aw-flex-row.ng-scope.ng-isolate-scope.afx-static-size {
+        height: auto !important;
+    }
+
+    .navContent #listCss ul.aw-widgets-cellListWidget.aw-layout-flexColumnContainer {
+        display: inline-flex;
+        flex-direction: row;
+        width: 110%;
+        flex-wrap: wrap;
+        margin-bottom: -4%;
+    }
+
+    li.aw-aria-border.aw-widgets-cellListItem.aw-widgets-cellTop.ng-scope.aw-widgets-hideCellListSelEffect {
+        flex: 0 0 19%;
+    }
+
+    #listCss ul li .aw-widgets-cellListItemContainer.aw-widgets-droppable {
+        width: 78px !important;
+    }
+
+    .word {
+        text-align: center;
+        font-size: xx-large;
+        margin-top: 20%;
+        /* 고정한게 나으면 350px로 수정하기 */
+    }
+
+    #technicalSpec .aw-widgets-innerWidget {
+        font-size: smaller;
+    }
+
+    #marketingSpec .aw-widgets-innerWidget {
+        font-size: smaller;
+    }
+
+    .footerPosit {
+        text-align-last: end;
+    }
+
+    aw-include .loadBOM {
+        width: 97%;
+    }
+
+    aw-include .loadBOM iframe {
+        width: 100%;
+    }
+
+    aw-include .loadBOM aw-logo.ng-scope.ng-isolate-scope {
+        display: none;
+    }
+
+    aw-include .loadBOM aw-icon {
+        display: none;
+    }
+    .questionBox {
+        position: relative;
+    }
+    .showQuestion {
+        position: fixed;
+        top: 90%;
+        left: 42%;
+        /* width: 17px;
+        top: 1px;
+        right: 2px;
+        margin: 0; */
+    }
+    .hiddenBox {
+        position: absolute;
+        background-color: white;
+        width: 11%;
+        height: 70px;
+        right: 2.5%;
+        top: 130px;
+        overflow: hidden;
+    }
+</style>
+<aw-flex-row class="questionBox">
+    <aw-flex-column>
+        <aw-panel-body>
+            <aw-flex-row height="53f">
+                <aw-flex-column width="32f">
+                    <aw-flex-row>
+                        <aw-panel-section caption="모델 네비게이터" anchor="data.closeAnchor">
+                            <aw-tab-set tabs="data.tabModels">
+                                <aw-flex-column class="sectionBorder">
+                                    <aw-panel-body exist-when="conditions.technicalSpec" id="technicalSpec">
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionHnA">
+                                            <aw-flex-column class="navName" width="10f">
+                                                Division
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f" class="techDivision">
+                                                    <aw-list dataprovider="data.dataProviders.categoryDivision"
+                                                        id="listCss">
+                                                        <aw-checkbox prop="item" action="selectCheckBoxEvent">
+                                                        </aw-checkbox>
+                                                    </aw-list>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row height="2.4f" class="techBorder">
+                                            <aw-flex-column class="navName" width="10f">
+                                                모델명
+                                            </aw-flex-column>
+                                            <aw-flex-column>
+                                                <aw-textbox prop="data.modelTxt" id="txtBox" aw-enter-key="searchItem"></aw-textbox>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                흡입력
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categorySuction1"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction2"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction3"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction4"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction5"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction6"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                모터
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryMotor1"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryMotor2"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryMotor3"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                소음
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryNoise1"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryNoise2"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryNoise3"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                    </aw-panel-body>
+                                    <aw-panel-body exist-when="conditions.marketingSpec" id="marketingSpec">
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionHnA">
+                                            <aw-flex-column class="navName" width="10f">
+                                                Division
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f" class="techDivision">
+                                                    <aw-list dataprovider="data.dataProviders.categoryDivision"
+                                                        id="listCss">
+                                                        <aw-checkbox prop="item" action="selectCheckBoxEvent">
+                                                        </aw-checkbox>
+                                                    </aw-list>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row height="2.4f" class="techBorder">
+                                            <aw-flex-column class="navName" width="10f">
+                                                모델명
+                                            </aw-flex-column>
+                                            <aw-flex-column>
+                                                <aw-textbox prop="data.modelTxt" id="txtBox" aw-enter-key="searchItem"></aw-textbox>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                브랜드
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryCode0"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryCode0Obj"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryCode0Turbo"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryCode0Bed"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryCyking"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryCykingPower"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryRoboking"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                품목
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryVacuum"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryHandy"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryRobot"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryRestaurant"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryHP"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryBed"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                색상
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryWhite"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryBlack"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryGray"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryGold"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySilver"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryBrown"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryNavy"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                흡입력
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categorySuction1"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction2"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction3"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction4"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction5"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySuction6"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                부가기능
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryAddition1"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryAddition2"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryAddition3"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryAddition4"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryAddition5"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryAddition6"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                스마트기능
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categorySmart1"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart2"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart3"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart4"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart5"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart6"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart7"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart8"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categorySmart9"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                        <aw-flex-row height="0.3f"></aw-flex-row>
+                                        <aw-flex-row class="techBorder" exist-when="conditions.divisionDVZ">
+                                            <aw-flex-column class="navName" width="10f">
+                                                에너지소비효율등급
+                                            </aw-flex-column>
+                                            <aw-flex-column class="navContent">
+                                                <aw-flex-row height="2f">
+                                                    <aw-checkbox prop="data.categoryOne"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryTwo"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryThree"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryFour"></aw-checkbox>
+                                                    <aw-checkbox prop="data.categoryFive"></aw-checkbox>
+                                                </aw-flex-row>
+                                            </aw-flex-column>
+                                        </aw-flex-row>
+                                    </aw-panel-body>
+                                    <aw-panel-footer class="footerPosit">
+                                        <aw-button size="auto" action="searchItem">검색</aw-button>
+                                        <aw-button size="auto" action="technicalInitialization"
+                                            exist-when="conditions.technicalSpec">초기화</aw-button>
+                                        <aw-button size="auto" action="marketingInitialization"
+                                            exist-when="conditions.marketingSpec">초기화</aw-button>
+                                    </aw-panel-footer>
+                                </aw-flex-column>
+                            </aw-tab-set>
+                        </aw-panel-section>
+                    </aw-flex-row>
+                    <aw-flex-row height="15f" id="specMgmtTable">
+                        <aw-splm-table gridid="specMgmtTable" show-decorate="true" show-check-box=true>
+                        </aw-splm-table>
+                    </aw-flex-row>
+                </aw-flex-column>
+                <aw-splitter></aw-splitter>
+                <aw-flex-column class="word"
+                    exist-when="data.dataProviders.specMgmtTableDataProvider.selectedObjects.length == 0">
+                    좌측 네비게이터를 통해 검색해 주세요.
+                </aw-flex-column>
+                <aw-flex-column class="loadBOMCol"
+                    exist-when="data.dataProviders.specMgmtTableDataProvider.selectedObjects.length == 1">
+                    <aw-include name="loadBOM" class="loadBOM" id="loadBom" style="margin-left: -65px; width: 106%;"></aw-include>
+                </aw-flex-column>
+                <aw-flex-column
+                    exist-when="data.dataProviders.specMgmtTableDataProvider.selectedObjects.length == 2">
+                    <aw-include name="comparePopup" id="compareTable"
+                        exist-when="data.dataProviders.specMgmtTableDataProvider.selectedObjects.length == 2">
+                    </aw-include>
+                </aw-flex-column>
+            </aw-flex-row>
+        </aw-panel-body>
+    </aw-flex-column>
+</aw-flex-row>
+<!-- <aw-flex-row class="showQuestion">
+    <aw-icon-button size="large" command="data.loadQnACommand" exist-when="data.dataProviders.specMgmtTableDataProvider.selectedObjects.length == 1"></aw-icon-button>
+</aw-flex-row> -->
+<aw-flex-row class="hiddenBox" exist-when="data.screenWidth > 950 && data.dataProviders.specMgmtTableDataProvider.selectedObjects.length == 1"></aw-flex-row>

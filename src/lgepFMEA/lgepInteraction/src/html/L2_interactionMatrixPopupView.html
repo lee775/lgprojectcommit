@@ -1,0 +1,60 @@
+<aw-popup2>
+  <aw-panel class="interaction-popup">
+    <aw-panel-body class="interaction__popup">
+      <div class="interaction-desc">
+        <div class="text-desc">
+        </div>
+        <div class="color-desc">
+          <div class="color__title">{{i18n.interactionPopupDescRightTitle}}</div>
+          <div class="color__table">
+            <table>
+              <tr>
+                <td>{{i18n.interactionTypeA}}</td>
+                <td class="td__mechanical"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeB}}</td>
+                <td class="td__electrical"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeC}}</td>
+                <td class="td__heat"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeD}}</td>
+                <td class="td__chemical"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeE}}</td>
+                <td class="td__radiative"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeAB}}</td>
+                <td class="td__mechanical-electrical"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeAC}}</td>
+                <td class="td__mechanical-heat"></td>
+              </tr>
+              <tr>
+                <td>{{i18n.interactionTypeAD}}</td>
+                <td class="td__mechanical-chemical"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="interaction-grid" class="interaction-matrix-container"></div>
+    </aw-panel-body>
+    <aw-panel-footer class="interaction-popup__footer">
+      <div class="interaction-matrix-button-group">
+        <aw-button
+          id="interactionMatrixSave"
+          action="saveInteractionMatrix"
+          exist-when="ctx.interaction_init"
+          >{{i18n.save}}</aw-button
+        >
+      </div>
+  </aw-panel-footer>
+  </aw-panel>
+</aw-popup2>

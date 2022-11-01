@@ -1,0 +1,38 @@
+{
+    "name": "lgepInteraction",
+    "description": "This is the lgepInteraction module",
+    "skipTest": true,
+    "typeProperties": {
+        "typeProperties": {
+            "L2_FMEAStructureRevision": {
+                "additionalProperties": [
+                    {
+                        "name": "L2_InteractionRelation"
+                    },
+                    {
+                        "name": "item_id"
+                    },
+                    {
+                        "name": "item_revision_id"
+                    },
+                    {
+                        "name": "object_name"
+                    }
+                ]
+            },
+            "L2_InteractionRelation": {
+                "additionalProperties": [
+                    {
+                        "name": "l2_interaction_type"
+                    },
+                    {
+                        "name": "primary_object"
+                    },
+                    {
+                        "name": "secondary_object"
+                    }
+                ]
+            }
+        }
+    }
+}

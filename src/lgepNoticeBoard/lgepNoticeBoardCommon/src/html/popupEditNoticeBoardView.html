@@ -1,0 +1,13 @@
+<aw-popup2>
+    <aw-panel-body id="faqDatas">
+        <aw-widget prop="data.questionTitle" hint="textarea" aria-label='{{i18n.questionTitle}}' class="textareaSize"></aw-widget>
+        <aw-break></aw-break>
+        <aw-label prop="data.questionContent"></aw-label>
+        <textarea id="qaEditPopSummernote"></textarea>
+    </aw-panel-body>
+    <aw-panel-footer>
+        <aw-button button-type="base" action="closePopup" size="auto">{{i18n.close}}</aw-button>
+        <aw-button action="editQna" size="auto" exist-when="data.window == 'HelpDesk'">{{i18n.editing}}</aw-button>
+        <aw-button action="editExpert" size="auto" exist-when="data.window == 'VoC'">{{i18n.editing}}</aw-button>
+    </aw-panel-footer>
+</aw-popup2>

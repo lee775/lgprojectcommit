@@ -1,0 +1,110 @@
+/* technicalDocumentation Main */
+.aw-commands-IconButtonText{
+    font-size: 30px;
+}
+.summernotePanel{
+    margin-bottom: 15px;
+    margin-top: -1%;
+}
+.iconClass{
+    position: absolute;
+    padding: 0;
+    bottom: 7px;
+    left: 35%;
+}
+/* .aw-layout-flexRow{
+    height: 40px;
+} */
+.noPadding{
+    padding: 0 10px;
+}
+.noPadding .aw-layout-panelSection {
+    border: solid 1px lightgray;
+}
+.labHei{
+    height: 35px;
+    margin: 0px 15px;
+    min-width: 97.5%;
+}
+.labHei2{
+    height: 35px;
+    margin: 0px 15px;
+    min-width: 97.5%;
+}
+.labContent {
+    height: 35px;
+    margin: 0px 15px;
+    min-width: 97.5%;
+}
+.whyyy{
+    margin-left: 90px;
+}
+.columnJustiClass{
+    background: #FFF;
+}
+.rere{
+    position: relative;
+}
+.h3TopMargin{
+    margin-top: 20px;
+}
+.borderShadow {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+}
+
+.borderShadow2 {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+    background-color: rgb(234,234,234);
+}
+
+#commandColorId div aw-command[command-id="2"] button div{
+    color: rgb(215, 28, 59) !important;
+    font-weight: bold !important;
+}
+
+#commandColorId div aw-command[command-id="1"] button div{
+    color: rgb(0, 123, 182) !important;
+    font-weight: bold !important;
+}
+
+#commandColorId div aw-command[command-id="0"] button div{
+    font-weight: bold !important;
+}
+
+.labHei .aw-widgets-propertyContainer {
+    border-bottom: solid 1px lightgray;
+}
+
+/* technicalDocumentation Add, Edit */
+#addTechnical .aw-layout-flexRow {
+    height: 40px;
+}
+#editTechnicalData .aw-layout-flexRow {
+    height: 40px;
+}
+.labelMargin{
+    margin-top: 20px;
+    margin-bottom: -20px;
+}
+/* .aw-widgets-spaceBetween {
+    margin-bottom: -15px;
+} */
+.contentHei{
+    margin-top: -20px;
+}
+.titleMargin{
+    margin-bottom: 20px;
+}
+.titleMargin textarea {
+    height: 36px;
+}
+
+.insideMargin{
+    margin: 16px;
+}
+
+#chipStyle .aw-widgets-chip .aw-widgets-chipCheckmark {
+    display: none;
+}

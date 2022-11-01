@@ -1,0 +1,360 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-tab-set.directive",
+        "js/visible-when.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-label.directive",
+        "js/aw-file-upload.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-separator.directive",
+        "js/aw-flex-column.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "attachPopupActionSuccess",
+            "cacheEventData": true,
+            "action": "attachInit"
+        }
+    ],
+    "actions": {
+        "fileDelete": {
+            "actionType": "JSFunction",
+            "method": "fileDelete",
+            "deps": "js/L2_DesignManualService"
+        },
+        "downloadAll": {
+            "actionType": "JSFunction",
+            "method": "downloadAll",
+            "deps": "js/L2_DesignManualService"
+        },
+        "selectDown": {
+            "actionType": "JSFunction",
+            "method": "selectDown",
+            "deps": "js/L2_DesignManualService"
+        },
+        "downloadAllPage": {
+            "actionType": "JSFunction",
+            "method": "downloadAllPage",
+            "deps": "js/L2_DesignManualService"
+        },
+        "selectDownAllFile": {
+            "actionType": "JSFunction",
+            "method": "selectDownAllFile",
+            "deps": "js/L2_DesignManualService"
+        },
+        "attachPopupStart": {
+            "actionType": "JSFunction",
+            "method": "attachPopupStart",
+            "deps": "js/L2_DesignManualService"
+        },
+        "uploadClick": {
+            "actionType": "JSFunction",
+            "method": "uploadClick",
+            "deps": "js/L2_DesignManualService"
+        },
+        "updateFormData": {
+            "actionType": "JSFunction",
+            "method": "updateFormData",
+            "inputData": {
+                "fileData": {
+                    "key": "name",
+                    "value": "{{data.fileName}}"
+                },
+                "data": "{{data}}"
+            },
+            "deps": "js/declUtils"
+        },
+        "selectedItemRelationDataset": {
+            "actionType": "JSFunction",
+            "method": "selectedItemRelationDataset",
+            "inputData": {
+                "fileData": "{{data.formData}}"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "attachFileTableSet": {
+            "actionType": "JSFunction",
+            "method": "attachFileTableSet",
+            "outputData": {
+                "filterResults": "{{function:filterRowsWithSort}}",
+                "totalFound": "totalFound"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "attachAllFileTableSet": {
+            "actionType": "JSFunction",
+            "method": "attachAllFileTableSet",
+            "outputData": {
+                "filterResults": "{{function:filterRowsWithSort}}",
+                "totalFound": "totalFound"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "attachFileTableMultiSelect": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "manualAttachFileTableData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    },
+                    {
+                        "name": "manualAllAttachFileTableData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "linkRelationsManualBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "updateFormData"
+                },
+                {
+                    "action": "selectedItemRelationDataset"
+                }
+            ]
+        },
+        "attachInit": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "attachPopupStart"
+                },
+                {
+                    "action": "attachFileTableMultiSelect"
+                }
+            ]
+        }
+    },
+    "data": {
+        "tableModel": [
+            {
+                "name": "{{i18n.page}}",
+                "tabKey": "page"
+            },
+            {
+                "name": "{{i18n.book}}",
+                "tabKey": "book"
+            }
+        ],
+        "containerName": {
+            "type": "STRING",
+            "uiValue": ""
+        },
+        "objName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "pageSize": 40
+    },
+    "dataProviders": {
+        "manualAttachFileTableData": {
+            "action": "attachFileTableSet",
+            "response": "{{data.filterResults}}",
+            "totalFound": "{{data.totalFound}}",
+            "selectionModelMode": "multiple"
+        },
+        "manualAllAttachFileTableData": {
+            "action": "attachAllFileTableSet",
+            "response": "{{data.filterResults}}",
+            "totalFound": "{{data.totalFound}}",
+            "selectionModelMode": "multiple"
+        }
+    },
+    "columnProviders": {
+        "manualAttachFileTableColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.dataset}}",
+                    "width": 300,
+                    "pinnedLeft": true,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "file_ext",
+                    "displayName": "{{i18n.datasetType}}",
+                    "width": 100,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.dateCreated}}",
+                    "width": 150,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "owning_user",
+                    "displayName": "{{i18n.user}}",
+                    "width": 100,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                }
+            ]
+        },
+        "manualAllAttachFileTableColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.dataset}}",
+                    "width": 300,
+                    "pinnedLeft": true,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "file_ext",
+                    "displayName": "{{i18n.datasetType}}",
+                    "width": 100,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.dateCreated}}",
+                    "width": 150,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "owning_user",
+                    "displayName": "{{i18n.user}}",
+                    "width": 100,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "manualAttachFileTable": {
+            "dataProvider": "manualAttachFileTableData",
+            "columnProvider": "manualAttachFileTableColumn",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": true,
+                "enableSorting": true
+            }
+        },
+        "manualAllAttachFileTable": {
+            "dataProvider": "manualAllAttachFileTableData",
+            "columnProvider": "manualAllAttachFileTableColumn",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": true,
+                "enableSorting": true
+            }
+        }
+    },
+    "functions": {
+        "filterRowsWithSort": {
+            "functionName": "filterRowsWithSort",
+            "parameters": [
+                "{{data.columnProviders.manualAttachFileTableColumn.sortCriteria}}",
+                "{{data.dataProviders.manualAttachFileTableData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        }
+    },
+    "conditions": {
+        "state": {
+            "expression": "data.state=='1'"
+        },
+        "popup": {
+            "expression": "data.popupState===true"
+        },
+        "page": {
+            "expression": "data.selectedTab.tabKey === 'page'"
+        },
+        "book": {
+            "expression": "data.selectedTab.tabKey === 'book'"
+        }
+    },
+    "i18n": {
+        "ok": [
+            "lgepDesignSequenceMessages"
+        ],
+        "close": [
+            "lgepDesignSequenceMessages"
+        ],
+        "name": [
+            "L2_DesignStandardMessages"
+        ],
+        "objType": [
+            "L2_DesignStandardMessages"
+        ],
+        "objDetailType": [
+            "L2_DesignStandardMessages"
+        ],
+        "fileSize": [
+            "L2_DesignStandardMessages"
+        ],
+        "selectDownload": [
+            "L2_DesignStandardMessages"
+        ],
+        "downloadAll": [
+            "L2_DesignStandardMessages"
+        ],
+        "dateCreated": [
+            "L2_DesignStandardMessages"
+        ],
+        "user": [
+            "L2_DesignStandardMessages"
+        ],
+        "datasetType": [
+            "L2_DesignStandardMessages"
+        ],
+        "dataset": [
+            "L2_DesignStandardMessages"
+        ],
+        "page": [
+            "L2_DesignStandardMessages"
+        ],
+        "book": [
+            "L2_DesignStandardMessages"
+        ],
+        "fileDelete": [
+            "L2_DesignStandardMessages"
+        ],
+        "fileAdd": [
+            "L2_DesignStandardMessages"
+        ]
+    }
+}

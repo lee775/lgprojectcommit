@@ -1,0 +1,116 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-break.directive",
+        "js/aw-button.directive",
+        "js/aw-label.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-textarea.directive",
+        "js/aw-popup2.directive"
+    ],
+    "data": {
+        "questionTitle": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "false",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ansTitle":{
+            "displayName": "{{i18n.questionContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "answerContent": {
+            "displayName": "{{i18n.answerContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "numberOfLines": 6
+        }
+    },
+    "actions": {
+        "createQnaAnswer":{
+            "actionType":"JSFunction",
+            "method":"createQnaAnswer",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "closePopup":{
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "loadBeforeAnswerData":{
+            "actionType":"JSFunction",
+            "method":"loadBeforeAnswerData",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "initializeAddAnswer":{
+            "actionType":"JSFunction",
+            "method":"initializeAddAnswer",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "loadAnswer":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                    "action": "initializeAddAnswer"
+                },
+                {
+                    "action": "loadBeforeAnswerData"
+                }
+            ]
+        },
+        "popViewResizing":{
+            "actionType":"JSFunction",
+            "method": "popViewResizing",
+            "deps": "js/popUpsService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        }
+    },
+    "i18n": {
+        "helloText": [ "lgepKnowldegeManageMessages" ],
+        "answerContent":[ "lgepKnowldegeManageMessages" ],
+        "questionContent":[ "lgepKnowldegeManageMessages" ],
+        "ok" : [ "lgepKnowldegeManageMessages" ],
+        "close" : [ "lgepKnowldegeManageMessages" ]
+    },
+    "onEvent": [
+        {
+            "eventId": "answerAdd.complete",
+            "action": "loadAnswer"
+        },
+        {
+            "eventId": "popupResizeTest",
+            "action": "popViewResizing"
+        },
+        {
+            "eventId": "aw.windowResize",
+            "action": "popViewResizing"
+        }
+    ]
+}

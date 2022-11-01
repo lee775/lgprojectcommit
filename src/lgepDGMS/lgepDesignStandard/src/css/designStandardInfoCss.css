@@ -1,0 +1,538 @@
+/* knowledgeWarehouse Main */
+/* #addPop .testMarginTop {
+    margin-top: 30px;
+} */
+/* #border1 {
+    display: block;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+} */
+
+#wareHouse .showReviewText{
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+.boderUp {
+    border-top: solid #aaa9a9 1px;
+    padding-top: 10px;
+}
+
+/* .noWhite .aw-widgets-cellListCellTitleBlock,
+.aw-widgets-cellListCellTitleBlock h3,
+.aw-widgets-cellListCellTitleBlock span,
+.aw-widgets-cellListCellItemType,
+.aw-widgets-cellListCellProperties,
+.aw-widgets-cellListItem .aw-widgets-propertyValue {
+    white-space: pre-line;
+} */
+
+#imgSize {
+    width: 16rem;
+    height: 12rem;
+}
+
+/* 
+aw-image-cell img {
+    width: 16rem;
+    height: 12rem;
+}*/
+
+.star-ratings {
+    color: #aaa9a9;
+    position: relative;
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    width: max-content;
+    -webkit-text-fill-color: transparent;
+    /* Will override color (regardless of order) */
+}
+
+.star-ratings-fill {
+    color: orangered;
+    font-size: 1.2rem;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-text-fill-color: orangered;
+}
+
+.star-ratings-base {
+    font-size: 1.2rem;
+    z-index: 0;
+    padding: 0;
+    -webkit-text-fill-color: #aaa9a9;
+}
+
+#showPercent {
+    display: inline-block;
+    font-size: 0.8rem;
+}
+
+#showReview {
+    display: inline-block;
+    font-size: 0.8rem;
+}
+
+li.aw-ui-treeNode {
+    font-size: 1rem !important;
+}
+
+.awRoot .aw-layout-panelSectionTitle label {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.resultNoneTop {
+    margin-top: 50px;
+}
+
+#mainBgColor {
+    background-color: #464646;
+    margin-top: -16px;
+}
+
+#columnMargin {
+    margin: 16px 17px 0 25px;
+}
+
+#awTreeBgColorId ul li {
+    background-color: #777777;
+    margin: 0 -16px;
+    border-left: 1px solid #464646;
+    border-right: 1px solid #464646;
+    border-top: 1px solid #000000;
+}
+
+#awTreeBgColorId ul li div {
+    padding: 10px 0;
+}
+
+/* #awTreeBgColorId ul li div:active{
+    background-color: #ffffff;
+}
+
+#awTreeBgColorId ul li div:visited{
+    background-color: #ffffff;
+} */
+#awTreeBgColorId ul li div:hover * {
+    color: #000000;
+}
+
+#awTreeBgColorId ul li div:visited * {
+    color: #000000;
+}
+
+
+#awTreeBgColorId ul li aw-node ul li div span span span {
+    margin-left: 2em;
+}
+
+#awTreeBgColorId ul li aw-node * {
+    background-color: #eaeaea;
+    color: #000000
+}
+
+#awTreeBgColorId ul li * {
+    color: #ffffff;
+}
+
+#awTreeBgColorId ul li aw-node ul li {
+    border-top: 1px solid #bababa;
+}
+
+#wareHouse .aw-ui-treeNodeValue:hover {
+    background-color: transparent !important;
+}
+
+#wareHouse .aw-state-selected {
+    background-color: transparent !important;
+}
+
+#wareHouse .aw-state-selected * {
+    color: #000000 !important;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.backGroundWhiteImportant {
+    background-color: #ffffff !important;
+}
+
+.backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
+    background-color: #ffffff !important;
+}
+
+/* .tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0; */
+
+/* Position the tooltip */
+/* position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+} */
+
+#mainListId div div div ul .aw-widgets-cellListItemSelected {
+    background-color: transparent !important;
+    border-color: transparent;
+}
+
+#mainListId div div div ul li:hover {
+    background-color: transparent !important;
+    border-color: transparent;
+}
+
+#mainListId div div div ul .aw-widgets-cellListItemSelected div div div img {
+    border: 7px solid darkred;
+}
+
+#mainListId div div div ul li:hover div div div img {
+    border: 7px solid darkred;
+}
+
+#mainListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
+    font-weight: 900;
+    text-decoration: underline;
+    font-size: 1.2rem; 
+    color: darkred;
+}
+
+#mainListId div div div ul li:hover div div div h2 {
+    font-weight: 900;
+    text-decoration: underline;
+    font-size: 1.2rem;
+    color: darkred;
+}
+
+#expertListId div div div ul li ng-transclude group-header-cell a {
+    color: darkred;
+    font-weight: bold;
+}
+
+.dataDefaultCell div div aw-default-cell-content div .aw-widgets-cellListCellItemType.aw-base-small.ng-scope.ng-isolate-scope {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+#qnaListId div div div ul li ng-transclude group-header-cell a {
+    color: darkred;
+    font-weight: bold;
+}
+
+.dataDefaultCell div div aw-default-cell-content div .aw-widgets-cellListCellItemType.aw-base-small.ng-scope.ng-isolate-scope {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+#wareHouse .aw-widgets-cellListCellImage img {
+    border-radius: 70%;
+    overflow: hidden;
+}
+
+
+/* knowledgeWarehouse Filter */
+#filterView aw-label div.aw-widgets-propertyLabelTopValueContainer {
+    width: 0px;
+    max-width: 0%;
+    min-width: 0%;
+}
+
+#filterView aw-property-label {
+    margin-top: 15px;
+}
+
+#issueDisalbe input {
+    pointer-events: none;
+    background-color: #eee;
+    color: #555;
+    opacity: 1;
+}
+
+
+/* knowledgeWarehouse Info */
+.test {
+    position: absolute;
+    top: 155px;
+    right: 10px;
+}
+
+.hiddenButton {
+    position: absolute;
+    top: 70px;
+    right: 2px;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 1.8rem;
+    justify-content: space-around;
+    padding: 0 .2em;
+    text-align: center;
+    width: 7em;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star-rating :checked~label {
+    color: #f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+    color: #fc0;
+}
+
+.star-position {
+    width: 100%;
+}
+
+.reviewWrite {
+    border-top: solid #ccc 1px;
+}
+
+.star-ratings {
+    color: #aaa9a9;
+    position: relative;
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    width: max-content;
+    -webkit-text-fill-color: transparent;
+    /* Will override color (regardless of order) */
+}
+
+.star-ratings-fill {
+    color: #fff58c;
+    font-size: 1.2rem;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-text-fill-color: gold;
+}
+
+.star-ratings-base {
+    font-size: 1.2rem;
+    z-index: 0;
+    padding: 0;
+}
+
+#showing-star {
+    color: gold;
+    display: inline;
+    font-size: 1.6em;
+}
+
+.visibletrue {
+    display: inline-block;
+}
+
+.visiblefalse {
+    display: none;
+}
+
+.upArrowSpace {
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: 100%;
+}
+
+.upArrowSpace:hover {
+    background-color: rgba(175, 215, 225, 0.5);
+    cursor: pointer;
+}
+
+.upArrowSpace:hover .upArrow2 {
+    visibility: visible;
+}
+
+.upArrow {
+    display: none;
+}
+
+/* .upArrow2 {
+    position: absolute;
+    left: 15%;
+    top: 45%;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+} */
+
+.upArrow2 svg {
+    width: 30px;
+    height: 30px;
+}
+
+.spaceTest {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.downArrowSpace {
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+}
+
+.downArrowSpace:hover .downArrow2 {
+    visibility: visible;
+}
+
+.downArrowSpace:hover {
+    background-color: rgba(175, 215, 225, 0.5);
+    cursor: pointer;
+}
+
+.downArrow {
+    display: none;
+}
+
+/* .downArrow2 {
+    position: absolute;
+    right: 15%;
+    top: 45%;
+    transform: scaleX(-1);
+    visibility: hidden;
+} */
+
+.downArrow2 svg {
+    width: 30px;
+    height: 30px;
+}
+
+.imgSize {
+    width: 100%;
+    height: auto;
+}
+
+.textSize {
+    text-align: center;
+}
+
+#creators {
+    font-size: 1rem;
+    display: inline;
+}
+
+.aw-layout-popup #reviews .aw-widgets-cellListItem {
+    white-space: pre-line;
+    border-bottom: 1px solid gray;
+    margin: 0 0 10px 0;
+
+}
+
+#showPPT img {
+    width: 100%;
+    height: auto;
+}
+
+.grayTab .aw-xrt-tabsContainer {
+    padding: 10px 0 4px 25px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    background-color: #CCCCCC;
+}
+
+.numberSize{
+    font-weight: bold;
+}
+.averageStar{
+    border-bottom: 3px solid gray;
+}
+
+#wareHouse .aw-aria-border.aw-widgets-cellListItem.aw-widgets-cellTop.ng-scope.aw-widgets-cellListItemSelected{
+    background-color: gainsboro;
+    /* border: 5px solid darkred; */
+}
+
+#wareHouse .aw-widgets-cellListItemContainer.aw-widgets-droppable {
+    padding-left:10px;
+}
+
+#totalStar{
+    display: inline-block;
+}
+.avrPointspace{
+    text-indent: 10px;
+    padding-top: 3px;
+}
+#test1 .aw-flex-row.height-1 {
+    height: 4%;
+    border-bottom: 3px solid grey;
+}
+.imgSize{
+    height: 200px;
+}
+/* ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar {
+    width: 4px; 
+    margin-top:100px;   
+}
+::-webkit-scrollbar-thumb {
+border-radius: 4px;
+background-color: rgba(0, 0, 0, .5);
+
+} */
+.listfor{
+    height:auto;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+.split {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+
+/* knowledgeWarehouse Favorites */
+#favorites aw-label div.aw-widgets-propertyLabelTopValueContainer{
+    width: 0px;
+    max-width: 0%;
+    min-width: 0%;
+}
+#favorites aw-property-label {
+    margin-top: 15px;
+}

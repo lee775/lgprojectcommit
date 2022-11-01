@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-label.directive",
+    "js/aw-progress-indicator.directive",
+    "css/masterCreateView.css"
+  ],
+  "data": {
+    "disabledButtonChk": {
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "l2Product": {
+      "displayName": "{{i18n.l2Product}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2Division": {
+      "displayName": "{{i18n.l2Division}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2DivisionValues": {
+      "dbValue": [
+        {
+          "propDisplayValue": "Case",
+          "propDisplayDescription": "",
+          "dispValue": "Case",
+          "propInternalValue": "Case",
+          "iconName": ""
+        },
+        {
+          "propDisplayValue": "Cycle",
+          "propDisplayDescription": "",
+          "dispValue": "Cycle",
+          "propInternalValue": "Cycle",
+          "iconName": ""
+        },
+        {
+          "propDisplayValue": "Door",
+          "propDisplayDescription": "",
+          "dispValue": "Door",
+          "propInternalValue": "Door",
+          "iconName": ""
+        },
+        {
+          "propDisplayValue": "I&W",
+          "propDisplayDescription": "",
+          "dispValue": "I&W",
+          "propInternalValue": "I&W",
+          "iconName": ""
+        },
+        {
+          "propDisplayValue": "Movable",
+          "propDisplayDescription": "",
+          "dispValue": "Movable",
+          "propInternalValue": "Movable",
+          "iconName": ""
+        },
+        {
+          "propDisplayValue": "Perform",
+          "propDisplayDescription": "",
+          "dispValue": "Perform",
+          "propInternalValue": "Perform",
+          "iconName": ""
+        }
+      ]
+    }
+  },
+  "actions": {
+    "onInit": {
+      "actionType": "JSFunction",
+      "method": "initAction",
+      "deps": "js/cmCreateService",
+      "outputData": {
+        "l2Product.dbValue": "productValue"
+      }
+    },
+    "save": {
+      "actionType": "JSFunction",
+      "method": "createAction",
+      "deps": "js/functionCreateService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    }
+  },
+  "grids": {},
+  "lifecycleHooks": {
+    "onInit": "onInit"
+  },
+  "i18n": {
+    "functionCaption": ["lgepMasterViewMessages"],
+    "function": ["lgepMasterViewMessages"],
+    "requirement": ["lgepMasterViewMessages"],
+    "save": ["lgepMasterViewMessages"],
+    "l2Product": ["lgepDFMEAViewMessages"],
+    "l2Division": ["lgepDFMEAViewMessages"]
+  }
+}

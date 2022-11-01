@@ -1,0 +1,104 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-link.directive",
+        "js/aw-chip-list.directive"
+    ],
+    "data": {
+        "before":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "after":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "firstPage":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPage":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        }
+    },
+    "actions": {
+        "setInitPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setInitPageNumber",
+            "inputData":{
+                "subPanelContext": "{{subPanelContext}}"
+            },
+            "outputData":{
+                "pageResponse": "pageResponse"
+            },
+            "deps": "js/chipForPaginationService"
+        },
+        "clickedPageAction": {
+            "actionType": "JSFunction",
+            "method": "clickedPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "chip": "{{chip}}",
+                "subPanelContext": "{{subPanelContext}}"
+            },
+            "deps": "js/chipForPaginationService"
+        },
+        "pagingBeforeAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeAction",
+            "inputData":{
+                "data": "{{data}}",
+                "subPanelContext": "{{subPanelContext}}"
+            },
+            "deps": "js/chipForPaginationService"
+        },
+        "pagingAfterAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterAction",
+            "inputData":{
+                "data": "{{data}}",
+                "subPanelContext": "{{subPanelContext}}"
+            },
+            "deps": "js/chipForPaginationService"
+        },
+        "firstPageAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "subPanelContext": "{{subPanelContext}}"
+            },
+            "deps": "js/chipForPaginationService"
+        },
+        "lastPageAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "subPanelContext": "{{subPanelContext}}"
+            },
+            "deps": "js/chipForPaginationService"
+        }
+    },
+    "onEvent": [],
+    "dataProviders": {
+        "chipPagingDataProvider": {
+            "type": "Static",
+            "action": "setInitPageNumber",
+            "response": "{{data.pageResponse}}",
+            "totalFound": "{{data.pageResponse.length}}"
+        }
+    },
+    "i18n": {},
+    "lifecycleHooks": {}
+}

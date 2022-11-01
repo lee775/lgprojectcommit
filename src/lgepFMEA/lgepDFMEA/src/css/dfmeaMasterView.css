@@ -1,0 +1,257 @@
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25px;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.top-header-container,
+.row-edit-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+    justify-content: flex-end;
+}
+
+.row-edit-container {
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.top-header-container button {
+    margin: 0;
+}
+
+.header__right-container,
+.header__left-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.header__right-container {
+    justify-content: flex-end;
+}
+
+.header__right-container button {
+    width: 100px;
+    height: 35px;
+    margin: 0 15px 0 0px;
+}
+
+.header__left-container button {
+    width: 170px;
+    height: 45px;
+    margin: 0 0 0 20px;
+}
+
+.homeButton {
+    width: 70px !important;
+    border-radius: 5px;
+}
+
+.controller-container {
+    display: flex;
+    align-items: center;
+    margin-left: -10px;
+}
+
+.table__left-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 0 5px 5px;
+}
+
+.table__right-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px 5px 0;
+}
+
+.tableselect-listbox {
+    margin: 0 0 0 15px;
+}
+
+.changeViewButton {
+    min-width: 100px;
+    max-width: 100px;
+    height: 35px;
+    margin: 10px 0 0 15px;
+}
+
+.table__right-container button {
+    min-width: 100px;
+    max-width: 100px;
+    height: 35px;
+    margin: 10px 0 0 15px;
+}
+
+.label-column {
+    min-width: 250px;
+}
+
+.label-value,
+.label-text {
+    min-width: 600px;
+}
+
+.text-container {
+    min-width: 1000px;
+    margin-right: 20px;
+}
+
+.text-container>.aw-widgets-propertyContainer {
+    display: flex;
+}
+
+.dmaster-row-edit-command-header div aw-command {
+    float: right;
+}
+
+.dmaster-table-command-header div aw-command {
+    float: left;
+}
+
+.dmaster-table-command-header,
+.dmaster-row-edit-command-header {
+    width: 100%;
+    margin: 8px 0 0 10px;
+}
+
+.search__listbox {
+    min-width: 470px;
+    margin-right: 20px;
+}
+
+.text-row {
+    display: flex;
+}
+
+.detail-body {
+    padding: 0;
+}
+
+.list-row {
+    display: block;
+    width: 900px;
+    margin-top: 10px;
+}
+
+.list-editor.edit {
+    display: none;
+}
+
+.detail-view-container {
+    padding: 10px;
+}
+
+.detail-view-container {
+    min-width: 1000px;
+}
+
+button.aw-base-blk-button.disabled {
+    background-color: rgba(229, 229, 229) !important;
+}
+
+.info-column {
+    display: flex;
+    flex-direction: row;
+}
+
+.product-title {
+    margin-left: 50px;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.main-container {
+    border-top: 1px solid #E0E0E0;
+    width: 100%;
+}
+
+#imgPopup {
+    position: fixed;
+    z-index: 10000;
+    background-color: #fff;
+    transform: scale(0);
+    height: auto;
+    border: 1px solid #4A4A4A;
+    display: flex;
+    flex-direction: column;
+    max-width: 1300px;
+    max-height: 800px;
+}
+
+#imgPopup.active {
+    transform: scale(1);
+    transition: transform 100ms ease-in-out;
+}
+
+#imgPopup img {
+    width: 100%;
+    height: auto;
+}
+
+.main-container {
+    position: relative;
+}
+
+.zoom-slider {
+    position: fixed;
+    top: 90%;
+    left: 85%;
+    width: 180px;
+}
+
+.zoom-sliderBtn {
+    position: fixed;
+    top: 88.5%;
+    left: 94.45%;
+}
+
+.sod-focus-cell {
+    background-color: #C8F5FF !important;
+}
+
+.selectable-all {
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
+}
+
+td div, p {
+    white-space: normal;
+}
+
+/* td img {
+    width: auto;
+    height: auto;
+    max-width: 400px;
+    max-height: auto;
+} */
+
+@media (max-width: 768px) {
+    .fmea-splitter {
+        display: none;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-title {
+        display: none;
+    }
+}
+
+.dfmea-job-progressing {
+    pointer-events: none;
+}

@@ -1,0 +1,27 @@
+{
+    "typeQcFMEARootObject48": [
+        "L2_FMEARoot",
+        "L2_FMEARootRevision"
+    ],
+    "typeQcFMEASystemElementSpecification48": [
+        "L2_FMEAStructure",
+        "L2_FMEAStructureRevision"
+    ],
+    "typeQcFMEAFunctionSpecification48": [
+        "L2_FMEAFunc",
+        "L2_FMEAFuncRevision"
+    ],
+    "typeQcFMEAFailureSpecification48": [
+        "L2_FMEAFailure",
+        "L2_FMEAFailureRevision"
+    ],
+    "typeNamespaceTable48": [
+        "L2_SODTable"
+    ],
+    "typeTableConfiguration48": [
+        "L2_SODTableRow"
+    ],
+    "typeQualityAction48": [
+        "L2_FMEAAction"
+    ]
+}

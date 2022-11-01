@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-command-panel-section.directive",
+    "js/aw-numeric.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "css/commonTheme.css"
+  ],
+  "data": {
+    "fontSize": {
+      "displayName": "Font Size (Pixel)",
+      "type": "INTEGER",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": " ",
+      "dispValue": " "
+    }
+  },
+  "actions": {
+    "setThemeConfig": {
+      "actionType": "JSFunction",
+      "method": "setTextBox",
+      "inputData": {
+          "0": "{{data.fontSize}}"
+      },
+      "deps": "js/L2ThemeConfigService"
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "inputData": {
+        "fontSize": "{{data.fontSize}}"
+    },
+      "deps": "js/L2ThemeConfigService"
+    }
+  },
+  "columnProviders": {},
+  "dataProviders": {},
+  "functions": {},
+  "onEvent": [],
+  "grids": {},
+  "lifecycleHooks": {
+    "onMount": "onMount"
+  },
+  "i18n": {
+    "lgepThemeConfig": [
+      "lgepThemeMessages"
+    ],
+    "fontSizeSection": [
+      "lgepThemeMessages"
+    ],
+    "setThemeConfig": [
+      "lgepThemeMessages"
+    ]
+  }
+}

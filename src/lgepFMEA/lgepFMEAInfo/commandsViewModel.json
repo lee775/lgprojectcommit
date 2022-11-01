@@ -1,0 +1,168 @@
+{
+  "commands": {
+    "sodAdd": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.addTitle}}",
+      "description": "{{i18n.sodAddDesc}}"
+    },
+    "sodDelete": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.deleteTitle}}",
+      "description": "{{i18n.sodDeleteDesc}}"
+    },
+    "sodEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.editTitle}}",
+      "description": "{{i18n.sodEditDesc}}"
+    },
+    "sodEditCancel": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.editCancelTitle}}",
+      "description": "{{i18n.sodEditCancelDesc}}"
+    },
+    "sodEditSave": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.editSaveTitle}}",
+      "description": "{{i18n.sodEditSaveDesc}}"
+    }
+  },
+  "commandHandlers": {
+    "sodAddHandler": {
+      "id": "sodAdd",
+      "action": "addSod",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": true
+    },
+    "sodDeleteHandler": {
+      "id": "sodDelete",
+      "action": "deleteSod",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": true
+    },
+    "sodEditHandler": {
+      "id": "sodEdit",
+      "action": "editSod",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.infoEditVisible"
+      }
+    },
+    "sodEditCancelHandler": {
+      "id": "sodEditCancel",
+      "action": "cancelEditSod",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.isEditing"
+      }
+    },
+    "sodEditSaveHandler": {
+      "id": "sodEditSave",
+      "action": "saveEditSod",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.isEditing"
+      }
+    }
+  },
+  "commandPlacements": {
+    "sodAddPlacements": {
+      "id": "sodAdd",
+      "uiAnchor": "sod_table_list_commands",
+      "priority": 100
+    },
+    "sodDeletePlacements": {
+      "id": "sodDelete",
+      "uiAnchor": "sod_table_list_commands",
+      "priority": 200
+    },
+    "sodEditPlacements": {
+      "id": "sodEdit",
+      "uiAnchor": "sod_summary_list_commands",
+      "priority": 100
+    },
+    "sodEditCancelPlacements": {
+      "id": "sodEditCancel",
+      "uiAnchor": "sod_summary_list_commands",
+      "priority": 200
+    },
+    "sodEditSavePlacements": {
+      "id": "sodEditSave",
+      "uiAnchor": "sod_summary_list_commands",
+      "priority": 100
+    }
+  },
+  "actions": {
+    "addSod": {
+      "actionType": "JSFunction",
+      "method": "openSubPanel",
+      "deps": "js/utils/fmeaPanelUtils",
+      "inputData": {
+        "id": "fmeaSodCreate",
+        "view": "sodStandardCreate"
+      }
+    },
+    "deleteSod": {
+      "actionType": "JSFunction",
+      "method": "deleteWorkspaceObject",
+      "deps": "js/cmDeleteService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editSod": {
+      "actionType": "JSFunction",
+      "method": "editAction",
+      "deps": "js/sodTableEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "cancelEditSod": {
+      "actionType": "JSFunction",
+      "method": "cancelEdit",
+      "deps": "js/sodTableEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "saveEditStructure": {
+      "actionType": "JSFunction",
+      "method": "saveEdit",
+      "deps": "js/sodTableEditService"
+    }
+  },
+  "conditions": {
+    "fmeaInfoLocation": {
+      "expression": "ctx.locationContext['ActiveWorkspace:Location'] === 'fmeaInfoLocation'"
+    },
+    "infoAddEnable": {
+      "expression": "conditions.fmeaInfoLocation && ctx.fmea_editing !== true && ctx.fmea_popup !== true && ctx.master_objset_editing !== true"
+    },
+    "infoAddDeleteVisible": {
+      "expression": "conditions.fmeaInfoLocation && ctx.fmea_table_init"
+    },
+    "deleteEnable": {
+      "expression": "conditions.fmeaInfoLocation && ctx.fmea_row_select && ctx.fmea_editing !== true && !(ctx.sidenavCommandId) && ctx.fmea_popup !== true"
+    },
+    "isEditing": {
+      "expression": "conditions.fmeaInfoLocation && ctx.fmea_editing === true"
+    },
+    "infoEditVisible": {
+      "expression": "conditions.fmeaInfoLocation && ctx.xrtPageContext['secondaryXrtPageID'] ==='tc_xrt_Overview' && ctx.fmea_row_select && ctx.fmea_editing !== true && ctx.fmea_popup !== true"
+    }
+  },
+  "i18n": {
+    "addTitle": ["lgepMasterMessages"],
+    "sodAddDesc": ["lgepFMEAInfoCommandMessages"],
+    "deleteTitle": ["lgepMasterMessages"],
+    "sodDeleteDesc": ["lgepFMEAInfoCommandMessages"],
+    "sodEditDesc": ["lgepFMEAInfoCommandMessages"],
+    "sodEditCancelDesc": ["lgepFMEAInfoCommandMessages"],
+    "sodEditSaveDesc": ["lgepFMEAInfoCommandMessages"]
+  }
+}

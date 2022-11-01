@@ -1,0 +1,217 @@
+/* askExpert Main */
+.marginUp {
+    margin-top: 20px;
+}
+
+.firstRow1 {
+    align-items: self-end;
+    margin-left: 50%;
+}
+
+.firstRow1 .aw-widgets-propertyLabelTopValueContainer{
+    margin-left: -50px;
+}
+
+.marginLeft {
+    margin-left: 10px;
+}
+
+.positionControll {
+    display: inline-block;
+}
+
+#marginLeft {
+    margin-top: 12px;
+    margin-right: 5px;
+}
+
+.fontRed {
+    color: red;
+}
+
+.leftPadding {
+    margin-left: 0px;
+}
+.listClass .aw-widgets-cellListCellImage img{
+    border-radius: 70%;
+}
+
+.listClass .aw-widgets-cellListItemContainer {
+    position: relative;
+}
+
+.goodMove {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}
+
+.borderShadow {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+}
+
+.borderShadow2 {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+    background-color: rgb(234, 234, 234);
+}
+
+.question {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+}
+
+.listHeight .aw-widgets-cellListCellImage img{
+    border-radius: 70%;
+}
+
+.qaWriteDate {
+    margin-bottom: -18px;
+}
+
+.noMaxWidth {
+    margin: 0px 0px 0px 15px;
+    min-width: 100px;
+}
+
+.noMaxWidth .aw-widgets-propertyLabelTopValueContainer{
+    -webkit-box-flex: 0;
+    flex: 0;
+    max-width: 0;
+    min-width: 0;
+    width: 0px;
+}
+
+/* #qnaDatas .aw-widgets-cellListItemContainer {
+    border-bottom: solid 1px lightgray;
+} */
+
+.lblHeight {
+    height: 25px;
+    margin: 0px 15px;
+    min-width: 155px;
+    /* max-width: 180px; */
+}
+
+.lblHeightExpertField {
+    height: 25px;
+    margin: 0px 15px;
+}
+
+.lblHeightWriterExpert {
+    margin: 12px 15px -3px;
+    /* max-width: 180px; */
+}
+
+.listHeight {
+    height: 37px;
+}
+
+.btnAdopt {
+    width: 50px;
+}
+
+.answerSection {
+    margin-bottom: 30px;
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+    width: 100%;
+    float: right;
+}
+
+.answerSection .aw-widgets-cellListItem {
+    margin-bottom: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: solid 1px rgb(170, 170, 170);
+    width: 80%;
+    align-self: self-start;
+}
+
+#commandColorId div aw-command[command-id="2"] button div {
+    color: rgb(215, 28, 59) !important;
+    font-weight: bold !important;
+}
+
+#commandColorId div aw-command[command-id="1"] button div {
+    color: rgb(0, 123, 182) !important;
+    font-weight: bold !important;
+}
+
+#commandColorId div aw-command[command-id="0"] button div {
+    font-weight: bold !important;
+}
+
+#fieldSize div aw-property-label {
+    max-width: 100px;
+}
+
+.separatorHeight {
+    width: 98%;
+    align-self: center;
+    padding: 0px;
+}
+
+.question .aw-widgets-propertyContainer>aw-property-label {
+    text-align: left;
+    max-width: 100px;
+    margin-right: 50px;
+}
+
+.aw-widgets-propertyNonEditValue>.aw-layout-flexRowContainer {
+    min-width: max-content;
+}
+
+#addAnswerCss {
+    margin: 0px 10px;
+}
+
+
+/* askExpert Chart */
+.relativeE {
+    z-index: 9;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.chartSize {
+    height: auto;
+}
+
+.sectionCss {
+    height: 0px;
+}
+
+
+/* askExpert Popup */
+.reHeight .ng-scope.ng-isolate-scope .propertyLabelTopContainer.aw-layout-flexRow.aw-widgets-justifySpaceBetween.aw-widgets-spaceBetween{
+    height: 30px;
+}
+.listReHeight .ng-isolate-scope .aw-widgets-propertyContainer .ng-scope.ng-isolate-scope .propertyLabelTopContainer.aw-layout-flexRow.aw-widgets-justifySpaceBetween.aw-widgets-spaceBetween{
+    height: 25px;
+}
+.reHeight .aw-widgets-propertyContainer.aw-layout-flexRow{
+    height: 25px;
+}
+
+/* .noMaxWidth div .ng-isolate-scope {
+    max-width: 100px;
+}
+
+.noMaxWidth {
+    margin: 0px 15px -10px;
+    min-width: 226px;
+} */
+
+.changeWhite{
+    background-color: white;
+}
+
+.insideMargin{
+    margin: 16px;
+}
+
+#chipStyle .aw-widgets-chip .aw-widgets-chipCheckmark {
+    display: none;
+}

@@ -1,0 +1,24 @@
+<style>
+    .aw-widgets-chip .aw-widgets-chipCheckmark {
+        display: none;
+    }
+    .aw-widgets-chip:not(.disabled).aw-accent-midContrast:not(.aw-widgets-staticChip):hover {
+        background-color: #a50034;
+    }
+    .aw-widgets-chip:not(.disabled).aw-accent-midContrast {
+        background-color: #b32854;
+        border-color: #a50034;
+        color: #ffffff;
+        fill: #ffffff;
+    }
+    .aw-layout-subLocation a {
+        color: #a50034;
+    }
+</style>
+<aw-flex-row justify="center" height="auto">
+    <aw-link prop="data.firstPage" action="firstPageAction" style="font-weight: bolder; margin-top: 5px;"></aw-link>
+    <aw-link prop="data.before" action="pagingBeforeAction" style="font-weight: bolder; margin-top: 5px;"></aw-link>
+    <aw-chip-list dataprovider="data.dataProviders.chipPagingDataProvider" action="clickedPageAction"></aw-chip-list>
+    <aw-link prop="data.after" action="pagingAfterAction" style="font-weight: bolder; margin-top: 5px;"></aw-link>
+    <aw-link prop="data.lastPage" action="lastPageAction" style="font-weight: bolder; margin-top: 5px;"></aw-link>
+</aw-flex-row>

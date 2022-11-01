@@ -1,0 +1,114 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-panel-body.directive",
+        "js/aw-button.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-action-section.directive",
+        "js/aw-balloon-popup-panel.directive",
+        "js/visible-when.directive",
+        "css/knowledgeWarehouseView.css"
+    ],
+    "actions": {
+        "setInitListValue":{
+            "actionType":"JSFunction",
+            "method": "setInitListValue",
+            "deps": "js/sidePanelService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "buttonAction1": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "addFavorite":{
+            "actionType":"JSFunction",
+            "method": "addFavorite",
+            "deps": "js/sidePanelService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "delFavorite":{
+            "actionType":"JSFunction",
+            "method": "delFavorite",
+            "deps": "js/sidePanelService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "editFavorite":{
+            "actionType":"JSFunction",
+            "method": "editFavorite",
+            "deps": "js/sidePanelService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "setSelectedListValue":{
+            "actionType":"JSFunction",
+            "method": "setSelectedListValue",
+            "deps": "js/sidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        }
+    },
+    "data": {
+        "closeAnchor": "closePushAnchor",
+        "part": {
+            "displayName": "{{i18n.folder}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listPart": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": true,
+            "requiredText": "{{i18n.noFavorites}}",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listPartValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "",
+                    "propInternalValue": ""
+                }
+            ]
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "showFavorite.contentLoaded",
+            "action": "setInitListValue"
+        },
+        {
+            "eventId": "removeMessages",
+            "action": "buttonAction1"
+        }
+    ],
+    "i18n": {
+        "buttonDemo": "Customer Info",
+        "buttonAdd": ["knowledgeSearchMessages"],
+        "buttonEdit": ["knowledgeSearchMessages"],
+        "buttonClose": ["knowledgeSearchMessages"],
+        "buttonDelete": ["knowledgeSearchMessages"],
+        "folder": ["knowledgeSearchMessages"],
+        "noFavorites": ["knowledgeSearchMessages"]
+    }
+}

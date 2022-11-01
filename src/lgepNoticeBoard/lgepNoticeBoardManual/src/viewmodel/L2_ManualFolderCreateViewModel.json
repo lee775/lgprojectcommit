@@ -1,0 +1,69 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-textbox.directive"
+    ],
+    "actions": {
+        "addMainFolder": {
+            "actionType": "JSFunction",
+            "method": "addMainFolder",
+            "outputData": {
+                "state": "state"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "createFolderBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "addMainFolder"
+                },
+                {
+                    "condition": "conditions.state",
+                    "action": "closePopupWindow"
+                }
+            ]
+        }
+    },
+    "data": {
+        "containerName": {
+            "type": "STRING",
+            "uiValue": ""
+        },
+        "objName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "conditions": {
+        "state": {
+            "expression": "data.state=='1'"
+        },
+        "popup": {
+            "expression": "data.popupState===true"
+        }
+    },
+    "i18n": {
+        "ok": ["lgepDesignSequenceMessages"],
+        "close": ["lgepDesignSequenceMessages"],
+        "name": ["L2_DesignStandardMessages"],
+        "objType": ["L2_DesignStandardMessages"],
+        "objDetailType": ["L2_DesignStandardMessages"]
+    }
+}

@@ -1,0 +1,11 @@
+<aw-popup2>
+    <aw-panel-body id="approvalData">
+        <aw-label prop="data.userName" class="reHeight"></aw-label>
+        <aw-listbox prop="data.expertState" list="data.expertStateValue.dbValue" isSelectOnly="true" class="listReHeight"></aw-listbox>
+        <aw-textbox prop="data.specializedField" class="reHeight" exist-when="data.expertState.uiValue == 'O'"></aw-textbox>
+    </aw-panel-body>
+    <aw-panel-footer>
+        <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+        <aw-button action="expertStateChangeBat" size="auto">{{i18n.edit}}</aw-button>
+    </aw-panel-footer>
+</aw-popup2>

@@ -1,0 +1,88 @@
+<aw-flex-column class="afx-alt-content-background" color="white" id="mainTechnicalData">
+    <aw-flex-row>
+        <aw-flex-column width="4" class="leftPadding insideMargin" id="summaryContentStyle">
+            <aw-search-box prop="data.searchBox" action="questionSearch"></aw-search-box>
+            <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadow2">
+                <aw-command-bar anchor="tableCommand" alignment="HORIZONTAL" class="fontUp" id="commandColorId">
+                </aw-command-bar>
+            </aw-flex-row>
+            <div style="text-align: center;"
+                visible-when="data.dataProviders.technicalDataProvider.viewModelCollection.loadedVMObjects.length === 0">
+                <h3>{{i18n.noPost}}</h3>
+            </div>
+            <aw-flex-row class="borderShadow">
+                <aw-splm-table gridid="technicalDocumentationTable"
+                    visible-when="data.dataProviders.technicalDataProvider.viewModelCollection.loadedVMObjects.length != 0"
+                    align-content="center"></aw-splm-table>
+            </aw-flex-row>
+            <aw-flex-row id="alink" justify="center">
+                <aw-link prop="data.firstPage" action="firstPageAction" style="font-weight: bolder; margin-top: 5px;">
+                </aw-link>
+                <aw-link prop="data.beforePage" action="pagingBeforeAction"
+                    style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                <aw-chip-list dataprovider="data.dataProviders.pageChipDataProvider" action="clickedPageAction"
+                    id="chipStyle"></aw-chip-list>
+                <aw-link prop="data.afterPage" action="pagingAfterAction" style="font-weight: bolder; margin-top: 5px;">
+                </aw-link>
+                <aw-link prop="data.lastPage" action="lastPageAction" style="font-weight: bolder; margin-top: 5px;">
+                </aw-link>
+            </aw-flex-row>
+        </aw-flex-column>
+        <aw-splitter min-size-1="300"> </aw-splitter>
+        <aw-flex-column class="rowColor" width="fill">
+            <aw-flex-row justify="center"
+                visible-when="data.dataProviders.technicalDataProvider.selectedObjects.length == 0 && data.dataProviders.technicalDataProvider.viewModelCollection.loadedVMObjects.length != 0">
+                <h3 class="h3TopMargin">{{i18n.pleaseSelectDocument}}</h3>
+            </aw-flex-row>
+            <aw-tab-set tabs="data.summaryTab"
+                visible-when="data.dataProviders.technicalDataProvider.selectedObjects.length > 0">
+                <aw-panel-body visible-when="conditions.showSummaryTab" class="noPadding">
+                    <aw-command-panel-section caption="{{i18n.property}}" anchor="data.qaOptionAnchor"
+                        collapsed="false">
+                        <aw-flex-row>
+                            <aw-label class="labHei" prop="data.wriId"></aw-label>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-label class="labHei" prop="data.wriTitle"></aw-label>
+                        </aw-flex-row>
+                        <aw-label class="labContent" prop="data.wriContent"></aw-label>
+                        <aw-panel-body class="summernotePanel">
+                            <textarea id="technicalSummernote"></textarea>
+                            <!-- <body>
+                                <textarea id="technicalSummernote"></textarea>
+                            </body> -->
+                        </aw-panel-body>
+                        <aw-flex-row class="rere">
+                            <aw-flex-column>
+                                <aw-flex-row>
+                                    <aw-flex-column width="2">
+                                        <aw-label class="labHei2" prop="data.wriDataSet"></aw-label>
+                                    </aw-flex-column>
+                                    <aw-flex-column>
+                                        <aw-link prop="data.datasetLink" action="datasetLinkAction" class="whyyy">
+                                        </aw-link>
+                                    </aw-flex-column>
+                                </aw-flex-row>
+                                <aw-flex-row>
+                                    <aw-label class="labHei" prop="data.writer"></aw-label>
+                                </aw-flex-row>
+                                <aw-flex-row>
+                                    <aw-label class="labHei" prop="data.wriCreationDate"></aw-label>
+                                </aw-flex-row>
+                                <aw-flex-row>
+                                    <aw-label class="labHei" prop="data.wriViews"></aw-label>
+                                </aw-flex-row>
+                                <aw-flex-row>
+                                    <aw-label class="labHei likeClass" prop="data.wriLike"></aw-label>
+                                </aw-flex-row>
+                            </aw-flex-column>
+                            <aw-icon-button size="large" command="data.likeBtn" class="iconClass"
+                                exist-when="data.dataProviders.technicalDataProvider.selectedObjects.length > 0">
+                            </aw-icon-button>
+                        </aw-flex-row>
+                    </aw-command-panel-section>
+                </aw-panel-body>
+            </aw-tab-set>
+        </aw-flex-column>
+    </aw-flex-row>
+</aw-flex-column>

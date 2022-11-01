@@ -1,0 +1,489 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-break.directive",
+        "js/aw-label.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-splitter.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-command-bar.directive",
+        "js/aw-tab-set.directive",
+        "js/aw-textarea.directive",
+        "js/visible-when.directive",
+        "js/aw-chip-list.directive",
+        "js/aw-search-box.directive",
+        "css/faqView.css"
+    ],
+    "data": {
+        "qaID": {
+            "displayName": "ID",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaTitle": {
+            "displayName": "{{i18n.title}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaQuestion":{
+            "displayName": "{{i18n.answer}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaContent": {
+            "displayName": "{{i18n.answer}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaWriter": {
+            "displayName": "{{i18n.user}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qaWriteDate": {
+            "displayName": "{{i18n.createDate}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "faqTabModel":[
+            {
+                "name":"개요",
+                "tabKey":"showProps"
+            }
+        ],
+        "firstPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforePage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterPage": {
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "searchBox": {
+            "displayName": "",
+            "type": "STRING"
+        }
+    },
+    "actions": {
+        "loadQaList":{
+            "actionType":"JSFunction",
+            "method":"loadQaList",
+            "deps": "js/faqService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            },
+            "outputData": {
+                "searchResponse":"{{function:filterList}}"
+            }
+        },
+        "editPopup1":{
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "PopupEditQna",
+                    "locals": {
+                        "caption": "{{i18n.addQuestion}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": 900,
+                        "width": 1300
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "events": {
+                "success":[
+                    {
+                        "name": "editPopupOpen.complete"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "editPopup2":{
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "PopupEditQna",
+                    "locals": {
+                        "caption": "{{i18n.editing}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": 900,
+                        "width": 1300
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "events": {
+                "success":[
+                    {
+                        "name": "editPopupOpen.complete"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "inputWinodwAdd":{
+            "actionType":"JSFunction",
+            "method":"inputWinodwAdd",
+            "deps": "js/faqService",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "window":""
+            }
+        },
+        "inputWinodwEdit":{
+            "actionType":"JSFunction",
+            "method":"inputWinodwEdit",
+            "deps": "js/faqService",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "window":""
+            }
+        },
+        "addBtn":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                  "action": "inputWinodwAdd"
+                },
+                {
+                  "action": "editPopup1"
+                }
+              ]
+        },
+        "editBtn":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                  "action": "inputWinodwEdit"
+                },
+                {
+                  "action": "editPopup2"
+                }
+              ]
+        },
+        "showQuestionProp":{
+            "actionType": "JSFunction",
+            "method":"showQuestionProp",
+            "deps":"js/faqService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "faqDelete": {
+            "actionType": "JSFunction",
+            "method": "faqDelete",
+            "deps": "js/faqService",
+            "inputData": {
+                "data": "{{data.dataProviders}}",
+                "id":"{{data.qaID}}",
+                "title":"{{data.qaTitle}}",
+                "writer":"{{data.qaWriter}}",
+                "writerDate":"{{data.qaWriteDate}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "checkURLData":{
+            "actionType": "JSFunction",
+            "method": "checkURLData",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}",
+                "providerName":"qaListDataProvider"
+            }
+        },
+        "resetCount":{
+            "actionType": "JSFunction",
+            "method": "resetCount",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "setSplitterAction":{
+            "actionType": "JSFunction",
+            "method": "setSplitterAction",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "firstPageAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/faqService"
+        },
+        "lastPageAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/faqService"
+        },
+        "pagingBeforeAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/faqService"
+        },
+        "pagingAfterAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/faqService"
+        },
+        "setPageNumber":{
+            "actionType": "JSFunction",
+            "method": "setPageNumber",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "pageResponse": "pageResponse",
+                "pageLength": "pageLength"
+            },
+            "deps": "js/faqService"
+        },
+        "clickedPageAction":{
+            "actionType": "JSFunction",
+            "method": "clickedPageAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/faqService"
+        },
+        "questionSearch":{
+            "actionType": "JSFunction",
+            "method": "questionSearch",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/faqService"
+        }
+    },
+    "dataProviders": {
+        "qaListDataProvider": {
+            "action": "loadQaList",
+            "response":"{{data.searchResponse}}",
+            "totalFound": "{{data.totalFound}}"
+        },
+        "pageChipDataProvider": {
+            "type": "Static",
+            "action": "setPageNumber",
+            "response": "{{data.pageResponse}}",
+            "totalFound": "{{data.pageLength}}"
+        }
+    },
+    "columnProviders": {
+        "qaListColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.title}}",
+                    "minWidth": 80,
+                    "width": 300,
+                    "enableColumnMenu": false
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.createDate}}",
+                    "minWidth": 60,
+                    "width": 100,
+                    "enableColumnMenu": false
+                },
+                {
+                    "name": "owning_user",
+                    "displayName": "{{i18n.user}}",
+                    "minWidth": 60,
+                    "width": 100,
+                    "enableColumnMenu": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "qaList": {
+            "dataProvider": "qaListDataProvider",
+            "columnProvider": "qaListColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": false
+            }
+        }
+    },
+    "functions": {
+        "filterList":{
+            "functionName": "filterList",
+            "parameters": [
+                "{{data}}"
+            ]
+        }
+    },
+    "i18n": {
+        "helloText": [ "lgepKnowldegeManageMessages" ],
+        "property": [ "lgepKnowldegeManageMessages" ],
+        "createDate": [ "lgepKnowldegeManageMessages" ],
+        "user": [ "lgepKnowldegeManageMessages" ],
+        "editing": [ "lgepKnowldegeManageMessages" ],
+        "title": [ "lgepKnowldegeManageMessages" ],
+        "answer": [ "lgepKnowldegeManageMessages" ],
+        "addQuestion": [ "lgepKnowldegeManageMessages" ],
+        "pleaseSelectDocument": ["lgepKnowldegeManageMessages"],
+        "noPost": [ "lgepKnowldegeManageMessages" ],
+        "cantEditQuestion": [ "lgepKnowldegeManageMessages" ],
+        "cantDeleteQuestion": [ "lgepKnowldegeManageMessages" ]
+    },
+    "conditions": {
+        "showProps": {
+            "expression": "data.selectedTab.tabKey === 'showProps'"
+        }
+    },
+    "onEvent": [
+        {
+            "eventId":"qaList.add",
+            "action":"addBtn"
+        },
+        {
+            "eventId":"qaList.edit",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.owning_user.dbValues[0] == ctx.user.uid",
+            "action":"editBtn"
+        },
+        {
+            "eventId":"qaList.edit",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.owning_user.dbValues[0] != ctx.user.uid",
+            "message": "cantEditQuestion"
+        },
+        {
+            "eventId":"qaListDataProvider.selectionChangeEvent",
+            "action":"showQuestionProp"
+        },
+        {
+            "eventId": "qaList.del",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.owning_user.dbValues[0] == ctx.user.uid",
+            "action": "faqDelete"
+        },
+        {
+            "eventId": "qaList.del",
+            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.owning_user.dbValues[0] != ctx.user.uid",
+            "message": "cantDeleteQuestion"
+        },
+        {
+            "eventId": "awPopup.close",
+            "action":"closePopupWindow"
+        },
+        {
+            "eventId": "qaListDataProvider.modelObjectsUpdated",
+            "action": "checkURLData"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "resetCount"
+        },
+        {
+            "eventId": "aw-splitter-update",
+            "action": "setSplitterAction"
+        }
+    ],
+    "messages": {
+        "cantAddAnswer": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantAddAnswer}}"
+        },
+        "cantEditQuestion": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantEditQuestion}}"
+        },
+        "cantDeleteQuestion": {
+            "messageType": "ERROR",
+            "messageText": "{{i18n.cantDeleteQuestion}}"
+        }
+    }
+}

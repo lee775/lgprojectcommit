@@ -1,0 +1,18 @@
+<aw-popup2>
+    <aw-panel-body id="answerPop">
+        <!-- <aw-textbox prop="data.questionTitle"></aw-textbox> -->
+        <aw-label prop="data.ansTitle" class=""></aw-label>
+        <aw-panel-body>
+
+            <body>
+                <textarea id="answerContentSummernote"></textarea>
+            </body>
+        </aw-panel-body>
+        <aw-break></aw-break>
+        <aw-textarea prop="data.answerContent"></aw-textarea>
+    </aw-panel-body>
+    <aw-panel-footer>
+        <aw-button button-type="base" action="closePopup" size="auto">{{i18n.close}}</aw-button>
+        <aw-button action="createQnaAnswer" size="auto">{{i18n.ok}}</aw-button>
+    </aw-panel-footer>
+</aw-popup2>

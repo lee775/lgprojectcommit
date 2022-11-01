@@ -1,0 +1,612 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-avatar.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-splitter.directive",
+        "js/aw-icon-button.directive",
+        "js/aw-sidenav.directive",
+        "js/aw-list.directive",
+        "js/aw-default-cell.directive",
+        "js/aw-link.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-separator.directive",
+        "js/aw-default-group-cell.directive",
+        "js/aw-header-cell.directive",
+        "js/aw-tab-set.directive",
+        "js/aw-button.directive",
+        "js/extended-tooltip.directive",
+        "css/knowledgeMyDocumentView.css"
+    ],
+    "actions": {
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "dataLoad",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "filterResults": "result"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "getDataProvider": {
+            "actionType": "dataProvider",
+            "methods": [
+                "showAnswer",
+                "showExpertAnswer",
+                "recentSearchList",
+                "recommendedResult"
+            ]
+        },
+        "openSidenav": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose",
+                        "eventData": {
+                            "id": "sidenavCommandPanel"
+                        }
+                    }
+                ]
+            }
+        },
+        "clickedMyQnaTitle": {
+            "actionType": "JSFunction",
+            "method": "clickedMyQnaTitle",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "clickedMyQnaTitle1": {
+            "actionType": "JSFunction",
+            "method": "clickedMyQnaTitle1",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "clickedMyQnaTitle2": {
+            "actionType": "JSFunction",
+            "method": "clickedMyQnaTitle2",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "initializeJob": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "openSidenav"
+                },
+                {
+                    "action": "getDataProvider"
+                }
+            ]
+        },
+        "controlPage": {
+            "actionType": "JSFunction",
+            "method": "controlPage",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "createFolder": {
+            "actionType": "JSFunction",
+            "method": "createFolder",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "closeRecentAction": {
+            "actionType": "JSFunction",
+            "method": "closeRecentAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "clearRecentAction": {
+            "actionType": "JSFunction",
+            "method": "clearRecentAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "closeRecommendedAction": {
+            "actionType": "JSFunction",
+            "method": "closeRecommendedAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "closeClockAction": {
+            "actionType": "JSFunction",
+            "method": "closeClockAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "closeCalendarAction": {
+            "actionType": "JSFunction",
+            "method": "closeCalendarAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "closeMyQnaAction": {
+            "actionType": "JSFunction",
+            "method": "closeMyQnaAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/knowledgeMyDocumentService"
+        },
+        "loadAnswerList": {
+            "actionType": "JSFunction",
+            "method": "loadAnswerList",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "QnaResponse": "{{function:qnaResponse}}",
+                "ExpertResponse": "{{function:expertResponse}}"
+            }
+        },
+        "loadrecentSearch":{
+            "actionType": "JSFunction",
+            "method": "loadrecentSearch",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "recentSearchValue": "{{function:recentSearchData}}",
+                "totalFound": "totalFound"
+            }
+        },
+        "loadRecommended":{
+            "actionType": "JSFunction",
+            "method": "loadRecommended",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx":"{{ctx}}"
+            },
+            "outputData": {
+                "recommendedValue": "{{function:recommendedData}}",
+                "totalFound": "totalFound"
+            }
+        },
+        "loadFavoritesList":{
+            "actionType": "JSFunction",
+            "method": "loadFavoritesList",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "favoritesValue": "{{function:favoritesData}}",
+                "totalFound": "totalFound"
+            }
+        },
+        "openMoreInfo": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "deps": "js/popupService",
+            "inputData": {
+                "data": {
+                    "declView": "moreInfo",
+                    "locals": {
+                        "caption": "{{data.i18n.openMoreInfo}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "{{data.popupWidth}}",
+                        "height": "{{data.popupHeight}}"
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            }
+        },
+        "folderEdit":{
+            "actionType": "JSFunction",
+            "method": "folderEdit",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "folderDel":{
+            "actionType": "JSFunction",
+            "method": "folderDel",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "folderCopy":{
+            "actionType": "JSFunction",
+            "method": "folderCopy",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "navigationAction": {
+            "actionType": "Navigate",
+            "navigateTo": "knowledgeWarehouse",
+            "navigationParams": {}
+        },
+        "closePopup": {
+            "actionType": "JSFunction",
+            "method": "closePopup",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "resetCount":{
+            "actionType": "JSFunction",
+            "method": "resetCount",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "setSelectedNone":{
+            "actionType": "JSFunction",
+            "method": "setSelectedNone",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "param": "{{parameters.param1}}"
+            }
+        },
+        "loadExpert":{
+            "actionType": "JSFunction",
+            "method": "loadExpert",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "expertAnswer": "expertAnswer"
+            }
+        },
+        "loadQna":{
+            "actionType": "JSFunction",
+            "method": "loadQna",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "qnaAnswer": "qnaAnswer",
+                "qnaTotalFound": "qnaTotalFound"
+            }
+        },
+        "vmReload":{
+            "actionType": "JSFunction",
+            "method": "vmReload",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "defaultPageReload": {
+            "actionType": "dataProvider",
+            "methods": [
+                "recentSearchList",
+                "recommendedResult"
+            ]
+        }
+    },
+    "data": {
+        "qnaTab": [
+            {
+                "name": "Q&A",
+                "tabKey": "showQna"
+            },
+            {
+                "name": "{{i18n.askExpert}}",
+                "tabKey": "showExpert"
+            }
+        ],
+        "captionValue": {
+            "value": "main"
+        },
+        "image1": {
+            "dbValue": ""
+        },
+        "flag": {
+            "recent": true,
+            "recommended": true,
+            "myQna": true,
+            "mainPanel": false
+        },
+        "buttonCommand1": {
+            "action": "closeRecentAction",
+            "iconName": "Close"
+        },
+        "buttonClear": {
+            "action": "clearRecentAction",
+            "iconName": "ClearAllSelections"
+        },
+        "buttonCommand2": {
+            "action": "closeRecommendedAction",
+            "iconName": "Close"
+        },
+        "buttonCommand5": {
+            "action": "closeMyQnaAction",
+            "iconName": "Close"
+        },
+        "sideNavCommandPanelData": {
+            "slide": "PUSH",
+            "direction": "LEFT_TO_RIGHT",
+            "width": "WIDE",
+            "height": "AUTO"
+        },
+        "box1": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "goToWareHouse": {
+            "displayName": "{{i18n.GoToPosted}}",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "folderMng": {
+            "displayName": "{{i18n.makeFolder}}",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "listTooltip": {
+            "view": "knowledgeTooltip"
+        },
+        "pageSize":40
+    },
+    "dataProviders": {
+        "SPLMTableContxMenuDataProvider": {
+            "action": "loadData",
+            "response": "{{data.filterResults}}",
+            "totalFound": "{{data.filterResults.length}}",
+            "contextMenuCommandsAnchor": "aw_splmTableContextMenu"
+        },
+        "recentSearchList":{
+            "action":"loadrecentSearch",
+            "response": "{{data.recentSearchValue}}",
+            "totalFound": "{{data.recentSearchValue.length}}"
+        },
+        "recommendedResult":{
+            "action":"loadRecommended",
+            "response": "{{data.recommendedValue}}",
+            "totalFound": "{{data.recommendedValue.length}}"
+        },
+        "favoritesList":{
+            "action":"loadFavoritesList",
+            "response": "{{data.favoritesValue}}",
+            "totalFound": "{{data.favoritesValue.length}}"
+        },
+        "showAnswer":{
+            "action": "loadQna",
+            "response": "{{data.qnaAnswer}}",
+            "totalFound": "{{data.qnaTotalFound}}",
+            "selectionModelMode": "none"
+        },
+        "showExpertAnswer":{
+            "action": "loadExpert",
+            "response": "{{data.expertAnswer}}",
+            "totalFound": "{{data.expertAnswer.length}}",
+            "selectionModelMode": "none"
+        }
+    },
+    "columnProviders": {
+        "SPLMTableContextMenuProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_string",
+                    "displayName": "NAME",
+                    "width": 200,
+                    "enableColumnMoving": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "SPLMTableContextMenu": {
+            "dataProvider": "SPLMTableContxMenuDataProvider",
+            "columnProvider": "SPLMTableContextMenuProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": false,
+                "enableSorting": false
+            }
+        }
+    },
+    "conditions": {
+        "showTextInRecent": {
+            "expression": "data.recentSearchValue.length == 0"
+        },
+        "showTextInRecommended": {
+            "expression": "data.recommendedValue.length == 0"
+        },
+        "showTextInFavorite": {
+            "expression": "data.favoritesValue.length == 0"
+        },
+        "showTextInQna": {
+            "expression": "data.qnaAnswer.length == 0"
+        },
+        "showTextInExpert": {
+            "expression": "data.expertAnswer.length == 0"
+        },
+        "showQna": {
+            "expression": "data.selectedTab.tabKey === 'showQna'"
+        },
+        "showExpert": {
+            "expression": "data.selectedTab.tabKey === 'showExpert'"
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "SPLMTableContxMenuDataProvider.selectionChangeEvent",
+            "action": "controlPage"
+        },
+        {
+            "eventId": "recent.clear",
+            "action": "recentClear"
+        },
+        {
+            "eventId": "favoritesList.changeUpdated",
+            "action": "favoritesList"
+        },
+        {
+            "eventId": "recentList.changeUpdated",
+            "action": "defaultPageReload"
+        },
+        {
+            "eventId": "recentSearchList.selectionChangeEvent",
+            "condition": "data.dataProviders.recentSearchList.selectedObjects.length > 0",
+            "inputArgs": {
+                "eventData": "{{eventData}}"
+            },
+            "cacheEventData": true,
+            "action": "openMoreInfo"
+        },
+        {
+            "eventId": "recommendedResult.selectionChangeEvent",
+            "condition": "data.dataProviders.recommendedResult.selectedObjects.length > 0",
+            "inputArgs": {
+                "eventData": "{{eventData}}"
+            },
+            "cacheEventData": true,
+            "action": "openMoreInfo"
+        },
+        {
+            "eventId": "recentSearchList.selectionChangeEvent",
+            "condition": "data.dataProviders.recentSearchList.selectedObjects.length > 0 && data.dataProviders.recommendedResult.selectedObjects.length > 0",
+            "inputArgs": {
+                "param1": "recommendedResult"
+            },
+            "action": "setSelectedNone"
+        },
+        {
+            "eventId": "recommendedResult.selectionChangeEvent",
+            "condition": "data.dataProviders.recommendedResult.selectedObjects.length > 0 && data.dataProviders.recentSearchList.selectedObjects.length > 0",
+            "inputArgs": {
+                "param1": "recentSearchList"
+            },
+            "action": "setSelectedNone"
+        },
+        {
+            "eventId": "favoritesList.selectionChangeEvent",
+            "condition": "data.dataProviders.favoritesList.selectedObjects.length > 0",
+            "inputArgs": {
+                "eventData": "{{eventData}}"
+            },
+            "cacheEventData": true,
+            "action": "openMoreInfo"
+        },
+        {
+            "eventId": "folder.edit",
+            "action": "folderEdit"
+        },
+        {
+            "eventId": "folder.del",
+            "action": "folderDel"
+        },
+        {
+            "eventId": "folder.copy",
+            "action": "folderCopy"
+        },
+        {
+            "eventId": "knowledgeMyDocument.contentUnloaded",
+            "action": "closePopup"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "resetCount"
+        },
+        {
+            "eventId": "recentList.clear",
+            "action": "recentSearchList"
+        },
+        {
+            "eventId": "removeMessages",
+            "action": "vmReload"
+        }
+    ],
+    "functions": {
+        "recentSearchData":{
+            "functionName": "recentSearchData",
+            "parameters": [
+                "{{data.dataProviders.recentSearchList.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        },
+        "recommendedData":{
+            "functionName": "recommendedData",
+            "parameters": [
+                "{{data.dataProviders.recommendedResult.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        },
+        "favoritesData":{
+            "functionName": "favoritesData",
+            "parameters": [
+                "{{data.dataProviders.favoritesList.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        }
+    },
+    "lifecycleHooks": {
+        "onMount": "initializeJob"
+    },
+    "i18n": {
+        "openMoreInfo": ["knowledgeSearchMessages"],
+        "GoToPosted": ["knowledgeSearchMessages"],
+        "makeFolder": ["knowledgeSearchMessages"],
+        "reViewNum": ["knowledgeSearchMessages"],
+        "knowledgeRecommended": ["knowledgeSearchMessages"],
+        "noFavoritesPage": ["knowledgeSearchMessages"],
+        "recentSearches": ["knowledgeSearchMessages"],
+        "noRecentsPage": ["knowledgeSearchMessages"],
+        "noRecommended": ["knowledgeSearchMessages"],
+        "noMyQuestion": ["knowledgeSearchMessages"],
+        "myQuestion": ["knowledgeSearchMessages"],
+        "askExpert": ["knowledgeSearchMessages"]
+    }
+}

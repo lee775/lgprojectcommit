@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-section.directive",
+
+    "css/dfmeaMasterAddView.css"
+  ],
+  "data": {
+    "failure": {
+      "displayName": "{{i18n.potentialFailureModeLabel}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "isEditable": "true"
+    },
+    "disabledButtonChk": {
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "l2Severity": {
+      "displayName": "{{i18n.severityPlaceholder}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "functionValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "failureValues": {
+      "type": "STRING",
+      "dbValue": []
+    }
+  },
+  "actions": {
+    "save": {
+      "actionType": "JSFunction",
+      "method": "saveAction",
+      "deps": "js/fmeaMasterAddService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "selectionFailure": {
+      "actionType": "JSFunction",
+      "method": "selectionFailure",
+      "deps": "js/dfmeaMasterRowEditService",
+      "inputData": {
+        "failureData": "{{data.failure}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editRow": {
+      "actionType": "JSFunction",
+      "method": "editRow",
+      "deps": "js/dfmeaMasterRowEditInitService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "failure.dbValue": "result.failureValue",
+        "failure.dispValue": "result.failureValue",
+        "failureValues.dbValue": "result.l2_potential_failure_mode"
+      }
+    },
+    "editRowCancelAction": {
+      "actionType": "JSFunction",
+      "method": "editRowCancelAction",
+      "deps": "js/dfmeaMasterRowEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editRowSaveAction": {
+      "actionType": "JSFunction",
+      "method": "editRowSaveAction",
+      "deps": "js/dfmeaMasterRowEditSaveService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "functionData": "{{data.functionData}}",
+        "failureData": "{{data.failure}}"
+      }
+    }
+  },
+  "i18n": {
+    "potentialFailureMode": ["lgepDFMEAViewMessages"],
+    "potentialFailureMode_explanation": ["lgepMasterViewMessages"],
+    "failureEffect": ["lgepMasterViewMessages"],
+    "failureEffect_explanation": ["lgepMasterViewMessages"],
+    "causeOfFailure": ["lgepMasterViewMessages"],
+    "causeOfFailure_explanation": ["lgepMasterViewMessages"],
+    "precautionsAction": ["lgepMasterViewMessages"],
+    "precautionsAction_explanation": ["lgepMasterViewMessages"],
+    "detectionAciton": ["lgepMasterViewMessages"],
+    "detectionAciton_explanation": ["lgepMasterViewMessages"],
+    "requirement": ["lgepMasterViewMessages"]
+  }
+}

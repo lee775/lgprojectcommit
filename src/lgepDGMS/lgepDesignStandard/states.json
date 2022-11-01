@@ -1,0 +1,60 @@
+{
+    "L2_DesignStandard": {
+        "url": "/L2_DesignStandard",
+        "data": {},
+        "view": "L2_DesignStandard",
+        "parent": "L2_DesignStandardLocation"
+    },
+    "L2_DesignStandardLocation": {
+        "data": {
+            "label": {
+                "source": "/i18n/L2_DesignStandardMessages",
+                "key": "L2_DesignStandardSubLocationTitle"
+            },
+            "browserTitle": {
+                "source": "/i18n/L2_DesignStandardMessages",
+                "key": "L2_DesignStandardLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/L2_DesignStandardMessages",
+                "key": "L2_DesignStandardLocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/L2_DesignStandardMessages",
+                "key": "L2_DesignStandardLocationHeaderTitle"
+            }
+        },
+        "type": "location"
+    },
+    "L2_DesignStandardSubLocation": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/L2_DesignStandardMessages",
+                "key": "L2_DesignStandardSubLocationTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "L2_DesignStandardSubLocation",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/L2_DesignStandardMessages",
+                        "key": "L2_DesignStandardSubLocationChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "params": {
+            "filter": null
+        },
+        "parent": "L2_DesignStandardLocation",
+        "reloadOnSearch": false,
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "url": "/L2_DesignStandardSubLocation"
+    }
+}

@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-progress-indicator.directive",
+    "js/aw-label.directive",
+    "css/masterCreateView.css"
+  ],
+  "data": {
+    "l2Division": {},
+    "disabledButtonChk": {
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "l2SodValues": {
+      "type": "STRING",
+      "dbValue": [
+        {
+          "propDisplayValue": "1",
+          "propInternalValue": "1"
+        },
+        {
+          "propDisplayValue": "2",
+          "propInternalValue": "2"
+        },
+        {
+          "propDisplayValue": "3",
+          "propInternalValue": "3"
+        },
+        {
+          "propDisplayValue": "4",
+          "propInternalValue": "4"
+        },
+        {
+          "propDisplayValue": "5",
+          "propInternalValue": "5"
+        },
+        {
+          "propDisplayValue": "6",
+          "propInternalValue": "6"
+        },
+        {
+          "propDisplayValue": "7",
+          "propInternalValue": "7"
+        },
+        {
+          "propDisplayValue": "8",
+          "propInternalValue": "8"
+        },
+        {
+          "propDisplayValue": "9",
+          "propInternalValue": "9"
+        },
+        {
+          "propDisplayValue": "9",
+          "propInternalValue": "9"
+        },
+        {
+          "propDisplayValue": "10",
+          "propInternalValue": "10"
+        }
+      ]
+    },
+    "l2Product": {
+      "displayName": "{{i18n.l2Product}}",
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "actions": {
+    "onInit": {
+      "actionType": "JSFunction",
+      "method": "initAction",
+      "deps": "js/cmCreateService",
+      "outputData": {
+        "l2Product.dbValue": "productValue"
+      }
+    },
+    "save": {
+      "actionType": "JSFunction",
+      "method": "createAction",
+      "deps": "js/failureCreateService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    }
+  },
+  "lifecycleHooks": {
+    "onInit": "onInit"
+  },
+  "i18n": {
+    "potentialFailureMode": ["lgepMasterViewMessages"],
+    "potentialFailureMode_explanation": ["lgepMasterViewMessages"],
+    "save": ["lgepMasterViewMessages"],
+    "l2RelatedSources": ["lgepMasterViewMessages"],
+    "l2classification": ["lgepMasterViewMessages"],
+    "l2Product": ["lgepDFMEAViewMessages"]
+  }
+}

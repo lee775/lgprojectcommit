@@ -1,0 +1,685 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-list.directive",
+        "js/aw-panel.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-tree.directive",
+        "js/aw-tab-set.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-default-cell.directive",
+        "js/aw-separator.directive",
+        "js/aw-splitter.directive",
+        "js/visible-when.directive",
+        "js/aw-sidenav.directive",
+        "js/aw-splm-table.directive",
+        "js/extended-tooltip.directive",
+        "js/aw-default-group-cell.directive",
+        "js/aw-header-cell.directive",
+        "js/aw-panel-section.directive",
+        "css/knowledgeWarehouseView.css",
+        "js/aw-togglebutton.directive",
+        "js/aw-scrollpanel.directive"
+    ],
+    "data": {
+        "qnaTab": [
+            {
+                "name": "Q&A",
+                "tabKey": "showQna"
+            },
+            {
+                "name": "{{i18n.askExpert}}",
+                "tabKey": "showExpert"
+            }
+        ],
+        "partDataTree": [],
+        "button1": {
+            "action":"openQna",
+            "iconName": "File",
+            "tooltip": "New"
+        },
+        "button3": {
+            "action": "filterOn",
+            "iconName": "filter",
+            "tooltip": "Filter"
+        },
+        "button4": {
+            "action": "turnTableView",
+            "iconName": "SummaryView",
+            "tooltip": "TableView"
+        },
+        "button5": {
+            "action": "turnListView",
+            "iconName": "ListView",
+            "tooltip": "CardView"
+        },
+        "button6": {
+            "action": "turnTextView",
+            "iconName": "TrackChanges",
+            "tooltip": "TextView"
+        },
+        "searchFilter": {
+            "slide": "FLOAT",
+            "direction": "LEFT_TO_RIGHT",
+            "animation": true,
+            "width": "STANDARD",
+            "height": "FULL"
+        },
+        "chagneMode":{
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": false
+        },
+        "listTooltip": {
+            "view": "knowledgeTooltip"
+        },
+        "searchValue":" ",
+        "pageSize": 40,
+        "startIndex": 0
+    },
+    "actions": {
+        "createChild":{
+            "actionType": "JSFunction",
+            "method": "createChild",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "loadTreeData": {
+            "actionType": "JSFunction",
+            "method": "loadTreeData",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx":"{{ctx}}"
+            },
+            "outputData": {
+                "partDataTree":""
+            },
+            "events": {
+                "success": [ {
+                    "name": "partDataTree.complete"
+                } ]
+            }
+        },
+        "loadSelectData": {
+            "actionType": "JSFunction",
+            "method": "loadSelectData",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "treeValue": "{{function:dataFilter}}",
+                "totalFound": "totalFound"
+            }
+        },
+        "loadQNA":{
+            "actionType": "JSFunction",
+            "method": "loadQNA",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "question": "question",
+                "questionFound": "questionFound",
+                "answer":"answer",
+                "answerFound":"answerFound"
+            }
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyFilterFacets"
+                }
+            ]
+        },
+        "turnTableView": {
+            "actionType": "JSFunction",
+            "method": "turnTableView",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "turnListView": {
+            "actionType": "JSFunction",
+            "method": "turnListView",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "turnTextView":{
+            "actionType": "JSFunction",
+            "method": "turnTextView",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "reload": {
+            "actionType": "JSFunction",
+            "method": "reload",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "selectResult": {
+            "actionType": "dataProvider",
+            "methods": [
+                "selectedTreeResult",
+                "showAnswer",
+                "showExpertAnswer"
+            ]
+        },
+        "questionsReload":{
+            "actionType": "dataProvider",
+            "methods": [
+                "showAnswer",
+                "showExpertAnswer"
+            ]
+        },
+        "openMoreInfo": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "moreInfo",
+                    "locals": {
+                        "caption": "{{data.i18n.openMoreInfo}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "{{data.popupWidth}}",
+                        "height": "{{data.popupHeight}}"
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "mainId"
+            },
+            "deps": "js/popupService"
+        },
+        "filterOn": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose",
+                        "eventData": {
+                            "id": "searchFilter",
+                            "includeView": "knowledgeSidePanel",
+                            "commandId": "button3",
+                            "config": {
+                                "width": "STANDARD",
+                                "height": "FULL"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "selecting":{
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awtree.updateSelection",
+                        "eventData": {
+                            "name": "partTree",
+                            "selectionValue": "{{data.eventData.folder}}"
+                        }
+                    }
+                ]
+            }
+        },
+        "searching":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                    "action": "createChild"
+                },
+                {
+                    "action": "selecting"
+                },
+                {
+                    "action": "selectResult"
+                }
+            ]
+        },
+        "getFilterFacetData": {
+            "actionType": "JSFunction",
+            "method": "getFilterFacetData",
+            "inputData": {
+                "filterFacetInput": "{{filterFacetInput}}"
+            },
+            "outputData": {
+                "fullData": ""
+            },
+            "deps": "js/knowledgeWarehouseService"
+        },
+        "openQna":{
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "PopupQuestionAdd",
+                    "locals": {
+                        "caption": "{{i18n.addQuestion}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "{{data.popupWidth}}",
+                        "height": "{{data.popupHeight}}"
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "events": {
+                "success": [ {
+                    "name": "addPopupOpen.complete"
+                } ]
+            },
+            "deps": "js/popupService"
+        },
+        "addRecentSearch": {
+            "actionType": "JSFunction",
+            "method": "addRecentSearch",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            }
+        },
+        "countTree":{
+            "actionType": "JSFunction",
+            "method": "countTree",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "urlUID":{
+            "actionType": "JSFunction",
+            "method": "urlUID",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "vmReload": {
+            "actionType": "JSFunction",
+            "method": "vmReload",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "popupResizing":{
+            "actionType": "JSFunction",
+            "method": "popupResizing",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "closePopup": {
+            "actionType": "JSFunction",
+            "method": "closePopup",
+            "deps": "js/knowledgeMyDocumentService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "testSelectNone":{
+            "actionType": "JSFunction",
+            "method": "testSelectNone",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "loadExpert":{
+            "actionType": "JSFunction",
+            "method": "loadExpert",
+            "deps": "js/knowledgeWarehouseService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "expertAnswer": "expertAnswer",
+                "expertAnswerFound": "expertAnswerFound"
+            }
+        },
+        "openLoadingPopup":{
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "knowledgeLoading",
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "800",
+                        "height": "300"
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "deps": "js/popupService"
+        },
+        "performFacetSearch": {
+            "actionType": "TcSoaService",
+            "serviceName": "Internal-AWS2-2018-05-Finder",
+            "method": "performFacetSearch",
+            "inputData": {
+                "facetSearchInput": {
+                    "providerName": "Awp0FullTextSearchProvider",
+                    "searchCriteria": "{{function:searchCriteria}}",
+                    "searchFilterMap": "{{function:searchFilterMap}}",
+                    "startIndex":"{{data.startIndex}}",
+                    "maxToReturn": -1
+                }
+            },
+            "outputData": {
+                "ctx.checkMoreSearch":"hasMoreFacetValues",
+                "ctx.filterEndIndex":"endIndex",
+                "ctx.filterResult":"searchFilterMap"
+            },
+            "events": {
+                "success": [ {
+                    "name": "performFacetSearchCompleted"
+                } ]
+            },
+            "deps": "js/knowledgeWarehouseService"
+        }
+    },
+    "dataProviders": {
+        "selectedTreeResult": {
+            "action": "loadSelectData",
+            "response": "{{data.treeValue}}",
+            "totalFound": "{{data.totalFound}}",
+            "searchIndex": "{{data.searchIndex}}"
+        },
+        "showAnswer":{
+            "action": "loadQNA",
+            "response": "{{data.answer}}",
+            "totalFound": "{{data.answerFound}}",
+            "selectionModelMode": "none"
+        },
+        "showExpertAnswer":{
+            "action": "loadExpert",
+            "response": "{{data.expertAnswer}}",
+            "totalFound": "{{data.expertAnswerFound}}",
+            "selectionModelMode": "none"
+        }
+    },
+    "columnProviders": {
+        "searchTableResultColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "l2_file_name",
+                    "displayName": "{{i18n.fileName}}",
+                    "minWidth": 80,
+                    "width": 300
+                },
+                {
+                    "name": "l2_page_index",
+                    "displayName": "페이지",
+                    "minWidth": 30,
+                    "width": 60
+                },
+                {
+                    "name":"show_issue_pred",
+                    "displayName":"정확도",
+                    "width": 80
+                },
+                {
+                    "name": "l2_doc_no",
+                    "displayName": "{{i18n.docNo}}",
+                    "minWidth": 60,
+                    "width": 150
+                },
+                {
+                    "name": "l2_model_name",
+                    "displayName": "{{i18n.model}}",
+                    "minWidth": 60,
+                    "width": 150
+                },
+                {
+                    "name": "l2_source",
+                    "displayName": "{{i18n.source}}",
+                    "minWidth": 60,
+                    "width": 150
+                },
+                {
+                    "name": "l2_creator",
+                    "displayName": "{{i18n.creator}}",
+                    "minWidth": 60,
+                    "width": 100
+                }
+            ]
+        }
+    },
+    "grids": {
+        "searchTableResult": {
+            "columnProvider": "searchTableResultColumnProvider",
+            "dataProvider": "selectedTreeResult",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enableSorting": false,
+                "enablePinning": false,
+                "enableGridMenu": false
+            }
+        }
+    },
+    "conditions": {
+        "showQna": {
+            "expression": "data.selectedTab.tabKey === 'showQna'"
+        },
+        "showExpert":{
+            "expression": "data.selectedTab.tabKey === 'showExpert'"
+        },
+        "listView": {
+            "expression": "data.mainView === 'listView'"
+        },
+        "tableView": {
+            "expression": "data.mainView === 'tableView'"
+        },
+        "textView": {
+            "expression": "data.mainView === 'textView'"
+        },
+        "resultNone":{
+            "expression": "data.totalFound === 0"
+        },
+        "qnaNone":{
+            "expression": "data.answerFound === 0 || !data.answerFound"
+        },
+        "expertQnaNone":{
+            "expression": "data.expertAnswerFound === 0 || !data.expertAnswerFound"
+        }
+    },
+    "i18n": {
+        "helloText": [
+            "knowledgeSearchMessages"
+        ],
+        "askExpert":[
+            "knowledgeSearchMessages"
+        ],
+        "addQuestion":[
+            "knowledgeSearchMessages"
+        ],
+        "creator":[
+            "knowledgeSearchMessages"
+        ],
+        "openMoreInfo":[
+            "knowledgeSearchMessages"
+        ],
+        "noQuestion":[
+            "knowledgeSearchMessages"
+        ],
+        "noResult":[
+            "knowledgeSearchMessages"
+        ],
+        "reViewNum":[
+            "knowledgeSearchMessages"
+        ],
+        "issueDate":[
+            "knowledgeSearchMessages"
+        ],
+        "pageCode":[
+            "knowledgeSearchMessages"
+        ],
+        "docNo":[
+            "knowledgeSearchMessages"
+        ],
+        "source":[
+            "knowledgeSearchMessages"
+        ],
+        "model":[
+            "knowledgeSearchMessages"
+        ],
+        "fileName":[
+            "knowledgeSearchMessages"
+        ]
+    },
+    "functions": {
+        "dataFilter": {
+            "functionName": "dataFilter",
+            "parameters": [
+                "{{data.columnProviders.searchTableResultColumnProvider.columnFilters}}",
+                "{{data.columnProviders.searchTableResultColumnProvider.sortCriteria}}",
+                "{{data.dataProviders.selectedTreeResult.startIndex}}",
+                "{{data.pageSize}}",
+                "{{data}}"
+            ]
+        },
+        "searchCriteria":{
+            "functionName": "searchCriteria",
+            "parameters": [
+                "{{data}}"
+            ]
+        },
+        "searchFilterMap":{
+            "functionName": "searchFilterMap",
+            "parameters": [
+                "{{data}}"
+            ]
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "knowledgeWarehouse.contentLoaded",
+            "action": "loadTreeData"
+        },
+        {
+            "eventId": "partTree.treeNodeSelected",
+            "action": "selectResult",
+            "cacheEventData": true
+        },
+        {
+            "eventId": "selectedTreeResult.selectionChangeEvent",
+            "action": "reload",
+            "cacheEventData": true
+        },
+        {
+            "eventId": "selectionOn",
+            "action": "openMoreInfo"
+        },
+        {
+            "eventId": "selectionOn",
+            "action": "addRecentSearch"
+        },
+        {
+            "eventId": "panelSearch",
+            "action": "searching",
+            "cacheEventData": true
+        },
+        {
+            "eventId": "partDataTree.complete",
+            "action":"performFacetSearch"
+        },
+        {
+            "eventId": "performFacetSearchCompleted",
+            "action":"countTree"
+        },
+        {
+            "eventId": "selectedTreeResult.modelObjectsUpdated",
+            "action":"urlUID"
+        },
+        {
+            "eventId": "removeMessages",
+            "action": "vmReload"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "closePopup"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "closePopupWindow"
+        },
+        {
+            "eventId": "awPopup.close",
+            "action":"closePopupWindow"
+        },
+        {
+            "eventId": "aw.windowResize",
+            "action": "popupResizing"
+        },
+        {
+            "eventId": "questionCreate.complete",
+            "action": "questionsReload"
+        },
+        {
+            "eventId": "openLoading",
+            "action": "openLoadingPopup"
+        },
+        {
+            "eventId": "knowledge.questionReload",
+            "action": "questionsReload"
+        }
+    ]
+}

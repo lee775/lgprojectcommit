@@ -1,0 +1,50 @@
+<aw-popup2>
+    <style>
+        .btnStyle {
+            padding-top: 27px;
+        }
+    </style>
+
+    <aw-flex-row>
+        <aw-flex-column width="12">
+            <aw-panel-body id="popupCreate">
+                <aw-flex-row>
+                    <aw-xrt type="CREATE" object-type="L2_DgnProdSpec"></aw-xrt>
+                </aw-flex-row>
+                <aw-panel-section caption="{{i18n.ref_properties}}">
+                    <aw-flex-row>
+                        <aw-flex-column width="10">
+                            <aw-textbox prop="data.ref_ModelsTxtBox"></aw-textbox>
+                        </aw-flex-column>
+                        <aw-flex-column width="1f"></aw-flex-column>
+                        <aw-flex-column class="btnStyle">
+                            <aw-button button-type="base" size="auto" action="openAddModel">{{i18n.findBtn}}</aw-button>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column width="10">
+                            <aw-textbox prop="data.ref_PartsTxtBox"></aw-textbox>
+                        </aw-flex-column>
+                        <aw-flex-column width="1f"></aw-flex-column>
+                        <aw-flex-column class="btnStyle">
+                            <aw-button button-type="base" size="auto" action="openAddParts">{{i18n.findBtn}}</aw-button>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-label prop="data.uploadLbl" style="width: 1000px;"></aw-label>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-file-upload type-filter=".png, .gif, .jpg, .jpeg" file-change-action="updateFormData"></aw-file-upload>
+                    </aw-flex-row>
+                </aw-panel-section>
+            </aw-panel-body>
+        </aw-flex-column>
+    </aw-flex-row>
+
+    <aw-separator></aw-separator>
+
+    <aw-panel-footer>
+        <aw-button action="uploadNCreate" size="auto">{{i18n.addBtn}}</aw-button>
+        <aw-button action="closeAddPopup" size="auto">{{i18n.close}}</aw-button>
+    </aw-panel-footer>
+</aw-popup2>

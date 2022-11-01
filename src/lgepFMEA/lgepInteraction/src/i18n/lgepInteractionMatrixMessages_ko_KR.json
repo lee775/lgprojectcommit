@@ -1,0 +1,17 @@
+{
+    "helloText": "!! Hello World !!",
+    "interactionMatrixLocationHeaderTitle": "상호 작용",
+    "interactionMatrixLocationBrowserTitle": "상호 작용",
+    "interactionMatrixLocationBrowserSubTitle": "상호 작용",
+    "interactionMatrixSubLocationTitle": "상호 작용",
+    "interactionMatrixSubLocationChartTitle": "상호 작용",
+    "interactionPopupDescRightTitle": "Interaccton 영향검토 가이드",
+    "interactionTypeA": "A : 기계적",
+    "interactionTypeB": "B : 전기적",
+    "interactionTypeC": "C : 열",
+    "interactionTypeD": "D : 화학적",
+    "interactionTypeE": "E : 방사적",
+    "interactionTypeAB": "AB : 기계 - 전기",
+    "interactionTypeAC": "AC : 기계 - 열",
+    "interactionTypeAD": "AD : 기계 - 화학"
+}

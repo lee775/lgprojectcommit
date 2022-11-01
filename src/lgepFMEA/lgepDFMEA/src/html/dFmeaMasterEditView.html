@@ -1,0 +1,20 @@
+<aw-popup2>
+  <aw-progress-indicator name="fmeaPopupProgIndicator"></aw-progress-indicator>
+  <aw-panel>
+    <aw-panel-body class="popup-body">
+      <div class="create-additionalinfo">
+        <aw-flex-row>
+          <aw-label class="label-column" prop="data.initName"></aw-label>
+          <span>{{data.initName.dbValue}}</span>
+        </aw-flex-row>
+        <aw-flex-row class="text-row">
+          <aw-textbox prop="data.changeName"></aw-textbox>
+        </aw-flex-row>
+      </div>
+      </div>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="editAction">{{i18n.editSave}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

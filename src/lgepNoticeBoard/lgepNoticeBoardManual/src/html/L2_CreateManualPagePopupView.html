@@ -1,0 +1,48 @@
+<aw-popup2>
+    <style>
+        #bottomMargin {
+            margin-bottom: 20px;
+        }
+
+        .marginRL {
+            margin: 0 10px;
+            margin-top: 13px;
+        }
+    </style>
+    <aw-panel-body id="dgnPageCreateData">
+        <aw-flex-column justify="center" visible-when="conditions.createTypeSetDefault">
+            <aw-flex-row justify="center">
+                <aw-button button-type="base" action="chapterMode" size="auto">{{i18n.ChapterCreate}}</aw-button>
+                <aw-button button-type="base" action="pageMode" size="auto">{{i18n.PageCreate}}</aw-button>
+            </aw-flex-row>
+        </aw-flex-column>
+        <aw-flex-column visible-when="conditions.createTypeSetChapter">
+            <aw-textbox prop="data.objChapterName"></aw-textbox>
+            <div visible-when="conditions.chapterSvgAdd">
+                <body>
+                    <div>
+                        <textarea id="dgnChapterCreateSummernote"></textarea>
+                    </div>
+                </body>
+            </div>
+        </aw-flex-column>
+        <aw-flex-column visible-when="conditions.createTypeSetPage">
+            <aw-textbox prop="data.objName" id="bottomMargin"></aw-textbox>
+
+            <body>
+                <div>
+                    <textarea id="dgnPageCreateSummernote"></textarea>
+                </div>
+            </body>
+        </aw-flex-column>
+    </aw-panel-body>
+    <aw-panel-footer visible-when="conditions.createTypeSetChapter">
+        <!-- <aw-button button-type="base" action="chapterSvgAddAc" size="auto">{{i18n.chapterSvgAdd}}</aw-button> -->
+        <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+        <aw-button action="createDgnChapterBat" size="auto">{{i18n.ok}}</aw-button>
+    </aw-panel-footer>
+    <aw-panel-footer visible-when="conditions.createTypeSetPage">
+        <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+        <aw-button action="createDgnPageBat" size="auto">{{i18n.ok}}</aw-button>
+    </aw-panel-footer>
+</aw-popup2>

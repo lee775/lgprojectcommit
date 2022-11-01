@@ -1,0 +1,61 @@
+<aw-command-panel caption="Filter">
+    <aw-panel-body id="filterView">
+        <aw-flex-row>
+            <aw-flex-column Justify="center" width="4">
+                <aw-label prop="data.part"></aw-label>
+            </aw-flex-column width="8">
+            <aw-flex-column>
+                <aw-listbox prop="data.listPart" action="changeIssue" list="data.listPartValues.dbValue"></aw-listbox>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row>
+            <aw-flex-column Justify="center" width="4">
+                <aw-label prop="data.issue"></aw-label>
+            </aw-flex-column width="8">
+            <aw-flex-column>
+                <aw-listbox prop="data.listIssue" list="data.listIssueValues.dbValue" class="issue" id="issueDisalbe">
+                </aw-listbox>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row>
+            <aw-flex-column Justify="center" width="4">
+                <aw-label prop="data.source"></aw-label>
+            </aw-flex-column width="8">
+            <aw-flex-column>
+                <aw-listbox prop="data.listSource" list="data.listSourceValues.dbValue"></aw-listbox>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row>
+            <aw-flex-column Justify="center" width="4">
+                <aw-label prop="data.period"></aw-label>
+            </aw-flex-column width="8">
+            <aw-flex-column>
+                <aw-listbox prop="data.listPeriod" list="data.listPeriodValues.dbValue"></aw-listbox>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row>
+            <aw-textbox prop="data.inputPNo"></aw-textbox>
+        </aw-flex-row>
+        <aw-flex-row>
+            <aw-textbox prop="data.inputModelNo"></aw-textbox>
+        </aw-flex-row>
+        <aw-flex-row>
+            <aw-flex-column Justify="center" width="4">
+                <aw-label prop="data.allignStandard"></aw-label>
+            </aw-flex-column width="8">
+            <aw-flex-column>
+                <aw-listbox prop="data.listAllign" list="data.listAllignValues.dbValue"></aw-listbox>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-body>
+    <aw-panel-footer>
+        <aw-flex-row>
+            <aw-flex-column>
+                <aw-button action="panelDataReset">초기화</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="searchList">{{i18n.buttonSearch}}</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-footer>
+</aw-command-panel>

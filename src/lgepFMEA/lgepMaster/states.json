@@ -1,0 +1,103 @@
+{
+    "fmasterlocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepMasterMessages",
+                "key": "fmasterlocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepMasterMessages",
+                "key": "fmasterlocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepMasterMessages",
+                "key": "fmasterlocationHeaderTitle"
+            }
+        },
+        "type": "location"
+    },
+    "structuremaster": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/lgepMasterMessages",
+                "key": "structuremasterTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "structuremaster",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/lgepMasterMessages",
+                        "key": "structuremasterChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "fmasterlocation",
+        "reloadOnSearch": false,
+        "template": "<aw-include name=\"structuremaster\"></aw-include>",
+        "type": "subLocation",
+        "url": "/structuremaster"
+    },
+    "funcmaster": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/lgepMasterMessages",
+                "key": "funcmasterTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "funcmaster",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/lgepMasterMessages",
+                        "key": "funcmasterChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "fmasterlocation",
+        "reloadOnSearch": false,
+        "template": "<aw-include name=\"functionmaster\"></aw-include>",
+        "type": "subLocation",
+        "url": "/funcmaster"
+    },
+    "failuremaster": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/lgepMasterMessages",
+                "key": "failuremasterTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "failuremaster",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/lgepMasterMessages",
+                        "key": "failuremasterChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "fmasterlocation",
+        "reloadOnSearch": false,
+        "template": "<aw-include name=\"failuremaster\"></aw-include>",
+        "type": "subLocation",
+        "url": "/failuremaster"
+    }
+}

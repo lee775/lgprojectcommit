@@ -1,0 +1,98 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-list.directive",
+        "js/aw-default-cell.directive"
+    ],
+    "actions": {
+        "onChevronClick": {
+            "actionType": "dataProvider",
+            "method": "procedureBreadcrumListData"
+        },
+        "getSelectProcedureList": {
+            "actionType": "JSFunction",
+            "method": "getSelectProcedureList",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "procedureBreadcrumList": "procedureBreadcrumList",
+                "totalFound": "totalFound"
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "breadcrumb.popUpLoading"
+                    }
+                ]
+            },
+            "deps": "js/sequenceService"
+        },
+        "breadcrumListDataSelect": {
+            "actionType": "JSFunction",
+            "method": "breadcrumListDataSelect",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "hideLoading": {
+            "actionType": "JSFunction",
+            "method": "toggle",
+            "inputData": {
+                "id": "d_uids",
+                "data": "{{data}}",
+                "key": "loading",
+                "value": false,
+                "unRegister": false
+            },
+            "deps": "js/breadcrumbUtils"
+        },
+        "closePopUp": {
+            "actionType": "JSFunction",
+            "method": "toggle",
+            "inputData": {
+                "id": "d_uids",
+                "data": "{{data}}",
+                "key": "showPopup",
+                "value": false,
+                "unRegister": true
+            },
+            "deps": "js/breadcrumbUtils"
+        }
+    },
+    "dataProviders": {
+        "procedureBreadcrumListData": {
+            "action": "getSelectProcedureList",
+            "response": "{{data.procedureBreadcrumList}}",
+            "totalFound": "{{data.totalFound}}"
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "d_uids.chevronClicked",
+            "cacheEventData": true,
+            "action": "onChevronClick"
+        },
+        {
+            "eventId": "procedureBreadcrumListData.selectionChangeEvent",
+            "cacheEventData": true,
+            "condition": "conditions.showPopup",
+            "action": "breadcrumListDataSelect"
+        },
+        {
+            "eventId": "breadcrumb.update",
+            "action": "closePopUp"
+        },
+        {
+            "eventId": "breadcrumb.popUpLoading",
+            "action": "hideLoading"
+        }
+    ],
+    "conditions": {
+        "showPopup": {
+            "expression": "selectedObjects.length > 0"
+        }
+    }
+}

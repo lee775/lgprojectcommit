@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-splm-table.directive", "js/aw-column.directive"],
+  "actions": {
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "treeLoadResult": "{{function:loadTreeTableData}}"
+      },
+      "deps": "js/dfmeaMasterListTableService"
+    },
+    "loadColumns": {
+      "actionType": "JSFunction",
+      "method": "loadColumns",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.dfmeaListTableProvider}}"
+      },
+      "deps": "js/dfmeaMasterListTableService"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRowAction",
+      "inputData": {
+        "selectionRow": "{{data.eventData.selectedObjects[0]}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterListTableService"
+    }
+  },
+  "functions": {
+    "loadTreeTableData": {
+      "functionName": "loadTreeTableData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}"],
+      "deps": "js/dfmeaMasterListTableService"
+    }
+  },
+  "columnProviders": {
+    "dfmeaListTableColumnProvider": {
+      "loadColumnAction": "loadColumns",
+      "frozenColumnIndex": -1
+    }
+  },
+  "dataProviders": {
+    "dfmeaListTableProvider": {
+      "action": "loadData",
+      "initializeAction": "loadData",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "dfmeaListTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    }
+  ],
+  "grids": {
+    "dfmeaListTable": {
+      "dataProvider": "dfmeaListTableProvider",
+      "columnProvider": "dfmeaListTableColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
+      }
+    }
+  }
+}

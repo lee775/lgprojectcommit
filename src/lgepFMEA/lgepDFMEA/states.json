@@ -1,0 +1,67 @@
+{
+    "dfmeaLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepDFMEAMessages",
+                "key": "dfmeaLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepDFMEAMessages",
+                "key": "dfmeaLocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepDFMEAMessages",
+                "key": "dfmeaLocationHeaderTitle"
+            }
+        },
+        "type": "location"
+    },
+    "dchecklist": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "dchecklist"
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "dfmeaLocation",
+        "template": "<aw-include name=\"dfmeaMasterList\"></aw-include>",
+        "type": "subLocation",
+        "url": "/dchecklist"
+    },
+    "fmeaChceklistLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepDFMEAMessages",
+                "key": "dfmeaLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepDFMEAMessages",
+                "key": "dfmeaLocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepDFMEAMessages",
+                "key": "dfmeaLocationHeaderTitle"
+            }
+        },
+        "type": "location"
+    },
+    "dchecklistm": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 1,
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "dchecklistm"
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "fmeaChceklistLocation",
+        "reloadOnSearch": false,
+        "template": "<aw-include name=\"dfmeaMaster\"></aw-include>",
+        "type": "subLocation",
+        "url": "/dchecklistm"
+    }
+}

@@ -1,0 +1,151 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-break.directive",
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-textarea.directive",
+        "js/aw-popup2.directive",
+        "js/exist-when.directive",
+        "css/questionAnswerView.css",
+        "js/aw-widget.directive"
+    ],
+    "data": {
+        "questionTitle": {
+            "displayName": "{{i18n.questionContent}}",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "maxLength": 128,
+            "renderingHint": "textbox",
+            "arrayLength": 1
+        },
+        "questionContent": {
+            "displayName": "{{i18n.questionContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "qnaAnswerEdit":{
+            "displayName": "{{i18n.questionContent}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "actions": {
+        "editQna":{
+            "actionType":"JSFunction",
+            "method":"editQna",
+            "deps": "js/popupNoticeBoardService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "closePopup":{
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "loadBeforeData":{
+            "actionType":"JSFunction",
+            "method":"loadBeforeData",
+            "deps": "js/popupNoticeBoardService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "addFaq":{
+            "actionType":"JSFunction",
+            "method":"addFaq",
+            "deps": "js/popupNoticeBoardService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "editFaq":{
+            "actionType":"JSFunction",
+            "method":"editFaq",
+            "deps": "js/popupNoticeBoardService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "editExpert":{
+            "actionType":"JSFunction",
+            "method":"editExpert",
+            "deps": "js/popupNoticeBoardService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        },
+        "initializeEdit": {
+            "actionType": "JSFunction",
+            "method": "initializeEdit",
+            "deps": "js/popupNoticeBoardService"
+        },
+        "loadEdit":{
+            "actionType":"batchJob",
+            "steps": [
+                {
+                    "action": "initializeEdit"
+                },
+                {
+                    "action": "loadBeforeData"
+                }
+            ]
+        },
+        "popViewResizing":{
+            "actionType":"JSFunction",
+            "method": "popViewResizing",
+            "deps": "js/popupNoticeBoardService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        }
+    },
+    "i18n": {
+        "helloText": [ "lgepKnowldegeManageMessages" ],
+        "ok" : [ "lgepKnowldegeManageMessages" ],
+        "close" : [ "lgepKnowldegeManageMessages" ],
+        "edit" : [ "lgepKnowldegeManageMessages" ],
+        "editing":[ "lgepKnowldegeManageMessages" ],
+        "answerContent":[ "lgepKnowldegeManageMessages" ],
+        "questionContent":[ "lgepNoticeBoardMessages" ],
+        "find": ["lgepKnowldegeManageMessages"],
+        "choose":["lgepKnowldegeManageMessages"],
+        "expert":["lgepKnowldegeManageMessages"],
+        "expertQuestion":["lgepKnowldegeManageMessages"],
+        "expertDiv":["lgepKnowldegeManageMessages"],
+        "questionTitle":["lgepNoticeBoardMessages"],
+        "questionPoint":["lgepKnowldegeManageMessages"],
+        "questionCategory":["lgepKnowldegeManageMessages"]
+    },
+    "conditions": {
+        "showCategory": {
+            "expression": "data.showCategory === 'show'"
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "aw.windowResize",
+            "action": "popViewResizing"
+        },
+        {
+            "eventId": "editPopupOpen.complete",
+            "action": "loadEdit"
+        }
+    ]
+}

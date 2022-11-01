@@ -1,0 +1,21 @@
+{
+    "helloText": "안녕 우주!!",
+    "partmgmtLocationHeaderTitle": "파트 분류 관리",
+    "partmgmtLocationBrowserTitle": "Digital DGMS",
+    "partmgmtLocationBrowserSubTitle": "분류 기준 관리",
+    "partmgmtSubLocationTitle": "파트 분류 관리",
+    "partmgmtSubLocationChartTitle": "파트 분류 관리",
+    "header": "머리",
+    "body": "몸",
+    "footer": "다리",
+    "checkBoxName": "Enable the OK button in footer",
+    "save": "확인",
+    "textValue": "Contents here",
+    "cmdPartmgmtTitle": "파트 분류 관리",
+    "cmdPartmgmtDescription": "파트 분류 관리",
+    "treeHeaderParts" : "부품 그룹",
+    "grouping" : "그룹 ",
+    "parts" : "부품",
+    "classification" : "분류 ",
+    "division": "부서"
+}

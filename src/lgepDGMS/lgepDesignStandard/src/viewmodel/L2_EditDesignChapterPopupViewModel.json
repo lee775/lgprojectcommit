@@ -1,0 +1,84 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-popup2.directive",
+        "js/aw-textbox.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "editgnChapterPopupSuccess",
+            "action": "editChapterSet"
+        }     
+    ],
+    "actions": {
+        "editChapterSet": {
+            "actionType": "JSFunction",
+            "method": "editChapterSet",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "editDgnChapter": {
+            "actionType": "JSFunction",
+            "method": "editDgnChapter",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "state": "state"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "editDgnChapterBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "editDgnChapter"
+                },
+                {
+                    "condition": "conditions.state",
+                    "action": "closePopupWindow"
+                }
+            ]
+        }
+    },
+    "data": {
+        "objName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "conditions": {
+        "state": {
+            "expression": "data.state=='1'"
+        },
+        "popup": {
+            "expression": "data.popupState===true"
+        }
+    },
+    "i18n": {
+        "edit": ["lgepDesignSequenceMessages"],
+        "close": ["lgepDesignSequenceMessages"],
+        "name": ["L2_DesignStandardMessages"],
+        "objType": ["L2_DesignStandardMessages"],
+        "objDetailType": ["L2_DesignStandardMessages"],
+        "contentDetailType": ["L2_DesignStandardMessages"],
+        "contentType": ["L2_DesignStandardMessages"],
+        "keyword": ["L2_DesignStandardMessages"],
+        "parts": ["L2_DesignStandardMessages"]
+    }
+}

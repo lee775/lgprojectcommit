@@ -1,0 +1,31 @@
+.table-container {
+    padding: 10px;
+    min-width: 800px;
+}
+
+#interaction-init-select {
+    background-color: #CFCFCF;
+}
+
+#interaction-same {
+    background-color: #CDE6EB;
+}
+
+.dfmea-listbox {
+    border: none;
+    background-color: inherit;
+}
+
+.dfmea-listbox:hover {
+    background-color: inherit;
+}
+
+#dfmeaTable.aw-splm-table .aw-splm-tableCellContents.aw-splm-tableHeaderCellContents{
+    display: flex;
+    justify-content: center;
+}
+
+#dfmeaTable .aw-splm-tableHeaderCell{
+    border-top: 2px solid #AAAAAA !important;
+    border-bottom: 2px solid #AAAAAA !important;
+}

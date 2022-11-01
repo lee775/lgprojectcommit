@@ -1,0 +1,313 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-label.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-separator.directive",
+        "js/aw-textarea.directive",
+        "js/aw-textbox.directive",
+        "js/aw-property-label.directive",
+        "js/aw-property-val.directive"
+    ],
+    "actions": {
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "editCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specManagement.edit"
+                    }
+                ]
+            }
+        },
+        "setSummaryPopup": {
+            "actionType": "JSFunction",
+            "method": "setSummaryPopup",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "editModel": {
+            "actionType": "JSFunction",
+            "method": "editModel",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "editParts": {
+            "actionType": "JSFunction",
+            "method": "editParts",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "setEditPopup": {
+            "actionType": "JSFunction",
+            "method": "setEditPopup",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "completeEdit": {
+            "actionType": "JSFunction",
+            "method": "completeEdit",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        }
+    },
+    "data": {
+        "itemIdLbl": {
+            "displayName": "ID ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "revisionLbl": {
+            "displayName": "Revision ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "nameLbl": {
+            "displayName": "Name ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "descLbl": {
+            "displayName": "Description ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "typeLbl": {
+            "displayName": "Type ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "createrLbl": {
+            "displayName": "Creator ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "divisionLbl": {
+            "displayName": "Division ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "modelTypeLbl": {
+            "displayName": "ModelType ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "makerLbl": {
+            "displayName": "Model Maker ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_ModelsLbl": {
+            "displayName": "Reference Models ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_ModelsLink": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_PartsLbl": {
+            "displayName": "Reference Parts ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_PartsLink": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "diameterLbl": {
+            "displayName": "Diameter ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "lengthLbl": {
+            "displayName": "Length ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "materialLbl": {
+            "displayName": "Material ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "rpmLbl": {
+            "displayName": "RPM ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "voltageLbl": {
+            "displayName": "Voltage ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+
+        
+        "descTxtArea": {
+            "displayName": "Description ",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "numberOfLines": 2
+        },
+        "makerTxtBox": {
+            "displayName": "Maker ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_ModelsTxtBox": {
+            "displayName": "Reference Models ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_PartsTxtBox": {
+            "displayName": "Reference Parts ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "diameterTxtBox": {
+            "displayName": "Diameter ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "lengthTxtBox": {
+            "displayName": "Length ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "materialTxtBox": {
+            "displayName": "Material ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "rpmTxtBox": {
+            "displayName": "RPM ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "voltageTxtBox": {
+            "displayName": "Voltage ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "popupSpecEdit.contentLoaded",
+            "action": "setSummaryPopup"
+        },
+        {
+            "eventId": "specManagement.edit",
+            "action": "setEditPopup"
+        },
+        {
+            "eventId": "$stateChangeStart",
+            "action": "closePopupWindow"
+        }
+    ]
+}

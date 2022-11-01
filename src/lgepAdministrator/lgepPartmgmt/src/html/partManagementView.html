@@ -1,0 +1,72 @@
+<style>
+    #partTable {
+        margin-right: 2%;
+    }
+
+    .aw-widgets-propertyContainer > aw-property-label {
+        margin-left: 1%;
+    }
+   
+    .aw-layout-fxbreadCrumbs > div {
+        margin-left: 0.5%;
+    }
+
+    .aw-jswidgets-tableNonEditContainer.aw-layout-flexRowContainer{
+        display: none;
+    }
+
+    .aw-jswidgets-cellTop.aw-jswidgets-uiNonEditCell{
+        padding-right: 30px;
+    }
+
+    .aw-splm-tableHeaderCellSplitter{
+        display: none;
+    }
+
+    .partTableCommandCss{
+        padding-bottom: 30px;
+    }
+    
+</style>
+
+<aw-flex-row height="fill" justify="center" id="partMgmtData">
+    <aw-flex-column width="12" justify="center">
+        <aw-panel-body>
+            <aw-flex-row height="10">
+                <aw-sidenav id="sidenavPushLeft" config="data.sideNavLeftData"></aw-sidenav>
+                <aw-flex-column width="3" id="partTree">
+                    <aw-flex-row height ="1">
+                        <aw-command-bar anchor="partCommand" alignment="HORIZONTAL">
+                    </aw-flex-row>
+                    <aw-flex-row height = "30" class = partTreeClass >
+                    <aw-splm-table gridid="partMgmtTree" use-tree="true" show-decorate="true">
+                    </aw-splm-table>
+                </aw-flex-row>
+                </aw-flex-column>
+                <aw-splitter> </aw-splitter>
+                <aw-flex-column width="9">
+                    <aw-flex-row height="2f">
+                        <aw-flex-column>
+                            <aw-navigate-breadcrumb provider="data.provider" breadcrumb-config="data.partsConfig.navigationPartsConfig" compact="true" id="locationToBread"></aw-navigate-breadcrumb>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row height="2f">
+                        <aw-flex-column width="fill">
+                            <aw-label prop="data.partsLbl"></aw-label>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row height="2f">
+                        <aw-flex-column width="fill">
+                            <aw-label prop="data.classificationLbl"></aw-label>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column id="partTable">
+                            <aw-include name="partTableManagement"></aw-include>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                </aw-flex-column>
+            </aw-flex-row>
+        </aw-panel-body>
+    </aw-flex-column>
+</aw-flex-row>

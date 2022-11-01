@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-include.directive",
+    "js/aw-button.directive",
+    "css/dfmeaListView.css"
+  ],
+  "data": {
+    "productGroup": {
+      "displayName": "{{i18n.productGroup}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    }
+  },
+  "actions": {
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
+      "deps": "js/dfmeaMasterListService"
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterListService"
+    },
+    "interaction": {
+      "actionType": "JSFunction",
+      "method": "openInteractionPopup",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/interactionMatrixPopupService"
+    }
+  },
+  "i18n": {
+    "search": ["lgepDFMEAViewMessages"],
+    "productGroup": ["lgepDFMEAViewMessages"],
+    "sendWorkflow": ["lgepDFMEAViewMessages"],
+    "revise": ["lgepDFMEAViewMessages"]
+  },
+  "lifecycleHooks": {
+    "onMount": "onMount",
+    "onUnmount": "unMount"
+  }
+}

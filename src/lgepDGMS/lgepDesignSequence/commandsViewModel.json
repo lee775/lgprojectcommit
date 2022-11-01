@@ -1,0 +1,52 @@
+{
+    "commands": {
+        "designSequenceCommand": {
+            "iconId": "cmdShowConnectedPorts",
+            "title": "{{i18n.designSequenceCommandTitle}}",
+            "description": "{{i18n.designSequenceCommandDescription}}"
+        }
+    },
+    "commandHandlers": {
+        "designSequenceCommandHandler": {
+            "id": "designSequenceCommand",
+            "action": "activatedesignSequenceCommand",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.tcWorkspace"
+            }
+        }
+    },
+    "commandPlacements": {
+    },
+    "actions": {
+        "activatedesignSequenceCommand": {
+            "actionType": "Navigate",
+            "navigateTo": "designProcedure",
+            "navigationParams": {}
+        },
+        "activatecmdDesignGuideSystem": {
+            "actionType": "JSFunction",
+            "method": "alert",
+            "deps": "js/cmdDesignGuideSystemService",
+            "inputData": {
+                "text": "Hello cmdDesignGuideSystem!"
+            }
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "tcWorkspace": {
+            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+        }
+    },
+    "i18n": {
+        "designSequenceCommandTitle": [
+            "lgepDesignSequenceMessages"
+        ],
+        "designSequenceCommandDescription": [
+            "lgepDesignSequenceMessages"
+        ]
+    }
+}

@@ -1,0 +1,32 @@
+  <aw-panel>
+    <aw-panel-body class="detail-body"></aw-panel-body>
+    <div class="create-additionalinfo" visible-when="ctx.fmea_detail_init">
+        <aw-flex-row class="editor-row">
+          <!-- 고장 EDITOR VIEW -->
+          <label class="list-editor" visible-when="ctx.fmea_label_init">{{i18n.potentialFailureMode}}{{i18n.potentialFailureMode_explanation}}</label>
+          <div id="l2_potential_failure_mode" class="html-editor"></div>
+        </aw-flex-row>
+        <!-- 고장영향 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label visible-when="ctx.fmea_label_init">{{i18n.failureEffect}}{{i18n.failureEffect_explanation}}</label>
+          <div id="l2_failure_effect" class="html-editor"></div>
+        </aw-flex-row>
+        <!-- 고장원인 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label visible-when="ctx.fmea_label_init">{{i18n.causeOfFailure}}{{i18n.causeOfFailure_explanation}}</label>
+          <div id="l2_cause_of_failure" class="html-editor"></div>
+        </aw-flex-row>
+        <!-- 예방조치 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label visible-when="ctx.fmea_label_init"
+            >{{i18n.precautionsAction}}{{i18n.precautionsAction_explanation}}</label>
+          <div id="l2_precautions_action" class="html-editor"></div>
+        </aw-flex-row>
+        <!-- 검출조치 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label visible-when="ctx.fmea_label_init">{{i18n.detectionAciton}}{{i18n.detectionAciton_explanation}}</label>
+          <div id="l2_detection_action" class="html-editor"></div>
+        </aw-flex-row>
+      </div>
+    </aw-panel-body>
+  </aw-panel>

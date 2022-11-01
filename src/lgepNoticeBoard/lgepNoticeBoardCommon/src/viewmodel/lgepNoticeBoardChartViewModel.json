@@ -1,0 +1,153 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-listbox.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-chart.directive",
+        "css/questionAnswerView.css"
+    ],
+    "data": {
+        "chartModeChange": {
+            "displayName": "{{i18n.chartMode}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "{{i18n.column}}",
+            "dispValue": "{{i18n.column}}"
+        },
+        "chartModeChangeValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "{{i18n.column}}",
+                    "propInternalValue": "{{i18n.column}}"
+                },
+                {
+                    "propDisplayValue": "{{i18n.pie}}",
+                    "propInternalValue": "{{i18n.pie}}"
+                }
+            ]
+        },
+        "chartTitle":""
+    },
+    "actions": {
+        "getColumnChartDataQnA": {
+            "actionType": "JSFunction",
+            "method": "getColumnChartDataQnA",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            },
+            "outputData": {
+                "chartProviders.columnChartProviderQnA.chartPoints": ""
+            },
+            "deps": "js/lgepNoticeBoardChartService"
+        },
+        "pieChartProviderQnA": {
+            "actionType": "JSFunction",
+            "method": "pieChartProviderQnA",
+            "outputData": {
+                "chartProviders.pieChartProviderQnA.chartPoints": ""
+            },
+            "deps": "js/lgepNoticeBoardChartService"
+        },
+        "chartReLoad": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getColumnChartDataQnA"
+                },
+                {
+                    "action": "pieChartProviderQnA"
+                }
+            ]
+        }
+    },
+    "chartProviders": {
+        "columnChartProviderQnA": {
+            "title": "",
+            "chartType": "column",
+            "loadDataAction": "getColumnChartDataQnA",
+            "chartConfig": {
+                "isChartZoomable": true,
+                "xAxisLabel": "",
+                "yAxisLabel": "",
+                "isDataLabelOnChartEnabled": true
+            }
+        },
+        "pieChartProviderQnA": {
+            "title": "",
+            "chartType": "pie",
+            "loadDataAction": "pieChartProviderQnA",
+            "chartColorOverrideClass": "charts-custom-colors",
+            "chartConfig": {
+                "isChartZoomable": true,
+                "isYAxisLinearOrLogarithmic": "logarithmic",
+                "xAxisLabel": "",
+                "yAxisLabel": "",
+                "isDataLabelOnChartEnabled": true
+            }
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "chartReLoad",
+            "action": "chartReLoad"
+        }
+    ],
+    "i18n": {
+        "chartMode": [
+            "L2_DesignStandardMessages"
+        ],
+        "column": [
+            "L2_DesignStandardMessages"
+        ],
+        "pie": [
+            "L2_DesignStandardMessages"
+        ],
+        "helloText": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "relationItem": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "property": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "answer": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "title": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "createDate": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "editing": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "addAnswer": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "addQuestion": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "content": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "point": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "user": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "pleaseSelectDocument": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "qnaChartTitle": [
+            "lgepKnowldegeManageMessages"
+        ]
+    }
+}

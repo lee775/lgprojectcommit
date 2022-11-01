@@ -1,0 +1,15 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-i18n.directive"
+    ],
+    "onEvent": [
+    ],
+    "data": {},
+    "actions": {
+    },
+    "i18n": {
+        "openChecklistBomRevise":["L2_ChkMainMessages"],
+        "openChecklistBomReviseDesc1":["L2_ChkMainMessages"]
+    }
+}

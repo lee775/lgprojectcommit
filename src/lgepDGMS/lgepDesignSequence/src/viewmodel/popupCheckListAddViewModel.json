@@ -1,0 +1,342 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-label.directive",
+        "css/dfmeaListView.css",
+        "js/aw-splm-table.directive",
+        "js/aw-column.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "aw.windowResize",
+            "action": "popupCheckListSizeUpdate"
+        },
+        {
+            "eventId": "popupCheckListLoadSuccess",
+            "action": "omMountBat"
+        }
+    ],
+    "actions": {
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "loadData",
+            "inputData": {
+                "subPanelContext": "{{data.productGroup.dbValue}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "treeLoadResult": "{{function:loadTreeTableData}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "loadColumns": {
+            "actionType": "JSFunction",
+            "method": "loadColumns",
+            "inputData": {
+                "dataProvider": "{{data.dataProviders.dfmeaListTableProvider}}"
+            },
+            "deps": "js/dfmeaMasterListTableService"
+        },
+        "selectTableRow": {
+            "actionType": "JSFunction",
+            "method": "selectTableRowAction",
+            "inputData": {
+                "selectionRow": "{{data.eventData.selectedObjects[0]}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/dfmeaMasterListTableService"
+        },
+        "searchAction": {
+            "actionType": "JSFunction",
+            "method": "searchAction",
+            "inputData": {
+                "productGroup": "{{data.productGroup.dbValue}}"
+            },
+            "deps": "js/dfmeaMasterListService"
+        },
+        "unMount": {
+            "actionType": "JSFunction",
+            "method": "unMount",
+            "deps": "js/dfmeaMasterListService"
+        },
+        "sendWorkflowAction": {
+            "actionType": "JSFunction",
+            "method": "sendWorkflowAction",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/dfmeaMasterListService"
+        },
+        "reviseAction": {
+            "actionType": "JSFunction",
+            "method": "reviseAction",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/dfmeaMasterListService"
+        },
+        "onMount": {
+            "actionType": "JSFunction",
+            "method": "onMount",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "popupCheckListSizeUpdate": {
+            "actionType": "JSFunction",
+            "method": "popupCheckListSizeUpdate",
+            "deps": "js/sequencePopupService"
+        },
+        "checkListdataSet": {
+            "actionType": "JSFunction",
+            "method": "checkListdataSet",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "result": "result",
+                "filterResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "getListBox": {
+            "actionType": "JSFunction",
+            "method": "getListBox",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "getSecondListBox": {
+            "actionType": "JSFunction",
+            "method": "getSecondListBox",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "getLastListBox": {
+            "actionType": "JSFunction",
+            "method": "getLastListBox",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "checkTableReLoad": {
+            "actionType": "JSFunction",
+            "method": "checkTableReLoad",
+            "deps": "js/sequenceService"
+        },
+        "checkListItemCopy": {
+            "actionType": "JSFunction",
+            "method": "checkListItemCopy",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "noSelectItem": "noSelectItem"
+            },
+            "deps": "js/sequenceService"
+        },
+        "setData": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "checkListData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "checkListItemCopyBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "checkListItemCopy"
+                },
+                {
+                    "condition": "conditions.noSelectItemCondition",
+                    "action": "closePopupWindow"
+                }
+            ]
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyFilterFacets"
+                }
+            ]
+        },
+        "tableReSearching": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "checkListdataSet"
+                },
+                {
+                    "action": "checkTableReLoad"
+                }
+            ]
+        },
+        "checkTableReLoadFirst": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getListBox"
+                },
+                {
+                    "action": "checkListdataSet"
+                }
+            ]
+        },
+        "omMountBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "onMount"
+                },
+                {
+                    "action": "tableMultiCheckAc"
+                }
+            ]
+        },
+        "tableMultiCheckAc": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "dfmeaListTableProvider.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "data": {
+        "productGroup": {
+            "displayName": "{{i18n.productGroup}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+          },
+        "pageSize": 40
+    },
+    "dataProviders": {
+        "dfmeaListTableProvider": {
+            "action": "loadData",
+            "initializeAction": "loadData",
+            "treeLoadResult": "{{data.treeLoadResult}}",
+            "inputData": {
+                "accessMode": "tree",
+                "topNodeUid": "{{data.top}}"
+            },
+            "selectionModelMode": "multiple"
+        }
+    },
+    "columnProviders": {
+        "dfmeaListTableColumnProvider": {
+            "loadColumnAction": "loadColumns",
+            "frozenColumnIndex": -1
+        }
+    },
+    "grids": {
+        "dfmeaListTable": {
+            "dataProvider": "dfmeaListTableProvider",
+            "columnProvider": "dfmeaListTableColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": true,
+                "enableSorting": false
+            }
+        }
+    },
+    "functions": {
+        "loadTreeTableData": {
+            "functionName": "loadTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}"
+            ],
+            "deps": "js/dfmeaMasterListTableService"
+        }
+    },
+    "conditions": {
+        "noSelectItemCondition": {
+            "expression": "data.noSelectItem===true"
+        }
+    },
+    "i18n": {
+        "edit": [
+            "lgepDesignSequenceMessages"
+        ],
+        "close": [
+            "lgepDesignSequenceMessages"
+        ],
+        "lookup": [
+            "lgepDesignSequenceMessages"
+        ],
+        "large": [
+            "lgepDesignSequenceMessages"
+        ],
+        "medium": [
+            "lgepDesignSequenceMessages"
+        ],
+        "small": [
+            "lgepDesignSequenceMessages"
+        ],
+        "checkCriteria": [
+            "lgepDesignSequenceMessages"
+        ],
+        "type": [
+            "lgepDesignSequenceMessages"
+        ],
+        "code": [
+            "lgepDesignSequenceMessages"
+        ],
+        "category": [
+            "lgepDesignSequenceMessages"
+        ],
+        "goals": [
+            "lgepDesignSequenceMessages"
+        ],
+        "add": [
+            "lgepDesignSequenceMessages"
+        ],
+        "search": ["lgepDFMEAViewMessages"],
+        "productGroup": ["lgepDFMEAViewMessages"],
+        "sendWorkflow": ["lgepDFMEAViewMessages"],
+        "revise": ["lgepDFMEAViewMessages"]
+    },
+    "lifecycleHooks": {
+        "onUnmount": "unMount"
+    }
+}

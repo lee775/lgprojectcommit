@@ -1,0 +1,273 @@
+/* Q&A Main */
+.marginUp {
+    margin-top: 20px;
+}
+
+.firstRow1 {
+    align-items: self-end;
+    margin-left: 50%;
+}
+
+.firstRow1 .aw-widgets-propertyLabelTopValueContainer{
+    margin-left: -50px;
+}
+
+/* .aw-layout-flexRow {
+    height: 40px;
+} */
+
+.marginLeft {
+    margin-left: 10px;
+}
+
+.positionControll {
+    display: inline-block;
+}
+
+#marginLeft {
+    margin-top: 12px;
+    margin-right: 5px;
+}
+
+.fontRed {
+    color: red;
+}
+
+.leftPadding {
+    margin-left: 0px;
+}
+
+.borderShadow {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+}
+
+.borderShadow2 {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+    background-color: rgb(234, 234, 234);
+}
+
+.lblHeight {
+    height: 25px;
+    margin: 0px 15px;
+    min-width: 155px;
+}
+
+.lblHeightWriter {
+    height: 25px;
+    margin-top: 15px;
+}
+
+.summernote {
+    margin: 0px 15px;
+}
+
+.listHeight {
+    height: 37px;
+}
+
+.btnAdopt {
+    width: 50px;
+}
+
+.btnAdopted {
+    width: 70px;
+}
+
+
+.marginTopWriter {
+    margin: 12px 15px -22px;
+}
+
+/* .noMaxWidth div .ng-isolate-scope {
+    max-width: 100px;
+} */
+
+.qaWriteDate {
+    margin-bottom: -18px;
+}
+
+.noMaxWidth {
+    margin: 0px 0px 0px 15px;
+    min-width: 100px;
+}
+
+.noMaxWidth .aw-widgets-propertyLabelTopValueContainer{
+    -webkit-box-flex: 0;
+    flex: 0;
+    max-width: 0;
+    min-width: 0;
+    width: 0px;
+}
+
+.fitContent.aw-flex-row {
+    flex: 1 1 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0px 15px;
+}
+
+.listClass .aw-widgets-cellListItemContainer {
+    position: relative;
+}
+
+.answerSection {
+    margin-bottom: 30px;
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+    width: 100%;
+    float: right;
+}
+
+.answerSection .aw-widgets-cellListItem {
+    margin-bottom: 15px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: solid 1px rgb(170, 170, 170);
+    width: 80%;
+    align-self: self-start;
+}
+
+#linkFont a {
+    font-size: 1.2rem
+}
+
+.question {
+    border: solid 1px lightgray;
+    box-shadow: 1px 1px 2px 0px lightgray;
+}
+
+.questionSummary {
+    margin: 0px 3px;
+}
+
+.listClass .aw-widgets-cellListCellImage img{
+    border-radius: 70%;
+}
+
+/* #qnaDatas .aw-widgets-cellListItemContainer {
+    border-bottom: solid 1px lightgray;
+} */
+
+#commandColorId div aw-command[command-id="2"] button div {
+    color: rgb(215, 28, 59) !important;
+    font-weight: bold;
+}
+
+#commandColorId div aw-command[command-id="1"] button div {
+    color: rgb(0, 123, 182) !important;
+    font-weight: bold;
+}
+
+#commandColorId div aw-command[command-id="0"] button div {
+    font-weight: bold;
+}
+
+.separatorHeight {
+    width: 98%;
+    align-self: center;
+    padding: 0px;
+}
+
+.question .aw-widgets-propertyContainer>aw-property-label {
+    text-align: left;
+    max-width: 100px;
+    margin-right: 50px;
+}
+
+.aw-widgets-propertyNonEditValue>.aw-layout-flexRowContainer {
+    min-width: max-content;
+}
+
+
+.goodMove {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}
+
+#addAnswerCss{
+    margin: 0px 10px;
+}
+
+
+/* Q&A Chart */
+.relativeW {
+    z-index: 9;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.chartSize {
+    height: auto;
+}
+
+.sectionCss {
+    height: 0px;
+}
+
+
+/* Q&A Add */
+#addPop .aw-layout-flexRow {
+    height: 30px;
+}
+
+.pointPadding {
+    padding-top: 17px;
+}
+
+.contentPadding {
+    margin-top: 150px;
+}
+
+#addPop .note-editor {
+    margin-bottom: 15px;
+}
+
+.marginTop {
+    margin-top: 5px;
+}
+
+.noMaxWidthPopup div .ng-isolate-scope {
+    max-width: 100px;
+}
+
+.noMaxWidthPopup {
+    margin-bottom: -20px;
+}
+
+.fitContent.aw-flex-row {
+    flex: 1 1 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#issueDisalbe input {
+    pointer-events: none;
+    background-color: #eee;
+    color: #555;
+    opacity: 1;
+}
+
+.changeWhite{
+    background-color: white;
+}
+
+.textareaSize textarea {
+    height: 36px;
+}
+
+.insideMargin{
+    margin: 16px;
+}
+
+#chipStyle .aw-widgets-chip .aw-widgets-chipCheckmark {
+    display: none;
+}

@@ -1,0 +1,27 @@
+{
+    "helloText": "!! Hello World !!",
+    "lgepUserManagementMessagesLocationTitle":"Admin Menu",
+    "lgepUserManagementMessagesSubLocationTitle":"User Management",
+    "lgepUserManagementMessagesLocationBrowserTitle": "Admin Menu",
+    "lgepUserManagementMessagesLocationBrowserSubTitle":"User Management",
+
+    "name":"Username",
+    "expertStatus": "Is Expert?",
+    "expertCoverages":"Expert Coverage",
+    "knowledgePoint":"Knowledge Point",
+    "questionCount":"Questions",
+    "answerCount":"Answers",
+    "selectAnswerCount":"Selected Questions",
+    "likesCount":"Likes",
+
+    "noneSelUser": "Please select the user that you want to modify/",
+    "close": "Close",
+    "onlyNumber": "Modifying Knowledge points is only allowed to input numbers.",
+    "editSuccess": "Editing has been successfully complete.",
+
+    "editUserCommandTitle": "Edit",
+    "cmdUserManagementTitle": "User Management",
+    "cmdUserManagementDesc": "Modifying User informations, and managing experts.",
+    "cmdUserLogsTitle": "User Logs",
+    "cmdUserLogsDesc": "Manage user access records."
+}

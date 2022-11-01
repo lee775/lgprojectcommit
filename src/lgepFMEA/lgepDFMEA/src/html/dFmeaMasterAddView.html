@@ -1,0 +1,75 @@
+<aw-popup2>
+  <aw-progress-indicator name="fmeaPopupProgIndicator"></aw-progress-indicator>
+  <aw-panel>
+    <aw-panel-body class="popup-body">
+      <div class="create-additionalinfo">
+        <aw-flex-row class="editor-row">
+          <!-- 상위assy LIST -->
+          <aw-listbox isSelectOnly="true" prop="data.parentAssy" list="data.parentAssyValues.dbValue"></aw-listbox>
+          <!-- 하위 assy LIST -->
+          <aw-listbox isSelectOnly="true" prop="data.subAssy" list="data.subAssyValues.dbValue"></aw-listbox>
+          <!-- 단품 LIST -->
+          <aw-listbox isSelectOnly="true" prop="data.singleItem" list="data.singleItemValues.dbValue"></aw-listbox>
+        </aw-flex-row>
+        <!-- 기능 LIST -->
+        <aw-listbox action="selectionFunction" isSelectOnly="true" prop="data.functionData" list="data.functionValues.dbValue"></aw-listbox>
+        <!-- 기능 EDITOR VIEW -->
+        <aw-flex-row class="editor-row">
+          <div id="l2_function_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <!-- 요구사항 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label>{{i18n.requirement}}</label>
+          <div id="l2_requirements_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <aw-flex-row class="editor-row">
+          <!-- 고장 LIST -->
+          <aw-listbox action="selectionFailure" isSelectOnly="true" prop="data.failure" list="data.failureValues.dbValue"></aw-listbox>
+        </aw-flex-row>
+        <!-- 고장 EDITOR VIEW -->
+        <aw-flex-row class="editor-row">
+          <div id="l2_potential_failure_mode_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <!-- 고장영향 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label>{{i18n.failureEffect}}{{i18n.failureEffect_explanation}}</label>
+          <div id="l2_failure_effect_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <!-- 고장원인 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label>{{i18n.causeOfFailure}}{{i18n.causeOfFailure_explanation}}</label>
+          <div id="l2_cause_of_failure_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <!-- 예방조치 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label>{{i18n.precautionsAction}}{{i18n.precautionsAction_explanation}}</label>
+          <div id="l2_precautions_action_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <!-- 검출조치 EDITOR -->
+        <aw-flex-row class="editor-row">
+          <label>{{i18n.detectionAciton}}{{i18n.detectionAciton_explanation}}</label>
+          <div id="l2_detection_action_create" class="html-createeditor"></div>
+        </aw-flex-row>
+        <div class="addInfo">
+          <!-- 관련자료 -->
+          <aw-flex-row class="text-row">
+            <aw-textbox prop="data.l2RelatedSources"></aw-textbox>
+          </aw-flex-row>
+          <!-- CLASSIFICATION -->
+          <aw-flex-row class="text-row">
+            <aw-textbox prop="data.classification"></aw-textbox>
+          </aw-flex-row>
+          <!-- SOD LIST -->
+          <div class="list-section__popup">
+            <aw-listbox isSelectOnly="true" action="selectionSeverity" prop="data.l2Severity" list="data.l2SodValues.dbValue"></aw-listbox>
+            <aw-listbox isSelectOnly="true" action="selectionOccurence" prop="data.l2Occurence" list="data.l2SodValues.dbValue"></aw-listbox>
+            <aw-listbox isSelectOnly="true" action="selectionDetection" prop="data.l2Detection" list="data.l2SodValues.dbValue"></aw-listbox>
+          </div>
+        </div>
+      </div>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="save">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

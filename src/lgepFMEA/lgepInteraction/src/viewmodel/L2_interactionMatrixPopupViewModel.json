@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive",
+    "js/aw-button.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "css/interactionMatrix.css"
+  ],
+  "data": {},
+  "actions": {
+    "saveInteractionMatrix": {
+      "actionType": "JSFunction",
+      "method": "saveInteractionMatrix",
+      "deps": "js/L2_ChecklistMatrixPopupSaveService"
+    }
+  },
+  "i18n": {
+    "save": ["lgepMasterViewMessages"],
+    "interactionPopupDescRightTitle":["lgepInteractionMatrixMessages"],
+    "interactionTypeA":["lgepInteractionMatrixMessages"],
+    "interactionTypeB":["lgepInteractionMatrixMessages"],
+    "interactionTypeC":["lgepInteractionMatrixMessages"],
+    "interactionTypeD":["lgepInteractionMatrixMessages"],
+    "interactionTypeE":["lgepInteractionMatrixMessages"],
+    "interactionTypeAB":["lgepInteractionMatrixMessages"],
+    "interactionTypeAC":["lgepInteractionMatrixMessages"],
+    "interactionTypeAD":["lgepInteractionMatrixMessages"]
+
+  }
+}

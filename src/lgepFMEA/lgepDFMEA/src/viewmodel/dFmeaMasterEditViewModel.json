@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-textbox.directive",
+    "js/aw-label.directive",
+    "js/aw-progress-indicator.directive"
+  ],
+  "data": {
+    "changeName": {
+      "displayName": "{{i18n.dfmeaName}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": "",
+      "isRequired": "true"
+    },
+    "disabledButtonChk": {
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "initName": {
+      "displayName": "{{i18n.initialName}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "actions": {
+    "editAction": {
+      "actionType": "JSFunction",
+      "method": "editAction",
+      "deps": "js/fmeaMasterEditService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "deps": "js/fmeaMasterEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "initName.dbValue": "initName"
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "dfmeacreate.onmount",
+      "action": "onMount"
+    }
+  ],
+  "lifecycleHooks": {},
+  "i18n": {
+    "editSave": ["lgepDFMEAViewMessages"],
+    "dfmeaName": ["lgepDFMEAViewMessages"],
+    "initialName": ["lgepDFMEAViewMessages"]
+  }
+}

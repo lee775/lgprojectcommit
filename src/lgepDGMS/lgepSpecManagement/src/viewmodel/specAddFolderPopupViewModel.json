@@ -1,0 +1,52 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-textbox.directive"
+    ],
+    "actions": {
+        "closeAddPopup": {
+            "actionType": "JSFunction",
+            "method": "closeAddPopup",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "addFolderInTree": {
+            "actionType": "JSFunction",
+            "method": "addFolderInTree",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        }
+    },
+    "data": {
+        "createFolderTxtBox": {
+            "displayName": "{{i18n.addFolderName}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "grids": {},
+    "onEvent": [],
+    "i18n": {
+        "addBtn": [
+            "lgepSpecManagementMessages"
+        ],
+        "close": [
+            "lgepSpecManagementMessages"
+        ],
+        "addFolderName": [
+            "lgepSpecManagementMessages"
+        ]
+    }
+}

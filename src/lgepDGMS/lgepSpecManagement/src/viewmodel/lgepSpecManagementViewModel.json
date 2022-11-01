@@ -1,0 +1,798 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-command-bar.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-label.directive",
+        "js/aw-listbox.directive",
+        "js/aw-panel-section.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-splitter.directive",
+        "js/aw-sidenav.directive",
+        "js/aw-splm-table.directive",
+        "js/exist-when.directive",
+        "js/aw-xrt-summary.directive",
+        "js/aw-textbox.directive"
+    ],
+    "actions": {
+        "commandbarChange": {
+            "actionType": "JSFunction",
+            "method": "commandbarChange",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "realGetCompareData": {
+            "actionType": "JSFunction",
+            "method": "realGetCompareData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "inputImage": {
+            "actionType": "JSFunction",
+            "method": "inputImage",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "limitedSelected": {
+            "actionType": "JSFunction",
+            "method": "limitedSelected",
+            "inputData": {
+                "data": "{{data}}",
+                "eventData": "{{data.eventData}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "parent",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "getChildrenData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "eventTable": "{{data.eventMap['specManagementDataProvider.selectionChangeEvent']}}"
+            },
+            "outputData": {
+                "totalFound": "totalFound",
+                "example": "{{function:sortAction}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "reload": {
+            "actionType": "JSFunction",
+            "method": "reload",
+            "deps": "js/SpecManagementService"
+        },
+        "changeVisibleAdd": {
+            "actionType": "JSFunction",
+            "method": "changeVisibleAdd",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "falseVisibleAdd": {
+            "actionType": "JSFunction",
+            "method": "falseVisibleAdd",
+            "inputData": {
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "changeEdit": {
+            "actionType": "JSFunction",
+            "method": "changeEdit",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "changeEdit2": {
+            "actionType": "JSFunction",
+            "method": "changeEdit2",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "originURL": {
+            "actionType": "JSFunction",
+            "method": "originURL",
+            "deps": "js/SpecManagementService"
+        },
+        "specEditPopup": {
+            "actionType": "JSFunction",
+            "method": "specEditPopup",
+            "deps": "js/SpecManagementService"
+        },
+        "changeEditMode": {
+            "actionType": "JSFunction",
+            "method": "changeEditMode",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "cancelEdit": {
+            "actionType": "JSFunction",
+            "method": "cancelEdit",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "saveEdit": {
+            "actionType": "JSFunction",
+            "method": "saveEdit",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "specAddPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupSpecAdd",
+                    "locals": {
+                        "caption": "{{i18n.addPopup}}"
+                    },
+                    "options": {
+                        "reference": "addId",
+                        "isModal": true,
+                        "clickOutsideToClose": true,
+                        "draggable": true,
+                        "placement": "center",
+                        "width": 700,
+                        "height": 900
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "addId"
+            },
+            "deps": "js/popupService"
+        },
+        "applyData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyData"
+                }
+            ]
+        },
+        "clearSearch": {
+            "actionType": "JSFunction",
+            "method": "clearSearch",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "appendUidToUrl": {
+            "actionType": "JSFunction",
+            "method": "appendUidToUrl",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "clearBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "clearSearch"
+                },
+                {
+                    "action": "searchSpecTable"
+                }
+            ]
+        },
+        "searchSpecTable": {
+            "actionType": "JSFunction",
+            "method": "searchSpecTable",
+            "deps": "js/SpecManagementService",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "eventTable": "{{data.eventMap['specManagementDataProvider.selectionChangeEvent']}}"
+            }
+        },
+        "specDeleteObject": {
+            "actionType": "JSFunction",
+            "method": "specDeleteObject",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "divisionValue": {
+            "actionType": "JSFunction",
+            "method": "divisionValue",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "typeValue": {
+            "actionType": "JSFunction",
+            "method": "typeValue",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "makerValue": {
+            "actionType": "JSFunction",
+            "method": "makerValue",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "showCompareNoty": {
+            "actionType": "JSFunction",
+            "method": "showCompareNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "showAddNoty": {
+            "actionType": "JSFunction",
+            "method": "showAddNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "showDeleteNoty": {
+            "actionType": "JSFunction",
+            "method": "showDeleteNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "showSummaryNoty": {
+            "actionType": "JSFunction",
+            "method": "showSummaryNoty",
+            "deps": "js/SpecManagementService"
+        },
+        "specSidePanel": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose",
+                        "eventData": {
+                            "id": "specSidePanel",
+                            "includeView": "specSidePanel",
+                            "commandId": "",
+                            "config": {
+                                "width": "STANDARD",
+                                "height": "FULL"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "data": {
+        "tableSearchBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "",
+            "value": []
+        },
+        "specFilterPanel": {
+            "slide": "PUSH",
+            "direction": "LEFT_TO_RIGHT",
+            "animation": true,
+            "width": "STANDARD",
+            "height": "FULL"
+        },
+        "specSidePanel": {
+            "slide": "PUSH",
+            "direction": "LEFT_TO_RIGHT",
+            "animation": true,
+            "width": "STANDARD",
+            "height": "FULL"
+        },
+        "pageSize": 40,
+        "modelLbl": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.modelName}}"
+        },
+        "divisionLbl": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.division}}"
+        },
+        "makerLbl": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.maker}}"
+        },
+        "typeLbl": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.type}}"
+        },
+        "createUserLbl": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.creator}}"
+        },
+        "referenceModelLbl": {
+            "displayName": "기준 항목 ",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "modelTxtBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "createUserTxtBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "createUserListBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "divisionListBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "makerListBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "typeListBox": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "divisionListBoxValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "{{i18n.addNoty}}",
+                    "dispValue": "{{i18n.addNoty}}",
+                    "propInternalValue": "{{i18n.addNoty}}"
+                }
+            ]
+        },
+        "makerListBoxValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "{{i18n.addNoty}}",
+                    "dispValue": "{{i18n.addNoty}}",
+                    "propInternalValue": "{{i18n.addNoty}}"
+                }
+            ]
+        },
+        "typeListBoxValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "{{i18n.addNoty}}",
+                    "dispValue": "{{i18n.addNoty}}",
+                    "propInternalValue": "{{i18n.addNoty}}"
+                }
+            ]
+        },
+        "changeRadio": {
+            "displayName": "",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "vertical": false,
+            "labelPosition": "PROPERTY_LABEL_AT_TOP",
+            "propertyRadioTrueText": "mm,kg,lpm,cc,L,km/h",
+            "propertyRadioFalseText": "inch,lbs,gpm,gal,moh",
+            "isAutoAssignable": true
+        }
+    },
+    "dataProviders": {
+        "specManagementDataProvider": {
+            "action": "loadData",
+            "initializeAction": "loadData",
+            "treeLoadResult": "{{data.treeLoadResult}}",
+            "inputData": {
+                "accessMode": "tree",
+                "topNodeUid": "garJI3FyZx_JkD"
+            }
+        },
+        "specManagementChildrenDataProvider": {
+            "action": "getChildrenData",
+            "response": "{{data.example}}",
+            "totalFound": "{{data.totalFound}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetAction": "filterFacetBatchAction",
+            "filterFacetResults": "{{data.filterFacetResults}}",
+            "selectionModelMode": "multiple"
+        }
+    },
+    "columnProviders": {
+        "specManagementColumnProvider": {
+            "columns": [
+                {
+                    "name": "object_string",
+                    "displayName": "{{i18n.individual}}",
+                    "minWidth": 150,
+                    "width": 300,
+                    "isTreeNavigation": true,
+                    "pinnedLeft": true
+                }
+            ],
+            "frozenColumnIndex": -1
+        },
+        "specManagementChildrenColumnProvider": {
+            "frozenColumnIndex": 1,
+            "columns": [
+                {
+                    "name": "object_string",
+                    "displayName": "{{i18n.c_modelName}}",
+                    "minWidth": 150,
+                    "width": 300,
+                    "isTableCommand": true,
+                    "pinnedLeft": true
+                },
+                {
+                    "name": "l2_division",
+                    "displayName": "{{i18n.c_division}}",
+                    "minWidth": 100,
+                    "width": 100
+                },
+                {
+                    "name": "l2_model_maker",
+                    "displayName": "{{i18n.c_maker}}",
+                    "minWidth": 80,
+                    "width": 80
+                },
+                {
+                    "name": "l2_spec_diameter",
+                    "displayName": "{{i18n.c_diameter}}",
+                    "minWidth": 100,
+                    "width": 125
+                },
+                {
+                    "name": "l2_spec_length",
+                    "displayName": "{{i18n.c_length}}",
+                    "minWidth": 100,
+                    "width": 125
+                },
+                {
+                    "name": "l2_spec_rpm",
+                    "displayName": "{{i18n.c_rpm}}",
+                    "minWidth": 150,
+                    "width": 150
+                },
+                {
+                    "name": "l2_spec_voltage",
+                    "displayName": "{{i18n.c_volt}}",
+                    "minWidth": 150,
+                    "width": 150
+                },
+                {
+                    "name": "l2_spec_material",
+                    "displayName": "{{i18n.c_material}}",
+                    "minWidth": 150,
+                    "width": 150
+                }
+            ]
+        }
+    },
+    "grids": {
+        "specManagementTree": {
+            "dataProvider": "specManagementDataProvider",
+            "columnProvider": "specManagementColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": true,
+                "enableSorting": false,
+                "enableExpansionStateCaching": true
+            }
+        },
+        "specManagementTable": {
+            "dataProvider": "specManagementChildrenDataProvider",
+            "columnProvider": "specManagementChildrenColumnProvider",
+            "addIconColumn": true,
+            "enableArrangeMenu": true,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": true,
+                "enableExpandAndPaginationInEdit": true,
+                "enableGridMenu": true,
+                "isFilteringEnabled": true
+            }
+        }
+    },
+    "functions": {
+        "loadEmployeeTreeTableData": {
+            "functionName": "loadEmployeeTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}",
+                "{{data}}",
+                "{{ctx}}"
+            ]
+        },
+        "sortAction": {
+            "functionName": "sortAction",
+            "parameters": [
+                "{{data.columnProviders.specManagementChildrenColumnProvider.sortCriteria}}",
+                "{{data.dataProviders.specManagementChildrenDataProvider.startIndex}}",
+                "{{data.pageSize}}",
+                "{{data.columnProviders.specManagementChildrenColumnProvider.columnFilters}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.specManagementChildrenColumnProvider.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        }
+    },
+    "i18n": {
+        "individual": [
+            "lgepSpecManagementMessages"
+        ],
+        "addNoty": [
+            "lgepSpecManagementMessages"
+        ],
+        "modelName": [
+            "lgepSpecManagementMessages"
+        ],
+        "division": [
+            "lgepSpecManagementMessages"
+        ],
+        "maker": [
+            "lgepSpecManagementMessages"
+        ],
+        "type": [
+            "lgepSpecManagementMessages"
+        ],
+        "creator": [
+            "lgepSpecManagementMessages"
+        ],
+        "searchBtn": [
+            "lgepSpecManagementMessages"
+        ],
+        "clearBtn": [
+            "lgepSpecManagementMessages"
+        ],
+        "addPopup": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_modelName": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_division": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_type": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_maker": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_diameter": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_length": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_rpm": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_volt": [
+            "lgepSpecManagementMessages"
+        ],
+        "c_material": [
+            "lgepSpecManagementMessages"
+        ],
+        "saveEditProgress": [
+            "lgepSpecManagementMessages"
+        ]
+    },
+    "lifecycleHooks": {},
+    "onEvent": [
+        {
+            "eventId": "specManagementChildrenDataProvider.modelObjectsUpdated",
+            "cacheEventData": true,
+            "action": "divisionValue"
+        },
+        {
+            "eventId": "specManagementChildrenDataProvider.modelObjectsUpdated",
+            "cacheEventData": true,
+            "action": "typeValue"
+        },
+        {
+            "eventId": "specManagementChildrenDataProvider.modelObjectsUpdated",
+            "cacheEventData": true,
+            "action": "makerValue"
+        },
+        {
+            "eventId": "specManagementChildrenDataProvider.selectionChangeEvent",
+            "condition": "data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length == 2",
+            "cacheEventData": true,
+            "action": "realGetCompareData"
+        },
+        {
+            "eventId": "specManagementChildrenDataProvider.selectionChangeEvent",
+            "condition": "ctx.startEdit == false",
+            "action": "changeEdit"
+        },
+        {
+            "eventId": "editHandlerStateChange",
+            "cacheEventData": true,
+            "action": "commandbarChange"
+        },
+        {
+            "eventId": "specManagementChildrenDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "limitedSelected"
+        },
+        {
+            "eventId": "specManagementChildrenDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "appendUidToUrl"
+        },
+        {
+            "eventId": "specManagementDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "appendUidToUrl"
+        },
+        {
+            "eventId": "specManagementDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "changeVisibleAdd"
+        },
+        {
+            "eventId": "specManagementTree.gridSelection",
+            "cacheEventData": true,
+            "action": "reload"
+        },
+        {
+            "eventId": "specManagement.add",
+            "condition": "data.dataProviders.specManagementDataProvider.selectedObjects.length == 1",
+            "action": "specAddPopup"
+        },
+        {
+            "eventId": "specMgmt.startEdit",
+            "condition": "data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length != 1",
+            "action": "showSummaryNoty"
+        },
+        {
+            "eventId": "specManagement.delete",
+            "condition": "data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length != 0",
+            "action": "specDeleteObject"
+        },
+        {
+            "eventId": "specManagement.delete",
+            "condition": "data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length === 0",
+            "action": "showDeleteNoty"
+        },
+        {
+            "eventId": "lgepSpecManagement.contentLoaded",
+            "action": "specSidePanel"
+        },
+        {
+            "eventId": "awXRT2.contentLoaded",
+            "action": "inputImage"
+        },
+        {
+            "eventId": "lgepSpecManagement.contentLoaded",
+            "action": "originURL"
+        },
+        {
+            "eventId": "specMgmt.startEdit",
+            "action": "changeEditMode"
+        },
+        {
+            "eventId": "specMgmt.cancelEdit",
+            "action": "cancelEdit"
+        },
+        {
+            "eventId": "specMgmt.saveEdit",
+            "action": "saveEdit"
+        },
+        {
+            "eventId": "awsidenav.openClose",
+            "action": "falseVisibleAdd"
+        }
+    ],
+    "messages": {
+        "testMessage": {
+            "messageType": "WARNING",
+            "messageText": "{{i18n.saveEditProgress}}"
+        }
+    }
+}

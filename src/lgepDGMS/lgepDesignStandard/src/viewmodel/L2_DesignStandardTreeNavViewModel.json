@@ -1,0 +1,436 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-command-panel.directive",
+        "js/aw-include.directive",
+        "js/exist-when.directive",
+        "js/visible-when.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "manualPageSearchedWordList.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "listPageSearching"
+        },
+        {
+            "eventId": "backArrowAction",
+            "action": "backArrow"
+        },
+        {
+            "eventId": "forwardArrowAction",
+            "action": "forwardArrow"
+        },
+        {
+            "eventId": "bookmarkAction",
+            "action": "bookmark"
+        },
+        {
+            "eventId": "backArrowBookmarkAction",
+            "action": "backArrowBookmark"
+        },
+        {
+            "eventId": "bomLineTree.treeNodeSelected",
+            "cacheEventData": true,
+            "action": "selectedTreeNode"
+        },
+        {
+            "eventId": "treeViewChange",
+            "cacheEventData": true,
+            "action": "treeViewChangeAc"
+        },
+        {
+            "eventId": "reviseEvent",
+            "cacheEventData": true,
+            "action": "revisePage"
+        },
+        {
+            "eventId": "pageAddCmdAction",
+            "cacheEventData": true,
+            "action": "pageModeBat"
+        },
+        {
+            "eventId": "chapterAddCmdAction",
+            "cacheEventData": true,
+            "action": "chapterModeBat"
+        },
+        {
+            "eventId": "deleteCmdAction",
+            "cacheEventData": true,
+            "action": "deleteCmdAction"
+        },
+        {
+            "eventId": "editCmdAction",
+            "cacheEventData": true,
+            "action": "editDesignPageBat"
+        },
+        {
+            "eventId": "viewDetailEvent",
+            "cacheEventData": true,
+            "action": "viewDetailChangeAc"
+        },
+        {
+            "eventId": "backArrowViewDetailAction",
+            "action": "backArrowViewDetailAc"
+        },
+        {
+            "eventId": "addFolderCmdAction",
+            "action": "addMainFolderPopup"
+        },
+        {
+            "eventId": "pageSearchCmdAction",
+            "action": "pageSearchModeStart"
+        }
+    ],
+    "actions": {
+        "listPageSearching": {
+            "actionType": "JSFunction",
+            "method": "listPageSearching",
+            "inputData": {
+                "eventData": "{{data.eventData}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "pageSearchModeStart": {
+            "actionType": "JSFunction",
+            "method": "pageSearchModeStart",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "addMainFolderPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "L2_ManualFolderCreate",
+                    "locals": {
+                        "caption": "{{i18n.folderAdd}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "210",
+                        "width": "400"
+                    }
+                }
+            },
+            "deps": "js/popupService"
+        },
+        "chapterMode": {
+            "actionType": "JSFunction",
+            "method": "chapterMode",
+            "outputData": {
+                "createHeight": "createHeight",
+                "createWidth": "createWidth"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "pageMode": {
+            "actionType": "JSFunction",
+            "method": "pageMode",
+            "outputData": {
+                "createHeight": "createHeight",
+                "createWidth": "createWidth"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "backArrowViewDetailAc": {
+            "actionType": "JSFunction",
+            "method": "backArrowViewDetailAc",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "viewDetailChangeAc": {
+            "actionType": "JSFunction",
+            "method": "viewDetailChangeAc",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "treeNavSet": {
+            "actionType": "JSFunction",
+            "method": "treeNavSet",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "deleteCmdAction": {
+            "actionType": "JSFunction",
+            "method": "deleteCmdAction",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "revisePage": {
+            "actionType": "JSFunction",
+            "method": "revisePage",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "treeViewChangeAc": {
+            "actionType": "JSFunction",
+            "method": "treeViewChangeAc",
+            "outputData": {
+                "navMode": "navMode"
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "treeLoadAction"
+                    }
+                ]
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "selectedTreeNode": {
+            "actionType": "JSFunction",
+            "method": "selectedTreeNode",
+            "inputData": {
+                "eventData": "{{data.eventData}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "bomlineAdd": {
+            "actionType": "JSFunction",
+            "method": "bomlineAdd",
+            "outputData": {
+                "treeSelect": "treeSelect"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "bomlineEdit": {
+            "actionType": "JSFunction",
+            "method": "bomlineEdit",
+            "outputData": {
+                "treeSelect": "treeSelect"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "backArrowBookmark": {
+            "actionType": "JSFunction",
+            "method": "backArrowBookmark",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "backArrow": {
+            "actionType": "JSFunction",
+            "method": "backArrow",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "forwardArrow": {
+            "actionType": "JSFunction",
+            "method": "forwardArrow",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "bookmark": {
+            "actionType": "JSFunction",
+            "method": "bookmark",
+            "deps": "js/L2_DesignStandardService"
+        },
+        "createDgnPagePopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "L2_CreateDesignPagePopup",
+                    "locals": {
+                        "caption": "{{i18n.createDgnPage}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "{{data.createHeight}}",
+                        "width": "{{data.createWidth}}"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "createDgnPagePopupSuccess"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "pageModeBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "bomlineAdd"
+                },
+                {
+                    "condition": "conditions.treeSelectState",
+                    "action": "pageMode"
+                },
+                {
+                    "condition": "conditions.treeSelectState",
+                    "action": "createDgnPagePopup"
+                }
+            ]
+        },
+        "chapterModeBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "bomlineAdd"
+                },
+                {
+                    "condition": "conditions.treeSelectState",
+                    "action": "chapterMode"
+                },
+                {
+                    "condition": "conditions.treeSelectState",
+                    "action": "createDgnPagePopup"
+                }
+            ]
+        },
+        "createDesignPageBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "bomlineAdd"
+                },
+                {
+                    "condition": "conditions.treeSelectState",
+                    "action": "createDgnPagePopup"
+                }
+            ]
+        },
+        "editDgnPagePopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "L2_EditManualPagePopup",
+                    "locals": {
+                        "caption": "{{i18n.editDgnPage}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "800",
+                        "width": "1300"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "editgnPagePopupSuccess"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "editDgnChapterPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "L2_EditManualChapterPopup",
+                    "locals": {
+                        "caption": "{{i18n.editDgnPage}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "200",
+                        "width": "300"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "editgnChapterPopupSuccess"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "editDesignPageBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "bomlineEdit"
+                },
+                {
+                    "condition": "conditions.treeSelectState",
+                    "action": "editDgnPagePopup"
+                },
+                {
+                    "condition": "conditions.treeSelectStateChapter",
+                    "action": "editDgnChapterPopup"
+                }
+            ]
+        }
+    },
+    "data": {},
+    "conditions": {
+        "treeChangeCond": {
+            "expression": "data.navMode == 'awTree'"
+        },
+        "bookmarkModeStatus": {
+            "expression": "data.navMode == 'bookmark'"
+        },
+        "normalState": {
+            "expression": "data.navMode === undefined"
+        },
+        "viewDetail": {
+            "expression": "data.navMode === 'viewDetail'"
+        },
+        "treeSelectState": {
+            "expression": "data.treeSelect === true"
+        },
+        "treeSelectStateChapter": {
+            "expression": "data.treeSelect === 'DgnChapter'"
+        }
+    },
+    "i18n": {
+        "summerNoteWidthMax": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeShowTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "tabShowTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "leftSelectPlease": [
+            "L2_DesignStandardMessages"
+        ],
+        "viewDetails": [
+            "L2_DesignStandardMessages"
+        ],
+        "mostPosts": [
+            "lgepKnowldegeManageMessages"
+        ],
+        "dgnStandardTree": [
+            "L2_DesignStandardMessages"
+        ],
+        "createDgnPage": [
+            "L2_DesignStandardMessages"
+        ],
+        "editDgnPage": [
+            "L2_DesignStandardMessages"
+        ],
+        "folderAdd": [
+            "L2_DesignStandardMessages"
+        ],
+        "dgnStandard2Tree": [
+            "L2_DesignStandardMessages"
+        ]
+    },
+    "lifecycleHooks": {
+        "onInit": "treeNavSet"
+    }
+}

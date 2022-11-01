@@ -1,0 +1,390 @@
+{
+    "schemaVersion": "1.0.0",
+    "commands": {
+        "filterCommandSpec": {
+            "iconId": "cmdFilterAnalysisRequest",
+            "isGroup": false,
+            "title": "{{i18n.filter}}"
+        },
+        "addCommandSpec": {
+            "iconId": "cmdAdd",
+            "isGroup": false,
+            "title": "{{i18n.addBtn}}"
+        },
+        "editCommandSpec": {
+            "iconId": "cmdEditSearch",
+            "isGroup": true,
+            "title": "{{i18n.editBtn}}"
+        },
+        "editStartCommandSpec": {
+            "iconId": "cmdEdit",
+            "isGroup": false,
+            "title": "{{i18n.startEdit}}"
+        },
+        "editSaveCommandSpec": {
+            "iconId": "cmdSave",
+            "isGroup": false,
+            "title": "{{i18n.saveEdit}}"
+        },
+        "editCancelCommandSpec": {
+            "iconId": "cmdCancelEdit",
+            "isGroup": false,
+            "title": "{{i18n.cancelEdit}}"
+        },
+        "deleteCommandSpec": {
+            "iconId": "cmdDelete",
+            "isGroup": false,
+            "title": "{{i18n.deleteBtn}}"
+        },
+        "excelCompareCommandSpec": {
+            "iconId": "cmdDownload",
+            "isGroup": false,
+            "title": "{{i18n.excel}}"
+        },
+        "lgepSpecManagement": {
+            "iconId": "cmdSimToolProgressMonitor",
+            "title": "{{i18n.lgepSpecManagementTitle}}",
+            "description": "{{i18n.lgepSpecManagementDescription}}"
+        },
+        "commandPanelCloseCommand": {
+            "iconId": "cmdClose",
+            "title": "{{i18n.close}}",
+            "description": "{{i18n.closeDesc}}"
+        },
+        "addFolderCommandSpec": {
+            "iconId": "cmdAdd",
+            "isGroup": false,
+            "title": "{{i18n.addBtn}}"
+        },
+        "deleteFolderCommandSpec": {
+            "iconId": "cmdDelete",
+            "isGroup": false,
+            "title": "{{i18n.deleteBtn}}"
+        }
+    },
+    "commandHandlers": {
+        "filterCommandHandlerSpec": {
+            "id": "filterCommandSpec",
+            "action": "specSidePanel",
+            "activeWhen": true,
+            "visibleWhen": true
+        },
+        "addCommandHandlerSpec": {
+            "id": "addCommandSpec",
+            "action": "addCommandAction",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.visibleAdd"
+            }
+        },
+        "modifyCommandHandlerSpec": {
+            "id": "editCommandSpec",
+            "action": "summaryCommandAction",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.startEdit"
+            }
+        },
+        "editStartCommandHandlerSpec": {
+            "id": "editStartCommandSpec",
+            "action": "changeEditMode",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.startEdit"
+            }
+        },
+        "editSaveCommandHandlerSpec": {
+            "id": "editSaveCommandSpec",
+            "action": "saveEdit",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.endEdit"
+            }
+        },
+        "editCancelCommandHandlerSpec": {
+            "id": "editCancelCommandSpec",
+            "action": "cancelEdit",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.endEdit"
+            }
+        },
+        "deleteCommandHandlerSpec": {
+            "id": "deleteCommandSpec",
+            "action": "deleteCommandAction",
+            "activeWhen": true,
+            "visibleWhen": true
+        },
+        "excelCompareCommandHandlerSpec": {
+            "id": "excelCompareCommandSpec",
+            "action": "exportToExcel",
+            "activeWhen": true,
+            "visibleWhen": true
+        },
+        "lgepSpecManagementHandler": {
+            "id": "lgepSpecManagement",
+            "action": "activatelgepSpecManagement",
+            "activeWhen": true,
+            "visibleWhen": true
+        },
+        "commandPanelCloseCommandHandler": {
+            "id": "commandPanelCloseCommand",
+            "action": "closeFilter",
+            "activeWhen": true,
+            "visibleWhen": true
+        },
+        "addFolderCommandHandlerSpec": {
+            "id": "addFolderCommandSpec",
+            "action": "addFolderPopup",
+            "activeWhen": true,
+            "visibleWhen": true
+        },
+        "deleteFolderCommandHandlerSpec": {
+            "id": "deleteFolderCommandSpec",
+            "action": "deleteFolderInTree",
+            "activeWhen": true,
+            "visibleWhen": true
+        }
+    },
+    "commandPlacements": {
+        "filterCommandPlacementSpec": {
+            "id": "filterCommandSpec",
+            "uiAnchor": "specManagementTableCommand",
+            "priority": 100
+        },
+        "addCommandPlacementSpec": {
+            "id": "addCommandSpec",
+            "uiAnchor": "specManagementTableCommand",
+            "priority": 100
+        },
+        "editCommandPlacementSpec": {
+            "id": "editCommandSpec",
+            "uiAnchor": "specManagementTableCommand",
+            "priority": 200
+        },
+        "editStartCommandPlacementSpec": {
+            "id": "editStartCommandSpec",
+            "priority": 200,
+            "parentGroupId": "editCommandSpec"
+        },
+        "editSaveCommandPlacementSpec": {
+            "id": "editSaveCommandSpec",
+            "priority": 200,
+            "parentGroupId": "editCommandSpec"
+        },
+        "editCancelCommandPlacementSpec": {
+            "id": "editCancelCommandSpec",
+            "priority": 200,
+            "parentGroupId": "editCommandSpec"
+        },
+        "deleteCommandPlacementSpec": {
+            "id": "deleteCommandSpec",
+            "uiAnchor": "specManagementTableCommand",
+            "priority": 200
+        },
+        "compareExcelCommandPlacementSpec": {
+            "id": "excelCompareCommandSpec",
+            "uiAnchor": "specManagementCompareCommand",
+            "priority": 200
+        },
+        "commandPanelClosePlacement": {
+            "id": "commandPanelCloseCommand",
+            "uiAnchor": "commandPanelCloseAnchor22",
+            "priority": 200
+        },
+        "addFolderCommandPlacementSpec": {
+            "id": "addFolderCommandSpec",
+            "uiAnchor": "specManagementTreeCommand",
+            "priority": 200
+        },
+        "deleteFolderCommandPlacementSpec": {
+            "id": "deleteFolderCommandSpec",
+            "uiAnchor": "specManagementTreeCommand",
+            "priority": 200
+        }
+    },
+    "actions": {
+        "exportToExcel": {
+            "actionType": "JSFunction",
+            "method": "exportToExcel",
+            "deps": "js/protoTypeSpecManagementService"
+        },
+        "addFolderPopup": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specTree.addFolder"
+                    }
+                ]
+            }
+        },
+        "deleteFolderInTree": {
+            "actionType": "JSFunction",
+            "method": "deleteFolderInTree",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "changeEditMode": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specMgmt.startEdit"
+                    }
+                ]
+            }
+        },
+        "cancelEdit": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specMgmt.cancelEdit"
+                    }
+                ]
+            }
+        },
+        "saveEdit": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specMgmt.saveEdit"
+                    }
+                ]
+            }
+        },
+        "closeFilter": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose"
+                    }
+                ]
+            }
+        },
+        "specDeleteObject": {
+            "actionType": "JSFunction",
+            "method": "specDeleteObject",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "addCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specManagement.add"
+                    }
+                ]
+            }
+        },
+        "summaryCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specManagement.summary"
+                    }
+                ]
+            }
+        },
+        "deleteCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "specManagement.delete"
+                    }
+                ]
+            }
+        },
+        "activatelgepSpecManagement": {
+            "actionType": "Navigate",
+            "navigateTo": "lgepSpecManagement",
+            "navigationParams": {}
+        },
+        "specSidePanel": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose",
+                        "eventData": {
+                            "id": "specSidePanel",
+                            "includeView": "specSidePanel",
+                            "commandId": "",
+                            "config": {
+                                "width": "STANDARD",
+                                "height": "FULL"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "onEvent": [],
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "tcWorkspace": {
+            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+        },
+        "startEdit": {
+            "expression": "ctx.startEdit == true"
+        },
+        "endEdit": {
+            "expression": "ctx.startEdit == false"
+        },
+        "visibleAdd": {
+            "expression": "ctx.visibleAdd == true"
+        }
+    },
+    "i18n": {
+        "lgepSpecManagementTitle": [
+            "lgepSpecManagementMessages"
+        ],
+        "lgepSpecManagementDescription": [
+            "lgepSpecManagementMessages"
+        ],
+        "addBtn": [
+            "lgepSpecManagementMessages"
+        ],
+        "editBtn": [
+            "lgepSpecManagementMessages"
+        ],
+        "deleteBtn": [
+            "lgepSpecManagementMessages"
+        ],
+        "filter": [
+            "lgepSpecManagementMessages"
+        ],
+        "excel": [
+            "lgepSpecManagementMessages"
+        ],
+        "close": [
+            "lgepSpecManagementMessages"
+        ],
+        "closeDesc": [
+            "lgepSpecManagementMessages"
+        ]
+    }
+}

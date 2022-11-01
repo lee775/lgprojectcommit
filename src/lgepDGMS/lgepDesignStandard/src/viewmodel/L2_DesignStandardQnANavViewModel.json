@@ -1,0 +1,176 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-panel-section.directive",
+        "js/aw-label.directive",
+        "js/aw-link.directive",
+        "js/visible-when.directive",
+        "js/aw-sidenav.directive",
+        "css/designStandardInfoCss.css",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive"
+    ],
+    "actions": {
+        "datasetLinkAction": {
+            "actionType": "JSFunction",
+            "method": "datasetLinkAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignStandardService"
+        },
+        "selectedBookViewDetail": {
+            "actionType": "JSFunction",
+            "method": "selectedBookViewDetail",
+            "deps": "js/L2_DesignStandardService"
+        }
+    },
+    "data": {
+        "datasetLink": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "referenceFile": {
+            "displayName": "{{i18n.referenceFile}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "bookName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "bookId": {
+            "displayName": "id",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "productType": {
+            "displayName": "{{i18n.productType}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "productDetailType": {
+            "displayName": "{{i18n.productDetailType}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "chapterName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "pageName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "contentType": {
+            "displayName": "{{i18n.contentType}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "contentDetailType": {
+            "displayName": "{{i18n.contentDetailType}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "parts": {
+            "displayName": "{{i18n.parts}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "keyword": {
+            "displayName": "{{i18n.keyword}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "pageIndex": {
+            "displayName": "{{i18n.pageIndex}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "conditions": {
+        "showInfo": {
+            "expression": "data.moreInfoTab.tabKey === 'showInfo'"
+        }
+    },
+    "i18n": {
+        "name": [
+            "L2_DesignStandardMessages"
+        ],
+        "productType": [
+            "L2_DesignStandardMessages"
+        ],
+        "productDetailType": [
+            "L2_DesignStandardMessages"
+        ],
+        "bookViewDetail": [
+            "L2_DesignStandardMessages"
+        ],
+        "chapterViewDetail": [
+            "L2_DesignStandardMessages"
+        ],
+        "contentType": [
+            "L2_DesignStandardMessages"
+        ],
+        "contentDetailType": [
+            "L2_DesignStandardMessages"
+        ],
+        "parts": [
+            "L2_DesignStandardMessages"
+        ],
+        "keyword": [
+            "L2_DesignStandardMessages"
+        ],
+        "pageIndex": [
+            "L2_DesignStandardMessages"
+        ],
+        "pageViewDetail": [
+            "L2_DesignStandardMessages"
+        ],
+        "referenceFile":["L2_DesignStandardMessages"]
+    },
+    "onEvent": [],
+    "lifecycleHooks": {
+        "onInit": "selectedBookViewDetail"
+    }
+}

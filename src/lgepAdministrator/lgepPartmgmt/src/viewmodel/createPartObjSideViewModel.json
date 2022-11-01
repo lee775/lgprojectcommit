@@ -1,0 +1,132 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-command-panel.directive",
+        "js/aw-button.directive",
+        "js/aw-textbox.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-action-section.directive"
+    ],
+    "actions": {
+        "addPartData": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "makeFolder"
+                    }
+                ]
+            }
+        },
+        "buttonAction1": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose"
+                    }
+                ]
+            }
+        },
+        "refresh": {
+            "actionType": "JSFunction",
+            "method": "refresh",
+            "deps": "js/partManagementService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "partMgmtTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+            },
+            "deps": "js/partManagementService"
+        },
+        "partMgmtTree": {
+            "actionType": "JSFunction",
+            "method": "partMgmtTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data":"{{data}}"
+            },
+            "deps": "js/partManagementService"
+        }
+    },
+    "data": {
+        "closeAnchor": "closePushAnchor",
+        "addPartTitle": {
+            "displayName": "Folder Name",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "dataProviders": {
+        "partMgmtTreeDataProvider": {
+            "action": "loadData",
+            "initializeAction": "loadData",
+            "treeLoadResult": "{{data.treeLoadResult}}",
+            "inputData": {
+                "ctx":"{{ctx}}",
+                "accessMode": "tree",
+                "topNodeUid": "{{data.top}}"
+            }
+        }
+    },
+    "columnProviders": {
+        "partMgmtTreeColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "",
+                    "minWidth": 80,
+                    "width": 80,
+                    "isTreeNavigation": true,
+                    "pinnedLeft": true
+                },
+                {
+                    "name": "object_name",
+                    "displayName": "이름",
+                    "minWidth": 80,
+                    "width": 100,
+                    "isTreeNavigation": true,
+                    "pinnedLeft": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "partMgmtTree": {
+            "dataProvider": "partMgmtTreeDataProvider",
+            "columnProvider": "partMgmtTreeColumnProvider",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": false,
+                "enableSorting": false,
+                "enableGridMenu": false
+            }
+        }
+    },
+    "onEvent": [
+    ],
+    "functions": {
+        "loadEmployeeTreeTableData": {
+            "functionName": "loadEmployeeTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}",
+                "{{data.columnProviders.partMgmtTreeColumnProvider.sortCriteria}}",
+                "{{data.treeLoadInput}}"
+            ]
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<aw-popup2>
+  <aw-panel-body class="popup-body">
+    <aw-tab-set tabs="data.tabModels">
+      <aw-panel-body visible-when="conditions.severityPage">
+        <aw-include exist-when="conditions.severityPage" name="sodStandardPoupSeverityTable"></aw-include>
+      </aw-panel-body>
+      <aw-panel-body visible-when="conditions.occurencePage">
+        <aw-include exist-when="conditions.occurencePage" name="sodStandardPoupOccurenceTable"></aw-include>
+      </aw-panel-body>
+      <aw-panel-body visible-when="conditions.detectionPage">
+        <aw-include exist-when="conditions.detectionPage" name="sodStandardPoupDetectionTable"></aw-include>
+      </aw-panel-body>
+    </aw-tab-set>
+  </aw-panel-body>
+</aw-popup2>

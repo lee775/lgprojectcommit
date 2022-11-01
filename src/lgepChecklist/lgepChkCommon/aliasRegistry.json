@@ -1,0 +1,14 @@
+{
+    "typeQcFMEASystemElementSpecification48": [
+        "L2_Structure",
+        "L2_StructureRevision"
+    ],
+    "typeQcFMEAFunctionSpecification48": [
+        "L2_Function",
+        "L2_FunctionRevision"
+    ],
+    "typeQcFMEAFailureSpecification48": [
+        "L2_Failure",
+        "L2_FailureRevision"
+    ]
+}

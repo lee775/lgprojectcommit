@@ -1,0 +1,180 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-progress-indicator.directive",
+        "js/visible-when.directive",
+        "js/aw-i18n.directive",
+        "js/aw-click.directive",
+        "js/aw-layout-slot.directive"
+    ],
+    "data": {
+        "narrowModeStyle": "",
+        "skipToMainClickEvent" : null
+    },
+    "actions": {
+        "updateDailyVisitorValue": {
+            "actionType":"JSFunction",
+            "method":"updateDailyVisitorValue",
+            "inputData": {
+                "ctx":"{{ctx}}"
+            },
+            "deps": "js/dashboardChart"
+        },
+        "checkNarrowMode": {
+            "actionType": "JSFunction",
+            "method": "checkNarrowMode",
+            "deps": "js/aw.narrowMode.service",
+            "outputData": {
+                "narrowModeStyle": ""
+            }
+        },
+        "checkShowUserSettingsBarValue": {
+            "actionType": "batchJob",
+            "steps": [ {
+                    "action": "checkNarrowMode"
+                },
+                {
+                    "action": "getShowUserSettingsBarValueInLocalStorage"
+                },
+                {
+                    "action": "setShowUserSettingsBarValueInCtx"
+                },
+                {
+                    "action": "initializeSkipToMainListener"
+                },
+                {
+                    "action": "setL2UserAction"
+                }
+            ]
+        },
+        "getShowUserSettingsBarValueInLocalStorage": {
+            "actionType": "JSFunction",
+            "method": "get",
+            "deps": "js/localStorage",
+            "inputData": {
+                "topic": "showUserSettingsBar"
+            },
+            "outputData": {
+                "showUserSettingsBar": ""
+            }
+        },
+        "setShowUserSettingsBarValueInCtx": {
+            "actionType": "JSFunction",
+            "method": "modifyCtx",
+            "deps": "js/modifyCtxService",
+            "inputData": {
+                "methodType": "update",
+                "name": "showUserSettingsBar",
+                "value": "{{data.showUserSettingsBar}}"
+            }
+        },
+        "toggleShowUserSettingsBarValueInLocalStorage": {
+            "actionType": "JSFunction",
+            "method": "publish",
+            "deps": "js/localStorage",
+            "inputData": {
+                "topic": "showUserSettingsBar",
+                "data": "{{ctx.showUserSettingsBar}}"
+            }
+        },
+        "initializeSkipToMainListener": {
+            "actionType": "JSFunction",
+            "method": "initializeSkipToMain",
+            "deps": "js/wcagService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        },
+        "commonRootLoadedAction": {
+            "actionType": "JSFunction",
+            "method": "excludeCommands",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepCommandExcludeService"
+        },
+        "updateThemeConfigAction": {
+            "actionType": "JSFunction",
+            "method": "updateThemeConfigAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2ThemeConfigService"
+        },
+        "setL2UserAction": {
+            "actionType": "JSFunction",
+            "method": "setL2UserAction",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/dashboardList"
+        },
+        "iconClick":{
+            "actionType": "JSFunction",
+            "method": "iconClick",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/changeNavigateColorService"
+        }
+    },
+    "dataProviders": {},
+    "functions": {},
+    "onEvent": [ {
+            "eventId": "aw.windowResize",
+            "action": "checkNarrowMode"
+        },
+        {
+            "eventId": "appCtx.update",
+            "condition": "name === 'showUserSettingsBar'",
+            "action": "toggleShowUserSettingsBarValueInLocalStorage"
+        },
+        {
+            "eventId": "commonRoot.contentLoaded",
+            "action": "commonRootLoadedAction"
+        },
+        {
+            "eventId":"commonRoot.contentLoaded",
+            "action":"updateDailyVisitorValue"
+        },
+        {
+            "eventId": "commonRoot.contentLoaded",
+            "action": "updateThemeConfigAction"
+        },
+        {
+            "eventId": "displayRuleProvider.modelObjectsUpdated",
+            "action": "setL2UserAction"
+        },
+        {
+            "eventId": "$locationChangeSuccess",
+            "action": "setL2UserAction"
+        },
+        {
+            "eventId": "commonGlobalNavigationBar.contentLoaded",
+            "action":"iconClick"
+        },
+        {
+            "eventId": "$locationChangeSuccess",
+            "action":"iconClick",
+            "cacheEventData": true
+        }
+    ],
+    "i18n": {
+        "skipToMainLabel": ["UIElementsMessages"]
+    },
+    "messages": {},
+    "conditions": {
+        "isTaskbarFullScreen": {
+            "expression": "ctx.taskbarfullscreen && ctx.taskbarfullscreen === 'true'"
+        }
+    },
+    "lifecycleHooks": {
+        "onMount": "checkShowUserSettingsBarValue"
+    }
+}

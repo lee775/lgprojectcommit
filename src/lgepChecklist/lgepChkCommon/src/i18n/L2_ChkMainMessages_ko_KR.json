@@ -1,0 +1,99 @@
+{
+    "L2_ChkMainLocationHeaderTitle": "체크리스트",
+    "L2_ChkMainLocationBrowserTitle": "디지털 DGMS",
+    "L2_ChkMainLocationBrowserSubTitle": "체크리스트",
+
+
+    "L2_ChkMainSubLocationTitle": "체크리스트",
+    "L2_ChkMainSubLocationChartTitle": "체크리스트",
+
+
+    "L2_ChkOpenLocationHeaderTitle": "체크리스트 조회",
+    "L2_ChkOpenLocationBrowserTitle": "디지털 DGMS",
+    "L2_ChkOpenLocationBrowserSubTitle": "체크리스트 조회",
+
+
+    "L2_ChkOpenSubLocationTitle": "체크리스트 조회",
+    "L2_ChkOpenSubLocationChartTitle": "체크리스트 조회",
+
+
+    "backToSelectionPage": "뒤로",
+    "backToSelectionPageDesc": "체크리스트 목록으로 돌아갑니다.",
+
+    "addChecklist": "추가",
+    "addChecklistDesc": "표준 BOM 목록으로부터 선택하여 체크리스트를 추가합니다.",
+
+
+    "modifyChecklist": "편집",
+    "modifyChecklistDesc": "체크리스트의 이름을 편집합니다.",
+
+
+    "openChecklistSod": "SOD",
+    "openChecklistSodDesc1": "SOD 테이블을 조회합니다.",
+    "openChecklistSodDesc2": "심각도(Severity), 발생도(Occurence), 검출도(Detection)에 따른 등급을 조회할 수 있습니다.",
+
+
+    "interactionGroup": "인터랙션",
+    "interactionGroupDesc": "해당 체크리스트의 인터랙션 메뉴 모음입니다.",
+
+
+    "openInteractionMatrix": "매트릭스 조회 및 편집",
+    "openInteractionMatrixDesc": "인터랙션 매트릭스를 조회 및 편집합니다.",
+
+    "openEffectivityCheck": "영향성 체크",
+    "openEffectivityCheckDesc": "인터랙션 매트릭스를 기반으로 부품 간 간섭 여부를 체크합니다.",
+   
+        
+    "editGroup": "편집",
+    "editGroupDesc": "해당 체크리스트의 편집 메뉴 모음입니다.",
+
+
+    "openChecklistBomEdit": "편집 시작",
+    "openChecklistBomEditDesc": "체크리스트 열을 편집합니다.",
+
+
+    "openChecklistBomAdd": "열 추가",
+    "openChecklistBomAddDesc": "체크리스트 열을 추가합니다.",
+
+
+    "openChecklistBomRemove": "열 제거",
+    "openChecklistBomRemoveDesc": "체크리스트 열을 제거합니다.",
+
+
+    "openChecklistBomSave": "편집 저장",
+    "openChecklistBomSaveDesc": "변경점을 저장합니다.",
+
+    
+    "openChecklistBomCancelEdit": "편집 취소",
+    "openChecklistBomCancelEditDesc": "변경점을 버리고 편집 이전 시점으로 돌아갑니다.",
+
+    
+    "openChecklistBomClone": "복제",
+    "openChecklistBomCloneDesc": "체크리스트를 복제합니다.",
+
+
+    "openChecklistFreeze": "프리즈",
+    "openChecklistFreezeDesc": "체크리스트를 프리즈 시켜 더 이상 수정 불가능한 상태로 만듭니다.",
+
+    
+    "openChecklistBomRevise": "개정",
+    "openChecklistBomReviseDesc1": "체크리스트를 개정합니다.",
+    "openChecklistBomReviseDesc2": "체크리스트 열을 개정합니다.",
+
+    "openChecklistTitle": "이름",
+    "openChecklistRevId": "리비전",
+    "openChecklistLastModUser": "마지막 수정 유저",
+
+    "L2_InteractionPanelCaption" : "인터랙션 체크",
+
+    
+    "functionDetail": "기능 상세내용",
+    "requirementDetail": "요구사항 상세내용",
+    "failureModeDetail": "고장모드 상세내용",
+    "failureEffect": "고장의 영향(소비자 고장 형태)",
+    "failureDetail": "고장 상세내용",
+    "prevention": "예방(설계 관점)",
+    "referenceData": "참조 자료",
+    "detectivity": "검출(시험 관점)",
+    "classification": "분류"
+}

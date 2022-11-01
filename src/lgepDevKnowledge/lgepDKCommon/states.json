@@ -1,0 +1,58 @@
+{
+    "knowledgeMyDocument": {
+        "url": "/knowledgeMyDocument",
+        "view": "knowledgeMyDocument",
+        "data": {
+            "label": {
+                "source": "/i18n/knowledgeSearchMessages",
+                "key": "knowledgeMyDocumentTitle"
+            },
+            "nameToken": "knowledgeMyDocument",
+            "clientScopeURI": ""
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "knowledgeSearchLocation",
+        "reloadOnSearch": false,
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation"
+    },
+    "knowledgeWarehouse": {
+        "url": "/knowledgeWarehouse",
+        "view": "knowledgeWarehouse",
+        "data": {
+            "label": {
+                "source": "/i18n/knowledgeSearchMessages",
+                "key": "knowledgeWarehouse"
+            },
+            "nameToken": "knowledgeWarehouse",
+            "clientScopeURI": ""
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "parent": "knowledgeSearchLocation",
+        "reloadOnSearch": false,
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation"
+    },
+    "knowledgeSearchLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/knowledgeSearchMessages",
+                "key": "knowledgeSearchLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/knowledgeSearchMessages",
+                "key": "knowledgeSearchLocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/knowledgeSearchMessages",
+                "key": "knowledgeSearchLocationHeaderTitle"
+            },
+            "viewBase": "knowledgeMyDocument"
+        },
+        "type": "location"
+    }
+}

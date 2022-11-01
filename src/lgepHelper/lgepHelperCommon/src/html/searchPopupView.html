@@ -1,0 +1,21 @@
+<aw-popup2>
+    <aw-panel>
+        <aw-panel-body>
+            <aw-flex-row id="searchPopup">
+                <aw-flex-column>
+                    {{i18n.recentSearches}}
+                </aw-flex-column>
+                <aw-flex-column align-content="end">
+                    <aw-link prop="data.delBox" action="delLink"></aw-link>
+                </aw-flex-column>
+            </aw-flex-row>
+        </aw-panel-body>
+    </aw-panel>
+    <aw-flex-row>
+        <aw-panel>
+            <aw-list dataprovider="data.dataProviders.searchedWordList">
+                <aw-link prop="item"></aw-link>
+            </aw-list>
+        </aw-panel>
+    </aw-flex-row>
+</aw-popup2>

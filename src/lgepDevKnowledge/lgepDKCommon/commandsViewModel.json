@@ -1,0 +1,133 @@
+{
+    "commands": {
+        "popupCloseCommand": {
+            "iconId": "cmdClosePanel",
+            "isGroup": false,
+            "title":"Close"
+        },
+        "recentClearCommand": {
+            "iconId": "cmdClearAllSelections",
+            "isGroup": false,
+            "title":"Clear"
+        },
+        "contextMenuEditCommand": {
+            "iconId": "cmdEdit",
+            "title": "{{i18n.buttonEdit2}}"
+        },
+        "contextMenuDelCommand": {
+            "iconId": "cmdDelete",
+            "title": "{{i18n.buttonDelete}}"
+        },
+        "cmdKnowledgeSystem": {
+            "iconId": "LNBdevKnow",
+            "title": "{{i18n.knowledgeSearchLocationHeaderTitle}}",
+            "description": "{{i18n.knowledgeSearchLocationDescription}}"
+        }
+       
+    },
+    "commandHandlers": {
+        "contextMenuEditCommandHandler": {
+            "id": "contextMenuEditCommand",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true,
+            "action": "contextMenuEditCommandAction"
+        },
+        "contextMenuDelCommandHandler": {
+            "id": "contextMenuDelCommand",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true,
+            "action": "contextMenuDelCommandAction"
+        },
+        "cmdKnowledgeSystemHandler": {
+            "id":"cmdKnowledgeSystem",
+            "action": "cmdKnowledgeSystemAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        }
+    },
+    "commandPlacements": {
+        "popupCloseCommandPlacement": {
+            "id": "popupCloseCommand",
+            "uiAnchor": "closePopupAnchor",
+            "priority": 600
+        },
+        "recentClearCommandPlacement": {
+            "id": "recentClearCommand",
+            "uiAnchor": "closePopupAnchor",
+            "priority": 590
+        },
+        "contextMenuEditCommand": {
+            "id": "contextMenuEditCommand",
+            "uiAnchor": "aw_splmTableContextMenu",
+            "priority": 1
+        },
+        "contextMenuDelCommand": {
+            "id": "contextMenuDelCommand",
+            "uiAnchor": "aw_splmTableContextMenu",
+            "priority": 2
+        }
+    },
+    "actions": {
+        "contextMenuEditCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "folder.edit"
+                    }
+                ]
+            }
+        },
+        "contextMenuDelCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "folder.del"
+                    }
+                ]
+            }
+        },
+        "cmdKnowledgeSystemAction": {
+            "actionType": "Navigate",
+            "navigateTo": "knowledgeMyDocument",
+            "navigationParams": {}
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "tcWorkspace": {
+            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+        }
+    },
+    "i18n": {
+        "cmdChecklistTitle": [
+            "lgepChecklistMessages"
+        ],
+        "cmdChecklistDescription": [
+            "lgepChecklistMessages"
+        ],
+        "knowledgeSearchLocationHeaderTitle":[
+            "knowledgeSearchMessages"
+        ],
+        "cmdKnowledgeSearchLocationTitle": [
+            "knowledgeSearchMessages"
+        ],
+        "knowledgeSearchLocationDescription": [
+            "knowledgeSearchMessages"
+        ],
+        "buttonEdit2": [
+            "knowledgeSearchMessages"
+        ],
+        "buttonDelete": [
+            "knowledgeSearchMessages"
+        ]
+    }
+}

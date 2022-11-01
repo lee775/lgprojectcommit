@@ -1,0 +1,179 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-label.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-separator.directive",
+        "js/aw-flex-column.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "pageAllSearchingPopupSuccess",
+            "cacheEventData": true,
+            "action": "pageAllSearchingInit"
+        }
+    ],
+    "actions": {
+        "pageMove":{
+            "actionType": "JSFunction",
+            "method": "pageMove",
+            "deps": "js/L2_DesignManualService"
+        },
+        "getSearchPageTableData": {
+            "actionType": "JSFunction",
+            "method": "getSearchPageTableData",
+            "outputData": {
+                "filterResults": "{{function:filterRowsWithSort}}",
+                "totalFound": "totalFound"
+            },
+            "deps": "js/L2_DesignManualPopupService"
+        },
+        "pageAllSearchingInit": {
+            "actionType": "JSFunction",
+            "method": "pageAllSearchingInit",
+            "deps": "js/L2_DesignManualPopupService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        }
+    },
+    "data": {
+        "containerName": {
+            "type": "STRING",
+            "uiValue": ""
+        },
+        "searchWord": {
+            "displayName": "{{i18n.searchWord}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "pageSize": 50
+    },
+    "dataProviders": {
+        "searchPageTableData": {
+            "action": "getSearchPageTableData",
+            "response": "{{data.filterResults}}",
+            "totalFound": "{{data.totalFound}}",
+            "selectionModelMode": "single"
+        }
+    },
+    "columnProviders": {
+        "searchPageTableColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.dataset}}",
+                    "width": 200,
+                    "pinnedLeft": true,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                },
+                {
+                    "name": "l2_reference_book",
+                    "displayName": "{{i18n.referenceBook}}",
+                    "width": 400,
+                    "pinnedLeft": false,
+                    "enableColumnMenu": false,
+                    "enableColumnMoving": false
+                }
+            ]
+        }
+    },
+    "grids": {
+        "searchPageTable": {
+            "dataProvider": "searchPageTableData",
+            "columnProvider": "searchPageTableColumn",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enableGridMenu": false,
+                "enablePinning": true,
+                "enableSorting": true
+            }
+        }
+    },
+    "functions": {
+        "filterRowsWithSort": {
+            "functionName": "filterRowsWithSort",
+            "parameters": [
+                "{{data.columnProviders.searchPageTableColumn.sortCriteria}}",
+                "{{data.dataProviders.searchPageTableData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        }
+    },
+    "conditions": {
+    },
+    "i18n": {
+        "ok": [
+            "lgepDesignSequenceMessages"
+        ],
+        "close": [
+            "lgepDesignSequenceMessages"
+        ],
+        "name": [
+            "L2_DesignStandardMessages"
+        ],
+        "objType": [
+            "L2_DesignStandardMessages"
+        ],
+        "objDetailType": [
+            "L2_DesignStandardMessages"
+        ],
+        "fileSize": [
+            "L2_DesignStandardMessages"
+        ],
+        "selectDownload": [
+            "L2_DesignStandardMessages"
+        ],
+        "downloadAll": [
+            "L2_DesignStandardMessages"
+        ],
+        "dateCreated": [
+            "L2_DesignStandardMessages"
+        ],
+        "user": [
+            "L2_DesignStandardMessages"
+        ],
+        "datasetType": [
+            "L2_DesignStandardMessages"
+        ],
+        "dataset": [
+            "L2_DesignStandardMessages"
+        ],
+        "page": [
+            "L2_DesignStandardMessages"
+        ],
+        "book": [
+            "L2_DesignStandardMessages"
+        ],
+        "fileDelete": [
+            "L2_DesignStandardMessages"
+        ],
+        "fileAdd": [
+            "L2_DesignStandardMessages"
+        ],
+        "searchWord": [
+            "L2_DesignStandardMessages"
+        ],
+        "referenceBook": [
+            "L2_DesignStandardMessages"
+        ],
+        "pageMove": [
+            "L2_DesignStandardMessages"
+        ]
+    }
+}

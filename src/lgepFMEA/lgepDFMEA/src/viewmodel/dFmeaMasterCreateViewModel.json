@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-textbox.directive",
+    "js/aw-label.directive",
+    "js/aw-progress-indicator.directive"
+  ],
+  "data": {
+    "dfmeaName": {
+      "displayName": "{{i18n.dfmeaName}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": "",
+      "isRequired": "true"
+    },
+    "disabledButtonChk": {
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "l2Product": {
+      "displayName": "{{i18n.l2Product}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "actions": {
+    "save": {
+      "actionType": "JSFunction",
+      "method": "createAction",
+      "deps": "js/fmeaMasterCreateService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "deps": "js/fmeaMasterCreateService",
+      "outputData": {
+        "l2Product.dbValue": "productValue"
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "dfmeacreate.onmount",
+      "action": "onMount"
+    }
+  ],
+  "lifecycleHooks": {},
+  "i18n": {
+    "save": ["lgepMasterViewMessages"],
+    "dfmeaName": ["lgepDFMEAViewMessages"],
+    "l2Product": ["lgepDFMEAViewMessages"]
+  }
+}

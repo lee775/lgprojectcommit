@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "baseUrl": "",
+        "paths": {
+            "app": [
+                "./out/site/assets/js/adapters/angularjs/appWrapper"
+            ],
+            "lodash": [
+                "./out/site/assets/lib/lodash/lodash"
+            ],
+            "js/*": [
+                "./out/site/assets/js/*",
+                "./out/site/assets/js/utils/*",
+                "./out/site/assets/js/constants/*"
+            ],
+            "soa/*": [
+                "./out/site/assets/js/soa/*"
+            ],
+            "soa/kernel/*": [
+                "./out/site/assets/js/soa/kernel/*"
+            ]
+        }
+    },
+    "include": [
+        "out/site/assets/js/*",
+        "out/site/assets/js/hosting/*",
+        "out/site/assets/lib/lodash/*",
+        "out/site/assets/js/utils/*",
+        "out/site/assets/js/constants/*",
+        "src"
+    ]
+}

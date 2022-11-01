@@ -1,0 +1,56 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-chart.directive"
+    ],
+    "actions": {
+        "getColumnChartData": {
+            "actionType": "JSFunction",
+            "method": "getColumnChartData",
+            "outputData": {
+                "chartProviders.columnChartProvider.chartPoints": ""
+            },
+            "deps": "js/L2_DesignManualService"
+        }
+    },
+    "data": {
+    },
+    "chartProviders": {
+        "dgnStdChartPro": {
+            "title": "실험",
+            "chartType": "column",
+            "loadDataAction": "getColumnChartData",
+            "chartConfig": {
+                "isChartZoomable": true,
+                "xAxisLabel": "",
+                "yAxisLabel": "",
+                "isDataLabelOnChartEnabled": true
+            }
+        }
+    },
+    "conditions": {
+        "selValueConditions": {
+            "expression": "data.selValue !== undefined"
+        }
+    },
+    "i18n": {
+        "summerNoteWidthMax": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeShowTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "tabShowTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "leftSelectPlease": [
+            "L2_DesignStandardMessages"
+        ],
+        "viewDetails": [
+            "L2_DesignStandardMessages"
+        ],
+        "mostPosts": [
+            "lgepKnowldegeManageMessages"
+        ]
+    }
+}

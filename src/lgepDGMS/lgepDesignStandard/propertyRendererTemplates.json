@@ -1,0 +1,17 @@
+{
+    "dgnStandardView": {
+        "grids": [
+            "designStandardTreeTable"
+        ],
+        "columns": [
+            "dgnStdStatus"
+        ],
+        "tooltip": [],
+        "template": "",
+        "templateUrl": "",
+        "renderFunction": "buttonSet",
+        "deps": "js/L2_DesignStandardService",
+        "dependentServices": []
+        
+    }
+}

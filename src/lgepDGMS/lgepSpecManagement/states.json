@@ -1,0 +1,151 @@
+{
+    "lgepSpecManagement": {
+        "url": "/lgepSpecManagement",
+        "data": {},
+        "view": "lgepSpecManagement",
+        "dependencies": [],
+        "parent": "lgepSpecManagementLocation"
+    },
+    "lgepSpecManagementLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "lgepSpecManagementLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "lgepSpecManagementLocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "lgepSpecManagementLocationHeaderTitle"
+            },
+            "label": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "lgepSpecManagementSubLocationTitle"
+            }
+        },
+        "type": "location"
+    },
+    "lgepSpecManagementSubLocation": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "lgepSpecManagementSubLocationTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "lgepSpecManagementSubLocation",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/lgepSpecManagementMessages",
+                        "key": "lgepSpecManagementSubLocationChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "params": {
+            "filter": null
+        },
+        "parent": "lgepSpecManagementLocation",
+        "reloadOnSearch": false,
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "url": "/lgepSpecManagementSubLocation"
+    },
+    "protoTypeSpecManagement": {
+        "url": "/protoTypeSpecManagement",
+        "data": {},
+        "view": "protoTypeSpecManagement",
+        "dependencies": [],
+        "parent": "protoTypeSpecManagementLocation"
+    },
+    "protoTypeSpecManagementLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "protoTypeSpecManagementLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "protoTypeSpecManagementLocationBrowserSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "protoTypeSpecManagementLocationHeaderTitle"
+            },
+            "label": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "protoTypeSpecManagementSubLocationTitle"
+            }
+        },
+        "type": "location"
+    },
+    "protoTypeSpecManagementSubLocation": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "protoTypeSpecManagementSubLocationTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "protoTypeSpecManagementSubLocation",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/lgepSpecManagementMessages",
+                        "key": "protoTypeSpecManagementSubLocationChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "params": {
+            "filter": null
+        },
+        "parent": "protoTypeSpecManagementLocation",
+        "reloadOnSearch": false,
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "url": "/protoTypeSpecManagementSubLocation"
+    },
+    "forIncludeSubLocation": {
+        "controller": "NativeSubLocationCtrl",
+        "data": {
+            "priority": 0,
+            "label": {
+                "source": "/i18n/lgepSpecManagementMessages",
+                "key": "forIncludeSubLocationTitle"
+            },
+            "clientScopeURI": "Awp0SearchResults",
+            "nameToken": "forIncludeSubLocation",
+            "context": {
+                "search": {
+                    "chartTitle": {
+                        "source": "/i18n/lgepSpecManagementMessages",
+                        "key": "forIncludeSubLocationChartTitle"
+                    }
+                }
+            }
+        },
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "params": {
+            "filter": null
+        },
+        "parent": "protoTypeSpecManagementLocation",
+        "reloadOnSearch": false,
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "url": "/forIncludeSubLocation"
+    }
+}

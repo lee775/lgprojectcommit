@@ -1,0 +1,13 @@
+{
+    "name": "lgepCommon",
+    "level": 7,
+    "kitDeps": [
+        "tc-aw-solution",
+        "lgepCommon"
+    ],
+    "modules": [
+        "lgepCommon",
+        "tc-aw-solution",
+        "testModule"
+    ]
+}

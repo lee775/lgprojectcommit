@@ -1,0 +1,14 @@
+{
+  "fmeaInfoLocationHeaderTitle": "SOD 마스터",
+  "fmeaInfoLocationBrowserTitle": "디지털 DGMS",
+  "fmeaInfoLocationBrowserSubTitle": "SOD 마스터",
+  
+  "systemFmeaListTitle": "System FMEA",
+  "systemFmeaCreateTitle": "System FMEA",
+
+  "interactionMatrixCreateTitle": "Interaction Matrix",
+  "interactionMatrixListTitle": "Interaction Matrix",
+
+  "sodStandardCreateTitle": "SOD 기준 관리",
+  "sodStandardListTitle": "SOD 기준 관리 List"
+}

@@ -1,0 +1,19 @@
+<aw-balloon-popup-panel>
+    <!-- <aw-command-panel caption="즐겨찾기"> -->
+        <aw-panel-body id="favorites">
+            <aw-flex-row>
+                <aw-flex-column Justify="center" width="4">
+                    <aw-label prop="data.part"></aw-label>
+                </aw-flex-column width="8">
+                <aw-flex-column>
+                    <aw-listbox prop="data.listPart" list="data.listPartValues.dbValue" action="setSelectedListValue"></aw-listbox>
+                </aw-flex-column>
+            </aw-flex-row>
+        <aw-panel-footer>
+            <aw-button size="auto" action="addFavorite" visible-when="data.iconName=='EmptyStar'">{{i18n.buttonAdd}}</aw-button>
+            <aw-button size="auto" action="delFavorite" visible-when="data.iconName=='FilledStar'">{{i18n.buttonDelete}}</aw-button>
+            <aw-button size="auto" action="editFavorite" visible-when="data.iconName=='FilledStar'">{{i18n.buttonEdit}}</aw-button>
+            <aw-button size="auto" action="buttonAction1">{{i18n.buttonClose}}</aw-button>
+        </aw-panel-footer>
+    <!-- </aw-command-panel> -->
+</aw-balloon-popup-panel>

@@ -1,0 +1,19 @@
+{
+    "showGatewayLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepThemeMessages",
+                "key": "lgepMainTitleName"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepThemeMessages",
+                "key": "lgepMainSubTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepThemeMessages",
+                "key": "lgepMainTitleName"
+            }
+        },
+        "type": "location"
+    }
+}

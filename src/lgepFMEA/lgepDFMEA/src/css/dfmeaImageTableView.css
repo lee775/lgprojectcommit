@@ -1,0 +1,53 @@
+#toastGrid .tui-grid-cell-header {
+    border-bottom: 4px solid #AAAAAA !important;
+    border-top: 2px solid #AAAAAA !important;
+}
+
+.tui-grid-border-line-left {
+    background-color: #E0E0E0;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.select {
+    background-color: #CDE6EB;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.select.sod-select {
+    background-color: #C8F5FF !important;
+}
+
+.tui-grid-cell {
+    padding: 5px 0 0 5px !important;
+}
+
+
+.tui-grid-layer-focus-deactive .tui-grid-layer-focus-border {
+    background-color: transparent !important;
+}
+
+.tui-grid-layer-focus-border {
+    background-color: transparent !important;
+}
+
+.tui-grid-cell {
+    font-size: 14px !important;
+    font-family: inherit !important;
+}
+
+.tui-grid-container p,
+.tui-grid-container input,
+.tui-grid-container textarea {
+    font-size: 14px !important;
+    font-family: inherit !important;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.interaction-same {
+    background-color: #CDE6EB;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.interaction-init-select {
+    background-color: #CFCFCF;
+}
+
+#toastGrid b {
+    font-weight: 800;
+}

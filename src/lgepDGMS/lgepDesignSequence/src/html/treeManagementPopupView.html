@@ -1,0 +1,38 @@
+<aw-popup2>
+    <style>
+        .sizeSet{
+            margin: 0;
+            padding: 0 30px;
+        }
+        .marginRow{
+            margin: 15px -15px;
+        }
+        .bigCenter{
+            padding: 10px 50px;
+        }
+        .bottomMargin{
+            margin-bottom: 15px;
+        }
+        .bye .aw-splm-tableHeaderRow{
+            display: none;
+        }
+        .bye .aw-splm-tableMenuButton{
+            display: none;
+        }
+        .noColor{
+        background: #FFFFFF;
+        }
+    </style>
+    </style>
+    <aw-flex-column>
+        <aw-flex-row height="2.5f" class="marginRow noColor" justify="right">
+                <aw-button action="createObjAction" size="auto" class="sizeSet">{{i18n.add}}</aw-button>
+                <aw-button action="editObjAction" size="auto" class="sizeSet">{{i18n.update}}</aw-button>
+                <aw-button action="deleteObj" size="auto" class="sizeSet">{{i18n.delete}}</aw-button>
+        </aw-flex-row>
+        <aw-splm-table name="sequencePopupTree" gridid="sequencePopupTree" use-tree="true" show-decorators="true" class="bye"></aw-splm-table>
+        <aw-flex-row height="3f" justify="center" class="bottomMargin">
+            <aw-button button-type="base" action="closePopupWindow" size="auto" class="bigCenter">{{i18n.close}}</aw-button>
+        </aw-flex-row>
+    </aw-flex-column>
+</aw-popup2>

@@ -1,0 +1,38 @@
+<style>
+    .aw-commands-IconButtonText{
+        font-size: 30px;
+    }
+    .summernotePanel{
+        margin-bottom: 15px;
+    }
+    .aw-layout-flexRow{
+        height: 40px;
+    }
+    .noPadding{
+        padding: 0 10px;
+    }
+    .labHei{
+        height: 30px;
+    }
+</style>
+<aw-flex-column class="afx-alt-content-background" width="6" color="white" id="expertManageData" >
+            <aw-panel>
+                <aw-flex-row height="auto" justify="right" class="afx-alt-content-background">
+                        <aw-command-bar anchor="editOnlytableCommand" alignment="HORIZONTAL" class="fontUp"></aw-command-bar>
+                </aw-flex-row>
+                <aw-splm-table gridid="expertList" align-content="center"></aw-splm-table>
+            </aw-panel>
+</aw-flex-column>   
+<aw-splitter> </aw-splitter>   
+<aw-flex-column class="afx-alt-content-background" width="6" color="white">    
+    <aw-tab-set tabs="data.summaryTab">    
+        <aw-panel-body visible-when="conditions.showSummaryTab" class="noPadding">
+            <aw-command-panel-section caption="{{i18n.property}}" anchor="data.qaOptionAnchor" collapsed="false">
+                <aw-label class="labHei" prop="data.expertName" class="marginUp"></aw-label>
+                <aw-label class="labHei" prop="data.expertState"></aw-label>
+                <aw-label class="labHei" prop="data.answerCount"></aw-label>
+                <aw-label class="labHei" prop="data.expertCoverages"></aw-label>
+            </aw-command-panel-section>
+        </aw-panel-body>
+    </aw-tab-set>
+</aw-flex-column>

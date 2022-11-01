@@ -1,0 +1,429 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-label.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-separator.directive",
+        "js/aw-checkbox.directive",
+        "js/aw-enter-key.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "aw.windowResize",
+            "action": "popupDesignStdSizeUpdate"
+        },
+        {
+            "eventId": "popupDesignAddLoadSuccess",
+            "action": "popupDesignStdSizeUpdate"
+        }
+    ],
+    "actions": {
+        "popupDesignStdSizeUpdate": {
+            "actionType": "JSFunction",
+            "method": "popupDesignStdSizeUpdate",
+            "deps": "js/sequencePopupService"
+        },
+        "designStdTableReLoad": {
+                "actionType": "JSFunction",
+                "method": "designStdTableReLoad",
+                "deps": "js/sequenceService"
+        },
+        "designStdDataSet": {
+            "actionType": "JSFunction",
+            "method": "designStdDataSet",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "result": "result",
+                "filterResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "setData": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "designStdData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "designStdItemCopy": {
+            "actionType": "JSFunction",
+            "method": "designStdItemCopy",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "applyFilterFacets": {
+            "actionType": "JSFunction",
+            "method": "dataLoad",
+            "inputData": {
+                "ctx" : "{{ctx}}"
+            },
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "information":{
+            "actionType": "JSFunction",
+            "method": "information",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "informationState": "informationState",
+                "name": "name"
+            },
+            "deps": "js/sequencePopupService"
+        },
+        "getFilterFacetData": {
+            "actionType": "JSFunction",
+            "method": "getFilterFacetData",
+            "inputData": {
+                "filterFacetInput": "{{filterFacetInput}}"
+            },
+            "outputData": {
+                "fullData": ""
+            },
+            "deps": "js/sequenceService"
+        },
+        "informationPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupDesignInformation",
+                    "locals": {
+                        "caption": "표준 - 설계표준 : {{data.name}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": 450,
+                        "height": 400
+                    }
+                }
+            },
+            "deps": "js/popupService"
+        },
+        "informationBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "information"
+                },
+                {
+                    "condition": "conditions.cond1",
+                    "action": "informationPopup"
+                }
+            ]
+        },
+        "designStdItemCopyBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "designStdItemCopy"
+                },
+                {
+                    "action": "closePopupWindow"
+                }
+            ]
+        },
+        "filterFacetBatchAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getFilterFacetData"
+                },
+                {
+                    "action": "applyFilterFacets"
+                }
+            ]
+        },
+        "designStdSearching": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "designStdDataSet"
+                },
+                {
+                    "action": "designStdTableReLoad"
+                }
+            ]
+        }
+    },
+    "data": {
+        "pageSize": 40,
+        "categoriTitle": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "categoriTitleLabel": {
+            "displayName": "제목",
+            "dispValue": ""
+        },
+        "owningUser": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "owningUserLabel": {
+            "displayName": "등록자",
+            "dispValue": ""
+        },
+        "deviceLabel": {
+            "displayName": "장치",
+            "dispValue": ""
+        },
+        "common": {
+            "displayName": "공통",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "공통",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "external": {
+            "displayName": "외장",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "외장",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "engine": {
+            "displayName": "엔진",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "엔진",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "engineApp": {
+            "displayName": "엔진App",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "공통",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "TM": {
+            "displayName": "TM",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "공통",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "combine": {
+            "displayName": "콤바인",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "외장",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "hydrauic": {
+            "displayName": "유압",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "엔진",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        },
+        "electric": {
+            "displayName": "전장",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "공통",
+            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+        }
+    },
+    "dataProviders": {
+        "designStdData": {
+            "action": "designStdDataSet",
+            "response": "{{data.filterResults}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetAction": "filterFacetBatchAction",
+            "filterFacetResults": "{{data.filterFacetResults}}",
+            "selectionModelMode": "multiple"
+        }
+    },
+    "columnProviders": {
+        "designStdColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "item_id",
+                    "displayName": "{{i18n.docuNumber}}",
+                    "maxWidth": 300,
+                    "minWidth": 80,
+                    "width": 120,
+                    "pinnedLeft": true
+                },
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.title}}",
+                    "maxWidth": 300,
+                    "minWidth": 80,
+                    "width": 120,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "rev",
+                    "displayName": "{{i18n.rev}}",
+                    "maxWidth": 300,
+                    "minWidth": 80,
+                    "width": 120,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "l2_document_type",
+                    "displayName": "{{i18n.Type}}",
+                    "maxWidth": 800,
+                    "minWidth": 200,
+                    "width": 250,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "owning_user",
+                    "displayName": "{{i18n.user}}",
+                    "maxWidth": 500,
+                    "minWidth": 100,
+                    "width": 100,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "l2_classification",
+                    "displayName": "{{i18n.system}}",
+                    "maxWidth": 300,
+                    "minWidth": 80,
+                    "width": 100,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.createDate}}",
+                    "maxWidth": 300,
+                    "minWidth": 80,
+                    "width": 100,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "iman",
+                    "displayName": "{{i18n.dataset}}",
+                    "maxWidth": 300,
+                    "minWidth": 80,
+                    "width": 250,
+                    "pinnedLeft": false
+                }
+            ],
+            "sortCriteria": []
+        }
+    },
+    "grids": {
+        "designStdTable": {
+            "dataProvider": "designStdData",
+            "columnProvider": "designStdColumn",
+            "addIconColumn": false,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": true,
+                "isFilteringEnabled": true,
+                "enableGridMenu": true
+            }
+        }
+    },
+    "functions": {
+        "applySortAndFilterRows": {
+            "functionName": "applySortAndFilterRows",
+            "parameters": [
+                "{{data.columnProviders.designStdColumn.columnFilters}}",
+                "{{data.columnProviders.designStdColumn.sortCriteria}}",
+                "{{data.dataProviders.designStdData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.designStdColumn.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        }
+    },
+    "i18n": {
+        "edit": ["lgepDesignSequenceMessages"],
+        "close": ["lgepDesignSequenceMessages"],
+        "lookup": ["lgepDesignSequenceMessages"],
+        "large": ["lgepDesignSequenceMessages"],
+        "medium": ["lgepDesignSequenceMessages"],
+        "small": ["lgepDesignSequenceMessages"],
+        "checkCriteria": ["lgepDesignSequenceMessages"],
+        "type": ["lgepDesignSequenceMessages"],
+        "code": ["lgepDesignSequenceMessages"],
+        "category": ["lgepDesignSequenceMessages"],
+        "goals": ["lgepDesignSequenceMessages"],
+        "docuNumber": ["lgepDesignSequenceMessages"],
+        "title": ["lgepDesignSequenceMessages"],
+        "rev": ["lgepDesignSequenceMessages"],
+        "Type": ["lgepDesignSequenceMessages"],
+        "user": ["lgepDesignSequenceMessages"],
+        "system": ["lgepDesignSequenceMessages"],
+        "createDate": ["lgepDesignSequenceMessages"],
+        "dataset": ["lgepDesignSequenceMessages"],
+        "add": ["lgepDesignSequenceMessages"],
+        "information": ["lgepDesignSequenceMessages"],
+        "unchecking": ["lgepDesignSequenceMessages"]
+    },
+    "conditions": {
+        "cond1": {
+            "expression": "data.informationState===true"
+        }
+    },
+    "lifecycleHooks": {
+        "onInit": "setData"
+    }
+}

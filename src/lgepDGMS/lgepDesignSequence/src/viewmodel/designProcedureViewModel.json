@@ -1,0 +1,1156 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-checkbox.directive",
+        "js/aw-button.directive",
+        "js/aw-slider.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-sidenav.directive",
+        "js/aw-tab-set.directive",
+        "js/visible-when.directive",
+        "js/aw-navigate-breadcrumb.directive",
+        "js/aw-togglebutton.directive",
+        "js/extended-tooltip.directive",
+        "js/aw-header-props.directive",
+        "js/aw-splitter.directive",
+        "js/aw-label.directive",
+        "js/aw-file-upload.directive",
+        "js/aw-splm-table.directive",
+        "js/aw-separator.directive",
+        "js/exist-when.directive",
+        "css/procedureCss.css"
+    ],
+    "onEvent": [
+        {
+            "eventId": "sequenceDataProvider.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "contentLoadBat"
+        },
+        {
+            "eventId": "searchData.selectionChangeEvent",
+            "cacheEventData": true,
+            "action": "contentLoadBat"
+        },
+        {
+            "eventId": "updateFormDataComplete",
+            "action": "linkRelationsSequenceBat"
+        },
+        {
+            "eventId": "awTab.selected",
+            "action": "toolTipSelectedTab"
+        }
+    ],
+    "actions": {
+        "updateSliderValue": {
+            "actionType": "JSFunction",
+            "method": "updateSliderValue",
+            "inputData": {
+                "value": "{{prop.dbValue[0].sliderOption.value}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "toggleCssAction": {
+            "actionType": "JSFunction",
+            "method": "toggleCssAction",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "checklistOpen": {
+            "actionType": "JSFunction",
+            "method": "checklistOpen",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "ttttttst": {
+            "actionType": "JSFunction",
+            "method": "ttttttst",
+            "deps": "js/L2_DesignStandardsService"
+        },
+        "editStartOREnd": {
+            "actionType": "JSFunction",
+            "method": "editStartOREnd",
+            "deps": "js/sequenceService"
+        },
+        "tabShowORHide": {
+            "actionType": "JSFunction",
+            "method": "tabShowORHide",
+            "deps": "js/sequenceService"
+        },
+        "summerNoteImageWidthMax": {
+            "actionType": "JSFunction",
+            "method": "summerNoteImageWidthMax",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "sidenavPushCommandLeftSequence": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose",
+                        "eventData": {
+                            "id": "sequenceTreeNav",
+                            "includeView": "sequenceTreeAndTableSideNav",
+                            "commandId": "sidenavPushCommandLeftSequence"
+                        }
+                    }
+                ]
+            }
+        },
+        "toolTipSelectedTab": {
+            "actionType": "JSFunction",
+            "method": "toolTipSelectedTab",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "datasetDownLoad": {
+            "actionType": "JSFunction",
+            "method": "datasetDownLoad",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "checkListCopyDelete": {
+            "actionType": "JSFunction",
+            "method": "checkListCopyDelete",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "designStdCopyDelete": {
+            "actionType": "JSFunction",
+            "method": "designStdCopyDelete",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "contentLoad": {
+            "actionType": "JSFunction",
+            "method": "contentLoad",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "selValue": "selValue"
+            },
+            "deps": "js/sequenceService"
+        },
+        "checkListReload": {
+            "actionType": "JSFunction",
+            "method": "checkListReload",
+            "deps": "js/sequenceService"
+        },
+        "itemTypeCheck": {
+            "actionType": "JSFunction",
+            "method": "itemTypeCheck",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "itemEditPopupGetSize": {
+            "actionType": "JSFunction",
+            "method": "itemEditPopupGetSize",
+            "outputData": {
+                "setEditWidth": "setWidth",
+                "setEditHeight": "setHeight"
+            },
+            "deps": "js/sequencePopupService"
+        },
+        "itemEditPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "sequenceItemEditPopup",
+                    "locals": {
+                        "caption": "{{i18n.sequenceEdit}}",
+                        "anchor": "closePopupAnchor"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "height": "{{data.setEditHeight}}",
+                        "width": "{{data.setEditWidth}}"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "itemEditPopupLoadSuccess"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "editSequenceCheck": {
+            "actionType": "JSFunction",
+            "method": "editSequenceCheck",
+            "outputData": {
+                "editValue": "editValue"
+            },
+            "deps": "js/sequenceService"
+        },
+        "itemEditPopupBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "itemEditPopupGetSize"
+                },
+                {
+                    "action": "editSequenceCheck"
+                },
+                {
+                    "condition": "conditions.editValueType",
+                    "action": "itemEditPopup"
+                }
+            ]
+        },
+        "checklistPopupGetSize": {
+            "actionType": "JSFunction",
+            "method": "checkListPopupGetSize",
+            "outputData": {
+                "setcheckListWidth": "setWidth",
+                "setcheckListHeight": "setHeight"
+            },
+            "deps": "js/sequencePopupService"
+        },
+        "checklistPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupCheckListAdd",
+                    "locals": {
+                        "caption": "{{i18n.selectedChecklist}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "{{data.setcheckListWidth}}",
+                        "height": "{{data.setcheckListHeight}}"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "popupCheckListLoadSuccess"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "designPopupGetSize": {
+            "actionType": "JSFunction",
+            "method": "designStdPopupGetSize",
+            "outputData": {
+                "designStdWidth": "setWidth",
+                "designStdHeight": "setHeight"
+            },
+            "deps": "js/sequencePopupService"
+        },
+        "designPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "popupDesignAdd",
+                    "locals": {
+                        "caption": "{{i18n.designStandardSelect}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": "{{data.designStdWidth}}",
+                        "height": "{{data.designStdHeight}}"
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "popupDesignAddLoadSuccess"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "treeManagement": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "treeManagementPopup",
+                    "locals": {
+                        "caption": "{{i18n.treeEdit}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": 550,
+                        "height": 700
+                    }
+                }
+            },
+            "deps": "js/popupService"
+        },
+        "treeReload": {
+            "actionType": "JSFunction",
+            "method": "treeReload",
+            "outputData": {
+                "searchState": "searchState"
+            },
+            "deps": "js/sequenceService"
+        },
+        "CreateObjPopup": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "sequenceCreateObjPopup",
+                    "locals": {
+                        "caption": "{{i18n.createProcedure}}"
+                    },
+                    "options": {
+                        "reference": "referenceId",
+                        "isModal": true,
+                        "clickOutsideToClose": false,
+                        "draggable": true,
+                        "placement": "bottom-start",
+                        "width": 1300,
+                        "height": 800
+                    }
+                }
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "openMoreinfoComplete"
+                    }
+                ]
+            },
+            "deps": "js/popupService"
+        },
+        "selDataSet": {
+            "actionType": "JSFunction",
+            "method": "selDataSet",
+            "inputData": {
+                "data": "{{data.eventData.selectedObjects[0]}}",
+                "state": "1"
+            },
+            "outputData": {
+                "result": "result"
+            },
+            "deps": "js/sequenceService"
+        },
+        "selDataSetItem": {
+            "actionType": "JSFunction",
+            "method": "selDataSetItem",
+            "inputData": {
+                "data": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "result": "result"
+            },
+            "deps": "js/sequenceService"
+        },
+        "selectCheckItem": {
+            "actionType": "JSFunction",
+            "method": "selectCheckItem",
+            "inputData": {
+                "data": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "resultItem": "resultItem"
+            },
+            "deps": "js/sequenceService"
+        },
+        "searchResult": {
+            "actionType": "JSFunction",
+            "method": "searchData",
+            "inputData": {
+                "value": "{{data.searchingName.dbValue}}"
+            },
+            "outputData": {
+                "searchState": "searchState",
+                "result": "result",
+                "searchResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "checkListCopyResult": {
+            "actionType": "JSFunction",
+            "method": "checkListCopyResult",
+            "outputData": {
+                "result": "result",
+                "checkListCopyResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "applyFilterFacets": {
+            "actionType": "JSFunction",
+            "method": "subDataLoad",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "filterFacetResults": "{{function:getFilterFacets}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "getFilterFacetData": {
+            "actionType": "JSFunction",
+            "method": "getFilterFacetData",
+            "inputData": {
+                "filterFacetInput": "{{filterFacetInput}}"
+            },
+            "outputData": {
+                "fullData": ""
+            },
+            "deps": "js/sequenceService"
+        },
+        "initialize": {
+            "actionType": "JSFunction",
+            "method": "initialize",
+            "deps": "js/sequenceService"
+        },
+        "getDataUrlSetting": {
+            "actionType": "JSFunction",
+            "method": "getDataUrlSetting",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "designcheckListTableLoad": {
+            "actionType": "JSFunction",
+            "method": "designcheckListTableLoad",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "outputData": {
+                "result": "result",
+                "checklistTotalFound": "checklistTotalFound",
+                "checkListCopyResults": "{{function:applySortAndFilterRows}}"
+            },
+            "deps": "js/sequenceService"
+        },
+        "setMultiSelData": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "checkListCopyData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "setMultiSelDataStd": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "deStandardData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "setMultiSelDataSet": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "dataSetData.multiSelectModeAction",
+                        "eventData": {
+                            "multiSelect": true
+                        }
+                    }
+                ]
+            }
+        },
+        "testing": {
+            "actionType": "JSFunction",
+            "method": "testing",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "Tticket": "Tticket"
+            },
+            "deps": "js/sequenceService"
+        },
+        "testingBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "testing"
+                },
+                {
+                    "action": "testing2"
+                }
+            ]
+        },
+        "createObjAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "selDataSetItem"
+                },
+                {
+                    "condition": "conditions.cond1",
+                    "action": "CreateObjPopup"
+                }
+            ]
+        },
+        "searching": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "treeReload"
+                },
+                {
+                    "action": "searchResult"
+                }
+            ]
+        },
+        "onInitAction": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "sidenavPushCommandLeftSequence"
+                },
+                {
+                    "action": "initialize"
+                },
+                {
+                    "action": "setMultiSelDataStd"
+                },
+                {
+                    "action": "setMultiSelDataSet"
+                }
+            ]
+        },
+        "checklistPopupBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "selectCheckItem"
+                },
+                {
+                    "action": "checklistPopupGetSize"
+                },
+                {
+                    "condition": "conditions.itemSel",
+                    "action": "checklistPopup"
+                }
+            ]
+        },
+        "designPopupBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "selectCheckItem"
+                },
+                {
+                    "action": "designPopupGetSize"
+                },
+                {
+                    "condition": "conditions.itemSel",
+                    "action": "designPopup"
+                }
+            ]
+        },
+        "contentLoadBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "contentLoad"
+                },
+                {
+                    "action": "designcheckListTableLoad"
+                },
+                {
+                    "action": "checkListReload"
+                }
+            ]
+        },
+        "linkRelationsSequenceBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "updateFormData"
+                },
+                {
+                    "action": "selectDatasetItem"
+                },
+                {
+                    "condition": "conditions.datasetSel",
+                    "action": "uploadFiles"
+                },
+                {
+                    "condition": "conditions.datasetSel",
+                    "action": "linkRelationsSequence"
+                }
+            ]
+        },
+        "updateFormData": {
+            "actionType": "JSFunction",
+            "method": "updateFormData",
+            "inputData": {
+                "fileData": {
+                    "key": "name",
+                    "value": "{{data.fileName}}"
+                },
+                "data": "{{data}}"
+            },
+            "deps": "js/declUtils"
+        },
+        "uploadFiles": {
+            "actionType": "JSFunction",
+            "method": "uploadFileToDataset",
+            "inputData": {
+                "fileData": "{{data.formData}}"
+            },
+            "outputData": {
+                "dataset": ""
+            },
+            "deps": "js/datasetBackService"
+        },
+        "linkRelationsSequence": {
+            "actionType": "JSFunction",
+            "method": "linkRelationsSequence",
+            "deps": "js/datasetBackService"
+        },
+        "selectDatasetItem": {
+            "actionType": "JSFunction",
+            "method": "selectDatasetItem",
+            "inputData": {
+                "value": "{{data.eventData.selectedObjects[0]}}",
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "resultDatasetSel": "resultDatasetSel"
+            },
+            "deps": "js/datasetBackService"
+        },
+        "deleteRelationsSequence": {
+            "actionType": "JSFunction",
+            "method": "deleteRelationsSequence",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/datasetBackService"
+        }
+    },
+    "data": {
+        "zoomSliderProp": {
+            "isArray": "true",
+            "dbValue": [
+                {
+                    "sliderOption": {
+                        "disabled": false,
+                        "min": 0.1,
+                        "max": 2,
+                        "step": 0.13,
+                        "value": 1.04,
+                        "orientation": "horizontal",
+                        "range": false
+                    },
+                    "showIncrementButtons": true,
+                    "sliderChangeEventAction": "updateSliderValue"
+                }
+            ]
+        },
+        "themeToggle": {
+            "displayName": "테마 적용",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+        },
+        "itemTitle": {
+            "displayName": "{{i18n.title}}",
+            "type": "STRING",
+            "dispValue": ""
+        },
+        "writer": {
+            "displayName": "{{i18n.writer}}",
+            "type": "STRING",
+            "dispValue": ""
+        },
+        "createData": {
+            "displayName": "{{i18n.dateCreated}}",
+            "type": "STRING",
+            "dispValue": ""
+        },
+        "lastModify": {
+            "displayName": "{{i18n.lastModifiedDate}}",
+            "type": "STRING",
+            "dispValue": ""
+        },
+        "bcConfig": {
+            "navigationBreadcrumbConfig": {
+                "type": "navigate",
+                "vm": "designProcedureBreadcrumbList",
+                "chevronDataProvider": "procedureBreadcrumListData",
+                "id": "d_uids",
+                "noUpdate": true,
+                "displayProperty": "object_string",
+                "popuplist": "/html/designProcedureBreadcrumbListView.html"
+            }
+        },
+        "provider": {
+            "crumbs": []
+        },
+        "summerNoteWidthMax": {
+            "displayName": "{{i18n.summerNoteWidthMax}}",
+            "type": "BOOLEAN",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": true,
+            "dispValue": "{{i18n.summerNoteWidthMax}}",
+            "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+        },
+        "sideNavLeftData": {
+            "slide": "PUSH",
+            "direction": "LEFT_TO_RIGHT",
+            "animation": true,
+            "width": "STANDARD",
+            "height": "FULL"
+        },
+        "addCheckListTooltip": {
+            "extendedTooltipContent": "{{i18n.addCheckListTooltip}}"
+        },
+        "addDesignListTooltip": {
+            "extendedTooltipContent": "{{i18n.addDesignListTooltip}}"
+        },
+        "editTooltip": {
+            "extendedTooltipContent": "{{i18n.editTooltip}}"
+        },
+        "treeEditTooltip": {
+            "extendedTooltipContent": "{{i18n.treeEditTooltip}}"
+        },
+        "tabShowTooltip": {
+            "extendedTooltipContent": "{{i18n.tabShowTooltip}}"
+        },
+        "treeShowTooltip": {
+            "extendedTooltipContent": "{{i18n.treeShowTooltip}}"
+        },
+        "downLoadTooltip": {
+            "extendedTooltipContent": "{{i18n.downLoadTooltip}}"
+        },
+        "checkListTooltip": {
+            "extendedTooltipContent": "자주 발생될 수 있는 문제를 사전 점검하여 설계보완항목을 확인하기 위한 목록"
+        },
+        "designTooltip": {
+            "extendedTooltipContent": "설계 요소를 설계하는데 필요한 기술, 방법론, 가이드라인, 제약 사항을 표시. 설계 지침과 유사한 의미"
+        },
+        "datasetTooltip": {
+            "extendedTooltipContent": "설계 지침서에 포함되어 있는 참고용 파일 목록"
+        },
+        "fileUploadTooltip": {
+            "extendedTooltipContent": "{{i18n.fileUploadTooltip}}"
+        },
+        "listClassification": [
+            {
+                "name": "{{i18n.checkList}}",
+                "tabKey": "checkList"
+            },
+            {
+                "name": "{{i18n.procedureInfo}}",
+                "tabKey": "info"
+            }
+        ],
+        "pageSize": 40,
+        "sequenceHeaderProps": [
+            {
+                "property": {
+                    "propertyName": "owning_user",
+                    "propertyDisplayName": "{{i18n.writer}}",
+                    "propertyLabelDisplay": "PROPERTY_LABEL_AT_SIDE",
+                    "type": "STRING",
+                    "uiValue": "",
+                    "isNull": "false"
+                },
+                "renderingHint": "overflow",
+                "renderingStyle": ""
+            },
+            {
+                "property": {
+                    "propertyName": "last_mod_date",
+                    "propertyDisplayName": "{{i18n.lastModifiedDate}}",
+                    "propertyLabelDisplay": "PROPERTY_LABEL_AT_SIDE",
+                    "type": "DATE",
+                    "uiValue": "",
+                    "isNull": "false"
+                },
+                "renderingHint": "overflow",
+                "renderingStyle": ""
+            }
+        ]
+    },
+    "dataProviders": {
+        "searchData": {
+            "action": "searchResult",
+            "response": "{{data.searchResults}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetResults": "{{data.filterFacetResults}}"
+        },
+        "checkListCopyData": {
+            "action": "designcheckListTableLoad",
+            "response": "{{data.checkListCopyResults}}",
+            "totalFound": "{{data.checklistTotalFound}}",
+            "searchIndex": "{{data.searchIndex}}",
+            "filterFacetResults": "{{data.filterFacetResults}}",
+            "selectionModelMode": "multiple"
+        }
+    },
+    "columnProviders": {
+        "searchColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.name}}",
+                    "minWidth": 60,
+                    "width": 150
+                }
+            ],
+            "sortCriteria": []
+        },
+        "checkListCopyColumn": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "{{i18n.generalName}}",
+                    "minWidth": 60,
+                    "width": 150
+                },
+                {
+                    "name": "item_revision_id",
+                    "displayName": "Revision ID",
+                    "minWidth": 60,
+                    "width": 150
+                },
+                {
+                    "name": "owning_user",
+                    "displayName": "{{i18n.user}}",
+                    "minWidth": 60,
+                    "width": 150
+                },
+                {
+                    "name": "creation_date",
+                    "displayName": "{{i18n.createDate}}",
+                    "minWidth": 60,
+                    "width": 300
+                }
+            ],
+            "sortCriteria": []
+        }
+    },
+    "grids": {
+        "sequenceSearchTable": {
+            "dataProvider": "searchData",
+            "columnProvider": "searchColumn",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": true,
+                "enableGridMenu": true
+            }
+        },
+        "checkListCopyTable": {
+            "dataProvider": "checkListCopyData",
+            "columnProvider": "checkListCopyColumn",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enablePinning": true,
+                "enableSorting": true,
+                "enableGridMenu": true
+            }
+        }
+    },
+    "functions": {
+        "applySortAndFilterRows": {
+            "functionName": "applySortAndFilterRows",
+            "parameters": [
+                "{{data.columnProviders.searchColumn.columnFilters}}",
+                "{{data.columnProviders.searchColumn.sortCriteria}}",
+                "{{data.dataProviders.searchData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        },
+        "getFilterFacets": {
+            "functionName": "getFilterFacets",
+            "parameters": [
+                "{{data.columnProviders.searchColumn.columnFilters}}",
+                "{{data.fullData}}"
+            ]
+        },
+        "filterRowsWithSort": {
+            "functionName": "filterRowsWithSort",
+            "parameters": [
+                "{{data.columnProviders.searchColumn.sortCriteria}}",
+                "{{data.dataProviders.searchData.startIndex}}",
+                "{{data.pageSize}}"
+            ]
+        }
+    },
+    "conditions": {
+        "cond1": {
+            "expression": "data.result===true"
+        },
+        "showCheck": {
+            "expression": "data.selectedTab.tabKey === 'checkList'"
+        },
+        "showInfo": {
+            "expression": "data.selectedTab.tabKey === 'info'"
+        },
+        "itemSel": {
+            "expression": "data.resultItem === true"
+        },
+        "datasetSel": {
+            "expression": "data.resultDatasetSel === true"
+        },
+        "editValueType": {
+            "expression": "data.editValue === true"
+        },
+        "selValueConditions": {
+            "expression": "data.selValue !== undefined"
+        }
+    },
+    "i18n": {
+        "edit": [
+            "lgepDesignSequenceMessages"
+        ],
+        "close": [
+            "lgepDesignSequenceMessages"
+        ],
+        "lookup": [
+            "lgepDesignSequenceMessages"
+        ],
+        "large": [
+            "lgepDesignSequenceMessages"
+        ],
+        "medium": [
+            "lgepDesignSequenceMessages"
+        ],
+        "small": [
+            "lgepDesignSequenceMessages"
+        ],
+        "checkCriteria": [
+            "lgepDesignSequenceMessages"
+        ],
+        "type": [
+            "lgepDesignSequenceMessages"
+        ],
+        "code": [
+            "lgepDesignSequenceMessages"
+        ],
+        "category": [
+            "lgepDesignSequenceMessages"
+        ],
+        "goals": [
+            "lgepDesignSequenceMessages"
+        ],
+        "add": [
+            "lgepDesignSequenceMessages"
+        ],
+        "docuNumber": [
+            "lgepDesignSequenceMessages"
+        ],
+        "title": [
+            "lgepDesignSequenceMessages"
+        ],
+        "rev": [
+            "lgepDesignSequenceMessages"
+        ],
+        "Type": [
+            "lgepDesignSequenceMessages"
+        ],
+        "user": [
+            "lgepDesignSequenceMessages"
+        ],
+        "system": [
+            "lgepDesignSequenceMessages"
+        ],
+        "createDate": [
+            "lgepDesignSequenceMessages"
+        ],
+        "dataset": [
+            "lgepDesignSequenceMessages"
+        ],
+        "datasetType": [
+            "lgepDesignSequenceMessages"
+        ],
+        "datasetUser": [
+            "lgepDesignSequenceMessages"
+        ],
+        "datasetDate": [
+            "lgepDesignSequenceMessages"
+        ],
+        "sequenceEdit": [
+            "lgepDesignSequenceMessages"
+        ],
+        "selectChecklist": [
+            "lgepDesignSequenceMessages"
+        ],
+        "designStandardSelect": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeEdit": [
+            "lgepDesignSequenceMessages"
+        ],
+        "createProcedure": [
+            "lgepDesignSequenceMessages"
+        ],
+        "refresh": [
+            "lgepDesignSequenceMessages"
+        ],
+        "search": [
+            "lgepDesignSequenceMessages"
+        ],
+        "requiredText": [
+            "lgepDesignSequenceMessages"
+        ],
+        "writer": [
+            "lgepDesignSequenceMessages"
+        ],
+        "dateCreated": [
+            "lgepDesignSequenceMessages"
+        ],
+        "delete": [
+            "lgepDesignSequenceMessages"
+        ],
+        "lastModifiedDate": [
+            "lgepDesignSequenceMessages"
+        ],
+        "name": [
+            "lgepDesignSequenceMessages"
+        ],
+        "attachment": [
+            "lgepDesignSequenceMessages"
+        ],
+        "datasetDownLoad": [
+            "lgepDesignSequenceMessages"
+        ],
+        "designStdAdd": [
+            "lgepDesignSequenceMessages"
+        ],
+        "checklistAdd": [
+            "lgepDesignSequenceMessages"
+        ],
+        "editItem": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeManage": [
+            "lgepDesignSequenceMessages"
+        ],
+        "datasetSize": [
+            "lgepDesignSequenceMessages"
+        ],
+        "addCheckListTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "addDesignListTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "editTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeEditTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "downLoadTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "checkListTooltip": "",
+        "designTooltip": "",
+        "datasetTooltip": "",
+        "fileUploadTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "checkList": [
+            "lgepDesignSequenceMessages"
+        ],
+        "designStandard": [
+            "lgepDesignSequenceMessages"
+        ],
+        "download": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeView": [
+            "lgepDesignSequenceMessages"
+        ],
+        "summerNoteWidthMax": [
+            "lgepDesignSequenceMessages"
+        ],
+        "pleaseSelProcedure": [
+            "lgepDesignSequenceMessages"
+        ],
+        "selectedChecklist": [
+            "lgepDesignSequenceMessages"
+        ],
+        "tabHideAndShow": [
+            "lgepDesignSequenceMessages"
+        ],
+        "procedureInfo": [
+            "lgepDesignSequenceMessages"
+        ],
+        "treeShowTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "tabShowTooltip": [
+            "lgepDesignSequenceMessages"
+        ],
+        "generalName": [
+            "lgepDesignSequenceMessages"
+        ],
+        "open": [
+            "lgepDesignSequenceMessages"
+        ]
+    },
+    "lifecycleHooks": {
+        "onInit": "onInitAction"
+    }
+}

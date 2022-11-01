@@ -1,0 +1,38 @@
+{
+    "lgepUserManagement": {
+        "url": "/lgepUserManagement",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepUserManagementMessages",
+                "key": "lgepUserManagementMessageSubLocationTitle"
+            },
+            "nameToken": "lgepUserManagement",
+            "clientScopeURI": ""
+        },
+        "view": "lgepUserManagement",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepAdminManagementLocation"
+    },
+    "lgepAdminManagementLocation": {
+        "data": {
+            "headerTitle": {
+                "source": "/i18n/lgepUserManagementMessages",
+                "key": "lgepUserManagementMessagesLocationTitle"
+            },
+            "browserTitle": {
+                "source": "/i18n/lgepUserManagementMessages",
+                "key": "lgepUserManagementMessagesLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepUserManagementMessages",
+                "key": "lgepUserManagementMessagesLocationBrowserSubTitle"
+            },
+            "viewBase": "lgepUserManagement"
+        },
+        "type": "location"
+    }
+}

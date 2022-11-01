@@ -1,0 +1,15 @@
+<aw-row height="fill">
+  <aw-column width="6" class="checklist-tree-container">
+    <aw-flex-row height="3.5f">
+      <aw-column width="6" class="controller-container">
+        <aw-command-bar class="dmasterList-table-command-header" anchor="fmea_dfmea_master_table_list_commands" alignment="HORIZONTAL"></aw-command-bar>
+      </aw-column>
+      <aw-column width="6" class="dmaster-table-controller">
+        <aw-button action="interaction">Interaction</aw-button>
+        <!-- <aw-button aw-class="{'disabled': ctx.fmea_popup}" action="reviseAction">{{i18n.revise}}</aw-button> -->
+        <!-- <aw-button aw-class="{'disabled': ctx.fmea_popup}" action="sendWorkflowAction">{{i18n.sendWorkflow}}</aw-button> -->
+      </aw-column>
+    </aw-flex-row>
+    <aw-include name="dfmeaListTable" sub-panel-context="data.productGroup"></aw-include>
+  </aw-column>
+</aw-row>

@@ -1,0 +1,193 @@
+<aw-popup2>
+    <style>
+        #dragTest img::selection {
+            background: transparent;
+        }
+        #dragTest p::selection {
+            background: transparent;
+        }
+        #dragTest .aw-layout-panelMain{
+            overflow-x: auto;
+        }
+        #showPPT {
+            transform-origin: top left;
+        }
+        .buttonWriteforReview{
+            background-color: #ff3d5d !important;
+            border-color: #ff3d5d !important;
+        }
+    </style>
+    <aw-flex-row id="test1">
+        <aw-flex-column width="2" id="moreViewLeftSide" class="splitShadow">
+            <aw-tab-set tabs="data.listTab">
+                <div class="listfor">
+                    <aw-panel-body visible-when="conditions.showRecommend">
+                        <aw-list dataprovider="data.dataProviders.recommendList" id="reListId">
+                            <img src="{{item.viewImage}}" class="imgSize"><br />
+                            <span class="textSize">
+                                <h4 class="numberSize">{{item.props.l2_page_index.dbValues[0]}}</h4>
+                            </span>
+                        </aw-list>
+                    </aw-panel-body>
+                    <aw-panel-body visible-when="conditions.showFile">
+                        <aw-list dataprovider="data.dataProviders.fileList" id="fileListId">
+                            <img src="{{item.viewImage}}" class="imgSize"><br />
+                            <span class="textSize">
+                                <h4 class="numberSize">{{item.props.l2_page_index.dbValues[0]}}</h4>
+                            </span>
+                            <!-- <aw-image-cell vmo="item"></aw-image-cell> -->
+                        </aw-list>
+                    </aw-panel-body>
+            </aw-tab-set>
+            </div>
+        </aw-flex-column>
+        <aw-splitter direction="VERTICAL" class="split2"></aw-splitter>
+        <aw-flex-column width="fill" class="splitShadow">
+            <aw-flex-row height="12" class="spaceTest">
+                    <div class="leftArrowSpace">
+                        <aw-icon-button class="leftArrow" size="large" command="data.leftArrow"></aw-icon-button>
+                        <aw-icon-button class="leftArrow2" size="large" command="data.leftArrow2"></aw-icon-button>
+                    </div>
+                    <div class="rightArrowSpace">
+                        <aw-icon-button class="rightArrow" size="large" command="data.rightArrow"></aw-icon-button>
+                        <aw-icon-button class="rightArrow2" size="large" command="data.rightArrow2"></aw-icon-button>
+                    </div>
+                    <aw-panel id="dragTest">
+                        <aw-image source="data.image1.dbValue" id="showPPT" draggable="false"
+                            visible-when="data.centerView == 'Image'"></aw-image>
+                        <span id="showText"  draggable="false" visible-when="data.centerView == 'Text'"></span>
+                    </aw-panel>
+                </aw-flex-row>
+                <aw-flex-row height="6f">
+                    <aw-flex-column></aw-flex-column>
+                    <aw-flex-column align-content="center">
+                        <aw-icon-button size="large" command="data.button4"></aw-icon-button>&nbsp;Image&nbsp;View&nbsp;
+                    </aw-flex-column>
+                    <aw-flex-column align-content="center">
+                        <aw-icon-button size="large" command="data.button5"></aw-icon-button>&nbsp;Text&nbsp;View
+                    </aw-flex-column>
+                    <aw-flex-column class="knowledge-zoom-slider" justify="center">
+                        <aw-flex-row>
+                            <aw-flex-column width="10" justify="center">
+                                <aw-slider prop="data.zoomSliderProp"></aw-slider>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <aw-icon-button size="small" command="data.button6"></aw-icon-button>
+                            </aw-flex-column>
+                            </div>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                    <aw-flex-column></aw-flex-column>
+                </aw-flex-row>
+        </aw-flex-column>
+        <aw-splitter direction="VERTICAL" class="split"></aw-splitter>
+        <aw-flex-column width="3" id="moreViewRightSide">
+            <aw-flex-row height="12">
+                <aw-tab-set tabs="data.moreInfoTab">
+                    <aw-panel-body visible-when="conditions.showInfo">
+                        <aw-label prop="data.source"></aw-label>
+                        <aw-label prop="data.docNo"></aw-label>
+                        <aw-label prop="data.realModel"></aw-label>
+                        <aw-label prop="data.model"></aw-label>
+                        <!-- <aw-label prop="data.pit"></aw-label>
+                        <aw-label prop="data.grade"></aw-label>
+                        <aw-label prop="data.eventName"></aw-label> -->
+                        <aw-label prop="data.issueDate"></aw-label>
+                        <aw-label prop="data.creater"></aw-label>
+                        <aw-label prop="data.issuePred" visible-when="ctx.userSession.props.role_name.dbValue=='Admin'">
+                        </aw-label>
+                        <aw-label prop="data.orginText"></aw-label>
+                        <aw-link prop="data.origin" action="moveOrigin"></aw-link>
+                    </aw-panel-body>
+                    <aw-panel-body visible-when="conditions.showReview">
+                        <aw-flex-row height="1">
+                            <div class="star-ratings">
+                                <div class="star-ratings-fill space-x-2 text-lg star-sizing"
+                                    style="width: \{\{data\.avrPercent\}\}">
+                                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                                </div>
+                                <div class="star-ratings-base space-x-2 text-lg">
+                                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                                </div>
+                            </div>
+                            <div class="avrPointspace">
+                                {{data.avrPoint}}
+                            </div>
+                        </aw-flex-row>
+                        <aw-flex-row height="7">
+                            <aw-panel>
+                                <aw-list dataprovider="data.dataProviders.comments" id="reviews">
+                                    <div class="star-ratings">
+                                        <div class="star-ratings-fill space-x-2 text-lg star-sizing"
+                                            style="width: \{\{item\.percent\}\}">
+                                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                                        </div>
+                                        <div class="star-ratings-base space-x-2 text-lg">
+                                            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                                        </div>
+                                    </div>
+                                    {{item.props.l2_rating.dbValue}}<br>
+                                    <p id="creators">
+                                        {{item.props.owning_user.uiValues[0]}},{{item.props.creation_date.uiValue}}</p>
+                                    <br>
+                                    {{item.props.object_desc.dbValues[0]}}<br>
+                                    <aw-flex-column
+                                        exist-when="data.dataProviders.comments.selectedObjects[0].props.owning_user.uiValue==ctx.user.props.object_string.uiValue">
+                                        <div class="visible{{item.selected}}">
+                                            <aw-button action="editComment" size="auto">{{item.buttonEdit2}}</aw-button>
+                                            <aw-button action="deleteComment" size="auto">{{item.buttonDelete}}
+                                            </aw-button>
+                                        </div>
+                                    </aw-flex-column>
+                                </aw-list>
+                            </aw-panel>
+                        </aw-flex-row>
+                        <aw-flex-row height="4" class="reviewWrite" visible-when="conditions.reviewWrite">
+                            <aw-flex-column>
+                                <aw-flex-row height="3">
+                                    <div class="star-position">
+                                        <div class="star-rating">
+                                            <input type="radio" id="5-stars" name="rating" value="5" />
+                                            <label for="5-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="4-stars" name="rating" value="4" />
+                                            <label for="4-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="3-stars" name="rating" value="3" />
+                                            <label for="3-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="2-stars" name="rating" value="2" />
+                                            <label for="2-stars" class="star">&#9733;</label>
+                                            <input type="radio" id="1-star" name="rating" value="1" />
+                                            <label for="1-star" class="star">&#9733;</label>
+                                        </div>
+                                    </div>
+                                </aw-flex-row>
+                                <aw-flex-row height="fill">
+                                    <aw-flex-column>
+                                        <aw-textarea prop="data.review"></aw-textarea>
+                                        <aw-flex-row exist-when="!conditions.checkEdit">
+                                            <aw-button action="reviewSubmit">{{i18n.buttonWrite}}</aw-button>
+                                        </aw-flex-row>
+                                        <aw-flex-row exist-when="conditions.checkEdit">
+                                            <aw-button action="editModeComplete">{{i18n.buttonEdit2}}</aw-button>
+                                            <aw-button action="editModeCancle">{{i18n.buttonCancle}}</aw-button>
+                                        </aw-flex-row>
+                                    </aw-flex-column>
+                                </aw-flex-row>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                    </aw-panel-body>
+                    <aw-button class="hiddenButton" id="referenceID" action="filterOn" size="auto"
+                        style="visibility:hidden"></aw-button>
+                    <aw-icon-button class="test" size="large" command="data.buttonStar" style="display:none">
+                    </aw-icon-button>
+                    <aw-icon-button class="test" size="large" command="data.buttonStar1"
+                        visible-when="conditions.showEmpty">
+                    </aw-icon-button>
+                    <aw-icon-button class="test" size="large" command="data.buttonStar2"
+                        visible-when="conditions.showFull" id="showFullStar">
+                    </aw-icon-button>
+                    <!-- <aw-sidenav id="favorite" config="data.favorite"></aw-sidenav> -->
+                </aw-tab-set>
+            </aw-flex-row>
+        </aw-flex-column>
+    </aw-flex-row>
+</aw-popup2>

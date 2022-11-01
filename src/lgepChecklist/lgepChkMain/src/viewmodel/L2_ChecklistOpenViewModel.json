@@ -1,0 +1,37 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "css/L2_ChecklistMain.css"
+    ],
+    "onEvent": [
+    ],
+    "data": {
+    },
+    "actions": {
+        "initialize": {
+            "actionType": "JSFunction",
+            "method": "initialize",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistOpenService"
+        },
+        "unMount": {
+            "actionType": "JSFunction",
+            "method": "unMount",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistOpenService"
+        }
+    },
+    "dataProviders": {
+    },
+    "lifecycleHooks": {
+        "onMount": "initialize",
+        "onUnmount": "unMount"
+    }
+}

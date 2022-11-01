@@ -1,0 +1,633 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-panel.directive",
+        "js/aw-panel-body.directive",     
+        "js/aw-label.directive",
+        "js/aw-popup2.directive",
+        "js/aw-splitter.directive",
+        "js/aw-tab-set.directive",
+        "js/aw-list.directive",
+        "js/visible-when.directive",
+        "js/exist-when.directive",
+        "js/aw-sidenav.directive",
+        "js/aw-textarea.directive",
+        "js/aw-image.directive",
+        "js/aw-link.directive",
+        "js/aw-image-cell.directive",
+        "js/aw-button.directive",
+        "js/aw-scrollpanel.directive",
+        "js/aw-slider.directive",
+        "css/knowledgeWarehouseView.css"
+    ],
+    "actions": {
+        "test": {
+            "actionType": "dataProvider",
+            "methods": [
+                "recommendList",
+                "fileList"
+            ]
+        },
+        "reLoad": {
+            "actionType": "dataProvider",
+            "method": "comments"
+        },
+        "closePopup": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "getData": {
+            "actionType": "JSFunction",
+            "method": "getData",
+            "inputData": {
+                "data": "{{data}}",
+                "actions": "{{actions}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "buttonTest": {
+            "actionType": "JSFunction",
+            "method": "buttonTest",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "openBatch": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "buttonTest"
+                },
+                {
+                    "action": "filterOn"
+                }
+            ]
+        },
+        "filterOn": {
+            "actionType": "JSFunction",
+            "method": "show",
+            "inputData": {
+                "data": {
+                    "declView": "showFavorite",
+                    "options": {
+                        "reference": "referenceID",
+                        "forceCloseOthers": false,
+                        "width": 280,
+                        "height": 100,
+                        "placement": "bottom-end"
+                    }
+                }
+            },
+            "outputData": {
+                "popupId": "id"
+            },
+            "deps": "js/popupService"
+        },
+        "reviewSubmit": {
+            "actionType": "JSFunction",
+            "method": "reviewSubmit",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "loadComment": {
+            "actionType": "JSFunction",
+            "method": "loadComment",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "comments": "comments",
+                "totalFound": "totalFound"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "loadLists": {
+            "actionType": "JSFunction",
+            "method": "loadLists",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "lists": "lists",
+                "listsFound": "listsFound"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "loadRecommend":{
+            "actionType": "JSFunction",
+            "method": "loadRecommend",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "recommend": "recommend",
+                "recommendFound": "recommendFound"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "selectChange": {
+            "actionType": "JSFunction",
+            "method": "selectChange",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "deleteComment": {
+            "actionType": "JSFunction",
+            "method": "deleteComment",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "changeTrue": {
+            "actionType": "JSFunction",
+            "method": "changeTrue",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "editComment": {
+            "actionType": "JSFunction",
+            "method": "editComment",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "editModeComplete": {
+            "actionType": "JSFunction",
+            "method": "editModeComplete",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "editModeCancle": {
+            "actionType": "JSFunction",
+            "method": "editModeCancle",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "moveBefore": {
+            "actionType": "JSFunction",
+            "method": "moveBefore",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "moveAfter": {
+            "actionType": "JSFunction",
+            "method": "moveAfter",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "moveOrigin": {
+            "actionType": "JSFunction",
+            "method": "moveOrigin",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+            
+        },
+        "selectionAdd": {
+            "actionType": "JSFunction",
+            "method": "selectionAdd",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "tabChange":{
+            "actionType": "JSFunction",
+            "method": "tabChange",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "moreViewResizing":{
+            "actionType": "JSFunction",
+            "method": "moreViewResizing",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "dataReset":{
+            "actionType": "JSFunction",
+            "method": "dataReset",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "dataPropUpdate":{
+            "actionType": "JSFunction",
+            "method": "dataPropUpdate",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"
+        },
+        "changeImageView":{
+            "actionType": "JSFunction",
+            "method": "changeImageView",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"  
+        },
+        "changeTextView":{
+            "actionType": "JSFunction",
+            "method": "changeTextView",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/moreInfoService"  
+        },
+        "updateSliderValue": {
+            "actionType": "JSFunction",
+            "method": "updateSliderValue",
+            "inputData": {
+                "value": "{{prop.dbValue[0].sliderOption.value}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/moreInfoService"
+          },
+        "zoomReturn":{
+            "actionType": "JSFunction",
+            "method": "zoomReturn",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/moreInfoService"
+        }
+    },
+    "data": {
+        "source": {
+            "displayName": "{{i18n.source}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "docNo": {
+            "displayName": "{{i18n.docNo}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "pit": {
+            "displayName": "I-Grade",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "model": {
+            "displayName": "{{i18n.pageCode}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "grade": {
+            "displayName": "Grade",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "eventName": {
+            "displayName": "Event",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "issueDate": {
+            "displayName": "{{i18n.issueDate}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "creater": {
+            "displayName": "{{i18n.creator}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "issuePred":{
+            "displayName": "{{i18n.issuePred}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "orginText": {
+            "displayName": "{{i18n.origin}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "realModel":{
+            "displayName": "{{i18n.model}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "origin": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "moreInfoTab": [
+            {
+                "name": "{{i18n.tabInfo}}",
+                "tabKey": "showInfo"
+            },
+            {
+                "name": "{{i18n.tabComment}}",
+                "tabKey": "showReview"
+            }
+        ],
+        "image1": {
+            "dbValue": ""
+        },
+        "buttonStar": {
+            "action": "openBatch",
+            "iconName": "EmptyStar",
+            "tooltip": "{{i18n.Favorites}}"
+        },
+        "buttonStar1": {
+            "action": "filterOn",
+            "iconName": "EmptyStar",
+            "tooltip": "{{i18n.Favorites}}"
+        },
+        "buttonStar2": {
+            "action": "filterOn",
+            "iconName": "FilledStar",
+            "tooltip": "{{i18n.Favorites}}"
+        },
+        "favorite": {
+            "slide": "FLOAT",
+            "direction": "RIGHT_TO_LEFT",
+            "animation": false,
+            "width": "WIDE",
+            "height": "250"
+        },
+        "review": {
+            "displayName": "{{i18n.writeComment}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "requiredText": "{{i18n.buttonWrite}}",
+            "numberOfLines": 3
+        },
+        "leftArrow": {
+            "action": "moveBefore",
+            "iconName": "leftArrowIcon"
+        },
+        "rightArrow": {
+            "action": "moveAfter",
+            "iconName": "leftArrowIcon"
+        },
+        "leftArrow2": {
+            "iconName": "leftArrowIcon"
+        },
+        "rightArrow2": {
+            "iconName": "leftArrowIcon"
+        },
+        "listTab": [
+            {
+                "name": "{{i18n.tabRecommend}}",
+                "listKey": "showRecommend"
+            },
+            {
+                "name": "{{i18n.tabAll}}",
+                "listKey": "showFile"
+            }
+        ],
+        "button4": {
+            "action": "changeImageView",
+            "iconName": "Image",
+            "tooltip": "ImageView"
+        },
+        "button5": {
+            "action": "changeTextView",
+            "iconName": "TrackChanges",
+            "tooltip": "TextView"
+        },
+        "button6":{
+            "action": "zoomReturn",
+            "iconName": "Refresh",
+            "tooltip": "Return"
+        },
+        "zoomSliderProp": {
+            "isArray": "true",
+            "dbValue": [
+                {
+                    "sliderOption": {
+                        "disabled": false,
+                        "min": 0.5,
+                        "max": 3,
+                        "step": 0.1,
+                        "value": 1.00,
+                        "orientation": "horizontal",
+                        "range": false
+                    },
+                    "showIncrementButtons": true,
+                    "sliderChangeEventAction": "updateSliderValue"
+                }
+            ]
+          }
+    },
+    "dataProviders": {
+        "comments": {
+            "action": "loadComment",
+            "response": "{{data.comments}}",
+            "totalFound": "{{data.totalFound}}"
+        },
+        "fileList": {
+            "action": "loadLists",
+            "response": "{{data.lists}}",
+            "totalFound": "{{data.listsFound}}"
+        },
+        "recommendList":{
+            "action": "loadRecommend",
+            "response": "{{data.recommend}}",
+            "totalFound": "{{data.recommendFound}}"
+        }
+    },
+    "conditions": {
+        "showInfo": {
+            "expression": "data.moreInfoTab.tabKey === 'showInfo'"
+        },
+        "showReview": {
+            "expression": "data.moreInfoTab.tabKey === 'showReview'"
+        },
+        "showEmpty": {
+            "expression": "data.buttonStar.iconName === 'EmptyStar'"
+        },
+        "showFull": {
+            "expression": "data.buttonStar.iconName === 'FilledStar'"
+        },
+        "reviewWrite": {
+            "expression": "data.reviewComplete === undefine"
+        },
+        "checkEdit": {
+            "expression": "data.editMode === true"
+        },
+        "showFile":{
+            "expression": "data.listTab.tabKey === 'showFile'"
+        },
+        "showRecommend":{
+            "expression": "data.listTab.tabKey === 'showRecommend'"
+        }
+    },
+    "i18n": {
+        "buttonEdit2":[
+            "knowledgeSearchMessages"
+        ],
+        "buttonDelete":[
+            "knowledgeSearchMessages"
+        ],
+        "buttonWrite":[
+            "knowledgeSearchMessages"
+        ],
+        "buttonCancle":[
+            "knowledgeSearchMessages"
+        ],
+        "tabRecommend":[
+            "knowledgeSearchMessages"
+        ],
+        "tabAll":[
+            "knowledgeSearchMessages"
+        ],
+        "tabInfo":[
+            "knowledgeSearchMessages"
+        ],
+        "tabComment":[
+            "knowledgeSearchMessages"
+        ],
+        "origin":[
+            "knowledgeSearchMessages"
+        ],
+        "writeComment":[
+            "knowledgeSearchMessages"
+        ],
+        "Favorites":[
+            "knowledgeSearchMessages"
+        ],
+        "issueDate":[
+            "knowledgeSearchMessages"
+        ],
+        "pageCode":[
+            "knowledgeSearchMessages"
+        ],
+        "docNo":[
+            "knowledgeSearchMessages"
+        ],
+        "source":[
+            "knowledgeSearchMessages"
+        ],
+        "model":[
+            "knowledgeSearchMessages"
+        ],
+        "creator":[
+            "knowledgeSearchMessages"
+        ],
+        "issuePred":[
+            "knowledgeSearchMessages"
+        ]
+    },
+    "onEvent": [
+        {
+            "eventId": "popUp.closePopup",
+            "action": "closePopup"
+        },
+        {
+            "eventId": "moreInfo.contentLoaded",
+            "action": "getData"
+        },
+        {
+            "eventId": "commentComplete",
+            "action": "reLoad"
+        },
+        {
+            "eventId": "fileList.selectionChangeEvent",
+            "action": "selectChange"
+        },
+        {
+            "eventId": "recommendList.selectionChangeEvent",
+            "action": "selectChange"
+        },
+        {
+            "eventId": "update.comments",
+            "action": "reLoad"
+        },
+        {
+            "eventId": "comments.selectionChangeEvent",
+            "action": "changeTrue"
+        },
+        {
+            "eventId": "fileList.modelObjectsUpdated",
+            "action": "selectionAdd"
+        },
+        {
+            "eventId": "awTab.selected",
+            "action": "tabChange"
+        },
+        {
+            "eventId": "aw.windowResize",
+            "action": "moreViewResizing"
+        },
+        {
+            "eventId": "providerTest",
+            "action": "test"
+        },
+        {
+            "eventId": "removeMessages",
+            "action": "dataReset"
+        },
+        {
+            "eventId": "comments.modelObjectsUpdated",
+            "action": "dataPropUpdate"
+        }
+    ]
+}

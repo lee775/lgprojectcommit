@@ -1,0 +1,67 @@
+{
+  "name": "lgepFMEAInfo",
+  "description": "This is the lgepFMEAInfo module",
+  "skipTest": true,
+  "propertyRendererTemplates": {
+    "dfmeaTable_sevirity": {
+      "grids": ["dfmeaTable"],
+      "columns": ["L2_Severity"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "",
+      "renderFunction": "renderSeverityListbox",
+      "deps": "js/listboxRenderService",
+      "dependentServices": []
+    },
+    "dfmeaTable_occurence": {
+      "grids": ["dfmeaTable"],
+      "columns": ["L2_Occurence"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "",
+      "renderFunction": "renderOccurenceListbox",
+      "deps": "js/listboxRenderService",
+      "dependentServices": []
+    },
+    "dfmeaTable_detection": {
+      "grids": ["dfmeaTable"],
+      "columns": ["L2_Detection"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "",
+      "renderFunction": "renderDetectionListbox",
+      "deps": "js/listboxRenderService",
+      "dependentServices": []
+    },
+    "dfmeaTable_newSeverity": {
+      "grids": ["dfmeaTable"],
+      "columns": ["L2_Result_Severity"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "",
+      "renderFunction": "renderNewSevListbox",
+      "deps": "js/listboxRenderService",
+      "dependentServices": []
+    },
+    "dfmeaTable_newOccurence": {
+      "grids": ["dfmeaTable"],
+      "columns": ["L2_Result_Occurence"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "",
+      "renderFunction": "renderNewOccListbox",
+      "deps": "js/listboxRenderService",
+      "dependentServices": []
+    },
+    "dfmeaTable_newDetection": {
+      "grids": ["dfmeaTable"],
+      "columns": ["L2_Result_Detection"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "",
+      "renderFunction": "renderNewDetListbox",
+      "deps": "js/listboxRenderService",
+      "dependentServices": []
+    }
+  }
+}

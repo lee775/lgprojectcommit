@@ -1,0 +1,42 @@
+{
+    "commandHandlers": {
+        "cmdModelmgmtHandler": {
+            "id": "cmdModelmgmt",
+            "action": "activatecmdModelmgmt",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.onlyDBA"
+            }
+        }
+    },
+    "commandPlacements": {
+        "cmdModelmgmtaw_globalNavigationbar": {
+            "id": "cmdModelmgmt",
+            "uiAnchor": "aw_globalNavigationbar",
+            "priority": 90
+        }
+    },
+    "actions": {
+        "activatecmdModelmgmt": {
+            "actionType": "Navigate",
+            "navigateTo": "modelManagement",
+            "navigationParams": {}
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "onlyDBA": {
+            "expression": "ctx.userSession.props.role.uiValue == 'DBA'"
+        }
+    },
+    "i18n": {
+        "cmdModelmgmtTitle": [
+            "lgepModelmgmtMessages"
+        ],
+        "cmdModelmgmtDescription": [
+            "lgepModelmgmtMessages"
+        ]
+    }
+}

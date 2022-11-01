@@ -1,0 +1,780 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-panel.directive",
+        "js/aw-panel-section.directive",
+        "js/aw-scrollpanel.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-splitter.directive",
+        "js/aw-icon-button.directive",
+        "js/aw-list.directive",
+        "js/aw-default-cell.directive",
+        "js/aw-include.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-link.directive",
+        "js/aw-chip-list.directive",
+        "css/KnowledgeManageDashboardView.css"
+    ],
+    "actions": {
+        "setSearchAllPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setSearchAllPageNumber",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "getDataProvider": {
+            "actionType": "dataProvider",
+            "methods": [
+                "frequentlyList",
+                "qaAnswerList",
+                "faqList",
+                "techDocList",
+                "askExpertList"
+            ]
+        },
+        "searchJob": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "getDataProvider"
+                },
+                {
+                    "action": "setSearchAllPageNumber"
+                }
+            ]
+        },
+        "showPopupWithSharedData": {
+            "actionType": "JSFunction",
+            "method": "loadChart",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "showDetails": "chartResult"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "hidePopupWithSharedData": {
+            "actionType": "JSFunction",
+            "method": "closeChart",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "showDetails": "chartResult"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "doSearch": {
+            "actionType": "JSFunction",
+            "method": "doSearch",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "useTextSearch": {
+            "actionType": "JSFunction",
+            "method": "useTextSearch",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "goAllPage": {
+            "actionType": "JSFunction",
+            "method": "goAllPage",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "goQuestionAnswerPage": {
+            "actionType": "JSFunction",
+            "method": "goQuestionAnswerPage",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "goFaqPage": {
+            "actionType": "JSFunction",
+            "method": "goFaqPage",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "goTechnicalDocumentationPage": {
+            "actionType": "JSFunction",
+            "method": "goTechnicalDocumentationPage",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "goAskExpertPage": {
+            "actionType": "JSFunction",
+            "method": "goAskExpertPage",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "loadFrequentlyList": {
+            "actionType":"JSFunction",
+            "method":"loadFrequentlyList",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "searchFrequentlyResponse":"searchFrequentlyResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "loadAllList": {
+            "actionType":"JSFunction",
+            "method":"loadAllList",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "searchAllResponse":"searchAllResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "loadQnaList": {
+            "actionType":"JSFunction",
+            "method":"loadQnaList",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "searchQnaResponse":"searchQnaResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "loadFaqList": {
+            "actionType":"JSFunction",
+            "method":"loadFaqList",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "searchFaqResponse":"searchFaqResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "loadTechDocList": {
+            "actionType":"JSFunction",
+            "method":"loadTechDocList",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "searchTechResponse":"searchTechResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "loadAskExpertList": {
+            "actionType":"JSFunction",
+            "method":"loadAskExpertList",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "searchAskResponse":"searchAskResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardService"
+        },
+        "setQnaPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setQnaPageNumber",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData":{
+                "pageQnaResponse": "pageQnaResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "setAllPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setAllPageNumber",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData":{
+                "pageAllResponse": "pageAllResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "setTechDocPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setTechDocPageNumber",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData":{
+                "pageTechDocResponse": "pageTechDocResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "setFaqPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setFaqPageNumber",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData":{
+                "pageFaqResponse": "pageFaqResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "setAskExpertPageNumber": {
+            "actionType": "JSFunction",
+            "method": "setAskExpertPageNumber",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData":{
+                "pageAskExpertResponse": "pageAskExpertResponse"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "clickedQnaPageAction": {
+            "actionType": "JSFunction",
+            "method": "clickedQnaPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingBeforeQnaAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeQnaAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingAfterQnaAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterQnaAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "firstPageQnaAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageQnaAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "lastPageQnaAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageQnaAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "clickedAllPageAction": {
+            "actionType": "JSFunction",
+            "method": "clickedAllPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingBeforeAllAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeAllAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingAfterAllAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterAllAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "firstPageAllAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageAllAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "lastPageAllAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageAllAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "clickedTechDocPageAction": {
+            "actionType": "JSFunction",
+            "method": "clickedTechDocPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingBeforeTechDocAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeTechDocAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingAfterTechDocAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterTechDocAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "firstPageTechDocAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageTechDocAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "lastPageTechDocAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageTechDocAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "clickedFaqPageAction": {
+            "actionType": "JSFunction",
+            "method": "clickedFaqPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingBeforeFaqAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeFaqAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingAfterFaqAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterFaqAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "firstPageFaqAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageFaqAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "lastPageFaqAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageFaqAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "clickedAskExpertPageAction": {
+            "actionType": "JSFunction",
+            "method": "clickedAskExpertPageAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}",
+                "chip": "{{chip}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingBeforeAskExpertAction": {
+            "actionType": "JSFunction",
+            "method": "pagingBeforeAskExpertAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "pagingAfterAskExpertAction": {
+            "actionType": "JSFunction",
+            "method": "pagingAfterAskExpertAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "firstPageAskExpertAction": {
+            "actionType": "JSFunction",
+            "method": "firstPageAskExpertAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "lastPageAskExpertAction": {
+            "actionType": "JSFunction",
+            "method": "lastPageAskExpertAction",
+            "inputData":{
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/lgepNoticeBoardDashBoardPaging"
+        },
+        "resetCount":{
+            "actionType": "JSFunction",
+            "method": "resetCount",
+            "deps": "js/questionAnswer",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "KnowledgeManageDashboardChart.contentUnloaded",
+            "action": "searchAllList"
+        },
+        {
+            "eventId": "searchAllList.selectionChangeEvent",
+            "action": "goAllPage"
+        },
+        {
+            "eventId": "frequentlyList.selectionChangeEvent",
+            "action": "goAllPage"
+        },
+        {
+            "eventId": "qaAnswerList.selectionChangeEvent",
+            "action": "goQuestionAnswerPage"
+        },
+        {
+            "eventId": "faqList.selectionChangeEvent",
+            "action": "goFaqPage"
+        },
+        {
+            "eventId": "techDocList.selectionChangeEvent",
+            "action": "goTechnicalDocumentationPage"
+        },
+        {
+            "eventId": "askExpertList.selectionChangeEvent",
+            "action": "goAskExpertPage"
+        },
+        {
+            "eventId":"searchAllList.searchUpdated",
+            "action":"setSearchAllPageNumber"
+        },
+        {
+            "eventId": "searchedWordList.selectionChangeEvent",
+            "action": "useTextSearch"
+        },
+        {
+            "eventId": "$locationChangeStart",
+            "action": "resetCount"
+        },
+        {
+            "eventId": "paging.QnalistLoaded",
+            "action": "qaAnswerList"
+        },
+        {
+            "eventId": "paging.AlllistLoaded",
+            "action": "searchAllList"
+        },
+        {
+            "eventId": "paging.TechDoclistLoaded",
+            "action": "techDocList"
+        },
+        {
+            "eventId": "paging.FaqlistLoaded",
+            "action": "faqList"
+        },
+        {
+            "eventId": "paging.AskExpertlistLoaded",
+            "action": "askExpertList"
+        }
+    ],
+    "data": {
+        "searchBtn": {
+            "action": "doSearch",
+            "iconName": "Search",
+            "tooltip": "검색"
+        },
+        "chartButton": {
+            "action": "showPopupWithSharedData",
+            "iconName": "filter",
+            "tooltip": "Filter"
+        },
+        "listButton": {
+            "action": "hidePopupWithSharedData",
+            "iconName": "SummaryView",
+            "tooltip": "TableView"
+        },
+        "beforeQna":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterQna":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "firstPageQna":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPageQna":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforeAll":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterAll":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "firstPageAll":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPageAll":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforeTechDoc":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterTechDoc":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "firstPageTechDoc":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPageTechDoc":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforeFaq":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterFaq":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "firstPageFaq":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPageFaq":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "beforeAskExpert":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "afterAskExpert":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "firstPageAskExpert":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        },
+        "lastPageAskExpert":{
+            "displayName": "",
+            "uiValue": "",
+            "type": "STRING",
+            "isRequired": "false"
+        }
+    },
+    "dataProviders": {
+        "searchAllList":{
+            "action":"loadAllList",
+            "response":"{{data.searchAllResponse}}",
+            "totalFound": "{{data.searchAllResponse.length}}"
+        },
+        "frequentlyList":{
+            "action":"loadFrequentlyList",
+            "response":"{{data.searchFrequentlyResponse}}",
+            "totalFound": "{{data.searchFrequentlyResponse.length}}"
+        },
+        "qaAnswerList":{
+            "action":"loadQnaList",
+            "response":"{{data.searchQnaResponse}}",
+            "totalFound": "{{data.searchQnaResponse.length}}"
+        },
+        "faqList":{
+            "action":"loadFaqList",
+            "response":"{{data.searchFaqResponse}}",
+            "totalFound": "{{data.searchFaqResponse.length}}"
+        },
+        "techDocList":{
+            "action":"loadTechDocList",
+            "response":"{{data.searchTechResponse}}",
+            "totalFound": "{{data.searchTechResponse.length}}"
+        },
+        "askExpertList":{
+            "action":"loadAskExpertList",
+            "response":"{{data.searchAskResponse}}",
+            "totalFound": "{{data.searchAskResponse.length}}"
+        },
+        "qnaChipDataProvider": {
+            "type": "Static",
+            "action": "setQnaPageNumber",
+            "response": "{{data.pageQnaResponse}}",
+            "totalFound": "{{data.pageQnaResponse.length}}"
+        },
+        "searchChipDataProvider": {
+            "type": "Static",
+            "action": "setAllPageNumber",
+            "response": "{{data.pageAllResponse}}",
+            "totalFound": "{{data.pageAllResponse.length}}"
+        },
+        "techDocChipDataProvider": {
+            "type": "Static",
+            "action": "setTechDocPageNumber",
+            "response": "{{data.pageTechDocResponse}}",
+            "totalFound": "{{data.pageTechDocResponse.length}}"
+        },
+        "faqChipDataProvider": {
+            "type": "Static",
+            "action": "setFaqPageNumber",
+            "response": "{{data.pageFaqResponse}}",
+            "totalFound": "{{data.pageFaqResponse.length}}"
+        },
+        "askExpertChipDataProvider": {
+            "type": "Static",
+            "action": "setAskExpertPageNumber",
+            "response": "{{data.pageAskExpertResponse}}",
+            "totalFound": "{{data.pageAskExpertResponse.length}}"
+        }
+    },
+    "functions": {},
+    "lifecycleHooks": {
+        "onMount": "frequentlyList"
+    },
+    "conditions": {
+        "showDetails": {
+            "expression": "data.showDetails == true"
+        }
+    },
+    "i18n": {
+        "frequentlySearched": [ "lgepKnowldegeManageMessages" ],
+        "knowledgeSearch": [ "lgepKnowldegeManageMessages" ],
+        "EnterSearch": [ "lgepKnowldegeManageMessages" ],
+        "technicalDocumentationSubLocationTitle": [ "lgepKnowldegeManageMessages" ],
+        "askExpertSubLocationTitle": [ "lgepKnowldegeManageMessages" ],
+        "noSearch": [ "lgepKnowldegeManageMessages" ],
+        "classification": [ "lgepKnowldegeManageMessages" ],
+        "developmentKnowledge": [ "lgepKnowldegeManageMessages" ],
+        "reply": [ "lgepKnowldegeManageMessages" ],
+        "noPost": [ "lgepKnowldegeManageMessages" ]
+    }
+}

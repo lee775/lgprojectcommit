@@ -1,0 +1,60 @@
+.checklistMainTable {
+    border: 10px;
+    border-radius: 5px;
+    border-color: black;
+    background-color: wheat;
+}
+.tui-grid-tree-icon {
+    display: none;
+}
+
+.checklist-center {
+    text-align : center;
+}
+
+.checklist-contents {
+    word-break: break-all;
+}
+
+.checklist-open-view {
+    width: 100%;
+}
+
+.product-title{
+    margin-left: 50px;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.checklist-draggable-false {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+table td {
+    word-wrap:break-word !important;
+    white-space: normal !important;
+}
+
+/**** Interaction 관련 *****/
+/* target row  */
+.tui-grid-cell.tui-grid-cell-has-input.interaction-target-select {
+    background-color: #CFCFCF;
+}
+/* 영향 row */
+.tui-grid-cell.tui-grid-cell-has-input.interaction-check{
+    background-color: #CDE6EB;
+}
+
+div [class='note-editable'] {
+    background-color: #FFFFFF;
+}
+
+.checklist-job-progressing {
+    background-color: black;
+    opacity: 0.5;
+}

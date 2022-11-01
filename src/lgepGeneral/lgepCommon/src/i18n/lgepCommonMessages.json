@@ -1,0 +1,14 @@
+{
+    "commonFunctionFailed": "Function '{0}' Has been failed to execute.",
+    "header": "Header",
+    "body": "Body",
+    "footer": "Footer",
+    "checkBoxName": "Enable the OK button in footer",
+    "save": "Ok",
+    "textValue": "Contents here",
+    "commonTitle": "Common",
+    "commonDescription": "You can check questions and technical documents.",
+    "classificationCriteriaTitle": "classificationCriteria",
+    "classificationCriteriaDescription": "classificationCriteriaDescription",
+    "open":"Open"
+}

@@ -1,0 +1,28 @@
+{
+    "helloText": "!! Hello World !!",
+    "lgepUserManagementMessagesLocationTitle":"관리자 메뉴",
+    "lgepUserManagementMessagesSubLocationTitle":"유저관리",
+    "lgepUserManagementMessagesLocationBrowserTitle":"관리자 메뉴",
+    "lgepUserManagementMessagesLocationBrowserSubTitle":"유저관리",
+
+    "name":"사용자 명",
+    "expertStatus":"전문가 여부",
+    "expertCoverages":"전문 분야",
+    "knowledgePoint":"지식 포인트",
+    "questionCount":"질문 수",
+    "answerCount":"답변 수",
+    "selectAnswerCount":"채택 된 답변 수",
+    "likesCount":"받은 좋아요 수",
+
+    "noneSelUser": "수정 할 유저를 선택해주세요",
+    "close": "닫기",
+    "onlyNumber": "포인트지급은 숫자만 입력할 수 있습니다.",
+    "editSuccess": "정보 수정이 완료되었습니다.",
+    
+    "editUserCommandTitle": "수정",
+    "cmdUserManagementTitle": "유저 관리",
+    "cmdUserManagementDesc": "유저 정보를 수정하고 관리자 Pool을 관리합니다.",
+    "cmdUserLogsTitle": "유저 로그",
+    "cmdUserLogsDesc": "유저의 접속 기록을 관리합니다."
+
+}

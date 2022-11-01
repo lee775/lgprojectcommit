@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-tab-set.directive",
+    "js/aw-splm-table.directive",
+    "js/exist-when.directive",
+    "js/aw-label.directive",
+    "js/aw-widget.directive",
+    "css/L2_interactionView.css"
+  ],
+  "data": {
+    "selectPart": {
+      "displayName": "{{i18n.selectPart}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "effectType": {
+      "displayName": "{{i18n.effectType}}",
+      "type": "STRINGARRAY",
+      "isArray": true,
+      "dataProvider": "effectTypeProvider"
+    },
+    "effectTypes": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "tabModels": [
+      {
+        "name": "{{i18n.influencingSide}}",
+        "tabKey": "influencing"
+      },
+      {
+        "name": "{{i18n.affectedSide}}",
+        "tabKey": "affected"
+      }
+    ]
+  },
+  "actions": {
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "initAction",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "selectPart.dbValue": "result.selectPartName",
+        "selectPart.dispValue": "result.selectPartName",
+        "effectTypes.dbValue": "result.effectTypes"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckPanelService"
+    },
+    "loadInfluencingColumns": {
+      "actionType": "JSFunction",
+      "method": "loadColumns",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.influencingTableProvider}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckTableService"
+    },
+    "loadAffectedColumns": {
+      "actionType": "JSFunction",
+      "method": "loadColumns",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.affectedTableProvider}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckTableService"
+    },
+    "loadDataInfluencing": {
+      "actionType": "JSFunction",
+      "method": "loadDataInfluencing",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "influencingResults": "result.influencingResults",
+        "influencingTotalFound": "result.influencingTotalFound"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckTableService"
+    },
+    "loadDataAffected": {
+      "actionType": "JSFunction",
+      "method": "loadDataAffected",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "affectedResults": "result.affectedResults",
+        "affecteTotalFound": "result.affecteTotalFound"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckTableService"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRowAction",
+      "inputData": {
+        "selectionRow": "{{data.eventData.selectedObjects[0]}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckTableService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckPanelService"
+    },
+    "selectionEffectType": {
+      "actionType": "JSFunction",
+      "method": "selectionEffectType",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckPanelService"
+    },
+    "changeTab": {
+      "actionType": "JSFunction",
+      "method": "changeTab",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "tabKey": "{{data.selectedTab.tabKey}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckPanelService"
+    }
+  },
+  "columnProviders": {
+    "influencingTableColumnProvider": {
+      "loadColumnAction": "loadInfluencingColumns",
+      "frozenColumnIndex": -1
+    },
+    "affectedTableColumnProvider": {
+      "loadColumnAction": "loadAffectedColumns",
+      "frozenColumnIndex": -1
+    }
+  },
+  "dataProviders": {
+    "effectTypeProvider": {
+      "response": "{{data.effectTypes.dbValue}}",
+      "moreValuesExist": false
+    },
+    "influencingTableProvider": {
+      "action": "loadDataInfluencing",
+      "response": "{{data.influencingResults}}",
+      "totalFound": "{{data.influencingTotalFound}}"
+    },
+    "affectedTableProvider": {
+      "action": "loadDataAffected",
+      "response": "{{data.affectedResults}}",
+      "totalFound": "{{data.affecteTotalFound}}"
+    }
+  },
+  "grids": {
+    "influencingTable": {
+      "dataProvider": "influencingTableProvider",
+      "columnProvider": "influencingTableColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
+      }
+    },
+    "affectedTable": {
+      "dataProvider": "affectedTableProvider",
+      "columnProvider": "affectedTableColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
+      }
+    }
+  },
+  "lifecycleHooks": {
+    "onMount": "onMount",
+    "onUnmount": "unMount"
+  },
+  "conditions": {
+    "influencing": {
+      "expression": "data.selectedTab.tabKey === 'influencing'"
+    },
+    "affected": {
+      "expression": "data.selectedTab.tabKey === 'affected'"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "influencingTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    },
+    {
+      "eventId": "affectedTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    },
+    {
+      "eventId": "awTab.selected",
+      "action": "changeTab"
+    },
+    {
+      "eventId": "fmea.change.effectTypes",
+      "action": "selectionEffectType"
+    }
+  ],
+  "i18n": {
+    "L2_InteractionPanelCaption": ["L2_ChkMainMessages"],
+    "searc": ["lgepDFMEAViewMessages"],
+    "selectPart": ["lgepDFMEAViewMessages"],
+    "effectType": ["lgepDFMEAViewMessages"],
+    "influencingSide": ["lgepDFMEAViewMessages"],
+    "affectedSide": ["lgepDFMEAViewMessages"]
+  }
+}

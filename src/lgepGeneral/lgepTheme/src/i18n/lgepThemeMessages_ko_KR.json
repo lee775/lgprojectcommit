@@ -1,0 +1,14 @@
+{
+    "lgepThemeConfig": "테마 설정",
+    "lgepRedTitle": "LG Red",
+    "lgepGrayTitle": "LG Gray",
+    "lgepDarkTitle": "LG Dark",
+    "lgepWhiteTitle": "LG White",
+    "lgepMainTitleName" : "디지털 DGMS",
+    "lgepMainSubTitle": "홈",
+    "fontSizeSection": "폰트 사이즈 설정",
+    "setThemeConfig": "설정 저장",
+    "fontSizeWarningMsg": "폰트 사이즈는 10px 미만으로 설정할 수 없습니다.",
+    "fontSizeCompleteMsg": "테마 설정이 완료되었습니다.",
+    "fontSizeErrorMsg": "테마 설정에 실패하였습니다. 아래 에러 내용을 확인해주십시오."
+}

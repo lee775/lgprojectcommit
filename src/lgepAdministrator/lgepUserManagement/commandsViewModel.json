@@ -1,0 +1,128 @@
+{
+    "commands": {
+        "editUserCommand": {
+            "iconId": "cmdEdit",
+            "isGroup": false,
+            "title": "{{i18n.editUserCommandTitle}}"
+        },
+        "goToUserManagement": {
+            "iconId": "cmdSetProjectTeamAdmin",
+            "title": "{{i18n.cmdUserManagementTitle}}",
+            "description": "{{i18n.cmdUserManagementDesc}}"
+        },
+        "goToUserLogs": {
+            "iconId": "cmdLogging",
+            "title": "{{i18n.cmdUserLogsTitle}}",
+            "description": "{{i18n.cmdUserLogsDesc}}"
+        },
+        "cmdUserManagement": {
+            "iconId": "cmdUserAvailability",
+            "title": "{{i18n.cmdUserManagementTitle}}",
+            "description": "{{i18n.cmdUserManagementDesc}}"
+        }
+    },
+    "commandHandlers": {
+        "editUserCommandHandler": {
+            "id": "editUserCommand",
+            "action": "editUserCommandAction",
+            "activeWhen": true,
+            "visibleWhen": true,
+            "enableWhen": true
+        },
+        "goToUserManagementHandler": {
+            "id": "goToUserManagement",
+            "action": "activatecmdUserManagement",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.whenDba"
+            }
+        },
+        "goToUserLogsHandler": {
+            "id": "goToUserLogs",
+            "action": "activatecmdUserLogs",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.whenDba"
+            }
+        },
+        "cmdUserManagementHandler": {
+            "id": "cmdUserManagement",
+            "action": "activatecmdUserManagement",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.onlyDBA"
+            }
+        }
+    },
+    "commandPlacements": {
+        "editCommandPlace": {
+            "id": "editUserCommand",
+            "uiAnchor": "editCommand",
+            "priority": 100
+        },
+        "goToUserLogsaw_globalNavigationbar": {
+            "id": "goToUserLogs",
+            "parentGroupId": "classificationCriteria",
+            "priority": 80
+        },
+        "goToUserManagementaw_globalNavigationbar": {
+            "id": "goToUserManagement",
+            "parentGroupId": "classificationCriteria",
+            "priority": 90
+        }
+    },
+    "actions": {
+        "editUserCommandAction": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "userManagement.edit"
+                    }
+                ]
+            }
+        },
+        "activatecmdUserManagement":{
+            "actionType": "Navigate",
+            "navigateTo": "lgepUserManagement",
+            "navigationParams": {}
+        },
+        "activatecmdUserLogs":{
+            "actionType": "Navigate",
+            "navigateTo": "lgepUserLogs",
+            "navigationParams": {}
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        },
+        "tcWorkspace": {
+            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+        },
+        "selectedDba": {
+            "expression": "ctx.userSession.props.group_name.uiValue == 'dba'"
+        },
+        "onlyDBA": {
+            "expression": "ctx.userSession.props.role.uiValue == 'DBA'"
+        }
+    },
+    "i18n": {
+        "editUserCommandTitle": [
+            "lgepUserManagementMessages"
+        ],
+        "cmdUserManagementTitle": [
+            "lgepUserManagementMessages"
+        ],
+        "cmdUserManagementDesc": [
+            "lgepUserManagementMessages"
+        ],
+        "cmdUserLogsTitle": [
+            "lgepUserManagementMessages"
+        ],
+        "cmdUserLogsDesc": [
+            "lgepUserManagementMessages"
+        ]
+    }
+}

@@ -1,0 +1,310 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-popup2.directive",
+        "js/aw-panel.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-command-panel-section.directive",
+        "js/aw-list.directive",
+        "js/aw-listbox.directive",
+        "js/aw-guidance-message.directive",
+        "js/aw-break.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-textbox.directive",
+        "js/aw-i18n.directive",
+        "js/exist-when.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-button.directive"
+    ],
+    "onEvent": [
+    ],
+    "data": {
+        "upperAssy": {
+            "displayName": "상위 Assy 선택",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "upperAssyValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "Create New...",
+                    "propDisplayDescription": "Create a new structure and add it to checklist.",
+                    "propInternalValue": "Create New...",
+                    "iconName": "cmdAdd24.svg"
+                }
+            ]
+        },
+        "upperAssyName": {
+            "displayName": "상위 Assy 이름",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "lowerAssy": {
+            "displayName": "하위 Assy 선택",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "lowerAssyValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "Create New...",
+                    "propDisplayDescription": "Create a new structure and add it to checklist.",
+                    "propInternalValue": "Create New...",
+                    "iconName": "cmdAdd24.svg"
+                }
+            ]
+        },
+        "lowerAssyName": {
+            "displayName": "하위 Assy 이름",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "function": {
+            "displayName": "기능 선택",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "functionValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "Create New...",
+                    "propDisplayDescription": "Create a new structure and add it to checklist.",
+                    "propInternalValue": "Create New...",
+                    "iconName": "cmdAdd24.svg"
+                }
+            ]
+        },
+        "functionName": {
+            "displayName": "기능 내용",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "failure": {
+            "displayName": "고장 선택",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "failureValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "Create New...",
+                    "propDisplayDescription": "Create a new structure and add it to checklist.",
+                    "propInternalValue": "Create New...",
+                    "iconName": "cmdAdd24.svg"
+                }
+            ]
+        },
+        "failureName": {
+            "displayName": "고장 내용",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "referenceData": {
+            "displayName": "관련 자료(출처)",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "classification": {
+            "displayName": "분류",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "severity": {
+            "displayName": "심각도(Severity)",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "00",
+            "dispValue": "00"
+        },
+        "occurence": {
+            "displayName": "발생도(Occurence)",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "00",
+            "dispValue": "00"
+        },
+        "detection": {
+            "displayName": "검출도(Detection)",
+            "type": "STRING",
+            "isRequired": "true",
+            "hasLov": "true",
+            "dbValue": "00",
+            "dispValue": "00"
+        },
+        "SodValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "00",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "0"
+                },
+                {
+                    "propDisplayValue": "01",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "1"
+                },
+                {
+                    "propDisplayValue": "02",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "2"
+                },
+                {
+                    "propDisplayValue": "03",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "3"
+                },
+                {
+                    "propDisplayValue": "04",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "4"
+                },
+                {
+                    "propDisplayValue": "05",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "5"
+                },
+                {
+                    "propDisplayValue": "06",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "6"
+                },
+                {
+                    "propDisplayValue": "07",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "7"
+                },
+                {
+                    "propDisplayValue": "08",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "8"
+                },
+                {
+                    "propDisplayValue": "09",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "9"
+                },
+                {
+                    "propDisplayValue": "10",
+                    "propDisplayDescription": "",
+                    "propInternalValue": "10"
+                }
+            ]
+        }
+    },
+    "actions": {
+        "initialize": {
+            "actionType": "JSFunction",
+            "method": "initialize",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistRowEditService"
+        },
+        "upperAssyChanges": {
+            "actionType": "JSFunction",
+            "method": "upperAssyChanges",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistRowEditService"
+        },
+        "lowerAssyChanges": {
+            "actionType": "JSFunction",
+            "method": "lowerAssyChanges",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistRowEditService"
+        },
+        "functionChanges": {
+            "actionType": "JSFunction",
+            "method": "functionChanges",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistRowEditService"
+        },
+        "failureChanges": {
+            "actionType": "JSFunction",
+            "method": "failureChanges",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistRowEditService"
+        },
+        "createChecklistRow": {
+            "actionType": "JSFunction",
+            "method": "createChecklistRow",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistRowEditService"
+        }
+    },
+    "dataProviders": {
+    },
+    "lifecycleHooks": {
+        "onInit": "initialize"
+    },
+    "messages": {
+        "checklistAddRowHelp": {
+            "messageType": "INFO",
+            "messageText": "리스트에서 내용을 선택하면, 추가로 입력할 수 있는 내용이 출력됩니다. 내용을 선택해주세요."
+        }
+    },
+    "i18n": {
+        "functionDetail": ["L2_ChkMainMessages"],
+        "requirementDetail": ["L2_ChkMainMessages"],
+        "failureModeDetail": ["L2_ChkMainMessages"],
+        "failureEffect": ["L2_ChkMainMessages"],
+        "failureDetail": ["L2_ChkMainMessages"],
+        "prevention": ["L2_ChkMainMessages"],
+        "referenceData": ["L2_ChkMainMessages"],
+        "detectivity": ["L2_ChkMainMessages"],
+        "classification": ["L2_ChkMainMessages"]
+    }
+}

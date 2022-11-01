@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-column.directive"],
+  "actions": {
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onLoad",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/dfmeaMasterTextGridTableService"
+    },
+    "reLayout": {
+      "actionType": "JSFunction",
+      "method": "reLayout",
+      "deps": "js/dfmeaMasterTextGridTableService"
+    },
+    "updateTable": {
+      "actionType": "JSFunction",
+      "method": "updateTable",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/dfmeaMasterTextGridTableService"
+    },
+    "reLoad": {
+      "actionType": "JSFunction",
+      "method": "reLoad",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTextGridTableService"
+    },
+    "focusRow": {
+      "actionType": "JSFunction",
+      "method": "focusImgRow",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTableInteractionService"
+    },
+    "initSelectRow": {
+      "actionType": "JSFunction",
+      "method": "initSelectRow",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTextGridTableService"
+    },
+    "interactionFocusRow": {
+      "actionType": "JSFunction",
+      "method": "focusRowByInteraction",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTableInteractionService"
+    },
+    "initRest": {
+      "actionType": "JSFunction",
+      "method": "initRest",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTableInteractionService"
+    },
+    "initSelect": {
+      "actionType": "JSFunction",
+      "method": "initSelect",
+      "deps": "js/dfmeaMasterTableInteractionService"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "dfmea.textTable.reload",
+      "action": "reLoad"
+    },
+    {
+      "eventId": "dfmea.textTable.reLayout",
+      "action": "reLayout"
+    },
+    {
+      "eventId": "fmea.textTable.update",
+      "action": "updateTable"
+    },
+    {
+      "eventId": "fmea.textTable.initSelectRow",
+      "action": "initSelectRow"
+    },
+    {
+      "eventId": "fmea.textTable.focusInteraction",
+      "action": "interactionFocusRow"
+    },
+    {
+      "eventId": "fmea.textTable.initRest",
+      "action": "initRest"
+    },
+    {
+      "eventId": "fmea.textTable.initSelect",
+      "action": "initSelect"
+    }
+  ],
+  "lifecycleHooks": {
+    "onMount": "onMount"
+  }
+}

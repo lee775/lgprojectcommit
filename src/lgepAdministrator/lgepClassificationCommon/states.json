@@ -1,0 +1,42 @@
+{
+    "lgepProductStructure": {
+        "url": "/lgepProductStructure",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepProductStructureMessages",
+                "key": "lgepProductStructureSubLocationTitle"
+            },
+            "nameToken": "lgepProductStructure",
+            "clientScopeURI": ""
+        },
+        "view": "lgepProductStructure",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepClassificationCommonLocation"
+    },
+    
+    "lgepClassificationCommonLocation": {
+        "data": {
+            "browserTitle": {
+                "source": "/i18n/lgepClassificationCommonMessages",
+                "key": "lgepProductStructureSubLocationTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepClassificationCommonMessages",
+                "key": "lgepProductStructureSubLocationTitle"
+            },
+            "headerTitle": {
+                "source": "/i18n/lgepClassificationCommonMessages",
+                "key": "lgepProductStructureSubLocationTitle"
+            },
+            "label": {
+                "source": "/i18n/lgepClassificationCommonMessages",
+                "key": "lgepProductStructureSubLocationTitle"
+            }
+        },
+        "type": "location"
+    }
+}

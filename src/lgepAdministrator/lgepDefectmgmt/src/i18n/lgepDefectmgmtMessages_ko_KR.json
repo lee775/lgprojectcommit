@@ -1,0 +1,18 @@
+{
+    "helloText": "안녕 세계!!",
+    "defectmgmtHeaderTitle": "불량 분류 관리",
+    "defectmgmtBrowserTitle": "불량 분류 관리",
+    "defectmgmtBrowserSubTitle": "불량 분류 관리",
+    "defectmgmtLocationHeaderTitle": "불량 분류 관리",
+    "defectmgmtLocationBrowserTitle": "Digital DGMS",
+    "defectmgmtLocationBrowserSubTitle": "불량 분류 관리",
+    "defectmgmtSubLocationTitle": "불량 분류 관리",
+    "defectmgmtSubLocationChartTitle": "불량 분류 관리",
+    "cmdDefectmgmtTitle": "불량 분류 관리",
+    "cmdDefectmgmtDescription": "불량 분류 관리",
+    "treeHeaderDefect" : "불량 그룹",
+    "grouping" : "그룹 ",
+    "defect" : "불량",
+    "classification" : "분류 ",
+    "division": "부서"
+}

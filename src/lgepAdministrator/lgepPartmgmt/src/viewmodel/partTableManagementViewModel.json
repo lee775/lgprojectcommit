@@ -1,0 +1,258 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-column.directive",
+        "js/aw-splm-table.directive"
+    ],
+    "actions": {
+        "loadData": {
+            "actionType": "JSFunction",
+            "method": "partMgmtTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data":"{{data}}"
+            },
+            "outputData": {
+                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+            },
+            "deps": "js/partManagementService"
+        },
+        "partMgmtTree": {
+            "actionType": "JSFunction",
+            "method": "partMgmtTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data":"{{data}}"
+            },
+            "deps": "js/partManagementService"
+        },
+        "makeGroupBreadcrumb": {
+            "actionType": "JSFunction",
+            "method": "makeGroupBreadcrumb",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/partManagementService"
+        },
+        "makeBreadcrumb": {
+            "actionType": "JSFunction",
+            "method": "makeBreadcrumb",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "value": "{{data.eventData.selectedObjects[0]}}"
+            },
+            "deps": "js/partManagementService"
+        },
+        "getChildrenData": {
+            "actionType": "JSFunction",
+            "method": "getChildrenData",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "eventTable": "{{data.eventMap['partMgmtTreeDataProvider.selectionChangeEvent']}}"
+            },
+            "outputData": {
+                "example": "{{function:sortAction}}",
+                "totalFound": "totalFound"
+                
+            },
+            "deps": "js/partManagementService"
+        },
+        "reload": {
+            "actionType": "JSFunction",
+            "method": "reload",
+            "deps": "js/partManagementService"
+        },
+        "startEditAction": {
+            "actionType": "dataProvider",
+            "method": "partMgmtTableDataProvider",
+            "inputData": {
+                "action": "startEdit"
+            }
+        },
+        "saveEditAction": {
+            "actionType": "dataProvider",
+            "method": "partMgmtTableDataProvider",
+            "inputData": {
+                "action": "saveEdits"
+            }
+        },
+        "splmTableItemSaveEdit": {
+            "actionType": "JSFunction",
+            "method": "saveEmployeeItemEdits",
+            "deps": "js/partManagementService",
+            "inputData": {
+                "ctx":"{{ctx}}",
+                "data":"{{data}}"
+            }
+        },
+        "cancelEditItemAction": {
+            "actionType": "dataProvider",
+            "method": "partMgmtTableDataProvider",
+            "inputData": {
+                "action": "cancelEdits"
+            }
+        }
+    },
+    "data": {
+        "addPartTitle": {
+            "displayName": "title",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "pageSize": 40,
+        "partsLbl": {
+            "displayName": "{{i18n.grouping}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": "{{i18n.parts}}"
+        },
+        "classificationLbl": {
+            "displayName": "{{i18n.classification}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "provider": {
+            "crumbs": []
+        },
+        "partsConfig": {
+            "navigationPartsConfig": {
+                "type": "navigate",
+                "vm": "partManagementBreadcrumbList",
+                "chevronDataProvider": "partMgmtBreadcrumListData",
+                "id": "d_uids",
+                "noUpdate": true,
+                "displayProperty": "object_string",
+                "popuplist": "/html/partManagementBreadcrumbListView.html"
+            }
+        }
+    },
+    "dataProviders": {
+        "partMgmtTableDataProvider": {
+            "action": "getChildrenData",
+            "response": "{{data.example}}",
+            "totalFound": "{{data.totalFound}}",
+            "editConfig": {
+                "startEditAction": "getChildrenData",
+                "saveEditAction": "splmTableItemSaveEdit",
+                "identifier": "uid"
+            }
+        }
+    },
+    "columnProviders": {
+        "partMgmtTableColumnProvider": {
+            "frozenColumnIndex": -1,
+            "columns": [
+                {
+                    "name": "object_name",
+                    "displayName": "이름",
+                    "minWidth": 150,
+                    "width": 300,
+                    "isTableCommand": true,
+                    "pinnedLeft": false
+                },
+                {
+                    "name": "object_desc",
+                    "displayName": "{{i18n.division}}",
+                    "minWidth": 100,
+                    "width": 100
+                }
+            ]
+        }
+    },
+    "grids": {
+        "partMgmtTable": {
+            "dataProvider": "partMgmtTableDataProvider",
+            "columnProvider": "partMgmtTableColumnProvider",
+            "addIconColumn": true,
+            "gridOptions": {
+                "enablePinning": false,
+                "enableSorting": false,
+                "enableExpandAndPaginationInEdit": false,
+                "enableGridMenu": false,
+                "isFilteringEnabled": false
+            }
+        }
+    },
+    "functions": {
+        "loadEmployeeTreeTableData": {
+            "functionName": "loadEmployeeTreeTableData",
+            "parameters": [
+                "{{data.treeLoadInput.parentNode}}",
+                "{{data.columnProviders.partMgmtTreeColumnProvider.sortCriteria}}",
+                "{{data.treeLoadInput}}"
+            ]
+        },
+        "sortAction": {
+            "functionName": "sortAction",
+            "parameters": [
+                "{{data.columnProviders.partMgmtTableColumnProvider.sortCriteria}}",
+                "{{data.dataProviders.partMgmtTableDataProvider.startIndex}}",
+                "{{data.pageSize}}",
+                "{{data.columnProviders.partMgmtTableColumnProvider.columnFilters}}"
+            ]
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "partMgmtTreeDataProvider.selectionChangeEvent",
+            "action": "getChildrenData"
+        },
+        {
+            "eventId": "partMgmtTreeDataProvider.treeNodesLoaded",
+            "cacheEventData": true,
+            "action": "makeGroupBreadcrumb"
+        },
+        {
+            "eventId": "partMgmtTreeDataProvider.selectionChangeEvent",
+            "action": "reload"
+        },
+        {
+            "eventId": "partMgmtTreeDataProvider.selectionChangeEvent",
+            "condition": "data.dataProviders.partMgmtTreeDataProvider.selectedObjects.length == 1",
+            "cacheEventData": true,
+            "action": "makeBreadcrumb"
+        },
+        {
+            "eventId": "awp.startItemEdit",
+            "action": "startEditAction"
+        },
+        {
+            "eventId": "cdm.deleted",
+            "action": "reload"
+        },
+        {
+            "eventId": "awp.saveItemEdit",
+            "action": "saveEditAction"
+        },
+        {
+            "eventId": "awp.cancelItemEdit",
+            "action": "cancelEditItemAction"
+        }
+    ],
+    "i18n": {
+        "treeHeaderParts": [
+            "lgepPartmgmtMessages"
+        ],
+        "grouping": [
+            "lgepPartmgmtMessages"
+        ],
+        "parts": [
+            "lgepPartmgmtMessages"
+        ],
+        "classification": [
+            "lgepPartmgmtMessages"
+        ],
+        "division": [
+            "lgepPartmgmtMessages"
+        ]
+    }
+}

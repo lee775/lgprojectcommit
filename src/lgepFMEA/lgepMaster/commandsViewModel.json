@@ -1,0 +1,484 @@
+{
+  "commands": {
+    "structureAdd": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.addTitle}}",
+      "description": "{{i18n.structureAddDesc}}"
+    },
+    "structureDelete": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.deleteTitle}}",
+      "description": "{{i18n.structureDeleteDesc}}"
+    },
+    "structureEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.editTitle}}",
+      "description": "{{i18n.structureEditDesc}}"
+    },
+    "structureEditCancel": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.editCancelTitle}}",
+      "description": "{{i18n.structureEditCancelDesc}}"
+    },
+    "structureEditSave": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.editSaveTitle}}",
+      "description": "{{i18n.structureEditSaveDesc}}"
+    },
+    "functionAdd": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.addTitle}}",
+      "description": "{{i18n.functionAddDesc}}"
+    },
+    "functionDelete": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.deleteTitle}}",
+      "description": "{{i18n.functionDeleteDesc}}"
+    },
+    "functionEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.editTitle}}",
+      "description": "{{i18n.functionEditDesc}}"
+    },
+    "functionEditCancel": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.editCancelTitle}}",
+      "description": "{{i18n.functionEditCancelDesc}}"
+    },
+    "functionEditSave": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.editSaveTitle}}",
+      "description": "{{i18n.functionEditSaveDesc}}"
+    },
+    "failureAdd": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.addTitle}}",
+      "description": "{{i18n.failureAddDesc}}"
+    },
+    "failureDelete": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.deleteTitle}}",
+      "description": "{{i18n.failureDeleteDesc}}"
+    },
+    "failureEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.editTitle}}",
+      "description": "{{i18n.failureEditDesc}}"
+    },
+    "failureEditCancel": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.editCancelTitle}}",
+      "description": "{{i18n.failureEditCancelDesc}}"
+    },
+    "failureEditSave": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.editSaveTitle}}",
+      "description": "{{i18n.failureEditSaveDesc}}"
+    }
+  },
+  "commandHandlers": {
+    "structureAddHandler": {
+      "id": "structureAdd",
+      "action": "addStructure",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.addEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.addDeleteVisible"
+      }
+    },
+    "structureDeleteHandler": {
+      "id": "structureDelete",
+      "action": "deleteStructure",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.deleteEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.addDeleteVisible"
+      }
+    },
+    "structureEditHandler": {
+      "id": "structureEdit",
+      "action": "editStructure",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.deleteEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.editVisible"
+      }
+    },
+    "structureEditCancelHandler": {
+      "id": "structureEditCancel",
+      "action": "cancelEditStructure",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.editCancelSaveVisible"
+      }
+    },
+    "structureEditSaveHandler": {
+      "id": "structureEditSave",
+      "action": "saveEditStructure",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.editCancelSaveVisible"
+      }
+    },
+    "functionAddHandler": {
+      "id": "functionAdd",
+      "action": "addFunction",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.addEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.addDeleteVisible"
+      }
+    },
+    "functionDeleteHandler": {
+      "id": "functionDelete",
+      "action": "deleteFunction",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.deleteEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.addDeleteVisible"
+      }
+    },
+    "functionEditHandler": {
+      "id": "functionEdit",
+      "action": "editFunction",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.deleteEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.editVisible"
+      }
+    },
+    "functionEditCancelHandler": {
+      "id": "functionEditCancel",
+      "action": "cancelEditFunction",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.editCancelSaveVisible"
+      }
+    },
+    "functionEditSaveHandler": {
+      "id": "functionEditSave",
+      "action": "saveEditFunction",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.editCancelSaveVisible"
+      }
+    },
+    "failureAddHandler": {
+      "id": "failureAdd",
+      "action": "addFailure",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.addEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.addDeleteVisible"
+      }
+    },
+    "failureDeleteHandler": {
+      "id": "failureDelete",
+      "action": "deleteFailure",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.deleteEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.addDeleteVisible"
+      }
+    },
+    "failureEditHandler": {
+      "id": "failureEdit",
+      "action": "editFailure",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.deleteEnable"
+      },
+      "visibleWhen": {
+        "condition": "conditions.editVisible"
+      }
+    },
+    "failureEditCancelHandler": {
+      "id": "failureEditCancel",
+      "action": "cancelEditFailure",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.editCancelSaveVisible"
+      }
+    },
+    "failureEditSaveHandler": {
+      "id": "failureEditSave",
+      "action": "saveEditFailure",
+      "activeWhen": true,
+      "enableWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.editCancelSaveVisible"
+      }
+    }
+  },
+  "commandPlacements": {
+    "structureAddPlacements": {
+      "id": "structureAdd",
+      "uiAnchor": "fmea_structure_table_list_commands",
+      "priority": 100
+    },
+    "structureDeletePlacements": {
+      "id": "structureDelete",
+      "uiAnchor": "fmea_structure_table_list_commands",
+      "priority": 200
+    },
+    "structureEditPlacements": {
+      "id": "structureEdit",
+      "uiAnchor": "fmeaStructure_summary_list_commands",
+      "priority": 100
+    },
+    "structureEditCancelPlacements": {
+      "id": "structureEditCancel",
+      "uiAnchor": "fmeaStructure_summary_list_commands",
+      "priority": 200
+    },
+    "structureEditSavePlacements": {
+      "id": "structureEditSave",
+      "uiAnchor": "fmeaStructure_summary_list_commands",
+      "priority": 100
+    },
+    "functionAddPlacements": {
+      "id": "functionAdd",
+      "uiAnchor": "fmfunction_table_list_commands",
+      "priority": 100
+    },
+    "functionDeletePlacements": {
+      "id": "functionDelete",
+      "uiAnchor": "fmfunction_table_list_commands",
+      "priority": 200
+    },
+    "functionEditPlacements": {
+      "id": "functionEdit",
+      "uiAnchor": "fmfunction_summary_list_commands",
+      "priority": 100
+    },
+    "functionEditCancelPlacements": {
+      "id": "functionEditCancel",
+      "uiAnchor": "fmfunction_summary_list_commands",
+      "priority": 200
+    },
+    "functionEditSavePlacements": {
+      "id": "functionEditSave",
+      "uiAnchor": "fmfunction_summary_list_commands",
+      "priority": 100
+    },
+    "failureAddPlacements": {
+      "id": "failureAdd",
+      "uiAnchor": "fmfailure_table_list_commands",
+      "priority": 100
+    },
+    "failureDeletePlacements": {
+      "id": "failureDelete",
+      "uiAnchor": "fmfailure_table_list_commands",
+      "priority": 200
+    },
+    "failureEditPlacements": {
+      "id": "failureEdit",
+      "uiAnchor": "fmfailure_summary_list_commands",
+      "priority": 100
+    },
+    "failureEditCancelPlacements": {
+      "id": "failureEditCancel",
+      "uiAnchor": "fmfailure_summary_list_commands",
+      "priority": 200
+    },
+    "failureEditSavePlacements": {
+      "id": "failureEditSave",
+      "uiAnchor": "fmfailure_summary_list_commands",
+      "priority": 100
+    }
+  },
+  "actions": {
+    "addStructure": {
+      "actionType": "JSFunction",
+      "method": "openSubPanel",
+      "deps": "js/utils/fmeaPanelUtils",
+      "inputData": {
+        "id": "fmeaStructureCreate",
+        "view": "structuremasterCreate"
+      }
+    },
+    "deleteStructure": {
+      "actionType": "JSFunction",
+      "method": "deleteAction",
+      "deps": "js/cmDeleteService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editStructure": {
+      "actionType": "JSFunction",
+      "method": "editAction",
+      "deps": "js/structureEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "cancelEditStructure": {
+      "actionType": "JSFunction",
+      "method": "cancelEdit",
+      "deps": "js/structureEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "saveEditStructure": {
+      "actionType": "JSFunction",
+      "method": "saveEdit",
+      "deps": "js/structureEditService"
+    },
+    "addFunction": {
+      "actionType": "JSFunction",
+      "method": "openMasterCreatePopup",
+      "deps": "js/utils/fmeaPopupUtils",
+      "inputData": {
+        "htmlPanel": "functionmasterCreate",
+        "title:": "{{i18n.functionCaption}}",
+        "type": "L2_FMEAFunc"
+      }
+    },
+    "deleteFunction": {
+      "actionType": "JSFunction",
+      "method": "deleteAction",
+      "deps": "js/cmDeleteService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editFunction": {
+      "actionType": "JSFunction",
+      "method": "editAction",
+      "deps": "js/functionEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "cancelEditFunction": {
+      "actionType": "JSFunction",
+      "method": "cancelEdit",
+      "deps": "js/functionEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "saveEditFunction": {
+      "actionType": "JSFunction",
+      "method": "saveEdit",
+      "deps": "js/functionEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "addFailure": {
+      "actionType": "JSFunction",
+      "method": "openMasterCreatePopup",
+      "deps": "js/utils/fmeaPopupUtils",
+      "inputData": {
+        "htmlPanel": "failuremasterCreate",
+        "title:": "{{i18n.failureCaption}}",
+        "type": "L2_FMEAFailure"
+      }
+    },
+    "deleteFailure": {
+      "actionType": "JSFunction",
+      "method": "deleteAction",
+      "deps": "js/cmDeleteService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "editFailure": {
+      "actionType": "JSFunction",
+      "method": "editAction",
+      "deps": "js/failureEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "cancelEditFailure": {
+      "actionType": "JSFunction",
+      "method": "cancelEdit",
+      "deps": "js/failureEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "saveEditFailure": {
+      "actionType": "JSFunction",
+      "method": "saveEdit",
+      "deps": "js/failureEditService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    }
+  },
+  "conditions": {
+    "dfmealocation": {
+      "expression": "ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklist'"
+    },
+    "fmealocation": {
+      "expression": "ctx.locationContext['ActiveWorkspace:Location'] === 'fmasterlocation'"
+    },
+    "addDeleteVisible": {
+      "expression": "conditions.fmealocation && ctx.fmea_table_init"
+    },
+    "addEnable": {
+      "expression": "conditions.fmealocation && ctx.fmea_editing !== true && ctx.fmea_popup !== true"
+    },
+    "editVisible": {
+      "expression": "conditions.fmealocation && ctx.fmea_row_select && ctx.fmea_editing !== true && ctx.fmea_popup !== true"
+    },
+    "editCancelSaveVisible": {
+      "expression": "conditions.fmealocation && ctx.fmea_editing === true && ctx.fmea_popup !== true"
+    },
+    "deleteEnable": {
+      "expression": "conditions.fmealocation && ctx.fmea_row_select && ctx.fmea_editing !== true && !(ctx.sidenavCommandId) && ctx.fmea_popup !== true"
+    }
+  },
+  "i18n": {
+    "addTitle": ["lgepMasterMessages"],
+    "structureAddDesc": ["lgepMasterMessages"],
+    "deleteTitle": ["lgepMasterMessages"],
+    "structureDeleteDesc": ["lgepMasterMessages"],
+    "editTitle": ["lgepMasterMessages"],
+    "structureEditDesc": ["lgepMasterMessages"],
+    "editCancelTitle": ["lgepMasterMessages"],
+    "structureEditCancelDesc": ["lgepMasterMessages"],
+    "editSaveTitle": ["lgepMasterMessages"],
+    "structureEditSaveDesc": ["lgepMasterMessages"],
+    "functionAddDesc": ["lgepMasterMessages"],
+    "functionDeleteDesc": ["lgepMasterMessages"],
+    "functionEditDesc": ["lgepMasterMessages"],
+    "functionEditCancelDesc": ["lgepMasterMessages"],
+    "functionEditSaveDesc": ["lgepMasterMessages"],
+    "failureAddDesc": ["lgepMasterMessages"],
+    "failureDeleteDesc": ["lgepMasterMessages"],
+    "failureEditDesc": ["lgepMasterMessages"],
+    "failureEditSaveDesc": ["lgepMasterMessages"],
+    "isUnPin": ["lgepMasterMessages"],
+    "isUnPinDesc": ["lgepMasterMessages"],
+    "functionCaption": ["lgepMasterViewMessages"],
+    "failureCaption": ["lgepMasterViewMessages"],
+    "failureEditCancelDesc": ["lgepMasterMessages"]
+  }
+}

@@ -1,0 +1,38 @@
+{
+    "lgepUserLogs": {
+        "url": "/lgepUserLogs",
+        "data": {
+            "label": {
+                "source": "/i18n/lgepUserLogsMessages",
+                "key": "lgepUserLogsMessagesSubLocationTitle"
+            },
+            "nameToken": "lgepUserLogs",
+            "clientScopeURI": ""
+        },
+        "view": "lgepUserLogs",
+        "dependencies": [
+            "js/aw.native.sublocation.controller"
+        ],
+        "templateUrl": "/html/aw.native.sublocation.html",
+        "type": "subLocation",
+        "parent": "lgepUserLogsLocation"
+    },
+    "lgepUserLogsLocation": {
+        "data": {
+            "headerTitle": {
+                "source": "/i18n/lgepUserLogsMessages",
+                "key": "lgepUserLogsMessagesLocationTitle"
+            },
+            "browserTitle": {
+                "source": "/i18n/lgepUserLogsMessages",
+                "key": "lgepUserLogsMessagesLocationBrowserTitle"
+            },
+            "browserSubTitle": {
+                "source": "/i18n/lgepUserLogsMessages",
+                "key": "lgepUserLogsMessagesLocationBrowserSubTitle"
+            },
+            "viewBase": "lgepUserLogs"
+        },
+        "type": "location"
+    }
+}

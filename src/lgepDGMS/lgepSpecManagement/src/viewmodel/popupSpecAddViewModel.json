@@ -1,0 +1,207 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-file-upload.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-label.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-popup2.directive",
+        "js/aw-textbox.directive",
+        "js/aw-xrt.directive"
+    ],
+    "actions": {
+        "closeAddPopup": {
+            "actionType": "JSFunction",
+            "method": "closeAddPopup",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "linkRelationSpec": {
+            "actionType": "JSFunction",
+            "method": "linkRelationSpec",
+            "inputData": {
+                "value": "{{data.createdItem}}",
+                "dataset": "{{data.dataset}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "reload": {
+            "actionType": "JSFunction",
+            "method": "reload",
+            "deps": "js/SpecManagementService"
+        },
+        "createSpecData": {
+            "actionType": "JSFunction",
+            "method": "createSpecData",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "addModel": {
+            "actionType": "JSFunction",
+            "method": "addModel",
+            "deps": "js/SpecManagementService"
+        },
+        "addParts": {
+            "actionType": "JSFunction",
+            "method": "addParts",
+            "deps": "js/SpecManagementService"
+        },
+        "modelAddNameReset": {
+            "actionType": "JSFunction",
+            "method": "modelAddNameReset",
+            "deps": "js/SpecManagementService"
+        },
+        "partsAddNameReset": {
+            "actionType": "JSFunction",
+            "method": "partsAddNameReset",
+            "deps": "js/SpecManagementService"
+        },
+        "saveAddData": {
+            "actionType":"JSFunction",
+            "method":"saveAddData",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "loadAddData": {
+            "actionType":"JSFunction",
+            "method":"loadAddData",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "openAddModel": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "saveAddData"
+                },
+                {
+                    "action": "modelAddNameReset"
+                },
+                {                    
+                    "action": "addModel"
+                }
+            ]
+        },
+        "openAddParts": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "saveAddData"
+                },
+                {
+                    "action": "partsAddNameReset"
+                },
+                {                    
+                    "action": "addParts"
+                }
+            ]
+        },
+        "updateFormData": {
+            "actionType": "JSFunction",
+            "method": "updateFormData",
+            "inputData": {
+                "fileData": {
+                    "key": "name",
+                    "value": "{{data.fileName}}"
+                },
+                "data": "{{data}}"
+            },
+            "deps": "js/declUtils"
+        },
+        "uploadFileToDataset": {
+            "actionType": "JSFunction",
+            "method": "uploadFileToDataset",
+            "inputData": {
+                "fileData": "{{data.formData}}"
+            },
+            "events": {
+                "success": [
+                    {
+                        "name": "fileUploaded"
+                    }
+                ]
+            },
+            "deps": "js/SpecManagementService"
+          },
+        "clearFileSelection": {
+            "actionType": "JSFunction",
+            "method": "clearFileSelection",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/SpecManagementService"
+        },
+        "uploadNCreate": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "uploadFileToDataset"
+                },
+                {
+                    "action": "createSpecData"
+                },
+                {
+                    "action": "linkRelationSpec"
+                }
+            ]
+        }
+    },
+    "data": {
+        "ref_ModelsTxtBox": {
+            "displayName": "{{i18n.ref_model}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "ref_PartsTxtBox": {
+            "displayName": "{{i18n.ref_parts}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "uploadLbl": {
+            "displayName": "{{i18n.imageUp}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "functions": {},
+    "i18n": {
+        "ref_model": ["lgepSpecManagementMessages"],
+        "ref_parts": ["lgepSpecManagementMessages"],
+        "imageUp": ["lgepSpecManagementMessages"],
+        "findBtn": ["lgepSpecManagementMessages"],
+        "addBtn": ["lgepSpecManagementMessages"],
+        "close": ["lgepSpecManagementMessages"],
+        "ref_properties": ["lgepSpecManagementMessages"]
+    },
+    "lifecycleHooks": {},
+    "onEvent": [
+        {
+            "eventId": "cdm.updated",
+            "action": "closePopupWindow"
+        },
+        {
+            "eventId": "awXRT.contentLoaded",
+            "action": "loadAddData"
+        }
+    ]
+}

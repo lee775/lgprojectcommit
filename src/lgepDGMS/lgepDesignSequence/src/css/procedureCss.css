@@ -1,0 +1,180 @@
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.btnTop {
+    padding: 7px 7px;
+}
+
+.txtTop {
+    margin-top: 8px;
+}
+
+.tableTop {
+    height: 30px;
+}
+
+.docHeader {
+    margin-top: 12px;
+}
+
+.checkCate {
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.commandbar {
+    margin-right: 40px;
+}
+
+.addCheckTap {
+    margin-right: 2%;
+    padding: 0 35px;
+}
+
+.marginD {
+    margin: 0;
+}
+
+.mama {
+    padding: 0 15px;
+}
+
+.bye .aw-splm-tableHeaderRow {
+    display: none;
+}
+
+.bye .aw-splm-tableMenuButton {
+    display: none;
+}
+
+.tabtab {
+    margin-right: 40px;
+}
+
+form div div.aw-file-upload-fileName.ng-binding.ng-scope {
+    display: none;
+}
+
+.fileBtn div div.aw-file-upload-fileLabel.ng-binding {
+    background-color: #dc6914;
+    border-color: #843f0c;
+    color: #ffffff;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-height: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 0px 25px 0px 25px;
+}
+
+.fileBtn {
+    margin-top: 8px;
+    margin-right: -8px;
+    margin-left: -8px;
+}
+
+.noPading {
+    padding: 0;
+    overflow: scroll;
+}
+
+.noColor {
+    background: #F0F0F0;
+}
+
+.checkBoxCenter {
+    margin-top: 0.9%;
+    width: 11%;
+}
+
+.checkBoxCenter .aw-widgets-propertyContainer.aw-layout-flexRow {
+    margin-left: 40%;
+}
+
+.flas {
+    float: left;
+}
+
+.noSelCenter {
+    text-align: center;
+}
+
+.noneToolbar {
+    display: none;
+}
+
+.noneDisplay {
+    display: none;
+}
+
+.rowBasisDefault {
+    flex-basis: 114px;
+}
+
+.summernoteBasisDefault {
+    flex-basis: 1204px;
+}
+
+#checkBoxCssId>div>aw-property-label {
+    margin-right: -258px;
+}
+
+#checkBoxCssId>div>div {
+    margin-right: -207px;
+}
+
+#summernoteId>div>aw-panel-body>div:nth-child(2)>div>div.note-editing-area>div.note-editable {
+    background-color: white !important;
+}
+
+#sequenceTree,
+#sequenceTreeNav>div>aw-include>div>div>div.aw-layout-panelMain>div {
+    border: none;
+}
+
+#sequenceTree>div.aw-splm-tableContainer>div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft>div.aw-splm-tableCanvas.aw-splm-tableViewport>div>div {
+    border-color: rgb(51, 56, 60);
+}
+
+#labelMargin>div {
+    margin: 0 30px;
+    margin-right: 60px;
+}
+
+.se-shape {
+    z-index: 50000 !important;
+}
+
+#summernoteId>div>aw-panel-body>div:nth-child(2)>div>div.note-editing-area>div.note-editable>div>p {
+    color: black !important;
+}
+
+#proceduerThemeRow>div>aw-togglebutton>div {
+    margin-left: 130px;
+}
+
+#proceduerThemeRow>div>aw-togglebutton>div>aw-property-label>div>div {
+    margin-left: 35px;
+    margin-top: 15px;
+}
+
+#proceduerThemeRow>div>aw-togglebutton>div>div>aw-property-toggle-button-val>aw-property-error>div>span>label {
+    margin-top: 10;
+    margin-top: 12px;
+}
+
+#labelMargin > div > div > aw-property-non-edit-val > div > div > span.aw-jswidgets-text.ng-isolate-scope{
+    margin-right: -190px;
+}
+
+.marginLeft{
+    margin-left: 10px;
+}

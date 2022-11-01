@@ -1,0 +1,28 @@
+<aw-popup2>
+    <style>
+        .btnSize {
+            padding: 15px 45px;
+        }
+    </style>
+    <aw-panel-body class="afx-alt-content-background">
+        <aw-flex-row>
+            <aw-flex-column height="auto">
+                <aw-label prop="data.type"></aw-label>
+                <aw-label prop="data.rev"></aw-label>
+                <aw-label prop="data.docNumber"></aw-label>
+                <aw-label prop="data.title"></aw-label>
+                <aw-label prop="data.user"></aw-label>
+                <aw-label prop="data.createDate"></aw-label>
+                <aw-label prop="data.system"></aw-label>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-body>
+    <aw-separator></aw-separator>
+
+    <aw-panel-footer>
+        <aw-flex-row justify="center">
+            <aw-button action="designPopup" size="auto" class="btnSize">{{i18n.close}}
+            </aw-button>
+        </aw-flex-row>
+    </aw-panel-footer>
+</aw-popup2>

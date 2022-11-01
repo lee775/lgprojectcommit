@@ -1,0 +1,49 @@
+.action-summary__editor-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-summary__editor-section>label {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.table-command {
+  display: felx;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fmea-splitter {
+  display: block;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false],
+.note-editor.note-airframe .note-editing-area .note-editable[contenteditable=false] {
+  background-color: #fff;
+}
+
+.table-container {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  min-width: 800px;
+}
+.right-view{
+  min-width: 1000px;
+}
+
+@media (max-width: 768px) {
+  .fmea-splitter {
+    display: none;
+  }
+
+  .fmea-view {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left-view,
+  .right-view {
+    padding: 0 10px 0 10px;
+  }
+}

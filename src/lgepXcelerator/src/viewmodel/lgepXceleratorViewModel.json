@@ -1,0 +1,159 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-label.directive",
+        "js/aw-link.directive",
+        "js/aw-tab-set.directive",
+        "js/visible-when.directive"
+    ],
+    "data": {
+        "tabModels": [
+            {
+                "name": "링크1",
+                "tabKey": "link1"
+            },
+            {
+                "name": "링크2",
+                "tabKey": "link2"
+            },
+            {
+                "name": "링크3",
+                "tabKey": "link3"
+            },
+            {
+                "name": "링크4",
+                "tabKey": "link4"
+            },
+            {
+                "name": "링크5",
+                "tabKey": "link5"
+            }
+        ],
+        "link1": {
+            "displayName":"{{i18n.link1}}",
+            "type": "STRING",
+            "isRequired": false
+        },        
+        "link2": {
+            "displayName":"{{i18n.link2}}",
+            "type": "STRING",
+            "isRequired": false
+        },
+        "link3": {
+            "displayName":"{{i18n.link3}}",
+            "type": "STRING",
+            "isRequired": false
+        },
+        "link4": {
+            "displayName":"{{i18n.link4}}",
+            "type": "STRING",
+            "isRequired": false
+        },
+        "link5": {
+            "displayName":"{{i18n.link5}}",
+            "type": "STRING",
+            "isRequired": false
+        },
+        "link1Text": {
+            "displayName": "링크1",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "link2Text": {
+            "displayName": "링크2",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "link3Text": {
+            "displayName": "링크3",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "link4Text": {
+            "displayName": "링크4",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        },
+        "link5Text": {
+            "displayName": "링크5",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true"
+        }
+    },
+    "actions": {
+        "moveLink1": {
+            "actionType": "Navigate",
+            "navigateIn": "newTab",
+            "navigateTo": "https://siemens.highspot.com/items/60ed91afc79c52446dd1886d?lfrm=srp.16",
+            "navigationParams": {}
+        },
+        "moveLink2": {
+            "actionType": "Navigate",
+            "navigateIn": "newTab",
+            "navigateTo": "https://siemens.highspot.com/items/5efcbbbe659e934e26658e3c?lfrm=srp.60",
+            "navigationParams": {}
+        },
+        "moveLink3": {
+            "actionType": "Navigate",
+            "navigateIn": "newTab",
+            "navigateTo": "https://siemens.highspot.com/items/62396c7fc0fcd128c81caf1c?lfrm=srp.69",
+            "navigationParams": {}
+        },
+        "moveLink4": {
+            "actionType": "Navigate",
+            "navigateIn": "newTab",
+            "navigateTo": "https://siemens.highspot.com/items/6131c3134a74c854956d04f5?lfrm=srp.124",
+            "navigationParams": {}
+        },
+        "moveLink5": {
+            "actionType": "Navigate",
+            "navigateIn": "newTab",
+            "navigateTo": "https://siemens.highspot.com/items/60f6a5976a3b1177c3a31140?lfrm=irel.0",
+            "navigationParams": {}
+        },
+        "loadLink":{
+            "actionType": "JSFunction",
+            "method": "loadLink",
+            "deps": "js/lgepXceleratorService",
+            "inputData": {
+                "data":"{{data}}",
+                "ctx":"{{ctx}}"
+            }
+        }
+    },
+    "lifecycleHooks": {
+        "onMount": "loadLink"
+    },
+    "i18n": {
+        "helloText": [ "lgepXceleratorMessages" ],
+        "link1":"https://siemens.highspot.com/items/60ed91afc79c52446dd1886d?lfrm=srp.16",
+        "link2":"https://siemens.highspot.com/items/5efcbbbe659e934e26658e3c?lfrm=srp.60",
+        "link3":"https://siemens.highspot.com/items/62396c7fc0fcd128c81caf1c?lfrm=srp.69",
+        "link4":"https://siemens.highspot.com/items/6131c3134a74c854956d04f5?lfrm=srp.124",
+        "link5":"https://siemens.highspot.com/items/60f6a5976a3b1177c3a31140?lfrm=irel.0"
+    },
+    "conditions": {
+        "link1": {
+            "expression": "data.selectedTab.tabKey === 'link1'"
+        },
+        "link2": {
+            "expression": "data.selectedTab.tabKey === 'link2'"
+        },
+        "link3": {
+            "expression": "data.selectedTab.tabKey === 'link3'"
+        },
+        "link4": {
+            "expression": "data.selectedTab.tabKey === 'link4'"
+        },
+        "link5": {
+            "expression": "data.selectedTab.tabKey === 'link5'"
+        }
+    }
+}

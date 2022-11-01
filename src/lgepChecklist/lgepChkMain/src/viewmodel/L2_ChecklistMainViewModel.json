@@ -1,0 +1,90 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-panel.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-command-bar.directive",
+        "js/visible-when.directive",
+        "js/aw-flex-row.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-sidenav.directive",
+        "css/L2_ChecklistMain.css"
+    ],
+    "onEvent": [],
+    "data": {
+        "tableMode": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "dbValue": "1",
+            "dispValue": "Image View"
+        },
+        "tableModeValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "Image View",
+                    "propDisplayDescription": "",
+                    "dispValue": "Image View",
+                    "propInternalValue": "1",
+                    "iconName": "cmdImage"
+                },
+                {
+                    "propDisplayValue": "Table View",
+                    "propDisplayDescription": "",
+                    "dispValue": "Table View",
+                    "propInternalValue": "2",
+                    "iconName": "cmdTableView"
+                },
+                {
+                    "propDisplayValue": "Tree View",
+                    "propDisplayDescription": "",
+                    "dispValue": "Tree View",
+                    "propInternalValue": "3",
+                    "iconName": "cmdTreeView"
+                }
+            ]
+        },
+        "interactionInfo": {
+            "slide": "FLOAT",
+            "direction": "RIGHT_TO_LEFT",
+            "animation": false,
+            "width": "WIDE",
+            "height": "FULL"
+        }
+    },
+    "actions": {
+        "initialize": {
+            "actionType": "JSFunction",
+            "method": "initialize",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistMainService"
+        },
+        "tableModeChanges": {
+            "actionType": "JSFunction",
+            "method": "tableModeChanges",
+            "inputData": {
+                "currentValue": "{{data.tableMode.dbValue}}"
+            },
+            "deps": "js/L2_ChecklistMainService"
+        },
+        "unMount": {
+            "actionType": "JSFunction",
+            "method": "unMount",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "deps": "js/L2_ChecklistMainService"
+        }
+    },
+    "lifecycleHooks": {
+        "onMount": "initialize",
+        "onUnmount": "unMount"
+    }
+}

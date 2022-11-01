@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-column.directive"],
+  "actions": {
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onLoad",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/dfmeaMasterImageTableService"
+    },
+    "reLayout": {
+      "actionType": "JSFunction",
+      "method": "reLayout",
+      "deps": "js/dfmeaMasterImageTableService"
+    },
+    "updateTable": {
+      "actionType": "JSFunction",
+      "method": "updateTable",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/dfmeaMasterImageTableService"
+    },
+    "reLoad": {
+      "actionType": "JSFunction",
+      "method": "reLoad",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterImageTableService"
+    },
+    "interactionFocusRow": {
+      "actionType": "JSFunction",
+      "method": "focusRowByInteraction",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTableInteractionService"
+    },
+    "initSelectRow": {
+      "actionType": "JSFunction",
+      "method": "initSelectRow",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterImageTableService"
+    },
+    "initRest": {
+      "actionType": "JSFunction",
+      "method": "initRest",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterTableInteractionService"
+    },
+    "initSelect": {
+      "actionType": "JSFunction",
+      "method": "initSelect",
+      "deps": "js/dfmeaMasterTableInteractionService"
+    },
+    "windowResize": {
+      "actionType": "JSFunction",
+      "method": "windowResize",
+      "deps": "js/dfmeaMasterImageTableService"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "dfmea.imageTable.reload",
+      "action": "reLoad"
+    },
+    {
+      "eventId": "dfmea.imageTable.reLayout",
+      "action": "reLayout"
+    },
+    {
+      "eventId": "fmea.imageTable.update",
+      "action": "updateTable"
+    },
+    {
+      "eventId": "fmea.imageTable.focusInteraction",
+      "action": "interactionFocusRow"
+    },
+    {
+      "eventId": "fmea.imageTable.initSelectRow",
+      "action": "initSelectRow"
+    },
+    {
+      "eventId": "fmea.imageTable.initRest",
+      "action": "initRest"
+    },
+    {
+      "eventId": "fmea.imageTable.initSelect",
+      "action": "initSelect"
+    },
+    {
+      "eventId": "aw.windowResize",
+      "action": "windowResize"
+    }
+  ],
+  "lifecycleHooks": {
+    "onMount": "onMount"
+  }
+}

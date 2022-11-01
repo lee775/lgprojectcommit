@@ -1,0 +1,343 @@
+<!-- 테스트 -->
+<aw-flex-row id="dashboardListSite">
+    <aw-flex-column>
+        <!-- <aw-flex-row height="50"> -->
+        <!-- <aw-panel-body>
+                <aw-button button-type="base" exist-when="!conditions.showDetails" action="showPopupWithSharedData">Chart</aw-button>
+                <aw-button button-type="base" exist-when="conditions.showDetails" action="hidePopupWithSharedData">List</aw-button>
+            </aw-panel-body>
+        </aw-flex-row>   -->
+        <!-- <aw-include name="lgepUserManagement" visible-when="none"></aw-include> -->
+        <aw-flex-row exist-when="conditions.showDetails">
+            <aw-include name="KnowledgeManageDashboardChart"></aw-include>
+        </aw-flex-row>
+        <aw-flex-row justify="space-around" visible-when="!conditions.showDetails" id="summaryContentStyle">
+            <aw-flex-column width="20f" class="leftSide">
+                <aw-flex-row height="auto" justify="center" id="myDocument">
+                    <aw-avatar source="data.image1.dbValue" style="font-weight: bold;" full-layout="true"
+                        name="data.box1" text-position="BOTTOM" class="avatarBox"></aw-avatar>
+                </aw-flex-row>
+                <aw-flex-row id="labelHeight" height="auto"
+                    style="background-color: rgb(234, 234, 234); padding-top: 5%; padding-bottom: 68%;">
+                    <aw-flex-column>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.expertCoverages"
+                                        exist-when="conditions.isExpertCon"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <div class="rightValue noLink">
+                                    {{data.expertCoveragesValue.uiValue}}
+                                </div>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.point"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <div class="rightValue noLink">
+                                    {{data.pointValue.uiValue}}
+                                </div>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.knowledgeCount"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <aw-link class="rightValue" prop="data.knowledgeCountValue" action="goMyQuestion">
+                                </aw-link>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.qExpertCount"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <aw-link class="rightValue" prop="data.qExpertCountValue" action="goMyExpertQuestion">
+                                </aw-link>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.techDocumentCount"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <aw-link class="rightValue" prop="data.techDocumentCountValue" action="goMyTechDoc">
+                                </aw-link>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.answerCount"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <aw-link class="rightValue" prop="data.answerCountValue" action="goMyAnswer"></aw-link>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.selectedCount"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <aw-link class="rightValue" prop="data.selectedCountValue" action="goMySelectedAnswer">
+                                </aw-link>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <div class="leftValue">
+                                    <aw-label class="labelCSS leftLabel" prop="data.goodCount"></aw-label>
+                                </div>
+                            </aw-flex-column>
+                            <aw-flex-column>
+                                <div class="rightValue noLink">
+                                    {{data.goodValue.uiValue}}
+                                </div>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-flex-row>
+            </aw-flex-column>
+            <aw-flex-column width="3" class="sizeDown">
+                <aw-flex-row justify="center" class="setLayout">
+                    <aw-panel>
+                        <aw-panel-section caption="{{i18n.knowledgeSearch}}" collapsed="false">
+                            <aw-flex-column>
+                                <div class="search">
+                                    <input type="text" placeholder="{{i18n.EnterSearch}}" class="inputSearch"
+                                        id="referenceId" autocomplete="off" style="width: 90%; margin-left: 7px;">
+                                    <aw-icon-button class="searchImg" command="data.searchBtn"></aw-icon-button>
+                                </div>
+                                <div style="text-align: center; margin-top: 20px;"
+                                    visible-when="data.dataProviders.searchAllList.viewModelCollection.loadedVMObjects.length === 0">
+                                    <h3>{{i18n.noPost}}</h3>
+                                </div>
+                                <aw-scrollpanel>
+                                    <aw-list dataprovider="data.dataProviders.searchAllList">
+                                        <aw-default-cell vmo="item"></aw-default-cell>
+                                    </aw-list>
+                                </aw-scrollpanel>
+                            </aw-flex-column>
+                            <aw-flex-column id="alink">
+                                <aw-flex-row justify="center" height="1">
+                                    <aw-link prop="data.firstPageAll" action="firstPageAllAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                    <aw-link prop="data.beforeAll" action="pagingBeforeAllAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                    <aw-chip-list dataprovider="data.dataProviders.searchChipDataProvider"
+                                        action="clickedAllPageAction"></aw-chip-list>
+                                    <aw-link prop="data.afterAll" action="pagingAfterAllAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                    <aw-link prop="data.lastPageAll" action="lastPageAllAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                </aw-flex-row>
+                            </aw-flex-column>
+                        </aw-panel-section>
+                    </aw-panel>
+                </aw-flex-row>
+                <aw-flex-row class="setLayout">
+                    <aw-panel>
+                        <aw-panel-section caption="{{i18n.frequentlySearched}}" class="freqHeight" collapsed="false">
+                            <aw-flex-column>
+                                <div style="text-align: center;"
+                                    visible-when="data.dataProviders.frequentlyList.viewModelCollection.loadedVMObjects.length === 0">
+                                    <h3>{{i18n.noPost}}</h3>
+                                </div>
+                                <aw-list dataprovider="data.dataProviders.frequentlyList" id="listSize">
+                                    <aw-default-cell vmo="item"></aw-default-cell>
+                                </aw-list>
+                            </aw-flex-column>
+                            <aw-flex-column id="alink">
+                                <aw-flex-row justify="center" height="1">
+                                    <aw-link prop="data.firstPageFrequency" action="firstPageFrequencyAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                    <aw-link prop="data.beforeFrequency" action="pagingBeforeFrequencyAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                    <aw-chip-list dataprovider="data.dataProviders.frequencyChipDataProvider"
+                                        action="clickedFrequencyPageAction"></aw-chip-list>
+                                    <aw-link prop="data.afterFrequency" action="pagingAfterFrequencyAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                    <aw-link prop="data.lastPageFrequency" action="lastPageFrequencyAction"
+                                        style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                </aw-flex-row>
+                            </aw-flex-column>
+                        </aw-panel-section>
+                    </aw-panel>
+                </aw-flex-row>
+            </aw-flex-column>
+            <aw-splitter direction="VERTICAL" min-size-1="20" min-size-2="40"> </aw-splitter>
+            <aw-flex-column width="3">
+                <aw-flex-row>
+                    <aw-flex-column>
+                        <aw-flex-row style="padding-top: 7px;">
+                            <aw-panel>
+                                <aw-panel-section caption="Q&A" collapsed="false">
+                                    <aw-flex-column>
+                                        <div style="text-align: center;"
+                                            visible-when="data.dataProviders.qaAnswerList.viewModelCollection.loadedVMObjects.length === 0">
+                                            <h3>{{i18n.noPost}}</h3>
+                                        </div>
+                                        <aw-list dataprovider="data.dataProviders.qaAnswerList">
+                                            <aw-default-cell vmo="item"></aw-default-cell>
+                                        </aw-list>
+                                    </aw-flex-column>
+                                    <aw-flex-column id="alink">
+                                        <aw-flex-row justify="center" height="1"
+                                            style="margin-bottom: 15px; margin-bottom: 1%; box-shadow: none;">
+                                            <aw-link prop="data.firstPageQna" action="firstPageQnaAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.beforeQna" action="pagingBeforeQnaAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-chip-list dataprovider="data.dataProviders.qnaChipDataProvider"
+                                                action="clickedQnaPageAction"></aw-chip-list>
+                                            <aw-link prop="data.afterQna" action="pagingAfterQnaAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.lastPageQna" action="lastPageQnaAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                        </aw-flex-row>
+                                    </aw-flex-column>
+                                </aw-panel-section>
+                            </aw-panel>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-flex-row>
+                <aw-flex-row>
+                    <aw-flex-column>
+                        <aw-flex-row style="padding-top: 7px;">
+                            <aw-panel>
+                                <aw-panel-section caption="{{i18n.technicalDocumentationSubLocationTitle}}"
+                                    collapsed="false">
+                                    <aw-flex-column>
+                                        <div style="text-align: center;"
+                                            visible-when="data.dataProviders.techDocList.viewModelCollection.loadedVMObjects.length === 0">
+                                            <h3>{{i18n.noPost}}</h3>
+                                        </div>
+                                        <aw-list dataprovider="data.dataProviders.techDocList">
+                                            <aw-default-cell vmo="item"></aw-default-cell>
+                                        </aw-list>
+                                    </aw-flex-column>
+                                    <aw-flex-column id="alink">
+                                        <aw-flex-row justify="center" height="1">
+                                            <aw-link prop="data.firstPageTechDoc" action="firstPageTechDocAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.beforeTechDoc" action="pagingBeforeTechDocAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-chip-list dataprovider="data.dataProviders.techDocChipDataProvider"
+                                                action="clickedTechDocPageAction"></aw-chip-list>
+                                            <aw-link prop="data.afterTechDoc" action="pagingAfterTechDocAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.lastPageTechDoc" action="lastPageTechDocAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                        </aw-flex-row>
+                                    </aw-flex-column>
+                                </aw-panel-section>
+                            </aw-panel>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-flex-row>
+            </aw-flex-column>
+            <aw-splitter direction="VERTICAL" min-size-1="20" min-size-2="40"> </aw-splitter>
+            <aw-flex-column width="3">
+                <aw-flex-row>
+                    <aw-flex-column>
+                        <aw-flex-row class="setLayout"
+                            style="padding-right: 15px; margin-bottom: 1%; box-shadow: none;">
+                            <aw-panel>
+                                <aw-panel-section caption="FAQ" collapsed="false">
+                                    <aw-flex-column>
+                                        <div style="text-align: center;"
+                                            visible-when="data.dataProviders.faqList.viewModelCollection.loadedVMObjects.length === 0">
+                                            <h3>{{i18n.noPost}}</h3>
+                                        </div>
+                                        <aw-list dataprovider="data.dataProviders.faqList">
+                                            <aw-default-cell vmo="item"></aw-default-cell>
+                                        </aw-list>
+                                    </aw-flex-column>
+                                    <aw-flex-column id="alink">
+                                        <aw-flex-row justify="center" height="1"
+                                            style="margin-bottom: 15px; margin-bottom: 1%; box-shadow: none;">
+                                            <aw-link prop="data.firstPageFaq" action="firstPageFaqAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.beforeFaq" action="pagingBeforeFaqAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-chip-list dataprovider="data.dataProviders.faqChipDataProvider"
+                                                action="clickedFaqPageAction">
+                                            </aw-chip-list>
+                                            <aw-link prop="data.afterFaq" action="pagingAfterFaqAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.lastPageFaq" action="lastPageFaqAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                        </aw-flex-row>
+                                    </aw-flex-column>
+                                </aw-panel-section>
+                            </aw-panel>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-flex-row>
+                <aw-flex-row>
+                    <aw-flex-column>
+                        <aw-flex-row class="setLayout"
+                            style="padding-right: 15px; margin-bottom: 1%; box-shadow: none;">
+                            <aw-panel>
+                                <aw-panel-section caption="{{i18n.askExpertSubLocationTitle}}" collapsed="false">
+                                    <aw-flex-column>
+                                        <div style="text-align: center;"
+                                            visible-when="data.dataProviders.askExpertList.viewModelCollection.loadedVMObjects.length === 0">
+                                            <h3>{{i18n.noPost}}</h3>
+                                        </div>
+                                        <aw-list dataprovider="data.dataProviders.askExpertList">
+                                            <aw-default-cell vmo="item"></aw-default-cell>
+                                        </aw-list>
+                                    </aw-flex-column>
+                                    <aw-flex-column id="alink">
+                                        <aw-flex-row justify="center" height="1">
+                                            <aw-link prop="data.firstPageAskExpert" action="firstPageAskExpertAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.beforeAskExpert" action="pagingBeforeAskExpertAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-chip-list dataprovider="data.dataProviders.askExpertChipDataProvider"
+                                                action="clickedAskExpertPageAction"></aw-chip-list>
+                                            <aw-link prop="data.afterAskExpert" action="pagingAfterAskExpertAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                            <aw-link prop="data.lastPageAskExpert" action="lastPageAskExpertAction"
+                                                style="font-weight: bolder; margin-top: 5px;"></aw-link>
+                                        </aw-flex-row>
+                                    </aw-flex-column>
+                                </aw-panel-section>
+                            </aw-panel>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-flex-row>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto" class="afx-accent-background" justify="center">
+            <aw-flex-column width="24">
+                <aw-flex-row>
+                    <aw-flex-column align-content="center">
+                        <aw-icon-button id="list" size="large" command="data.listButton"></aw-icon-button>List
+                    </aw-flex-column>
+                    <aw-flex-column align-content="center">
+                        <aw-icon-button size="large" align-content="center" command="data.chartButton"></aw-icon-button>
+                        Chart
+                    </aw-flex-column>
+                </aw-flex-row>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-flex-column>
+</aw-flex-row>

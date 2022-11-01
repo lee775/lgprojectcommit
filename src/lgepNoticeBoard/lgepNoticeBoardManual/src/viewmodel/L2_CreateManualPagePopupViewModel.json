@@ -1,0 +1,207 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-button.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-flex-column.directive",
+        "js/aw-flex-row.directive",
+        "js/visible-when.directive",
+        "js/aw-popup2.directive",
+        "js/aw-textbox.directive"
+    ],
+    "onEvent": [
+        {
+            "eventId": "createDgnPagePopupSuccess",
+            "action": "typeOrDetailTypeSet"
+        }
+    ],
+    "actions": {
+        "chapterSvgAddAc": {
+            "actionType": "JSFunction",
+            "method": "chapterSvgAddAc",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "contentDetailTypeAdd": {
+            "actionType": "JSFunction",
+            "method": "contentDetailTypeAdd",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "contentTypeAdd": {
+            "actionType": "JSFunction",
+            "method": "contentTypeAdd",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "chapterMode": {
+            "actionType": "JSFunction",
+            "method": "chapterMode",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "pageMode": {
+            "actionType": "JSFunction",
+            "method": "pageMode",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "typeOrDetailTypeSet": {
+            "actionType": "JSFunction",
+            "method": "typeOrDetailTypeSet",
+            "deps": "js/L2_DesignManualService"
+        },
+        "createDgnPage": {
+            "actionType": "JSFunction",
+            "method": "createDgnPage",
+            "inputData": {
+                "data": "{{data}}",
+                "ctx": "{{ctx}}"
+            },
+            "outputData": {
+                "state": "state"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "createDgnChapter": {
+            "actionType": "JSFunction",
+            "method": "createDgnChapter",
+            "inputData": {
+                "data": "{{data}}"
+            },
+            "outputData": {
+                "state": "state"
+            },
+            "deps": "js/L2_DesignManualService"
+        },
+        "closePopupWindow": {
+            "actionType": "JSFunction",
+            "method": "hide",
+            "inputData": {
+                "popupId": "{{data.popupId}}"
+            },
+            "deps": "js/popupService"
+        },
+        "createDgnPageBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "createDgnPage"
+                },
+                {
+                    "condition": "conditions.state",
+                    "action": "closePopupWindow"
+                }
+            ]
+        },
+        "createDgnChapterBat": {
+            "actionType": "batchJob",
+            "steps": [
+                {
+                    "action": "createDgnChapter"
+                },
+                {
+                    "condition": "conditions.state",
+                    "action": "closePopupWindow"
+                }
+            ]
+        }
+    },
+    "data": {
+        "containerName": {
+            "type": "STRING",
+            "uiValue": ""
+        },
+        "objName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "objChapterName": {
+            "displayName": "{{i18n.name}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        }
+    },
+    "conditions": {
+        "state": {
+            "expression": "data.state=='1'"
+        },
+        "popup": {
+            "expression": "data.popupState===true"
+        },
+        "createTypeSetDefault": {
+            "expression": "data.createType === undefined"
+        },
+        "createTypeSetPage": {
+            "expression": "data.createType == 'Page'"
+        },
+        "createTypeSetChapter": {
+            "expression": "data.createType == 'Chapter'"
+        },
+        "chapterSvgAdd": {
+            "expression": "data.chapterSvgAdd == true"
+        }
+    },
+    "i18n": {
+        "ok": [
+            "lgepDesignSequenceMessages"
+        ],
+        "close": [
+            "lgepDesignSequenceMessages"
+        ],
+        "name": [
+            "L2_DesignStandardMessages"
+        ],
+        "objType": [
+            "L2_DesignStandardMessages"
+        ],
+        "objDetailType": [
+            "L2_DesignStandardMessages"
+        ],
+        "contentDetailType": [
+            "L2_DesignStandardMessages"
+        ],
+        "contentType": [
+            "L2_DesignStandardMessages"
+        ],
+        "keyword": [
+            "L2_DesignStandardMessages"
+        ],
+        "parts": [
+            "L2_DesignStandardMessages"
+        ],
+        "ChapterCreate": [
+            "L2_DesignStandardMessages"
+        ],
+        "PageCreate": [
+            "L2_DesignStandardMessages"
+        ],
+        "listBoxAdd": [
+            "L2_DesignStandardMessages"
+        ],
+        "add": [
+            "L2_DesignStandardMessages"
+        ],
+        "chapterSvgAdd": [
+            "L2_DesignStandardMessages"
+        ]
+    }
+}

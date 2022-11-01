@@ -1,0 +1,27 @@
+<aw-command-panel caption="i18n.buttonDemo">
+    <style>
+        .tabMargin {
+            margin: 15px;
+        }
+
+        .noPading div div div ul li {
+            padding: 3px 0;
+        }
+    </style>
+        <!-- <aw-panel-body> -->
+            <aw-splm-table gridid="relationItemTable" show-check-box=true></aw-splm-table>
+        <!-- </aw-panel-body> -->
+        <aw-panel-footer>
+            <aw-action-section>
+                <aw-flex-row>
+                    <aw-flex-column>
+                        <aw-button action="resetSelect">{{i18n.resetButton}}</aw-button>
+                    </aw-flex-column>
+                    <aw-flex-column width="1f"></aw-flex-column>
+                    <aw-flex-column>
+                        <aw-button action="relationingBat">{{i18n.realtioning}}</aw-button>
+                    </aw-flex-column>
+                </aw-flex-row>
+            </aw-action-section>
+        </aw-panel-footer>
+</aw-command-panel>

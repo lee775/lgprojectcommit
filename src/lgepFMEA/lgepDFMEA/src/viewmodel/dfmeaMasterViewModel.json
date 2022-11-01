@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "css/dfmeaMasterView.css",
+    "css/dfmeaImageTableView.css",
+    "css/dfmeaMasterTextTableView.css",
+    "js/aw-column.directive",
+    "js/aw-row.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-include.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-button.directive",
+    "js/aw-listbox.directive",
+    "js/aw-sidenav.directive",
+    "js/exist-when.directive",
+    "js/aw-slider.directive"
+  ],
+  "data": {
+    "interactionInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    },
+    "dfmeaNameText": {
+      "displayName": "{{i18n.dfmeaName}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "tableView": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "imageTable",
+      "dispValue": "Image Table"
+    },
+    "tableViewValues": {
+      "type": "STRING",
+      "dbValue": [
+        {
+          "propDisplayValue": "Image Table",
+          "dispValue": "Image Table",
+          "propInternalValue": "imageTable"
+        },
+        {
+          "propDisplayValue": "Text Table",
+          "dispValue": "Text Table",
+          "propInternalValue": "textTable"
+        },
+        {
+          "propDisplayValue": "Tree Table",
+          "dispValue": "Tree Table",
+          "propInternalValue": "treeTable"
+        }
+      ]
+    },
+    "dfmeaNameLbl": {
+      "displayName": "{{i18n.dfmeaName}}",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "dfmeaRevLbl": {
+      "displayName": "{{i18n.revisionId}}",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "productLbl": {
+      "displayName": "{{i18n.l2Product}}",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "dfmeaName": {
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "dfmeaRev": {
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "product": {
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "detailViewCondition": {
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": false,
+      "dispValue": ""
+    },
+    "detailButtonName": {
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": "{{i18n.editFunction}}",
+      "dispValue": ""
+    },
+    "zoomSliderProp": {
+      "isArray": "true",
+      "dbValue": [
+        {
+          "sliderOption": {
+            "disabled": false,
+            "min": 0.1,
+            "max": 2,
+            "step": 0.13,
+            "value": 1.04,
+            "orientation": "horizontal",
+            "range": false
+          },
+          "showIncrementButtons": true,
+          "sliderChangeEventAction": "updateSliderValue"
+        }
+      ]
+    },
+    "zoomSliderInit": {
+      "action": "initSliderValue",
+      "iconName": "Refresh",
+      "tooltip": "100%"
+    }
+  },
+  "actions": {
+    "saveAction": {
+      "actionType": "JSFunction",
+      "method": "saveAction",
+      "deps": "js/dfmeaMasterEditSaveService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "duplicateAction": {
+      "actionType": "JSFunction",
+      "method": "duplicateAction",
+      "deps": "js/dfmeaMasterDuplicateService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "editCancelAction": {
+      "actionType": "JSFunction",
+      "method": "editCancelAction",
+      "deps": "js/dfmeaMasterEditService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "editAction": {
+      "actionType": "JSFunction",
+      "method": "editAction",
+      "deps": "js/dfmeaMasterEditService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "onInit": {
+      "actionType": "JSFunction",
+      "method": "onInit",
+      "deps": "js/dfmeaMasterService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "pageUnMount",
+      "deps": "js/utils/fmeaCommonUtils"
+    },
+    "selectionTableChange": {
+      "actionType": "JSFunction",
+      "method": "changeTableMode",
+      "deps": "js/dfmeaMasterService",
+      "inputData": {
+        "tableView": "{{data.tableView.dbValue}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "detailButtonName.dbValue": ""
+      }
+    },
+    "dfmeaDeleteAction": {
+      "actionType": "JSFunction",
+      "method": "dfmeaDeleteAction",
+      "deps": "js/dfmeaMasterService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "changeView": {
+      "actionType": "JSFunction",
+      "method": "changeView",
+      "deps": "js/dfmeaMasterService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "detailButtonName.dbValue": ""
+      }
+    },
+    "sodOpen": {
+      "actionType": "JSFunction",
+      "method": "openSod",
+      "deps": "js/dfmeaMasterService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "interactionOpen": {
+      "actionType": "JSFunction",
+      "method": "openInteraction",
+      "deps": "js/interactionService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "interactionAction": {
+      "actionType": "JSFunction",
+      "method": "interactionAction",
+      "deps": "js/dfmeaMasterService",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      }
+    },
+    "endSave": {
+      "actionType": "JSFunction",
+      "method": "endSave",
+      "deps": "js/fmeaMasterAddService",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "goList": {
+      "actionType": "Navigate",
+      "navigateTo": "dchecklist",
+      "navigationParams": {}
+    },
+    "updateSliderValue": {
+      "actionType": "JSFunction",
+      "method": "updateSliderValue",
+      "inputData": {
+        "value": "{{prop.dbValue[0].sliderOption.value}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterService"
+    },
+    "exportExcel": {
+      "actionType": "JSFunction",
+      "method": "exportExcel",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaExcelService"
+    },
+    "initSliderValue": {
+      "actionType": "JSFunction",
+      "method": "initSliderValue",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dfmeaMasterService"
+    }
+  },
+  "i18n": {
+    "dfmeaName": [
+      "lgepDFMEAViewMessages"
+    ],
+    "l2Product": [
+      "lgepDFMEAViewMessages"
+    ],
+    "editButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "cancelButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "duplicateButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "saveButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "deleteButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "detailView": [
+      "lgepDFMEAViewMessages"
+    ],
+    "unDetailView": [
+      "lgepDFMEAViewMessages"
+    ],
+    "sodStandardButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "interactionMatrixButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "interactionButton": [
+      "lgepDFMEAViewMessages"
+    ],
+    "revisionId": [
+      "lgepDFMEAViewMessages"
+    ],
+    "fmeaHome": [
+      "lgepDFMEAViewMessages"
+    ],
+    "editFunction": [
+      "lgepDFMEAViewMessages"
+    ]
+  },
+  "onEvent": [
+    {
+      "eventId": "fmea.save.end",
+      "cacheEventData": true,
+      "action": "endSave"
+    }
+  ],
+  "lifecycleHooks": {
+    "onInit": "onInit",
+    "onUnmount": "unMount"
+  }
+}

@@ -1,0 +1,243 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-command-panel.directive",
+        "js/aw-panel-body.directive",
+        "js/aw-button.directive",
+        "js/aw-label.directive",
+        "js/aw-textbox.directive",
+        "js/aw-panel-footer.directive",
+        "js/aw-listbox.directive",
+        "css/knowledgeWarehouseView.css"
+    ],
+    "actions": {
+        "buttonAction1": {
+            "actionType": "Event",
+            "method": "Event",
+            "inputData": {
+                "events": [
+                    {
+                        "name": "awsidenav.openClose"
+                    }
+                ]
+            }
+        },
+        "loadLists":{
+            "actionType":"JSFunction",
+            "method": "loadLists",
+            "deps": "js/knowledgeSidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            },
+            "events": {
+                "success":[
+                    {
+                        "name": "loadLists.complete"
+                    }
+                ]
+            }
+        },
+        "changeIssue":{
+            "actionType":"JSFunction",
+            "method": "changeIssue",
+            "deps": "js/knowledgeSidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "searchList":{
+            "actionType":"JSFunction",
+            "method": "searchList",
+            "deps": "js/knowledgeSidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "checkURL":{
+            "actionType":"JSFunction",
+            "method": "checkURL",
+            "deps": "js/knowledgeSidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        },
+        "panelDataReset":{
+            "actionType":"JSFunction",
+            "method": "panelDataReset",
+            "deps": "js/knowledgeSidePanelService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        }
+    },
+    "data": {
+        "closeAnchor": "closePushAnchor",
+        "part": {
+            "displayName": "{{i18n.labelPart}}",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "issue": {
+            "displayName": "Issue",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "source": {
+            "displayName": "Source",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "period": {
+            "displayName": "{{i18n.labelPeriod}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "inputPNo": {
+            "displayName": "P/No",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "inputModelNo": {
+            "displayName": "Model No",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "allignStandard":{
+            "displayName": "{{i18n.labelAllign}}",
+            "type": "STRING",
+            "isRequired": "false",
+            "isEditable": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listPart": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "true",
+            "isEditable":"true",
+            "hasLov": "true",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listIssue": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listSource": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listPeriod": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listAllign": {
+            "displayName": "",
+            "type": "STRING",
+            "isRequired": "false",
+            "hasLov": "true",
+            "requiredText": "{{i18n.choose}}",
+            "dbValue": "",
+            "dispValue": ""
+        },
+        "listPartValues": {
+            "type": "STRING",
+            "dbValue": []
+        },
+        "listIssueValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "",
+                    "propInternalValue": ""
+                }
+            ]
+        },
+        "listSourceValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "",
+                    "propInternalValue": ""
+                }
+            ]
+        },
+        "listPeriodValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "",
+                    "propInternalValue": ""
+                }
+            ]
+        },
+        "listAllignValues": {
+            "type": "STRING",
+            "dbValue": [
+                {
+                    "propDisplayValue": "",
+                    "propInternalValue": ""
+                }
+            ]
+        }
+    },
+    "onEvent": [
+        {
+            "eventId": "removeMessages",
+            "action": "buttonAction1"
+        },
+        {
+            "eventId":"knowledgeSidePanel.contentLoaded",
+            "action": "loadLists"
+        },
+        {
+            "eventId":"loadLists.complete",
+            "action": "checkURL"
+        }
+    ],
+    "i18n": {
+        "buttonDemo": "Customer Info",
+        "buttonSearch":["knowledgeSearchMessages"],
+        "labelPart":["knowledgeSearchMessages"],
+        "labelAllign":["knowledgeSearchMessages"],
+        "labelPeriod":["knowledgeSearchMessages"],
+        "choose":["knowledgeSearchMessages"],
+        "day":["knowledgeSearchMessages"],
+        "week":["knowledgeSearchMessages"],
+        "month":["knowledgeSearchMessages"],
+        "recent":["knowledgeSearchMessages"]
+    }
+}

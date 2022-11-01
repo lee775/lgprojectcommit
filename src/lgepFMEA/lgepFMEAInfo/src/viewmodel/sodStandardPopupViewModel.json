@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "css/sodPopupView.css",
+    "js/aw-popup2.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-tab-set.directive",
+    "js/exist-when.directive"
+  ],
+  "data": {
+    "tabModels": [
+      {
+        "name": "{{i18n.severityTabName}}",
+        "tabKey": "L2_Severity"
+      },
+      {
+        "name": "{{i18n.occurenceTabName}}",
+        "tabKey": "L2_Occurence"
+      },
+      {
+        "name": "{{i18n.detectionTabName}}",
+        "tabKey": "L2_Detection"
+      }
+    ]
+  },
+  "actions": {
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onLoad",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/sodPopupService"
+    }
+  },
+  "i18n": {
+    "severityTabName": ["lgepDFMEAViewMessages"],
+    "occurenceTabName": ["lgepDFMEAViewMessages"],
+    "detectionTabName": ["lgepDFMEAViewMessages"]
+  },
+  "lifecycleHooks": {
+    "onMount": "onMount"
+  },
+  "conditions": {
+    "severityPage": {
+      "expression": "data.selectedTab.tabKey === 'L2_Severity'"
+    },
+    "occurencePage": {
+      "expression": "data.selectedTab.tabKey === 'L2_Occurence'"
+    },
+    "detectionPage": {
+      "expression": "data.selectedTab.tabKey === 'L2_Detection'"
+    }
+  }
+}

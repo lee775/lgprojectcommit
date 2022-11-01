@@ -1,0 +1,356 @@
+{
+  "commands": {
+    "fmeaSystemGroup": {
+      "iconId": "cmdPack",
+      "isGroup": true,
+      "title": "{{i18n.fmeaGroup}}",
+      "description": "{{i18n.fmeaGroup}}"
+    },
+    "masterManagement": {
+      "iconId": "homeQualityMasterData",
+      "title": "{{i18n.masterManagement}}",
+      "description": "{{i18n.masterManagementDesc}}"
+    },
+    "sheetManagement": {
+      "iconId": "homeQualityMasterData",
+      "title": "{{i18n.sheetManagement}}",
+      "description": "{{i18n.sheetManagementDesc}}"
+    },
+    "referenceInfoManagement": {
+      "iconId": "cmdReference",
+      "title": "{{i18n.referenceInfoManagementTItle}}",
+      "description": "{{i18n.referenceInfoManagementDesc}}"
+    },
+    "changeSummaryView": {
+      "iconId": "cmdTableSummaryView",
+      "title": "{{i18n.changeSummaryViewTitle}}",
+      "description": "{{i18n.changeSummaryViewDesc}}"
+    },
+    "changeTableView": {
+      "iconId": "cmdTableView",
+      "title": "{{i18n.changeTableViewTitle}}",
+      "description": "{{i18n.changeTableViewDesc}}"
+    },
+    "fmeaAdd": {
+      "iconId": "cmdAdd",
+      "title": "{{i18n.fmeaAddTitle}}",
+      "description": "{{i18n.fmeaAddDesc}}"
+    },
+    "fmeaEdit": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.fmeaEditTitle}}",
+      "description": "{{i18n.fmeaEditDesc}}"
+    },
+    "popupCloseCommand": {
+      "iconId": "cmdClosePanel",
+      "isGroup": false,
+      "title": "Close"
+    },
+    "fmeaMasterDelete": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.fmeaMasterDeleteTitle}}",
+      "description": "{{i18n.fmeaMasterDeleteDesc}}"
+    },
+    "fmeaEditSave": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.fmeaEditSaveTitle}}",
+      "description": "{{i18n.fmeaEditSaveDesc}}"
+    },
+    "fmeaEditCancel": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.fmeaEditCancelTitle}}",
+      "description": "{{i18n.fmeaEditCancelDesc}}"
+    },
+    "pin": {
+      "iconId": "cmdPin",
+      "isGroup": false,
+      "title": "{{i18n.isPin}}",
+      "description": "{{i18n.isPinDesc}}"
+    },
+    "unpin": {
+      "iconId": "cmdUnPin",
+      "isGroup": false,
+      "title": "{{i18n.isUnPin}}",
+      "description": "{{i18n.isUnPinDesc}}"
+    }
+  },
+  "commandHandlers": {
+    "masterManagementHandler": {
+      "id": "masterManagement",
+      "action": "activatemasterManagement",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "sheetManagementHandler": {
+      "id": "sheetManagement",
+      "action": "activatesheetManagement",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "referenceInfoManagementHandler": {
+      "id": "referenceInfoManagement",
+      "action": "activatereferenceInfoManagement",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "changeSummaryViewHandler": {
+      "id": "changeSummaryView",
+      "action": "changeSummaryViewAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tableView"
+      },
+      "enableWhen": {
+        "condition": "conditions.openPopup"
+      }
+    },
+    "changeTableViewHandler": {
+      "id": "changeTableView",
+      "action": "changeTableViewAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.summaryView"
+      }
+    },
+    "fmeaAddHandler": {
+      "id": "fmeaAdd",
+      "action": "fmeaAddAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.viewAdd"
+      },
+      "enableWhen": {
+        "condition": "conditions.viewAdd"
+      }
+    },
+    "fmeaEditHandler": {
+      "id": "fmeaEdit",
+      "action": "editAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.viewAdd"
+      }
+    },
+    "popupCloseCommandHandler": {
+      "id": "popupCloseCommand",
+      "action": "popupCloseAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "fmeaMasterDeleteHandler": {
+      "id": "fmeaMasterDelete",
+      "action": "fmeaMasterDelete",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.viewEdit"
+      }
+    },
+    "pinCommandHandler": {
+      "id": "pin",
+      "action": "setPin",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.pinSet"
+      }
+    },
+    "unPinCommandHandler": {
+      "id": "unpin",
+      "action": "setUnpin",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.unPinSet"
+      }
+    },
+    "Awp0CloseCommanddHandler": {
+      "id": "Awp0CloseCommandPanel",
+      "action": "closePanel",
+      "activeWhen": {
+        "condition": "conditions.sidenavCloseCommandVisible"
+      },
+      "visibleWhen": true
+    }
+  },
+  "commandPlacements": {
+    "masterManagementaw_globalNavigationbar": {
+      "id": "masterManagement",
+      "parentGroupId": "cmdDesignGuideSystem",
+      "priority": 210
+    },
+    "sheetManagementaw_globalNavigationbar": {
+      "id": "sheetManagement",
+      "parentGroupId": "cmdDesignGuideSystem",
+      "priority": 200
+    },
+    "referenceInfoManagementaw_globalNavigationbar": {
+      "id": "referenceInfoManagement",
+      "parentGroupId": "cmdDesignGuideSystem",
+      "priority": 230
+    },
+    "changeSummaryViewPlacements": {
+      "id": "changeSummaryView",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 100
+    },
+    "changeTableViewPlacements": {
+      "id": "changeTableView",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 100
+    },
+    "fmeaAddPlacements": {
+      "id": "fmeaAdd",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 300
+    },
+    "fmeaEditPlacements": {
+      "id": "fmeaEdit",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 200
+    },
+    "popupCloseCommandPlacement": {
+      "id": "popupCloseCommand",
+      "uiAnchor": "closePopupAnchor",
+      "priority": 300
+    },
+    "fmeaMasterDeletePlacements": {
+      "id": "fmeaMasterDelete",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 100
+    },
+    "fmeaMasterEditSavePlacements": {
+      "id": "fmeaEditSave",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 200
+    },
+    "fmeaMasterEditCancelPlacements": {
+      "id": "fmeaEditCancel",
+      "uiAnchor": "fmea_list_commands",
+      "priority": 300
+    },
+    "pinPopupPlacement": {
+      "id": "pin",
+      "uiAnchor": "closePopupAnchor",
+      "priority": 1
+    },
+    "unPinPopupPlacement": {
+      "id": "unpin",
+      "uiAnchor": "closePopupAnchor",
+      "priority": 1
+    },
+    "pinCommandPlacement": {
+      "id": "pin",
+      "uiAnchor": "aw_commandPanel",
+      "priority": 1
+    },
+    "unPinCommandPlacement": {
+      "id": "unpin",
+      "uiAnchor": "aw_commandPanel",
+      "priority": 1
+    }
+  },
+  "actions": {
+    "activatemasterManagement": {
+      "actionType": "Navigate",
+      "navigateTo": "structuremaster",
+      "navigationParams": {}
+    },
+    "activatesheetManagement": {
+      "actionType": "Navigate",
+      "navigateTo": "dchecklist",
+      "navigationParams": {}
+    },
+    "fmeaAddAction": {
+      "actionType": "Navigate",
+      "navigateTo": "dfmeaCreate",
+      "navigationParams": {}
+    },
+    "activatereferenceInfoManagement": {
+      "actionType": "Navigate",
+      "navigateTo": "sodlist",
+      "navigationParams": {}
+    },
+    "popupCloseAction": {
+      "actionType": "JSFunction",
+      "method": "closePopup",
+      "deps": "js/utils/fmeaPopupUtils"
+    },
+    "setPin": {
+      "actionType": "JSFunction",
+      "method": "setPin",
+      "deps": "js/utils/fmeaViewCommonUtils"
+    },
+    "setUnpin": {
+      "actionType": "JSFunction",
+      "method": "setUnPin",
+      "deps": "js/utils/fmeaViewCommonUtils"
+    },
+    "closePanel": {
+      "actionType": "JSFunction",
+      "method": "closePanel",
+      "deps": "js/utils/fmeaPanelUtils"
+    }
+  },
+  "conditions": {
+    "tableView": {
+      "expression": "ctx.locationContext['ActiveWorkspace:Location'] === 'dfmeaLocation' && ctx.fmea_view !=='SUMMARY_VIEW'"
+    },
+    "summaryView": {
+      "expression": "ctx.locationContext['ActiveWorkspace:Location'] === 'dfmeaLocation' && ctx.fmea_view === 'SUMMARY_VIEW'"
+    },
+    "tcWorkspace": {
+      "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+    },
+    "openPopup": {
+      "expression": "ctx.fmea_popup !== true"
+    },
+    "viewEdit": {
+      "expression": "ctx.locationContext['ActiveWorkspace:Location'] === 'dfmeaLocation' && ctx.fmea_view === 'SUMMARY_VIEW' && ctx.fmea_select && ctx.fmea_isEdit !== true"
+    },
+    "viewAdd": {
+      "expression": "ctx.locationContext['ActiveWorkspace:Location'] === 'dfmeaLocation' && ctx.fmea_popup !== true && ctx.fmea_isEdit !== true"
+    },
+    "pinSet": {
+      "expression": "!(ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklist' || ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklistm') && (ctx.sidenavCommandId || ctx.fmea_popup) && ctx.fmea_isPin === false"
+    },
+    "unPinSet": {
+      "expression": "!(ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklist' || ctx.locationContext['ActiveWorkspace:SubLocation'] === 'dchecklistm') && (ctx.sidenavCommandId || ctx.fmea_popup) && ctx.fmea_isPin === true"
+    },
+    "sidenavCloseCommandVisible": {
+      "expression": "ctx.sidenavCommandId"
+    }
+  },
+  "i18n": {
+    "fmeaGroup": ["lgepDFMEAMessages"],
+    "masterManagement": ["lgepDFMEAMessages"],
+    "masterManagementDesc": ["lgepDFMEAMessages"],
+    "sheetManagement": ["lgepDFMEAMessages"],
+    "sheetManagementDesc": ["lgepDFMEAMessages"],
+    "changeSummaryViewTitle": ["lgepDFMEAMessages"],
+    "changeSummaryViewDesc": ["lgepDFMEAMessages"],
+    "changeTableViewTitle": ["lgepDFMEAMessages"],
+    "changeTableViewDesc": ["lgepDFMEAMessages"],
+    "fmeaAddTitle": ["lgepDFMEAMessages"],
+    "fmeaAddDesc": ["lgepDFMEAMessages"],
+    "fmeaEditTitle": ["lgepDFMEAMessages"],
+    "fmeaEditDesc": ["lgepDFMEAMessages"],
+    "fmeaMasterDeleteTitle": ["lgepDFMEAMessages"],
+    "fmeaMasterDeleteDesc": ["lgepDFMEAMessages"],
+    "fmeaEditSaveTitle": ["lgepDFMEAMessages"],
+    "fmeaEditSaveDesc": ["lgepDFMEAMessages"],
+    "fmeaEditCancelTitle": ["lgepDFMEAMessages"],
+    "fmeaEditCancelDesc": ["lgepDFMEAMessages"],
+    "referenceInfoManagementTItle": ["lgepDFMEAMessages"],
+    "referenceInfoManagementDesc": ["lgepDFMEAMessages"],
+    "rowEditTitle": ["lgepDFMEAMessages"],
+    "rotEditDesc": ["lgepDFMEAMessages"],
+    "fmeaRowEditSaveTitle": ["lgepDFMEAMessages"],
+    "fmeaRowEditSaveDesc": ["lgepDFMEAMessages"],
+    "fmeaRowEditCancelTitle": ["lgepDFMEAMessages"],
+    "fmeaRowEditCancelDesc": ["lgepDFMEAMessages"]
+  }
+}

@@ -1,0 +1,8 @@
+<aw-command-panel caption="i18n.dgnStandardTree" id="stdTreeNavData">
+    <aw-flex-column>
+        <aw-include name="L2_ManualStandardTree" visible-when="conditions.normalState"></aw-include>
+        <aw-include name="L2_ManualStandardListOrTree" exist-when="conditions.treeChangeCond"></aw-include>
+        <aw-include name="L2_ManualStandardBookmark" exist-when="conditions.bookmarkModeStatus"></aw-include>
+        <aw-include name="L2_ManualStandardQnANav" exist-when="conditions.viewDetail"></aw-include>
+    </aw-flex-column>
+</aw-command-panel>
