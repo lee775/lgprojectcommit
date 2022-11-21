@@ -1,18 +1,17 @@
 {
-    "helloText": "!! Hello World !!",
-    "lgepUserLogsMessagesLocationTitle":"Admin Menu",
-    "lgepUserLogsMessagesSubLocationTitle":"User Logs",
-    "lgepUserLogsMessagesLocationBrowserTitle": "Admin Menu",
-    "lgepUserLogsMessagesLocationBrowserSubTitle":"User Logs",
+  "helloText": "!! Hello World !!",
+  "lgepUserLogsMessagesLocationTitle": "Admin Menu",
+  "lgepUserLogsMessagesSubLocationTitle": "User Logs",
+  "lgepUserLogsMessagesLocationBrowserTitle": "Admin Menu",
+  "lgepUserLogsMessagesLocationBrowserSubTitle": "User Logs",
 
-    "user_id": "User Name",
-    "division": "Division",
-    "module_name": "Module Name",
-    "action_name": "Action Name",
-    "targets": "Targets",
-    "results": "Result",
-    "log_comments": "Log Comments",
-    "update_date":"Login Date",
-    "client_ip":"Client IP"
-
+  "user_id": "User Name",
+  "division": "Division",
+  "module_name": "Module Name",
+  "action_name": "Action Name",
+  "targets": "Targets",
+  "results": "Result",
+  "log_comments": "Log Comments",
+  "update_date": "Login Date",
+  "client_ip": "Client IP"
 }

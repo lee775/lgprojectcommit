@@ -56,17 +56,12 @@ const changeTab = (ctx) => {
   }
   // reset 마지막으로 선택한 interaction row 제거
   delete appCtxService.ctx[constants.INTERACTION_ROW];
-  appCtxService.registerCtx(
-    constants.ROW_SELECT,
-    ctx[constants.INTERACTION_INIT_ROW_SELECT]
-  );
+  appCtxService.registerCtx(constants.ROW_SELECT, ctx[constants.INTERACTION_INIT_ROW_SELECT]);
 
   // Interaction Table에서 선택한 흔적 제거
   if (isTreeTable()) {
     eventBus.publish('fmea.treeTable.initSelect');
-  } else if (
-    ctx[constants.DFMEA_TABLE_MODE] === constants.DFMEA_TABLE_MODE_KEY_TEXT
-  ) {
+  } else if (ctx[constants.DFMEA_TABLE_MODE] === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
     allImageResetStyles();
     eventBus.publish('fmea.textTable.initSelect');
   } else {
@@ -101,9 +96,7 @@ const resetSelection = (ctx) => {
 };
 
 const initReset = () => {
-  const initLines = document.querySelectorAll(
-    `#${constants.INTERACTION_INIT_SELECT_CLASSNAME}`
-  );
+  const initLines = document.querySelectorAll(`#${constants.INTERACTION_INIT_SELECT_CLASSNAME}`);
   for (const line of initLines) {
     line.removeAttribute('id');
   }

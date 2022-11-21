@@ -1,165 +1,163 @@
 {
-    "commands": {
-        "addProStrItemCommand": {
-            "iconId": "cmdAdd",
-            "isGroup":false,
-            "title": "{{i18n.add}}"
-        },
-        "editProStrItemCommand": {
-            "iconId": "cmdEdit",
-            "isGroup":false,
-            "title": "{{i18n.edit}}"
-        },
-        "saveProStrItemCommand": {
-            "iconId": "cmdSave",
-            "title": "{{i18n.save}}"
-        },
-        "cancelProStrItemCommand": {
-            "iconId": "cmdCancelEdit",
-            "title": "{{i18n.cancel}}"
-        },
-        "deleteProStrItemCommand": {
-            "iconId": "cmdDelete",
-            "title" : "{{i18n.delete}}"
-        }
+  "commands": {
+    "addProStrItemCommand": {
+      "iconId": "cmdAdd",
+      "isGroup": false,
+      "title": "{{i18n.add}}"
     },
-    "commandHandlers": {
-        "addProStrCommandHandler": {
-            "id": "addProStrItemCommand",
-            "action": "createProObjSidenav",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "editProStrCommandHandler": {
-            "id": "editProStrItemCommand",
-            "action": "startEditAction",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.startEditVisible"
-            }
-        },
-        "saveProStrItemCommandHandler": {
-            "id": "saveProStrItemCommand",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.cancelEditVisible"
-            },
-            "action": "saveEditCommandAction"
-        },
-        "cancelProStrItemCommandHandler": {
-            "id": "cancelProStrItemCommand",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.cancelEditVisible"
-            },
-            "action": "cancelEditCommandAction"
-        },
-        "deleteProStrCommandHandler": {
-            "id": "deleteProStrItemCommand",
-            "action": "deleteItem",
-            "activeWhen": true,
-            "visibleWhen": true
-        }
+    "editProStrItemCommand": {
+      "iconId": "cmdEdit",
+      "isGroup": false,
+      "title": "{{i18n.edit}}"
     },
-    "commandPlacements": {
-        "addProStrCommandPlacement": {
-            "id": "addProStrItemCommand",
-            "uiAnchor": "productStructureCommand",
-            "priority": 100
-        },
-        "editProStrCommandPlacement": {
-            "id": "editProStrItemCommand",
-            "uiAnchor": "productStructureCommand",
-            "priority": 200
-        },
-        "saveProStrItemCommandPlacement": {
-            "id": "saveProStrItemCommand",
-            "uiAnchor": "productStructureCommand",
-            "priority": 300
-        },
-        "cancelProStrItemCommandPlacement": {
-            "id": "cancelProStrItemCommand",
-            "uiAnchor": "productStructureCommand",
-            "priority": 400
-        },
-        "deleteProStrItemCommandPlacement": {
-            "id": "deleteProStrItemCommand",
-            "uiAnchor": "productStructureCommand",
-            "priority": 500
-        }
+    "saveProStrItemCommand": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.save}}"
     },
-    "actions": {
-        "createProObjSidenav": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awsidenav.openClose",
-                        "eventData": {
-                            "id": "sidenavLeft",
-                            "includeView": "createBomorItemObjSide",
-                            "commandId": "addProStrItemCommand",
-                            "config": {
-                                "width": "STANDARD",
-                                "height": "FULL"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        "startEditAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.startEdit"
-                    }
-                ]
-            }
-        }, 
-        "saveEditCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.saveEdit"
-                    }
-                ]
-            }
-        },
-        "cancelEditCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.cancelEdit"
-                    }
-                ]
-            }
-        },
-        "deleteItem": {
-            "actionType": "JSFunction",
-            "method": "deleteItem",
-            "deps": "js/lgepProductStructureService"
-        }
+    "cancelProStrItemCommand": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.cancel}}"
     },
-    "conditions": {
-        "whenDba":{
-            "expression" : "ctx.userSession.props.role_name.dbValue == 'Admin'"
-        },
-        "startEditVisible": {
-            "expression": "!ctx.productStructureTreeDataProvider_editInProgress"
-        },
-        "cancelEditVisible": {
-            "expression": "ctx.productStructureTreeDataProvider_editInProgress"
-        }
-    },
-    "i18n": {
-        
+    "deleteProStrItemCommand": {
+      "iconId": "cmdDelete",
+      "title": "{{i18n.delete}}"
     }
+  },
+  "commandHandlers": {
+    "addProStrCommandHandler": {
+      "id": "addProStrItemCommand",
+      "action": "createProObjSidenav",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "editProStrCommandHandler": {
+      "id": "editProStrItemCommand",
+      "action": "startEditAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.startEditVisible"
+      }
+    },
+    "saveProStrItemCommandHandler": {
+      "id": "saveProStrItemCommand",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.cancelEditVisible"
+      },
+      "action": "saveEditCommandAction"
+    },
+    "cancelProStrItemCommandHandler": {
+      "id": "cancelProStrItemCommand",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.cancelEditVisible"
+      },
+      "action": "cancelEditCommandAction"
+    },
+    "deleteProStrCommandHandler": {
+      "id": "deleteProStrItemCommand",
+      "action": "deleteItem",
+      "activeWhen": true,
+      "visibleWhen": true
+    }
+  },
+  "commandPlacements": {
+    "addProStrCommandPlacement": {
+      "id": "addProStrItemCommand",
+      "uiAnchor": "productStructureCommand",
+      "priority": 100
+    },
+    "editProStrCommandPlacement": {
+      "id": "editProStrItemCommand",
+      "uiAnchor": "productStructureCommand",
+      "priority": 200
+    },
+    "saveProStrItemCommandPlacement": {
+      "id": "saveProStrItemCommand",
+      "uiAnchor": "productStructureCommand",
+      "priority": 300
+    },
+    "cancelProStrItemCommandPlacement": {
+      "id": "cancelProStrItemCommand",
+      "uiAnchor": "productStructureCommand",
+      "priority": 400
+    },
+    "deleteProStrItemCommandPlacement": {
+      "id": "deleteProStrItemCommand",
+      "uiAnchor": "productStructureCommand",
+      "priority": 500
+    }
+  },
+  "actions": {
+    "createProObjSidenav": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awsidenav.openClose",
+            "eventData": {
+              "id": "sidenavLeft",
+              "includeView": "createBomorItemObjSide",
+              "commandId": "addProStrItemCommand",
+              "config": {
+                "width": "STANDARD",
+                "height": "FULL"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "startEditAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.startEdit"
+          }
+        ]
+      }
+    },
+    "saveEditCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.saveEdit"
+          }
+        ]
+      }
+    },
+    "cancelEditCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.cancelEdit"
+          }
+        ]
+      }
+    },
+    "deleteItem": {
+      "actionType": "JSFunction",
+      "method": "deleteItem",
+      "deps": "js/lgepProductStructureService"
+    }
+  },
+  "conditions": {
+    "whenDba": {
+      "expression": "ctx.userSession.props.role_name.dbValue == 'Admin'"
+    },
+    "startEditVisible": {
+      "expression": "!ctx.productStructureTreeDataProvider_editInProgress"
+    },
+    "cancelEditVisible": {
+      "expression": "ctx.productStructureTreeDataProvider_editInProgress"
+    }
+  },
+  "i18n": {}
 }

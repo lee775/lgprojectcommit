@@ -35,11 +35,7 @@ export const add = function (parent, itemRev) {
       },
     ],
   };
-  return soaService.post(
-    'StructureManagement-2012-09-Structure',
-    'add',
-    requestParam
-  );
+  return soaService.post('StructureManagement-2012-09-Structure', 'add', requestParam);
 };
 
 /**
@@ -62,11 +58,7 @@ export const closeBOMWindows = function (bomWindows) {
   let requestParam = {
     bomWindows: bomWindows,
   };
-  return soaService.post(
-    'Cad-2007-01-StructureManagement',
-    'closeBOMWindows',
-    requestParam
-  );
+  return soaService.post('Cad-2007-01-StructureManagement', 'closeBOMWindows', requestParam);
 };
 
 /**
@@ -81,7 +73,7 @@ export const closeBOMWindows = function (bomWindows) {
  * @param {*} policy
  * @returns
  */
- export const createBOMWindow = function (item, itemRev, bomView, revRuleConfigInfo, policy) {
+export const createBOMWindow = function (item, itemRev, bomView, revRuleConfigInfo, policy) {
   let requestParam = {
     info: [
       {
@@ -110,16 +102,9 @@ export const closeBOMWindows = function (bomWindows) {
       },
     ],
   };
-  return soaService
-    .post(
-      'Cad-2007-01-StructureManagement',
-      'createBOMWindows',
-      requestParam,
-      policy
-    )
-    .then((response) => {
-      return response.output[0];
-    });
+  return soaService.post('Cad-2007-01-StructureManagement', 'createBOMWindows', requestParam, policy).then((response) => {
+    return response.output[0];
+  });
 };
 
 /**
@@ -139,11 +124,7 @@ export const cutItems = function (parent, objs) {
       },
     ],
   };
-  return soaService.post(
-    'StructureManagement-2012-10-Structure',
-    'cutItems',
-    requestParam
-  );
+  return soaService.post('StructureManagement-2012-10-Structure', 'cutItems', requestParam);
 };
 
 /**
@@ -175,11 +156,7 @@ export const duplicate = function (topLine) {
       },
     ],
   };
-  return soaService.post(
-    'StructureManagement-2008-06-Structure',
-    'duplicate',
-    requestParam
-  );
+  return soaService.post('StructureManagement-2008-06-Structure', 'duplicate', requestParam);
 };
 
 /**
@@ -241,12 +218,7 @@ export const expandPSAllLevels = function (parentBomLines, pref, paramPolicy) {
     //     }]
     // }
   };
-  return soaService.post(
-    'Cad-2007-01-StructureManagement',
-    'expandPSAllLevels',
-    requestParam,
-    paramPolicy
-  );
+  return soaService.post('Cad-2007-01-StructureManagement', 'expandPSAllLevels', requestParam, paramPolicy);
 };
 
 /**
@@ -273,12 +245,7 @@ export const expandPSOneLevel = function (parentBomLines, pref, paramPolicy) {
     //     }]
     // }
   };
-  return soaService.post(
-    'Cad-2007-01-StructureManagement',
-    'expandPSOneLevel',
-    requestParam,
-    paramPolicy
-  );
+  return soaService.post('Cad-2007-01-StructureManagement', 'expandPSOneLevel', requestParam, paramPolicy);
 };
 
 /**
@@ -321,11 +288,7 @@ export const removeChildrenFromParentLine = function (bomlines) {
   let requestParam = {
     bomlines: bomlines,
   };
-  return soaService.post(
-    'Bom-2008-06-StructureManagement',
-    'removeChildrenFromParentLine',
-    requestParam
-  );
+  return soaService.post('Bom-2008-06-StructureManagement', 'removeChildrenFromParentLine', requestParam);
 };
 
 /**
@@ -348,11 +311,7 @@ export const saveBOMWindows = function (bomWindows) {
   let requestParam = {
     bomWindows: bomWindows,
   };
-  return soaService.post(
-    'Cad-2008-06-StructureManagement',
-    'saveBOMWindows',
-    requestParam
-  );
+  return soaService.post('Cad-2008-06-StructureManagement', 'saveBOMWindows', requestParam);
 };
 
 /**
@@ -364,27 +323,246 @@ export const togglePrecision = function (bomlines) {
   let requestParam = {
     inputs: bomlines,
   };
-  return soaService.post(
-    'StructureManagement-2014-10-Structure',
-    'togglePrecision',
-    requestParam
-  );
+  return soaService.post('StructureManagement-2014-10-Structure', 'togglePrecision', requestParam);
 };
 
-
-export function setEditContext(context, objects) {
+/**
+ * AWC BOM을 펼친다.
+ * @param {*} product
+ * @param {*} productContext
+ * @param {*} parentElement
+ * @param {*} policy
+ * @returns
+ */
+export function getOccurrences3(product, productContext, parentElement, policy) {
   let requestParam = {
-    context: context,
-    objects: objects
+    inputData: {
+      config: {
+        effectivityDate: '0001-01-01T00:00:00',
+        unitNo: -1,
+        productContext: productContext,
+        revisionRule: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        occurrenceScheme: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        sourceContext: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        changeContext: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        appliedArrangement: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        closureRule: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        viewType: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        serializedRevRule: '',
+        effectivityGroups: [],
+        endItem: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        variantRules: [],
+        svrOwningProduct: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        effectivityRanges: [],
+      },
+      cursor: {
+        startReached: false,
+        endReached: false,
+        startIndex: 0,
+        endIndex: 0,
+        pageSize: 250,
+        startOccUid: '',
+        endOccUid: '',
+        cursorData: [],
+      },
+      focusOccurrenceInput: {
+        element: {
+          uid: 'AAAAAAAAAAAAAA',
+          type: 'unknownType',
+        },
+        cloneStableIdChain: '',
+      },
+      filter: {
+        searchFilterCategories: [],
+        searchFilterMap: {},
+        fetchUpdatedFilters: false,
+        recipe: [],
+        searchFilterFieldSortType: 'Priority',
+        searchSortCriteria: [],
+      },
+      requestPref: {
+        includePath: ['true'],
+        loadTreeHierarchyThreshold: ['50'],
+        displayMode: ['Tree'],
+        showExplodedLines: ['false'],
+        savedSessionMode: ['restore'],
+        calculateFilters: ['false'],
+        viewType: [''],
+        startFreshNavigation: ['true'],
+        defaultClientScopeUri: ['Awb0OccurrenceManagement'],
+      },
+      expansionCriteria: {
+        expandBelow: true,
+        levelNExpand: 0,
+        loadTreeHierarchyThreshold: 500,
+        scopeForExpandBelow: parentElement ? parentElement.uid : '',
+      },
+      sortCriteria: {
+        propertyName: '',
+        sortingOrder: '',
+      },
+      product: product,
+      parentElement: parentElement ? parentElement.uid : '',
+    },
   };
-  return soaService.post(
-    'EditContext-2014-12-DataManagement',
-    'setEditContext',
-    requestParam
-  );
-  
+  return soaService.post('Internal-ActiveWorkspaceBom-2019-12-OccurrenceManagement', 'getOccurrences3', requestParam, policy);
 }
 
+/**
+ * 특정 clientScopeUri 대상으로 TableViewModelProperty를 가져온다.
+ * @param {*} objectUids
+ * @param {*} policy
+ * @param {*} clientScopeURI
+ * @param {*} columns
+ * @returns
+ */
+function getTableViewModelProperties(
+  objectUids,
+  policy,
+  clientScopeURI = 'Awb0OccurrenceManagement',
+  columns = [
+    'Awb0ConditionalElement.awb0PendingAction',
+    'Awb0PositionedElement.pma1UpdateAction',
+    'Awb0DesignElement.pma1LastAlignedPart',
+    'Awb0DesignElement.REF(pma1LastAlignedPart,ItemRevision).release_status_list',
+    'Awb0PartElement.pma1LastAlignedDesign',
+    'Awb0PartElement.REF(pma1LastAlignedDesign,ItemRevision).release_status_list',
+    'Awb0ConditionalElement.awb0MarkupType',
+  ],
+) {
+  const requestParam = {
+    input: {
+      objectUids: objectUids,
+      columnConfigInput: {
+        clientName: 'AWClient',
+        hostingClientName: '',
+        clientScopeURI: clientScopeURI,
+        operationType: 'Union',
+        columnsToExclude: columns,
+      },
+      requestPreference: {
+        typesToInclude: ['Awb0DesignElement'],
+      },
+    },
+  };
+  return soaService.post('Internal-AWS2-2017-12-DataManagement', 'getTableViewModelProperties', requestParam, policy);
+}
+
+/**
+ *
+ * @param {*} date
+ * @returns
+ */
+export function dateTo_GMTString(date) {
+  date = typeof date === 'number' || typeof date === 'string' ? new Date(date) : date;
+  var MM = date.getMonth() + 1;
+  MM = MM < 10 ? '0' + MM : MM;
+  var dd = date.getDate();
+  dd = dd < 10 ? '0' + dd : dd;
+  let hh = date.getHours();
+  hh = hh < 10 ? '0' + hh : hh;
+  var mm = date.getMinutes();
+  mm = mm < 10 ? '0' + mm : mm;
+  var ss = date.getSeconds();
+  ss = ss < 10 ? '0' + ss : ss;
+  return date.getFullYear() + '-' + MM + '-' + dd + 'T' + hh + ':' + mm + ':' + ss + date.toString().slice(28, 33);
+}
+
+/**
+ * ViewModelObject를 대상으로 특정 속성에 값을 저장한다.
+ * 일반적으로 dbValue와 uiValue가 다른 경우는 드물지만,
+ * UiValue 가 별도로 지정되는 경우에는 uiValues에도 값을 넣어야한다.
+ * @param {*} loadedVMObjects
+ * @param {*} properties
+ * @param {*} values
+ * @param {*} policy
+ * @param {*} uiValues
+ * @returns
+ */
+export function saveViewModelEditAndSubmitWorkflow2(loadedVMObjects, properties, values, policy, uiValues) {
+  const requestParam = {
+    inputs: [],
+  };
+  for (const vmo of loadedVMObjects) {
+    let input = {
+      obj: {
+        uid: vmo.uid,
+        type: vmo.type,
+      },
+      viewModelProperties: [],
+      isPessimisticLock: false,
+      workflowData: {},
+    };
+    for (let i = 0; i < properties.length; i++) {
+      let viewModelProperty = {
+        propertyName: properties[i],
+        dbValues: [values[i]],
+        uiValues: uiValues ? uiValues[i] : [values[i]],
+        intermediateObjectUids: [],
+        srcObjLsd: dateTo_GMTString(new Date()),
+        // srcObjLsd: "2022-10-27T16:30:30+09:00",
+        isModifiable: true,
+      };
+      input.viewModelProperties.push(viewModelProperty);
+    }
+    requestParam.inputs.push(input);
+  }
+  return soaService.post('Internal-AWS2-2018-05-DataManagement', 'saveViewModelEditAndSubmitWorkflow2', requestParam, policy);
+}
+
+/**
+ *
+ * @param {*} parentOccurrenceId
+ * @param {*} policy
+ * @returns
+ */
+export function saveUserWorkingContextState2(parentOccurrenceId, policy) {
+  let requestParam = {
+    contextState: {
+      openedObject: {
+        uid: parentOccurrenceId,
+        type: 'Awb0DesignElement',
+      },
+      sublocationAttributes: {
+        awb0ActiveSublocation: ['개요'],
+        awb0SelectedElementPath: [parentOccurrenceId],
+        awb0OverrideContextElement: [parentOccurrenceId],
+      },
+      cloneContentSaveSpecifications: [[], []],
+    },
+    requestPref: {
+      isSetCase: ['true'],
+    },
+  };
+  return soaService.post('Internal-ActiveWorkspaceBom-2019-06-OccurrenceManagement', 'saveUserWorkingContextState2', requestParam, policy);
+}
 export default exports = {
   add,
   closeBOMWindow,
@@ -402,6 +580,9 @@ export default exports = {
   saveBOMWindows,
   duplicateFromItemRev,
   togglePrecision,
-  setEditContext
+  getOccurrences3,
+  getTableViewModelProperties,
+  dateTo_GMTString,
+  saveUserWorkingContextState2,
 };
 app.factory('lgepBomUtils', () => exports);

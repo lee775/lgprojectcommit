@@ -1,10 +1,10 @@
 {
-    "helloText": "!! Hello World !!",
-    "lgepClassificationCommonLocationHeaderTitle": "분류 기준 관리",
-    "lgepClassificationCommonLocationBrowserTitle": "분류 기준 관리",
-    "lgepClassificationCommonLocationBrowserSubTitle": "분류 기준 관리",
-    "lgepProductStructureLocationHeaderTitle": "제품 구조 관리",
-    "lgepProductStructureLocationBrowserTitle": "제품 구조 관리",
-    "lgepProductStructureLocationBrowserSubTitle": "partManagement",
-    "lgepProductStructureSubLocationTitle": "제품 구조 관리"
+  "helloText": "!! Hello World !!",
+  "lgepClassificationCommonLocationHeaderTitle": "분류 기준 관리",
+  "lgepClassificationCommonLocationBrowserTitle": "분류 기준 관리",
+  "lgepClassificationCommonLocationBrowserSubTitle": "분류 기준 관리",
+  "lgepProductStructureLocationHeaderTitle": "제품 구조 관리",
+  "lgepProductStructureLocationBrowserTitle": "제품 구조 관리",
+  "lgepProductStructureLocationBrowserSubTitle": "partManagement",
+  "lgepProductStructureSubLocationTitle": "제품 구조 관리"
 }

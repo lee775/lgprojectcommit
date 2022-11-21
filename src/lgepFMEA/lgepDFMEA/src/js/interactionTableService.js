@@ -5,16 +5,9 @@ import lgepQueryUtils from 'js/utils/lgepQueryUtils';
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import viewModelObjectService from 'js/viewModelObjectService';
 
-import {
-  loadObjectByPolicy
-} from 'js/utils/fmeaTcUtils';
-import {
-  isTreeTable
-} from 'js/utils/fmeaViewCommonUtils';
-import {
-  getHeaderData,
-  makeVmProperty
-} from 'js/utils/fmeaTableMakeUtils';
+import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
+import { isTreeTable } from 'js/utils/fmeaViewCommonUtils';
+import { getHeaderData, makeVmProperty } from 'js/utils/fmeaTableMakeUtils';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
 
@@ -81,19 +74,9 @@ const _getPartName = (selectRow) => {
 
 const _getEntries = (type) => {
   if (type === prop.SECONDARY_OBJECT) {
-    return [
-      prop.QUERY_ENTRY_PRIMARY_ID,
-      prop.QUERY_ENTRY_PRIMARY_REV_ID,
-      prop.QUERY_ENTRY_PRIMARY_NAME,
-      prop.QUERY_ENTRY_SECONDARY_REV_ID,
-    ];
+    return [prop.QUERY_ENTRY_PRIMARY_ID, prop.QUERY_ENTRY_PRIMARY_REV_ID, prop.QUERY_ENTRY_PRIMARY_NAME, prop.QUERY_ENTRY_SECONDARY_REV_ID];
   } else {
-    return [
-      prop.QUERY_ENTRY_SECONDARY_ID,
-      prop.QUERY_ENTRY_SECONDARY_REV_ID,
-      prop.QUERY_ENTRY_SECONDARY_NAME,
-      prop.QUERY_ENTRY_PRIMARY_REV_ID,
-    ];
+    return [prop.QUERY_ENTRY_SECONDARY_ID, prop.QUERY_ENTRY_SECONDARY_REV_ID, prop.QUERY_ENTRY_SECONDARY_NAME, prop.QUERY_ENTRY_PRIMARY_REV_ID];
   }
 };
 
@@ -111,7 +94,7 @@ const _getStructureUidByTableMode = (selectRow) => {
   } else {
     return selectRow.props[prop.SUB_ASSY].uid;
   }
-}
+};
 
 const _makeTableRows = async (interactionResult, typeName) => {
   if (!interactionResult || interactionResult.length === 0) {
@@ -121,14 +104,9 @@ const _makeTableRows = async (interactionResult, typeName) => {
   let tableRows = [];
   for (const structure of interactionResult) {
     const uid = structure.props[typeName].dbValues[0];
-    const structureObject = await loadObjectByPolicy(
-      uid,
-      prop.TYPE_FMEA_STRUCTURE_REV,
-      [prop.OBJECT_NAME]
-    );
+    const structureObject = await loadObjectByPolicy(uid, prop.TYPE_FMEA_STRUCTURE_REV, [prop.OBJECT_NAME]);
 
-    const tableRow =
-      viewModelObjectService.createViewModelObject(structureObject);
+    const tableRow = viewModelObjectService.createViewModelObject(structureObject);
 
     // add partname
     const partName = tableRow.props[prop.OBJECT_NAME].dbValues[0];
@@ -137,10 +115,7 @@ const _makeTableRows = async (interactionResult, typeName) => {
 
     // add effect type
     const effectType = structure.props[prop.INNTERACTION_TYPE].uiValues[0];
-    const effectTypeProperty = makeVmProperty(
-      prop.INNTERACTION_TYPE,
-      effectType
-    );
+    const effectTypeProperty = makeVmProperty(prop.INNTERACTION_TYPE, effectType);
     tableRow.props[prop.INNTERACTION_TYPE] = effectTypeProperty;
 
     tableRows.push(tableRow);
@@ -159,7 +134,7 @@ const _queryInteraction = async (entries, subAssy, effectType) => {
       subAssy.props[prop.OBJECT_NAME].dbValues[0],
       subAssy.props[prop.REVISION_ID].dbValues[0],
       effectType,
-    ]
+    ],
   );
   return interactionResult;
 };

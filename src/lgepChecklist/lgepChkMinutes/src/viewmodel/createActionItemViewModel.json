@@ -1,0 +1,136 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+      "js/aw-button.directive",
+      "js/aw-datetime.directive",
+      "js/aw-flex-column.directive",
+      "js/aw-flex-row.directive",
+      "js/aw-label.directive",
+      "js/aw-listbox.directive",
+      "js/aw-panel.directive",
+      "js/aw-panel-body.directive",
+      "js/aw-panel-footer.directive",
+      "js/aw-panel-section.directive",
+      "js/aw-textarea.directive",
+      "css/minutesMainCss.css"
+    ],
+    "actions": {
+      "createActionItemInitialize": {
+        "actionType": "JSFunction",
+        "method": "createActionItemInitialize",
+        "inputData": {
+          "data": "{{data}}"
+        },
+        "deps": "js/createActionItemService"
+      },
+      "createActionItem": {
+        "actionType": "JSFunction",
+        "method": "createActionItem",
+        "inputData": {
+          "ctx": "{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/createActionItemService"
+      },
+      "deleteActionItem": {
+        "actionType": "JSFunction",
+        "method": "deleteActionItem",
+        "inputData": {
+          "ctx": "{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/createActionItemService"
+      },
+      "backPage": {
+        "actionType": "JSFunction",
+        "method": "backPage",
+        "inputData": {
+          "data": "{{data}}"
+        },
+        "deps": "js/createActionItemService"
+      },
+      "createInitialize": {
+        "actionType": "JSFunction",
+        "method": "createInitialize",
+        "inputData": {
+          "ctx": "{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/createActionItemService"
+      }
+    },
+    "data": {
+      "l2_commentLbl": {
+        "displayName": "코멘트",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "l2_follow_upLbl": {
+        "displayName": "F/up",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "l2_workerTxt": {
+        "displayName": "담당자",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "numberOfLines": 3
+      },
+      "object_descLbl": {
+        "displayName": "비고",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "l2_expected_date": {
+        "displayName": "일정",
+        "type": "DATETIME",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dispValue": "",
+        "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+      },
+      "l2_worker": {
+          "displayName": "담당자",
+          "type": "STRING",
+          "isRequired": "true",
+          "hasLov": "true",
+          "dbValue": "",
+          "dispValue": ""
+      },
+      "l2_workerValues": {
+          "type": "STRING",
+          "dbValue": []
+      }
+    },
+    "onEvent": [
+      {
+        "eventId": "createActionItem.contentLoaded",
+        "action": "createInitialize"
+      }
+    ],
+    "lifecycleHooks": {
+      "onMount": "createActionItemInitialize"
+    },
+    "i18n": {
+      "minutesTitle": ["lgepChkMinutesMessages"],
+      "date": ["lgepChkMinutesMessages"],
+      "place": ["lgepChkMinutesMessages"],
+      "participants": ["lgepChkMinutesMessages"],
+      "meetingDetails": ["lgepChkMinutesMessages"],
+      "meetingAgenda": ["lgepChkMinutesMessages"],
+      "relatedSchedule": ["lgepChkMinutesMessages"],
+      "writer": ["lgepChkMinutesMessages"],
+      "detail": ["lgepChkMinutesMessages"],
+      "minutesList": ["lgepChkMinutesMessages"],
+      "minutes": ["lgepChkMinutesMessages"],
+      "create": ["lgepChkMinutesMessages"],
+      "back": ["lgepChkMinutesMessages"],
+      "createMinutes": ["lgepChkMinutesMessages"],
+      "fileDataSet": ["lgepChkMinutesMessages"]
+    }
+  }
+  

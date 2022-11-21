@@ -9,15 +9,8 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
 import dfmeaMasterListService from 'js/dfmeaMasterListService';
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
-import {
-  afterSaveAction,
-  beforeSaveAction,
-} from 'js/utils/fmeaViewCommonUtils';
-import {
-  getProductNameByGroup,
-  getProductNameValueByGroup,
-  insertLog,
-} from 'js/utils/fmeaCommonUtils';
+import { afterSaveAction, beforeSaveAction } from 'js/utils/fmeaViewCommonUtils';
+import { getProductNameByGroup, getProductNameValueByGroup, insertLog } from 'js/utils/fmeaCommonUtils';
 import { createItem } from 'js/utils/fmeaTcUtils';
 import { validationInputs } from 'js/utils/fmeaValidationUtils';
 import * as prop from 'js/constants/fmeaProperty';
@@ -53,32 +46,17 @@ const createAction = async (data) => {
     beforeSaveAction(data);
 
     // 3. DFMEA SHEET 생성
-    const master = await createItem(
-      prop.TYPE_DFMEA_MASTER_ITEM,
-      dfmeaName.dbValue
-    );
+    const master = await createItem(prop.TYPE_DFMEA_MASTER_ITEM, dfmeaName.dbValue);
     const dfmeaRev = master.itemRev;
 
     // TODO :: SOD 강제 추가 로직 삭제
-    const queryResults = await queryUtil.executeSavedQuery(
-      prop.QUERY_FMEA_SOD,
-      prop.QUERY_ENTRY_NAME,
-      '청소기_Risk Rankings'
-    );
+    const queryResults = await queryUtil.executeSavedQuery(prop.QUERY_FMEA_SOD, prop.QUERY_ENTRY_NAME, '청소기_Risk Rankings');
 
     const productValue = await getProductNameValueByGroup();
 
-    await lgepObjectUtils.setProperties(
-      dfmeaRev,
-      [prop.PRODUCT, prop.REF_SOD_STANDARD],
-      [productValue, queryResults[0].uid]
-    );
+    await lgepObjectUtils.setProperties(dfmeaRev, [prop.PRODUCT, prop.REF_SOD_STANDARD], [productValue, queryResults[0].uid]);
 
-    await lgepObjectUtils.setProperties(
-      dfmeaRev,
-      [prop.PRODUCT],
-      [productValue]
-    );
+    await lgepObjectUtils.setProperties(dfmeaRev, [prop.PRODUCT], [productValue]);
 
     // 후 처리
     afterSaveAction(data);

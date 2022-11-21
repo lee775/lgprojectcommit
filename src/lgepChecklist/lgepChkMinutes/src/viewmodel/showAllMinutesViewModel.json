@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-checkbox.directive",
+    "js/aw-icon-button.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-scrollpanel.directive",
+    "js/aw-splm-table.directive",
+    "css/minutesMainCss.css"
+  ],
+  "actions": {
+    "loadMinutes": {
+      "actionType": "JSFunction",
+      "method": "loadMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "example": "{{function:sortAction}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/showAllMinutesService"
+    },
+    "openCreateMinutes": {
+      "actionType": "JSFunction",
+      "method": "openCreateMinutes",
+      "deps": "js/minutesService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "goUserDetail": {
+      "actionType": "JSFunction",
+      "method": "goUserDetail",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "createproceed": {
+      "actionType": "JSFunction",
+      "method": "createproceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "saveMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "saveMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "cancelMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "cancelMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "openCreateMinutesInShowAllMinutes": {
+      "actionType": "JSFunction",
+      "method": "openCreateMinutesInShowAllMinutes",
+      "deps": "js/minutesService"
+    },
+    "backMinutes": {
+      "actionType": "JSFunction",
+      "method": "backMinutes",
+      "deps": "js/minutesService"
+    },
+    "openMinutesBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "closePopupWindow"
+        },
+        {
+          "action": "openCreateMinutes"
+        }
+      ]
+    },
+    "createProceedBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "createproceed"
+        },
+        {
+          "action": "backMinutes"
+        }
+      ]
+    },
+    "deleteProceed": {
+      "actionType": "JSFunction",
+      "method": "deleteProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "exportProceed": {
+      "actionType": "JSFunction",
+      "method": "exportProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "deleteMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "deleteMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesService"
+    },
+    "showAllRevisionsMinutes": {
+      "actionType": "JSFunction",
+      "method": "showAllRevisionsMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesService"
+    }
+  },
+  "data": {
+    "exportproceed": {
+      "action": "exportProceed",
+      "iconName": "cmdDownload"
+    },
+    "deleteproceed": {
+      "action": "deleteMinutesMain",
+      "iconName": "cmdDelete"
+    },
+    "createproceed": {
+      "action": "openCreateMinutesInShowAllMinutes",
+      "iconName": "cmdAdd"
+    },
+    "allRevisionsMinutes": {
+      "displayName": "모든 리비전의 회의록 보기",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "모든 리비전의 회의록 보기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "pageSize": 40
+  },
+  "conditions": {
+    "editMode": {
+      "expression": "data.editMode === true"
+    }
+  },
+  "onEvent": [],
+  "dataProviders": {
+    "minutesListProvider": {
+      "action": "loadMinutes",
+      "response": "{{data.example}}",
+      "totalFound": "{{data.totalFound}}",
+      "selectionModelMode": "multiple"
+    }
+  },
+  "columnProviders": {
+    "minutesColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "이름",
+          "minWidth": 60,
+          "width": 200
+        },
+        {
+          "name": "l2_meeting_date",
+          "displayName": "{{i18n.date}}",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "checklist_rev_id",
+          "displayName": "체크리스트의 리비전 ID",
+          "minWidth": 60,
+          "width": 200
+        }
+      ]
+    }
+  },
+  "grids": {
+    "showAllMinutesTable": {
+      "dataProvider": "minutesListProvider",
+      "columnProvider": "minutesColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "sortAction": {
+      "functionName": "sortAction",
+      "parameters": ["{{data.dataProviders.minutesListProvider.startIndex}}", "{{data.pageSize}}"]
+    }
+  },
+  "lifecycleHooks": {},
+  "i18n": {
+    "minutesTitle": ["lgepChkMinutesMessages"],
+    "date": ["lgepChkMinutesMessages"],
+    "place": ["lgepChkMinutesMessages"],
+    "participants": ["lgepChkMinutesMessages"],
+    "meetingDetails": ["lgepChkMinutesMessages"],
+    "meetingAgenda": ["lgepChkMinutesMessages"],
+    "relatedSchedule": ["lgepChkMinutesMessages"],
+    "writer": ["lgepChkMinutesMessages"],
+    "detail": ["lgepChkMinutesMessages"],
+    "minutesList": ["lgepChkMinutesMessages"],
+    "minutes": ["lgepChkMinutesMessages"]
+  }
+}

@@ -1,90 +1,277 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-panel.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-command-bar.directive",
-        "js/visible-when.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-sidenav.directive",
-        "css/L2_ChecklistMain.css"
-    ],
-    "onEvent": [],
-    "data": {
-        "tableMode": {
-            "displayName": "",
-            "type": "STRING",
-            "isRequired": "false",
-            "hasLov": "true",
-            "dbValue": "1",
-            "dispValue": "Image View"
-        },
-        "tableModeValues": {
-            "type": "STRING",
-            "dbValue": [
-                {
-                    "propDisplayValue": "Image View",
-                    "propDisplayDescription": "",
-                    "dispValue": "Image View",
-                    "propInternalValue": "1",
-                    "iconName": "cmdImage"
-                },
-                {
-                    "propDisplayValue": "Table View",
-                    "propDisplayDescription": "",
-                    "dispValue": "Table View",
-                    "propInternalValue": "2",
-                    "iconName": "cmdTableView"
-                },
-                {
-                    "propDisplayValue": "Tree View",
-                    "propDisplayDescription": "",
-                    "dispValue": "Tree View",
-                    "propInternalValue": "3",
-                    "iconName": "cmdTreeView"
-                }
-            ]
-        },
-        "interactionInfo": {
-            "slide": "FLOAT",
-            "direction": "RIGHT_TO_LEFT",
-            "animation": false,
-            "width": "WIDE",
-            "height": "FULL"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-sidenav.directive",
+    "js/aw-search-box.directive",
+    "js/aw-slider.directive",
+    "css/L2_ChecklistGrid.css",
+    "css/L2_ChecklistMain.css"
+  ],
+  "onEvent": [{
+      "eventId": "checklist.filter.resetReSearch",
+      "action": "resetReSearchValue"
     },
-    "actions": {
-        "initialize": {
-            "actionType": "JSFunction",
-            "method": "initialize",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/L2_ChecklistMainService"
-        },
-        "tableModeChanges": {
-            "actionType": "JSFunction",
-            "method": "tableModeChanges",
-            "inputData": {
-                "currentValue": "{{data.tableMode.dbValue}}"
-            },
-            "deps": "js/L2_ChecklistMainService"
-        },
-        "unMount": {
-            "actionType": "JSFunction",
-            "method": "unMount",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/L2_ChecklistMainService"
-        }
+    {
+      "eventId": "check.Selected.List",
+      "action": "checkSelected"
     },
-    "lifecycleHooks": {
-        "onMount": "initialize",
-        "onUnmount": "unMount"
+    {
+      "eventId": "knowledgeLoading.contentLoaded",
+      "action": "initSliderValue"
+    },
+    {
+      "eventId": "$locationChangeStart",
+      "action": "locationChangeEvent"
+    },
+    {
+      "eventId": "checklist.copyObject",
+      "action": "copyObject"
+    },
+    {
+      "eventId": "$locationChangeStart",
+      "action": "resetCmdData"
+    },
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setTuiGridStyle"
     }
+  ],
+  "data": {
+    "tableMode": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "true",
+      "dbValue": "1",
+      "dispValue": "Image View"
+    },
+    "tableModeValues": {
+      "type": "STRING",
+      "dbValue": [{
+          "propDisplayValue": "Image View",
+          "propDisplayDescription": "",
+          "dispValue": "Image View",
+          "propInternalValue": "1",
+          "iconName": "cmdImage"
+        },
+        {
+          "propDisplayValue": "Tree View",
+          "propDisplayDescription": "",
+          "dispValue": "Tree View",
+          "propInternalValue": "3",
+          "iconName": "cmdTreeView"
+        }
+      ]
+    },
+    "addStructureInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "STANDARD",
+      "height": "FULL"
+    },
+    "createStructureInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    },
+    "interactionInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    },
+    "mainFilterInfo": {
+      "slide": "PUSH",
+      "direction": "LEFT_TO_RIGHT",
+      "animation": true,
+      "width": "STANDARD",
+      "height": "FULL"
+    },
+    "minutesInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    },
+    "createMinutesInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    },
+    "allMinutesInfo": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
+    },
+    "attrSearchBox": {
+      "displayName": "",
+      "type": "STRING",
+      "dbValue": ""
+    },
+    "searchBoxPlaceHolder": {
+      "dbValue": "{{i18n.searchFilterPlaceholder}}"
+    },
+    "zoomSliderProp": {
+      "isArray": "true",
+      "dbValue": [{
+        "sliderOption": {
+          "disabled": false,
+          "min": 0.1,
+          "max": 2,
+          "step": 0.1,
+          "value": 1,
+          "orientation": "horizontal",
+          "range": false
+        },
+        "showIncrementButtons": true,
+        "sliderChangeEventAction": "updateSliderValue"
+      }]
+    },
+    "zoomSliderInit": {
+      "action": "initSliderValue",
+      "iconName": "Refresh",
+      "tooltip": "100%"
+    }
+  },
+  "actions": {
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "initialize",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    },
+    "tableModeChanges": {
+      "actionType": "JSFunction",
+      "method": "tableModeChanges",
+      "inputData": {
+        "currentValue": "{{data.tableMode.dbValue}}"
+      },
+      "deps": "js/L2_ChecklistOpenService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    },
+    "searchFilterAttr": {
+      "actionType": "JSFunction",
+      "method": "searchFilterAttr",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "resetReSearchValue": {
+      "actionType": "JSFunction",
+      "method": "resetReSearchValue",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "updateSliderValue": {
+      "actionType": "JSFunction",
+      "method": "updateSliderValue",
+      "inputData": {
+        "value": "{{prop.dbValue[0].sliderOption.value}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    },
+    "initSliderValue": {
+      "actionType": "JSFunction",
+      "method": "initSliderValue",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    },
+    "checkSelected": {
+      "actionType": "JSFunction",
+      "method": "checkSelected",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ExportExcelService"
+    },
+    "locationChangeEvent": {
+      "actionType": "JSFunction",
+      "method": "locationChangeEvent",
+      "inputData": {
+        "evt1": "{{evt1}}",
+        "evt2": "{{evt2}}",
+        "evt3": "{{evt3}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    },
+    "copyObject": {
+      "actionType": "Copy",
+      "method": "copyUrlToClipboard",
+      "inputData": {
+        "objectToCopy": "{{ctx.checklist.clipboard}}",
+        "copyType": "Object"
+      },
+      "actionMessages": {
+        "success": [{
+            "condition": "(ctx.checklist.clipboard && ctx.checklist.clipboard.length === 1)",
+            "message": "copySingleSuccessful"
+          },
+          {
+            "condition": "(ctx.checklist.clipboard && ctx.checklist.clipboard.length > 1)",
+            "message": "copyMultipleSuccessful"
+          }
+        ]
+      }
+    },
+    "resetCmdData": {
+      "actionType": "JSFunction",
+      "method": "resetCmdData",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ExportExcelService"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    }
+  },
+  "lifecycleHooks": {
+    "onMount": "initialize",
+    "onUnmount": "unMount"
+  },
+  "i18n": {
+    "searchFilterPlaceholder": ["L2_ChkMainMessages"],
+    "copySingleSuccessful": ["ZeroCompileCommandMessages"],
+    "copyMultipleSuccessful": ["ZeroCompileCommandMessages"]
+  }
 }

@@ -1,15 +1,15 @@
 <style>
-    #apToastTable .tui-grid-cell {
-        border-color: rgb(206, 206, 206);
-        border-left-width: 1px;
-        border-right-width: 1px;
-    }
+  #apToastTable .tui-grid-cell {
+    border-color: rgb(206, 206, 206);
+    border-left-width: 1px;
+    border-right-width: 1px;
+  }
 </style>
-<aw-row>
-    <aw-column width="fill" id="sod-container">
-        <div id="apToastTable"></div>
-    </aw-column>
+<aw-row style="justify-content: flex-end">
+  <aw-command-bar visible-when="ctx.getApTable == true" anchor="sod_ap_table_list_commands" alignment="HORIZONTAL"></aw-command-bar>
 </aw-row>
-<!-- <aw-row>
-    <aw-button action="makeRow">makeRow</aw-button>
-</aw-row> -->
+<aw-row>
+  <aw-column width="fill" id="sod-container">
+    <div id="apToastTable"></div>
+  </aw-column>
+</aw-row>

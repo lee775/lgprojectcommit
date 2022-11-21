@@ -1,39 +1,37 @@
 {
-    "lgepXcelerator": {
-        "url": "/lgepXcelerator",
-        "view": "lgepXcelerator",
-        "data": {
-            "label": {
-                "source": "/i18n/lgepXceleratorMessages",
-                "key": "lgepXcelerator"
-            },
-            "nameToken": "lgepXcelerator",
-            "clientScopeURI": ""
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "parent": "lgepXceleratorLocaiton",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation"
+  "lgepXcelerator": {
+    "url": "/lgepXcelerator",
+    "view": "lgepXcelerator",
+    "data": {
+      "label": {
+        "source": "/i18n/lgepXceleratorMessages",
+        "key": "lgepXcelerator"
+      },
+      "nameToken": "lgepXcelerator",
+      "clientScopeURI": ""
     },
-    "lgepXceleratorLocaiton": {
-        "data": {
-            "browserTitle": {
-                "source": "/i18n/lgepXceleratorMessages",
-                "key": "lgepXceleratorBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/lgepXceleratorMessages",
-                "key": "lgepXceleratorBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/lgepXceleratorMessages",
-                "key": "lgepXceleratorHeaderTitle"
-            },
-            "viewBase": "lgepXcelerator"
-        },
-        "type": "location"
-    }
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "parent": "lgepXceleratorLocaiton",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation"
+  },
+  "lgepXceleratorLocaiton": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/lgepXceleratorMessages",
+        "key": "lgepXceleratorBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/lgepXceleratorMessages",
+        "key": "lgepXceleratorBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/lgepXceleratorMessages",
+        "key": "lgepXceleratorHeaderTitle"
+      },
+      "viewBase": "lgepXcelerator"
+    },
+    "type": "location"
+  }
 }

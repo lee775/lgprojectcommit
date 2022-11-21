@@ -1,0 +1,80 @@
+<aw-flex-column class="parentPosition" width="3" id="exportMinutes">
+  <aw-command-panel-section caption="i18n.minutes" class="proceedPanel">
+    <aw-flex-row>
+      <aw-flex-column> </aw-flex-column>
+      <aw-flex-column> </aw-flex-column>
+      <aw-flex-column> </aw-flex-column>
+      <aw-flex-column>
+        <!-- <aw-icon-button command="data.exportproceed" class="exportPosit" visible-when="!data.editMode">
+                </aw-icon-button> -->
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-icon-button command="data.editProceed" class="editPosit" visible-when="!data.editMode"> </aw-icon-button>
+        <aw-icon-button command="data.cancelProceed" class="editPosit2" visible-when="data.editMode"> </aw-icon-button>
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-icon-button command="data.deleteproceed" class="deletePosit" visible-when="!data.editMode"> </aw-icon-button>
+        <aw-icon-button command="data.saveProceed" class="editPosit1" visible-when="data.editMode"> </aw-icon-button>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-panel-body>
+      <aw-flex-column>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition">
+            <aw-label prop="data.proceedTitle" visible-when="!data.editMode" id="title"></aw-label>
+            <aw-textarea prop="data.titleTxt" visible-when="data.editMode"></aw-textarea>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition">
+            <aw-label prop="data.proceedDate" id="date"></aw-label>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition">
+            <aw-label prop="data.proceedPlace" visible-when="!data.editMode" id="place"></aw-label>
+            <aw-textarea prop="data.placeTxt" visible-when="data.editMode"></aw-textarea>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition1">
+            <aw-label prop="data.proceedWriter"></aw-label>
+          </aw-flex-column>
+          <aw-flex-column>
+            <aw-link prop="data.proceedWriterLink" action="goUserDetail"></aw-link>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition">
+            <aw-label prop="data.proceedParticipants" visible-when="!data.editMode" id="participant"></aw-label>
+            <aw-textarea prop="data.participantsTxt" visible-when="data.editMode"></aw-textarea>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition">
+            <aw-label prop="data.proceedSubject" visible-when="!data.editMode" id="subject"></aw-label>
+            <aw-textarea prop="data.subjectTxt" visible-when="data.editMode"></aw-textarea>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row height="auto">
+          <aw-flex-column class="namePosition">
+            <aw-label prop="data.proceedSchedule" visible-when="!data.editMode" id="schedule"></aw-label>
+            <aw-textarea prop="data.scheduleTxt" visible-when="data.editMode"></aw-textarea>
+          </aw-flex-column>
+        </aw-flex-row>
+      </aw-flex-column>
+    </aw-panel-body>
+  </aw-command-panel-section>
+</aw-flex-column>
+<aw-separator is-vertical="true"></aw-separator>
+<aw-flex-column class="parentPosition">
+  <aw-panel-section caption="i18n.meetingDetails">
+    <aw-panel-body>
+      <aw-flex-row height="auto">
+        <aw-flex-column>
+          <textarea id="DetailsSummernote"></textarea>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-panel-body>
+  </aw-panel-section>
+</aw-flex-column>

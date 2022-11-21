@@ -33,12 +33,7 @@ export const setMasterItemProperty = async (item) => {
  * @param {string[]} createEditors
  * @param {*} data
  */
-export const masterCreateAfterActionByPopup = (
-  tableId,
-  isPin,
-  createEditors,
-  data
-) => {
+export const masterCreateAfterActionByPopup = (tableId, isPin, createEditors, data) => {
   tableRefresh(tableId);
   if (!isPin) {
     fmeaPopupUtils.closePopup();

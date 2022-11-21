@@ -1,0 +1,64 @@
+<aw-panel-section caption="i18n.createMinutes" context="data" id="createNav">
+    <aw-panel>
+        <aw-panel-body>
+            <aw-flex-row>
+                <aw-flex-column>
+                    <aw-flex-row>
+                        <aw-textbox prop="data.object_name"></aw-textbox>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column>
+                            <aw-datetime prop="data.l2_meeting_date"></aw-datetime>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-textbox prop="data.l2_meeting_place"></aw-textbox>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column>
+                            <aw-textarea prop="data.l2_meeting_participants"></aw-textarea>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column>
+                            <aw-textbox prop="data.l2_meeting_agenda"></aw-textbox>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column>
+                            <aw-textarea prop="data.l2_meeting_details"></aw-textarea>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-flex-column>
+                            <aw-textarea prop="data.l2_meeting_related_schedule"></aw-textarea>
+                        </aw-flex-column>
+                    </aw-flex-row>
+                    <aw-flex-row>
+                        <aw-label prop="data.fileDataSet" class="labelMargin"></aw-label>
+                    </aw-flex-row>
+                    <aw-flex-row class="fileLabel">
+                        <label for="createFileUpload">
+                            <div class="btn-upload">파일 업로드</div>
+                        </label>
+                        <input type="file" id="createFileUpload" multiple='multiple'
+                            accept=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"></input>
+                    </aw-flex-row>
+                    <aw-flex-row id="createUploadList">
+                        <div id="createPreview"></div>
+                    </aw-flex-row>
+                </aw-flex-column>
+            </aw-flex-row>
+        </aw-panel-body>
+    </aw-panel>
+    <aw-panel-footer>
+        <aw-flex-row>
+            <aw-flex-column>
+                <aw-button action="createproceed">{{i18n.create}}</button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="backMinutes">{{i18n.back}}</button>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-footer>
+</aw-panel-section>

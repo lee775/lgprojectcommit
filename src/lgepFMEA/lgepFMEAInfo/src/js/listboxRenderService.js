@@ -50,9 +50,7 @@ export function selectTableRow(selectionModel, ctx) {
   //setProperty of targetVMO
   let value = selectionModel.props.l2_grade.dbValues[0];
   const propName = appCtxService.ctx.dfmeaListboxSelected;
-  let targetElem = document.getElementById(
-    appCtxService.ctx.dfmeaListboxSelected
-  );
+  let targetElem = document.getElementById(appCtxService.ctx.dfmeaListboxSelected);
   targetElem.innerHTML = value;
 
   const selectRow = ctx[constants.ROW_SELECT];
@@ -83,9 +81,7 @@ const _getRealPropName = (propName) => {
 };
 
 export function unMount() {
-  document
-    .getElementById(appCtxService.ctx.dfmeaListboxSelected)
-    .classList.remove('dfmea-listbox-clicked');
+  document.getElementById(appCtxService.ctx.dfmeaListboxSelected).classList.remove('dfmea-listbox-clicked');
   appCtxService.unRegisterCtx('dfmeaListboxOpening');
   appCtxService.unRegisterCtx('dfmeaListboxSelected');
 }
@@ -96,37 +92,22 @@ let _renderListbox = function (vmo, containerElem, targetName) {
   // $("div[id='dfmeaTable']")[0].style = "height: 100%";
 
   //1. Setting Styles in Table Container (bigger size)
-  containerElem.setAttribute(
-    'style',
-    'height: 100%; width: 90%; padding-left: 0px'
-  );
+  containerElem.setAttribute('style', 'height: 100%; width: 90%; padding-left: 0px');
 
   //2. Create Listbox Element
   //: Create Button and makes it looks like listbox
-  let button = _createElement(
-    'button',
-    targetName + '_' + vmo.uid,
-    ['dfmea-listbox'],
-    '',
-    vmo.props[targetName].dbValue
-  );
+  let button = _createElement('button', targetName + '_' + vmo.uid, ['dfmea-listbox'], '', vmo.props[targetName].dbValue);
   _createIcon(containerElem);
   containerElem.appendChild(button);
 
   //3. button Click Event
   button.addEventListener('click', function () {
-    if (
-      appCtxService.getCtx('dfmeaListboxOpening') ||
-      !appCtxService.getCtx('fmea_editing')
-    ) {
+    if (appCtxService.getCtx('dfmeaListboxOpening') || !appCtxService.getCtx('fmea_editing')) {
       popupService.hide();
       return;
     }
 
-    appCtxService.registerCtx(
-      'dfmeaListboxSelected',
-      targetName + '_' + vmo.uid
-    );
+    appCtxService.registerCtx('dfmeaListboxSelected', targetName + '_' + vmo.uid);
     // debugging
     popupService.show({
       declView: 'sodBalloon',

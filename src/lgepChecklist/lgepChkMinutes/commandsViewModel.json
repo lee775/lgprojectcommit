@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "commands": {
+    "createActionItem": {
+      "iconId": "cmdBack",
+      "isGroup": false,
+      "title": "액션 아이템 생성"
+    },
+    "deleteActionItem": {
+      "iconId": "cmdBack",
+      "isGroup": false,
+      "title": "액션 아이템 삭제"
+    }
+  },
+  "commandHandlers": {
+    "createActionItemHandler": {
+      "id": "createActionItem",
+      "action": "",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.actionItemPage"
+      }
+    },
+    "deleteActionItemHandler": {
+      "id": "deleteActionItem",
+      "action": "",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.actionItemPage"
+      }
+    }
+  },
+  "commandPlacements": {
+    "createActionItemPlacement": {
+      "id": "createActionItem",
+      "uiAnchor": "actionItemAnchor",
+      "priority": 100
+    },
+    "deleteActionItemPlacement": {
+      "id": "deleteActionItem",
+      "uiAnchor": "actionItemAnchor",
+      "priority": 101
+    }
+  },
+  "actions": {},
+  "conditions": {
+    "actionItemPage": {
+      "expression": "data.selectedTab.tabKey === 'actionItemPage'"
+    }
+  }
+}

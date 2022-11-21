@@ -1,208 +1,205 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-textbox.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-splitter.directive",
-        "js/aw-button.directive",
-        "js/aw-label.directive",
-        "js/aw-separator.directive",
-        "js/aw-flex-column.directive"
-    ],
-    "actions": {
-        "loadData": {
-            "actionType": "JSFunction",
-            "method": "dataLoad",
-            "outputData": {
-                "result": "result",
-                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
-            },
-            "deps": "js/modelMgmtService"
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-textbox.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-splitter.directive",
+    "js/aw-button.directive",
+    "js/aw-label.directive",
+    "js/aw-separator.directive",
+    "js/aw-flex-column.directive"
+  ],
+  "actions": {
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "dataLoad",
+      "outputData": {
+        "result": "result",
+        "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+      },
+      "deps": "js/modelMgmtService"
+    },
+    "modelMgmtTable": {
+      "actionType": "JSFunction",
+      "method": "modelMgmtTable",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "result": "result",
+        "modelMgmtTableResults": "{{function:applySortAndFilterRows}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/modelMgmtService"
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "subDataLoad",
+      "inputData": {
+        "value": "{{data.eventData.selectedObjects[0]}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/modelMgmtService"
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/modelMgmtService"
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
         },
-        "modelMgmtTable": {
-            "actionType": "JSFunction",
-            "method": "modelMgmtTable",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "result": "result",
-                "modelMgmtTableResults": "{{function:applySortAndFilterRows}}",
-                "totalFound": "totalFound"
-            },
-            "deps": "js/modelMgmtService"
-        },
-        "applyFilterFacets": {
-            "actionType": "JSFunction",
-            "method": "subDataLoad",
-            "inputData": {
-                "value": "{{data.eventData.selectedObjects[0]}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/modelMgmtService"
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/modelMgmtService"
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyFilterFacets"
-                }
-            ]
+        {
+          "action": "applyFilterFacets"
         }
-    },
-    "data": {
-        "box1": {
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "Default String",
-            "dispValue": "Default String"
-        },
-        "box2": {
-            "displayName": "Label",
-            "type": "STRING"
-        },
-        "pageSize": 40
-    },
-    "dataProviders": {
-        "modelMgmtTableDataProvider": {
-            "action": "modelMgmtTable",
-            "response": "{{data.modelMgmtTableResults}}",
-            "totalFound": "{{data.totalFound}}",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}"
-        }
-    },
-    "columnProviders": {
-        "modelMgmtTableColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "object_string",
-                    "displayName": "object_string",
-                    "minWidth": 80,
-                    "width": 300
-                },
-                {
-                    "name": "name",
-                    "displayName": "{{i18n.countryName}}",
-                    "minWidth": 60,
-                    "width": 150,
-                    "propertyName": "name"
-                },
-                {
-                    "name": "capital",
-                    "displayName": "{{i18n.capital}}",
-                    "minWidth": 100,
-                    "width": 125,
-                    "propertyName": "capital"
-                },
-                {
-                    "name": "population",
-                    "displayName": "{{i18n.population}}",
-                    "minWidth": 100,
-                    "width": 125,
-                    "dataType": "INTEGER",
-                    "propertyName": "population"
-                },
-                {
-                    "name": "area",
-                    "displayName": "{{i18n.area}}",
-                    "minWidth": 100,
-                    "width": 125,
-                    "dataType": "INTEGER",
-                    "propertyName": "area"
-                },
-                {
-                    "name": "density",
-                    "displayName": "{{i18n.populationDensity}}",
-                    "minWidth": 100,
-                    "width": 125,
-                    "dataType": "DOUBLE",
-                    "propertyName": "density"
-                },
-                {
-                    "name": "geography",
-                    "displayName": "{{i18n.geography}}",
-                    "minWidth": 150,
-                    "width": 150,
-                    "propertyName": "geography"
-                },
-                {
-                    "name": "date_modified",
-                    "displayName": "{{i18n.lastModifiedDate}}",
-                    "minWidth": 100,
-                    "width": 175,
-                    "dataType": "DATE",
-                    "propertyName": "date_modified"
-                },
-                {
-                    "name": "region",
-                    "displayName": "{{i18n.region}}",
-                    "minWidth": 100,
-                    "width": 125,
-                    "propertyName": "region"
-                },
-                {
-                    "name": "borders",
-                    "displayName": "{{i18n.borders}}",
-                    "minWidth": 150,
-                    "width": 150,
-                    "propertyName": "borders"
-                }
-            ]
-        }
-    },
-    "grids": {
-        "modelMgmtTable": {
-            "dataProvider": "modelMgmtTableDataProvider",
-            "columnProvider": "modelMgmtTableColumnProvider",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": true,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "applySortAndFilterRows": {
-            "functionName": "applySortAndFilterRows",
-            "parameters": [
-                "{{data.columnProviders.modelMgmtTableColumnProvider.columnFilters}}",
-                "{{data.columnProviders.modelMgmtTableColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.modelMgmtTableDataProvider.startIndex}}",
-                "{{data.pageSize}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.modelMgmtTableColumnProvider.columnFilters}}",
-                "{{data.fullData}}"
-            ]
-        }
-    },
-    "i18n": {
-        "helloText": [ "lgepModelmgmtMessages" ]
+      ]
     }
+  },
+  "data": {
+    "box1": {
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "Default String",
+      "dispValue": "Default String"
+    },
+    "box2": {
+      "displayName": "Label",
+      "type": "STRING"
+    },
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "modelMgmtTableDataProvider": {
+      "action": "modelMgmtTable",
+      "response": "{{data.modelMgmtTableResults}}",
+      "totalFound": "{{data.totalFound}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "columnProviders": {
+    "modelMgmtTableColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "object_string",
+          "minWidth": 80,
+          "width": 300
+        },
+        {
+          "name": "name",
+          "displayName": "{{i18n.countryName}}",
+          "minWidth": 60,
+          "width": 150,
+          "propertyName": "name"
+        },
+        {
+          "name": "capital",
+          "displayName": "{{i18n.capital}}",
+          "minWidth": 100,
+          "width": 125,
+          "propertyName": "capital"
+        },
+        {
+          "name": "population",
+          "displayName": "{{i18n.population}}",
+          "minWidth": 100,
+          "width": 125,
+          "dataType": "INTEGER",
+          "propertyName": "population"
+        },
+        {
+          "name": "area",
+          "displayName": "{{i18n.area}}",
+          "minWidth": 100,
+          "width": 125,
+          "dataType": "INTEGER",
+          "propertyName": "area"
+        },
+        {
+          "name": "density",
+          "displayName": "{{i18n.populationDensity}}",
+          "minWidth": 100,
+          "width": 125,
+          "dataType": "DOUBLE",
+          "propertyName": "density"
+        },
+        {
+          "name": "geography",
+          "displayName": "{{i18n.geography}}",
+          "minWidth": 150,
+          "width": 150,
+          "propertyName": "geography"
+        },
+        {
+          "name": "date_modified",
+          "displayName": "{{i18n.lastModifiedDate}}",
+          "minWidth": 100,
+          "width": 175,
+          "dataType": "DATE",
+          "propertyName": "date_modified"
+        },
+        {
+          "name": "region",
+          "displayName": "{{i18n.region}}",
+          "minWidth": 100,
+          "width": 125,
+          "propertyName": "region"
+        },
+        {
+          "name": "borders",
+          "displayName": "{{i18n.borders}}",
+          "minWidth": 150,
+          "width": 150,
+          "propertyName": "borders"
+        }
+      ]
+    }
+  },
+  "grids": {
+    "modelMgmtTable": {
+      "dataProvider": "modelMgmtTableDataProvider",
+      "columnProvider": "modelMgmtTableColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.modelMgmtTableColumnProvider.columnFilters}}",
+        "{{data.columnProviders.modelMgmtTableColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.modelMgmtTableDataProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.modelMgmtTableColumnProvider.columnFilters}}", "{{data.fullData}}"]
+    }
+  },
+  "i18n": {
+    "helloText": ["lgepModelmgmtMessages"]
+  }
 }

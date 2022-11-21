@@ -15,10 +15,7 @@ let click;
 export const openImagePopup = (e, grid) => {
   const cell = { rowKey: e.rowKey, columnName: e.columnName };
   if (click) {
-    if (
-      prevCell.rowKey === cell.rowKey &&
-      prevCell.columnName === cell.columnName
-    ) {
+    if (prevCell.rowKey === cell.rowKey && prevCell.columnName === cell.columnName) {
       return;
     }
     click = false;

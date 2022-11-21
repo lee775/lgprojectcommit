@@ -3,15 +3,7 @@
  * @module js/functionEditService
  */
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
-import {
-  checkEditorTab,
-  editActionOnEditors,
-  cancelEditEditor,
-  cancel,
-  save,
-  saveEditOnEditors,
-  insertLogByEdit,
-} from 'js/cmEditService';
+import { checkEditorTab, editActionOnEditors, cancelEditEditor, cancel, save, saveEditOnEditors, insertLogByEdit } from 'js/cmEditService';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 

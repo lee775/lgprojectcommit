@@ -1,16 +1,12 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-i18n.directive"
-    ],
-    "onEvent": [
-    ],
-    "data": {},
-    "actions": {
-    },
-    "i18n": {
-        "openChecklistSod":["L2_ChkMainMessages"],
-        "openChecklistSodDesc1":["L2_ChkMainMessages"],
-        "openChecklistSodDesc2":["L2_ChkMainMessages"]
-    }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-i18n.directive"],
+  "onEvent": [],
+  "data": {},
+  "actions": {},
+  "i18n": {
+    "openChecklistSod": ["L2_ChkMainMessages"],
+    "openChecklistSodDesc1": ["L2_ChkMainMessages"],
+    "openChecklistSodDesc2": ["L2_ChkMainMessages"]
+  }
 }

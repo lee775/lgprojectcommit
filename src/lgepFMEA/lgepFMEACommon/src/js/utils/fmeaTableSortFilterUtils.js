@@ -7,22 +7,14 @@ import * as constants from 'js/constants/fmeaConstants';
 
 const sortDesc = (vmObjects) => {
   return vmObjects.sort(function (a, b) {
-    if (
-      a.props[prop.CREATION_DATE].value >= b.props[prop.CREATION_DATE].value
-    ) {
+    if (a.props[prop.CREATION_DATE].value >= b.props[prop.CREATION_DATE].value) {
       return -1;
     }
     return 1;
   });
 };
 
-const applySortAndFilterRows = function (
-  response,
-  columnFilters,
-  sortCriteria,
-  startIndex,
-  pageSize = 20
-) {
+const applySortAndFilterRows = function (response, columnFilters, sortCriteria, startIndex, pageSize = 20) {
   let searchResults = response.searchResults;
   if (columnFilters) {
     _.forEach(columnFilters, function (columnFilter) {
@@ -74,12 +66,7 @@ const applySortAndFilterRows = function (
   return searchResults.slice(startIndex, endIndex);
 };
 
-const filterRowsWithSort = function (
-  response,
-  sortCriteria,
-  startIndex,
-  pageSize = 40
-) {
+const filterRowsWithSort = function (response, sortCriteria, startIndex, pageSize = 40) {
   let searchResults = response.searchResults;
   let endIndex = startIndex + pageSize;
 
@@ -171,14 +158,9 @@ const getFilterFacetData = function (fullData) {
 let processContainsFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     if (country.props[columnFilter.columnName].uiValue) {
-      return country.props[columnFilter.columnName].uiValue
-        .toLowerCase()
-        .includes(columnFilter.values[0].toLowerCase());
+      return country.props[columnFilter.columnName].uiValue.toLowerCase().includes(columnFilter.values[0].toLowerCase());
     } else if (country.props[columnFilter.columnName].uiValues) {
-      return country.props[columnFilter.columnName].uiValues
-        .toString()
-        .toLowerCase()
-        .includes(columnFilter.values[0].toLowerCase());
+      return country.props[columnFilter.columnName].uiValues.toString().toLowerCase().includes(columnFilter.values[0].toLowerCase());
     }
   });
 };
@@ -193,14 +175,9 @@ let processContainsFilter = function (columnFilter, datas) {
 let processNotContainsFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     if (country.props[columnFilter.columnName].uiValue) {
-      return !country.props[columnFilter.columnName].uiValue
-        .toLowerCase()
-        .includes(columnFilter.values[0].toLowerCase());
+      return !country.props[columnFilter.columnName].uiValue.toLowerCase().includes(columnFilter.values[0].toLowerCase());
     } else if (country.props[columnFilter.columnName].uiValues) {
-      return !country.props[columnFilter.columnName].uiValues
-        .toString()
-        .toLowerCase()
-        .includes(columnFilter.values[0].toLowerCase());
+      return !country.props[columnFilter.columnName].uiValues.toString().toLowerCase().includes(columnFilter.values[0].toLowerCase());
     }
   });
 };
@@ -215,13 +192,9 @@ let processNotContainsFilter = function (columnFilter, datas) {
 let processStartsWithFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     if (country.props[columnFilter.columnName].uiValue) {
-      return country.props[columnFilter.columnName].uiValue
-        .toLowerCase()
-        .startsWith(columnFilter.values[0].toLowerCase());
+      return country.props[columnFilter.columnName].uiValue.toLowerCase().startsWith(columnFilter.values[0].toLowerCase());
     } else if (country.props[columnFilter.columnName].uiValues) {
-      return country.props[columnFilter.columnName].uiValues[0]
-        .toLowerCase()
-        .startsWith(columnFilter.values[0].toLowerCase());
+      return country.props[columnFilter.columnName].uiValues[0].toLowerCase().startsWith(columnFilter.values[0].toLowerCase());
     }
   });
 };
@@ -236,13 +209,9 @@ let processStartsWithFilter = function (columnFilter, datas) {
 const processEndsWithFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     if (country.props[columnFilter.columnName].uiValue) {
-      return country.props[columnFilter.columnName].uiValue
-        .toLowerCase()
-        .endsWith(columnFilter.values[0].toLowerCase());
+      return country.props[columnFilter.columnName].uiValue.toLowerCase().endsWith(columnFilter.values[0].toLowerCase());
     } else if (country.props[columnFilter.columnName].uiValues) {
-      return country.props[columnFilter.columnName].uiValues[0]
-        .toLowerCase()
-        .endsWith(columnFilter.values[0].toLowerCase());
+      return country.props[columnFilter.columnName].uiValues[0].toLowerCase().endsWith(columnFilter.values[0].toLowerCase());
     }
   });
 };
@@ -261,10 +230,7 @@ const processNumericRangeFilter = function (columnFilter, datas) {
     if (!fromValue) {
       fromValue = 0;
     }
-    return (
-      country.props[columnFilter.columnName].value >= Number(fromValue) &&
-      country.props[columnFilter.columnName].value <= Number(toValue)
-    );
+    return country.props[columnFilter.columnName].value >= Number(fromValue) && country.props[columnFilter.columnName].value <= Number(toValue);
   });
 };
 
@@ -281,10 +247,7 @@ const processDateRangeFilter = function (columnFilter, datas) {
     let toValue = columnFilter.values[1];
     let fromDate = new Date(fromValue);
     let toDate = new Date(toValue);
-    return (
-      country.props[columnFilter.columnName].value >= fromDate.getTime() &&
-      country.props[columnFilter.columnName].value <= toDate.getTime()
-    );
+    return country.props[columnFilter.columnName].value >= fromDate.getTime() && country.props[columnFilter.columnName].value <= toDate.getTime();
   });
 };
 
@@ -297,18 +260,10 @@ const processDateRangeFilter = function (columnFilter, datas) {
  */
 let processGreaterThanFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
-    if (
-      country.props[columnFilter.columnName].value &&
-      country.props[columnFilter.columnName].value >
-        Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].value && country.props[columnFilter.columnName].value > Number(columnFilter.values[0])) {
       return true;
     }
-    if (
-      country.props[columnFilter.columnName].uiValue === '0' &&
-      Number(country.props[columnFilter.columnName].uiValue) >
-        Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].uiValue === '0' && Number(country.props[columnFilter.columnName].uiValue) > Number(columnFilter.values[0])) {
       return true;
     }
   });
@@ -323,18 +278,10 @@ let processGreaterThanFilter = function (columnFilter, datas) {
  */
 let processLessThanFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
-    if (
-      country.props[columnFilter.columnName].value &&
-      country.props[columnFilter.columnName].value <
-        Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].value && country.props[columnFilter.columnName].value < Number(columnFilter.values[0])) {
       return true;
     }
-    if (
-      country.props[columnFilter.columnName].uiValue === '0' &&
-      Number(country.props[columnFilter.columnName].uiValue) <
-        Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].uiValue === '0' && Number(country.props[columnFilter.columnName].uiValue) < Number(columnFilter.values[0])) {
       return true;
     }
   });
@@ -349,17 +296,10 @@ let processLessThanFilter = function (columnFilter, datas) {
  */
 const processGreaterThanEqualsNumericFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
-    if (
-      country.props[columnFilter.columnName].value >=
-      Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].value >= Number(columnFilter.values[0])) {
       return true;
     }
-    if (
-      country.props[columnFilter.columnName].uiValue === '0' &&
-      Number(country.props[columnFilter.columnName].uiValue) >=
-        Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].uiValue === '0' && Number(country.props[columnFilter.columnName].uiValue) >= Number(columnFilter.values[0])) {
       return true;
     }
   });
@@ -375,9 +315,7 @@ const processGreaterThanEqualsNumericFilter = function (columnFilter, datas) {
 const processGreaterThanEqualsDateFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     let filterDateValue = new Date(columnFilter.values[0]);
-    let countryDateValue = new Date(
-      country.props[columnFilter.columnName].uiValue
-    );
+    let countryDateValue = new Date(country.props[columnFilter.columnName].uiValue);
     if (countryDateValue.getTime() >= filterDateValue.getTime()) {
       return true;
     }
@@ -393,18 +331,10 @@ const processGreaterThanEqualsDateFilter = function (columnFilter, datas) {
  */
 const processLessThanEqualsNumericFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
-    if (
-      country.props[columnFilter.columnName].value <=
-        Number(columnFilter.values[0]) &&
-      country.props[columnFilter.columnName].uiValue !== ''
-    ) {
+    if (country.props[columnFilter.columnName].value <= Number(columnFilter.values[0]) && country.props[columnFilter.columnName].uiValue !== '') {
       return true;
     }
-    if (
-      country.props[columnFilter.columnName].uiValue === '0' &&
-      Number(country.props[columnFilter.columnName].uiValue) <=
-        Number(columnFilter.values[0])
-    ) {
+    if (country.props[columnFilter.columnName].uiValue === '0' && Number(country.props[columnFilter.columnName].uiValue) <= Number(columnFilter.values[0])) {
       return true;
     }
   });
@@ -420,9 +350,7 @@ const processLessThanEqualsNumericFilter = function (columnFilter, datas) {
 const processLessThanEqualsDateFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     let filterDateValue = new Date(columnFilter.values[0]);
-    let countryDateValue = new Date(
-      country.props[columnFilter.columnName].uiValue
-    );
+    let countryDateValue = new Date(country.props[columnFilter.columnName].uiValue);
     if (countryDateValue.getTime() <= filterDateValue.getTime()) {
       return true;
     }
@@ -439,26 +367,18 @@ const processLessThanEqualsDateFilter = function (columnFilter, datas) {
 const processEqualsNumericFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
-      if (
-        country.props[columnFilter.columnName].value === null &&
-        columnFilter.values[i] === ''
-      ) {
+      if (country.props[columnFilter.columnName].value === null && columnFilter.values[i] === '') {
         return true;
       }
       if (country.props[columnFilter.columnName].uiValue !== '0') {
         if (
-          country.props[columnFilter.columnName].uiValue ===
-            columnFilter.values[i] ||
-          country.props[columnFilter.columnName].value ===
-            Number(columnFilter.values[i])
+          country.props[columnFilter.columnName].uiValue === columnFilter.values[i] ||
+          country.props[columnFilter.columnName].value === Number(columnFilter.values[i])
         ) {
           return true;
         }
       } else {
-        if (
-          country.props[columnFilter.columnName].uiValue ===
-          columnFilter.values[i]
-        ) {
+        if (country.props[columnFilter.columnName].uiValue === columnFilter.values[i]) {
           return true;
         }
       }
@@ -478,9 +398,7 @@ const processEqualsDateFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
       let filterDateValue = new Date(columnFilter.values[i]);
-      let countryDateValue = new Date(
-        country.props[columnFilter.columnName].uiValue
-      );
+      let countryDateValue = new Date(country.props[columnFilter.columnName].uiValue);
       if (filterDateValue.getTime() === countryDateValue.getTime()) {
         return true;
       }
@@ -500,30 +418,14 @@ const processEqualsTextFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
       if (!country.props[columnFilter.columnName].isArray) {
-        if (
-          country.props[columnFilter.columnName].value &&
-          columnFilter.values[i]
-        ) {
-          return country.props[columnFilter.columnName].value
-            .toString()
-            .toLowerCase()
-            .includes(columnFilter.values[i].toLowerCase());
-        } else if (
-          columnFilter.values[i] === '' &&
-          (!country.props[columnFilter.columnName].value ||
-            country.props[columnFilter.columnName].value === null)
-        ) {
+        if (country.props[columnFilter.columnName].value && columnFilter.values[i]) {
+          return country.props[columnFilter.columnName].value.toString().toLowerCase().includes(columnFilter.values[i].toLowerCase());
+        } else if (columnFilter.values[i] === '' && (!country.props[columnFilter.columnName].value || country.props[columnFilter.columnName].value === null)) {
           return true;
         }
       } else {
-        if (
-          country.props[columnFilter.columnName].uiValues &&
-          columnFilter.values[i]
-        ) {
-          return country.props[columnFilter.columnName].uiValues
-            .toString()
-            .toLowerCase()
-            .includes(columnFilter.values[i].toLowerCase());
+        if (country.props[columnFilter.columnName].uiValues && columnFilter.values[i]) {
+          return country.props[columnFilter.columnName].uiValues.toString().toLowerCase().includes(columnFilter.values[i].toLowerCase());
         }
       }
     }
@@ -566,17 +468,12 @@ const processCaseSensitiveEqualsTextFilter = function (columnFilter, datas) {
       if (!data.props[columnFilter.columnName].isArray) {
         if (dataValue && columnFilterValue) {
           return dataValue.toString().includes(columnFilterValue);
-        } else if (
-          columnFilterValue === '' &&
-          (!dataValue || dataValue === null)
-        ) {
+        } else if (columnFilterValue === '' && (!dataValue || dataValue === null)) {
           return true;
         }
       } else {
         if (data.props[columnFilter.columnName].uiValues && columnFilterValue) {
-          return data.props[columnFilter.columnName].uiValues
-            .toString()
-            .includes(columnFilterValue);
+          return data.props[columnFilter.columnName].uiValues.toString().includes(columnFilterValue);
         }
       }
     }
@@ -594,26 +491,18 @@ const processCaseSensitiveEqualsTextFilter = function (columnFilter, datas) {
 const processNotEqualsNumericFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
-      if (
-        country.props[columnFilter.columnName].value === null &&
-        columnFilter.values[i] === ''
-      ) {
+      if (country.props[columnFilter.columnName].value === null && columnFilter.values[i] === '') {
         return false;
       }
       if (country.props[columnFilter.columnName].uiValue !== '0') {
         if (
-          country.props[columnFilter.columnName].uiValue ===
-            columnFilter.values[i] ||
-          country.props[columnFilter.columnName].value ===
-            Number(columnFilter.values[i])
+          country.props[columnFilter.columnName].uiValue === columnFilter.values[i] ||
+          country.props[columnFilter.columnName].value === Number(columnFilter.values[i])
         ) {
           return false;
         }
       } else {
-        if (
-          country.props[columnFilter.columnName].uiValue ===
-          columnFilter.values[i]
-        ) {
+        if (country.props[columnFilter.columnName].uiValue === columnFilter.values[i]) {
           return false;
         }
       }
@@ -633,9 +522,7 @@ const processNotEqualsDateFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
       let filterDateValue = new Date(columnFilter.values[i]);
-      let countryDateValue = new Date(
-        country.props[columnFilter.columnName].uiValue
-      );
+      let countryDateValue = new Date(country.props[columnFilter.columnName].uiValue);
       if (countryDateValue.getTime() === filterDateValue.getTime()) {
         return false;
       }
@@ -655,36 +542,19 @@ const processNotEqualsTextFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
       if (!country.props[columnFilter.columnName].isArray) {
-        if (
-          columnFilter.values[i] === '' &&
-          (!country.props[columnFilter.columnName].value ||
-            country.props[columnFilter.columnName].value === null)
-        ) {
+        if (columnFilter.values[i] === '' && (!country.props[columnFilter.columnName].value || country.props[columnFilter.columnName].value === null)) {
           return false;
-        } else if (
-          country.props[columnFilter.columnName].uiValue &&
-          columnFilter.values[i]
-        ) {
-          return !country.props[columnFilter.columnName].uiValue
-            .toLowerCase()
-            .includes(columnFilter.values[i].toLowerCase());
+        } else if (country.props[columnFilter.columnName].uiValue && columnFilter.values[i]) {
+          return !country.props[columnFilter.columnName].uiValue.toLowerCase().includes(columnFilter.values[i].toLowerCase());
         }
       } else {
-        if (
-          country.props[columnFilter.columnName].uiValues &&
-          columnFilter.values[i]
-        ) {
-          _.forEach(
-            country.props[columnFilter.columnName].uiValues,
-            function (uiValue) {
-              //If one or more values in the array do not satisfy filter criteria, notEquals filter does not apply and the row is shown
-              if (
-                uiValue.toLowerCase() !== columnFilter.values[i].toLowerCase()
-              ) {
-                return true;
-              }
+        if (country.props[columnFilter.columnName].uiValues && columnFilter.values[i]) {
+          _.forEach(country.props[columnFilter.columnName].uiValues, function (uiValue) {
+            //If one or more values in the array do not satisfy filter criteria, notEquals filter does not apply and the row is shown
+            if (uiValue.toLowerCase() !== columnFilter.values[i].toLowerCase()) {
+              return true;
             }
-          );
+          });
           return false;
         }
       }
@@ -704,34 +574,19 @@ const processCaseSensitiveNotEqualsFilter = function (columnFilter, datas) {
   return datas.filter(function (country) {
     for (let i = 0; i < columnFilter.values.length; i++) {
       if (!country.props[columnFilter.columnName].isArray) {
-        if (
-          columnFilter.values[i] === '' &&
-          (!country.props[columnFilter.columnName].value ||
-            country.props[columnFilter.columnName].value === null)
-        ) {
+        if (columnFilter.values[i] === '' && (!country.props[columnFilter.columnName].value || country.props[columnFilter.columnName].value === null)) {
           return false;
-        } else if (
-          country.props[columnFilter.columnName].uiValue &&
-          columnFilter.values[i]
-        ) {
-          return !country.props[columnFilter.columnName].uiValue.includes(
-            columnFilter.values[i]
-          );
+        } else if (country.props[columnFilter.columnName].uiValue && columnFilter.values[i]) {
+          return !country.props[columnFilter.columnName].uiValue.includes(columnFilter.values[i]);
         }
       } else {
-        if (
-          country.props[columnFilter.columnName].uiValues &&
-          columnFilter.values[i]
-        ) {
+        if (country.props[columnFilter.columnName].uiValues && columnFilter.values[i]) {
           let matchFound = false;
-          _.forEach(
-            country.props[columnFilter.columnName].uiValues,
-            function (uiValue) {
-              if (uiValue !== columnFilter.values[i]) {
-                matchFound = true;
-              }
+          _.forEach(country.props[columnFilter.columnName].uiValues, function (uiValue) {
+            if (uiValue !== columnFilter.values[i]) {
+              matchFound = true;
             }
-          );
+          });
           return matchFound;
         }
       }

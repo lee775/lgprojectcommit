@@ -1,234 +1,211 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-separator.directive",
-        "js/aw-panel.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-section.directive",
-        "js/aw-list.directive",
-        "js/aw-default-cell.directive",
-        "js/aw-chart.directive",
-        "css/KnowledgeManageDashboardView.css"
-    ],
-    "actions": {
-        "windowSizeCheck": {
-            "actionType": "JSFunction",
-            "method": "windowSizeCheck",
-            "deps": "js/dashboardChart"
-        },
-        "loadUserList": {
-            "actionType": "JSFunction",
-            "method": "loadUserList",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "userList": "userList"
-            },
-            "deps": "js/dashboardChart"
-        },
-        "getDataProvider": {
-            "actionType": "dataProvider",
-            "methods": [
-                "postList",
-                "thumbsList"
-            ]
-        },
-        "initializeJob": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "loadUserList"
-                },
-                {
-                    "action": "getDataProvider"
-                }
-            ]
-        },
-        "loadPostList": {
-            "actionType": "JSFunction",
-            "method": "loadPostList",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "searchPostResponse": "{{function:setPostList}}",
-                "postTotalFound": "postTotalFound"
-            },
-            "deps": "js/dashboardChart"
-        },
-        "loadThumbsList": {
-            "actionType": "JSFunction",
-            "method": "loadThumbsList",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "searchThumbsResponse": "{{function:setThumbsList}}",
-                "thumbsTotalFound": "thumbsTotalFound"
-            },
-            "deps": "js/dashboardChart"
-        },
-        "getChartDataActionForMultipleSeries": {
-            "actionType": "JSFunction",
-            "method": "createChartFromArrayOfSeries",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "chartProviders.myChartProvider.chartPoints": ""
-            },
-            "deps": "js/dashboardChart"
-        },
-        "getPieChartDataActionForMultipleSeries": {
-            "actionType": "JSFunction",
-            "method": "createPieChart",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "chartProviders.pieChartProvider.chartPoints": ""
-            },
-            "deps": "js/dashboardChart"
-        },
-        "getPointChartDataActionForMultipleSeries": {
-            "actionType": "JSFunction",
-            "method": "createPointChartFromArrayOfSeries",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "chartProviders.scatterChartProvider.chartPoints": ""
-            },
-            "deps": "js/dashboardChart"
-        },
-        "getLineChartDataActionForMultipleSeries": {
-            "actionType": "JSFunction",
-            "method": "createLineChartFromArrayOfSeries",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "chartProviders.lineChartProvider.chartPoints": ""
-            },
-            "deps": "js/dashboardChart"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-separator.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-list.directive",
+    "js/aw-default-cell.directive",
+    "js/aw-chart.directive",
+    "css/KnowledgeManageDashboardView.css"
+  ],
+  "actions": {
+    "windowSizeCheck": {
+      "actionType": "JSFunction",
+      "method": "windowSizeCheck",
+      "deps": "js/dashboardChart"
     },
-    "dataProviders": {
-        "postList": {
-            "action": "loadPostList",
-            "response": "{{data.searchPostResponse}}",
-            "totalFound": "{{data.searchPostResponse.length}}"
-        },
-        "thumbsList": {
-            "action": "loadThumbsList",
-            "response": "{{data.searchThumbsResponse}}",
-            "totalFound": "{{data.thumbsTotalFound.length}}"
-        }
+    "loadUserList": {
+      "actionType": "JSFunction",
+      "method": "loadUserList",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "userList": "userList"
+      },
+      "deps": "js/dashboardChart"
     },
-    "chartProviders": {
-        "myChartProvider": {
-            "title": "{{i18n.columnChartTitle}}",
-            "chartType": "column",
-            "loadDataAction": "getChartDataActionForMultipleSeries",
-            "chartConfig": {
-                "isChartZoomable": true,
-                "xAxisLabel": "",
-                "yAxisLabel": "",
-                "isDataLabelOnChartEnabled": true
-            }
-        },
-        "pieChartProvider": {
-            "title": "",
-            "chartType": "pie",
-            "chartColorOverrideClass": "charts-custom-colors",
-            "loadDataAction": "getPieChartDataActionForMultipleSeries",
-            "chartConfig": {
-                "isChartZoomable": true,
-                "isYAxisLinearOrLogarithmic": "logarithmic",
-                "xAxisLabel": "",
-                "yAxisLabel": "",
-                "isDataLabelOnChartEnabled": true
-            }
-        },
-        "scatterChartProvider": {
-            "title": "",
-            "chartType": "column",
-            "loadDataAction": "getPointChartDataActionForMultipleSeries",
-            "chartConfig": {
-                "isChartZoomable": true,
-                "xAxisLabel": "",
-                "yAxisLabel": "",
-                "isDataLabelOnChartEnabled": true
-            }
-        },
-        "lineChartProvider": {
-            "title": "",
-            "chartType": "line",
-            "loadDataAction": "getLineChartDataActionForMultipleSeries",
-            "chartConfig": {
-                "isChartZoomable": true,
-                "isYAxisLinearOrLogarithmic": "logarithmic",
-                "xAxisLabel": "{{i18n.date}}",
-                "yAxisLabel": "{{i18n.howMany}}",
-                "isDataLabelOnChartEnabled": true
-            }
-        }
+    "getDataProvider": {
+      "actionType": "dataProvider",
+      "methods": ["postList", "thumbsList"]
     },
-    "functions": {
-        "setPostList": {
-            "functionName": "setPostList",
-            "parameters": [
-                "{{data}}"
-            ]
-        },
-        "setThumbsList": {
-            "functionName": "setThumbsList",
-            "parameters": [
-                "{{data}}"
-            ]
-        }
-    },
-    "lifecycleHooks": {
-        "onMount": "initializeJob"
-    },
-    "onEvent": [
+    "initializeJob": {
+      "actionType": "batchJob",
+      "steps": [
         {
-            "eventId": "loadUserList.listUpdated",
-            "action": "getPieChartDataActionForMultipleSeries"
+          "action": "loadUserList"
         },
         {
-            "eventId": "loadUserList.listUpdated",
-            "action": "getPointChartDataActionForMultipleSeries"
+          "action": "getDataProvider"
         }
-    ],
-    "i18n": {
-        "columnChartTitle": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "pieChartTitle": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "scatterChartTitle": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "lineChartTitle": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "date": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "howMany": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "mostPosts": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "mostRecommendations": [
-            "lgepKnowldegeManageMessages"
-        ]
+      ]
+    },
+    "loadPostList": {
+      "actionType": "JSFunction",
+      "method": "loadPostList",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "searchPostResponse": "{{function:setPostList}}",
+        "postTotalFound": "postTotalFound"
+      },
+      "deps": "js/dashboardChart"
+    },
+    "loadThumbsList": {
+      "actionType": "JSFunction",
+      "method": "loadThumbsList",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "searchThumbsResponse": "{{function:setThumbsList}}",
+        "thumbsTotalFound": "thumbsTotalFound"
+      },
+      "deps": "js/dashboardChart"
+    },
+    "getChartDataActionForMultipleSeries": {
+      "actionType": "JSFunction",
+      "method": "createChartFromArrayOfSeries",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "chartProviders.myChartProvider.chartPoints": ""
+      },
+      "deps": "js/dashboardChart"
+    },
+    "getPieChartDataActionForMultipleSeries": {
+      "actionType": "JSFunction",
+      "method": "createPieChart",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "chartProviders.pieChartProvider.chartPoints": ""
+      },
+      "deps": "js/dashboardChart"
+    },
+    "getPointChartDataActionForMultipleSeries": {
+      "actionType": "JSFunction",
+      "method": "createPointChartFromArrayOfSeries",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "chartProviders.scatterChartProvider.chartPoints": ""
+      },
+      "deps": "js/dashboardChart"
+    },
+    "getLineChartDataActionForMultipleSeries": {
+      "actionType": "JSFunction",
+      "method": "createLineChartFromArrayOfSeries",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "chartProviders.lineChartProvider.chartPoints": ""
+      },
+      "deps": "js/dashboardChart"
     }
+  },
+  "dataProviders": {
+    "postList": {
+      "action": "loadPostList",
+      "response": "{{data.searchPostResponse}}",
+      "totalFound": "{{data.searchPostResponse.length}}"
+    },
+    "thumbsList": {
+      "action": "loadThumbsList",
+      "response": "{{data.searchThumbsResponse}}",
+      "totalFound": "{{data.thumbsTotalFound.length}}"
+    }
+  },
+  "chartProviders": {
+    "myChartProvider": {
+      "title": "{{i18n.columnChartTitle}}",
+      "chartType": "column",
+      "loadDataAction": "getChartDataActionForMultipleSeries",
+      "chartConfig": {
+        "isChartZoomable": true,
+        "xAxisLabel": "",
+        "yAxisLabel": "",
+        "isDataLabelOnChartEnabled": true
+      }
+    },
+    "pieChartProvider": {
+      "title": "",
+      "chartType": "pie",
+      "chartColorOverrideClass": "charts-custom-colors",
+      "loadDataAction": "getPieChartDataActionForMultipleSeries",
+      "chartConfig": {
+        "isChartZoomable": true,
+        "isYAxisLinearOrLogarithmic": "logarithmic",
+        "xAxisLabel": "",
+        "yAxisLabel": "",
+        "isDataLabelOnChartEnabled": true
+      }
+    },
+    "scatterChartProvider": {
+      "title": "",
+      "chartType": "column",
+      "loadDataAction": "getPointChartDataActionForMultipleSeries",
+      "chartConfig": {
+        "isChartZoomable": true,
+        "xAxisLabel": "",
+        "yAxisLabel": "",
+        "isDataLabelOnChartEnabled": true
+      }
+    },
+    "lineChartProvider": {
+      "title": "",
+      "chartType": "line",
+      "loadDataAction": "getLineChartDataActionForMultipleSeries",
+      "chartConfig": {
+        "isChartZoomable": true,
+        "isYAxisLinearOrLogarithmic": "logarithmic",
+        "xAxisLabel": "{{i18n.date}}",
+        "yAxisLabel": "{{i18n.howMany}}",
+        "isDataLabelOnChartEnabled": true
+      }
+    }
+  },
+  "functions": {
+    "setPostList": {
+      "functionName": "setPostList",
+      "parameters": ["{{data}}"]
+    },
+    "setThumbsList": {
+      "functionName": "setThumbsList",
+      "parameters": ["{{data}}"]
+    }
+  },
+  "lifecycleHooks": {
+    "onMount": "initializeJob"
+  },
+  "onEvent": [
+    {
+      "eventId": "loadUserList.listUpdated",
+      "action": "getPieChartDataActionForMultipleSeries"
+    },
+    {
+      "eventId": "loadUserList.listUpdated",
+      "action": "getPointChartDataActionForMultipleSeries"
+    }
+  ],
+  "i18n": {
+    "columnChartTitle": ["lgepKnowldegeManageMessages"],
+    "pieChartTitle": ["lgepKnowldegeManageMessages"],
+    "scatterChartTitle": ["lgepKnowldegeManageMessages"],
+    "lineChartTitle": ["lgepKnowldegeManageMessages"],
+    "date": ["lgepKnowldegeManageMessages"],
+    "howMany": ["lgepKnowldegeManageMessages"],
+    "mostPosts": ["lgepKnowldegeManageMessages"],
+    "mostRecommendations": ["lgepKnowldegeManageMessages"]
+  }
 }

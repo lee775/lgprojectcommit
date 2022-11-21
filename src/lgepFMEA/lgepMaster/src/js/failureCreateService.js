@@ -7,21 +7,10 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import { getEditorValueById } from 'js/utils/fmeaEditorUtils';
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
 import { checkEmptyByEditor } from 'js/utils/fmeaValidationUtils';
-import {
-  makeShortenValues,
-  initGroupProuct,
-  insertLog,
-} from 'js/utils/fmeaCommonUtils';
-import {
-  afterSaveAction,
-  beforeSaveAction,
-} from 'js/utils/fmeaViewCommonUtils';
+import { makeShortenValues, initGroupProuct, insertLog } from 'js/utils/fmeaCommonUtils';
+import { afterSaveAction, beforeSaveAction } from 'js/utils/fmeaViewCommonUtils';
 import { createItem, reviseByRevision } from 'js/utils/fmeaTcUtils';
-import {
-  setMasterItemProperty,
-  masterCreateAfterActionByPopup,
-  insertLogByCreate,
-} from 'js/cmCreateService';
+import { setMasterItemProperty, masterCreateAfterActionByPopup, insertLogByCreate } from 'js/cmCreateService';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 
@@ -32,8 +21,7 @@ import * as constants from 'js/constants/fmeaConstants';
  */
 const createAction = async (ctx, data) => {
   try {
-    const createEditorId =
-      prop.POTENTIAL_FAILURE_MODE + constants.CREATE_SUFFIX;
+    const createEditorId = prop.POTENTIAL_FAILURE_MODE + constants.CREATE_SUFFIX;
 
     // validation check
     checkEmptyByEditor(createEditorId);
@@ -53,12 +41,7 @@ const createAction = async (ctx, data) => {
     insertLogByCreate(master);
 
     // 성공 처리
-    masterCreateAfterActionByPopup(
-      'fmFailureTableGrid',
-      ctx[constants.IS_PIN],
-      [createEditorId],
-      data
-    );
+    masterCreateAfterActionByPopup('fmFailureTableGrid', ctx[constants.IS_PIN], [createEditorId], data);
   } catch (e) {
     afterSaveAction(data);
     showErrorMessage(e);
@@ -114,11 +97,7 @@ const _setRevisionProperties = async (failureRev, editorId) => {
   const editorValue = getEditorValueById(editorId);
   const shortenValue = makeShortenValues(editorValue);
 
-  const attrs = [
-    prop.POTENTIAL_FAILURE_MODE,
-    prop.POTENTIAL_FAILURE_MODE_SHORT,
-    prop.PRODUCT_CATEGORY,
-  ];
+  const attrs = [prop.POTENTIAL_FAILURE_MODE, prop.POTENTIAL_FAILURE_MODE_SHORT, prop.PRODUCT_CATEGORY];
   const values = [editorValue, shortenValue, productName];
 
   await lgepObjectUtils.setProperties(failureRev, attrs, values);
@@ -133,10 +112,7 @@ export const eidtRevisionProperties = async (failureRev, editorId) => {
   const editorValue = getEditorValueById(editorId);
   const shortenValue = makeShortenValues(editorValue);
 
-  const attrs = [
-    prop.POTENTIAL_FAILURE_MODE,
-    prop.POTENTIAL_FAILURE_MODE_SHORT,
-  ];
+  const attrs = [prop.POTENTIAL_FAILURE_MODE, prop.POTENTIAL_FAILURE_MODE_SHORT];
   const values = [editorValue, shortenValue];
 
   await lgepObjectUtils.setProperties(failureRev, attrs, values);

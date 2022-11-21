@@ -1,17 +1,24 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-popup2.directive",
-        "js/aw-panel.directive"
-    ],
-    "onEvent": [
-    ],
-    "data": {
-    },
-    "actions": {
-    },
-    "dataProviders": {
-    },
-    "lifecycleHooks": {
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-popup2.directive", 
+    "js/aw-panel.directive",
+    "js/aw-guidance-message.directive"
+  ],
+  "onEvent": [],
+  "data": {
+    "columnParam": "{{ctx.checklist.currentColumn}}"
+  },
+  "actions": {},
+  "dataProviders": {},
+  "lifecycleHooks": {},
+  "messages": {
+    "helpInformation": {
+        "messageType": "INFO",
+        "messageText": "{0}",
+        "messageTextParams": [
+          "{{data.columnParam}}"
+      ]
     }
+  }
 }

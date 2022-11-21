@@ -5,20 +5,10 @@
 
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import queryUtil from 'js/utils/lgepQueryUtils';
-import {
-  setMasterItemProperty,
-  masterCreateAfterActionByPanel,
-  insertLogByCreate
-} from 'js/cmCreateService';
+import { setMasterItemProperty, masterCreateAfterActionByPanel, insertLogByCreate } from 'js/cmCreateService';
 import { setUnPin } from 'js/utils/fmeaViewCommonUtils';
-import {
-  showErrorMessage,
-  getLocalizedMessageByMaster,
-} from 'js/utils/fmeaMessageUtils';
-import {
-  getProductNameByGroup,
-  initGroupProuct,
-} from 'js/utils/fmeaCommonUtils';
+import { showErrorMessage, getLocalizedMessageByMaster } from 'js/utils/fmeaMessageUtils';
+import { getProductNameByGroup, initGroupProuct } from 'js/utils/fmeaCommonUtils';
 import { validationInputs } from 'js/utils/fmeaValidationUtils';
 import { createItem } from 'js/utils/fmeaTcUtils';
 import * as prop from 'js/constants/fmeaProperty';
@@ -52,7 +42,6 @@ const createAction = async (data) => {
     masterCreateAfterActionByPanel('fmeaStructureTableGrid');
 
     insertLogByCreate(master);
-
   } catch (e) {
     showErrorMessage(e);
   }
@@ -63,11 +52,7 @@ const createAction = async (data) => {
  * @param {string} objectName
  */
 const checkDuplicate = async (objectName) => {
-  const queryResults = await queryUtil.executeSavedQuery(
-    prop.QUERY_FMEA_STRUCTURE,
-    [prop.QUERY_ENTRY_NAME],
-    [objectName]
-  );
+  const queryResults = await queryUtil.executeSavedQuery(prop.QUERY_FMEA_STRUCTURE, [prop.QUERY_ENTRY_NAME], [objectName]);
 
   if (queryResults && queryResults.length > 0) {
     throw new Error(getLocalizedMessageByMaster('WarnDuplicateName'));

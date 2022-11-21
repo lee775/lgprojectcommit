@@ -1,50 +1,48 @@
 <aw-popup2>
-    <aw-panel-body id="faqDatas">
-        <aw-flex-row visible-when="conditions.showCategory">
-            <aw-flex-column>
-                <aw-listbox prop="data.listPart" action="changeIssue" list="data.listPartValues.dbValue"></aw-listbox>
-            </aw-flex-column>
-            <aw-flex-column>
-                <aw-listbox prop="data.listIssue" list="data.listIssueValues.dbValue" class="issue" id="issueDisalbe">
-                </aw-listbox>
-            </aw-flex-column>
-            <aw-flex-column width="5f" align-content="center">
-                <aw-checkbox prop="data.checkExpertQ" action="checkExpert"></aw-checkbox>
-            </aw-flex-column>
-            <aw-flex-column>
-                <aw-listbox prop="data.listExpert" list="data.listExpertValues.dbValue" class="expert" id="issueDisalbe">
-                </aw-listbox>
-            </aw-flex-column>
-        </aw-flex-row>
-        <aw-widget  prop="data.questionTitle" hint="textarea" aria-label='{{i18n.questionTitle}}' class="textareaSize"></aw-widget>
-        <!-- <aw-textbox prop="data.questionTitle"></aw-textbox> -->
-        <aw-label prop="data.answerContent" visible-when="data.checkEdit == false"></aw-label>
-        <aw-panel-body visible-when="data.checkEdit == false">
-            <body>
-                <textarea id="qaEditPopSummernote"></textarea>
-            </body>
-        </aw-panel-body>
-        <aw-panel-body visible-when="data.checkEdit == true">
-            <body>
-                <textarea id="qaEditQuestionSummernote"></textarea>
-            </body>
-        </aw-panel-body>
-        <aw-break></aw-break>
-        <aw-label prop="data.answerEdit"  visible-when="data.checkEdit == true"></aw-label>
-        <textarea visible-when="data.checkEdit == true" id="answerSummernote"></textarea>
-        <!-- <aw-panel-body exist-when="data.window == 'faqAdd'||data.window == 'faqEdit'">
+  <aw-panel-body id="faqDatas">
+    <aw-flex-row visible-when="conditions.showCategory">
+      <aw-flex-column>
+        <aw-listbox prop="data.listPart" action="changeIssue" list="data.listPartValues.dbValue"></aw-listbox>
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-listbox prop="data.listIssue" list="data.listIssueValues.dbValue" class="issue" id="issueDisalbe"> </aw-listbox>
+      </aw-flex-column>
+      <aw-flex-column width="5f" align-content="center">
+        <aw-checkbox prop="data.checkExpertQ" action="checkExpert"></aw-checkbox>
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-listbox prop="data.listExpert" list="data.listExpertValues.dbValue" class="expert" id="issueDisalbe"> </aw-listbox>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-widget prop="data.questionTitle" hint="textarea" aria-label="{{i18n.questionTitle}}" class="textareaSize"></aw-widget>
+    <!-- <aw-textbox prop="data.questionTitle"></aw-textbox> -->
+    <aw-label prop="data.answerContent" visible-when="data.checkEdit == false"></aw-label>
+    <aw-panel-body visible-when="data.checkEdit == false">
+      <body>
+        <textarea id="qaEditPopSummernote"></textarea>
+      </body>
+    </aw-panel-body>
+    <aw-panel-body visible-when="data.checkEdit == true">
+      <body>
+        <textarea id="qaEditQuestionSummernote"></textarea>
+      </body>
+    </aw-panel-body>
+    <aw-break></aw-break>
+    <aw-label prop="data.answerEdit" visible-when="data.checkEdit == true"></aw-label>
+    <textarea visible-when="data.checkEdit == true" id="answerSummernote"></textarea>
+    <!-- <aw-panel-body exist-when="data.window == 'faqAdd'||data.window == 'faqEdit'">
             <aw-break></aw-break>
             <aw-label prop="data.faqAnswerContent"></aw-label>
             <body>
                 <textarea id="qaFaqAnswerSummernote"></textarea>
             </body>
         </aw-panel-body> -->
-    </aw-panel-body>
-    <aw-panel-footer>
-        <aw-button button-type="base" action="closePopup" size="auto">{{i18n.close}}</aw-button>
-        <aw-button action="editQna" size="auto" exist-when="data.window == 'qna'">{{i18n.editing}}</aw-button>
-        <aw-button action="addFaq" size="auto" exist-when="data.window == 'faqAdd'" id="addQuestion">{{i18n.ok}}</aw-button>
-        <aw-button action="editFaq" size="auto" exist-when="data.window == 'faqEdit'">{{i18n.editing}}</aw-button>
-        <aw-button action="editExpert" size="auto" exist-when="data.window == 'askExpert'">{{i18n.editing}}</aw-button>
-    </aw-panel-footer>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-button button-type="base" action="closePopup" size="auto">{{i18n.close}}</aw-button>
+    <aw-button action="editQna" size="auto" exist-when="data.window == 'qna'">{{i18n.editing}}</aw-button>
+    <aw-button action="addFaq" size="auto" exist-when="data.window == 'faqAdd'" id="addQuestion">{{i18n.ok}}</aw-button>
+    <aw-button action="editFaq" size="auto" exist-when="data.window == 'faqEdit'">{{i18n.editing}}</aw-button>
+    <aw-button action="editExpert" size="auto" exist-when="data.window == 'askExpert'">{{i18n.editing}}</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

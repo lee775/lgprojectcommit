@@ -1,0 +1,16 @@
+<aw-popup2>
+  <style>
+    #FreezeMessageData {
+      margin-top: 10px;
+    }
+  </style>
+  <aw-flex-row justify="center" id="FreezeMessageData">
+    <aw-flex-column width="11">
+      <aw-textarea prop="data.FreezeMessage"></aw-textarea>
+    </aw-flex-column>
+  </aw-flex-row>
+  <aw-panel-footer>
+    <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+    <aw-button action="bookFreezeBat" size="auto">{{i18n.ok}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

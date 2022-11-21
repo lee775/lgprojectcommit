@@ -16,10 +16,7 @@ export const initImgSelectRow = (tuiGrid) => {
   grid = tuiGrid;
   const selectRowKey = grid.getFocusedCell().rowKey;
 
-  grid.addRowClassName(
-    selectRowKey,
-    constants.INTERACTION_INIT_SELECT_CLASSNAME
-  );
+  grid.addRowClassName(selectRowKey, constants.INTERACTION_INIT_SELECT_CLASSNAME);
 };
 
 /**
@@ -82,10 +79,7 @@ export const allImageResetStyles = () => {
 // 선택한 파트 css 제거
 const initRest = (ctx) => {
   const initRowKey = ctx[constants.INTERACTION_INIT_ROW_SELECT];
-  grid.removeRowClassName(
-    initRowKey.rowKey,
-    constants.INTERACTION_INIT_SELECT_CLASSNAME
-  );
+  grid.removeRowClassName(initRowKey.rowKey, constants.INTERACTION_INIT_SELECT_CLASSNAME);
   initSelect();
 };
 

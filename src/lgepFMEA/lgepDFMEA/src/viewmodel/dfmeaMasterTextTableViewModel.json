@@ -139,10 +139,7 @@
     },
     "getFilterFacets": {
       "functionName": "getFilterFacets",
-      "parameters": [
-        "{{data.columnProviders.dfmeaTableColumnProvider.columnFilters}}",
-        "{{data.fullData}}"
-      ],
+      "parameters": ["{{data.columnProviders.dfmeaTableColumnProvider.columnFilters}}", "{{data.fullData}}"],
       "deps": "js/utils/fmeaTableSortFilterUtils"
     }
   },

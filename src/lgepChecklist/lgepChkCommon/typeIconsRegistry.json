@@ -1,32 +1,77 @@
 [
-    {
-        "type": {
-            "names": ["L2_Structure"],
-            "prop": {
-                "names": ["l2_is_checklist"],
-                "iconFileName": "typeChecklist48",
-                "conditions": {
-                    "l2_is_checklist": {
-                        "$eq": "Y"
-                    }
-                }
-            }
-        },
-        "priority": 100
+  {
+    "type": {
+      "names": ["L2_Structure"],
+      "prop": {
+        "names": ["l2_is_checklist"],
+        "iconFileName": "typeChecklist48",
+        "conditions": {
+          "l2_is_checklist": {
+            "$eq": "Y"
+          }
+        }
+      }
     },
-    {
-        "type": {
-            "names": ["L2_Structure"],
-            "prop": {
-                "names": ["l2_is_template"],
-                "iconFileName": "typeChecklistQuality48",
-                "conditions": {
-                    "l2_is_template": {
-                        "$eq": "Y"
-                    }
-                }
-            }
-        },
-        "priority": 110
-    }
+    "priority": 100
+  },
+  {
+    "type": {
+      "names": ["L2_Structure"],
+      "prop": {
+        "names": ["l2_is_template"],
+        "iconFileName": "typeChecklistQuality48",
+        "conditions": {
+          "l2_is_template": {
+            "$eq": "Y"
+          }
+        }
+      }
+    },
+    "priority": 110
+  },
+  {
+    "type": {
+      "names": ["L2_StructureRevision"],
+      "prop": {
+        "names": ["REF(items_tag,L2_Structure).l2_is_checklist"],
+        "iconFileName": "typeChecklist48",
+        "conditions": {
+          "l2_is_checklist": {
+            "$eq": "Y"
+          }
+        }
+      }
+    },
+    "priority": 120
+  },
+  {
+    "type": {
+      "names": ["Awb0DesignElement"],
+      "prop": {
+        "names": ["l2_is_checklist_target"],
+        "iconFileName": "typeElementGreen48",
+        "conditions": {
+          "l2_is_checklist_target": {
+            "$eq": "Y"
+          }
+        }
+      }
+    },
+    "priority": 130
+  },
+  {
+    "type": {
+      "names": ["Awb0DesignElement"],
+      "prop": {
+        "names": ["l2_is_checklist_target"],
+        "iconFileName": "typeElementGray48",
+        "conditions": {
+          "l2_is_checklist_target": {
+            "$eq": "N"
+          }
+        }
+      }
+    },
+    "priority": 140
+  }
 ]

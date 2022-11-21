@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-scrollpanel.directive",
+    "js/aw-listbox.directive",
+    "js/aw-textbox.directive",
+    "js/aw-label.directive",
+    "js/visible-when.directive",
+    "css/L2_ChecklistAddView.css"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "okAction": {
+      "actionType": "JSFunction",
+      "method": "okAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistAddService"
+    },
+    "addParentStructure": {
+      "actionType": "JSFunction",
+      "method": "openStructure",
+      "inputData": {
+        "structureLv": "parent"
+      },
+      "deps": "js/L2_ChecklistAddService"
+    },
+    "addSubStructure": {
+      "actionType": "JSFunction",
+      "method": "openStructure",
+      "inputData": {
+        "structureLv": "sub"
+      },
+      "deps": "js/L2_ChecklistAddService"
+    }
+  },
+  "data": {
+    "disabledButtonChk": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "l2Severity": {
+      "displayName": "{{i18n.chkRowColumnRefSeverity}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "hasLov": "true",
+      "dbValue": ""
+    },
+    "l2Occurence": {
+      "displayName": "{{i18n.chkRowColumnRefOccurence}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "hasLov": "true",
+      "dbValue": ""
+    },
+    "l2Detection": {
+      "displayName": "{{i18n.chkRowColumnRefDetection}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "hasLov": "true",
+      "dbValue": ""
+    },
+    "l2SodValues": {
+      "type": "STRING",
+      "dbValue": [{
+          "propDisplayValue": "",
+          "propInternalValue": ""
+        },
+        {
+          "propDisplayValue": "1",
+          "propInternalValue": "1"
+        },
+        {
+          "propDisplayValue": "2",
+          "propInternalValue": "2"
+        },
+        {
+          "propDisplayValue": "3",
+          "propInternalValue": "3"
+        },
+        {
+          "propDisplayValue": "4",
+          "propInternalValue": "4"
+        },
+        {
+          "propDisplayValue": "5",
+          "propInternalValue": "5"
+        },
+        {
+          "propDisplayValue": "6",
+          "propInternalValue": "6"
+        },
+        {
+          "propDisplayValue": "7",
+          "propInternalValue": "7"
+        },
+        {
+          "propDisplayValue": "8",
+          "propInternalValue": "8"
+        },
+        {
+          "propDisplayValue": "9",
+          "propInternalValue": "9"
+        },
+        {
+          "propDisplayValue": "10",
+          "propInternalValue": "10"
+        }
+      ]
+    },
+    "parentName": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": ""
+    },
+    "subName": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": ""
+    },
+    "singleItemName": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": ""
+    },
+    "parentNameTextbox": {
+      "displayName": "{{i18n.chkRowColumnUpperAssy}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "subNameTextbox": {
+      "displayName": "{{i18n.chkRowColumnLowerAssy}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "singleItemNameTextbox": {
+      "displayName": "{{i18n.chkRowColumnSingle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "functionLabel": {
+      "displayName": "{{i18n.chkRowColumnFunction}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "requirementLabel": {
+      "displayName": "{{i18n.chkRowColumnRequirement}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "failureModeLabel": {
+      "displayName": "{{i18n.chkRowColumnFailureMode}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "failureEffectLabel": {
+      "displayName": "{{i18n.chkRowColumnFailureEffect}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "failureDetailLabel": {
+      "displayName": "{{i18n.chkRowColumnFailureDetail}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "preventionLabel": {
+      "displayName": "{{i18n.chkRowColumnPrevention}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "referenceDataLabel": {
+      "displayName": "{{i18n.chkRowColumnReferenceData}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "detectivityLabel": {
+      "displayName": "{{i18n.chkRowColumnDetectivity}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "classificationLabel": {
+      "displayName": "{{i18n.chkRowColumnClassification}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "conditions": {},
+  "i18n": {
+    "standardBOMSearchAndSelect": ["L2_ChkStandardBOMMessages"],
+    "chkRowColumnFunction": ["L2_ChkMainMessages"],
+    "chkRowColumnRequirement": ["L2_ChkMainMessages"],
+    "chkRowColumnFailureMode": ["L2_ChkMainMessages"],
+    "chkRowColumnFailureEffect": ["L2_ChkMainMessages"],
+    "chkRowColumnFailureDetail": ["L2_ChkMainMessages"],
+    "chkRowColumnPrevention": ["L2_ChkMainMessages"],
+    "chkRowColumnDetectivity": ["L2_ChkMainMessages"],
+    "chkRowColumnReferenceData": ["L2_ChkMainMessages"],
+    "chkRowColumnClassification": ["L2_ChkMainMessages"],
+    "modifyChecklist": ["L2_ChkMainMessages"],
+    "openChecklistBomSave": ["L2_ChkMainMessages"],
+    "openChecklistBomCancelEdit": ["L2_ChkMainMessages"],
+    "editorSave": ["L2_ChkMainMessages"],
+    "chkRowColumnRefSeverity": ["L2_ChkMainMessages"],
+    "chkRowColumnRefOccurence": ["L2_ChkMainMessages"],
+    "chkRowColumnRefDetection": ["L2_ChkMainMessages"],
+    "chkRowColumnUpperAssy": ["L2_ChkMainMessages"],
+    "chkRowColumnLowerAssy": ["L2_ChkMainMessages"],
+    "addStructure": ["L2_ChkMainMessages"],
+    "standardBomTreeAdd": ["L2_ChkMainMessages"],
+    "eidtStructure": ["L2_ChkMainMessages"],
+    "chkRowColumnSingle": ["L2_ChkMainMessages"]
+  }
+}

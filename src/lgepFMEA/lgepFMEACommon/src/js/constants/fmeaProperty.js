@@ -53,11 +53,10 @@ export const DETECTION_ACTION_SHORT = 'l2_detection_action_s'; // 검출 조치 
 /** 신규 추가 속성 항목 FMEA Failure Revision */
 export const DETECTION_ACTIONS = 'l2_detection_actions'; // 검출 조치 (long)
 export const DETECTION_ACTIONS_SHORT = 'l2_detection_actions_s'; // 검출 조치 (1024)
-export const FUNCTION_REQUIREMENTS = "l2_fun_requirements"; // 기능 요구사항(고장리비전)
-export const FUNCTION_REQUIREMENTS_SHORT = "l2_fun_requirements_s"; // 기능 요구사항(고장리비전)
+export const FUNCTION_REQUIREMENTS = 'l2_fun_requirements'; // 기능 요구사항(고장리비전)
+export const FUNCTION_REQUIREMENTS_SHORT = 'l2_fun_requirements_s'; // 기능 요구사항(고장리비전)
 export const PRECATUION_ACTION = 'l2_precaution_action'; // 예방 조치 (고장리비전)
 export const PRECATUION_ACTION_SHORT = 'l2_precaution_action_s'; // 예방 조치 (고장리비전)
-
 
 export const SEVERITY = 'l2_severity'; // 심각도 (integer)
 export const OCCURENCE = 'l2_occurence'; // 발생도 (integer)
@@ -68,7 +67,7 @@ export const CLASSFICATION = 'l2_classification'; // classification (512)
 
 export const PARENT_ASSY = 'l2_parent_assy'; // 상위 ASSY (512)
 export const SUB_ASSY = 'l2_sub_assy'; // 하위 ASSY (512)
-export const SINGLE_ITEM = 'l2_single_item'; 
+export const SINGLE_ITEM = 'l2_single_item';
 
 export const REF_SOD_STANDARD = 'l2_sod_ref'; // SOD 테이블 참조 ref
 
@@ -85,22 +84,33 @@ export const SOD_DETECTABILITY = 'l2_detectability'; // 검출 가능성
 export const SOD_DESIGN_LIFE_RELIABILITY = 'l2_design_life_reliability'; // 부품/제품의 설계수명/신뢰성
 export const SOD_NUMBER_OF_OCCURRENCES = 'l2_number_of_occurrences'; // 제품당 발생 횟수
 
-export const SOD_AP = 'l2_ap';
-export const SOD_DETECTION_CAPABILITY = 'l2_detection_capability';
-export const SOD_DETECTION_E = 'l2_detection_e';
-export const SOD_DETECTION_S = 'l2_detection_s';
-export const SOD_EFFECTIVITY = 'l2_effectivity';
-export const SOD_INDEX = 'l2_index';
-export const SOD_OCCURENCE_E = 'l2_occurence_e';
-export const SOD_OCCURENCE_S = 'l2_occurence_s';
-export const SOD_SEVERITY_E = 'l2_severity_e';
-export const SOD_SEVERITY_S = 'l2_severity_s';
-export const SOD_POTENTIAL_FAILURE_CAUSE = 'l2_potential_failure_cause';
-export const SOD_OPINION = 'l2_opinion';
+// export const SOD_AP = 'l2_ap';
+// export const SOD_DETECTION_CAPABILITY = 'l2_detection_capability';
+// export const SOD_DETECTION_E = 'l2_detection_e';
+// export const SOD_DETECTION_S = 'l2_detection_s';
+// export const SOD_EFFECTIVITY = 'l2_effectivity';
+// export const SOD_INDEX = 'l2_index';
+// export const SOD_OCCURENCE_E = 'l2_occurence_e';
+// export const SOD_OCCURENCE_S = 'l2_occurence_s';
+// export const SOD_SEVERITY_E = 'l2_severity_e';
+// export const SOD_SEVERITY_S = 'l2_severity_s';
+// export const SOD_POTENTIAL_FAILURE_CAUSE = 'l2_potential_failure_cause';
+// export const SOD_OPINION = 'l2_opinion';
 
 export const SOD_SEVERITY_TABLE = 'l2_severity_table'; // 심각도 테이블
 export const SOD_OCCURENCE_TABLE = 'l2_occurence_table'; // 검출도 테이블
 export const SOD_DETECTION_TABLE = 'l2_detection_table'; // 발생도 테이블
+
+export const SOD_EFFECTIVITY = 'effectivity';
+export const SOD_SEVERITY = 'severity';
+export const SOD_POTENTIAL_FAILURE_CAUSE = 'potential_failure_cause';
+export const SOD_OCCURRENCE = 'occurrence';
+export const SOD_DETECTION_CAPABILITY = 'detection_capability';
+export const SOD_DETECTION = 'detection';
+export const SOD_AP = 'ap';
+export const SOD_OPINION = 'opinion';
+export const SOD_VERSION = 'version_mgmt';
+
 export const SOD_AP_TABLE = 'l2_ap_table';
 
 /** INTERACTION */
@@ -184,5 +194,3 @@ export const BOMLINE_FAILURE_PRECAUTION_ACTION_SHORT = 'bl_L2_FMEAFailureRevisio
 export const BOMLINE_FAILURE_RELATED_SOURCES = 'bl_L2_FMEAFailureRevision_l2_related_sources'; // 예방조치(1024)
 export const BOMLINE_FUNC_FUNCTION = 'bl_L2_FMEAFuncRevision_l2_function'; // 기능
 export const BOMLINE_FUNC_FUNCTION_SHORT = 'bl_L2_FMEAFuncRevision_l2_function_s'; // 기능(1024)
-
-

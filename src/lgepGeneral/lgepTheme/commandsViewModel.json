@@ -1,200 +1,190 @@
 {
-    "commands": {
-        "lgepThemeConfig": {
-            "iconId": "cmdSettings",
-            "title": "{{i18n.lgepThemeConfig}}"
-        },
-        "lgepRed": {
-            "iconId": "cmd06RedGlossyPlastic",
-            "title": "{{i18n.lgepRedTitle}}"
-        },
-        "lgepGray": {
-            "iconId": "cmd09GrayGlossyPlastic",
-            "title": "{{i18n.lgepGrayTitle}}"
-        },
-        "lgepDark": {
-            "iconId": "cmd10BlackGlossyPlastic",
-            "title": "{{i18n.lgepDarkTitle}}"
-        },
-        "lgepWhite": {
-            "iconId": "cmd14WhiteGlossyPlastic",
-            "title": "{{i18n.lgepWhiteTitle}}"
-        }
+  "commands": {
+    "lgepThemeConfig": {
+      "iconId": "cmdSettings",
+      "title": "{{i18n.lgepThemeConfig}}"
     },
-    "commandHandlers": {
-        "lgepThemeConfigHandler": {
-            "id": "lgepThemeConfig",
-            "action": "setlgepThemeConfig",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.false"
-            }
-        },
-        "lgepGeneralHandler": {
-            "id": "lgepRed",
-            "action": "setlgepRed",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.false"
-            },
-            "selectWhen": {
-                "condition": "conditions.false"
-            }
-        },
-        "lgepTheme1Handler": {
-            "id": "lgepGray",
-            "action": "setlgepGray",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.false"
-            },
-            "selectWhen": {
-                "condition": "conditions.false"
-            }
-        },
-        "lgepDarkHandler": {
-            "id": "lgepDark",
-            "action": "setlgepDark",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.supportslgepDark"
-            },
-            "selectWhen": {
-                "condition": "conditions.islgepDark"
-            }
-        },
-        "lgepWhiteHandler": {
-            "id": "lgepWhite",
-            "action": "setlgepWhite",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.supportslgepWhite"
-            },
-            "selectWhen": {
-                "condition": "conditions.islgepWhite"
-            }
-        }
+    "lgepRed": {
+      "iconId": "cmd06RedGlossyPlastic",
+      "title": "{{i18n.lgepRedTitle}}"
     },
-    "commandPlacements": {
-        "lgepThemeConfigPlacement": {
-            "id": "lgepThemeConfig",
-            "priority": 0,
-            "parentGroupId": "Awp0ChangeTheme"
-        },
-        "lgepTheme_Awp0ShowLightThemePlacement": {
-            "id": "Awp0ShowLightTheme",
-            "priority": 1,
-            "parentGroupId": "Awp0ChangeTheme"
-        },
-        "lgepRedPlacement": {
-            "id": "lgepRed",
-            "uiAnchor": "aw_globalToolbar",
-            "priority": 2,
-            "parentGroupId": "Awp0ChangeTheme"
-        },
-        "lgepGrayPlacement": {
-            "id": "lgepGray",
-            "uiAnchor": "aw_globalToolbar",
-            "priority": 3,
-            "parentGroupId": "Awp0ChangeTheme"
-        },
-        "lgepDarkPlacement": {
-            "id": "lgepDark",
-            "uiAnchor": "aw_globalToolbar",
-            "priority": 3,
-            "parentGroupId": "Awp0ChangeTheme"
-        },
-        "lgepWhitePlacement": {
-            "id": "lgepWhite",
-            "uiAnchor": "aw_globalToolbar",
-            "priority": 3,
-            "parentGroupId": "Awp0ChangeTheme"
-        }
+    "lgepGray": {
+      "iconId": "cmd09GrayGlossyPlastic",
+      "title": "{{i18n.lgepGrayTitle}}"
     },
-    "actions": {
-        "setlgepThemeConfig": {
-            "actionType": "JSFunction",
-            "method": "activateCommandPanel",
-            "deps": "js/commandPanel.service",
-            "inputData": {
-                "commandId": "L2ThemeConfig",
-                "location": "aw_navigation"
-            }
-        },
-        "setlgepRed": {
-            "actionType": "JSFunction",
-            "method": "setTheme",
-            "inputData": {
-                "0": "ui-lgepRed"
-            },
-            "deps": "js/theme.service"
-        },
-        "setlgepGray": {
-            "actionType": "JSFunction",
-            "method": "setTheme",
-            "inputData": {
-                "0": "ui-lgepGray"
-            },
-            "deps": "js/theme.service"
-        },
-        "setlgepDark": {
-            "actionType": "JSFunction",
-            "method": "setTheme",
-            "inputData": {
-                "0": "ui-lgepDark"
-            },
-            "deps": "js/theme.service"
-        },
-        "setlgepWhite": {
-            "actionType": "JSFunction",
-            "method": "setTheme",
-            "inputData": {
-                "0": "ui-lgepWhite"
-            },
-            "deps": "js/theme.service"
-        }
+    "lgepDark": {
+      "iconId": "cmd10BlackGlossyPlastic",
+      "title": "{{i18n.lgepDarkTitle}}"
     },
-    "conditions": {
-        "supportslgepRed": {
-            "expression": "!ctx.changeThemeDisabled"
-        },
-        "islgepRed": {
-            "expression": "ctx.theme === 'ui-lgepRed'"
-        },
-        "supportslgepGray": {
-            "expression": "!ctx.changeThemeDisabled"
-        },
-        "islgepGray": {
-            "expression": "ctx.theme === 'ui-lgepGray'"
-        },
-        "supportslgepDark": {
-            "expression": "conditions.true"
-        },
-        "islgepDark": {
-            "expression": "ctx.theme === 'ui-lgepDark'"
-        },
-        "supportslgepWhite": {
-            "expression": "conditions.true"
-        },
-        "islgepWhite": {
-            "expression": "ctx.theme === 'ui-lgepWhite'"
-        }
-    },
-    "i18n": {
-        "lgepThemeConfig": [
-            "lgepThemeMessages"
-        ],
-        "lgepRedTitle": [
-            "lgepThemeMessages"
-        ],
-        "lgepGrayTitle": [
-            "lgepThemeMessages"
-        ],
-        "lgepDarkTitle": [
-            "lgepThemeMessages"
-        ],
-        "lgepWhiteTitle": [
-            "lgepThemeMessages"
-        ]
+    "lgepWhite": {
+      "iconId": "cmd14WhiteGlossyPlastic",
+      "title": "{{i18n.lgepWhiteTitle}}"
     }
+  },
+  "commandHandlers": {
+    "lgepThemeConfigHandler": {
+      "id": "lgepThemeConfig",
+      "action": "setlgepThemeConfig",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.false"
+      }
+    },
+    "lgepGeneralHandler": {
+      "id": "lgepRed",
+      "action": "setlgepRed",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.false"
+      },
+      "selectWhen": {
+        "condition": "conditions.false"
+      }
+    },
+    "lgepTheme1Handler": {
+      "id": "lgepGray",
+      "action": "setlgepGray",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.false"
+      },
+      "selectWhen": {
+        "condition": "conditions.false"
+      }
+    },
+    "lgepDarkHandler": {
+      "id": "lgepDark",
+      "action": "setlgepDark",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.supportslgepDark"
+      },
+      "selectWhen": {
+        "condition": "conditions.islgepDark"
+      }
+    },
+    "lgepWhiteHandler": {
+      "id": "lgepWhite",
+      "action": "setlgepWhite",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.supportslgepWhite"
+      },
+      "selectWhen": {
+        "condition": "conditions.islgepWhite"
+      }
+    }
+  },
+  "commandPlacements": {
+    "lgepThemeConfigPlacement": {
+      "id": "lgepThemeConfig",
+      "priority": 0,
+      "parentGroupId": "Awp0ChangeTheme"
+    },
+    "lgepTheme_Awp0ShowLightThemePlacement": {
+      "id": "Awp0ShowLightTheme",
+      "priority": 1,
+      "parentGroupId": "Awp0ChangeTheme"
+    },
+    "lgepRedPlacement": {
+      "id": "lgepRed",
+      "uiAnchor": "aw_globalToolbar",
+      "priority": 2,
+      "parentGroupId": "Awp0ChangeTheme"
+    },
+    "lgepGrayPlacement": {
+      "id": "lgepGray",
+      "uiAnchor": "aw_globalToolbar",
+      "priority": 3,
+      "parentGroupId": "Awp0ChangeTheme"
+    },
+    "lgepDarkPlacement": {
+      "id": "lgepDark",
+      "uiAnchor": "aw_globalToolbar",
+      "priority": 3,
+      "parentGroupId": "Awp0ChangeTheme"
+    },
+    "lgepWhitePlacement": {
+      "id": "lgepWhite",
+      "uiAnchor": "aw_globalToolbar",
+      "priority": 3,
+      "parentGroupId": "Awp0ChangeTheme"
+    }
+  },
+  "actions": {
+    "setlgepThemeConfig": {
+      "actionType": "JSFunction",
+      "method": "activateCommandPanel",
+      "deps": "js/commandPanel.service",
+      "inputData": {
+        "commandId": "L2ThemeConfig",
+        "location": "aw_navigation"
+      }
+    },
+    "setlgepRed": {
+      "actionType": "JSFunction",
+      "method": "setTheme",
+      "inputData": {
+        "0": "ui-lgepRed"
+      },
+      "deps": "js/theme.service"
+    },
+    "setlgepGray": {
+      "actionType": "JSFunction",
+      "method": "setTheme",
+      "inputData": {
+        "0": "ui-lgepGray"
+      },
+      "deps": "js/theme.service"
+    },
+    "setlgepDark": {
+      "actionType": "JSFunction",
+      "method": "setTheme",
+      "inputData": {
+        "0": "ui-lgepDark"
+      },
+      "deps": "js/theme.service"
+    },
+    "setlgepWhite": {
+      "actionType": "JSFunction",
+      "method": "setTheme",
+      "inputData": {
+        "0": "ui-lgepWhite"
+      },
+      "deps": "js/theme.service"
+    }
+  },
+  "conditions": {
+    "supportslgepRed": {
+      "expression": "!ctx.changeThemeDisabled"
+    },
+    "islgepRed": {
+      "expression": "ctx.theme === 'ui-lgepRed'"
+    },
+    "supportslgepGray": {
+      "expression": "!ctx.changeThemeDisabled"
+    },
+    "islgepGray": {
+      "expression": "ctx.theme === 'ui-lgepGray'"
+    },
+    "supportslgepDark": {
+      "expression": "conditions.true"
+    },
+    "islgepDark": {
+      "expression": "ctx.theme === 'ui-lgepDark'"
+    },
+    "supportslgepWhite": {
+      "expression": "conditions.true"
+    },
+    "islgepWhite": {
+      "expression": "ctx.theme === 'ui-lgepWhite'"
+    }
+  },
+  "i18n": {
+    "lgepThemeConfig": ["lgepThemeMessages"],
+    "lgepRedTitle": ["lgepThemeMessages"],
+    "lgepGrayTitle": ["lgepThemeMessages"],
+    "lgepDarkTitle": ["lgepThemeMessages"],
+    "lgepWhiteTitle": ["lgepThemeMessages"]
+  }
 }

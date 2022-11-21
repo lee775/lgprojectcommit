@@ -1,196 +1,190 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-button.directive",
-        "js/aw-popup2.directive",
-        "js/aw-splm-table.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "sequencePopupDataProvider.selectionChangeEvent",
-            "cacheEventData": true
-        }
-    ],
-    "actions": {
-        "CreateObjPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "treeFolderCreatePopup",
-                    "locals": {
-                        "caption": "폴더 생성"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "width": 450,
-                        "height": 210
-                    }
-                }
-            },
-            "deps": "js/popupService"
-        },
-        "editObjPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "sequenceEditObjPopup",
-                    "locals": {
-                        "caption": "폴더 수정"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "width": 450,
-                        "height": 215
-                    }
-                }
-            },
-            "deps": "js/popupService"
-        },
-        "selDataSet": {
-            "actionType": "JSFunction",
-            "method": "selDataSet",
-            "inputData": {
-                "data": "{{data.eventData.selectedObjects[0]}}",
-                "state": "2"
-            },
-            "outputData": {
-                "result": "result"
-            },
-            "deps": "js/sequenceService"
-        },
-        "selEditData": {
-            "actionType": "JSFunction",
-            "method": "selEditData",
-            "inputData": {
-                "data": "{{data.eventData.selectedObjects[0]}}"
-            },
-            "outputData": {
-                "result": "result"
-            },
-            "deps": "js/sequencePopupService"
-        },
-        "deleteObj": {
-            "actionType": "JSFunction",
-            "method": "deleteObj",
-            "inputData": {
-                "value": "{{data.eventData.selectedObjects[0]}}"
-            },
-            "deps": "js/sequenceService"
-        },
-        "loadData": {
-            "actionType": "JSFunction",
-            "method": "dataLoad",
-            "outputData": {
-                "result": "result",
-                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
-            },
-            "deps": "js/sequencePopupService"
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "createObjAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "selDataSet"
-                },
-                {
-                    "condition": "conditions.cond1",
-                    "action": "CreateObjPopup"
-                }
-            ]
-        },
-        "editObjAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "selEditData"
-                },
-                {
-                    "condition": "conditions.cond1",
-                    "action": "editObjPopup"
-                }
-            ]
-        }
-    },
-    "data": {},
-    "dataProviders": {
-        "sequencePopupDataProvider": {
-            "action": "loadData",
-            "initializeAction": "loadData",
-            "treeLoadResult": "{{data.treeLoadResult}}",
-            "inputData": {
-                "accessMode": "tree",
-                "topNodeUid": "{{data.top}}"
-            }
-        }
-    },
-    "columnProviders": {
-        "sequencePopupColumnProvider": {
-            "columns": [
-                {
-                    "name": "object_string",
-                    "displayName": "이름",
-                    "minWidth": 150,
-                    "width": 500,
-                    "isTreeNavigation": true
-                }
-            ],
-            "frozenColumnIndex": -1
-        }
-    },
-    "grids": {
-        "sequencePopupTree": {
-            "dataProvider": "sequencePopupDataProvider",
-            "columnProvider": "sequencePopupColumnProvider",
-            "addIconColumn": false,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": false,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "loadEmployeeTreeTableData": {
-            "functionName": "loadEmployeeTreeTableData",
-            "parameters": [
-                "{{data.treeLoadInput.parentNode}}",
-                "{{data.columnProviders.sequencePopupColumnProvider.sortCriteria}}",
-                "{{data.treeLoadInput}}",
-                "{{ctx}}"
-            ]
-        }
-    },
-    "conditions": {
-        "cond1": {
-            "expression": "data.result===true"
-        }
-    },
-    "i18n": {
-        "helloText": [ "lgepDesignSequenceMessages" ],
-        "close": ["lgepDesignSequenceMessages"],
-        "add": ["lgepDesignSequenceMessages"],
-        "update": ["lgepDesignSequenceMessages"],
-        "delete": ["lgepDesignSequenceMessages"]
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-flex-row.directive", "js/aw-flex-column.directive", "js/aw-button.directive", "js/aw-popup2.directive", "js/aw-splm-table.directive"],
+  "onEvent": [
+    {
+      "eventId": "sequencePopupDataProvider.selectionChangeEvent",
+      "cacheEventData": true
     }
+  ],
+  "actions": {
+    "CreateObjPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "treeFolderCreatePopup",
+          "locals": {
+            "caption": "폴더 생성"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "width": 450,
+            "height": 210
+          }
+        }
+      },
+      "deps": "js/popupService"
+    },
+    "editObjPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "sequenceEditObjPopup",
+          "locals": {
+            "caption": "폴더 수정"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "width": 450,
+            "height": 215
+          }
+        }
+      },
+      "deps": "js/popupService"
+    },
+    "selDataSet": {
+      "actionType": "JSFunction",
+      "method": "selDataSet",
+      "inputData": {
+        "data": "{{data.eventData.selectedObjects[0]}}",
+        "state": "2"
+      },
+      "outputData": {
+        "result": "result"
+      },
+      "deps": "js/sequenceService"
+    },
+    "selEditData": {
+      "actionType": "JSFunction",
+      "method": "selEditData",
+      "inputData": {
+        "data": "{{data.eventData.selectedObjects[0]}}"
+      },
+      "outputData": {
+        "result": "result"
+      },
+      "deps": "js/sequencePopupService"
+    },
+    "deleteObj": {
+      "actionType": "JSFunction",
+      "method": "deleteObj",
+      "inputData": {
+        "value": "{{data.eventData.selectedObjects[0]}}"
+      },
+      "deps": "js/sequenceService"
+    },
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "dataLoad",
+      "outputData": {
+        "result": "result",
+        "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+      },
+      "deps": "js/sequencePopupService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "createObjAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "selDataSet"
+        },
+        {
+          "condition": "conditions.cond1",
+          "action": "CreateObjPopup"
+        }
+      ]
+    },
+    "editObjAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "selEditData"
+        },
+        {
+          "condition": "conditions.cond1",
+          "action": "editObjPopup"
+        }
+      ]
+    }
+  },
+  "data": {},
+  "dataProviders": {
+    "sequencePopupDataProvider": {
+      "action": "loadData",
+      "initializeAction": "loadData",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "columnProviders": {
+    "sequencePopupColumnProvider": {
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "이름",
+          "minWidth": 150,
+          "width": 500,
+          "isTreeNavigation": true
+        }
+      ],
+      "frozenColumnIndex": -1
+    }
+  },
+  "grids": {
+    "sequencePopupTree": {
+      "dataProvider": "sequencePopupDataProvider",
+      "columnProvider": "sequencePopupColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": false,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "loadEmployeeTreeTableData": {
+      "functionName": "loadEmployeeTreeTableData",
+      "parameters": [
+        "{{data.treeLoadInput.parentNode}}",
+        "{{data.columnProviders.sequencePopupColumnProvider.sortCriteria}}",
+        "{{data.treeLoadInput}}",
+        "{{ctx}}"
+      ]
+    }
+  },
+  "conditions": {
+    "cond1": {
+      "expression": "data.result===true"
+    }
+  },
+  "i18n": {
+    "helloText": ["lgepDesignSequenceMessages"],
+    "close": ["lgepDesignSequenceMessages"],
+    "add": ["lgepDesignSequenceMessages"],
+    "update": ["lgepDesignSequenceMessages"],
+    "delete": ["lgepDesignSequenceMessages"]
+  }
 }

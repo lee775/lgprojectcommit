@@ -16,4 +16,3 @@ const _getValue = (rowInfo, prop) => {
   }
   return '';
 };
-

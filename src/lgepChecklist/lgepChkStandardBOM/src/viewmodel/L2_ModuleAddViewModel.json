@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-textbox.directive",
+    "js/aw-listbox.directive",
+    "js/aw-button.directive"
+  ],
+  "data": {
+    "disabledButtonChk": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "structureNameText": {
+      "displayName": "{{i18n.openChecklistTitle}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "productTypeText": {
+      "displayName": "{{i18n.chkColumnProductType}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "productClassText": {
+      "displayName": "{{i18n.chkColumnProductClass}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "isChecklistTarget": {
+      "displayName": "{{i18n.isChecklistTarget}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "Showcase",
+      "dispValue": "Showcase"
+    },
+    "isChecklistTargetValues": {
+      "type": "STRING",
+      "dbValue": [{
+          "propDisplayValue": "Yes",
+          "dispValue": "Yes",
+          "propInternalValue": "Y"
+        },
+        {
+          "propDisplayValue": "No",
+          "dispValue": "No",
+          "propInternalValue": "N"
+        }
+      ]
+    }
+  },
+  "actions": {
+    "addModuleAssy": {
+      "actionType": "JSFunction",
+      "method": "addModuleAssy",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectAddRemoveService"
+    }
+  },
+  "i18n": {
+    "addModuleAssy": ["L2_ChkMainMessages"],
+    "save": ["L2_ChkMainMessages"],
+    "openChecklistTitle": ["L2_ChkMainMessages"],
+    "isChecklistTarget": ["L2_ChkMainMessages"],
+    "chkColumnProductType": ["L2_ChkMainMessages"],
+    "chkColumnProductClass": ["L2_ChkMainMessages"]
+  }
+}

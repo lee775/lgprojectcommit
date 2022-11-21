@@ -4,15 +4,14 @@
 @import 'ui-base-themeColors';
 @import 'afx-theme-vars';
 @import 'ui-theme-vars';
-$color: #A50034; //Generator color has been used here
+$color: #a50034; //Generator color has been used here
 // Lightness
 $lbase: 23;
 $ltop: 86;
 $linc: calc(($ltop - $lbase) / 12);
 // The core colors for your theme
 $aw_accent_1: $color;
-$aw_accent_2: mix(white, $color, $linc * 1
-);
+$aw_accent_2: mix(white, $color, $linc * 1);
 $aw_accent_3: mix(white, $color, $linc * 2);
 $aw_accent_4: mix(white, $color, $linc * 3);
 $aw_accent_5: mix(white, $color, $linc * 4);
@@ -55,7 +54,6 @@ $brand_tab_title_selected: $aw_accent_5;
 $brand_tab_title_selected_border_color: $aw_accent_5;
 $brand_tab_title_selected_border_color_hover: $aw_accent_5;
 
-
 @import 'afx-theme-settings';
 @import 'ui-theme-settings';
 @import 'ui-theme';
@@ -65,118 +63,118 @@ $brand_tab_title_selected_border_color_hover: $aw_accent_5;
 */
 @import 'consumer-themes';
 
-
 .justify-flex-end {
-    justify-content: flex-end;
-    background: #A50034;
+  justify-content: flex-end;
+  background: #a50034;
 }
 
 .aw-layout-header {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    -webkit-transition: padding .5s;
-    -moz-transition: padding .5s;
-    -o-transition: padding .5s;
-    -ms-transition: padding .5s;
-    transition: padding .5s;
-    background: rgb(165, 0, 52);
-    background: linear-gradient(90deg, rgba(165, 0, 52, 1) 30%, rgba(174, 27, 73, 1) 53%, rgba(198, 94, 127, 1) 82%, rgba(245, 245, 245, 1) 100%);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-transition: padding 0.5s;
+  -moz-transition: padding 0.5s;
+  -o-transition: padding 0.5s;
+  -ms-transition: padding 0.5s;
+  transition: padding 0.5s;
+  background: rgb(165, 0, 52);
+  background: linear-gradient(90deg, rgba(165, 0, 52, 1) 30%, rgba(174, 27, 73, 1) 53%, rgba(198, 94, 127, 1) 82%, rgba(245, 245, 245, 1) 100%);
 }
 
 .awRoot .aw-order-one {
-    order: 1;
-    background: #A50034;
+  order: 1;
+  background: #a50034;
 }
 
 .global-navigation .aw-sidenav-layoutContainer.aw-sidenav-standard {
-    width: 180px;
-    background: #6b6b6b;
+  width: 180px;
+  background: #6b6b6b;
 }
 
 .aw-tile-tileContainer .aw-tile-brand.aw-tile-displayTitle {
-    padding-top: 10px;
-    opacity: .8;
-    z-index: 98;
-    margin-right: 5px;
+  padding-top: 10px;
+  opacity: 0.8;
+  z-index: 98;
+  margin-right: 5px;
 }
 .aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
-    width: auto;
-    height: auto;
-    margin: 0;
-    font-size: var(--nav_bar_font_size);
-    display: block;
-    word-wrap: break-word;
-    white-space: normal;
-    overflow: hidden;
-    max-height: 28px;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  font-size: var(--nav_bar_font_size);
+  display: block;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  max-height: 28px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 
 button.aw-base-blk-button:not(.disabled).aw-accent-highContrast:not(.aw-widgets-staticChip):hover {
-    background-color: #a50034 !important;
+  background-color: #a50034 !important;
 }
 
 button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
-    background-color: #b32854 !important;
-    border-color: #a50034 !important;
+  background-color: #b32854 !important;
+  border-color: #a50034 !important;
 }
 
-
 aw-tile-canvas {
-    background-color: #e4e4e4
+  background-color: #e4e4e4;
 }
 
 .afx-content-background button.aw-base-blk-button:not(.disabled).aw-base-button {
-    background-color: #ffffff !important;
-    border-color: #b32854;
-    color: #b32854;
-    fill: #b32854;
+  background-color: #ffffff !important;
+  border-color: #b32854;
+  color: #b32854;
+  fill: #b32854;
 }
 
 .afx-content-background button.aw-base-blk-button:not(.disabled).aw-base-button:hover {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .aw-session-tcLoginView {
-    background-image: url("./images/lgMainWall.jpg");
+  background-image: url('./images/lgMainWall.jpg');
+}
+.aw-session-tcLoginView .development-environment {
+  background-image: url('./images/lgMainWallDev.jpg') !important;
 }
 
 .aw-session-companyLogo {
-    background-image: url(images/lgMainLogo.svg);
-    background-repeat: no-repeat;
-    width: 281px;
-    height: 119px;
-    left: 70px;
-    display: flex;
-    position: relative;
-    background-size: contain;
-    top: 70px;
+  background-repeat: no-repeat;
+  width: 281px;
+  height: 119px;
+  left: 70px;
+  display: flex;
+  position: relative;
+  background-size: contain;
+  top: 70px;
 }
 
 #alink a {
-    color: #a50034 !important;
+  color: #a50034 !important;
 }
 
 .backGroundWhiteImportant {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
-.changeWhite{
-    background-color: white !important;
+.changeWhite {
+  background-color: white !important;
 }

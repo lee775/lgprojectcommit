@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-textbox.directive",
+    "js/enable-when.directive"
+  ],
+  "actions": {
+    "backAction": {
+      "actionType": "JSFunction",
+      "method": "openPopup",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "loadChecklistCreateTree": {
+      "actionType": "JSFunction",
+      "method": "loadChecklistCreateTree",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "treeLoadResult": "{{function:loadChecklistCreateTreeData}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "okAction": {
+      "actionType": "JSFunction",
+      "method": "okAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "onInit": {
+      "actionType": "JSFunction",
+      "method": "onInit",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "events": {
+        "success": [
+          {
+            "name": "checklistCreateTreeDataProvider.multiSelectModeAction",
+            "eventData": {
+              "multiSelect": true
+            }
+          }
+        ]
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "onUnmount": {
+      "actionType": "JSFunction",
+      "method": "onUnmount",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "treeSelectionChangeEvent": {
+      "actionType": "JSFunction",
+      "method": "treeSelectionChangeEvent",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "treeGridSelection": {
+      "actionType": "JSFunction",
+      "method": "treeGridSelection",
+      "inputData": {
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
+    "treeTreeNodesLoaded": {
+      "actionType": "JSFunction",
+      "method": "treeTreeNodesLoaded",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    }
+  },
+  "functions": {
+    "loadChecklistCreateTreeData": {
+      "functionName": "loadChecklistCreateTreeData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}"]
+    }
+  },
+  "data": {
+    "disabledButtonChk": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "baseProject": {
+      "displayName": "베이스 템플릿명",
+      "dispValue": ""
+    },
+    "baseProjectProductCode": {
+      "displayName": "제품 코드",
+      "dispValue": ""
+    },
+    "baseProjectModule": {
+      "displayName": "모듈",
+      "dispValue": ""
+    },
+    "checklistProject": {
+      "displayName": "기존 체크리스트 프로젝트",
+      "dispValue": ""
+    },
+    "checklistProjectProductCode": {
+      "displayName": "제품 코드",
+      "dispValue": ""
+    },
+    "checklistProjectModule": {
+      "displayName": "모듈",
+      "dispValue": ""
+    },
+    "productIdTextBox": {
+      "displayName": "Product ID",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "requiredText": "Product ID",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "projectIdTextBox": {
+      "displayName": "Project ID",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "requiredText": "Project ID",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    }
+  },
+  "dataProviders": {
+    "checklistCreateTreeDataProvider": {
+      "action": "loadChecklistCreateTree",
+      "initializeAction": "loadChecklistCreateTree",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "top"
+      },
+      "selectionModelMode": "multiple"
+    }
+  },
+  "columnProviders": {
+    "checklistCreateTreeColumnProvider": {
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "{{i18n.name}}",
+          "minWidth": 150,
+          "width": 500,
+          "isTreeNavigation": true
+        },
+        {
+          "name": "awb0ArchetypeId",
+          "displayName": "Part Name",
+          "minWidth": 100,
+          "width": 100
+        },
+        {
+          "name": "awb0ArchetypeRevId",
+          "displayName": "리비전",
+          "minWidth": 70,
+          "width": 70
+        },
+        {
+          "name": "l2_is_selected",
+          "displayName": "선택됨?",
+          "minWidth": 100,
+          "width": 100
+        },
+        {
+          "name": "l2_importance",
+          "displayName": "중요도",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_ref_detection",
+          "displayName": "검출도(Detection)",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_ref_occurence",
+          "displayName": "발생도(Occurence)",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_ref_severity",
+          "displayName": "심각도(Severity)",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_ref_ap",
+          "displayName": "AP",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_result_detection",
+          "displayName": "NEW DET",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_result_occurence",
+          "displayName": "NEW OCC",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_result_severity",
+          "displayName": "NEW SEV",
+          "minWidth": 100,
+          "width": 150
+        },
+        {
+          "name": "l2_result_ap",
+          "displayName": "NEW AP",
+          "minWidth": 100,
+          "width": 150
+        }
+      ]
+    }
+  },
+  "grids": {
+    "checklistCreateTree": {
+      "dataProvider": "checklistCreateTreeDataProvider",
+      "columnProvider": "checklistCreateTreeColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": true,
+        "enablePinning": false,
+        "enableSorting": false,
+        "isFilteringEnabled": false
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "checklistCreateTreeDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "treeSelectionChangeEvent",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    },
+    {
+      "eventId": "checklistCreateTree.gridSelection",
+      "action": "treeGridSelection",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    },
+    {
+      "eventId": "checklistCreateTreeDataProvider.treeNodesLoaded",
+      "action": "treeTreeNodesLoaded",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    }
+  ],
+  "i18n": {
+    "back": ["Awv0threeDViewerMessages"],
+    "CancelText": ["TCUICommandPanelsMessages"],
+    "confirm": ["InboxMessages"],
+    "description": ["TCUICommandPanelsMessages"],
+    "isSelect": ["L2_ChkStandardBOMMessages"],
+    "name": ["TCUICommandPanelsMessages"],
+    "propertyRequired": ["UIMessages"],
+    "revision": ["TCUICommandPanelsMessages"],
+    "saveAsOperationSuccessful": ["TCUICommandPanelsMessages"],
+    "select": ["SearchMessages"],
+    "sequence": ["lgepChecklist2Messages"],
+    "standardBOMSearchAndSelect": ["L2_ChkStandardBOMMessages"],
+    "standardBOMSelectAndChecklistCreate": ["L2_ChkStandardBOMMessages"],
+    "template": ["L2_ChkStandardBOMMessages"],
+    "templateList": ["L2_ChkStandardBOMMessages"]
+  },
+  "lifecycleHooks": {
+    "onInit": "onInit",
+    "onMount": "onMount",
+    "onUnmount": "onUnmount"
+  }
+}

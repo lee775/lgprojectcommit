@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-checkbox.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-list.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-separator.directive",
+    "js/aw-splm-table.directive",
+    "css/allMinutesInCheckBoxCSS.css"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "reveal": {
+      "actionType": "dataProvider",
+      "methods": ["projectCode", "productCode"]
+    },
+    "openAllMinutes": {
+      "actionType": "JSFunction",
+      "method": "openAllMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
+    "minutesView": {
+      "actionType": "JSFunction",
+      "method": "minutesView",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
+    "loadAllMinutes": {
+      "actionType": "JSFunction",
+      "method": "loadAllMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "example": "{{function:sortAction}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
+    "loadMinutesDetails": {
+      "actionType": "JSFunction",
+      "method": "loadMinutesDetails",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
+    "checkboxAction": {
+      "actionType": "JSFunction",
+      "method": "checkboxAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
+    "prodAction": {
+      "actionType": "JSFunction",
+      "method": "prodAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
+    "loadCheckboxList": {
+      "actionType": "JSFunction",
+      "method": "loadCheckboxList",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    }
+  },
+  "data": {
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "allMinutesListInCheckListDataProvider": {
+      "action": "loadAllMinutes",
+      "response": "{{data.example}}",
+      "totalFound": "{{data.totalFound}}"
+    },
+    "projectCode": {
+      "action": "",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "productCode": {
+      "action": "",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    }
+  },
+  "columnProviders": {
+    "allMinutesListInCheckLisColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "이름",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "project_code",
+          "displayName": "프로젝트 명",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "l2_product_code",
+          "displayName": "제품 코드",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "top_checklist",
+          "displayName": "상위 체크리스트",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "item_revision_id",
+          "displayName": "리비전ID",
+          "minWidth": 60,
+          "width": 150
+        }
+      ]
+    }
+  },
+  "grids": {
+    "allMinutesTable": {
+      "dataProvider": "allMinutesListInCheckListDataProvider",
+      "columnProvider": "allMinutesListInCheckLisColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "sortAction": {
+      "functionName": "sortAction",
+      "parameters": ["{{data.dataProviders.allMinutesListInCheckListDataProvider.startIndex}}", "{{data.pageSize}}"]
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "loadCheckBoxList",
+      "cacheEventData": true,
+      "action": "loadCheckboxList"
+    },
+    {
+      "eventId": "loadCheckBoxList",
+      "cacheEventData": true,
+      "action": "reveal"
+    }
+  ],
+  "i18n": {}
+}

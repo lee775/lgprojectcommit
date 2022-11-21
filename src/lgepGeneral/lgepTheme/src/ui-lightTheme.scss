@@ -58,40 +58,42 @@
 @import 'consumer-themes';
 
 .aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
-    width: auto;
-    height: auto;
-    margin: 0;
-    font-size: var(--nav_bar_font_size);
-    display: block;
-    word-wrap: break-word;
-    white-space: normal;
-    overflow: hidden;
-    max-height: 28px;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  font-size: var(--nav_bar_font_size);
+  display: block;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  max-height: 28px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 
 .aw-session-tcLoginView {
-    background-image: url("./images/lgMainWall.jpg");
+  background-image: url('./images/lgMainWall.jpg');
+}
+.aw-session-tcLoginView .development-environment {
+  background-image: url('./images/lgMainWallDev.jpg') !important;
 }
 
 .aw-session-companyLogo {
-    background-image: url(images/lgMainLogo.svg);
-    background-repeat: no-repeat;
-    width: 281px;
-    height: 119px;
-    left: 70px;
-    display: flex;
-    position: relative;
-    background-size: contain;
-    top: 70px;
+  background-repeat: no-repeat;
+  width: 281px;
+  height: 119px;
+  left: 70px;
+  display: flex;
+  position: relative;
+  background-size: contain;
+  top: 70px;
 }
 
 .backGroundWhiteImportant {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }

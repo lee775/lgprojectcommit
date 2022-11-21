@@ -2,13 +2,13 @@
  * interaction Service
  * @module js/interactionService
  */
-import appCtxService from "js/appCtxService";
-import eventBus from "js/eventBus";
+import appCtxService from 'js/appCtxService';
+import eventBus from 'js/eventBus';
 
-import { getTreePartName } from "js/dfmeaMasterTreeTableInteractionService";
-import { getPartName } from "js/dfmeaMasterTableInteractionService";
-import { tableRefresh, isTreeTable } from "js/utils/fmeaViewCommonUtils";
-import * as constants from "js/constants/fmeaConstants";
+import { getTreePartName } from 'js/dfmeaMasterTreeTableInteractionService';
+import { getPartName } from 'js/dfmeaMasterTableInteractionService';
+import { tableRefresh, isTreeTable } from 'js/utils/fmeaViewCommonUtils';
+import * as constants from 'js/constants/fmeaConstants';
 
 /**
  * Interaction panel UI초기화
@@ -29,11 +29,11 @@ const initAction = async (ctx) => {
   // 3. init select
   const tableMode = ctx[constants.DFMEA_TABLE_MODE];
   if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TREE) {
-    eventBus.publish("fmea.treeTable.initSelectRow");
+    eventBus.publish('fmea.treeTable.initSelectRow');
   } else if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
-    eventBus.publish("fmea.textTable.initSelectRow");
+    eventBus.publish('fmea.textTable.initSelectRow');
   } else {
-    eventBus.publish("fmea.imageTable.initSelectRow");
+    eventBus.publish('fmea.imageTable.initSelectRow');
   }
 
   return {
@@ -64,20 +64,17 @@ const selectionEffectType = (data) => {
   if (!tab) {
     return;
   }
-  if (tab.tabKey === "influencing") {
-    tableRefresh("influencingTable");
+  if (tab.tabKey === 'influencing') {
+    tableRefresh('influencingTable');
   } else {
-    tableRefresh("affectedTable");
+    tableRefresh('affectedTable');
   }
 };
 
-window.addEventListener("click", function (event) {
+window.addEventListener('click', function (event) {
   if (event && event.target) {
-    if (
-      event.target.className.includes &&
-      event.target.className.includes("aw-jswidgets-checkboxButton")
-    ) {
-      eventBus.publish("fmea.change.effectTypes");
+    if (event.target.className.includes && event.target.className.includes('aw-jswidgets-checkboxButton')) {
+      eventBus.publish('fmea.change.effectTypes');
     }
   }
 });

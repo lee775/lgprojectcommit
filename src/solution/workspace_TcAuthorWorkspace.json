@@ -189,7 +189,8 @@
         "testSubLocation",
         "lgepXcelerator",
         "lgepChkMainSubLocation",
-        "lgepChkOpenSubLocation"
+        "lgepChkOpenSubLocation",
+        "L2_DesignStandardEnterTree"
     ],
     "excludedCommands": [
         "GoToCommandBuilder",

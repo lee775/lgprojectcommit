@@ -9,7 +9,6 @@ const onMount = async (ctx) => {
   // 편집 모드인 경우..
 };
 
-
 export default {
   onMount,
 };

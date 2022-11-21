@@ -21,6 +21,9 @@
     "getFilteredData": {
       "actionType": "JSFunction",
       "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
       "outputData": {
         "filterResults": "{{function:applySortAndFilterRows}}",
         "totalFound": "totalFound"
@@ -121,10 +124,7 @@
     },
     "getFilterFacets": {
       "functionName": "getFilterFacets",
-      "parameters": [
-        "{{data.columnProviders.fSodTableColumnProvider.columnFilters}}",
-        "{{data.fullData}}"
-      ],
+      "parameters": ["{{data.columnProviders.fSodTableColumnProvider.columnFilters}}", "{{data.fullData}}"],
       "deps": "js/utils/fmeaTableSortFilterUtils"
     }
   },

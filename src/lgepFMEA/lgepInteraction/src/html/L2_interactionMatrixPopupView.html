@@ -2,8 +2,7 @@
   <aw-panel class="interaction-popup">
     <aw-panel-body class="interaction__popup">
       <div class="interaction-desc">
-        <div class="text-desc">
-        </div>
+        <div class="text-desc"></div>
         <div class="color-desc">
           <div class="color__title">{{i18n.interactionPopupDescRightTitle}}</div>
           <div class="color__table">
@@ -45,16 +44,14 @@
         </div>
       </div>
       <div id="interaction-grid" class="interaction-matrix-container"></div>
+      <aw-flex-row height="1">
+          <aw-flex-column width="6" >
+        <aw-button id="interactionMatrixSave" action="saveInteractionMatrix" exist-when="ctx.interaction_init">{{i18n.save}}</aw-button>
+        </aw-flex-column>
+        <aw-flex-column width="6">
+        <aw-button id="interactionMatrixSave" action="beforeClose" exist-when="ctx.interaction_init">{{i18n.cancel}}</aw-button>
+      </aw-flex-row>
     </aw-panel-body>
-    <aw-panel-footer class="interaction-popup__footer">
-      <div class="interaction-matrix-button-group">
-        <aw-button
-          id="interactionMatrixSave"
-          action="saveInteractionMatrix"
-          exist-when="ctx.interaction_init"
-          >{{i18n.save}}</aw-button
-        >
-      </div>
-  </aw-panel-footer>
   </aw-panel>
 </aw-popup2>
+

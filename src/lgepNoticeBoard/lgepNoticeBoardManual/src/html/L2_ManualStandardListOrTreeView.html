@@ -1,107 +1,100 @@
 <style>
-    #imgPosition {
-        vertical-align: bottom;
-    }
+  #imgPosition {
+    vertical-align: bottom;
+  }
 
-    .paddingR {
-        padding: 0;
-        padding-top: 10px;
-    }
+  .paddingR {
+    padding: 0;
+    padding-top: 10px;
+  }
 
-    .leftMargin {
-        margin-left: 5px;
-    }
+  .leftMargin {
+    margin-left: 5px;
+  }
 
-    #bomlineTreeData>div>div.aw-flex-row.ng-scope.ng-isolate-scope.afx-fill>form>aw-tree>ul>li>aw-node>ul>li>div {
-        white-space: nowrap;
-    }
+  #bomlineTreeData > div > div.aw-flex-row.ng-scope.ng-isolate-scope.afx-fill > form > aw-tree > ul > li > aw-node > ul > li > div {
+    white-space: nowrap;
+  }
 
-    .searchIcon svg {
-        width: 20px;
-        height: 20px;
-    }
+  .searchIcon svg {
+    width: 20px;
+    height: 20px;
+  }
 
-    .iconBtnPosition{
-        margin-right: -7px;
-    }
+  .iconBtnPosition {
+    margin-right: -7px;
+  }
 
-    .pagePosition{
-        margin-top: 15px;
-        margin-left: 3px;
-    }
+  .pagePosition {
+    margin-top: 15px;
+    margin-left: 3px;
+  }
 </style>
 <aw-flex-row id="bomlineTreeData">
-    <aw-flex-column>
-        <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background">
-            <aw-flex-column width="2">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="backArrowcmd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="bomlineAdd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="deleteCmd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <!-- <aw-flex-column width="2">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="reviseCmd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column> -->
-            <aw-flex-column width="2">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="viewDetailCmd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="cmdSearchIcon"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <!-- <aw-tab-set tabs="data.infoTab"></aw-tab-set> -->
+  <aw-flex-column>
+    <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background">
+      <aw-flex-column width="2">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="backArrowcmd"></aw-command-bar>
         </aw-flex-row>
-        <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background" justify="center" visible-when="conditions.searchingMode">
-            <aw-flex-row visible-when="!conditions.searchingStart">
-                <aw-flex-column width="11">
-                    <aw-textbox id="pageSearchId" class="txtTop" prop="data.searchingName" aw-enter-key="awtreeSearching"></aw-textbox>
-                </aw-flex-column>
-                <aw-flex-column width="1">
-                    <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
-                </aw-flex-column>
-            </aw-flex-row>
-            <aw-flex-row visible-when="conditions.searchingStart">
-                <aw-flex-column width="8">
-                    <aw-textbox id="pageSearchingId" class="txtTop" prop="data.searchingName" aw-enter-key="awtreeSearching"></aw-textbox>
-                </aw-flex-column>
-                <aw-flex-column width="4">
-                    <aw-flex-row>
-                        <div class="pagePosition">
-                            {{data.page}}/{{data.pageLength}}
-                        </div>
-                        <aw-icon-button class="iconBtnPosition" command="data.searchBtn"></aw-icon-button>
-                        <aw-icon-button class="searchIcon iconBtnPosition" command="data.chevronDown"></aw-icon-button>
-                        <aw-icon-button class="searchIcon" command="data.chevronUp"></aw-icon-button>
-                    </aw-flex-row>
-                </aw-flex-column>
-            </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="bomlineAdd"></aw-command-bar>
         </aw-flex-row>
-        <aw-flex-row color="white">
-            <aw-panel-body class="paddingR">
-                <!-- <aw-list dataprovider="data.dataProviders.fileList" visible-when="conditions.showCardView">
+      </aw-flex-column>
+      <aw-flex-column width="2">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="editParentGroupCmd"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="viewDetailCmd"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="cmdSearchIcon"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <!-- <aw-tab-set tabs="data.infoTab"></aw-tab-set> -->
+    </aw-flex-row>
+    <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background" justify="center" visible-when="conditions.searchingMode">
+      <aw-flex-row visible-when="!conditions.searchingStart">
+        <aw-flex-column width="11">
+          <aw-textbox id="pageSearchId" class="txtTop" prop="data.searchingName" aw-enter-key="awtreeSearching"></aw-textbox>
+        </aw-flex-column>
+        <aw-flex-column width="1">
+          <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row visible-when="conditions.searchingStart">
+        <aw-flex-column width="8">
+          <aw-textbox id="pageSearchingId" class="txtTop" prop="data.searchingName" aw-enter-key="awtreeSearching"></aw-textbox>
+        </aw-flex-column>
+        <aw-flex-column width="4">
+          <aw-flex-row>
+            <div class="pagePosition">{{data.page}}/{{data.pageLength}}</div>
+            <aw-icon-button class="iconBtnPosition" command="data.searchBtn"></aw-icon-button>
+            <aw-icon-button class="searchIcon iconBtnPosition" command="data.chevronDown"></aw-icon-button>
+            <aw-icon-button class="searchIcon" command="data.chevronUp"></aw-icon-button>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-flex-row>
+    <aw-flex-row color="white">
+      <aw-panel-body class="paddingR">
+        <!-- <aw-list dataprovider="data.dataProviders.fileList" visible-when="conditions.showCardView">
                 <img src="{{item.props.l2_image_path.dbValues[0]}}" class="imgSize"><br />
                 <span class="textSize">
                     <h4 class="numberSize">{{item.props.l2_page_index.dbValues[0]}}</h4>
                 </span>
             </aw-list> -->
-                <aw-tree name="'bomLineTree'" tree="data.bomLineTree">
-                    <img src="{{node.iconURL}}" id="imgPosition" height="25" width="25">&nbsp;{{node.label}}
-                </aw-tree>
-            </aw-panel-body>
-        </aw-flex-row>
-    </aw-flex-column>
+        <aw-tree name="'bomLineTree'" tree="data.bomLineTree">
+          <img src="{{node.iconURL}}" id="imgPosition" height="25" width="25" />&nbsp;{{node.label}}
+        </aw-tree>
+      </aw-panel-body>
+    </aw-flex-row>
+  </aw-flex-column>
 </aw-flex-row>

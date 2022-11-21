@@ -1,10 +1,7 @@
 /**
  * DFMEA Master Row 추가 팝업 초기화 서비스
  */
-import {
-  initeEditorByCreate,
-  initeEditorByCreateByValue,
-} from 'js/utils/fmeaEditorUtils';
+import { initeEditorByCreate, initeEditorByCreateByValue } from 'js/utils/fmeaEditorUtils';
 import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
@@ -17,8 +14,7 @@ import * as constants from 'js/constants/fmeaConstants';
 const onMount = async (ctx) => {
   const masterList = initMasterList(ctx);
   const firstFcuntionValue = masterList[prop.FUNCTION].functionValues;
-  const firstFailureValue =
-    masterList[prop.POTENTIAL_FAILURE_MODE].failureValues;
+  const firstFailureValue = masterList[prop.POTENTIAL_FAILURE_MODE].failureValues;
   _mountEditors(firstFcuntionValue, firstFailureValue);
   return masterList;
 };
@@ -33,12 +29,9 @@ const initMasterList = (ctx) => {
   const functionValues = allMasterList[constants.MASTER_DATA_KEY_FUNCTION];
   const failureValues = allMasterList[constants.MASTER_DATA_KEY_FAILURE];
   return {
-    [prop.PARENT_ASSY]:
-      allMasterList[constants.MASTER_DATA_KEY_STRUCTURE]['parentAssyList'],
-    [prop.SUB_ASSY]:
-      allMasterList[constants.MASTER_DATA_KEY_STRUCTURE]['subAssyList'],
-    [constants.SINGLE_ITEM]:
-      allMasterList[constants.MASTER_DATA_KEY_STRUCTURE]['singleAssyList'],
+    [prop.PARENT_ASSY]: allMasterList[constants.MASTER_DATA_KEY_STRUCTURE]['parentAssyList'],
+    [prop.SUB_ASSY]: allMasterList[constants.MASTER_DATA_KEY_STRUCTURE]['subAssyList'],
+    [constants.SINGLE_ITEM]: allMasterList[constants.MASTER_DATA_KEY_STRUCTURE]['singleAssyList'],
     [prop.FUNCTION]: functionValues,
     [prop.POTENTIAL_FAILURE_MODE]: failureValues,
   };
@@ -62,13 +55,7 @@ const _mountEditors = (initFunctionValue, initFailureValue) => {
  * 구조, 기능, 잠재적고장모드 제외한 에디터 초기화
  */
 const initActionInAbleEditors = () => {
-  const ids = [
-    prop.REQUIREMENT,
-    prop.FAILURE_EFFECT,
-    prop.CAUSE_OF_FAILURE,
-    prop.PRECATUIONS_ACTION,
-    prop.DETECTION_ACTION,
-  ];
+  const ids = [prop.REQUIREMENT, prop.FAILURE_EFFECT, prop.CAUSE_OF_FAILURE, prop.PRECATUIONS_ACTION, prop.DETECTION_ACTION];
   ids.forEach((id) => {
     initeEditorByCreate(id, 835);
   });

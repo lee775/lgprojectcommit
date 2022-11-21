@@ -1,0 +1,8 @@
+<aw-command-panel caption="i18n.minutes" context="data" id="mainModeNav">
+  <aw-include exist-when="ctx.show_minutes_mode === 0" name="showAllMinutes"></aw-include>
+  <aw-include exist-when="ctx.show_minutes_mode === 1" name="minutesMain"></aw-include>
+  <aw-include exist-when="ctx.show_minutes_mode === 2" name="createMinutes"></aw-include>
+  <aw-include exist-when="ctx.show_minutes_mode === 3" name="showAllMinutesDetailes"></aw-include>
+  <aw-include exist-when="ctx.show_minutes_mode === 4" name="createMinutesInShowAllMinutes"></aw-include>
+  <aw-include exist-when="ctx.show_minutes_mode === 5" name="createActionItem"></aw-include>
+</aw-command-panel>

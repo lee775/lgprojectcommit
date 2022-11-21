@@ -1,12 +1,12 @@
 <aw-popup2>
-    <aw-panel-body id="approvalData">
-        <aw-label prop="data.userName" class="reHeight"></aw-label>
-        <aw-textbox prop="data.userPoint"></aw-textbox>
-        <aw-listbox prop="data.expertState" list="data.expertStateValue.dbValue" isSelectOnly="true" class="listReHeight"></aw-listbox>
-        <aw-widget prop="data.expertCoveragesList" exist-when="data.expertState.uiValue == 'O'"></aw-widget>
-    </aw-panel-body>
-    <aw-panel-footer>
-        <aw-button action="editUserPropsBat" size="auto">Save</aw-button>
-        <aw-button button-type="base" action="closePopupWindow" size="auto">Close</aw-button>
-    </aw-panel-footer>
+  <aw-panel-body id="approvalData">
+    <aw-label prop="data.userName" class="reHeight"></aw-label>
+    <aw-textbox prop="data.userPoint"></aw-textbox>
+    <aw-listbox prop="data.expertState" list="data.expertStateValue.dbValue" isSelectOnly="true" class="listReHeight"></aw-listbox>
+    <aw-widget prop="data.expertCoveragesList" exist-when="data.expertState.uiValue == 'O'"></aw-widget>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-button action="editUserPropsBat" size="auto">Save</aw-button>
+    <aw-button button-type="base" action="closePopupWindow" size="auto">Close</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

@@ -32,7 +32,7 @@
       "deps": "js/dfmeaMasterDuplicateService",
       "inputData": {
         "ctx": "{{ctx}}",
-        "data":"{{data}}"
+        "data": "{{data}}"
       }
     }
   },

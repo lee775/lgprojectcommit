@@ -1,76 +1,71 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-      "js/aw-splm-table.directive"
-    ],
-    "data": {
-    },
-    "actions": {
-      "loadColumnSeverity": {
-        "actionType": "JSFunction",
-        "method": "loadColumnSeverity",
-        "inputData": {
-          "dataProvider": "{{data.dataProviders.severityTableProvider}}"
-        },
-        "deps": "js/sodBallonService"
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-splm-table.directive"],
+  "data": {},
+  "actions": {
+    "loadColumnSeverity": {
+      "actionType": "JSFunction",
+      "method": "loadColumnSeverity",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.severityTableProvider}}"
       },
-      "loadDataSeverity": {
-        "actionType": "JSFunction",
-        "method": "loadDataSeverity",
-        "inputData": {
-          "ctx": "{{ctx}}"
-        },
-        "outputData": {
-          "severityResults": "result.filterResults",
-          "severityTotalFound": "result.totalFound"
-        },
-        "deps": "js/sodBallonService"
+      "deps": "js/sodBallonService"
+    },
+    "loadDataSeverity": {
+      "actionType": "JSFunction",
+      "method": "loadDataSeverity",
+      "inputData": {
+        "ctx": "{{ctx}}"
       },
-      "selectTableRow": {
-        "actionType": "JSFunction",
-        "method": "selectTableRow",
-        "inputData": {
-          "selectionModel": "{{data.eventData.selectedObjects[0]}}",
-          "ctx": "{{ctx}}"
-        },
-        "deps": "js/listboxRenderService"
+      "outputData": {
+        "severityResults": "result.filterResults",
+        "severityTotalFound": "result.totalFound"
+      },
+      "deps": "js/sodBallonService"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRow",
+      "inputData": {
+        "selectionModel": "{{data.eventData.selectedObjects[0]}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/listboxRenderService"
+    }
+  },
+  "columnProviders": {
+    "severityTableColumnProvider": {
+      "loadColumnAction": "loadColumnSeverity",
+      "frozenColumnIndex": -1
+    }
+  },
+  "dataProviders": {
+    "severityTableProvider": {
+      "action": "loadDataSeverity",
+      "response": "{{data.severityResults}}",
+      "totalFound": "{{data.severityTotalFound}}"
+    }
+  },
+  "grids": {
+    "severityTable": {
+      "dataProvider": "severityTableProvider",
+      "columnProvider": "severityTableColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
       }
-    },
-    "columnProviders": {
-      "severityTableColumnProvider": {
-        "loadColumnAction": "loadColumnSeverity",
-        "frozenColumnIndex": -1
-      }
-    },
-    "dataProviders": {
-      "severityTableProvider": {
-        "action": "loadDataSeverity",
-        "response": "{{data.severityResults}}",
-        "totalFound": "{{data.severityTotalFound}}"
-      }
-    },
-    "grids": {
-      "severityTable": {
-        "dataProvider": "severityTableProvider",
-        "columnProvider": "severityTableColumnProvider",
-        "addIconColumn": false,
-        "gridOptions": {
-          "enablePinning": true,
-          "enableSorting": false
-        }
-      }
-    },
-    "i18n": {
-      "severityName": ["lgepDFMEAViewMessages"]
-    },
-    "conditions": {
-    },
-    "onEvent": [
-        {
-            "eventId": "severityTableProvider.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "selectTableRow"
-        }
-    ]
-  }
-  
+    }
+  },
+  "i18n": {
+    "severityName": ["lgepDFMEAViewMessages"]
+  },
+  "conditions": {},
+  "onEvent": [
+    {
+      "eventId": "severityTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    }
+  ]
+}

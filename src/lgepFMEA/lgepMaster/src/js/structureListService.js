@@ -29,10 +29,7 @@ const loadColumns = (dataProvider) => {
  * }
  */
 const loadData = async () => {
-  const results = await loadTableData(
-    prop.QUERY_FMEA_STRUCTURE,
-    TABLE_COLS
-  );
+  const results = await loadTableData(prop.QUERY_FMEA_STRUCTURE, TABLE_COLS);
   return {
     totalFound: results.length,
     searchResults: results,

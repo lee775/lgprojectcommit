@@ -32,17 +32,9 @@ const createAction = async (ctx, data) => {
     const workspaceObject = await lgepObjectUtils.getObject(workspaceObjectUid);
 
     // 2. setProperty (제품, 참조 관계)
-    await lgepObjectUtils.setProperties(
-      workspaceObject,
-      [prop.PRODUCT],
-      [productValue]
-    );
+    await lgepObjectUtils.setProperties(workspaceObject, [prop.PRODUCT], [productValue]);
 
-    const tablePropList = [
-      prop.SOD_SEVERITY_TABLE,
-      prop.SOD_OCCURENCE_TABLE,
-      prop.SOD_DETECTION_TABLE,
-    ];
+    const tablePropList = [prop.SOD_SEVERITY_TABLE, prop.SOD_OCCURENCE_TABLE, prop.SOD_DETECTION_TABLE];
 
     for (const tableProp of tablePropList) {
       await setChildTables(workspaceObject, name, tableProp);
@@ -65,11 +57,7 @@ const makeTableRows = async (name, type) => {
   for (let index = 10; 0 < index; index--) {
     const rowUid = await createObject(prop.TYPE_SOD_ROW, name);
     const row = await lgepObjectUtils.getObject(rowUid);
-    await lgepObjectUtils.setProperties(
-      row,
-      [prop.SOD_GRADE, prop.SOD_TYPE],
-      [index.toString(), type]
-    );
+    await lgepObjectUtils.setProperties(row, [prop.SOD_GRADE, prop.SOD_TYPE], [index.toString(), type]);
     rows.push(row);
   }
   return rows;

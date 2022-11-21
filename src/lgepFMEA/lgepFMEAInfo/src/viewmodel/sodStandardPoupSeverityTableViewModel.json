@@ -7,7 +7,7 @@
       "method": "onMount",
       "inputData": {
         "ctx": "{{ctx}}",
-        "tableId":"L2_Severity"
+        "tableId": "L2_Severity"
       },
       "deps": "js/sodPopupTableService"
     }

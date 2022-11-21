@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-date.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-textarea.directive",
+    "js/aw-textbox.directive"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "createproceed": {
+      "actionType": "JSFunction",
+      "method": "createproceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "createProceedBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "createproceed"
+        },
+        {
+          "action": "closePopupWindow"
+        }
+      ]
+    }
+  },
+  "data": {
+    "object_name": {
+      "displayName": "제목 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_date": {
+      "displayName": "일시 ",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_meeting_place": {
+      "displayName": "장소 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_participants": {
+      "displayName": "참여자 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 3
+    },
+    "l2_meeting_details": {
+      "displayName": "회의 내용 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 5
+    },
+    "l2_meeting_agenda": {
+      "displayName": "회의 안건 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_related_schedule": {
+      "displayName": "관련 일정 사항 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 5
+    }
+  },
+  "onEvent": []
+}

@@ -1,7 +1,7 @@
 #interaction-init-select {
-    background-color: #CFCFCF !important;
+  background-color: #cfcfcf !important;
 }
 
-#dfmeaTreeTable .aw-splm-tableRow[aria-selected="true"]{
-    background-color: #CDE6EB;
+#dfmeaTreeTable .aw-splm-tableRow[aria-selected='true'] {
+  background-color: #cde6eb;
 }

@@ -1,11 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "imports": [
-    "js/aw-flex-row.directive",
-    "js/aw-include.directive",
-    "js/aw-button.directive",
-    "css/dfmeaListView.css"
-  ],
+  "imports": ["js/aw-flex-row.directive", "js/aw-include.directive", "js/aw-button.directive", "css/dfmeaListView.css"],
   "data": {
     "productGroup": {
       "displayName": "{{i18n.productGroup}}",

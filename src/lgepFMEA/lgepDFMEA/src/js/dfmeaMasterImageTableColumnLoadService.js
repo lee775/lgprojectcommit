@@ -1,5 +1,5 @@
-import { replaceEmptyValue, getLangIndex } from "js/utils/fmeaCommonUtils";
-import * as constants from "js/constants/fmeaConstants";
+import { replaceEmptyValue, getLangIndex } from 'js/utils/fmeaCommonUtils';
+import * as constants from 'js/constants/fmeaConstants';
 
 export const COLUMNS = [
   constants.COL_PARENT_ASSY_LANG,
@@ -39,10 +39,10 @@ const SPLIT_NUMBER = 60;
 
 class EditorRender {
   constructor(props) {
-    const el = document.createElement("div");
-    el.classList.add("selectable-all");
-    el.style.width = "595px";
-    el.style.minHeight = "200px";
+    const el = document.createElement('div');
+    el.classList.add('selectable-all');
+    el.style.width = '595px';
+    el.style.minHeight = '200px';
 
     this.el = el;
 
@@ -56,16 +56,13 @@ class EditorRender {
   render(props) {
     let value = lineBreak(props.value);
     if (value) {
-      if (value.includes("<img")) {
-        value = value.replaceAll(
-          "<img",
-          '<img style="width:auto; height:auto; max-width:400px; max-height:auto;"'
-        );
+      if (value.includes('<img')) {
+        value = value.replaceAll('<img', '<img style="width:auto; height:auto; max-width:400px; max-height:auto;"');
       }
-      if (value.includes("<p>")) {
+      if (value.includes('<p>')) {
         this.el.innerHTML = String(value);
         return;
-      } else if (!value.includes("<img") && !value.includes("<table")) {
+      } else if (!value.includes('<img') && !value.includes('<table')) {
         if (value.length > SPLIT_NUMBER) {
           const newValue = _getSubstringValue(value);
           this.el.innerHTML = String(newValue);
@@ -78,15 +75,15 @@ class EditorRender {
 }
 
 export const lineBreak = (value) => {
-  let resultValue = value.replaceAll("&nbsp;", "<p></p>");
+  let resultValue = value.replaceAll('&nbsp;', '<p></p>');
   return resultValue;
 };
 
 class CellRender {
   constructor(props) {
-    const el = document.createElement("div");
-    el.style.width = "595px";
-    el.style.minHeight = "200px";
+    const el = document.createElement('div');
+    el.style.width = '595px';
+    el.style.minHeight = '200px';
 
     this.el = el;
 
@@ -100,16 +97,13 @@ class CellRender {
   render(props) {
     let value = lineBreak(props.value);
     if (value) {
-      if (value.includes("<img")) {
-        value = value.replaceAll(
-          "<img",
-          '<img style="width:auto; height:auto; max-width:400px; max-height:auto;"'
-        );
+      if (value.includes('<img')) {
+        value = value.replaceAll('<img', '<img style="width:auto; height:auto; max-width:400px; max-height:auto;"');
       }
-      if (value.includes("<p>")) {
+      if (value.includes('<p>')) {
         this.el.innerHTML = String(value);
         return;
-      } else if (!value.includes("<img") && !value.includes("<table")) {
+      } else if (!value.includes('<img') && !value.includes('<table')) {
         if (value.length > SPLIT_NUMBER) {
           const newValue = _getSubstringValue(value);
           this.el.innerHTML = String(newValue);
@@ -132,20 +126,18 @@ const _getSubstringValue = (value) => {
       subCnt = subCnt + SPLIT_NUMBER;
       result += subStringValue;
     } else {
-      const subStringValue = _makeValue(
-        value.substring(subCnt, subCnt + SPLIT_NUMBER)
-      );
+      const subStringValue = _makeValue(value.substring(subCnt, subCnt + SPLIT_NUMBER));
       subCnt = subCnt + SPLIT_NUMBER;
       result += subStringValue;
     }
   }
 
   const result2 = _makeValue(result);
-  return result2.replaceAll("<p>undefined", "");
+  return result2.replaceAll('<p>undefined', '');
 };
 
 const _makeValue = (txt) => {
-  return "<p>" + txt + "</p>";
+  return '<p>' + txt + '</p>';
 };
 
 const _getLangColumn = (column, langIndex, index) => {
@@ -157,7 +149,7 @@ const _getLangColumn = (column, langIndex, index) => {
     resizable: false,
     sortable: true,
     filter: {
-      type: "text",
+      type: 'text',
       showApplyBtn: true,
       showClearBtn: true,
     },
@@ -182,27 +174,11 @@ const _getColumnWidth = (index) => {
   } else if (index === 2 || index === 9 || index === 11) {
     // 단품, 관련자료, 출처
     return 150;
-  } else if (
-    (index >= 3 && index <= 8) ||
-    index === 10 ||
-    index === 16 ||
-    index === 17 ||
-    index === 18
-  ) {
+  } else if ((index >= 3 && index <= 8) || index === 10 || index === 16 || index === 17 || index === 18) {
     // 기능 ~ 예방
     return 600;
   }
-  if (
-    index === 2 ||
-    index === 12 ||
-    index === 13 ||
-    index === 14 ||
-    index === 15 ||
-    index === 21 ||
-    index === 22 ||
-    index === 23 ||
-    index === 24
-  ) {
+  if (index === 2 || index === 12 || index === 13 || index === 14 || index === 15 || index === 21 || index === 22 || index === 23 || index === 24) {
     return 110;
   } else {
     return 160;

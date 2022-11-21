@@ -1,17 +1,17 @@
 {
-    "helloText": "!! Hello World !!",
-    "lgepUserLogsMessagesLocationTitle":"관리자 메뉴",
-    "lgepUserLogsMessagesSubLocationTitle":"사용자 사용이력",
-    "lgepUserLogsMessagesLocationBrowserTitle": "관리자 메뉴",
-    "lgepUserLogsMessagesLocationBrowserSubTitle":"사용자 사용이력",
+  "helloText": "!! Hello World !!",
+  "lgepUserLogsMessagesLocationTitle": "관리자 메뉴",
+  "lgepUserLogsMessagesSubLocationTitle": "사용자 사용이력",
+  "lgepUserLogsMessagesLocationBrowserTitle": "관리자 메뉴",
+  "lgepUserLogsMessagesLocationBrowserSubTitle": "사용자 사용이력",
 
-    "user_id": "사용자 명",
-    "division": "소속",
-    "module_name": "모듈 명",
-    "action_name": "액션 기준",
-    "targets": "액션 대상",
-    "results": "액션 결과",
-    "log_comments": "결과 내용",
-    "update_date":"사용일자",
-    "client_ip":"접속 PC IP"
+  "user_id": "사용자 명",
+  "division": "소속",
+  "module_name": "모듈 명",
+  "action_name": "액션 기준",
+  "targets": "액션 대상",
+  "results": "액션 결과",
+  "log_comments": "결과 내용",
+  "update_date": "사용일자",
+  "client_ip": "접속 PC IP"
 }

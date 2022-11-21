@@ -9,20 +9,11 @@ import lgepBomUtils from 'js/utils/lgepBomUtils';
 
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
-import {
-  saveCloseBomWindow,
-  getFmeaRevId,
-  getLatestItemRevisionByRevUid,
-} from 'js/utils/fmeaTcUtils';
+import { saveCloseBomWindow, getFmeaRevId, getLatestItemRevisionByRevUid } from 'js/utils/fmeaTcUtils';
 import { tableRefreshByTableMode } from 'js/utils/fmeaViewCommonUtils';
 import { showWarnMessage } from 'js/utils/fmeaMessageUtils';
 import { goDFmeaMasterView } from 'js/utils/fmeaCommonUtils';
-import {
-  TYPE_INFO,
-  getLocalizedMessage,
-  showErrorMessage,
-  showInfoMessage,
-} from 'js/utils/fmeaMessageUtils';
+import { TYPE_INFO, getLocalizedMessage, showErrorMessage, showInfoMessage } from 'js/utils/fmeaMessageUtils';
 
 /**
  * 로우 제거 (View만)
@@ -53,7 +44,7 @@ const removeRowAction = async (ctx) => {
       function () {
         return;
       },
-    ]
+    ],
   );
 };
 
@@ -79,14 +70,10 @@ const _removeRow = async (fmeaRev, selectRow) => {
     const allBomlines = expandResult.output;
 
     const removeFailureUid = await _removeFailure(allBomlines, selectRow);
-    const functionUid = await _removeFunction(
-      allBomlines,
-      selectRow,
-      removeFailureUid
-    );
+    const functionUid = await _removeFunction(allBomlines, selectRow, removeFailureUid);
     await _removeStructures(allBomlines, selectRow, functionUid);
   } catch (e) {
-    console.log('_removeRow', e);
+    //console.log('_removeRow', e);
   } finally {
     await saveCloseBomWindow(bom.bomWindow);
   }
@@ -94,10 +81,7 @@ const _removeRow = async (fmeaRev, selectRow) => {
 
 // 고장 제거
 const _removeFailure = async (allBomlines, selectRow) => {
-  const removeFailure = await getLatestItemRevisionByRevUid(
-    selectRow.props.uid,
-    prop.TYPE_FMEA_FAILURE_REVISION
-  );
+  const removeFailure = await getLatestItemRevisionByRevUid(selectRow.props.uid, prop.TYPE_FMEA_FAILURE_REVISION);
   for (const bomlineInfo of allBomlines) {
     const itemRev = bomlineInfo.parent.itemRevOfBOMLine;
     if (removeFailure.uid !== itemRev.uid) {
@@ -112,10 +96,7 @@ const _removeFailure = async (allBomlines, selectRow) => {
 // 기능 제거
 const _removeFunction = async (allBomlines, selectRow, removedFailureUid) => {
   const removeFunctionUid = selectRow.props[prop.FUNCTION].uid;
-  const removeFunction = await getLatestItemRevisionByRevUid(
-    removeFunctionUid,
-    prop.TYPE_FMEA_FUNC_REVISION
-  );
+  const removeFunction = await getLatestItemRevisionByRevUid(removeFunctionUid, prop.TYPE_FMEA_FUNC_REVISION);
 
   for (const bomlineInfo of allBomlines) {
     const itemRev = bomlineInfo.parent.itemRevOfBOMLine;
@@ -123,10 +104,7 @@ const _removeFunction = async (allBomlines, selectRow, removedFailureUid) => {
       continue;
     }
     // 하위에 고장이 없는 경우만 제거 가능
-    const isHaveChildren = await _checkHaveChildren(
-      bomlineInfo,
-      removedFailureUid
-    );
+    const isHaveChildren = await _checkHaveChildren(bomlineInfo, removedFailureUid);
     if (!isHaveChildren) {
       const bomLine = bomlineInfo.parent.bomLine;
       await lgepBomUtils.removeChildrenFromParentLine([bomLine]);
@@ -155,10 +133,7 @@ const _removeStructures = async (allBomlines, selectRow, functionUid) => {
 };
 
 const _removeStructure = async (allBomlines, structureUid, functionUid) => {
-  const removeStructure = await getLatestItemRevisionByRevUid(
-    structureUid,
-    prop.TYPE_FMEA_STRUCTURE_REV
-  );
+  const removeStructure = await getLatestItemRevisionByRevUid(structureUid, prop.TYPE_FMEA_STRUCTURE_REV);
   for (const bomlineInfo of allBomlines) {
     const itemRev = bomlineInfo.parent.itemRevOfBOMLine;
     if (removeStructure.uid !== itemRev.uid) {

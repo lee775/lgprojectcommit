@@ -1,0 +1,13 @@
+<aw-command-panel caption="i18n.addModuleAssy" context="data">
+  <aw-panel>
+    <aw-panel-body>
+      <aw-textbox prop="data.structureNameText"></aw-textbox>
+      <aw-listbox prop="data.isChecklistTarget" list="data.isChecklistTargetValues.dbValue" isSelectOnly="true"></aw-listbox>
+      <!-- <aw-textbox prop="data.productTypeText"></aw-textbox> -->
+      <!-- <aw-textbox prop="data.productClassText"></aw-textbox> -->
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="addModuleAssy">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-command-panel>

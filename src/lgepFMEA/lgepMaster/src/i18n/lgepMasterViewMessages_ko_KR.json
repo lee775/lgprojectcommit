@@ -43,7 +43,7 @@
   "precatuionsActionEditSaveDesc": "예방 조치 편집 저장",
   "precatuionsActionEditCancelDesc": "예방 조치 편집 취소",
 
-  "l2RelatedSourcesPlaceholder":"DGMS, QMS, 표준, 도면 등",
-  "l2ClassificationPlaceholder":"CTQ",
-  "l2ClassificationTitle":"Classification"
+  "l2RelatedSourcesPlaceholder": "DGMS, QMS, 표준, 도면 등",
+  "l2ClassificationPlaceholder": "CTQ",
+  "l2ClassificationTitle": "Classification"
 }

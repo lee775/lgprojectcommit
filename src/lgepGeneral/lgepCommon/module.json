@@ -1,53 +1,51 @@
 {
-    "name": "lgepCommon",
-    "description": "This is the lgepCommon module",
-    "skipTest": true,
+  "name": "lgepCommon",
+  "description": "This is the lgepCommon module",
+  "skipTest": true,
+  "typeProperties": {
     "typeProperties": {
-        "typeProperties": {
-            "User": {
-                "additionalProperties": [
-                    {
-                        "name": "home_folder"
-                    }
-                ]
-            },
-            "L2_User": {
-                "additionalProperties": [
-                    {
-                        "name": "object_name"
-                    },
-                    {
-                        "name": "owning_user"
-                    },
-                    {
-                        "name": "l2_user_id"
-                    },
-                    {
-                        "name": "l2_point"
-                    }
-                ]
-            },
-            "Awb0ConditionalElement": {
-                "additionalProperties": [
-                    {
-                        "name": "l2_awb0uggeometry"
-                    }
-                ]
-            }
-        }
-    },
-    "propertyRendererTemplates": {
-        "l2_awb0uggeometry_template": {
-            "grids": [],
-            "columns": [
-                "l2_awb0uggeometry"
-            ],
-            "tooltip": [],
-            "template": "",
-            "templateUrl": "/propertyRenderTemplates/L2_GeometryStatusRenderer.html",
-            "renderFunction": "",
-            "deps": "",
-            "dependentServices": []
-        }
+      "User": {
+        "additionalProperties": [
+          {
+            "name": "home_folder"
+          }
+        ]
+      },
+      "L2_User": {
+        "additionalProperties": [
+          {
+            "name": "object_name"
+          },
+          {
+            "name": "owning_user"
+          },
+          {
+            "name": "l2_user_id"
+          },
+          {
+            "name": "l2_point"
+          }
+        ]
+      },
+      "Awb0ConditionalElement": {
+        "additionalProperties": [
+          {
+            "name": "l2_awb0uggeometry"
+          }
+        ]
+      }
     }
+  },
+  "propertyRendererTemplates": {
+    "l2_awb0uggeometry_template": {
+      "grids": [],
+      "columns": ["l2_awb0uggeometry"],
+      "tooltip": [],
+      "template": "",
+      "templateUrl": "/propertyRenderTemplates/L2_GeometryStatusRenderer.html",
+      "renderFunction": "",
+      "deps": "",
+      "dependentServices": []
+    }
+  }
 }

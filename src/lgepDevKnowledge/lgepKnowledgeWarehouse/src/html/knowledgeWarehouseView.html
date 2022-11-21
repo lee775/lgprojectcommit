@@ -1,164 +1,155 @@
 <aw-flex-column id="wareHouse">
-    <aw-flex-row color="white">
-        <aw-sidenav id="searchFilter" config="data.searchFilter"></aw-sidenav>
-        <aw-flex-column width="2" id="columnMargin">
-            <aw-flex-row height="5f" class="filterBackground">
-                <aw-flex-column align-content="center" justify="center" class="buttonSize">
-                    <aw-icon-button size="large" command="data.button1"></aw-icon-button>&nbsp;New
-                </aw-flex-column>
-                <aw-separator is-vertical="true" class="seperatorSizeChange"></aw-separator>
-                <aw-flex-column align-content="center" justify="center" class="buttonSize">
-                    <aw-icon-button size="large" command="data.button3"></aw-icon-button>&nbsp;Filter
-                </aw-flex-column>
-                <aw-flex-column align-content="center" justify="center" class="buttonSize">
-                    <aw-icon-button size="large" command="data.button4"></aw-icon-button>&nbsp;Table&nbsp;View&nbsp;
-                </aw-flex-column>
-                <aw-flex-column align-content="center" justify="center" class="buttonSize">
-                    <aw-icon-button size="large" command="data.button5"></aw-icon-button>&nbsp;Card&nbsp;View
-                </aw-flex-column>
-                <aw-flex-column align-content="center" justify="center" class="buttonSize">
-                    <aw-icon-button size="large" command="data.button6"></aw-icon-button>&nbsp;Text&nbsp;View
-                </aw-flex-column>
-            </aw-flex-row>
-            <aw-flex-row height="1f"></aw-flex-row>
-            <aw-flex-row>
-                <aw-panel-body id="mainBgColor">
-                    <aw-tree name="'partTree'" tree="data.partDataTree" id="awTreeBgColorId">
-                        <span extended-tooltip="{extendedTooltipContent: '{{node.explain}}' }"
-                        extended-tooltip-options="{placement : ['right', 'bottom']}">{{node.label}}{{node.count}}</span>
-                    </aw-tree>
-                </aw-panel-body>
-            </aw-flex-row>
+  <aw-flex-row color="white">
+    <aw-sidenav id="searchFilter" config="data.searchFilter"></aw-sidenav>
+    <aw-flex-column width="2" id="columnMargin">
+      <aw-flex-row height="5f" class="filterBackground">
+        <aw-flex-column align-content="center" justify="center" class="buttonSize">
+          <aw-icon-button size="large" command="data.button1"></aw-icon-button>&nbsp;New
         </aw-flex-column>
-        <aw-splitter direction="VERTICAL" class="split"></aw-splitter>
-        <aw-flex-column width="fill" class="middleMargin">
-            <p style="font-weight:bold;">{{data.stringResult}}</p>
-            <aw-panel visible-when="conditions.tableView">
-                <aw-panel-section caption="{{data.searchValue}}&nbsp;{{data.panelResult}}" collapsed="false"
-                    class="listShadow">
-                    <div style="text-align: center;" visible-when="conditions.resultNone" class="resultNoneTop">
-                        <h3>{{i18n.noResult}}</h3>
-                        <br>
-                    </div>
-                    <aw-flex-row height="40f" visible-when="!conditions.resultNone">
-                        <aw-splm-table gridid="searchTableResult"></aw-splm-table>
-                    </aw-flex-row>
-                </aw-panel-section>
-            </aw-panel>
-            <aw-panel id="listScroll" visible-when="!conditions.tableView">
-                <aw-panel-section caption="{{data.searchValue}}&nbsp;{{data.panelResult}}" collapsed="false"
-                    class="listShadow">
-                    <div style="text-align: center;" visible-when="conditions.resultNone" class="resultNoneTop">
-                        <h3>{{i18n.noResult}}</h3>
-                        <br>
-                    </div>
-                    <aw-list dataprovider="data.dataProviders.selectedTreeResult" class="aw-layout-primaryWorkareaFill"
-                        visible-when="conditions.listView" id="mainListId">
-                        <div extended-tooltip-context="item" extended-tooltip="data.listTooltip"
-                            extended-tooltip-options="{placement : ['right', 'bottom']}">
-                            <h2 id="border1" style="font-weight: bold; font-size: 0.95rem;">
-                                [{{item.props.l2_source.dbValue}}]&nbsp;{{item.props.l2_file_name.uiValue}}_{{item.props.l2_page_index.dbValue}}
-                            </h2>
-                            <br>
-                            <div class="imgBox">
-                                <img src="{{item.image}}" id="imgSize">
-                            </div>
-                            <br>
-                            <div class="star-ratings">
-                                <div class="star-ratings-fill space-x-2 text-lg star-sizing"
-                                    style="width: \{\{item\.percent\}\}">
-                                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                                </div>
-                                <div class="star-ratings-base space-x-2 text-lg">
-                                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                                </div>
-                            </div>
-                            <span id="showPercent"
-                                style="font-weight: bold; font-size: 0.9rem;">&ensp;{{item.props.l2_average_rating.uiValue}}</span>
-                            <span class="showReviewText"
-                                style="font-weight: bold; font-size: 0.9rem;">{{item.textReview}} :
-                                {{item.props.l2_like_count.dbValues[0]}}
-                            </span>
-                        </div>
-                    </aw-list>
-                    <aw-list dataprovider="data.dataProviders.selectedTreeResult" class="aw-layout-primaryWorkareaFill"
-                        visible-when="conditions.textView" id="mainListId">
-                        <div extended-tooltip-context="item" extended-tooltip="data.listTooltip"
-                            extended-tooltip-options="{placement : ['right', 'bottom']}">
-                            <h2 id="border1" style="font-weight: bold; font-size: 0.95rem;">
-                                [{{item.props.l2_source.dbValue}}]&nbsp;{{item.props.l2_file_name.uiValue}}_{{item.props.l2_page_index.dbValue}}
-                            </h2>
-                            <br>
-                            <div class="imgBox">
-                                <p id="imgSize" style="text-overflow: ellipsis;">
-                                    {{item.props.l2_content_string.dbValue}}
-                                </p>
-                            </div>
-                            <br>
-                            <div class="star-ratings">
-                                <div class="star-ratings-fill space-x-2 text-lg star-sizing"
-                                    style="width: \{\{item\.percent\}\}">
-                                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                                </div>
-                                <div class="star-ratings-base space-x-2 text-lg">
-                                    <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                                </div>
-                            </div>
-                            <span id="showPercent"
-                                style="font-weight: bold; font-size: 0.9rem;">&ensp;{{item.props.l2_average_rating.uiValue}}</span>
-                            <span class="showReviewText"
-                                style="font-weight: bold; font-size: 0.9rem;">{{item.textReview}} :
-                                {{item.props.l2_like_count.dbValues[0]}}
-                            </span>
-                        </div>
-                    </aw-list>
-                </aw-panel-section>
-            </aw-panel>
+        <aw-separator is-vertical="true" class="seperatorSizeChange"></aw-separator>
+        <aw-flex-column align-content="center" justify="center" class="buttonSize">
+          <aw-icon-button size="large" command="data.button3"></aw-icon-button>&nbsp;Filter
         </aw-flex-column>
-        <aw-splitter direction="VERTICAL" class="split"></aw-splitter>
-        <aw-flex-column width="25f">
-            <aw-panel>
-                <aw-panel-body>
-                    <aw-panel-section caption="관련 질문" collapsed="false" class="listShadow">
-                        <aw-tab-set tabs="data.qnaTab" class="testTab">
-                            <aw-panel-body visible-when="conditions.showQna">
-                                <div style="text-align: center;" visible-when="conditions.qnaNone">
-                                    <h3>{{i18n.noQuestion}}</h3>
-                                </div>
-                                <br>
-                                <aw-list dataprovider="data.dataProviders.showAnswer" is-group-list="true"
-                                    id="qnaListId">
-                                    <aw-default-group-cell item="item" group-by="qName,qUID" class="noWhite">
-                                        <group-header-cell class="boderUp">
-                                            <a href="{{item.sendURL}}">{{item.qName}}</a>
-                                        </group-header-cell>
-                                        <cell>
-                                            <aw-default-cell vmo="item" class="dataDefaultCell"></aw-default-cell>
-                                        </cell>
-                                    </aw-default-group-cell>
-                                </aw-list>
-                            </aw-panel-body>
-                            <aw-panel-body visible-when="conditions.showExpert">
-                                <div style="text-align: center;" visible-when="conditions.expertQnaNone">
-                                    <h3>{{i18n.noQuestion}}</h3>
-                                </div>
-                                <br>
-                                <aw-list dataprovider="data.dataProviders.showExpertAnswer" is-group-list="true"
-                                    id="expertListId">
-                                    <aw-default-group-cell item="item" group-by="qName,qUID" class="noWhite">
-                                        <group-header-cell class="boderUp">
-                                            <a href="{{item.sendURL}}">{{item.qName}}</a>
-                                        </group-header-cell>
-                                        <cell>
-                                            <aw-default-cell vmo="item" class="dataDefaultCell"></aw-default-cell>
-                                        </cell>
-                                    </aw-default-group-cell>
-                                </aw-list>
-                            </aw-panel-body>
-                        </aw-tab-set>
-                    </aw-panel-section>
-                </aw-panel-body>
-            </aw-panel>
+        <aw-flex-column align-content="center" justify="center" class="buttonSize">
+          <aw-icon-button size="large" command="data.button4"></aw-icon-button>&nbsp;Table&nbsp;View&nbsp;
         </aw-flex-column>
-    </aw-flex-row>
+        <aw-flex-column align-content="center" justify="center" class="buttonSize">
+          <aw-icon-button size="large" command="data.button5"></aw-icon-button>&nbsp;Card&nbsp;View
+        </aw-flex-column>
+        <aw-flex-column align-content="center" justify="center" class="buttonSize">
+          <aw-icon-button size="large" command="data.button6"></aw-icon-button>&nbsp;Text&nbsp;View
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row height="1f"></aw-flex-row>
+      <aw-flex-row>
+        <aw-panel-body id="mainBgColor">
+          <aw-tree name="'partTree'" tree="data.partDataTree" id="awTreeBgColorId">
+            <span extended-tooltip="{extendedTooltipContent: '{{node.explain}}' }" extended-tooltip-options="{placement : ['right', 'bottom']}"
+              >{{node.label}}{{node.count}}</span
+            >
+          </aw-tree>
+        </aw-panel-body>
+      </aw-flex-row>
+    </aw-flex-column>
+    <aw-splitter direction="VERTICAL" class="split"></aw-splitter>
+    <aw-flex-column width="fill" class="middleMargin">
+      <p style="font-weight: bold">{{data.stringResult}}</p>
+      <aw-panel visible-when="conditions.tableView">
+        <aw-panel-section caption="{{data.searchValue}}&nbsp;{{data.panelResult}}" collapsed="false" class="listShadow">
+          <div style="text-align: center" visible-when="conditions.resultNone" class="resultNoneTop">
+            <h3>{{i18n.noResult}}</h3>
+            <br />
+          </div>
+          <aw-flex-row height="40f" visible-when="!conditions.resultNone">
+            <aw-splm-table gridid="searchTableResult"></aw-splm-table>
+          </aw-flex-row>
+        </aw-panel-section>
+      </aw-panel>
+      <aw-panel id="listScroll" visible-when="!conditions.tableView">
+        <aw-panel-section caption="{{data.searchValue}}&nbsp;{{data.panelResult}}" collapsed="false" class="listShadow">
+          <div style="text-align: center" visible-when="conditions.resultNone" class="resultNoneTop">
+            <h3>{{i18n.noResult}}</h3>
+            <br />
+          </div>
+          <aw-list
+            dataprovider="data.dataProviders.selectedTreeResult"
+            class="aw-layout-primaryWorkareaFill"
+            visible-when="conditions.listView"
+            id="mainListId"
+          >
+            <div extended-tooltip-context="item" extended-tooltip="data.listTooltip" extended-tooltip-options="{placement : ['right', 'bottom']}">
+              <h2 id="border1" style="font-weight: bold; font-size: 0.95rem">
+                [{{item.props.l2_source.dbValue}}]&nbsp;{{item.props.l2_file_name.uiValue}}_{{item.props.l2_page_index.dbValue}}
+              </h2>
+              <br />
+              <div class="imgBox">
+                <img src="{{item.image}}" id="imgSize" />
+              </div>
+              <br />
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg star-sizing" style="width: \{\{item\.percent\}\}">
+                  <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+              </div>
+              <span id="showPercent" style="font-weight: bold; font-size: 0.9rem">&ensp;{{item.props.l2_average_rating.uiValue}}</span>
+              <span class="showReviewText" style="font-weight: bold; font-size: 0.9rem">{{item.textReview}} : {{item.props.l2_like_count.dbValues[0]}} </span>
+            </div>
+          </aw-list>
+          <aw-list
+            dataprovider="data.dataProviders.selectedTreeResult"
+            class="aw-layout-primaryWorkareaFill"
+            visible-when="conditions.textView"
+            id="mainListId"
+          >
+            <div extended-tooltip-context="item" extended-tooltip="data.listTooltip" extended-tooltip-options="{placement : ['right', 'bottom']}">
+              <h2 id="border1" style="font-weight: bold; font-size: 0.95rem">
+                [{{item.props.l2_source.dbValue}}]&nbsp;{{item.props.l2_file_name.uiValue}}_{{item.props.l2_page_index.dbValue}}
+              </h2>
+              <br />
+              <div class="imgBox">
+                <p id="imgSize" style="text-overflow: ellipsis">{{item.props.l2_content_string.dbValue}}</p>
+              </div>
+              <br />
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg star-sizing" style="width: \{\{item\.percent\}\}">
+                  <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                </div>
+              </div>
+              <span id="showPercent" style="font-weight: bold; font-size: 0.9rem">&ensp;{{item.props.l2_average_rating.uiValue}}</span>
+              <span class="showReviewText" style="font-weight: bold; font-size: 0.9rem">{{item.textReview}} : {{item.props.l2_like_count.dbValues[0]}} </span>
+            </div>
+          </aw-list>
+        </aw-panel-section>
+      </aw-panel>
+    </aw-flex-column>
+    <aw-splitter direction="VERTICAL" class="split"></aw-splitter>
+    <aw-flex-column width="25f">
+      <aw-panel>
+        <aw-panel-body>
+          <aw-panel-section caption="관련 질문" collapsed="false" class="listShadow">
+            <aw-tab-set tabs="data.qnaTab" class="testTab">
+              <aw-panel-body visible-when="conditions.showQna">
+                <div style="text-align: center" visible-when="conditions.qnaNone">
+                  <h3>{{i18n.noQuestion}}</h3>
+                </div>
+                <br />
+                <aw-list dataprovider="data.dataProviders.showAnswer" is-group-list="true" id="qnaListId">
+                  <aw-default-group-cell item="item" group-by="qName,qUID" class="noWhite">
+                    <group-header-cell class="boderUp">
+                      <a href="{{item.sendURL}}">{{item.qName}}</a>
+                    </group-header-cell>
+                    <cell>
+                      <aw-default-cell vmo="item" class="dataDefaultCell"></aw-default-cell>
+                    </cell>
+                  </aw-default-group-cell>
+                </aw-list>
+              </aw-panel-body>
+              <aw-panel-body visible-when="conditions.showExpert">
+                <div style="text-align: center" visible-when="conditions.expertQnaNone">
+                  <h3>{{i18n.noQuestion}}</h3>
+                </div>
+                <br />
+                <aw-list dataprovider="data.dataProviders.showExpertAnswer" is-group-list="true" id="expertListId">
+                  <aw-default-group-cell item="item" group-by="qName,qUID" class="noWhite">
+                    <group-header-cell class="boderUp">
+                      <a href="{{item.sendURL}}">{{item.qName}}</a>
+                    </group-header-cell>
+                    <cell>
+                      <aw-default-cell vmo="item" class="dataDefaultCell"></aw-default-cell>
+                    </cell>
+                  </aw-default-group-cell>
+                </aw-list>
+              </aw-panel-body>
+            </aw-tab-set>
+          </aw-panel-section>
+        </aw-panel-body>
+      </aw-panel>
+    </aw-flex-column>
+  </aw-flex-row>
 </aw-flex-column>

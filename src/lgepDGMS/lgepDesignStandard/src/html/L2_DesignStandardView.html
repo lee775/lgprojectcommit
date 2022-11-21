@@ -1,4 +1,5 @@
 <style>
+
     #summernoteBodyId {
         position: relative;
         /* width: 100%;
@@ -228,6 +229,9 @@
         margin-right: -207px;
     }
 
+    #bomlineTreeData>div>div.aw-flex-row.ng-scope.ng-isolate-scope.afx-fill>form>aw-tree>ul>li>aw-node>ul>li>div {
+        white-space: nowrap;
+    }
     .marginRight{
         margin-right: 10px;
     }
@@ -236,8 +240,28 @@
         margin-right: 10px;
         margin-top: 12px;
     }
+
+    #listboxIdStd{
+        margin-right: 10px;
+    }
+    #scrollCtrl .tui-grid-rside-area .tui-grid-header-area {
+    /* position: fixed; */
+    z-index: 1;
+    border: none;
+    }
+    #scrollCtrl .tui-grid-body-container {
+    margin-top: 0px;
+    }
+    #newTabButton{
+        margin-left:700px;
+        position:static
+    }
+    .aw-splm-tableCellTop{
+        margin:auto !important;
+    }
+
 </style>
-<aw-flex-row class="afx-alt-content-background" justify="center" id="L2DesignStandardData">
+<aw-flex-row class="afx-alt-content-background" justify="center" id="L2DesignStandardData" visible-when ="!conditions.showNewTab">
     <aw-sidenav id="treeNavPushLeft" config="data.treeNavPushLeftData"></aw-sidenav>
     <!-- <aw-flex-column width="2">
         <aw-include name="L2_DesignStandardTree" visible-when="!conditions.selValueConditions"></aw-include>
@@ -250,17 +274,21 @@
                 <aw-flex-row height="3f" justify="right" class="importantBackground">
                     <aw-flex-column justify="center">
                         <aw-flex-row justify="right" class="noColor" align-content="center">
-                            <!-- <aw-listbox prop="data.revisionListBox" list="data.revisionListBoxValues.dbValue" id="listboxIdStd" visible-when="conditions.selValueConditions"></aw-listbox> -->
+                            <aw-listbox prop="data.revisionListBox" list="data.revisionListBoxValues.dbValue" id="listboxIdStd" visible-when="conditions.selectedBookNoneManual" action="treeRevChange"></aw-listbox>
                             <!-- <aw-checkbox prop="data.summerNoteWidthMax" action="summerNoteImageWidthMax"
                                 class="checkBoxCenter" id="checkBoxCssId"></aw-checkbox> -->
-                                <aw-checkbox prop="data.chapterMergeView" class="checkboxPosition"></aw-checkbox>
-                            <aw-flex-column width="10f" class="marginRight">
-                                <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
-                            </aw-flex-column>
-                            <aw-button size="auto" class="checkCate mama" action="bookFreeze">{{i18n.bookFreeze}}</aw-button>
+                                <aw-checkbox prop="data.chapterMergeView" class="checkboxPosition" visible-when="conditions.selectedBookNoneManual"></aw-checkbox>
+                                <aw-flex-column width="10f" class="marginRight" visible-when="conditions.selectedBookCond">
+                                    <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
+                                </aw-flex-column>
+                                <aw-button size="auto" class="checkCate mama" action="showTableCheck" visible-when="conditions.selectedBookNoneManual">
+                                    {{i18n.showCheckTable}}</aw-button>
+                            <aw-button size="auto" class="checkCate mama" action="revisionComparePopupBat" visible-when="conditions.selectedBookNoneManual">{{i18n.revCompare}}</aw-button>
+                            <aw-button size="auto" class="checkCate mama" action="reviseHistoryPopup" visible-when="conditions.selectedBookNoneManual">{{i18n.reviseHistory}}</aw-button>
+                            <aw-button size="auto" class="checkCate mama" action="FreezeMessagePopupAc" visible-when="conditions.selectedBookNoneManual">{{i18n.bookFreeze}}</aw-button>
                             <aw-button size="auto" class="checkCate mama" action="attachPopupAction" visible-when="conditions.selectedBookCond">{{i18n.FileAttach}}</aw-button>
                             <aw-button size="auto" class="checkCate mama"
-                            action="createDesignBookBat">{{i18n.createDgnStandardBook}}</aw-button>
+                            action="createDesignBookBat" visible-when="!conditions.selectedBookNoneManual">{{i18n.createDgnStandardBook}}</aw-button>
                         <aw-button size="auto" id="checkboxTabBtnId" class="checkCate mama"
                             action="navModeBat">{{i18n.treeViewShowOrHide}}</aw-button>
                             <!-- <aw-button button-type="sole" size="auto" class="checkCate mama"
@@ -291,7 +319,6 @@
                     </aw-flex-column>
                 </aw-flex-row> -->
                 <aw-panel-body class="noPading" visible-when="conditions.pageOpenConditions">
-
                     <body>
                         <div id="summernoteBodyId">
                             <div class="upArrowSpace">
@@ -314,6 +341,30 @@
                 </aw-panel-body>
             </aw-flex-column>
         </aw-flex-row>
+<!-- <aw-splitter direction="HORIZONTAL"></aw-splitter> -->
+        <!-- <aw-panel-body exist-when="conditions.showToast" height="100%" width="100%">
+        <div exist-when="conditions.showToast" style="white-space:nowrap; overflow:auto;" onscroll="scrollCtrl()">
+            <aw-button size="auto" class="checkCate mama" action="toastNewTab" id="newTabButton">
+                새탭으로 열기</aw-button>
+            <div id="checkToast" width="100%" class="toast"exist-when="conditions.showToast"></div>
+        <div>
+        </body>
+        </aw-panel-body> -->
     </aw-flex-column>
 </aw-flex-row>
-<aw-sidenav id="sidenavPushRight" config="data.sideNavRightData"></aw-sidenav>
+</aw-flex-row>
+
+
+<script>
+    function scrollCtrl() {
+
+        let scale = document.querySelector('#checkToast');
+        scale = scale.style.zoom;
+        scale = scale == "" ? 1 : scale;
+
+        var div = document.getElementById("scrollCtrl");
+        let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
+        headerLayout.style.marginLeft = "-" + div.scrollLeft / scale + "px";
+
+    }
+</script>

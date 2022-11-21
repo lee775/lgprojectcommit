@@ -1,391 +1,387 @@
 {
-    "commands": {
-        "cmdPartmgmt": {
-            "iconId": "cmdAddLatestReference",
-            "title": "제품 구조 관리",
-            "description": "{{i18n.cmdPartmgmtDescription}}"
-        },
-    
-        "partAddCommand": {
-            "iconId": "cmdAdd",
-            "isGroup": false,
-            "title": "Add"
-        },
-        "partEditCommand": {
-            "iconId": "cmdEdit",
-            "isGroup": false,
-            "title": "Edit"
-        },
-        "partDeleteCommand": {
-            "iconId": "cmdDelete",
-            "isGroup": false,
-            "title": "Delete"
-        },
-        "partEditSaveCommand": {
-            "iconId": "cmdSave",
-            "title": "Save Edit"
-        },
-        "cancelEditCommand": {
-            "iconId": "cmdCancelEdit",
-            "title": "Cancel Edit"
-        },
-        "partItemAddCommand": {
-            "iconId": "cmdAdd",
-            "isGroup": false,
-            "title": "Add"
-        },
-        "partItemDeleteCommand": {
-            "iconId": "cmdDelete",
-            "isGroup": false,
-            "title": "Delete"
-        },
-        "partItemEditCommand": {
-            "iconId": "cmdEdit",
-            "isGroup": false,
-            "title": "Edit"
-        },
-        "partEditItemSaveCommand": {
-            "iconId": "cmdSave",
-            "isGroup": false,
-            "title": "Save Edit"
-        },
-        "cancelEditItemCommand": {
-            "iconId": "cmdCancelEdit",
-            "title": "Cancel Edit"
-        }
+  "commands": {
+    "cmdPartmgmt": {
+      "iconId": "cmdAddLatestReference",
+      "title": "제품 구조 관리",
+      "description": "{{i18n.cmdPartmgmtDescription}}"
     },
-    "commandHandlers": {
-        "cmdPartmgmtHandler": {
-            "id": "cmdPartmgmt",
-            "action": "activatecmdPartmgmt",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.whenDba"
-            }
-        },
-        "goToPartmgmtHandler": {
-            "id": "goToPartmgmt",
-            "action": "activatecmdDefectmgmt",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.whenDba"
-            }
-        },
-        "partAddCommandHandler": {
-            "id": "partAddCommand",
-            "action": "createPartObjSidenav",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "partModifyCommandHandler": {
-            "id": "partEditCommand",
-            "action": "startEditAction",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.startEditVisible"
-            }
-        },
-        "partDeleteCommandHandler": {
-            "id": "partDeleteCommand",
-            "action": "deletePartData",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "partEditSaveCommandHandler": {
-            "id": "partEditSaveCommand",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.cancelEditVisible"
-            },
-            "action": "saveEditCommandAction"
-        },
-        "partCancelEditCommandHandler": {
-            "id": "cancelEditCommand",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.cancelEditVisible"
-            },
-            "action": "cancelEditCommandAction"
-        },
-        "partItemAddCommandHandler": {
-            "id": "partItemAddCommand",
-            "action": "createPartItemPopup",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "partItemDeleteCommandHandler": {
-            "id": "partItemDeleteCommand",
-            "action": "deletePartItemData",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.deleteEditItemVisible"
-            }
-        },
-        "partItemEditCommandHandler": {
-            "id": "partItemEditCommand",
-            "action": "startEditItemAction",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.startEditItemVisible"
-            }
-        },
-        "partEditItemSaveCommandHandler": {
-            "id": "partEditItemSaveCommand",
-            "action": "saveEditItemAction",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.cancelEditItemVisible"
-            }
-        },
-        "partItemCancelEditCommandHandler": {
-            "id": "cancelEditItemCommand",
-            "action": "cancelEditItemCommandAction",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition":"conditions.cancelEditItemVisible"
-            }
-        }
+
+    "partAddCommand": {
+      "iconId": "cmdAdd",
+      "isGroup": false,
+      "title": "Add"
     },
-    "commandPlacements": {
-        "cmdPartmgmtaw_globalNavigationbar": {
-            "id": "cmdPartmgmt",
-            "uiAnchor": "aw_globalNavigationbar",
-            "priority": 100
-        },
-        "goToPartmgmtaw_globalNavigationbar": {
-            "id": "goToPartmgmt",
-            "parentGroupId": "classificationCriteria",
-            "priority": 200
-        },
-        "partAddCommandPlacement": {
-            "id": "partAddCommand",
-            "uiAnchor": "partCommand",
-            "priority": 150
-        },
-        "partEditCommandPlacement": {
-            "id": "partEditCommand",
-            "uiAnchor": "partCommand",
-            "priority": 200
-        },
-        "partDeleteCommandPlacement": {
-            "id": "partDeleteCommand",
-            "uiAnchor": "partCommand",
-            "priority": 250
-        },
-        "partSaveEditCommandPlacement": {
-            "id": "partEditSaveCommand",
-            "uiAnchor": "partCommand",
-            "priority": 300
-        },
-        "partCancelEditCommandPlacement": {
-            "id": "cancelEditCommand",
-            "uiAnchor": "partCommand",
-            "priority": 350
-        },
-        "partItemAddCommandPlacement": {
-            "id": "partItemAddCommand",
-            "uiAnchor": "partTableCommand",
-            "priority": 150
-        },
-        "partItemDeleteCommandPlacement": {
-            "id": "partItemDeleteCommand",
-            "uiAnchor": "partTableCommand",
-            "priority": 200
-        },
-        "partItemEditCommandPlacement": {
-            "id": "partItemEditCommand",
-            "uiAnchor": "partTableCommand",
-            "priority": 250
-        },
-        "partItemSaveCommandPlacement": {
-            "id": "partEditItemSaveCommand",
-            "uiAnchor": "partTableCommand",
-            "priority": 250
-        },
-        "partItemCancelEditCommandPlacement": {
-            "id": "cancelEditItemCommand",
-            "uiAnchor": "partTableCommand",
-            "priority": 350
-        }
+    "partEditCommand": {
+      "iconId": "cmdEdit",
+      "isGroup": false,
+      "title": "Edit"
     },
-    "actions": {
-        "activatecmdPartmgmt": {
-            "actionType": "Navigate",
-            "navigateTo": "lgepProductStructure",
-            "navigationParams": {}
-        },
-        "activatecmdDefectmgmt": {
-            "actionType": "Navigate",
-            "navigateTo": "defectManagement",
-            "navigationParams": {}
-        },
-        "createPartItemPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "createPartItemPopup",
-                    "locals": {
-                        "caption": "ADD POPUP",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "addId3",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "center",
-                        "width": 500,
-                        "height": 250
-                    }
-                }
-            },
-            "outputData": {
-                "popupId": "addId3"
-            },
-            "deps": "js/popupService"
-        },
-        "createPartObjSidenav": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awsidenav.openClose",
-                        "eventData": {
-                            "id": "sidenavPushLeft",
-                            "includeView": "createPartObjSide",
-                            "commandId": "partAddCommand",
-                            "config": {
-                                "width": "STANDARD",
-                                "height": "full"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        "deletePartData": {
-            "actionType": "JSFunction",
-            "method": "deletePartData",
-            "deps": "js/partManagementService",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            }
-        }, 
-        "deletePartItemData": {
-            "actionType": "JSFunction",
-            "method": "deletePartItemData",
-            "deps": "js/createPartItemService",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            }
-        },
-        
-        "startEditAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.startEdit"
-                    }
-                ]
-            }
-        },
-        "startEditItemAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.startItemEdit"
-                    }
-                ]
-            }
-        },
-        "saveEditItemAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.saveItemEdit"
-                    }
-                ]
-            }
-        },
-        "saveEditCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.saveEdit"
-                    }
-                ]
-            }
-        },
-        "cancelEditCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.cancelEdit"
-                    }
-                ]
-            }
-        },
-        "cancelEditItemCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awp.cancelItemEdit"
-                    }
-                ]
-            }
-        }
+    "partDeleteCommand": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "Delete"
     },
-    "conditions": {
-        "objectIsSelected": {
-            "expression": "ctx.selected"
-        },
-        "onlyDBA": {
-            "expression": "ctx.userSession.props.role_name.uiValue == 'Admin'"
-        },
-        "startEditVisible": {
-            "expression": "!ctx.partMgmtTreeDataProvider_editInProgress"
-        },
-        "startEditItemVisible": {
-            "expression": "!ctx.partMgmtTableDataProvider_editInProgress"
-        },
-        "cancelEditVisible": {
-            "expression": "ctx.partMgmtTreeDataProvider_editInProgress"
-        },
-        "cancelEditItemVisible": {
-            "expression": "ctx.partMgmtTableDataProvider_editInProgress"
-        },
-        "deleteEditVisible": {
-            "expression" : "!data.dataProviders.partMgmtTreeDataProvider.selectedObjects.length == 0"
-        },
-        "deleteEditItemVisible": {
-            "expression" : "!ctx.data.dataProviders.partMgmtTableDataProvider.selectedObjects.length == 0"
-        },
-        "whenDba":{
-            "expression" : "ctx.userSession.props.role_name.dbValue == 'Admin'"
-        }
+    "partEditSaveCommand": {
+      "iconId": "cmdSave",
+      "title": "Save Edit"
     },
-    "i18n": {
-        "cmdPartmgmtTitle": [
-            "lgepPartmgmtMessages"
-        ],
-        "cmdPartmgmtDescription": [
-            "lgepPartmgmtMessages"
-        ]
+    "cancelEditCommand": {
+      "iconId": "cmdCancelEdit",
+      "title": "Cancel Edit"
+    },
+    "partItemAddCommand": {
+      "iconId": "cmdAdd",
+      "isGroup": false,
+      "title": "Add"
+    },
+    "partItemDeleteCommand": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "Delete"
+    },
+    "partItemEditCommand": {
+      "iconId": "cmdEdit",
+      "isGroup": false,
+      "title": "Edit"
+    },
+    "partEditItemSaveCommand": {
+      "iconId": "cmdSave",
+      "isGroup": false,
+      "title": "Save Edit"
+    },
+    "cancelEditItemCommand": {
+      "iconId": "cmdCancelEdit",
+      "title": "Cancel Edit"
     }
+  },
+  "commandHandlers": {
+    "cmdPartmgmtHandler": {
+      "id": "cmdPartmgmt",
+      "action": "activatecmdPartmgmt",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.false"
+      }
+    },
+    "goToPartmgmtHandler": {
+      "id": "goToPartmgmt",
+      "action": "activatecmdDefectmgmt",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.false"
+      }
+    },
+    "partAddCommandHandler": {
+      "id": "partAddCommand",
+      "action": "createPartObjSidenav",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "partModifyCommandHandler": {
+      "id": "partEditCommand",
+      "action": "startEditAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.startEditVisible"
+      }
+    },
+    "partDeleteCommandHandler": {
+      "id": "partDeleteCommand",
+      "action": "deletePartData",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "partEditSaveCommandHandler": {
+      "id": "partEditSaveCommand",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.cancelEditVisible"
+      },
+      "action": "saveEditCommandAction"
+    },
+    "partCancelEditCommandHandler": {
+      "id": "cancelEditCommand",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.cancelEditVisible"
+      },
+      "action": "cancelEditCommandAction"
+    },
+    "partItemAddCommandHandler": {
+      "id": "partItemAddCommand",
+      "action": "createPartItemPopup",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "partItemDeleteCommandHandler": {
+      "id": "partItemDeleteCommand",
+      "action": "deletePartItemData",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.deleteEditItemVisible"
+      }
+    },
+    "partItemEditCommandHandler": {
+      "id": "partItemEditCommand",
+      "action": "startEditItemAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.startEditItemVisible"
+      }
+    },
+    "partEditItemSaveCommandHandler": {
+      "id": "partEditItemSaveCommand",
+      "action": "saveEditItemAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.cancelEditItemVisible"
+      }
+    },
+    "partItemCancelEditCommandHandler": {
+      "id": "cancelEditItemCommand",
+      "action": "cancelEditItemCommandAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.cancelEditItemVisible"
+      }
+    }
+  },
+  "commandPlacements": {
+    "cmdPartmgmtaw_globalNavigationbar": {
+      "id": "cmdPartmgmt",
+      "uiAnchor": "aw_globalNavigationbar",
+      "priority": 100
+    },
+    "goToPartmgmtaw_globalNavigationbar": {
+      "id": "goToPartmgmt",
+      "parentGroupId": "classificationCriteria",
+      "priority": 200
+    },
+    "partAddCommandPlacement": {
+      "id": "partAddCommand",
+      "uiAnchor": "partCommand",
+      "priority": 150
+    },
+    "partEditCommandPlacement": {
+      "id": "partEditCommand",
+      "uiAnchor": "partCommand",
+      "priority": 200
+    },
+    "partDeleteCommandPlacement": {
+      "id": "partDeleteCommand",
+      "uiAnchor": "partCommand",
+      "priority": 250
+    },
+    "partSaveEditCommandPlacement": {
+      "id": "partEditSaveCommand",
+      "uiAnchor": "partCommand",
+      "priority": 300
+    },
+    "partCancelEditCommandPlacement": {
+      "id": "cancelEditCommand",
+      "uiAnchor": "partCommand",
+      "priority": 350
+    },
+    "partItemAddCommandPlacement": {
+      "id": "partItemAddCommand",
+      "uiAnchor": "partTableCommand",
+      "priority": 150
+    },
+    "partItemDeleteCommandPlacement": {
+      "id": "partItemDeleteCommand",
+      "uiAnchor": "partTableCommand",
+      "priority": 200
+    },
+    "partItemEditCommandPlacement": {
+      "id": "partItemEditCommand",
+      "uiAnchor": "partTableCommand",
+      "priority": 250
+    },
+    "partItemSaveCommandPlacement": {
+      "id": "partEditItemSaveCommand",
+      "uiAnchor": "partTableCommand",
+      "priority": 250
+    },
+    "partItemCancelEditCommandPlacement": {
+      "id": "cancelEditItemCommand",
+      "uiAnchor": "partTableCommand",
+      "priority": 350
+    }
+  },
+  "actions": {
+    "activatecmdPartmgmt": {
+      "actionType": "Navigate",
+      "navigateTo": "lgepProductStructure",
+      "navigationParams": {}
+    },
+    "activatecmdDefectmgmt": {
+      "actionType": "Navigate",
+      "navigateTo": "defectManagement",
+      "navigationParams": {}
+    },
+    "createPartItemPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "createPartItemPopup",
+          "locals": {
+            "caption": "ADD POPUP",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "addId3",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "center",
+            "width": 500,
+            "height": 250
+          }
+        }
+      },
+      "outputData": {
+        "popupId": "addId3"
+      },
+      "deps": "js/popupService"
+    },
+    "createPartObjSidenav": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awsidenav.openClose",
+            "eventData": {
+              "id": "sidenavPushLeft",
+              "includeView": "createPartObjSide",
+              "commandId": "partAddCommand",
+              "config": {
+                "width": "STANDARD",
+                "height": "full"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "deletePartData": {
+      "actionType": "JSFunction",
+      "method": "deletePartData",
+      "deps": "js/partManagementService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "deletePartItemData": {
+      "actionType": "JSFunction",
+      "method": "deletePartItemData",
+      "deps": "js/createPartItemService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+
+    "startEditAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.startEdit"
+          }
+        ]
+      }
+    },
+    "startEditItemAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.startItemEdit"
+          }
+        ]
+      }
+    },
+    "saveEditItemAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.saveItemEdit"
+          }
+        ]
+      }
+    },
+    "saveEditCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.saveEdit"
+          }
+        ]
+      }
+    },
+    "cancelEditCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.cancelEdit"
+          }
+        ]
+      }
+    },
+    "cancelEditItemCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awp.cancelItemEdit"
+          }
+        ]
+      }
+    }
+  },
+  "conditions": {
+    "objectIsSelected": {
+      "expression": "ctx.selected"
+    },
+    "onlyDBA": {
+      "expression": "ctx.userSession.props.role_name.uiValue == 'Admin'"
+    },
+    "startEditVisible": {
+      "expression": "!ctx.partMgmtTreeDataProvider_editInProgress"
+    },
+    "startEditItemVisible": {
+      "expression": "!ctx.partMgmtTableDataProvider_editInProgress"
+    },
+    "cancelEditVisible": {
+      "expression": "ctx.partMgmtTreeDataProvider_editInProgress"
+    },
+    "cancelEditItemVisible": {
+      "expression": "ctx.partMgmtTableDataProvider_editInProgress"
+    },
+    "deleteEditVisible": {
+      "expression": "!data.dataProviders.partMgmtTreeDataProvider.selectedObjects.length == 0"
+    },
+    "deleteEditItemVisible": {
+      "expression": "!ctx.data.dataProviders.partMgmtTableDataProvider.selectedObjects.length == 0"
+    },
+    "whenDba": {
+      "expression": "ctx.userSession.props.role_name.dbValue == 'Admin'"
+    }
+  },
+  "i18n": {
+    "cmdPartmgmtTitle": ["lgepPartmgmtMessages"],
+    "cmdPartmgmtDescription": ["lgepPartmgmtMessages"]
+  }
 }

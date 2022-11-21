@@ -3,32 +3,33 @@
 // TYPOGRAPHY
 
 .aw-session-tcLoginView {
-    background-image: url("./images/lgMainWall.jpg");
+  background-image: url('./images/lgMainWall.jpg');
 }
 
 .aw-base-logoImage .aw-base-icon {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 @font-face {
-    font-family: "LG 스마트체 2.0";
-    src: url("./LGSmHaR_v1.4_151215.ttf");
+  font-family: 'LG 스마트체 2.0';
+  src: url('./LGSmHaR_v1.4_151215.ttf');
 }
 
 @font-face {
-    font-family: "LG 스마트체";
-    src: url("./LGSmHaL.ttf");
+  font-family: 'LG 스마트체';
+  src: url('./LGSmHaL.ttf');
 }
 
 @font-face {
-    font-family: "Arial Narrow";
-    font-style: normal;
-    src: url("./ArialNarrow.ttf");
-    unicode-range: U+0041-005A, U+0061-007A;
+  font-family: 'Arial Narrow';
+  font-style: normal;
+  src: url('./ArialNarrow.ttf');
+  unicode-range: U+0041-005A, U+0061-007A;
 }
 
-$font_family: 'Arial Narrow', 'LG 스마트체','LG 스마트체 2.0','Segoe UI', 'Open Sans', 'Helvetica Neue', Verdana, Arial, 'YU Gothic UI', 'MS PGothic', 'Hiragino Sans', 'Microsoft YaHei', 微软雅黑, STXihei, 华文细黑, sans-serif;
+$font_family: 'Arial Narrow', 'LG 스마트체', 'LG 스마트체 2.0', 'Segoe UI', 'Open Sans', 'Helvetica Neue', Verdana, Arial, 'YU Gothic UI', 'MS PGothic',
+  'Hiragino Sans', 'Microsoft YaHei', 微软雅黑, STXihei, 华文细黑, sans-serif;
 $default_font_size: 16px;
 $base_font_size: rem-calc(15);
 $dense_line_height: 1.32;
@@ -154,11 +155,11 @@ $popup_border_radius: $default_border_radius;
 $popup_container_border_radius: $popup_border_radius;
 $popup_child_border_radius: 0 0 $default_border_radius $default_border_radius;
 $popup_border: $default_border;
-$popup_child_border:none;
+$popup_child_border: none;
 $popup_container_min_width: 400px;
-$popup_container_min_height : 213px;
-$popup_container_max_width : 600px;
-$popup_container_max_height : 498px;
+$popup_container_min_height: 213px;
+$popup_container_max_width: 600px;
+$popup_container_max_height: 498px;
 $popup_menu_icon_width: 16px;
 $popup_menu_icon_height: 16px;
 $popup_title_padding: rem-calc(16) 0 rem-calc(16) rem-calc(16);
@@ -211,109 +212,108 @@ $checkbox_border: 1px solid;
 $checkbox_ripple_animation: 300ms;
 $checkbox_check_animation: 300ms;
 $checkbox_desc_indent: 34px;
-$checkbox_required_margin_left:0.125rem;
-$checkbox_required_label_right_margin_left:0;
+$checkbox_required_margin_left: 0.125rem;
+$checkbox_required_label_right_margin_left: 0;
 
 // aw-separator
 $separator_vertical_border-left: 1px solid;
 $separator_vertical_margin: 8px 16px;
 $separator_vertical_width: 0px;
 
-
 // Flex
 @mixin flexbox() {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
 }
 
 @mixin flex($values) {
-    -webkit-box-flex: $values;
-    -moz-box-flex: $values;
-    -webkit-flex: $values;
-    -ms-flex: $values;
-    flex: $values;
+  -webkit-box-flex: $values;
+  -moz-box-flex: $values;
+  -webkit-flex: $values;
+  -ms-flex: $values;
+  flex: $values;
 }
 
 @mixin flex-direction($direction) {
-    -webkit-flex-direction: $direction;
-    -moz-flex-direction: $direction;
-    -ms-flex-direction: $direction;
-    flex-direction: $direction;
+  -webkit-flex-direction: $direction;
+  -moz-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
 }
 
 @mixin flex-wrap($wrap) {
-    -webkit-flex-wrap: $wrap;
-    -moz-flex-wrap: $wrap;
-    -ms-flex-wrap: $wrap;
-    flex-wrap: $wrap;
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
 }
 
 @mixin flex-flow($flow) {
-    -webkit-flex-flow: $flow;
-    -moz-flex-flow: $flow;
-    -ms-flex-flow: $flow;
-    flex-flow: $flow;
+  -webkit-flex-flow: $flow;
+  -moz-flex-flow: $flow;
+  -ms-flex-flow: $flow;
+  flex-flow: $flow;
 }
 
 @mixin order($val) {
-    -webkit-box-ordinal-group: $val;
-    -moz-box-ordinal-group: $val;
-    -ms-flex-order: $val;
-    -webkit-order: $val;
-    order: $val;
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
 }
 
 @mixin flex-grow($grow) {
-    -webkit-flex-grow: $grow;
-    -moz-flex-grow: $grow;
-    -ms-flex-grow: $grow;
-    flex-grow: $grow;
+  -webkit-flex-grow: $grow;
+  -moz-flex-grow: $grow;
+  -ms-flex-grow: $grow;
+  flex-grow: $grow;
 }
 
 @mixin flex-shrink($shrink) {
-    -webkit-flex-shrink: $shrink;
-    -moz-flex-shrink: $shrink;
-    -ms-flex-shrink: $shrink;
-    flex-shrink: $shrink;
+  -webkit-flex-shrink: $shrink;
+  -moz-flex-shrink: $shrink;
+  -ms-flex-shrink: $shrink;
+  flex-shrink: $shrink;
 }
 
 @mixin flex-basis($width) {
-    -webkit-flex-basis: $width;
-    -moz-flex-basis: $width;
-    -ms-flex-basis: $width;
-    flex-basis: $width;
+  -webkit-flex-basis: $width;
+  -moz-flex-basis: $width;
+  -ms-flex-basis: $width;
+  flex-basis: $width;
 }
 
 @mixin justify-content($justify) {
-    -webkit-justify-content: $justify;
-    -moz-justify-content: $justify;
-    -ms-justify-content: $justify;
-    justify-content: $justify;
-    -ms-flex-pack: $justify;
+  -webkit-justify-content: $justify;
+  -moz-justify-content: $justify;
+  -ms-justify-content: $justify;
+  justify-content: $justify;
+  -ms-flex-pack: $justify;
 }
 
 @mixin align-content($align) {
-    -webkit-align-content: $align;
-    -moz-align-content: $align;
-    -ms-align-content: $align;
-    align-content: $align;
+  -webkit-align-content: $align;
+  -moz-align-content: $align;
+  -ms-align-content: $align;
+  align-content: $align;
 }
 
 @mixin align-items($align) {
-    -webkit-align-items: $align;
-    -moz-align-items: $align;
-    -ms-align-items: $align;
-    align-items: $align;
+  -webkit-align-items: $align;
+  -moz-align-items: $align;
+  -ms-align-items: $align;
+  align-items: $align;
 }
 
 @mixin align-self($align) {
-    -webkit-align-self: $align;
-    -moz-align-self: $align;
-    -ms-align-self: $align;
-    align-self: $align;
+  -webkit-align-self: $align;
+  -moz-align-self: $align;
+  -ms-align-self: $align;
+  align-self: $align;
 }
 
 // slider
@@ -379,7 +379,7 @@ $fileUpload_padding: 6px 16px 8px 16px;
 $fileUpload_letter_spacing: normal;
 
 // fileUploader
-$fileUploader_border:1px dashed;
+$fileUploader_border: 1px dashed;
 $fileUploader_label_font_size_base: $base-font-size;
 
 // default-cell or aw-default-cell
@@ -615,10 +615,10 @@ $list_filter_input_padding: rem-calc(7);
 // Global navigation (aw-global-navigation)
 $global_navigation_width: rem-calc(64);
 $global_navigation_animation_duration: $base_transition_duration;
-$global_navigation_command_height:rem-calc(16);
-$global_navigation_command_label_height:rem-calc(16);
-$global_navigation_commad_margin:rem-calc(8);
-$global_navigation_command_label_margin:rem-calc(4);
+$global_navigation_command_height: rem-calc(16);
+$global_navigation_command_label_height: rem-calc(16);
+$global_navigation_commad_margin: rem-calc(8);
+$global_navigation_command_label_margin: rem-calc(4);
 $global_navigation_padding: rem-calc(16);
 $global_navigation_command_label_width: calc(100% - #{$global_navigation_command_label_height * 2});
 $global_navigation_command_margin_left: 4px;

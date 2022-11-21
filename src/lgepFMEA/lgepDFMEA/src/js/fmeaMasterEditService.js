@@ -2,11 +2,7 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
 import { validationInputs } from 'js/utils/fmeaValidationUtils';
-import {
-  afterSaveAction,
-  beforeSaveAction,
-  tableRefresh,
-} from 'js/utils/fmeaViewCommonUtils';
+import { afterSaveAction, beforeSaveAction, tableRefresh } from 'js/utils/fmeaViewCommonUtils';
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
@@ -34,20 +30,12 @@ const editAction = async (data, ctx) => {
 
     // set item, revs
     const fmea = ctx[constants.FMEA_SELECT];
-    await lgepObjectUtils.setProperties(
-      fmea,
-      [prop.OBJECT_NAME],
-      [changeNameValue]
-    );
+    await lgepObjectUtils.setProperties(fmea, [prop.OBJECT_NAME], [changeNameValue]);
 
     await lgepObjectUtils.getProperties([fmea], [prop.REVISION_LIST]);
     for (const revUid of fmea.props[prop.REVISION_LIST].dbValues) {
       const revision = await lgepObjectUtils.getObject(revUid);
-      await lgepObjectUtils.setProperties(
-        revision,
-        [prop.OBJECT_NAME],
-        [changeNameValue]
-      );
+      await lgepObjectUtils.setProperties(revision, [prop.OBJECT_NAME], [changeNameValue]);
     }
 
     afterSaveAction(data);

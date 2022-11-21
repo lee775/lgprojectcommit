@@ -1,32 +1,32 @@
 <aw-popup2>
-    <style>
-        #bottomMargin{
-            margin-bottom: 20px;
-        }
-    </style>
-    <aw-panel-body id="dgnPageEditData">
-        <aw-flex-column>
-            <aw-flex-row>
-                <aw-flex-column width="fill">
-                    <aw-listbox prop="data.contentType" list="data.contentTypeValues.dbValue"></aw-listbox>
-                </aw-flex-column>
-                <aw-flex-column width="5f"></aw-flex-column>
-                <aw-flex-column width="fill">
-                    <aw-listbox prop="data.contentDetailType" list="data.contentDetailTypeValues.dbValue"></aw-listbox>
-                </aw-flex-column>
-            </aw-flex-row>
-            <aw-textbox prop="data.objName"></aw-textbox>
-            <aw-textbox prop="data.parts"></aw-textbox>
-            <aw-textbox prop="data.keyword" id="bottomMargin"></aw-textbox>
-            <body>
-                <div>
-                    <textarea id="dgnPageEditSummernote"></textarea>
-                </div>
-            </body>
+  <style>
+    #bottomMargin {
+      margin-bottom: 20px;
+    }
+  </style>
+  <aw-panel-body id="dgnPageEditData">
+    <aw-flex-column>
+      <aw-flex-row>
+        <aw-flex-column width="fill">
+          <aw-listbox prop="data.contentType" list="data.contentTypeValues.dbValue"></aw-listbox>
         </aw-flex-column>
-    </aw-panel-body>
-    <aw-panel-footer>
-        <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
-        <aw-button action="editDgnPageBat" size="auto">{{i18n.edit}}</aw-button>
-    </aw-panel-footer>
+        <aw-flex-column width="5f"></aw-flex-column>
+        <aw-flex-column width="fill">
+          <aw-listbox prop="data.contentDetailType" list="data.contentDetailTypeValues.dbValue"></aw-listbox>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-textbox prop="data.objName"></aw-textbox>
+      <aw-textbox prop="data.parts"></aw-textbox>
+      <aw-textbox prop="data.keyword" id="bottomMargin"></aw-textbox>
+      <body>
+        <div>
+          <textarea id="dgnPageEditSummernote"></textarea>
+        </div>
+      </body>
+    </aw-flex-column>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+    <aw-button action="editDgnPageBat" size="auto">{{i18n.edit}}</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

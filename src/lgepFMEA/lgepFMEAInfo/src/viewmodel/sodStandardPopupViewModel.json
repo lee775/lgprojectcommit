@@ -1,12 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "imports": [
-    "css/sodPopupView.css",
-    "js/aw-popup2.directive",
-    "js/aw-panel-body.directive",
-    "js/aw-tab-set.directive",
-    "js/exist-when.directive"
-  ],
+  "imports": ["css/sodPopupView.css", "js/aw-popup2.directive", "js/aw-panel-body.directive", "js/aw-tab-set.directive", "js/exist-when.directive"],
   "data": {
     "tabModels": [
       {

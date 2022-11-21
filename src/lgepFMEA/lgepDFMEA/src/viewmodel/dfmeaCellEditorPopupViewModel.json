@@ -9,8 +9,7 @@
     "js/aw-flex-row.directive",
     "js/aw-panel-section.directive"
   ],
-  "data": {
-  },
+  "data": {},
   "actions": {
     "save": {
       "actionType": "JSFunction",

@@ -1,0 +1,44 @@
+<style>
+  #scrollCtrl .tui-grid-rside-area .tui-grid-header-area {
+    position: fixed;
+    z-index: 1;
+    width: 94%;
+  }
+  #scrollCtrl .tui-grid-body-container {
+    margin-top: 40px;
+  }
+
+  .tui-grid-cell {
+    position: relative;
+    background-color: #ffffff;
+    border-color: #000000;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 0px;
+    border-bottom-width: 1px;
+    color: #333;
+  }
+
+  .tui-grid-cell-content {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+</style>
+
+<aw-flex-column width="fill">
+  <div id="scrollCtrl" style="white-space: nowrap; overflow: auto" onscroll="scrollCtrl()">
+    <div id="checkToast1"></div>
+  </div>
+</aw-flex-column>
+
+<script>
+  function scrollCtrl() {
+    let scale = document.querySelector('#checkToast1');
+    scale = scale.style.zoom;
+    scale = scale == '' ? 1 : scale;
+
+    var div = document.getElementById('scrollCtrl');
+    let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
+    headerLayout.style.marginLeft = '-' + div.scrollLeft / scale + 'px';
+  }
+</script>

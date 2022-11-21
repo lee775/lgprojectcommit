@@ -1,0 +1,741 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-command-panel.directive",
+    "js/aw-datetime.directive",
+    "js/aw-file-upload.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-icon-button.directive",
+    "js/aw-include.directive",
+    "js/aw-label.directive",
+    "js/aw-link.directive",
+    "js/aw-list.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-separator.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-tab-set.directive",
+    "js/aw-textarea.directive",
+    "css/minutesMainCss.css"
+  ],
+  "actions": {
+    "loadMinutes": {
+      "actionType": "JSFunction",
+      "method": "loadMinutes",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "minutes": "{{function:sortAction}}",
+        "minutesLength": "minutesLength"
+      },
+      "deps": "js/minutesService"
+    },
+    "failureLoad": {
+      "actionType": "JSFunction",
+      "method": "failureLoad",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "initialize",
+      "deps": "js/minutesService"
+    },
+    "panelReload": {
+      "actionType": "JSFunction",
+      "method": "panelReload",
+      "deps": "js/minutesService"
+    },
+    "panelReloadBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "panelReload"
+        },
+        {
+          "action": "openMinutes"
+        }
+      ]
+    },
+    "highlightTuiGrid": {
+      "actionType": "JSFunction",
+      "method": "highlightTuiGrid",
+      "deps": "js/minutesService"
+    },
+    "openCreateMinutes": {
+      "actionType": "JSFunction",
+      "method": "openCreateMinutes",
+      "deps": "js/minutesService"
+    },
+    "openCreateActionItem": {
+      "actionType": "JSFunction",
+      "method": "openCreateActionItem",
+      "deps": "js/minutesService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "goUserDetail": {
+      "actionType": "JSFunction",
+      "method": "goUserDetail",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "createproceed": {
+      "actionType": "JSFunction",
+      "method": "createproceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "saveMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "saveMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "cancelMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "cancelMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "filesView": {
+      "actionType": "JSFunction",
+      "method": "filesView",
+      "deps": "js/minutesService"
+    },
+    "editFileView": {
+      "actionType": "JSFunction",
+      "method": "editFileView",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "backMinutes": {
+      "actionType": "JSFunction",
+      "method": "backMinutes",
+      "deps": "js/minutesService"
+    },
+    "openMinutesBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "closePopupWindow"
+        },
+        {
+          "action": "openCreateMinutes"
+        }
+      ]
+    },
+    "createProceedBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "createproceed"
+        },
+        {
+          "action": "backMinutes"
+        }
+      ]
+    },
+    "deleteProceed": {
+      "actionType": "JSFunction",
+      "method": "deleteProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "editProceed": {
+      "actionType": "JSFunction",
+      "method": "editProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "loadMinutesDetails": {
+      "actionType": "JSFunction",
+      "method": "loadMinutesDetails",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "changePanelStatus": {
+      "actionType": "JSFunction",
+      "method": "changePanelStatus",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "fileUpload": {
+      "actionType": "JSFunction",
+      "method": "fileUpload",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "fileView": {
+      "actionType": "JSFunction",
+      "method": "fileView",
+      "deps": "js/minutesService"
+    },
+    "saveProceed": {
+      "actionType": "JSFunction",
+      "method": "saveProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "cancelProceed": {
+      "actionType": "JSFunction",
+      "method": "cancelProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "exportProceed": {
+      "actionType": "JSFunction",
+      "method": "exportProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "updateFormData": {
+      "actionType": "JSFunction",
+      "method": "updateFormData",
+      "inputData": {
+        "fileData": {
+          "key": "name",
+          "value": "{{data.fileName}}"
+        },
+        "data": "{{data}}"
+      },
+      "deps": "js/declUtils"
+    },
+    "uploadFiles": {
+      "actionType": "JSFunction",
+      "method": "uploadFileToDataset",
+      "inputData": {
+        "fileData": "{{data.formData}}"
+      },
+      "outputData": {
+        "dataset": ""
+      },
+      "deps": "js/minutesService"
+    },
+    "saveMinutesBatch": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "fileUpload"
+        },
+        {
+          "action": "saveMinutesMain"
+        }
+      ]
+    },
+    "panelReloadBatch": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "changePanelStatus"
+        },
+        {
+          "action": "panelReload"
+        }
+      ]
+    },
+    "editMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "editMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "deleteMinutesMain": {
+      "actionType": "JSFunction",
+      "method": "deleteMinutesMain",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "resetDetails": {
+      "actionType": "JSFunction",
+      "method": "resetDetails",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "failureAdd": {
+      "actionType": "JSFunction",
+      "method": "failureAddPopupAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "failureDelete": {
+      "actionType": "JSFunction",
+      "method": "failureDeleteAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "deleteFailureBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "failureDelete"
+        },
+        {
+          "action": "failureLoad"
+        }
+      ]
+    },
+    "datasetLinkAction": {
+      "actionType": "JSFunction",
+      "method": "datasetLinkAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "enableAutomaticMultiSelection": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "failureList.multiSelectModeAction",
+            "eventData": {
+              "multiSelect": true
+            }
+          }
+        ]
+      }
+    },
+    "datasetLinkEvent": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "datasetLinkEvent"
+          }
+        ]
+      }
+    },
+    "deleteActionItem": {
+      "actionType": "JSFunction",
+      "method": "deleteActionItem",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/createActionItemService"
+    }
+  },
+  "data": {
+    "tabDetails": [
+      {
+        "name": "{{i18n.detail}}",
+        "tabKey": "detailsPage"
+      },
+      {
+        "name": "{{i18n.failureList}}",
+        "tabKey": "referencePage"
+      },
+      {
+        "name": "액션 아이템",
+        "tabKey": "actionItemPage"
+      }
+    ],
+    "datasetLink": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "minutesPageSize": 40,
+    "object_name": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_date": {
+      "displayName": "{{i18n.date}}",
+      "type": "DATETIME",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_meeting_place": {
+      "displayName": "{{i18n.place}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_participants": {
+      "displayName": "{{i18n.participants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 3
+    },
+    "l2_meeting_details": {
+      "displayName": "{{i18n.meetingDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 10
+    },
+    "l2_meeting_agenda": {
+      "displayName": "{{i18n.meetingAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_related_schedule": {
+      "displayName": "{{i18n.relatedSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 5
+    },
+    "exportproceed": {
+      "action": "exportProceed",
+      "iconName": "cmdDownload"
+    },
+    "deleteproceed": {
+      "action": "deleteMinutesMain",
+      "iconName": "cmdDelete"
+    },
+    "editProceed": {
+      "action": "editMinutesMain",
+      "iconName": "cmdEditSearch"
+    },
+    "saveProceed": {
+      "action": "saveMinutesMain",
+      "iconName": "cmdSave"
+    },
+    "cancelProceed": {
+      "action": "cancelMinutesMain",
+      "iconName": "cmdCancelEdit"
+    },
+    "createproceed": {
+      "action": "openCreateMinutes",
+      "iconName": "cmdAdd"
+    },
+    "failureAdd": {
+      "action": "failureAdd",
+      "iconName": "cmdAddPresentedProperty"
+    },
+    "failureDelete": {
+      "action": "failureDelete",
+      "iconName": "cmdRemoveLevel"
+    },
+    "object_nameLbl": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_dateLbl": {
+      "displayName": "{{i18n.date}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_placeLbl": {
+      "displayName": "{{i18n.place}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriter": {
+      "displayName": "{{i18n.writer}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriterLink": {
+      "displayName": "",
+      "type": "STRING",
+      "isEditable": "false"
+    },
+    "l2_meeting_participantsLbl": {
+      "displayName": "{{i18n.participants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_agendaLbl": {
+      "displayName": "{{i18n.meetingAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedDetails": {
+      "displayName": "{{i18n.detail}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_related_scheduleLbl": {
+      "displayName": "{{i18n.relatedSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "fileDataSet": {
+      "displayName": "{{i18n.detailsFile}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_workerLbl": {
+      "displayName": "담당자 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_expected_dateLbl": {
+      "displayName": "일시 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_commentLbl": {
+      "displayName": "코멘트 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_follow_upLbl": {
+      "displayName": "F/up ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "conditions": {
+    "editMode": {
+      "expression": "data.editMode === true"
+    },
+    "actionEditMode": {
+      "expression": "data.actionEditMode === true"
+    },
+    "showDetailsPage": {
+      "expression": "data.selectedTab.tabKey === 'detailsPage'"
+    },
+    "showReferencePage": {
+      "expression": "data.selectedTab.tabKey === 'referencePage'"
+    },
+    "actionItemPage": {
+      "expression": "data.selectedTab.tabKey === 'actionItemPage'"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "minutesMain.contentLoaded",
+      "action": "loadMinutes"
+    },
+    {
+      "eventId": "minutesListProvider.selectionChangeEvent",
+      "action": "loadMinutesDetails"
+    },
+    {
+      "eventId": "minutesListProvider.selectionChangeEvent",
+      "action": "resetDetails"
+    },
+    {
+      "eventId": "minutesTable.gridSelection",
+      "action": "failureLoad"
+    },
+    {
+      "eventId": "awTab.selected",
+      "condition": "conditions.showReferencePage",
+      "action": "failureLoad"
+    },
+    {
+      "eventId": "awTab.selected",
+      "condition": "conditions.actionItemPage",
+      "action": "loadActionItem"
+    },
+    {
+      "eventId": "minutesMain.contentLoaded",
+      "action": "enableAutomaticMultiSelection"
+    },
+    {
+      "eventId": "failureList.selectionChangeEvent",
+      "action": "highlightTuiGrid"
+    },
+    {
+      "eventId": "awsidenav.openClose",
+      "action": "changePanelStatus"
+    },
+    {
+      "eventId": "toastGrid.selectionChangeEvent",
+      "action": "panelReload"
+    },
+    {
+      "eventId": "datasetLinkEvent",
+      "cacheEventData": true,
+      "action": "datasetLinkAction"
+    },
+    {
+      "eventId": "start.editMode",
+      "action": "editFileView"
+    }
+  ],
+  "dataProviders": {
+    "failureList": {
+      "action": "failureLoad",
+      "response": "{{data.failureResponse}}",
+      "totalFound": "{{data.failureResponse.length}}",
+      "selectionModelMode": "multiple"
+    },
+    "minutesListProvider": {
+      "action": "loadMinutes",
+      "response": "{{data.minutes}}",
+      "totalFound": "{{data.minutesLength}}"
+    }
+  },
+  "columnProviders": {
+    "minutesColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "이름",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "meeting_date",
+          "displayName": "일시",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "item_revision_id",
+          "displayName": "체크리스트의 리비전ID",
+          "minWidth": 60,
+          "width": 150
+        }
+      ]
+    }
+  },
+  "grids": {
+    "minutesTable": {
+      "dataProvider": "minutesListProvider",
+      "columnProvider": "minutesColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "sortAction": {
+      "functionName": "sortAction",
+      "parameters": ["{{data.dataProviders.minutesListProvider.startIndex}}", "{{data.minutesPageSize}}"]
+    }
+  },
+  "lifecycleHooks": {
+    "onMount": "initialize"
+  },
+  "i18n": {
+    "minutesTitle": ["lgepChkMinutesMessages"],
+    "date": ["lgepChkMinutesMessages"],
+    "place": ["lgepChkMinutesMessages"],
+    "participants": ["lgepChkMinutesMessages"],
+    "meetingDetails": ["lgepChkMinutesMessages"],
+    "meetingAgenda": ["lgepChkMinutesMessages"],
+    "relatedSchedule": ["lgepChkMinutesMessages"],
+    "writer": ["lgepChkMinutesMessages"],
+    "detail": ["lgepChkMinutesMessages"],
+    "minutesList": ["lgepChkMinutesMessages"],
+    "minutes": ["lgepChkMinutesMessages"],
+    "failureList": ["lgepChkMinutesMessages"],
+    "noFailure": ["lgepChkMinutesMessages"],
+    "detailsFile": ["lgepChkMinutesMessages"]
+  }
+}

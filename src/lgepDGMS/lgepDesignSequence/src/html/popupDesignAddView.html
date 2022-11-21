@@ -1,108 +1,103 @@
 <aw-popup2>
-    <style>
-        .btnPadding {
-            padding: 15px 35px;
-        }
+  <style>
+    .btnPadding {
+      padding: 15px 35px;
+    }
 
-        .btnSize {
-            padding: 15px 45px;
-        }
+    .btnSize {
+      padding: 15px 45px;
+    }
 
-        .minusMargin {
-            margin-right: -50px;
-        }
+    .minusMargin {
+      margin-right: -50px;
+    }
 
-        .marginTop {
-            margin-top: 30px;
-            margin-left: 25px;
-        }
+    .marginTop {
+      margin-top: 30px;
+      margin-left: 25px;
+    }
 
-        .minusMarginCheck {
-            margin-right: -65px;
-        }
+    .minusMarginCheck {
+      margin-right: -65px;
+    }
 
-        .minusTap {
-            margin-right: -80px;
-        }
+    .minusTap {
+      margin-right: -80px;
+    }
 
-        .btnMar {
-            margin-top: -30px;
-            padding: 0 25px;
-        }
+    .btnMar {
+      margin-top: -30px;
+      padding: 0 25px;
+    }
 
-        .noTopPading {
-            padding-top: 0px;
-        }
+    .noTopPading {
+      padding-top: 0px;
+    }
 
-        .tableMargin {
-            margin-top: 10px;
-        }
+    .tableMargin {
+      margin-top: 10px;
+    }
 
-        .noColor {
-            background: #FFFFFF;
-        }
-    </style>
-    <aw-panel-body>
-        <aw-flex-row height="auto" class="marginTop" id="designStdData">
-            <aw-flex-column width="10" class="minusTap">
-                <aw-flex-row>
-                    <aw-flex-column width="2" class="minusMargin">
-                        <aw-label prop="data.categoriTitleLabel"></aw-label>
-                    </aw-flex-column>
-                    <aw-flex-column width="8">
-                        <aw-textbox prop="data.categoriTitle" aw-enter-key="designStdSearching"></aw-textbox>
-                    </aw-flex-column>
-                </aw-flex-row>
-                <aw-flex-row>
-                    <aw-flex-column width="2" class="minusMargin">
-                        <aw-label prop="data.owningUserLabel"></aw-label>
-                    </aw-flex-column>
-                    <aw-flex-column width="8">
-                        <aw-textbox prop="data.owningUser" aw-enter-key="designStdSearching"></aw-textbox>
-                    </aw-flex-column>
-                </aw-flex-row>
-                <aw-flex-row>
-                    <aw-flex-column width="2" class="minusMarginCheck">
-                        <aw-label prop="data.deviceLabel"></aw-label>
-                    </aw-flex-column>
-                    <aw-flex-column width="8">
-                        <aw-flex-row>
-                            <aw-checkbox class="checkCate" prop="data.common"></aw-checkbox>
-                            <aw-checkbox class="checkCate" prop="data.external"></aw-checkbox>
-                            <aw-checkbox class="checkCate" prop="data.engine"></aw-checkbox>
-                            <aw-checkbox class="checkCate" prop="data.engineApp"></aw-checkbox>
-                            <aw-checkbox class="checkCate" prop="data.TM"></aw-checkbox>
-                            <aw-checkbox class="checkCate" prop="data.combine"></aw-checkbox>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-checkbox class="checkCate" prop="data.hydrauic"></aw-checkbox>
-                            <aw-checkbox class="checkCate" prop="data.electric"></aw-checkbox>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2" justify="center">
-                <aw-button action="designStdSearching" size="auto" class="btnPadding">{{i18n.lookup}}
-                    ></aw-button>
-            </aw-flex-column>
+    .noColor {
+      background: #ffffff;
+    }
+  </style>
+  <aw-panel-body>
+    <aw-flex-row height="auto" class="marginTop" id="designStdData">
+      <aw-flex-column width="10" class="minusTap">
+        <aw-flex-row>
+          <aw-flex-column width="2" class="minusMargin">
+            <aw-label prop="data.categoriTitleLabel"></aw-label>
+          </aw-flex-column>
+          <aw-flex-column width="8">
+            <aw-textbox prop="data.categoriTitle" aw-enter-key="designStdSearching"></aw-textbox>
+          </aw-flex-column>
         </aw-flex-row>
-        <aw-separator></aw-separator>
-        <aw-panel-body class="noTopPading">
-            <aw-flex-row justify="right" class="noColor">
-                <aw-button action="informationBat" size="auto" class="btnMar">{{i18n.information}}
-                </aw-button>
-                <aw-button action="designStdTableReLoad" size="auto" class="btnMar">
-                    {{i18n.unchecking}}</aw-button>
+        <aw-flex-row>
+          <aw-flex-column width="2" class="minusMargin">
+            <aw-label prop="data.owningUserLabel"></aw-label>
+          </aw-flex-column>
+          <aw-flex-column width="8">
+            <aw-textbox prop="data.owningUser" aw-enter-key="designStdSearching"></aw-textbox>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row>
+          <aw-flex-column width="2" class="minusMarginCheck">
+            <aw-label prop="data.deviceLabel"></aw-label>
+          </aw-flex-column>
+          <aw-flex-column width="8">
+            <aw-flex-row>
+              <aw-checkbox class="checkCate" prop="data.common"></aw-checkbox>
+              <aw-checkbox class="checkCate" prop="data.external"></aw-checkbox>
+              <aw-checkbox class="checkCate" prop="data.engine"></aw-checkbox>
+              <aw-checkbox class="checkCate" prop="data.engineApp"></aw-checkbox>
+              <aw-checkbox class="checkCate" prop="data.TM"></aw-checkbox>
+              <aw-checkbox class="checkCate" prop="data.combine"></aw-checkbox>
             </aw-flex-row>
-            <aw-splm-table gridid="designStdTable" show-decorators="true" show-check-box="true" class="tableMargin">
-            </aw-splm-table>
-        </aw-panel-body>
+            <aw-flex-row>
+              <aw-checkbox class="checkCate" prop="data.hydrauic"></aw-checkbox>
+              <aw-checkbox class="checkCate" prop="data.electric"></aw-checkbox>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2" justify="center">
+        <aw-button action="designStdSearching" size="auto" class="btnPadding">{{i18n.lookup}} ></aw-button>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-separator></aw-separator>
+    <aw-panel-body class="noTopPading">
+      <aw-flex-row justify="right" class="noColor">
+        <aw-button action="informationBat" size="auto" class="btnMar">{{i18n.information}} </aw-button>
+        <aw-button action="designStdTableReLoad" size="auto" class="btnMar"> {{i18n.unchecking}}</aw-button>
+      </aw-flex-row>
+      <aw-splm-table gridid="designStdTable" show-decorators="true" show-check-box="true" class="tableMargin"> </aw-splm-table>
     </aw-panel-body>
-        <aw-panel-footer>
-            <aw-flex-row justify="center">
-                <aw-button action="closePopupWindow" size="auto" class="btnSize">{{i18n.close}}
-                </aw-button>
-                <aw-button action="designStdItemCopyBat" size="auto" class="btnSize">{{i18n.add}}</aw-button>
-            </aw-flex-row>
-        </aw-panel-footer>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-flex-row justify="center">
+      <aw-button action="closePopupWindow" size="auto" class="btnSize">{{i18n.close}} </aw-button>
+      <aw-button action="designStdItemCopyBat" size="auto" class="btnSize">{{i18n.add}}</aw-button>
+    </aw-flex-row>
+  </aw-panel-footer>
 </aw-popup2>

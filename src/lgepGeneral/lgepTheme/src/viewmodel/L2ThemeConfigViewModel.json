@@ -25,7 +25,7 @@
       "actionType": "JSFunction",
       "method": "setTextBox",
       "inputData": {
-          "0": "{{data.fontSize}}"
+        "0": "{{data.fontSize}}"
       },
       "deps": "js/L2ThemeConfigService"
     },
@@ -34,7 +34,7 @@
       "method": "onMount",
       "inputData": {
         "fontSize": "{{data.fontSize}}"
-    },
+      },
       "deps": "js/L2ThemeConfigService"
     }
   },
@@ -47,14 +47,8 @@
     "onMount": "onMount"
   },
   "i18n": {
-    "lgepThemeConfig": [
-      "lgepThemeMessages"
-    ],
-    "fontSizeSection": [
-      "lgepThemeMessages"
-    ],
-    "setThemeConfig": [
-      "lgepThemeMessages"
-    ]
+    "lgepThemeConfig": ["lgepThemeMessages"],
+    "fontSizeSection": ["lgepThemeMessages"],
+    "setThemeConfig": ["lgepThemeMessages"]
   }
 }

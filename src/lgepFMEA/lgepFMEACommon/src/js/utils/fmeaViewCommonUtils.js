@@ -24,11 +24,7 @@ export const tableRefresh = (tableId) => {
  * @returns [{aw-list}]
  */
 export const initProductLovs = async () => {
-  const productLovResult = await lgepObjectUtils.getInitialLOVValues(
-    prop.TYPE_FMEA_REVISION,
-    'Create',
-    prop.PRODUCT_CATEGORY
-  );
+  const productLovResult = await lgepObjectUtils.getInitialLOVValues(prop.TYPE_FMEA_REVISION, 'Create', prop.PRODUCT_CATEGORY);
 
   const productValues = productLovResult.lovValues.map((lov) => {
     const {
@@ -116,15 +112,11 @@ export const isTreeTable = () => {
 export const getTableMode = () => {
   const ctx = appCtxService.ctx;
   if (ctx[constants.DFMEA_TABLE_MODE]) {
-    if (
-      ctx[constants.DFMEA_TABLE_MODE] === constants.DFMEA_TABLE_MODE_KEY_TEXT
-    ) {
+    if (ctx[constants.DFMEA_TABLE_MODE] === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
       return constants.DFMEA_TABLE_MODE_KEY_TEXT;
-    } else if (
-      ctx[constants.DFMEA_TABLE_MODE] === constants.DFMEA_TABLE_MODE_KEY_TREE
-    ) {
+    } else if (ctx[constants.DFMEA_TABLE_MODE] === constants.DFMEA_TABLE_MODE_KEY_TREE) {
       return constants.DFMEA_TABLE_MODE_KEY_TREE;
-    }else{
+    } else {
       return constants.DFMEA_TABLE_MODE_KEY_IMAGE;
     }
   } else {

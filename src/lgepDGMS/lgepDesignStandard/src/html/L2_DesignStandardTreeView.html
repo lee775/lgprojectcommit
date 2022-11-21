@@ -1,64 +1,98 @@
 <style>
-    .bye .aw-splm-tableHeaderRow {
-        display: none;
-    }
+  .bye .aw-splm-tableHeaderRow {
+    display: none;
+  }
 
-    .bye .aw-splm-tableMenuButton {
-        display: none;
-    }
+  .bye .aw-splm-tableMenuButton {
+    display: none;
+  }
 
-    ::-webkit-scrollbar {
-        /* display: none; */
-    }
+  .aw-vertical-separator {
+    opacity: 1 !important;
+  }
 
-    .aw-vertical-separator {
-        opacity: 1 !important;
-    }
-
-    #zindexMax > div.aw-command-overflowIcon.ng-scope{
-        display: none;
-    }
-
+  #zindexMax>div.aw-command-overflowIcon.ng-scope {
+    display: none;
+  }
 </style>
 <aw-flex-row class="afx-alt-content-background" id="designStdData">
-    <aw-flex-column>
-        <aw-flex-row height="3.5f" align-content="center">
-            <!-- <aw-flex-column width="2">
+  <aw-flex-column>
+    <aw-flex-row height="3.5f" align-content="center" justify="left">
+      <aw-flex-column width="11" visible-when="!conditions.backArrowStatus">
+        <aw-flex-row>
+          <aw-flex-column width="2" justify="center">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="upTreecmd"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column>
+          <aw-flex-column width="2" justify="center">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="downTreecmd"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column>
+          <!-- <aw-flex-column width="2">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="bookmarkcmd" id="zindexMax"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column> -->
+          <aw-flex-column width="2">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="editTreeFolderAnchor"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column>
+          <!-- <aw-flex-column width="2" exist-when="conditions.folderNameEditMode">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="treeFolderNameSaveAnchor"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column> -->
+          <aw-flex-column width="2">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="pageSearch"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column>
+          <aw-flex-column width="2">
+            <aw-flex-row justify="center">
+              <aw-command-bar anchor="stdBomCopyCmd"></aw-command-bar>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-flex-row>
+      </aw-flex-column>
+      <!-- <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
                 <aw-flex-row justify="center">
                     <aw-command-bar anchor="bookmarkcmd"></aw-command-bar>
                 </aw-flex-row>
             </aw-flex-column> -->
-            <aw-flex-column width="11" visible-when="!conditions.backArrowStatus">
-                <aw-flex-row>
-                    <aw-flex-column width="2">
-                        <aw-flex-row justify="center">
-                            <aw-command-bar anchor="bookmarkcmd" id="zindexMax"></aw-command-bar>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                    <aw-flex-column width="2">
-                        <aw-flex-row justify="center">
-                            <aw-command-bar anchor="pageSearch"></aw-command-bar>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="bookmarkcmd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="pageSearch"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
-                <aw-flex-row justify="center">
-                    <aw-command-bar anchor="forwardArrowcmd"></aw-command-bar>
-                </aw-flex-row>
-            </aw-flex-column>
-            
-            <!-- <aw-flex-column width="7" visible-when="conditions.backArrowStatus">
+      <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="upTreecmd"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="downTreecmd"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="editTreeFolderAnchor"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="forwardArrowcmd"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="stdBomCopyCmd"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <aw-flex-column width="2" exist-when="conditions.backArrowStatus">
+        <aw-flex-row justify="center">
+          <aw-command-bar anchor="pageSearch"></aw-command-bar>
+        </aw-flex-row>
+      </aw-flex-column>
+      <!-- <aw-flex-column width="7" visible-when="conditions.backArrowStatus">
                 <aw-textbox class="txtTop" prop="data.searchingName" aw-enter-key="searching"></aw-textbox>
             </aw-flex-column>
             <aw-flex-column visible-when="!conditions.backArrowStatus">
@@ -67,20 +101,22 @@
             <aw-flex-column visible-when="conditions.backArrowStatus">
                 <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
             </aw-flex-column> -->
-        </aw-flex-row>
-        <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background" justify="center" visible-when="conditions.pageSearchMode">
-            <aw-flex-row>
-                <aw-flex-column width="11">
-                    <aw-textbox id="pageAllSearchId" class="txtTop" prop="data.searchingName" aw-enter-key="pageAllSearchingPopupBat"></aw-textbox>
-                </aw-flex-column>
-                <aw-flex-column width="1">
-                    <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
-                </aw-flex-column>
-            </aw-flex-row>
-        </aw-flex-row>
-        <aw-flex-row color="white">
-            <aw-splm-table gridid="designStandardTreeTable" use-tree="true" show-decorators="true" class="bye">
-            </aw-splm-table>
-        </aw-flex-row>
-    </aw-flex-column>
+    </aw-flex-row>
+    <aw-flex-row height="3.5f" align-content="center" class="afx-alt-content-background" justify="center"
+      visible-when="conditions.pageSearchMode">
+      <aw-flex-row>
+        <aw-flex-column width="11">
+          <aw-textbox id="pageAllSearchId" class="txtTop" prop="data.searchingName"
+            aw-enter-key="pageAllSearchingPopupBat"></aw-textbox>
+        </aw-flex-column>
+        <aw-flex-column width="1">
+          <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-flex-row>
+    <aw-flex-row color="white">
+      <aw-splm-table gridid="designStandardTreeTable" use-tree="true" show-decorators="true" class="bye">
+      </aw-splm-table>
+    </aw-flex-row>
+  </aw-flex-column>
 </aw-flex-row>

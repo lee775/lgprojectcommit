@@ -1,100 +1,96 @@
 {
-    "L2_ChkMainLocation": {
-        "data": {
-            "browserTitle": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkMainLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkMainLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkMainLocationHeaderTitle"
-            }
-        },
-        "type": "location"
+  "L2_ChkMainLocation": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkMainLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkMainLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkMainLocationHeaderTitle"
+      }
     },
-    "lgepChkMainSubLocation": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "priority": 0,
-            "label": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkMainSubLocationTitle"
-            },
-            "clientScopeURI": "Awp0SearchResults",
-            "nameToken": "L2_ChkMainSubLocation",
-            "context": {
-                "search": {
-                    "chartTitle": {
-                        "source": "/i18n/L2_ChkMainMessages",
-                        "key": "L2_ChkMainSubLocationChartTitle"
-                    }
-                }
-            }
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "params": {
-            "filter": null
-        },
-        "parent": "L2_ChkMainLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "view": "L2_ChecklistMain",
-        "type": "subLocation",
-        "url": "/checklistMain"
+    "type": "location"
+  },
+  "lgepChkMainSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkMainSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "L2_ChkMainSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/L2_ChkMainMessages",
+            "key": "L2_ChkMainSubLocationChartTitle"
+          }
+        }
+      }
     },
-    "L2_ChkOpenLocation": {
-        "data": {
-            "browserTitle": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkOpenLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkOpenLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkOpenLocationHeaderTitle"
-            }
-        },
-        "type": "location"
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
     },
-    "lgepChkOpenSubLocation": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "priority": 0,
-            "label": {
-                "source": "/i18n/L2_ChkMainMessages",
-                "key": "L2_ChkOpenSubLocationTitle"
-            },
-            "clientScopeURI": "Awp0SearchResults",
-            "nameToken": "L2_ChkOpenSubLocation",
-            "context": {
-                "search": {
-                    "chartTitle": {
-                        "source": "/i18n/L2_ChkMainMessages",
-                        "key": "L2_ChkOpenSubLocationChartTitle"
-                    }
-                }
-            }
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "params": {
-            "filter": null
-        },
-        "parent": "L2_ChkOpenLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "view": "L2_ChecklistOpen",
-        "type": "subLocation",
-        "url": "/checklistOpen"
-    }
+    "parent": "L2_ChkMainLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "view": "L2_ChecklistMain",
+    "type": "subLocation",
+    "url": "/checklistMain"
+  },
+  "L2_ChkOpenLocation": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkOpenLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkOpenLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkOpenLocationHeaderTitle"
+      }
+    },
+    "type": "location"
+  },
+  "lgepChkOpenSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/L2_ChkMainMessages",
+        "key": "L2_ChkOpenSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "L2_ChkOpenSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/L2_ChkMainMessages",
+            "key": "L2_ChkOpenSubLocationChartTitle"
+          }
+        }
+      }
+    },
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
+    },
+    "parent": "L2_ChkOpenLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "view": "L2_ChecklistOpen",
+    "type": "subLocation",
+    "url": "/checklistOpen"
+  }
 }

@@ -1,790 +1,752 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-label.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-splitter.directive",
-        "js/aw-command-panel-section.directive",
-        "js/aw-include.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-separator.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-command-bar.directive",
-        "js/aw-list.directive",
-        "js/aw-default-cell.directive",
-        "js/aw-button.directive",
-        "js/exist-when.directive",
-        "js/visible-when.directive",
-        "js/aw-chip-list.directive",
-        "js/aw-search-box.directive",
-        "css/askExpertView.css"
-    ],
-    "data": {
-        "linkRepeat": {
-            "type": "STRING",
-            "dbValue": []
-        },
-        "relationItem": {
-            "displayName": "{{i18n.relationItem}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "",
-            "labelPosition": "PROPERTY_LABEL_AT_TOP"
-        },
-        "answerContent":{
-            "displayName": "{{i18n.answerContent}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "",
-            "labelPosition": "PROPERTY_LABEL_AT_TOP"
-        },
-        "expertName": {
-            "displayName": "{{i18n.expert}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "expertField": {
-            "displayName": "{{i18n.expertDiv}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "qaID": {
-            "displayName": "ID",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "qaPoint": {
-            "displayName": "{{i18n.point}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "qaTitle": {
-            "displayName": "{{i18n.title}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "qaContent": {
-            "displayName": "{{i18n.content}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "qaWriter": {
-            "displayName": "{{i18n.user}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "qaWriteDate": {
-            "displayName": "{{i18n.createDate}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "buttonCommand": {
-            "action": "iconTest",
-            "iconName": "ThumbsUp"
-        },
-        "plusButton": {
-            "action": "answerChange",
-            "iconName": "Add"
-        },
-        "firstPage": {
-            "displayName": "",
-            "uiValue": "",
-            "type": "STRING",
-            "isRequired": "false"
-        },
-        "lastPage": {
-            "displayName": "",
-            "uiValue": "",
-            "type": "STRING",
-            "isRequired": "false"
-        },
-        "beforePage": {
-            "displayName": "",
-            "uiValue": "",
-            "type": "STRING",
-            "isRequired": "false"
-        },
-        "afterPage": {
-            "displayName": "",
-            "uiValue": "",
-            "type": "STRING",
-            "isRequired": "false"
-        },
-        "searchBox": {
-            "displayName": "",
-            "type": "STRING"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-label.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-splitter.directive",
+    "js/aw-command-panel-section.directive",
+    "js/aw-include.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-separator.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-list.directive",
+    "js/aw-default-cell.directive",
+    "js/aw-button.directive",
+    "js/exist-when.directive",
+    "js/visible-when.directive",
+    "js/aw-chip-list.directive",
+    "js/aw-search-box.directive",
+    "css/askExpertView.css"
+  ],
+  "data": {
+    "linkRepeat": {
+      "type": "STRING",
+      "dbValue": []
     },
-    "actions": {
-        "setAnswerListStyle": {
-            "actionType": "JSFunction",
-            "method": "setAnswerListStyle",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "setAnswerListBgStyle": {
-            "actionType": "JSFunction",
-            "method": "setAnswerListBgStyle",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "qnaLinkEventAction": {
-            "actionType": "JSFunction",
-            "method": "qnaLinkEventAction",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "qnaLinkAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "qnaLinkAction"
-                    }
-                ]
-            }
-        },
-        "getDataProvider": {
-            "actionType": "dataProvider",
-            "methods": [
-                "qaAnswerList"
-            ]
-        },
-        "adopt":{
-            "actionType": "JSFunction",
-            "method": "adopt",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data}}",
-                "value": "{{data.dataProviders.qaAnswerList.selectedObjects[0]}}",
-                "valueQuestion": "{{data.dataProviders.qaListDataProvider.selectedObjects[0]}}"
-            },
-            "outputData": {
-                "adoptState": "adoptState"
-            }
-        },
-        "loadQaList":{
-            "actionType":"JSFunction",
-            "method":"loadQaList",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data":"{{data}}",
-                "ctx":"{{ctx}}"
-            },
-            "outputData": {
-                "searchResponse":"{{function:filterList}}",
-                "totalFound":"totalFound",
-                "window":"window",
-                "expert":"expert"
-            }
-        },
-        "loadAnswerList": {
-            "actionType": "JSFunction",
-            "method": "loadAnswerList",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "listResponse": "{{function:answerList}}",
-                "totalFound": "totalFound",
-                "adoptState": "adoptState"
-            }
-        },
-        "questionAdd":{
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "PopupQuestionAdd",
-                    "locals": {
-                        "caption":"{{i18n.addQuestion}}",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "height": 950,
-                        "width": 1300
-                    }
-                }
-            },
-            "events": {
-                "success":[
-                    {
-                        "name": "addPopupOpen.complete"
-                    }
-                ]
-            },
-            "outputData": {
-                "popupId": "id"
-            },           
-            "deps": "js/popupService"
-        },
-        "answerAdd":{
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "PopupAnswerAdd",
-                    "locals": {
-                        "caption": "{{data.i18n.addAnswer}}",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "height": 700,
-                        "width": 1300
-                    }
-                }
-            },
-            "events": {
-                "success":[
-                    {
-                        "name": "answerAdd.complete"
-                    }
-                ]
-            },
-            "outputData": {
-                "popupId": "id"
-            },
-            "deps": "js/popupService"
-        },
-        "editPopup":{
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "PopupEditQna",
-                    "locals": {
-                        "caption": "{{data.i18n.editing}}",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "height": 900,
-                        "width": 1100
-                    }
-                }
-            },
-            "outputData": {
-                "popupId": "id"
-            },
-            "events": {
-                "success":[
-                    {
-                        "name": "editPopupOpen.complete"
-                    }
-                ]
-            },
-            "deps": "js/popupService"
-        },
-        "showQuestionProp":{
-            "actionType": "JSFunction",
-            "method":"showQuestionProp",
-            "deps":"js/askExpertService",
-            "inputData": {
-                "data":"{{data}}"
-            }
-        },
-        "askExpertDelete":{
-            "actionType": "JSFunction",
-            "method": "askExpertDelete",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data.dataProviders}}",
-                "list": "{{data.listResponse}}",
-                "ctx":"{{ctx}}",
-                "id":"{{data.qaID}}",
-                "title":"{{data.qaTitle}}",
-                "writer":"{{data.qaWriter}}",
-                "writerDate":"{{data.qaWriteDate}}",
-                "point":"{{data.qaPoint}}",
-                "expertField": "{{data.expertField}}",
-                "expertName": "{{data.expertName}}"
-            }
-        },
-        "likeAdd":{
-            "actionType": "JSFunction",
-            "method": "likeAdd",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx":"{{ctx}}"
-            }
-            
-        },
-        "iconTest":{
-            "actionType":"Event",
-            "method":"Event",
-            "inputData":
-            {
-                "events":
-                [
-                    {
-                        "name":"icontest.click"
-                    }
-                ]
-            }
-        },
-        "loadSelection":{
-            "actionType": "JSFunction",
-            "method": "loadSelection",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-        "checkUser":{
-            "actionType": "JSFunction",
-            "method": "checkUser",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data.dataProviders}}",
-                "ctx":"{{ctx}}"
-            }
-        },
-        "checkExpert":{
-            "actionType": "JSFunction",
-            "method": "checkExpert",
-            "deps": "js/askExpertService",
-            "inputData": {
-                "data": "{{data.dataProviders}}",
-                "ctx":"{{ctx}}"
-            }
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "checkURLData":{
-            "actionType": "JSFunction",
-            "method": "checkURLData",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}",
-                "providerName":"qaListDataProvider"
-            }
-        },
-        "resetCount":{
-            "actionType": "JSFunction",
-            "method": "resetCount",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-        "setSplitterAction":{
-            "actionType": "JSFunction",
-            "method": "setSplitterAction",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-         "initSummer":{
-            "actionType": "JSFunction",
-            "method": "initSummer",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-        "updateList":{
-            "actionType":"batchJob",
-            "steps": [
-                {
-                    "action": "getDataProvider"
-                },
-                {
-                    "action": "showQuestionProp"
-                }
-            ]
-        },
-        "answerAddNow":{
-            "actionType": "JSFunction",
-            "method": "answerAddNow",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-        "answerChange":{
-            "actionType": "JSFunction",
-            "method": "answerChange",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            }
-        },
-        "answerAddCancel":{
-            "actionType": "JSFunction",
-            "method": "answerAddCancel",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-        "editCancel":{
-            "actionType": "JSFunction",
-            "method": "editCancel",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx":"{{ctx}}"
-            }
-        },
-        "answerEdit":{
-            "actionType": "JSFunction",
-            "method":"answerEdit",
-            "deps": "js/questionAnswer",
-            "inputData": {
-                "data":"{{data}}",
-                "ctx":"{{ctx}}"
-            }
-        },
-        "firstPageAction": {
-            "actionType": "JSFunction",
-            "method": "firstPageAction",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "lastPageAction": {
-            "actionType": "JSFunction",
-            "method": "lastPageAction",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "pagingBeforeAction": {
-            "actionType": "JSFunction",
-            "method": "pagingBeforeAction",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "pagingAfterAction": {
-            "actionType": "JSFunction",
-            "method": "pagingAfterAction",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "setPageNumber":{
-            "actionType": "JSFunction",
-            "method": "setPageNumber",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "pageResponse": "pageResponse",
-                "pageLength": "pageLength"
-            },
-            "deps": "js/askExpertService"
-        },
-        "clickedPageAction":{
-            "actionType": "JSFunction",
-            "method": "clickedPageAction",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}",
-                "chip": "{{chip}}"
-            },
-            "deps": "js/askExpertService"
-        },
-        "questionSearch":{
-            "actionType": "JSFunction",
-            "method": "questionSearch",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/askExpertService"
-        }
-        
+    "relationItem": {
+      "displayName": "{{i18n.relationItem}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_TOP"
     },
-    "dataProviders": {
-        "qaListDataProvider": {
-            "action": "loadQaList",
-            "response":"{{data.searchResponse}}"
-        },
-        "qaAnswerList": {
-            "action": "loadAnswerList",
-            "response": "{{data.listResponse}}",
-            "totalFound": "{{data.totalFound}}"
-        },
-        "pageChipDataProvider": {
-            "type": "Static",
-            "action": "setPageNumber",
-            "response": "{{data.pageResponse}}",
-            "totalFound": "{{data.pageLength}}"
-        }
+    "answerContent": {
+      "displayName": "{{i18n.answerContent}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_TOP"
     },
-    "columnProviders": {
-        "qaListColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "object_name",
-                    "displayName": "{{i18n.title}}",
-                    "minWidth": 80,
-                    "width": 300,
-                    "enableColumnMenu": false
-                },
-                {
-                    "name": "creation_date",
-                    "displayName": "{{i18n.createDate}}",
-                    "minWidth": 60,
-                    "width": 150,
-                    "enableColumnMenu": false
-                },
-                {
-                    "name": "owning_user",
-                    "displayName": "{{i18n.user}}",
-                    "minWidth": 60,
-                    "width": 100,
-                    "enableColumnMenu": false
-                }
-            ]
-        }
+    "expertName": {
+      "displayName": "{{i18n.expert}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "grids": {
-        "qaList": {
-            "dataProvider": "qaListDataProvider",
-            "columnProvider": "qaListColumnProvider",
-            "addIconColumn": false,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": false
-            }
-        }
+    "expertField": {
+      "displayName": "{{i18n.expertDiv}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "functions": {
-        "answerList": {
-            "functionName": "answerList",
-            "parameters": [
-                "{{data}}"
-            ]
-        },
-        "filterList":{
-            "functionName": "filterList",
-            "parameters": [
-                "{{data}}"
-            ]
-        }
+    "qaID": {
+      "displayName": "ID",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "i18n": {
-        "helloText": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "relationItem": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "property": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "answer": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "title":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "createDate":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "addQuestion":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "addAnswer":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "editing":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "content":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "point":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "user":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "expert":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "expertDiv":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "cantAddAnswer": ["lgepKnowldegeManageMessages"],
-        "noPost": [ "lgepKnowldegeManageMessages" ],
-        "cantEditQuestion": [ "lgepKnowldegeManageMessages" ],
-        "cantDeleteQuestion": [ "lgepKnowldegeManageMessages" ],
-        "answerContent":[ "lgepKnowldegeManageMessages" ],
-        "cancle":[ "lgepKnowldegeManageMessages" ],
-        "add":[ "lgepKnowldegeManageMessages" ]
+    "qaPoint": {
+      "displayName": "{{i18n.point}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "onEvent": [
-        {
-            "eventId": "qnaLinkAction",
-            "cacheEventData": true,
-            "action": "qnaLinkEventAction"
-        },
-        {
-            "eventId":"question.add",
-            "action":"questionAdd"
-        },
-        {
-            "eventId": "qaList.edit",
-            "condition": "data.dataProviders.qaListDataProvider.selectedObjects.length > 0",
-            "action": "checkUser"
-        },
-        {
-            "eventId":"qaListDataProvider.selectionChangeEvent",
-            "condition": "data.dataProviders.qaListDataProvider.selectedObjects.length > 0",
-            "action":"updateList"
-        },
-        {
-            "eventId": "qaList.del",
-            "action": "askExpertDelete"
-        },
-        {
-            "eventId":"qaAnswerList.listUpdated",
-            "action":"updateList"
-        },
-        {
-            "eventId": "qaAnswerList.selectionChangeEvent",
-            "action": "loadSelection"
-        },
-        {
-            "eventId": "icontest.click",
-            "action": "likeAdd"
-        },
-        {
-            "eventId": "editPopup.open",
-            "action":  "editPopup"
-        },
-        {
-            "eventId": "answer.add",
-            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] != 'Y'",
-            "action": "answerAdd"
-        },
-        {
-            "eventId": "answer.add",
-            "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] === 'Y'",
-            "message": "cantAddAnswer"
-        },
-        {
-            "eventId": "awPopup.close",
-            "action":"closePopupWindow"
-        },
-        {
-            "eventId": "qaListDataProvider.modelObjectsUpdated",
-            "action": "checkURLData"
-        },
-        {
-            "eventId": "$locationChangeStart",
-            "action": "resetCount"
-        },
-        {
-            "eventId": "aw-splitter-update",
-            "action": "setSplitterAction"
-        },
-        {
-            "eventId": "initSummernote",
-            "action":"initSummer"
-        },
-        {
-            "eventId": "initSummernote",
-            "action":"setAnswerListStyle"
-        },
-        {
-            "eventId": "ThemeChangeEvent",
-            "action":"setAnswerListBgStyle"
-        }
-    ],
-    "conditions": {
-        "checkAnswerAdd":{
-            "expression": "data.answerAdd === true"
-        }
+    "qaTitle": {
+      "displayName": "{{i18n.title}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "messages": {
-        "cantAddAnswer": {
-            "messageType": "ERROR",
-            "messageText": "{{i18n.cantAddAnswer}}"
-        },
-        "cantEditQuestion": {
-            "messageType": "ERROR",
-            "messageText": "{{i18n.cantEditQuestion}}"
-        },
-        "cantDeleteQuestion": {
-            "messageType": "ERROR",
-            "messageText": "{{i18n.cantDeleteQuestion}}"
-        }
+    "qaContent": {
+      "displayName": "{{i18n.content}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "qaWriter": {
+      "displayName": "{{i18n.user}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "qaWriteDate": {
+      "displayName": "{{i18n.createDate}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "buttonCommand": {
+      "action": "iconTest",
+      "iconName": "ThumbsUp"
+    },
+    "plusButton": {
+      "action": "answerChange",
+      "iconName": "Add"
+    },
+    "firstPage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "lastPage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "beforePage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "afterPage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "searchBox": {
+      "displayName": "",
+      "type": "STRING"
     }
+  },
+  "actions": {
+    "setAnswerListStyle": {
+      "actionType": "JSFunction",
+      "method": "setAnswerListStyle",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "setAnswerListBgStyle": {
+      "actionType": "JSFunction",
+      "method": "setAnswerListBgStyle",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "qnaLinkEventAction": {
+      "actionType": "JSFunction",
+      "method": "qnaLinkEventAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "qnaLinkAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "qnaLinkAction"
+          }
+        ]
+      }
+    },
+    "getDataProvider": {
+      "actionType": "dataProvider",
+      "methods": ["qaAnswerList"]
+    },
+    "adopt": {
+      "actionType": "JSFunction",
+      "method": "adopt",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data}}",
+        "value": "{{data.dataProviders.qaAnswerList.selectedObjects[0]}}",
+        "valueQuestion": "{{data.dataProviders.qaListDataProvider.selectedObjects[0]}}"
+      },
+      "outputData": {
+        "adoptState": "adoptState"
+      }
+    },
+    "loadQaList": {
+      "actionType": "JSFunction",
+      "method": "loadQaList",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "searchResponse": "{{function:filterList}}",
+        "totalFound": "totalFound",
+        "window": "window",
+        "expert": "expert"
+      }
+    },
+    "loadAnswerList": {
+      "actionType": "JSFunction",
+      "method": "loadAnswerList",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "listResponse": "{{function:answerList}}",
+        "totalFound": "totalFound",
+        "adoptState": "adoptState"
+      }
+    },
+    "questionAdd": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupQuestionAdd",
+          "locals": {
+            "caption": "{{i18n.addQuestion}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 950,
+            "width": 1300
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "addPopupOpen.complete"
+          }
+        ]
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "deps": "js/popupService"
+    },
+    "answerAdd": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupAnswerAdd",
+          "locals": {
+            "caption": "{{data.i18n.addAnswer}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 700,
+            "width": 1300
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "answerAdd.complete"
+          }
+        ]
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "deps": "js/popupService"
+    },
+    "editPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupEditQna",
+          "locals": {
+            "caption": "{{data.i18n.editing}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 900,
+            "width": 1100
+          }
+        }
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "events": {
+        "success": [
+          {
+            "name": "editPopupOpen.complete"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "showQuestionProp": {
+      "actionType": "JSFunction",
+      "method": "showQuestionProp",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "askExpertDelete": {
+      "actionType": "JSFunction",
+      "method": "askExpertDelete",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data.dataProviders}}",
+        "list": "{{data.listResponse}}",
+        "ctx": "{{ctx}}",
+        "id": "{{data.qaID}}",
+        "title": "{{data.qaTitle}}",
+        "writer": "{{data.qaWriter}}",
+        "writerDate": "{{data.qaWriteDate}}",
+        "point": "{{data.qaPoint}}",
+        "expertField": "{{data.expertField}}",
+        "expertName": "{{data.expertName}}"
+      }
+    },
+    "likeAdd": {
+      "actionType": "JSFunction",
+      "method": "likeAdd",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "iconTest": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "icontest.click"
+          }
+        ]
+      }
+    },
+    "loadSelection": {
+      "actionType": "JSFunction",
+      "method": "loadSelection",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "checkUser": {
+      "actionType": "JSFunction",
+      "method": "checkUser",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data.dataProviders}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "checkExpert": {
+      "actionType": "JSFunction",
+      "method": "checkExpert",
+      "deps": "js/askExpertService",
+      "inputData": {
+        "data": "{{data.dataProviders}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "checkURLData": {
+      "actionType": "JSFunction",
+      "method": "checkURLData",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}",
+        "providerName": "qaListDataProvider"
+      }
+    },
+    "resetCount": {
+      "actionType": "JSFunction",
+      "method": "resetCount",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "setSplitterAction": {
+      "actionType": "JSFunction",
+      "method": "setSplitterAction",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "initSummer": {
+      "actionType": "JSFunction",
+      "method": "initSummer",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "updateList": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getDataProvider"
+        },
+        {
+          "action": "showQuestionProp"
+        }
+      ]
+    },
+    "answerAddNow": {
+      "actionType": "JSFunction",
+      "method": "answerAddNow",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "answerChange": {
+      "actionType": "JSFunction",
+      "method": "answerChange",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "answerAddCancel": {
+      "actionType": "JSFunction",
+      "method": "answerAddCancel",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "editCancel": {
+      "actionType": "JSFunction",
+      "method": "editCancel",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "answerEdit": {
+      "actionType": "JSFunction",
+      "method": "answerEdit",
+      "deps": "js/questionAnswer",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
+    },
+    "firstPageAction": {
+      "actionType": "JSFunction",
+      "method": "firstPageAction",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "lastPageAction": {
+      "actionType": "JSFunction",
+      "method": "lastPageAction",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "pagingBeforeAction": {
+      "actionType": "JSFunction",
+      "method": "pagingBeforeAction",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "pagingAfterAction": {
+      "actionType": "JSFunction",
+      "method": "pagingAfterAction",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "setPageNumber": {
+      "actionType": "JSFunction",
+      "method": "setPageNumber",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "pageResponse": "pageResponse",
+        "pageLength": "pageLength"
+      },
+      "deps": "js/askExpertService"
+    },
+    "clickedPageAction": {
+      "actionType": "JSFunction",
+      "method": "clickedPageAction",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}",
+        "chip": "{{chip}}"
+      },
+      "deps": "js/askExpertService"
+    },
+    "questionSearch": {
+      "actionType": "JSFunction",
+      "method": "questionSearch",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/askExpertService"
+    }
+  },
+  "dataProviders": {
+    "qaListDataProvider": {
+      "action": "loadQaList",
+      "response": "{{data.searchResponse}}"
+    },
+    "qaAnswerList": {
+      "action": "loadAnswerList",
+      "response": "{{data.listResponse}}",
+      "totalFound": "{{data.totalFound}}"
+    },
+    "pageChipDataProvider": {
+      "type": "Static",
+      "action": "setPageNumber",
+      "response": "{{data.pageResponse}}",
+      "totalFound": "{{data.pageLength}}"
+    }
+  },
+  "columnProviders": {
+    "qaListColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.title}}",
+          "minWidth": 80,
+          "width": 300,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "creation_date",
+          "displayName": "{{i18n.createDate}}",
+          "minWidth": 60,
+          "width": 150,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "owning_user",
+          "displayName": "{{i18n.user}}",
+          "minWidth": 60,
+          "width": 100,
+          "enableColumnMenu": false
+        }
+      ]
+    }
+  },
+  "grids": {
+    "qaList": {
+      "dataProvider": "qaListDataProvider",
+      "columnProvider": "qaListColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
+      }
+    }
+  },
+  "functions": {
+    "answerList": {
+      "functionName": "answerList",
+      "parameters": ["{{data}}"]
+    },
+    "filterList": {
+      "functionName": "filterList",
+      "parameters": ["{{data}}"]
+    }
+  },
+  "i18n": {
+    "helloText": ["lgepKnowldegeManageMessages"],
+    "relationItem": ["lgepKnowldegeManageMessages"],
+    "property": ["lgepKnowldegeManageMessages"],
+    "answer": ["lgepKnowldegeManageMessages"],
+    "title": ["lgepKnowldegeManageMessages"],
+    "createDate": ["lgepKnowldegeManageMessages"],
+    "addQuestion": ["lgepKnowldegeManageMessages"],
+    "addAnswer": ["lgepKnowldegeManageMessages"],
+    "editing": ["lgepKnowldegeManageMessages"],
+    "content": ["lgepKnowldegeManageMessages"],
+    "point": ["lgepKnowldegeManageMessages"],
+    "user": ["lgepKnowldegeManageMessages"],
+    "expert": ["lgepKnowldegeManageMessages"],
+    "expertDiv": ["lgepKnowldegeManageMessages"],
+    "cantAddAnswer": ["lgepKnowldegeManageMessages"],
+    "noPost": ["lgepKnowldegeManageMessages"],
+    "cantEditQuestion": ["lgepKnowldegeManageMessages"],
+    "cantDeleteQuestion": ["lgepKnowldegeManageMessages"],
+    "answerContent": ["lgepKnowldegeManageMessages"],
+    "cancle": ["lgepKnowldegeManageMessages"],
+    "add": ["lgepKnowldegeManageMessages"]
+  },
+  "onEvent": [
+    {
+      "eventId": "qnaLinkAction",
+      "cacheEventData": true,
+      "action": "qnaLinkEventAction"
+    },
+    {
+      "eventId": "question.add",
+      "action": "questionAdd"
+    },
+    {
+      "eventId": "qaList.edit",
+      "condition": "data.dataProviders.qaListDataProvider.selectedObjects.length > 0",
+      "action": "checkUser"
+    },
+    {
+      "eventId": "qaListDataProvider.selectionChangeEvent",
+      "condition": "data.dataProviders.qaListDataProvider.selectedObjects.length > 0",
+      "action": "updateList"
+    },
+    {
+      "eventId": "qaList.del",
+      "action": "askExpertDelete"
+    },
+    {
+      "eventId": "qaAnswerList.listUpdated",
+      "action": "updateList"
+    },
+    {
+      "eventId": "qaAnswerList.selectionChangeEvent",
+      "action": "loadSelection"
+    },
+    {
+      "eventId": "icontest.click",
+      "action": "likeAdd"
+    },
+    {
+      "eventId": "editPopup.open",
+      "action": "editPopup"
+    },
+    {
+      "eventId": "answer.add",
+      "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] != 'Y'",
+      "action": "answerAdd"
+    },
+    {
+      "eventId": "answer.add",
+      "condition": "data.dataProviders.qaListDataProvider.selectedObjects[0].props.l2_complete.dbValues[0] === 'Y'",
+      "message": "cantAddAnswer"
+    },
+    {
+      "eventId": "awPopup.close",
+      "action": "closePopupWindow"
+    },
+    {
+      "eventId": "qaListDataProvider.modelObjectsUpdated",
+      "action": "checkURLData"
+    },
+    {
+      "eventId": "$locationChangeStart",
+      "action": "resetCount"
+    },
+    {
+      "eventId": "aw-splitter-update",
+      "action": "setSplitterAction"
+    },
+    {
+      "eventId": "initSummernote",
+      "action": "initSummer"
+    },
+    {
+      "eventId": "initSummernote",
+      "action": "setAnswerListStyle"
+    },
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setAnswerListBgStyle"
+    }
+  ],
+  "conditions": {
+    "checkAnswerAdd": {
+      "expression": "data.answerAdd === true"
+    }
+  },
+  "messages": {
+    "cantAddAnswer": {
+      "messageType": "ERROR",
+      "messageText": "{{i18n.cantAddAnswer}}"
+    },
+    "cantEditQuestion": {
+      "messageType": "ERROR",
+      "messageText": "{{i18n.cantEditQuestion}}"
+    },
+    "cantDeleteQuestion": {
+      "messageType": "ERROR",
+      "messageText": "{{i18n.cantDeleteQuestion}}"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "lgepPartmgmt",
-    "description": "This is the lgepPartmgmt module",
-    "skipTest": true
+  "name": "lgepPartmgmt",
+  "description": "This is the lgepPartmgmt module",
+  "skipTest": true
 }

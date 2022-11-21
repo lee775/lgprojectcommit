@@ -6,7 +6,14 @@
     "js/aw-panel.directive",
     "js/aw-panel-body.directive",
     "js/aw-panel-footer.directive",
-    "css/interactionMatrix.css"
+    "css/interactionMatrix.css",
+    "js/aw-flex-column.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setTuiGridStyle"
+    }
   ],
   "data": {},
   "actions": {
@@ -14,19 +21,32 @@
       "actionType": "JSFunction",
       "method": "saveInteractionMatrix",
       "deps": "js/L2_ChecklistMatrixPopupSaveService"
+    },
+    "beforeClose":{
+      "actionType": "JSFunction",
+      "method": "beforeClose",
+      "deps": "js/interactionMatrixService"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/sodAPTableService"
     }
   },
   "i18n": {
     "save": ["lgepMasterViewMessages"],
-    "interactionPopupDescRightTitle":["lgepInteractionMatrixMessages"],
-    "interactionTypeA":["lgepInteractionMatrixMessages"],
-    "interactionTypeB":["lgepInteractionMatrixMessages"],
-    "interactionTypeC":["lgepInteractionMatrixMessages"],
-    "interactionTypeD":["lgepInteractionMatrixMessages"],
-    "interactionTypeE":["lgepInteractionMatrixMessages"],
-    "interactionTypeAB":["lgepInteractionMatrixMessages"],
-    "interactionTypeAC":["lgepInteractionMatrixMessages"],
-    "interactionTypeAD":["lgepInteractionMatrixMessages"]
-
+    "interactionPopupDescRightTitle": ["lgepInteractionMatrixMessages"],
+    "interactionTypeA": ["lgepInteractionMatrixMessages"],
+    "interactionTypeB": ["lgepInteractionMatrixMessages"],
+    "interactionTypeC": ["lgepInteractionMatrixMessages"],
+    "interactionTypeD": ["lgepInteractionMatrixMessages"],
+    "interactionTypeE": ["lgepInteractionMatrixMessages"],
+    "interactionTypeAB": ["lgepInteractionMatrixMessages"],
+    "interactionTypeAC": ["lgepInteractionMatrixMessages"],
+    "interactionTypeAD": ["lgepInteractionMatrixMessages"],
+    "cancel": ["lgepInteractionMatrixMessages"]
   }
 }

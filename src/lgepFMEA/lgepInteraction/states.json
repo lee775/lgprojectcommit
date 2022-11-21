@@ -1,60 +1,58 @@
 {
-    "interactionMatrix": {
-        "url": "/interactionMatrix",
-        "data": {},
-        "view": "interactionMatrix",
-        "parent": "interactionMatrixLocation"
+  "interactionMatrix": {
+    "url": "/interactionMatrix",
+    "data": {},
+    "view": "interactionMatrix",
+    "parent": "interactionMatrixLocation"
+  },
+  "interactionMatrixLocation": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/lgepinteractionMatrixMessages",
+        "key": "interactionMatrixLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/lgepinteractionMatrixMessages",
+        "key": "interactionMatrixLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/lgepinteractionMatrixMessages",
+        "key": "interactionMatrixLocationHeaderTitle"
+      },
+      "label": {
+        "source": "/i18n/lgepinteractionMatrixMessages",
+        "key": "interactionMatrixSubLocationTitle"
+      }
     },
-    "interactionMatrixLocation": {
-        "data": {
-            "browserTitle": {
-                "source": "/i18n/lgepinteractionMatrixMessages",
-                "key": "interactionMatrixLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/lgepinteractionMatrixMessages",
-                "key": "interactionMatrixLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/lgepinteractionMatrixMessages",
-                "key": "interactionMatrixLocationHeaderTitle"
-            },
-            "label": {
-                "source": "/i18n/lgepinteractionMatrixMessages",
-                "key": "interactionMatrixSubLocationTitle"
-            }
-        },
-        "type": "location"
+    "type": "location"
+  },
+  "interactionMatrixSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/lgepinteractionMatrixMessages",
+        "key": "interactionMatrixSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "interactionMatrixSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/lgepinteractionMatrixMessages",
+            "key": "interactionMatrixSubLocationChartTitle"
+          }
+        }
+      }
     },
-    "interactionMatrixSubLocation": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "priority": 0,
-            "label": {
-                "source": "/i18n/lgepinteractionMatrixMessages",
-                "key": "interactionMatrixSubLocationTitle"
-            },
-            "clientScopeURI": "Awp0SearchResults",
-            "nameToken": "interactionMatrixSubLocation",
-            "context": {
-                "search": {
-                    "chartTitle": {
-                        "source": "/i18n/lgepinteractionMatrixMessages",
-                        "key": "interactionMatrixSubLocationChartTitle"
-                    }
-                }
-            }
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "params": {
-            "filter": null
-        },
-        "parent": "interactionMatrixLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation",
-        "url": "/interactionMatrixSubLocation"
-    }
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
+    },
+    "parent": "interactionMatrixLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "url": "/interactionMatrixSubLocation"
+  }
 }

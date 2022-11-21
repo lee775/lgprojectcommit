@@ -11,8 +11,7 @@ $ltop: 86;
 $linc: calc(($ltop - $lbase) / 12);
 // The core colors for your theme
 $aw_accent_1: $color;
-$aw_accent_2: mix(white, $color, $linc * 1
-);
+$aw_accent_2: mix(white, $color, $linc * 1);
 $aw_accent_3: mix(white, $color, $linc * 2);
 $aw_accent_4: mix(white, $color, $linc * 3);
 $aw_accent_5: mix(white, $color, $linc * 4);
@@ -63,198 +62,208 @@ $brand_tab_title_selected_border_color_hover: $aw_accent_5;
 */
 @import 'consumer-themes';
 .justify-flex-end {
-    justify-content: flex-end;
-    background: #6b6b6b;
+  justify-content: flex-end;
+  background: #6b6b6b;
 }
 .aw-layout-header {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    -webkit-transition: padding .5s;
-    -moz-transition: padding .5s;
-    -o-transition: padding .5s;
-    -ms-transition: padding .5s;
-    transition: padding .5s;
-    background: white;
-    color: rgb(71, 71, 71);
-    border-bottom: 0.3rem solid transparent;
-    border-image: linear-gradient(90deg, rgb(215, 5, 70) 30%, rgb(203, 24, 80) 53%, rgb(187, 134, 154) 82%, rgba(245, 245, 245, 1) 100%);
-    border-image-slice: 1;
-    width:100%;
-    // background: linear-gradient(90deg, rgba(107, 107, 107, 1) 83%, rgba(255, 255, 255, 1) 100%);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-transition: padding 0.5s;
+  -moz-transition: padding 0.5s;
+  -o-transition: padding 0.5s;
+  -ms-transition: padding 0.5s;
+  transition: padding 0.5s;
+  background: white;
+  color: rgb(71, 71, 71);
+  border-bottom: 0.3rem solid transparent;
+  border-image: linear-gradient(90deg, rgb(215, 5, 70) 30%, rgb(203, 24, 80) 53%, rgb(187, 134, 154) 82%, rgba(245, 245, 245, 1) 100%);
+  border-image-slice: 1;
+  width: 100%;
+  // background: linear-gradient(90deg, rgba(107, 107, 107, 1) 83%, rgba(255, 255, 255, 1) 100%);
 }
-.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected, .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover, .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: rgb(242, 86, 108) !important;
-    border-bottom-color: rgb(242, 86, 108) !important;
+.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected,
+.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: rgb(242, 86, 108) !important;
+  border-bottom-color: rgb(242, 86, 108) !important;
 }
-.aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer input.aw-uiwidgets-searchBox
-, .aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer
-, .aw-search-globalSearchBoxContainer aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
-    background: rgb(239, 239, 239);
+.aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer input.aw-uiwidgets-searchBox,
+.aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer,
+.aw-search-globalSearchBoxContainer aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
+  background: rgb(239, 239, 239);
 }
-.aw-layout-headerProperties a, .aw-search-globalSearchContainer a {
-    color: rgb(242, 86, 108);
+.aw-layout-headerProperties a,
+.aw-search-globalSearchContainer a {
+  color: rgb(242, 86, 108);
 }
 .aw-layout-headerTitleContainer {
-    padding-top: 20px;
-    margin-left: 50px;
+  padding-top: 20px;
+  margin-left: 50px;
 }
 .aw-search-resultsCountArea span {
-    margin-left: 50px !important;
-    color: #000000 !important;
-    font-weight: normal !important;
+  margin-left: 50px !important;
+  color: #000000 !important;
+  font-weight: normal !important;
 }
 aw-showobject-header .aw-layout-headerIcon {
-    padding-right: 16px;
-    margin-left: 50px;
+  padding-right: 16px;
+  margin-left: 50px;
 }
 .aw-uiwidgets-searchBoxIcon .aw-theme-iconOutline {
-    fill: rgb(71, 71, 71);
+  fill: rgb(71, 71, 71);
 }
 .awRoot .aw-order-one {
-    order: 1;
-    background: #6b6b6b;
+  order: 1;
+  background: #6b6b6b;
 }
 .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle {
-    color: rgb(71, 71, 71);
+  color: rgb(71, 71, 71);
 }
 .aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
-    width: auto;
-    height: auto;
-    margin: 0;
-    font-size: var(--nav_bar_font_size);
-    display: block;
-    word-wrap: break-word;
-    white-space: normal;
-    overflow: hidden;
-    max-height: 28px;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  font-size: var(--nav_bar_font_size);
+  display: block;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  max-height: 28px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 button.aw-base-blk-button:not(.disabled).aw-accent-highContrast:not(.aw-widgets-staticChip):hover {
-    background-color: #6b6b6b !important;
+  background-color: #6b6b6b !important;
 }
 button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
-    background-color: #4a4a4a !important;
-    border-color: #6b6b6b !important;
+  background-color: #4a4a4a !important;
+  border-color: #6b6b6b !important;
 }
 .aw-session-tcLoginView {
-    background-image: url("./images/lgMainWall.jpg");
+  background-image: url('./images/lgMainWall.jpg');
 }
+.development-environment {
+  background-image: url('./images/lgMainWallDev.jpg') !important;
+}
+
 .aw-session-companyLogo {
-    background-image: url(images/lgMainLogo.svg);
-    background-repeat: no-repeat;
-    width: 281px;
-    height: 119px;
-    left: 70px;
-    display: flex;
-    position: relative;
-    background-size: contain;
-    top: 70px;
+  background-repeat: no-repeat;
+  width: 281px;
+  height: 119px;
+  left: 70px;
+  display: flex;
+  position: relative;
+  background-size: contain;
+  top: 70px;
 }
 .aw-theme-locationsTile .aw-theme-tileText {
-    color: black;
+  color: black;
 }
 
 .aw-tile-tileGroups {
-    background-color: white;
+  background-color: white;
 }
 
-.aw-layout-header a{
-    color:#f2566c;
+.aw-layout-header a {
+  color: #f2566c;
 }
-.awRoot .aw-layout-breadCrumbs, aw-page .aw-layout-breadCrumbs, .aw-layout-breadCrumbs .aw-theme-iconOutline, .aw-widgets-crumbCategoryLabel {
-    color: black;
-    fill: black;
+.awRoot .aw-layout-breadCrumbs,
+aw-page .aw-layout-breadCrumbs,
+.aw-layout-breadCrumbs .aw-theme-iconOutline,
+.aw-widgets-crumbCategoryLabel {
+  color: black;
+  fill: black;
 }
 .aw-layout-breadCrumbs aw-property-image svg {
-    margin-top: 5px;
+  margin-top: 5px;
 }
-.aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
-    background-color: #cde6eb !important;
-    color: #464646 !important;
+.aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+.aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
+  background-color: #cde6eb !important;
+  color: #464646 !important;
 }
-.aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
-    background-color: #afd7e1 !important;
-    color: #464646 !important;
+.aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+.aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
+  background-color: #afd7e1 !important;
+  color: #464646 !important;
 }
-.aw-widgets-cellListWidget .aw-widgets-cellListItem:hover, .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #daecf0 !important;
-    color: #464646;
+.aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+.aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #daecf0 !important;
+  color: #464646;
 }
 // 페이징 칩 css
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-accent-midContrast {
-    background-color: #ffffff !important;
-    border-color: #ffffff !important;
-    color: rgb(245, 66, 95) !important;
-    fill: #ffffff !important;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: rgb(245, 66, 95) !important;
+  fill: #ffffff !important;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-base-button:not(.aw-widgets-staticChip):hover {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-base-button {
-    background-color: #ffffff !important;
-    border-color: #ffffff !important;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled):not(.aw-widgets-staticChip) {
-    box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 #alink a {
-    color: #828282 !important;
-    margin-top: -3px;
+  color: #828282 !important;
+  margin-top: -3px;
 }
 #dashboardListSite .aw-widgets-cellListCellImage img {
-    border-radius: 0 !important;
-    overflow: visible !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
 }
 
 //개발지식
 
 //내문서
 #linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.aw-splm-tableHoverRow {
-    background: rgb(199, 199, 199) !important;
+  background: rgb(199, 199, 199) !important;
 }
-#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected
-, #linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableHoverRow
-, #linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .ui-grid-cell:hover {
-    border: none !important;
+#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected,
+#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableHoverRow,
+#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .ui-grid-cell:hover {
+  border: none !important;
 }
 #linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon {
-    color: black !important;
-    font-weight: bold !important;
-    border-color:#eaeaea !important;
+  color: black !important;
+  font-weight: bold !important;
+  border-color: #eaeaea !important;
 }
 // #linkTableAllId .aw-splm-tableCellTop .aw-splm-tableCellText {
 //     color: black !important;
 //     font-weight: bold !important;
 // }
 #linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.ui-grid-row-selected.aw-state-selected {
-    background-color: rgb(209, 209, 209) !important;
-    font-weight: bold !important;
-    color: #000000 !important;
-    // text-decoration: underline !important;
+  background-color: rgb(209, 209, 209) !important;
+  font-weight: bold !important;
+  color: #000000 !important;
+  // text-decoration: underline !important;
 }
-#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.ui-grid-row-selected.aw-state-selected *{
-    /* background-color: #cacaca; */
-    font-weight: bold;
-    color: #000000;
-    // text-decoration: underline;
-    /* border-color: #cacaca; */
+#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.ui-grid-row-selected.aw-state-selected * {
+  /* background-color: #cacaca; */
+  font-weight: bold;
+  color: #000000;
+  // text-decoration: underline;
+  /* border-color: #cacaca; */
 }
 #linkTableAllId div div div div div div .aw-splm-tableRow {
-    background-color: rgb(209, 209, 209) !important;
+  background-color: rgb(209, 209, 209) !important;
 }
 // #linkTableAllId div div div div div div .aw-splm-tableRow {
 //     background-color: #808080 !important;
@@ -264,159 +273,157 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 //     border-color:#eaeaea !important;
 // }
 .minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div img {
-    border: 7px solid #d81d3c !important
+  border: 7px solid #d81d3c !important;
 }
 
 .minColumn aw-list div div div ul li:hover div div div img {
-    border: 7px solid #d81d3c !important
+  border: 7px solid #d81d3c !important;
 }
 
 .minColumn aw-list div div div ul li div div div img {
-    border: 7px solid white;
+  border: 7px solid white;
 }
 
 .minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
 .minColumn aw-list div div div ul li:hover div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
-.minColumn aw-list div div div ul li{
-    border-bottom: 0px !important;
-    border-top:0px !important;
-    border-left:0px !important;
-    border-right:0px !important;
-
+.minColumn aw-list div div div ul li {
+  border-bottom: 0px !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
 }
 
 .minColumn .star-ratings-fill {
-    color: orangered !important;
-    font-size: 1.2rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: orangered !important;
+  color: orangered !important;
+  font-size: 1.2rem;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: orangered !important;
 }
 
-#folderNameData .aw-avatar-layout{
-    background-color: #eaeaea;
+#folderNameData .aw-avatar-layout {
+  background-color: #eaeaea;
 }
 
-#linkTableAllId{
-    background-color: #eaeaea !important;
+#linkTableAllId {
+  background-color: #eaeaea !important;
 }
 
-.inBgColor{
-    background-color: #eaeaea !important;
+.inBgColor {
+  background-color: #eaeaea !important;
 }
 
-#addFolder{
-    margin: 10px;
-    padding: 5px;
-    border: 0.5px solid #828282;
-    border-radius: 10px;
-    background-color: white;
+#addFolder {
+  margin: 10px;
+  padding: 5px;
+  border: 0.5px solid #828282;
+  border-radius: 10px;
+  background-color: white;
 }
 
-#addFolder div a{
-    color:black !important;
+#addFolder div a {
+  color: black !important;
 }
 
 // 대시보드 차트 css
 #chartDashboardSite .aw-layout-summaryContent {
-    border: solid 1px lightgray;
-    box-shadow: 1px 4px 2px 0px lightgray !important;
+  border: solid 1px lightgray;
+  box-shadow: 1px 4px 2px 0px lightgray !important;
 }
 
 #chartDashboardSite .aw-widgets-cellListItemContainer {
-    border-bottom: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
 }
 
 #chartDashboardSite .aw-widgets-cellListCellImage img {
-    border-radius: 70% !important;
-    // overflow: hidden !important;
+  border-radius: 70% !important;
+  // overflow: hidden !important;
 }
 
 // #expertListId div div div ul li ng-transclude group-header-cell a{
 //     color: black !important;
 // }
 
-#wareHouse .split{
-    margin-right:0px;
-    flex: 0 0 8px;
-    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
+#wareHouse .split {
+  margin-right: 0px;
+  flex: 0 0 8px;
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
 }
 
-#wareHouse .seperatorSizeChange{
-    border-color:black;
-    margin: 8px 8px;
+#wareHouse .seperatorSizeChange {
+  border-color: black;
+  margin: 8px 8px;
 }
 
 //지식창고
 .backGroundWhiteImportant {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
-#mainBgColor{
-    background-color: #eaeaea !important;   
+#mainBgColor {
+  background-color: #eaeaea !important;
 }
 
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div img {
-    border: 7px solid #d81d3c !important;
+  border: 7px solid #d81d3c !important;
 }
 
 #mainListId div div div ul li:hover div div div img {
-    border: 7px solid #d81d3c !important;
+  border: 7px solid #d81d3c !important;
 }
 
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div p {
-    border: 7px solid #d81d3c;
+  border: 7px solid #d81d3c;
 }
 
 #mainListId div div div ul li:hover div div div p {
-    border: 7px solid #d81d3c;
+  border: 7px solid #d81d3c;
 }
 
 #mainListId div div div ul li div div div img {
-    border: 7px solid white !important;
+  border: 7px solid white !important;
 }
 
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
 #mainListId div div div ul li:hover div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
-#mainListId div div div ul li{
-    border-bottom: 1px solid #eaeaea !important;
-    border-top:0px !important;
-    border-left:0px !important;
-    border-right:0px !important;
-
+#mainListId div div div ul li {
+  border-bottom: 1px solid #eaeaea !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
 }
 
 // #wareHouse div div div ul li ng-transclude group-header-cell a {
@@ -424,186 +431,189 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 // }
 
 #wareHouse .star-ratings-fill {
-    color: orangered !important;
-    font-size: 1.2rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: orangered !important;
+  color: orangered !important;
+  font-size: 1.2rem;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: orangered !important;
 }
 
-#wareHouse .listShadow{
-    border: 1px solid #eaeaea;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+#wareHouse .listShadow {
+  border: 1px solid #eaeaea;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-#wareHouse .middleMargin{
-    margin: 16px;
+#wareHouse .middleMargin {
+  margin: 16px;
 }
 
-#wareHouse .aw-widgets-modelObjectList{
-    margin: 0px;
+#wareHouse .aw-widgets-modelObjectList {
+  margin: 0px;
 }
 
 //지식창고 상세정보
-#reListId div div div ul .aw-widgets-cellListItemSelected{
-    border: 7px solid #d81d3c !important;
-    background-color: #eaeaea;
+#reListId div div div ul .aw-widgets-cellListItemSelected {
+  border: 7px solid #d81d3c !important;
+  background-color: #eaeaea;
 }
 
-#reListId div div div ul li:hover{
-    border: 7px solid #d81d3c !important;
-    background-color: #eaeaea;
+#reListId div div div ul li:hover {
+  border: 7px solid #d81d3c !important;
+  background-color: #eaeaea;
 }
 
-#reListId div div div ul li{
-    border: 7px solid white;
+#reListId div div div ul li {
+  border: 7px solid white;
 }
-#reListId .aw-widgets-cellListItemContainer{
-    justify-content: center !important;
+#reListId .aw-widgets-cellListItemContainer {
+  justify-content: center !important;
 }
 
-#reListId div div div ul li{
-    margin: 3px 0px;
+#reListId div div div ul li {
+  margin: 3px 0px;
 }
 
 #reListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
 #reListId div div div ul li:hover div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
-#fileListId div div div ul .aw-widgets-cellListItemSelected{
-    border: 7px solid #d81d3c !important;
-    background-color: #eaeaea;
+#fileListId div div div ul .aw-widgets-cellListItemSelected {
+  border: 7px solid #d81d3c !important;
+  background-color: #eaeaea;
 }
 
-#fileListId div div div ul li:hover{
-    border: 7px solid #d81d3c !important;
-    background-color: #eaeaea;
+#fileListId div div div ul li:hover {
+  border: 7px solid #d81d3c !important;
+  background-color: #eaeaea;
 }
 
-#fileListId div div div ul li{
-    border: 7px solid white;
+#fileListId div div div ul li {
+  border: 7px solid white;
 }
 
-#fileListId div div div ul li{
-    margin: 3px 0px;
+#fileListId div div div ul li {
+  margin: 3px 0px;
 }
 
-#fileListId .aw-widgets-cellListItemContainer{
-    justify-content: center !important;
+#fileListId .aw-widgets-cellListItemContainer {
+  justify-content: center !important;
 }
 
 #fileListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
 #fileListId div div div ul li:hover div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: black !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: black !important;
 }
 
 #test1 .star-ratings-fill {
-    color: orangered !important;
-    font-size: 1.2rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: orangered !important;
+  color: orangered !important;
+  font-size: 1.2rem;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: orangered !important;
 }
 
-#test1 .star-rating :checked~label {
-    color: orangered !important;
+#test1 .star-rating :checked ~ label {
+  color: orangered !important;
 }
 
 #test1 .star-rating label:hover,
-#test1 .star-rating label:hover~label {
-    color: orangered !important;
+#test1 .star-rating label:hover ~ label {
+  color: orangered !important;
 }
 
-#test1 .leftArrowSpace:hover{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#test1 .leftArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-#test1 .rightArrowSpace:hover{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#test1 .rightArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-#test1 .rightArrowSpace svg line, #test1 .leftArrowSpace svg line{
-    stroke:white !important
+#test1 .rightArrowSpace svg line,
+#test1 .leftArrowSpace svg line {
+  stroke: white !important;
 }
 
-#showFullStar svg path{
-    fill:orange;
+#showFullStar svg path {
+  fill: orange;
 }
 
 // Q&A css
 .answerSection .aw-widgets-cellListItem {
-    border: solid 1px lightgray !important;
+  border: solid 1px lightgray !important;
 }
-.changeWhite{
-    background-color: white !important;
+.changeWhite {
+  background-color: white !important;
 }
 #qnaDatas .aw-commands-commandBarHorizontal .aw-commandIcon {
-    display: none !important;
+  display: none !important;
 }
 
 aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected {
-    border-color: rgb(240, 240, 240);
+  border-color: rgb(240, 240, 240);
 }
 
 .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
-    background-color: #ffffff;
-    border-color: rgb(240, 240, 240);
+  background-color: #ffffff;
+  border-color: rgb(240, 240, 240);
 }
 
 aw-splm-table .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected {
-    background: rgb(240, 240, 240);
+  background: rgb(240, 240, 240);
 }
 
 .aw-splm-table .ui-grid-row.aw-splm-tableHoverRow {
-    background: rgb(231, 231, 231);
+  background: rgb(231, 231, 231);
 }
 
 .aw-splm-table .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
-    background: rgb(207, 207, 207);
+  background: rgb(207, 207, 207);
 }
 
-#qnaDatas .aw-splm-tableHeaderRow, #qnaDatas .aw-splm-tableHeaderCell {
-    background-color: #ffffff;
-    font-weight: bolder;
+#qnaDatas .aw-splm-tableHeaderRow,
+#qnaDatas .aw-splm-tableHeaderCell {
+  background-color: #ffffff;
+  font-weight: bolder;
 }
 
 // 기술문서 css
 #mainTechnicalData .aw-commands-commandBarHorizontal .aw-commandIcon {
-    display: none !important;
+  display: none !important;
 }
 
-#mainTechnicalData .aw-splm-tableHeaderRow, #mainTechnicalData .aw-splm-tableHeaderCell {
-    background-color: #ffffff;
-    font-weight: bolder;
+#mainTechnicalData .aw-splm-tableHeaderRow,
+#mainTechnicalData .aw-splm-tableHeaderCell {
+  background-color: #ffffff;
+  font-weight: bolder;
 }
 
 // 설계절차서
@@ -612,74 +622,81 @@ aw-splm-table .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected {
 //     color: black;
 // }
 aw-navigate-breadcrumb .aw-theme-iconOutline {
-    fill: black !important;
+  fill: black !important;
 }
 aw-navigate-breadcrumb .aw-widgets-selectedCrumb {
-    color: black;
+  color: black;
 }
 aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
-    margin-left: 50px;
-    background-color: none;
+  margin-left: 50px;
+  background-color: none;
 }
 
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false]{
-    background-color: white !important;
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'] {
+  background-color: white !important;
 }
 
 .aw-widgets-breadCrumbCompact .aw-layout-eachCrumb:first-child .aw-widgets-primaryCrumb {
-    margin-left: -50px !important;
+  margin-left: -50px !important;
 }
 
-//타일 
+//타일
 
 .aw-theme-commandsActionsTile {
-    background-color: #c82254 !important;
-    fill: #ffffff;
-    color: #ffffff;
-    
+  background-color: #c82254 !important;
+  fill: #ffffff;
+  color: #ffffff;
 }
 
 .aw-tile-tileContainer {
-    width: 150px;
-    height: 150px;
-    font-weight: 300;
-    font-size: 1.125rem;
-    letter-spacing: 0.02em;
-    line-height: 19px;
-    box-shadow: none;
-    text-decoration: none;
-    cursor: pointer;
-    position: relative;
-    outline: 0;
-    border: transparent solid 2px;
+  width: 150px;
+  height: 150px;
+  font-weight: 300;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+  line-height: 19px;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  outline: 0;
+  border: transparent solid 2px;
 }
 
 .aw-tile-tileImage .aw-base-icon {
-    min-width: 100%;
-    max-height: 100%;
+  min-width: 100%;
+  max-height: 100%;
 }
 
 .aw-tile-tileContent > .aw-layout-flexColumn {
-    -webkit-justify-content: center;
-    -ms-flex-pack: justify;
-    justify-content: center;
-    padding-top: 15px;
+  -webkit-justify-content: center;
+  -ms-flex-pack: justify;
+  justify-content: center;
+  padding-top: 15px;
 }
 
 //좌측 커맨드 바
 
 .awRoot .global-navigation-toolbar aw-command-bar.aw-commands-commandBarVertical {
-    width: 72px;
+  width: 72px;
 }
 
-.aw-commands-showIconLabel .global-navigation-toolbar aw-command-bar:not(.aw-layout-userSessionCommands).aw-commands-commandBarVertical .aw-commands-commandIconButton {
-    height: auto;
-    max-height: 3.5rem;
-    width: 72px;
-    padding: 0.375rem 0;
-    margin: 0;
+.aw-commands-showIconLabel
+  .global-navigation-toolbar
+  aw-command-bar:not(.aw-layout-userSessionCommands).aw-commands-commandBarVertical
+  .aw-commands-commandIconButton {
+  height: auto;
+  max-height: 3.5rem;
+  width: 72px;
+  padding: 0.375rem 0;
+  margin: 0;
 }
 
-.selectNavigateCommand{
-    background-color: rgba(0,0,0,0.2);
+// 공통 모듈
+.leftSide.aw-flex-column.ng-scope.ng-isolate-scope.afx-static-size {
+  background-color: rgb(234, 234, 234);
+}
+
+.selectNavigateCommand {
+  background-color: rgba(0, 0, 0, 0.2);
 }

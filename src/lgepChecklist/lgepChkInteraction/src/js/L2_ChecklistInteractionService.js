@@ -1,8 +1,8 @@
-import app from "app";
-import appCtxService from "js/appCtxService";
+import app from 'app';
+import appCtxService from 'js/appCtxService';
 
-import { openInteractionPopup } from "js/L2_interactionMatrixPopupService";
-import { openInteractionPanel } from "js/L2_ChecklistInteractionCheckPanelService";
+import { openInteractionPopup } from 'js/L2_interactionMatrixPopupService';
+import { openInteractionPanel } from 'js/L2_ChecklistInteractionCheckPanelService';
 
 var exports = {};
 
@@ -17,7 +17,7 @@ export function openInteractionMatrix() {
 }
 
 export function openChecklistSod() {
-  alert("openChecklistSod");
+  alert('openChecklistSod');
 }
 
 export default exports = {
@@ -26,4 +26,4 @@ export default exports = {
   openChecklistSod,
 };
 
-app.factory("L2_ChecklistInteractionService", () => exports);
+app.factory('L2_ChecklistInteractionService', () => exports);

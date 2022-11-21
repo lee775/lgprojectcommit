@@ -8,23 +8,23 @@ import eventBus from 'js/eventBus';
 let exports = {};
 
 /**
- * 
+ *
  * @param {*} view - view 이름(xxxView.html 일 경우 xxx)
  * @param {*} location - 위치 (aw_toolsAndInfo, aw_navigation, ...)
- * @returns 
+ * @returns
  */
-export const openCommandPanel = function (view, location = "aw_toolsAndInfo") {
-    return commandPanelService.activateCommandPanel(view, location);
+export const openCommandPanel = function (view, location = 'aw_toolsAndInfo') {
+  return commandPanelService.activateCommandPanel(view, location);
 };
 
 export const closeCommandPanel = function () {
-    eventBus.publish('complete', {
-        source: 'toolAndInfoPanel'
-    });
+  eventBus.publish('complete', {
+    source: 'toolAndInfoPanel',
+  });
 };
 
 export default exports = {
-    openCommandPanel,
-    closeCommandPanel
+  openCommandPanel,
+  closeCommandPanel,
 };
 app.factory('lgepPanelUtils', () => exports);

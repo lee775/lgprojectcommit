@@ -1,0 +1,29 @@
+<aw-popup2>
+  <aw-panel-body>
+    <div class="awRoot aw-layout-panelMain aw-layout-subLocation">
+      <aw-flex-row>
+        <aw-textbox prop="data.productIdTextBox"></aw-textbox>
+      </aw-flex-row>
+      <aw-flex-row>
+        <aw-textbox prop="data.projectIdTextBox"></aw-textbox>
+      </aw-flex-row>
+
+      <aw-splitter direction="HORIZONTAL"></aw-splitter>
+
+      <aw-flex-row>
+        <aw-toolbar first-anchor="checklistCreateTreeAnchor" second-anchor=""></aw-toolbar>
+      </aw-flex-row>
+      <aw-flex-row>
+        <aw-splm-table gridid="checklistCreateTree" use-tree="true" show-decorators="true" show-check-box="true"> </aw-splm-table>
+      </aw-flex-row>
+    </div>
+  </aw-panel-body>
+  <aw-splitter direction="HORIZONTAL"></aw-splitter>
+  <aw-panel-footer>
+    <aw-button action="okAction" aw-class="{'disabled': data.disabledButtonChk.dbValue}" size="auto" enable-when="awPanelBody.$valid"
+      >{{i18n.confirm}}</aw-button
+    >
+    <aw-button button-type="base" aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="backAction" size="auto">{{i18n.back}}</aw-button>
+    <aw-button button-type="base" aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="closePopupWindow" size="auto">{{i18n.CancelText}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

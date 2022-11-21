@@ -1,17 +1,7 @@
 {
-    "typePerson48": [
-        "L2_User"
-    ],
-    "typeContractDataRequirement48": [
-        "L2_Knowledge"
-    ],
-    "typeContractDataRequirementRevision48": [
-        "L2_KnowledgeRevision"
-    ],
-    "typeConfigurationAudit48": [
-        "L2_TroubleDB"
-    ],
-    "typeConfigurationAuditRevision48": [
-        "L2_TroubleDBRevision"
-    ]
+  "typePerson48": ["L2_User"],
+  "typeContractDataRequirement48": ["L2_Knowledge"],
+  "typeContractDataRequirementRevision48": ["L2_KnowledgeRevision"],
+  "typeConfigurationAudit48": ["L2_TroubleDB"],
+  "typeConfigurationAuditRevision48": ["L2_TroubleDBRevision"]
 }

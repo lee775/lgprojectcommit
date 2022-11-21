@@ -5,12 +5,7 @@ import lgepBomUtils from 'js/utils/lgepBomUtils';
 import messageUtil from 'js/utils/lgepMessagingUtils';
 
 import { goDFmeaMasterView } from 'js/utils/fmeaCommonUtils';
-import {
-  showErrorMessage,
-  getLocalizedMessage,
-  TYPE_INFO,
-  showWarnMessage,
-} from 'js/utils/fmeaMessageUtils';
+import { showErrorMessage, getLocalizedMessage, TYPE_INFO, showWarnMessage } from 'js/utils/fmeaMessageUtils';
 import { beforeSaveAction } from 'js/utils/fmeaViewCommonUtils';
 
 import { validationInputs } from 'js/utils/fmeaValidationUtils';
@@ -52,17 +47,9 @@ const duplicate = async (ctx, data) => {
     const copyRev = copyResult.clonedItemRev;
 
     // 2. 이름_copy로 수정 (item, rev )
-    await lgepObjectUtils.setProperties(
-      copyRev,
-      [prop.OBJECT_NAME],
-      [duplicateName]
-    );
+    await lgepObjectUtils.setProperties(copyRev, [prop.OBJECT_NAME], [duplicateName]);
     const copyItem = await lgepObjectUtils.getItemByItemRevision(copyRev);
-    await lgepObjectUtils.setProperties(
-      copyItem,
-      [prop.OBJECT_NAME],
-      [duplicateName]
-    );
+    await lgepObjectUtils.setProperties(copyItem, [prop.OBJECT_NAME], [duplicateName]);
 
     // 3. SOD 복사
     await _copySod(originRev);
@@ -75,7 +62,7 @@ const duplicate = async (ctx, data) => {
 const _copySod = async (originRev, copyRev) => {
   await lgepObjectUtils.getProperties([copyRev], [prop.REF_SOD_STANDARD]);
   const sodUid = originRev.props[prop.REF_SOD_STANDARD].dbValues[0];
-  await lgepObjectUtils.setProperties(copyRev, [prop.REF_SOD_STANDARD],sodUid);
+  await lgepObjectUtils.setProperties(copyRev, [prop.REF_SOD_STANDARD], sodUid);
 };
 
 /**
@@ -102,7 +89,7 @@ const _afterAction = (copyRev) => {
         fmeaPopupUtils.closePopup();
         return;
       },
-    ]
+    ],
   );
 };
 

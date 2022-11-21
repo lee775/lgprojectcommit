@@ -1,5 +1,5 @@
 {
-    "name": "lgepNoticeBoardDashBoard",
-    "description": "This is the lgepNoticeBoardDashBoard module",
-    "skipTest": true
+  "name": "lgepNoticeBoardDashBoard",
+  "description": "This is the lgepNoticeBoardDashBoard module",
+  "skipTest": true
 }

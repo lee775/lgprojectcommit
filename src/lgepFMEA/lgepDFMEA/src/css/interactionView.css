@@ -1,15 +1,15 @@
-.interaction-partsection{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+.interaction-partsection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
-.interaction-partsection span{
-    font-weight: 600;
+.interaction-partsection span {
+  font-weight: 600;
 }
 
-.partsection__value{
-    border: 1px solid black;
-    padding : 7px;
-    width: 95%;
+.partsection__value {
+  border: 1px solid black;
+  padding: 7px;
+  width: 95%;
 }

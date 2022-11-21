@@ -1,0 +1,28 @@
+<!-- <aw-command-panel caption="i18n.minutes" context="data" id="mainNav">
+    <aw-panel>
+        <aw-panel-body>
+        </aw-panel-body>
+    </aw-panel>
+</aw-command-panel> -->
+<aw-flex-row id="show-all-minutes">
+  <aw-panel>
+    <aw-panel-body>
+      <aw-flex-row id="btnBox">
+        <aw-icon-button command="data.createproceed" class="createBtn"> </aw-icon-button>
+        <aw-icon-button command="data.deleteproceed" class="deleteBtn"> </aw-icon-button>
+      </aw-flex-row>
+      <aw-scrollpanel>
+        <aw-panel-section caption="i18n.minutesList">
+          <aw-checkbox prop="data.allRevisionsMinutes" action="showAllRevisionsMinutes"></aw-checkbox>
+          <aw-flex-row>
+            <aw-flex-column>
+              <aw-scrollpanel>
+                <aw-splm-table gridid="showAllMinutesTable" use-tree="false"></aw-splm-table>
+              </aw-scrollpanel>
+            </aw-flex-column>
+          </aw-flex-row>
+        </aw-panel-section>
+      </aw-scrollpanel>
+    </aw-panel-body>
+  </aw-panel>
+</aw-flex-row>

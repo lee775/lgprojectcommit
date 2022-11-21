@@ -1,0 +1,26 @@
+.checkbox .aw-widgets-innerWidget {
+  width: fit-content;
+}
+
+.checkboxLabel.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 200px;
+}
+
+.checkboxLabel1.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 200px;
+}
+
+.checkbox ul.aw-widgets-cellListWidget.aw-layout-flexColumnContainer {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.checkbox li.aw-aria-border.aw-widgets-cellListItem.aw-widgets-cellTop.ng-scope.aw-widgets-hideCellListSelEffect {
+  width: auto;
+}
+
+.checkbox .aw-widgets-cellListItemContainer.aw-widgets-droppable {
+  flex-direction: column;
+  width: 182px;
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-panel.directive"],
+  "actions": {
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchDetailService"
+    },
+    "standardBOMTreeSelectionChangeEvent": {
+      "actionType": "JSFunction",
+      "method": "standardBOMTreeSelectionChangeEvent",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    }
+  },
+  "functions": {},
+  "data": {},
+  "dataProviders": {
+    "standardBOMTreeDetailDataProvider": {}
+  },
+  "columnProviders": {
+    "standardBOMFolderTreeColumnProvider": {
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "minWidth": 150,
+          "width": 300,
+          "isTreeNavigation": true
+        }
+      ],
+      "frozenColumnIndex": -1
+    },
+    "standardBOMTreeColumnProvider": {
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "{{i18n.name}}",
+          "minWidth": 150,
+          "width": 400,
+          "isTreeNavigation": true
+        }
+      ]
+    }
+  },
+  "grids": {
+    "standardBOMTreeDetail": {
+      "dataProvider": "standardBOMTreeDetailDataProvider",
+      "columnProvider": "standardBOMTreeColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": true,
+        "enablePinning": false,
+        "enableSorting": false,
+        "isFilteringEnabled": false
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "standardBOMTreeDetailDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "standardBOMTreeSelectionChangeEvent",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    }
+  ],
+  "conditions": {},
+  "i18n": {
+    "name": ["TCUICommandPanelsMessages"]
+  },
+  "lifecycleHooks": {
+    "onMount": "onMount"
+  }
+}

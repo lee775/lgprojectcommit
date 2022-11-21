@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["css/knowledgeWarehouseView.css", "js/aw-flex-column.directive"],
+  "onEvent": [],
+  "actions": {
+    "callToast": {
+      "actionType": "JSFunction",
+      "method": "callToast",
+      "deps": "js/L2_DesignCheckListService"
+    }
+  },
+  "data": {},
+  "conditions": {},
+  "dataProviders": {
+    "designStandardTreeTableData": {
+      "action": "loadData",
+      "initializeAction": "loadData",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "columnProviders": {
+    "designStandardTreeTableColumn": {
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "width": 350,
+          "isTreeNavigation": true
+        },
+        {
+          "name": "dgnStdStatus",
+          "displayName": "{{i18n.dgnStdStatus}}",
+          "width": 100
+        }
+      ],
+      "frozenColumnIndex": -1
+    }
+  },
+  "grids": {
+    "designStandardTreeTable": {
+      "dataProvider": "designStandardTreeTableData",
+      "columnProvider": "designStandardTreeTableColumn",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": false,
+        "enablePinning": false,
+        "enableSorting": false,
+        "enableExpansionStateCaching": true
+      }
+    }
+  },
+  "i18n": {
+    "search": ["L2_DesignStandardMessages"],
+    "requiredText": ["L2_DesignStandardMessages"]
+  },
+  "lifecycleHooks": {
+    "onMount": "callToast"
+  },
+  "functions": {
+    "loadEmployeeTreeTableData": {
+      "functionName": "loadEmployeeTreeTableData",
+      "parameters": [
+        "{{data.treeLoadInput.parentNode}}",
+        "{{data.columnProviders.designStandardTreeTableColumn.sortCriteria}}",
+        "{{data.treeLoadInput}}",
+        "{{ctx}}"
+      ]
+    }
+  }
+}

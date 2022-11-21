@@ -1,0 +1,13 @@
+{
+  "allLineView": "모든 구성요소 보기",
+  "allLineViewDesc": "모든 구성요소를 봅니다.",
+  "isChecklistTarget": "체크리스트 대상?",
+  "isSelect": "선택됨?",
+  "standardBOMSearchAndSelect": "표준 BOM 목록 조회 및 선택",
+  "standardBOMSelectAndChecklistCreate": "표준 BOM 선택 및 체크리스트 생성",
+  "template": "템플릿",
+  "templateList": "템플릿 목록",
+  "templateEdit": "템플릿 편집",
+  "pinPanel": "패널 고정",
+  "unPinPanel" : "고정 해제"
+}

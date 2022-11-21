@@ -1,5 +1,5 @@
 {
-    "name": "lgepHelperManage",
-    "description": "This is the lgepHelperManage module",
-    "skipTest": true
+  "name": "lgepHelperManage",
+  "description": "This is the lgepHelperManage module",
+  "skipTest": true
 }

@@ -1,37 +1,35 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-panel-body.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "editHandlerStateChange",
-            "cacheEventData": true,
-            "action": "editSummerNoteChange"
-        },
-        {
-            "eventId": "lgepSummerNoteEditor.contentLoaded",
-            "cacheEventData": true,
-            "action": "summerNoteInitialize"
-        }
-    ],
-    "data": {},
-    "actions": {
-        "summerNoteInitialize": {
-            "actionType": "JSFunction",
-            "method": "summerNoteInitialize",
-            "inputData": {
-                "eventData": "{{data.eventData}}"
-            },
-            "deps": "js/utils/lgepSummerNoteUtils"
-        },
-        "editSummerNoteChange": {
-            "actionType": "JSFunction",
-            "method": "editSummerNoteChange",
-            "inputData": {
-                "eventData": "{{data.eventData}}"
-            },
-            "deps": "js/utils/lgepSummerNoteUtils"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-panel-body.directive"],
+  "onEvent": [
+    {
+      "eventId": "editHandlerStateChange",
+      "cacheEventData": true,
+      "action": "editSummerNoteChange"
+    },
+    {
+      "eventId": "lgepSummerNoteEditor.contentLoaded",
+      "cacheEventData": true,
+      "action": "summerNoteInitialize"
     }
+  ],
+  "data": {},
+  "actions": {
+    "summerNoteInitialize": {
+      "actionType": "JSFunction",
+      "method": "summerNoteInitialize",
+      "inputData": {
+        "eventData": "{{data.eventData}}"
+      },
+      "deps": "js/utils/lgepSummerNoteUtils"
+    },
+    "editSummerNoteChange": {
+      "actionType": "JSFunction",
+      "method": "editSummerNoteChange",
+      "inputData": {
+        "eventData": "{{data.eventData}}"
+      },
+      "deps": "js/utils/lgepSummerNoteUtils"
+    }
+  }
 }

@@ -1,0 +1,498 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-popup2.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-listbox.directive",
+    "js/aw-toolbar.directive",
+    "js/aw-textbox.directive",
+    "js/aw-scrollpanel.directive",
+    "css/L2_StandardBOMSearchAndSelectView.css"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "loadStandardBOMFolderTree": {
+      "actionType": "JSFunction",
+      "method": "loadStandardBOMFolderTree",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "treeLoadResult": "{{function:loadStandardBOMFolderTreeData}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "loadStandardBOMTree": {
+      "actionType": "JSFunction",
+      "method": "loadStandardBOMTree",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "treeLoadResult2": "{{function:loadStandardBOMTreeData}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "okAction": {
+      "actionType": "JSFunction",
+      "method": "okAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "onInit": {
+      "actionType": "JSFunction",
+      "method": "onInit",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "onMount": {
+      "actionType": "JSFunction",
+      "method": "onMount",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "onUnmount": {
+      "actionType": "JSFunction",
+      "method": "onUnmount",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "standardBOMFolderTreeSelectionChangeEvent": {
+      "actionType": "JSFunction",
+      "method": "standardBOMFolderTreeSelectionChangeEvent",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "standardBOMTreeSelectionChangeEvent": {
+      "actionType": "JSFunction",
+      "method": "standardBOMTreeSelectionChangeEvent",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_StandardBOMSearchDetailService"
+    },
+    "standardBOMTreeGridSelection": {
+      "actionType": "JSFunction",
+      "method": "standardBOMTreeGridSelection",
+      "inputData": {
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "editOpen": {
+      "actionType": "JSFunction",
+      "method": "editOpen",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
+    },
+    "editSave": {
+      "actionType": "JSFunction",
+      "method": "saveEdit",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
+    },
+    "editCancel": {
+      "actionType": "JSFunction",
+      "method": "cancelEdit",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
+    },
+    "refreshBomTree": {
+      "actionType": "JSFunction",
+      "method": "refreshBomTree",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "deleteChecklist": {
+      "actionType": "JSFunction",
+      "method": "deleteChecklist",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    }
+  },
+  "functions": {
+    "loadStandardBOMFolderTreeData": {
+      "functionName": "loadStandardBOMFolderTreeData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}"]
+    },
+    "loadStandardBOMTreeData": {
+      "functionName": "loadStandardBOMTreeData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}"]
+    }
+  },
+  "data": {
+    "disabledButtonChk": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
+    "isEditing": {
+      "dbValue": false
+    },
+    "checkValue": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "checkValues": {
+      "type": "STRING",
+      "dbValue": [{
+          "propDisplayValue": "Yes",
+          "dispValue": "Yes",
+          "propInternalValue": "Y"
+        },
+        {
+          "propDisplayValue": "No",
+          "dispValue": "No",
+          "propInternalValue": "N"
+        }
+      ]
+    },
+    "structureName": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "importance": {
+      "type": "STRING",
+      "isRequired": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "structureTemplate": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "structureIsChecklist": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "structureTargetChecklist": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "structureNameText": {
+      "type": "STRING",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "templateCheckValue": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "isChecklistCheckValue": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "isChecklistTargetValue": {
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "productType": {
+      "type": "STRING",
+      "isRequired": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "productClass": {
+      "type": "STRING",
+      "isRequired": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "productTypeBox": {
+      "type": "STRING",
+      "isRequired": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "productClassBox": {
+      "type": "STRING",
+      "isRequired": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "importanceValue": {
+      "type": "STRING",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "importanceValues": {
+      "type": "STRING",
+      "dbValue": [
+        {
+          "propDisplayValue": "",
+          "dispValue": "",
+          "propInternalValue": ""
+        },
+        {
+          "propDisplayValue": "1",
+          "dispValue": "1",
+          "propInternalValue": "1"
+        },
+        {
+          "propDisplayValue": "2",
+          "dispValue": "2",
+          "propInternalValue": "2"
+        },
+        {
+          "propDisplayValue": "3",
+          "dispValue": "3",
+          "propInternalValue": "3"
+        },
+        {
+          "propDisplayValue": "4",
+          "dispValue": "4",
+          "propInternalValue": "4"
+        },
+        {
+          "propDisplayValue": "5",
+          "dispValue": "5",
+          "propInternalValue": "5"
+        },
+        {
+          "propDisplayValue": "6",
+          "dispValue": "6",
+          "propInternalValue": "6"
+        },
+        {
+          "propDisplayValue": "7",
+          "dispValue": "7",
+          "propInternalValue": "7"
+        },
+        {
+          "propDisplayValue": "8",
+          "dispValue": "8",
+          "propInternalValue": "8"
+        },
+        {
+          "propDisplayValue": "9",
+          "dispValue": "9",
+          "propInternalValue": "9"
+        },
+        {
+          "propDisplayValue": "10",
+          "dispValue": "10",
+          "propInternalValue": "10"
+        }
+      ]
+    }
+  },
+  "dataProviders": {
+    "standardBOMFolderTreeDataProvider": {
+      "action": "loadStandardBOMFolderTree",
+      "initializeAction": "loadStandardBOMFolderTree",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "top"
+      }
+    },
+    "standardBOMTreeDataProvider": {
+      "action": "loadStandardBOMTree",
+      "initializeAction": "loadStandardBOMTree",
+      "treeLoadResult": "{{data.treeLoadResult2}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "top"
+      }
+    }
+  },
+  "columnProviders": {
+    "standardBOMFolderTreeColumnProvider": {
+      "columns": [{
+        "name": "object_name",
+        "displayName": "{{i18n.name}}",
+        "minWidth": 150,
+        "width": 300,
+        "isTreeNavigation": true
+      }],
+      "frozenColumnIndex": -1
+    },
+    "standardBOMTreeColumnProvider": {
+      "columns": [{
+        "name": "object_string",
+        "displayName": "{{i18n.name}}",
+        "minWidth": 150,
+        "width": 400,
+        "isTreeNavigation": true
+      }]
+    }
+  },
+  "grids": {
+    "standardBOMFolderTree": {
+      "dataProvider": "standardBOMFolderTreeDataProvider",
+      "columnProvider": "standardBOMFolderTreeColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": true,
+        "enablePinning": false,
+        "enableSorting": false,
+        "isFilteringEnabled": false,
+        "maxRowsToShow": 17
+      }
+    },
+    "standardBOMTree": {
+      "dataProvider": "standardBOMTreeDataProvider",
+      "columnProvider": "standardBOMTreeColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": true,
+        "enablePinning": false,
+        "enableSorting": false,
+        "isFilteringEnabled": false
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "standardBOMTree.delete.item",
+      "cacheEventData": true,
+      "action": "deleteChecklist"
+    },
+    {
+      "eventId": "standardBOMFolderTreeDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "standardBOMFolderTreeSelectionChangeEvent",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    },
+    {
+      "eventId": "standardBOMTreeDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "standardBOMTreeSelectionChangeEvent",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    },
+    {
+      "eventId": "standardBOMTree.gridSelection",
+      "action": "standardBOMTreeGridSelection",
+      "cacheEventData": true,
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    },
+    {
+      "eventId": "standardBOMTree.table.refresh",
+      "action": "refreshBomTree",
+      "cacheEventData": true,
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
+    }
+  ],
+  "conditions": {
+    "openEdit": {
+      "expression": "data.isEditing.dbValue === true"
+    }
+  },
+  "i18n": {
+    "CancelText": ["TCUICommandPanelsMessages"],
+    "confirm": ["InboxMessages"],
+    "description": ["TCUICommandPanelsMessages"],
+    "isChecklistTarget": ["L2_ChkStandardBOMMessages"],
+    "name": ["TCUICommandPanelsMessages"],
+    "revision": ["TCUICommandPanelsMessages"],
+    "select": ["SearchMessages"],
+    "standardBOMSearchAndSelect": ["L2_ChkStandardBOMMessages"],
+    "template": ["L2_ChkStandardBOMMessages"],
+    "templateList": ["L2_ChkStandardBOMMessages"],
+    "templateEdit": ["L2_ChkStandardBOMMessages"],
+    "functionLabel": ["L2_ChkMainMessages"],
+    "requirementLabel": ["L2_ChkMainMessages"],
+    "failureModeLabel": ["L2_ChkMainMessages"],
+    "failureEffectLabel": ["L2_ChkMainMessages"],
+    "failureDetailLabel": ["L2_ChkMainMessages"],
+    "preventionLabel": ["L2_ChkMainMessages"],
+    "detectivityLabel": ["L2_ChkMainMessages"],
+    "referenceDataLabel": ["L2_ChkMainMessages"],
+    "classificationLabel": ["L2_ChkMainMessages"],
+    "modifyChecklist": ["L2_ChkMainMessages"],
+    "openChecklistBomSave": ["L2_ChkMainMessages"],
+    "openChecklistBomCancelEdit": ["L2_ChkMainMessages"],
+    "editorSave": ["L2_ChkMainMessages"],
+    "failureImportance": ["L2_ChkMainMessages"]
+  },
+  "lifecycleHooks": {
+    "onInit": "onInit",
+    "onMount": "onMount",
+    "onUnmount": "onUnmount"
+  }
+}

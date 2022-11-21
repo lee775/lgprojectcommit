@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-command-panel.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-list.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "css/minutesMainCss.css"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "failureAddAction": {
+      "actionType": "JSFunction",
+      "method": "failureAddAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "failureLoadAction": {
+      "actionType": "JSFunction",
+      "method": "failureLoadAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "failureLoad": {
+      "actionType": "JSFunction",
+      "method": "failureLoad",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "addFailureBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "failureAddAction"
+        },
+        {
+          "action": "closePopupWindow"
+        },
+        {
+          "action": "failureLoad"
+        }
+      ]
+    },
+    "enableAutomaticMultiSelection": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "failureControlList.multiSelectModeAction",
+            "eventData": {
+              "multiSelect": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "data": {},
+  "conditions": {},
+  "onEvent": [
+    {
+      "eventId": "popupFailureList.contentLoaded",
+      "action": "failureLoadAction"
+    },
+    {
+      "eventId": "popupFailureList.contentLoaded",
+      "action": "enableAutomaticMultiSelection"
+    }
+  ],
+  "dataProviders": {
+    "failureControlList": {
+      "action": "",
+      "response": "{{data.failureResponse}}",
+      "totalFound": "{{data.failureResponse.length}}",
+      "selectionModelMode": "multiple"
+    }
+  },
+  "functions": {},
+  "lifecycleHooks": {},
+  "i18n": {}
+}

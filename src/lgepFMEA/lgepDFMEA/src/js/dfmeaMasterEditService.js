@@ -7,10 +7,7 @@ import appCtxService from 'js/appCtxService';
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 import { showWarnMessage } from 'js/utils/fmeaMessageUtils';
-import {
-  isTreeTable,
-  tableRefreshByTableMode,
-} from 'js/utils/fmeaViewCommonUtils';
+import { isTreeTable, tableRefreshByTableMode } from 'js/utils/fmeaViewCommonUtils';
 import * as constants from 'js/constants/fmeaConstants';
 
 const NO_EDITING = 'no-editing';

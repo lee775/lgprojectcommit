@@ -1,60 +1,58 @@
 {
-    "designProcedure": {
-        "url": "/lgepDesignStandards",
-        "data": {},
-        "view": "designProcedure",
-        "parent": "designProcedureLocation"
+  "designProcedure": {
+    "url": "/lgepDesignStandards",
+    "data": {},
+    "view": "designProcedure",
+    "parent": "designProcedureLocation"
+  },
+  "designProcedureLocation": {
+    "data": {
+      "label": {
+        "source": "/i18n/lgepDesignSequenceMessages",
+        "key": "designSequenceSubLocationTitle"
+      },
+      "browserTitle": {
+        "source": "/i18n/lgepDesignSequenceMessages",
+        "key": "designSequenceLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/lgepDesignSequenceMessages",
+        "key": "designSequenceLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/lgepDesignSequenceMessages",
+        "key": "designSequenceLocationHeaderTitle"
+      }
     },
-    "designProcedureLocation": {
-        "data": {
-            "label": {
-                "source": "/i18n/lgepDesignSequenceMessages",
-                "key": "designSequenceSubLocationTitle"
-            },
-            "browserTitle": {
-                "source": "/i18n/lgepDesignSequenceMessages",
-                "key": "designSequenceLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/lgepDesignSequenceMessages",
-                "key": "designSequenceLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/lgepDesignSequenceMessages",
-                "key": "designSequenceLocationHeaderTitle"
-            }
-        },
-        "type": "location"
+    "type": "location"
+  },
+  "designProcedureSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/lgepDesignSequenceMessages",
+        "key": "designSequenceSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "designSequenceSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/lgepDesignSequenceMessages",
+            "key": "designSequenceSubLocationChartTitle"
+          }
+        }
+      }
     },
-    "designProcedureSubLocation": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "priority": 0,
-            "label": {
-                "source": "/i18n/lgepDesignSequenceMessages",
-                "key": "designSequenceSubLocationTitle"
-            },
-            "clientScopeURI": "Awp0SearchResults",
-            "nameToken": "designSequenceSubLocation",
-            "context": {
-                "search": {
-                    "chartTitle": {
-                        "source": "/i18n/lgepDesignSequenceMessages",
-                        "key": "designSequenceSubLocationChartTitle"
-                    }
-                }
-            }
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "params": {
-            "filter": null
-        },
-        "parent": "designProcedureLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation",
-        "url": "/lgepDesignStandards"
-    }
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
+    },
+    "parent": "designProcedureLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "url": "/lgepDesignStandards"
+  }
 }

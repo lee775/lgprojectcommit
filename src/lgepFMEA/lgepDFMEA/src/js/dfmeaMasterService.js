@@ -6,10 +6,7 @@ import eventBus from 'js/eventBus';
 
 import { initMasterDatas } from 'js/dfmeaMasterEditInitService';
 import { getTableMode, isTreeTable } from 'js/utils/fmeaViewCommonUtils';
-import {
-  showWarnMessage,
-  getLocalizedMessageByMasterView,
-} from 'js/utils/fmeaMessageUtils';
+import { showWarnMessage, getLocalizedMessageByMasterView } from 'js/utils/fmeaMessageUtils';
 import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
 import { openSubPanel, closePanel } from 'js/utils/fmeaPanelUtils';
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
@@ -53,11 +50,7 @@ const onInit = async (ctx, data) => {
 };
 
 const _setProductTitle = (dfmeaMasterRev, data) => {
-  const {
-    dfmeaName: dfmeaNameTitle,
-    revisionId: revisionIdTitle,
-    l2Product: l2ProductTitle,
-  } = data.i18n;
+  const { dfmeaName: dfmeaNameTitle, revisionId: revisionIdTitle, l2Product: l2ProductTitle } = data.i18n;
 
   const headerTitleEl = document.querySelector('aw-sublocation-title');
   const productTitleEl = document.createElement('div');
@@ -85,17 +78,13 @@ const _setProductTitle = (dfmeaMasterRev, data) => {
 const getDfmea = async (ctx) => {
   const currentUrl = window.location.href;
   const uid = currentUrl.split('?s_uid=')[1];
-  const dfmeaMasterRev = await loadObjectByPolicy(
-    uid,
-    prop.TYPE_DFMEA_MASTER_REVISION,
-    [
-      prop.ITEM_ID,
-      prop.OBJECT_NAME,
-      prop.PRODUCT,
-      prop.REVISION_ID,
-      prop.REF_SOD_STANDARD,
-    ]
-  );
+  const dfmeaMasterRev = await loadObjectByPolicy(uid, prop.TYPE_DFMEA_MASTER_REVISION, [
+    prop.ITEM_ID,
+    prop.OBJECT_NAME,
+    prop.PRODUCT,
+    prop.REVISION_ID,
+    prop.REF_SOD_STANDARD,
+  ]);
   appCtxService.registerCtx(constants.FMEA_SELECT, dfmeaMasterRev);
   return dfmeaMasterRev;
 };
@@ -109,12 +98,7 @@ export const changeTableMode = (tableMode, data) => {
   if (data.zoomSliderProp) {
     data.zoomSliderProp.dbValues[0].sliderOption.value = 1.04;
   }
-  _deleteCtx([
-    constants.DFMEA_DETAIL_MODE,
-    constants.DFMEA_DETAIL_INIT,
-    constants.ROW_SELECT,
-    constants.FMEA_SELECT_STRUCTURE,
-  ]);
+  _deleteCtx([constants.DFMEA_DETAIL_MODE, constants.DFMEA_DETAIL_INIT, constants.ROW_SELECT, constants.FMEA_SELECT_STRUCTURE]);
 
   if (appCtxService.ctx[constants.FMEA_PANEL]) {
     // Interaction
@@ -154,10 +138,8 @@ const changeView = async (ctx) => {
   if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
     eventBus.publish('dfmea.textTable.reLayout');
   } else if (tableMode === constants.DFMEA_TABLE_MODE_KEY_IMAGE) {
-    let headerLayout = document.querySelector(
-      '#scrollCtrl .tui-grid-rside-area .tui-grid-header-area'
-    );
-    if(document.querySelector('#toastGrid')) {
+    let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area');
+    if (document.querySelector('#toastGrid')) {
       headerLayout.style.width = changeWidth + 'px';
       changeWidth = document.querySelector('#toastGrid').offsetWidth;
     }
@@ -196,10 +178,7 @@ const interactionAction = (ctx) => {
     return;
   }
   if (isTreeTable()) {
-    if (
-      selectRow.type !== prop.TYPE_FMEA_STRUCTURE_REV ||
-      selectRow.typeLevel !== prop.SUB_ASSY
-    ) {
+    if (selectRow.type !== prop.TYPE_FMEA_STRUCTURE_REV || selectRow.typeLevel !== prop.SUB_ASSY) {
       showWarnMessage('warnNoStructureNode');
       return;
     }
@@ -221,29 +200,24 @@ const updateSliderValue = (value, ctx) => {
         tableLayout = document.querySelector('#tree-table-container');
       }
     }
-    
+
     // tableLayout.style.transform = `scale(${value})`;
     // tableLayout.style.transformOrigin = 'left top';
     tableLayout.style.zoom = value;
 
-    let headerLayout = document.querySelector(
-      '#scrollCtrl .tui-grid-rside-area .tui-grid-header-area'
-    );
+    let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area');
 
-    if(headerLayout) {
+    if (headerLayout) {
       headerLayout.style.width = tableLayout.offsetWidth + 'px';
-  
+
       var div = document.getElementById('scrollCtrl');
-      let headerTableLayout = document.querySelector(
-        '#scrollCtrl .tui-grid-rside-area .tui-grid-header-area .tui-grid-table'
-      );
+      let headerTableLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
       headerTableLayout.style.marginLeft = '-' + div.scrollLeft / value + 'px';
       appCtxService.registerCtx(constants.FMEA_IS_RESIZE, true);
 
       plusBtn.disabled = false;
       minusBtn.disabled = false;
     }
-
   }, 260);
 };
 

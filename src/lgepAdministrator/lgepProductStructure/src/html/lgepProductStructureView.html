@@ -1,70 +1,67 @@
 <style>
+  .aw-widgets-propertyContainer > aw-property-label {
+    margin-left: 1%;
+  }
 
-    .aw-widgets-propertyContainer > aw-property-label {
-        margin-left: 1%;
-    }
-   
-    .aw-layout-fxbreadCrumbs > div {
-        margin-left: 0.5%;
-    }
+  .aw-layout-fxbreadCrumbs > div {
+    margin-left: 0.5%;
+  }
 
-    .aw-jswidgets-tableNonEditContainer.aw-layout-flexRowContainer{
-        display: none;
-    }
+  .aw-jswidgets-tableNonEditContainer.aw-layout-flexRowContainer {
+    display: none;
+  }
 
-    .aw-jswidgets-cellTop.aw-jswidgets-uiNonEditCell{
-        padding-right: 30px;
-    }
+  .aw-jswidgets-cellTop.aw-jswidgets-uiNonEditCell {
+    padding-right: 30px;
+  }
 
-    .aw-splm-tableHeaderCellSplitter{
-        display: none;
-    }
+  .aw-splm-tableHeaderCellSplitter {
+    display: none;
+  }
 
-    .productStructureClass{
-        margin-bottom: 60px;
-    }
+  .productStructureClass {
+    margin-bottom: 60px;
+  }
 
-    .aw-layout-panelSectionContent{
-        display: none;
-    }
+  .aw-layout-panelSectionContent {
+    display: none;
+  }
 
-    .aw-flex-row.height-2 {
+  .aw-flex-row.height-2 {
     height: 16.6666666667%;
     margin-bottom: -100px;
-    background-color: #E6E6E6;
-    }
+    background-color: #e6e6e6;
+  }
 
-    .aw-flex-column.width-2 {
+  .aw-flex-column.width-2 {
     width: 16.6666666667%;
     margin-right: -10px;
-    }
-
-   
-
-    
+  }
 </style>
 
-    <aw-flex-column>
-            <aw-flex-row>
-                <aw-sidenav id="sidenavLeft" config="data.showAddProData"></aw-sidenav>
-                <aw-flex-column width="2">
-                    <aw-flex-row height ="2" class ="command">
-                        <aw-command-bar anchor="productStructureCommand" alignment="HORIZONTAL"></aw-command-bar>
-                    </aw-flex-row>
-                    <aw-flex-row height = "40" class = "productStructureTreeClass" id ="proStr" >
-                    <aw-splm-table gridid="productStructureTree" use-tree="true" show-decorate="true" class="proStrTree" id ="proStr">
-                    </aw-splm-table>   
-                </aw-flex-row>
-                </aw-flex-column>
-                <aw-splitter> </aw-splitter>
-                <aw-flex-column width="10">
-                    <aw-flex-row height="fill">
-                        <aw-xrt-summary model-object="ctx.selected" exist-when="data.dataProviders.productStructureTreeDataProvider.selectedObjects.length == 1"></aw-xrt-summary>
-                        <!-- <aw-list dataprovider="data.dataProviders.productStructureTreeDataProvider" class="aw-layout-primaryWorkareaFill"id="mainListId">
+<aw-flex-column>
+  <aw-flex-row>
+    <aw-sidenav id="sidenavLeft" config="data.showAddProData"></aw-sidenav>
+    <aw-flex-column width="2">
+      <aw-flex-row height="2" class="command">
+        <aw-command-bar anchor="productStructureCommand" alignment="HORIZONTAL"></aw-command-bar>
+      </aw-flex-row>
+      <aw-flex-row height="40" class="productStructureTreeClass" id="proStr">
+        <aw-splm-table gridid="productStructureTree" use-tree="true" show-decorate="true" class="proStrTree" id="proStr"> </aw-splm-table>
+      </aw-flex-row>
+    </aw-flex-column>
+    <aw-splitter> </aw-splitter>
+    <aw-flex-column width="10">
+      <aw-flex-row height="fill">
+        <aw-xrt-summary
+          model-object="ctx.selected"
+          exist-when="data.dataProviders.productStructureTreeDataProvider.selectedObjects.length == 1"
+        ></aw-xrt-summary>
+        <!-- <aw-list dataprovider="data.dataProviders.productStructureTreeDataProvider" class="aw-layout-primaryWorkareaFill"id="mainListId">
                             <aw-default-cell vmo="item"></aw-default-cell>
                         </aw-list>  -->
-                    </aw-flex-row>
-                    <!-- <aw-chip-list button-type="positive" dataprovider="data.dataProviders.clickableChipDataProvider" action="clickableChipAction"></aw-chip-list> -->
-                </aw-flex-column>
-            </aw-flex-row>
+      </aw-flex-row>
+      <!-- <aw-chip-list button-type="positive" dataprovider="data.dataProviders.clickableChipDataProvider" action="clickableChipAction"></aw-chip-list> -->
     </aw-flex-column>
+  </aw-flex-row>
+</aw-flex-column>

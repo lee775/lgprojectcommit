@@ -1,4 +1,4 @@
 {
-    "cmdDesignGuideSystemMessagesTitle" : "설계 가이드",
-    "cmdDesignGuideSystemMessagesDescription" : "DGMS(Design Guidance Management System) 시스템은 Trouble DB, Design Guide, Checklist 모듈로 구성되어 있으며, 제품개발 단계별 Self, Final 체크를 실행하며 주요관련 시스템에는 DV-PMS, DQMS, GQIS 등이 있다."
+  "cmdDesignGuideSystemMessagesTitle": "설계 가이드",
+  "cmdDesignGuideSystemMessagesDescription": "DGMS(Design Guidance Management System) 시스템은 Trouble DB, Design Guide, Checklist 모듈로 구성되어 있으며, 제품개발 단계별 Self, Final 체크를 실행하며 주요관련 시스템에는 DV-PMS, DQMS, GQIS 등이 있다."
 }

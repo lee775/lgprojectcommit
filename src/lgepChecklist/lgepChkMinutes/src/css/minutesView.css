@@ -1,0 +1,41 @@
+.namePosition.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  justify-content: end;
+}
+
+.namePosition1.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 0%;
+}
+
+.proceedPanel form.aw-layout-panelSectionContent.afx-base-parentElement.ng-pristine.ng-valid {
+  padding: 0;
+}
+
+.aw-vertical-separator {
+  border-left: 1px solid;
+  width: 0px;
+  margin: 8px 8px;
+}
+
+button.createPosit.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 45%;
+}
+
+button.editPosit.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 45%;
+}
+
+button.editPosit1.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 42%;
+}
+
+button.editPosit2.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 42%;
+}
+
+button.deletePosit.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 45%;
+}
+
+button.exportPosit.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 45%;
+}

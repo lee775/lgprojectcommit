@@ -1,0 +1,380 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-list.directive",
+    "js/aw-date.directive",
+    "js/aw-link.directive",
+    "js/visible-when.directive",
+    "js/aw-icon-button.directive",
+    "js/aw-checkbox.directive"
+  ],
+  "data": {
+    "selectPart": {
+      "displayName": "{{i18n.selectPart}}",
+      "type": "STRING",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "startDate": {
+      "displayName": "",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "endDate": {
+      "displayName": "",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "moreView": {
+      "displayName": "{{i18n.viewMore}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": "false"
+    },
+    "lessView": {
+      "displayName": "{{i18n.viewLess}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "dbValue": "false"
+    },
+    "dateSearch": {
+      "action": "updateDate",
+      "iconName": "Search"
+    }
+  },
+  "dataProviders": {
+    "nameConditions": {
+      "action": "loadNameConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "projectConditions": {
+      "action": "loadProjectConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "productTypeConditions": {
+      "action": "loadProductTypeConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "productClassConditions": {
+      "action": "loadproductClassConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "productNameConditions": {
+      "action": "loadproductNameConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "moduleNameConditions": {
+      "action": "loadModuleNameConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "creationUserConditions": {
+      "action": "loadCreationUserConditions",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    }
+  },
+  "actions": {
+    "onInit": {
+      "actionType": "JSFunction",
+      "method": "onInit",
+      "deps": "js/L2_ChecklistFilterService",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      }
+    },
+    "reveal": {
+      "actionType": "dataProvider",
+      "methods": [
+        "nameConditions",
+        "revisionIdConditions",
+        "projectConditions",
+        "creationUserConditions",
+        "productTypeConditions",
+        "productClassConditions",
+        "productNameConditions",
+        "moduleNameConditions"
+      ]
+    },
+    "loadNameConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.nameConditions}}",
+        "conditionName": "Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadProjectConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.projectConditions}}",
+        "conditionName": "Project Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadProductTypeConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.productTypeConditions}}",
+        "conditionName": "Product Type"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadproductClassConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.productClassConditions}}",
+        "conditionName": "Product Class"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadproductNameConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.productNameConditions}}",
+        "conditionName": "Product ID"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadModuleNameConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.moduleNameConditions}}",
+        "conditionName": "Module Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadCreationUserConditions": {
+      "actionType": "JSFunction",
+      "method": "loadConditions",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.creationUserConditions}}",
+        "conditionName": "Creation User"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeNameConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeProjectNameConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Project Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeProductTypeConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Product Type"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeProductClassConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Product Class"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeProductNameConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Product ID"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeModuleNameConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Module Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "loadChangeCreationUserConditinos": {
+      "actionType": "JSFunction",
+      "method": "loadChangeConditinos",
+      "inputData": {
+        "conditionName": "Creation User"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterNameCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.nameConditions}}",
+        "conditionName": "Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterProjectCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.projectConditions}}",
+        "conditionName": "Project Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterProductTypeCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.productTypeConditions}}",
+        "conditionName": "Product Type"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterProductClassCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.productClassConditions}}",
+        "conditionName": "Product Class"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterProductNameCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.productNameConditions}}",
+        "conditionName": "Product ID"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterModuleNameCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.moduleNameConditions}}",
+        "conditionName": "Module Name"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterCreationCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}",
+        "dataProvider": "{{data.dataProviders.creationUserConditions}}",
+        "conditionName": "Creation User"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "selectFilterCondition": {
+      "actionType": "JSFunction",
+      "method": "selectFilterCondition",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "updateDate": {
+      "actionType": "JSFunction",
+      "method": "filteringByDate",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistFilterService"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistMainService"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "checklist.filter.viewChange",
+      "action": "reveal"
+    },
+    {
+      "eventId": "checklist.filter.dateUpdate",
+      "action": "updateDate"
+    },
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setTuiGridStyle"
+    }
+  ],
+  "grids": {},
+  "lifecycleHooks": {
+    "onInit": "onInit",
+    "onUnmount": "unMount"
+  },
+  "conditions": {
+    "selectUser": {
+      "expression": "data.userSelectedState===true"
+    }
+  },
+  "i18n": {
+    "filterChecklist": ["L2_ChkMainMessages"],
+    "viewMore": ["L2_ChkMainMessages"],
+    "viewLess": ["L2_ChkMainMessages"]
+  }
+}

@@ -1,290 +1,264 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-column.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-panel.directive"
-    ],
-    "data": {
-        "user_id": {
-            "displayName": "{{i18n.user_id}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "division": {
-            "displayName": "{{i18n.division}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "module_name": {
-            "displayName": "{{i18n.module_name}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "action_name": {
-            "displayName": "{{i18n.action_name}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "targets": {
-            "displayName": "{{i18n.targets}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "results": {
-            "displayName": "{{i18n.results}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "log_comments": {
-            "displayName": "{{i18n.log_comments}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "update_date": {
-            "displayName": "{{i18n.update_date}}",
-            "type": "DATE",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "client_ip": {
-            "displayName": "{{i18n.client_ip}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "pageSize": 40
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-flex-column.directive", "js/aw-flex-row.directive", "js/aw-splm-table.directive", "js/aw-panel.directive"],
+  "data": {
+    "user_id": {
+      "displayName": "{{i18n.user_id}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "actions": {
-        "getUserLogsTable": {
-            "actionType": "JSFunction",
-            "method": "getUserLogList",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "result": "result",
-                "totalFound": "totalFound",
-                "filterResults": "{{function:applySortAndFilterRows}}"
-            },
-            "deps": "js/lgepUserLogsService"
+    "division": {
+      "displayName": "{{i18n.division}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "module_name": {
+      "displayName": "{{i18n.module_name}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "action_name": {
+      "displayName": "{{i18n.action_name}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "targets": {
+      "displayName": "{{i18n.targets}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "results": {
+      "displayName": "{{i18n.results}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "log_comments": {
+      "displayName": "{{i18n.log_comments}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "update_date": {
+      "displayName": "{{i18n.update_date}}",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "client_ip": {
+      "displayName": "{{i18n.client_ip}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "pageSize": 40
+  },
+  "actions": {
+    "getUserLogsTable": {
+      "actionType": "JSFunction",
+      "method": "getUserLogList",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "result": "result",
+        "totalFound": "totalFound",
+        "filterResults": "{{function:applySortAndFilterRows}}"
+      },
+      "deps": "js/lgepUserLogsService"
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "getUserLogList",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/lgepUserLogsService"
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/lgepUserLogsService"
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
         },
-        "applyFilterFacets": {
-            "actionType": "JSFunction",
-            "method": "getUserLogList",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/lgepUserLogsService"
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/lgepUserLogsService"
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyFilterFacets"
-                }
-            ]
+        {
+          "action": "applyFilterFacets"
         }
-    },
-    "dataProviders": {
-        "userLogsDataProvider": {
-            "action": "getUserLogsTable",
-            "response": "{{data.filterResults}}",
-            "totalFound": "{{data.totalFound}}",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}"
-        }
-    },
-    "columnProviders": {
-        "userLogsColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "user_id",
-                    "displayName": "{{i18n.user_id}}",
-                    "maxWidth": 300,
-                    "minWidth": 80,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "user_id"
-                },
-                {
-                    "name": "division",
-                    "displayName": "{{i18n.division}}",
-                    "maxWidth": 300,
-                    "minWidth": 80,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "division"
-                },
-                {
-                    "name": "module_name",
-                    "displayName": "{{i18n.module_name}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "module_name"
-                },
-                {
-                    "name": "action_name",
-                    "displayName": "{{i18n.action_name}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "action_name"
-                },
-                {
-                    "name": "targets",
-                    "displayName": "{{i18n.targets}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "targets"
-                },
-                {
-                    "name": "results",
-                    "displayName": "{{i18n.results}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "results"
-                },
-                {
-                    "name": "log_comments",
-                    "displayName": "{{i18n.log_comments}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "log_comments"
-                },
-                {
-                    "name": "update_date",
-                    "displayName": "{{i18n.update_date}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "DATE",
-                    "propertyName": "update_date"
-                },
-                {
-                    "name": "client_ip",
-                    "displayName": "{{i18n.client_ip}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "dataType": "STRING",
-                    "propertyName": "client_ip"
-                }
-            ]
-        }
-    },
-    "grids": {
-        "logList": {
-            "dataProvider": "userLogsDataProvider",
-            "columnProvider": "userLogsColumnProvider",
-            "addIconColumn": false,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": true,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "applySortAndFilterRows": {
-            "functionName": "applySortAndFilterRows",
-            "parameters": [
-                "{{data.columnProviders.userLogsColumnProvider.columnFilters}}",
-                "{{data.columnProviders.userLogsColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.userLogsDataProvider.startIndex}}",
-                "{{data.pageSize}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.userLogsColumnProvider.columnFilters}}",
-                "{{data.fullData}}"
-            ]
-        }
-    },
-    "i18n": {
-        "user_id": [
-            "lgepUserLogsMessages"
-        ],
-        "division": [
-            "lgepUserLogsMessages"
-        ],
-        "module_name": [
-            "lgepUserLogsMessages"
-        ],
-        "action_name": [
-            "lgepUserLogsMessages"
-        ],
-        "targets": [
-            "lgepUserLogsMessages"
-        ],
-        "results": [
-            "lgepUserLogsMessages"
-        ],
-        "log_comments": [
-            "lgepUserLogsMessages"
-        ],
-        "update_date": [
-            "lgepUserLogsMessages"
-        ],
-        "client_ip": [
-            "lgepUserLogsMessages"
-        ]
+      ]
     }
+  },
+  "dataProviders": {
+    "userLogsDataProvider": {
+      "action": "getUserLogsTable",
+      "response": "{{data.filterResults}}",
+      "totalFound": "{{data.totalFound}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "columnProviders": {
+    "userLogsColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "user_id",
+          "displayName": "{{i18n.user_id}}",
+          "maxWidth": 300,
+          "minWidth": 80,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "user_id"
+        },
+        {
+          "name": "division",
+          "displayName": "{{i18n.division}}",
+          "maxWidth": 300,
+          "minWidth": 80,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "division"
+        },
+        {
+          "name": "module_name",
+          "displayName": "{{i18n.module_name}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "module_name"
+        },
+        {
+          "name": "action_name",
+          "displayName": "{{i18n.action_name}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "action_name"
+        },
+        {
+          "name": "targets",
+          "displayName": "{{i18n.targets}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "targets"
+        },
+        {
+          "name": "results",
+          "displayName": "{{i18n.results}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "results"
+        },
+        {
+          "name": "log_comments",
+          "displayName": "{{i18n.log_comments}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "log_comments"
+        },
+        {
+          "name": "update_date",
+          "displayName": "{{i18n.update_date}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "DATE",
+          "propertyName": "update_date"
+        },
+        {
+          "name": "client_ip",
+          "displayName": "{{i18n.client_ip}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "dataType": "STRING",
+          "propertyName": "client_ip"
+        }
+      ]
+    }
+  },
+  "grids": {
+    "logList": {
+      "dataProvider": "userLogsDataProvider",
+      "columnProvider": "userLogsColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.userLogsColumnProvider.columnFilters}}",
+        "{{data.columnProviders.userLogsColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.userLogsDataProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.userLogsColumnProvider.columnFilters}}", "{{data.fullData}}"]
+    }
+  },
+  "i18n": {
+    "user_id": ["lgepUserLogsMessages"],
+    "division": ["lgepUserLogsMessages"],
+    "module_name": ["lgepUserLogsMessages"],
+    "action_name": ["lgepUserLogsMessages"],
+    "targets": ["lgepUserLogsMessages"],
+    "results": ["lgepUserLogsMessages"],
+    "log_comments": ["lgepUserLogsMessages"],
+    "update_date": ["lgepUserLogsMessages"],
+    "client_ip": ["lgepUserLogsMessages"]
+  }
 }

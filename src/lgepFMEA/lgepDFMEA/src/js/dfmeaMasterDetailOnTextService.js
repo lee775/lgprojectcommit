@@ -5,10 +5,7 @@
 import appCtxService from 'js/appCtxService';
 
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
-import {
-  loadDetail,
-  setEmptyEditorValue,
-} from 'js/dfmeaMasterDetailCommonService';
+import { loadDetail, setEmptyEditorValue } from 'js/dfmeaMasterDetailCommonService';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 

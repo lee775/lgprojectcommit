@@ -9,20 +9,14 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import lgepBomUtils from 'js/utils/lgepBomUtils';
 import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import { commonEditCancel } from 'js/dfmeaMasterEditService';
-import {
-  saveCloseBomWindow,
-  saveAsItemToRev,
-  loadObjectByPolicy,
-} from 'js/utils/fmeaTcUtils';
+import { saveCloseBomWindow, saveAsItemToRev, loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
 import { makeShortenValues, insertLog } from 'js/utils/fmeaCommonUtils';
 import { showInfoMessage } from 'js/utils/fmeaMessageUtils';
 import { editCancelCtx } from 'js/dfmeaMasterEditService';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
 import loadUtils from 'js/utils/lgepLoadingUtils';
-import {
-  tableRefreshByTableMode,
-} from 'js/utils/fmeaViewCommonUtils';
+import { tableRefreshByTableMode } from 'js/utils/fmeaViewCommonUtils';
 
 /**
  * 편집 저장.
@@ -78,13 +72,10 @@ const _replaceFunctions = async (editRows, fmeaRev) => {
     }
     try {
       const allBomlines = await lgepBomUtils.expandPSAllLevels([bom.bomLine]);
-      const newFunctionUid = await _replaceFunction(
-        editRow,
-        allBomlines.output
-      );
+      const newFunctionUid = await _replaceFunction(editRow, allBomlines.output);
       editRow['newFunctionUid'] = newFunctionUid;
     } catch (e) {
-      console.log('_replaceFunctions', e);
+      //console.log('_replaceFunctions', e);
     } finally {
       await saveCloseBomWindow(bom.bomWindow);
     }
@@ -96,29 +87,17 @@ const _replaceFunctions = async (editRows, fmeaRev) => {
 const _replaceFunction = async (editRow, allBomlinesOutput) => {
   // 1. 변경 전 기능 정보 get
   const newFunctionUid = editRow[prop.FUNCTION].uid;
-  const baseFunction = _getBomInfoByUid(
-    allBomlinesOutput,
-    editRow.row.props[prop.FUNCTION_SHORT].uid,
-    prop.TYPE_FMEA_FUNC_REVISION
-  );
+  const baseFunction = _getBomInfoByUid(allBomlinesOutput, editRow.row.props[prop.FUNCTION_SHORT].uid, prop.TYPE_FMEA_FUNC_REVISION);
   // 1-2. 변경전 funciton을 자식으로 가지고 있는 strcture 정보 get
   const structureUid = _getStructureUidUntilSubAssy(editRow.row);
-  const structureInfo = await _getBomInfoByPreviousRevUid(
-    allBomlinesOutput,
-    structureUid,
-    prop.TYPE_FMEA_STRUCTURE_REV
-  );
+  const structureInfo = await _getBomInfoByPreviousRevUid(allBomlinesOutput, structureUid, prop.TYPE_FMEA_STRUCTURE_REV);
 
   // 1-3. 변경전 function의 고장 bomline갖고있기
   const baseFunctionRev = baseFunction.itemRevOfBOMLine;
   const failureBomlines = await _getBomlinesByParentRev(baseFunctionRev);
 
   // 1-4. 변경할 master saveas 및 revise
-  const masterFunction = await loadObjectByPolicy(
-    newFunctionUid,
-    prop.TYPE_FMEA_FUNC_REVISION,
-    [prop.OBJECT_NAME]
-  );
+  const masterFunction = await loadObjectByPolicy(newFunctionUid, prop.TYPE_FMEA_FUNC_REVISION, [prop.OBJECT_NAME]);
   const saveasFunc = await saveAsItemToRev(masterFunction);
   // await lgepObjectUtils.getProperties(
   //   [baseFunctionRev, saveasFunc],
@@ -126,14 +105,9 @@ const _replaceFunction = async (editRow, allBomlinesOutput) => {
   // );
 
   // 2. requirement 객체 ref 추가
-  const requirementUid =
-    baseFunctionRev.props[prop.REF_REQUIREMENTS].dbValues[0];
+  const requirementUid = baseFunctionRev.props[prop.REF_REQUIREMENTS].dbValues[0];
   const requirement = lgepObjectUtils.getObject(requirementUid);
-  await lgepObjectUtils.addChildren(
-    saveasFunc,
-    [requirement],
-    prop.REF_REQUIREMENTS
-  );
+  await lgepObjectUtils.addChildren(saveasFunc, [requirement], prop.REF_REQUIREMENTS);
 
   // 3. 변경 전 function bomline 제거
   await lgepBomUtils.removeChildrenFromParentLine([baseFunction.bomLine]);
@@ -149,11 +123,7 @@ const _replaceFunction = async (editRow, allBomlinesOutput) => {
     const addResult = await lgepBomUtils.add(newFunctionBomLine, failureRev);
     const failureBomline = addResult.addedLines[0];
     const noteTypeValues = await _getNoteTypesValue(currentFailureBomline);
-    lgepObjectUtils.setProperties(
-      failureBomline,
-      constants.NOTETYPE_PROPS,
-      noteTypeValues
-    );
+    lgepObjectUtils.setProperties(failureBomline, constants.NOTETYPE_PROPS, noteTypeValues);
   }
   return saveasFunc.uid;
 };
@@ -167,10 +137,7 @@ const _replaceFailures = async (editRows, fmeaRevision) => {
   let bom;
   for (let editRow of changeEditRows) {
     // 변경 row 정보 중 고장 변경인 경우만 실행
-    if (
-      !editRow[prop.POTENTIAL_FAILURE_MODE] ||
-      !editRow[prop.POTENTIAL_FAILURE_MODE].uid
-    ) {
+    if (!editRow[prop.POTENTIAL_FAILURE_MODE] || !editRow[prop.POTENTIAL_FAILURE_MODE].uid) {
       continue;
     }
     if (!bom) {
@@ -193,37 +160,20 @@ const _replaceFailures = async (editRows, fmeaRevision) => {
 const _replaceFailure = async (editRow, allBomlinesOutput) => {
   try {
     // 1. 기존 고장 정보 get
-    const baseFailure = _getBomInfoByUid(
-      allBomlinesOutput,
-      editRow.row.props.uid,
-      prop.TYPE_FMEA_FAILURE_REVISION
-    );
+    const baseFailure = _getBomInfoByUid(allBomlinesOutput, editRow.row.props.uid, prop.TYPE_FMEA_FAILURE_REVISION);
 
     const baseFailureRev = baseFailure.itemRevOfBOMLine;
     // const noteTypeValues = await _getNoteTypesValue(baseFailure.bomLine);
     // 1-2. 기존 고장이 붙어있는 function Info get
-    const funcitonUid = editRow['newFunctionUid']
-      ? editRow['newFunctionUid']
-      : editRow.row.props[prop.FUNCTION_SHORT].uid;
+    const funcitonUid = editRow['newFunctionUid'] ? editRow['newFunctionUid'] : editRow.row.props[prop.FUNCTION_SHORT].uid;
 
-    const functionInfo = await _getBomInfoByPreviousRevUid(
-      allBomlinesOutput,
-      funcitonUid,
-      prop.TYPE_FMEA_FUNC_REVISION
-    );
+    const functionInfo = await _getBomInfoByPreviousRevUid(allBomlinesOutput, funcitonUid, prop.TYPE_FMEA_FUNC_REVISION);
     const masterFailureUid = editRow[prop.POTENTIAL_FAILURE_MODE].uid;
-    const masterFailure = await loadObjectByPolicy(
-      masterFailureUid,
-      prop.TYPE_FMEA_FAILURE_REVISION,
-      [prop.OBJECT_NAME]
-    );
+    const masterFailure = await loadObjectByPolicy(masterFailureUid, prop.TYPE_FMEA_FAILURE_REVISION, [prop.OBJECT_NAME]);
     const saveasFailure = await saveAsItemToRev(masterFailure);
 
     // 3. 새 failure bomline add
-    const addResult = await lgepBomUtils.add(
-      functionInfo.bomLine,
-      saveasFailure
-    );
+    const addResult = await lgepBomUtils.add(functionInfo.bomLine, saveasFailure);
     // const newFailureBomline = addResult.addedLines[0];
 
     // 4. Note Types 복사
@@ -245,15 +195,9 @@ const _replaceFailureProperties = async (editRows, reviseRevision) => {
   try {
     for (const editRow of editRows) {
       // 고장 봄라인 get
-      const failureUid = editRow['newFailureUid']
-        ? editRow['newFailureUid']
-        : editRow.row.props.uid;
+      const failureUid = editRow['newFailureUid'] ? editRow['newFailureUid'] : editRow.row.props.uid;
 
-      const failureInfo = await _getBomInfoByPreviousRevUid(
-        allBomlines.output,
-        failureUid,
-        prop.TYPE_FMEA_FAILURE_REVISION
-      );
+      const failureInfo = await _getBomInfoByPreviousRevUid(allBomlines.output, failureUid, prop.TYPE_FMEA_FAILURE_REVISION);
 
       const failureBomline = failureInfo.bomLine;
       const failureRev = failureInfo.itemRevOfBOMLine;
@@ -314,11 +258,7 @@ const _getNoteTypesValue = async (baseBomline) => {
 
 // Note Types 복사
 const _copyNoteTypes = async (noteTypeValues, newBomline) => {
-  await lgepObjectUtils.setProperties(
-    newBomline,
-    constants.NOTETYPE_PROPS,
-    noteTypeValues
-  );
+  await lgepObjectUtils.setProperties(newBomline, constants.NOTETYPE_PROPS, noteTypeValues);
 };
 
 // get Bomline
@@ -329,7 +269,7 @@ const _getBomlinesByParentRev = async (parentRev) => {
     const allBomlines = await lgepBomUtils.expandPSOneLevel([bom.bomLine]);
     return allBomlines.output[0].children;
   } catch (e) {
-    console.log('_getBomlinesByParentRev', e);
+    //console.log('_getBomlinesByParentRev', e);
   } finally {
     await saveCloseBomWindow(bomWindow);
   }
@@ -339,14 +279,10 @@ const _getBomlinesByParentRev = async (parentRev) => {
 const _editRequirement = async (editRow, baseBomline) => {
   const changeRequirement = editRow[prop.REQUIREMENT];
   if (changeRequirement && changeRequirement.value) {
-    const requirementUid =
-      baseBomline.props[prop.BOMLINE_REQUIREMENT].dbValues[0];
+    const requirementUid = baseBomline.props[prop.BOMLINE_REQUIREMENT].dbValues[0];
     const requirement = lgepObjectUtils.getObject(requirementUid);
     const props = [prop.REQUIREMENT, prop.REQUIREMENT_SHORT];
-    const values = [
-      changeRequirement.value,
-      makeShortenValues(changeRequirement.value),
-    ];
+    const values = [changeRequirement.value, makeShortenValues(changeRequirement.value)];
     await lgepObjectUtils.setProperties(requirement, props, values);
   }
 };
@@ -356,29 +292,23 @@ const _replaceFailureProps = async (editRow, baseBomline) => {
   const changeEffect = editRow[prop.FAILURE_EFFECT];
   let failureRev;
   if (changeEffect && changeEffect.value) {
-    const baseFailureUid =
-      baseBomline.props[prop.BOMLINE_FAILURE_EFFECT].dbValues[0];
+    const baseFailureUid = baseBomline.props[prop.BOMLINE_FAILURE_EFFECT].dbValues[0];
     failureRev = lgepObjectUtils.getObject(baseFailureUid);
 
     await lgepObjectUtils.setProperties(
       failureRev,
       [prop.FAILURE_EFFECT, prop.FAILURE_EFFECT_SHORT],
-      [changeEffect.value, makeShortenValues(changeEffect.value)]
+      [changeEffect.value, makeShortenValues(changeEffect.value)],
     );
   }
   const changeCause = editRow[prop.CAUSE_OF_FAILURE];
   if (changeCause && changeCause.value) {
     const newCauseValue = changeCause.value;
     if (!failureRev) {
-      const baseFailureUid =
-        baseBomline.props[prop.BOMLINE_CAUSE_OF_FAILURE].dbValues[0];
+      const baseFailureUid = baseBomline.props[prop.BOMLINE_CAUSE_OF_FAILURE].dbValues[0];
       failureRev = lgepObjectUtils.getObject(baseFailureUid);
     }
-    await lgepObjectUtils.setProperties(
-      failureRev,
-      [prop.CAUSE_OF_FAILURE, prop.CAUSE_OF_FAILURE_SHORT],
-      [newCauseValue, makeShortenValues(newCauseValue)]
-    );
+    await lgepObjectUtils.setProperties(failureRev, [prop.CAUSE_OF_FAILURE, prop.CAUSE_OF_FAILURE_SHORT], [newCauseValue, makeShortenValues(newCauseValue)]);
   }
 };
 
@@ -386,19 +316,13 @@ const _replaceFailureProps = async (editRow, baseBomline) => {
 const _revisePrecautionAction = async (editRow, baseBomline) => {
   const changePrecaution = editRow[prop.PRECATUIONS_ACTION];
   if (changePrecaution && changePrecaution.value) {
-    await lgepObjectUtils.getProperties(baseBomline, [
-      prop.BOMLINE_PRECAUTION_ACTION,
-    ]);
-    const precautionUid =
-      baseBomline.props[prop.BOMLINE_PRECAUTION_ACTION].dbValues[0];
-    const precaution = await loadObjectByPolicy(
-      precautionUid,
-      prop.TYPE_FMEA_PREACUTION_ACTION
-    );
+    await lgepObjectUtils.getProperties(baseBomline, [prop.BOMLINE_PRECAUTION_ACTION]);
+    const precautionUid = baseBomline.props[prop.BOMLINE_PRECAUTION_ACTION].dbValues[0];
+    const precaution = await loadObjectByPolicy(precautionUid, prop.TYPE_FMEA_PREACUTION_ACTION);
     lgepObjectUtils.setProperties(
       precaution,
       [prop.PRECATUIONS_ACTION, prop.PRECATUIONS_ACTION_SHORT],
-      [changePrecaution.value, makeShortenValues(changePrecaution.value)]
+      [changePrecaution.value, makeShortenValues(changePrecaution.value)],
     );
   }
 };
@@ -407,20 +331,14 @@ const _revisePrecautionAction = async (editRow, baseBomline) => {
 const _reviseDetectionAction = async (editRow, baseBomline) => {
   const changeDetection = editRow[prop.DETECTION_ACTION];
   if (changeDetection && changeDetection.value) {
-    await lgepObjectUtils.getProperties(baseBomline, [
-      prop.BOMLINE_DETECTION_ACTION,
-    ]);
+    await lgepObjectUtils.getProperties(baseBomline, [prop.BOMLINE_DETECTION_ACTION]);
 
-    const detectionUid =
-      baseBomline.props[prop.BOMLINE_DETECTION_ACTION].dbValues[0];
-    const detectionAction = await loadObjectByPolicy(
-      detectionUid,
-      prop.TYPE_FMEA_DETECTION_ACTION
-    );
+    const detectionUid = baseBomline.props[prop.BOMLINE_DETECTION_ACTION].dbValues[0];
+    const detectionAction = await loadObjectByPolicy(detectionUid, prop.TYPE_FMEA_DETECTION_ACTION);
     lgepObjectUtils.setProperties(
       detectionAction,
       [prop.DETECTION_ACTION, prop.DETECTION_ACTION_SHORT],
-      [changeDetection.value, makeShortenValues(changeDetection.value)]
+      [changeDetection.value, makeShortenValues(changeDetection.value)],
     );
   }
 };
@@ -481,14 +399,8 @@ const _isChange = (changeInfo) => {
 const _editRequirement2 = (editRow, failureRev) => {
   const changeRequirement = editRow[prop.REQUIREMENT];
   if (changeRequirement && changeRequirement.value) {
-    const props = [
-      prop.FUNCTION_REQUIREMENTS,
-      prop.FUNCTION_REQUIREMENTS_SHORT,
-    ];
-    const values = [
-      changeRequirement.value,
-      makeShortenValues(changeRequirement.value),
-    ];
+    const props = [prop.FUNCTION_REQUIREMENTS, prop.FUNCTION_REQUIREMENTS_SHORT];
+    const values = [changeRequirement.value, makeShortenValues(changeRequirement.value)];
     lgepObjectUtils.setProperties(failureRev, props, values);
   }
 };
@@ -501,20 +413,12 @@ const _editRequirement2 = (editRow, failureRev) => {
 const _replaceFailureProps2 = (editRow, failureRev) => {
   const changeEffect = editRow[prop.FAILURE_EFFECT];
   if (changeEffect && changeEffect.value) {
-    lgepObjectUtils.setProperties(
-      failureRev,
-      [prop.FAILURE_EFFECT, prop.FAILURE_EFFECT_SHORT],
-      [changeEffect.value, makeShortenValues(changeEffect.value)]
-    );
+    lgepObjectUtils.setProperties(failureRev, [prop.FAILURE_EFFECT, prop.FAILURE_EFFECT_SHORT], [changeEffect.value, makeShortenValues(changeEffect.value)]);
   }
   const changeCause = editRow[prop.CAUSE_OF_FAILURE];
   if (changeCause && changeCause.value) {
     const newCauseValue = changeCause.value;
-    lgepObjectUtils.setProperties(
-      failureRev,
-      [prop.CAUSE_OF_FAILURE, prop.CAUSE_OF_FAILURE_SHORT],
-      [newCauseValue, makeShortenValues(newCauseValue)]
-    );
+    lgepObjectUtils.setProperties(failureRev, [prop.CAUSE_OF_FAILURE, prop.CAUSE_OF_FAILURE_SHORT], [newCauseValue, makeShortenValues(newCauseValue)]);
   }
 };
 
@@ -530,7 +434,7 @@ const _revisePrecautionAction2 = (editRow, failureRev) => {
     lgepObjectUtils.setProperties(
       failureRev,
       [prop.PRECATUION_ACTION, prop.PRECATUION_ACTION_SHORT],
-      [changePrecaution.value, makeShortenValues(changePrecaution.value)]
+      [changePrecaution.value, makeShortenValues(changePrecaution.value)],
     );
   }
 };
@@ -547,7 +451,7 @@ const _reviseDetectionAction2 = (editRow, failureRev) => {
     lgepObjectUtils.setProperties(
       failureRev,
       [prop.DETECTION_ACTIONS, prop.DETECTION_ACTIONS_SHORT],
-      [changeDetection.value, makeShortenValues(changeDetection.value)]
+      [changeDetection.value, makeShortenValues(changeDetection.value)],
     );
   }
 };

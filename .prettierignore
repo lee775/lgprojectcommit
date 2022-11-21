@@ -1,0 +1,20 @@
+# Ignore artifacts:
+build
+coverage
+
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/repo
+**/out
+**/bin
+**/build
+**/conf
+**/lib
+**/xsd
+**/vscode
+**/src/generator
+**/src/image
+**/src/soa
+**/src/solution

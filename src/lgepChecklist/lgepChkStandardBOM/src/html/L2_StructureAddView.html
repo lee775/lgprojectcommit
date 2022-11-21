@@ -1,0 +1,11 @@
+<aw-command-panel caption="i18n.L2_StructureCreatePanel" context="data">
+  <aw-panel>
+    <aw-panel-body>
+      <aw-textbox prop="data.structureNameText"></aw-textbox>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer class="create-footer">
+    <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" action="addStructureSave">{{i18n.save}}
+    </aw-button>
+  </aw-panel-footer>
+</aw-command-panel>

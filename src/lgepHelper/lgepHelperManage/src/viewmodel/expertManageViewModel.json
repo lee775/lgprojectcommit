@@ -1,301 +1,298 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-label.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-splitter.directive",
-        "js/aw-panel.directive",
-        "js/aw-command-panel-section.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-command-bar.directive",
-        "js/aw-tab-set.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "expertDataProvider.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "expertLabel"
-        },
-        {
-            "eventId": "qaList.edit",
-            "action": "expertApprovalPopupBat"
-        }
-    ],
-    "data": {
-        "summaryTab": [
-            {
-                "name": "{{i18n.summary}}",
-                "tabKey": "summary"
-            }
-        ],
-        "expertCoverages": {
-            "displayName": "{{i18n.expertCoverages}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "expertName": {
-            "displayName": "{{i18n.name}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "expertState": {
-            "displayName": "{{i18n.expertStatus}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "answerCount": {
-            "displayName": "{{i18n.answerCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "pageSize": 40
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-label.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-splitter.directive",
+    "js/aw-panel.directive",
+    "js/aw-command-panel-section.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-tab-set.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "expertDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "expertLabel"
     },
-    "actions": {
-        "expertApprovalPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "expertApprovalPopup",
-                    "locals": {
-                        "caption": "{{i18n.expertAuthorization}}"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": true,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "width": 400,
-                        "height": 310
-                    }
-                }
-            },
-            "events": {
-                "success": [
-                    {
-                        "name": "expertApprovalPopupLoadSuccess"
-                    }
-                ]
-            },
-            "deps": "js/popupService"
-        },
-        "userExpertSelectedCheck": {
-            "actionType": "JSFunction",
-            "method": "userExpertSelectedCheck",
-            "inputData": {
-                "value": "{{data.dataProviders}}"
-            },
-            "outputData": {
-                "userExpertSelectedState": "userExpertSelectedState"
-            },
-            "deps": "js/technicalService"
-        },
-        "expertLabel":{
-            "actionType": "JSFunction",
-            "method": "expertLabel",
-            "inputData": {
-                "value": "{{data.eventData.selectedObjects[0]}}",
-                "data": "{{data}}"
-            },
-            "deps": "js/technicalService"
-        },
-        "getUserTable": {
-            "actionType": "JSFunction",
-            "method": "getUserTable",
-            "inputData": {
-                "data" : "{{data}}"
-            },
-            "outputData": {
-                "result": "result",
-                "filterResults": "{{function:applySortAndFilterRows}}"
-            },
-            "deps": "js/technicalService"
-        },
-        "listQaTest":{
-            "actionType":"dataProvider",
-            "method":"qaAnswerList"
-        },
-        "setDispAfterDash": {
-            "actionType": "JSFunction",
-            "method": "setDispAfterDash",
-            "deps": "js/technicalService",
-            "inputData": {
-                "data": "{{data}}"
-            }
-        },
-        "applyFilterFacets": {
-            "actionType": "JSFunction",
-            "method": "getTechnicalTable",
-            "inputData": {
-                "ctx" : "{{ctx}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/technicalService"
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/technicalService"
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyFilterFacets"
-                }
-            ]
-        },
-        "expertApprovalPopupBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "userExpertSelectedCheck"
-                },
-                {
-                    "condition": "conditions.cond1",
-                    "action": "expertApprovalPopup"
-                }
-            ]
-        }
-    },
-    "dataProviders": {
-        "expertDataProvider": {
-            "action": "getUserTable",
-            "response": "{{data.filterResults}}",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}"
-        }
-    },
-    "columnProviders": {
-        "expertColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "l2_user_name",
-                    "displayName": "{{i18n.name}}",
-                    "maxWidth":300,
-                    "minWidth": 80,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_is_expert",
-                    "displayName": "{{i18n.expertStatus}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_expert_coverages",
-                    "displayName": "{{i18n.expertCoverages}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_answer_count",
-                    "displayName": "{{i18n.answerCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_selected_knowledge_count",
-                    "displayName": "{{i18n.selectionCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_good_count",
-                    "displayName": "{{i18n.likeCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                }
-            ]
-        }
-    },
-    "grids": {
-        "expertList": {
-            "dataProvider": "expertDataProvider",
-            "columnProvider": "expertColumnProvider",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": true,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "applySortAndFilterRows": {
-            "functionName": "applySortAndFilterRows",
-            "parameters": [
-                "{{data.columnProviders.expertColumnProvider.columnFilters}}",
-                "{{data.columnProviders.expertColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.expertDataProvider.startIndex}}",
-                "{{data.pageSize}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.expertColumnProvider.columnFilters}}",
-                "{{data.fullData}}"
-            ]
-        }
-    },
-    "i18n": {
-        "property": ["lgepTechnicalMessages"],
-        "name": ["lgepTechnicalMessages"],
-        "expertStatus": ["lgepTechnicalMessages"],
-        "expertCoverages": ["lgepTechnicalMessages"],
-        "answerCount": ["lgepTechnicalMessages"],
-        "selectionCount": ["lgepTechnicalMessages"],
-        "likeCount": ["lgepTechnicalMessages"],
-        "expertAuthorization": ["lgepTechnicalMessages"],
-        "summary": ["lgepTechnicalMessages"]
-    },
-    "conditions": {
-        "showSummaryTab": {
-            "expression": "data.selectedTab.tabKey === 'summary'"
-        },
-        "cond1": {
-            "expression": "data.userExpertSelectedState===true"
-        }
+    {
+      "eventId": "qaList.edit",
+      "action": "expertApprovalPopupBat"
     }
+  ],
+  "data": {
+    "summaryTab": [
+      {
+        "name": "{{i18n.summary}}",
+        "tabKey": "summary"
+      }
+    ],
+    "expertCoverages": {
+      "displayName": "{{i18n.expertCoverages}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "expertName": {
+      "displayName": "{{i18n.name}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "expertState": {
+      "displayName": "{{i18n.expertStatus}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "answerCount": {
+      "displayName": "{{i18n.answerCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "pageSize": 40
+  },
+  "actions": {
+    "expertApprovalPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "expertApprovalPopup",
+          "locals": {
+            "caption": "{{i18n.expertAuthorization}}"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": true,
+            "draggable": true,
+            "placement": "bottom-start",
+            "width": 400,
+            "height": 310
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "expertApprovalPopupLoadSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "userExpertSelectedCheck": {
+      "actionType": "JSFunction",
+      "method": "userExpertSelectedCheck",
+      "inputData": {
+        "value": "{{data.dataProviders}}"
+      },
+      "outputData": {
+        "userExpertSelectedState": "userExpertSelectedState"
+      },
+      "deps": "js/technicalService"
+    },
+    "expertLabel": {
+      "actionType": "JSFunction",
+      "method": "expertLabel",
+      "inputData": {
+        "value": "{{data.eventData.selectedObjects[0]}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/technicalService"
+    },
+    "getUserTable": {
+      "actionType": "JSFunction",
+      "method": "getUserTable",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "result": "result",
+        "filterResults": "{{function:applySortAndFilterRows}}"
+      },
+      "deps": "js/technicalService"
+    },
+    "listQaTest": {
+      "actionType": "dataProvider",
+      "method": "qaAnswerList"
+    },
+    "setDispAfterDash": {
+      "actionType": "JSFunction",
+      "method": "setDispAfterDash",
+      "deps": "js/technicalService",
+      "inputData": {
+        "data": "{{data}}"
+      }
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "getTechnicalTable",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/technicalService"
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/technicalService"
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
+        },
+        {
+          "action": "applyFilterFacets"
+        }
+      ]
+    },
+    "expertApprovalPopupBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "userExpertSelectedCheck"
+        },
+        {
+          "condition": "conditions.cond1",
+          "action": "expertApprovalPopup"
+        }
+      ]
+    }
+  },
+  "dataProviders": {
+    "expertDataProvider": {
+      "action": "getUserTable",
+      "response": "{{data.filterResults}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "columnProviders": {
+    "expertColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "l2_user_name",
+          "displayName": "{{i18n.name}}",
+          "maxWidth": 300,
+          "minWidth": 80,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_is_expert",
+          "displayName": "{{i18n.expertStatus}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_expert_coverages",
+          "displayName": "{{i18n.expertCoverages}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_answer_count",
+          "displayName": "{{i18n.answerCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_selected_knowledge_count",
+          "displayName": "{{i18n.selectionCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_good_count",
+          "displayName": "{{i18n.likeCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        }
+      ]
+    }
+  },
+  "grids": {
+    "expertList": {
+      "dataProvider": "expertDataProvider",
+      "columnProvider": "expertColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.expertColumnProvider.columnFilters}}",
+        "{{data.columnProviders.expertColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.expertDataProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.expertColumnProvider.columnFilters}}", "{{data.fullData}}"]
+    }
+  },
+  "i18n": {
+    "property": ["lgepTechnicalMessages"],
+    "name": ["lgepTechnicalMessages"],
+    "expertStatus": ["lgepTechnicalMessages"],
+    "expertCoverages": ["lgepTechnicalMessages"],
+    "answerCount": ["lgepTechnicalMessages"],
+    "selectionCount": ["lgepTechnicalMessages"],
+    "likeCount": ["lgepTechnicalMessages"],
+    "expertAuthorization": ["lgepTechnicalMessages"],
+    "summary": ["lgepTechnicalMessages"]
+  },
+  "conditions": {
+    "showSummaryTab": {
+      "expression": "data.selectedTab.tabKey === 'summary'"
+    },
+    "cond1": {
+      "expression": "data.userExpertSelectedState===true"
+    }
+  }
 }

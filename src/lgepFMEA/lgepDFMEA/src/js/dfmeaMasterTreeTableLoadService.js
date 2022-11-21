@@ -1,15 +1,15 @@
-import iconSvc from "js/iconService";
-import treeView from "js/awTableService";
-import appCtxService from "js/appCtxService";
+import iconSvc from 'js/iconService';
+import treeView from 'js/awTableService';
+import appCtxService from 'js/appCtxService';
 
-import { tableRefresh } from "js/utils/fmeaViewCommonUtils";
-import fmeaPopupUtils from "js/utils/fmeaPopupUtils";
-import { loadObjectByPolicy } from "js/utils/fmeaTcUtils";
-import { showErrorMessage } from "js/utils/fmeaMessageUtils";
-import { getLangIndex } from "js/utils/fmeaCommonUtils";
-import { loadTableDatas } from "js/dfmeaMasteTableInitLoadService";
-import * as prop from "js/constants/fmeaProperty";
-import * as constants from "js/constants/fmeaConstants";
+import { tableRefresh } from 'js/utils/fmeaViewCommonUtils';
+import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
+import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
+import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
+import { getLangIndex } from 'js/utils/fmeaCommonUtils';
+import { loadTableDatas } from 'js/dfmeaMasteTableInitLoadService';
+import * as prop from 'js/constants/fmeaProperty';
+import * as constants from 'js/constants/fmeaConstants';
 
 /**
  * Tree Table Columns 생성
@@ -54,7 +54,7 @@ const loadData = async (ctx) => {
 
 const reLoad = async (ctx) => {
   await loadTableDatas(ctx);
-  tableRefresh("dfmeaTreeTable");
+  tableRefresh('dfmeaTreeTable');
   fmeaPopupUtils.closePopup();
 };
 
@@ -91,7 +91,7 @@ const loadTreeTableData = async (result, nodeBeingExpanded) => {
  * @returns {[ViewModelObject]}
  */
 const _getDatas = (result, nodeBeingExpanded) => {
-  if (nodeBeingExpanded.uid == "top") {
+  if (nodeBeingExpanded.uid == 'top') {
     const parentList = _getNodeInfoList(result);
     return parentList;
   } else {
@@ -297,15 +297,9 @@ const _getTreeName = (type, modelObject) => {
     case prop.TYPE_FMEA_STRUCTURE_REV:
       return modelObject.props[prop.OBJECT_NAME].dbValues[0];
     case prop.TYPE_FMEA_FUNC_REVISION:
-      return _getShortPropValue(
-        modelObject.treeInfo.props,
-        prop.FUNCTION_SHORT
-      );
+      return _getShortPropValue(modelObject.treeInfo.props, prop.FUNCTION_SHORT);
     default:
-      return _getShortPropValue(
-        modelObject.treeInfo.props,
-        prop.POTENTIAL_FAILURE_MODE_SHORT
-      );
+      return _getShortPropValue(modelObject.treeInfo.props, prop.POTENTIAL_FAILURE_MODE_SHORT);
   }
 };
 
@@ -318,7 +312,7 @@ const _getShortPropValue = (props, propName) => {
 };
 
 const _getModelType = (modelObject) => {
-  if (modelObject.type === "BOMLine") {
+  if (modelObject.type === 'BOMLine') {
     return prop.TYPE_FMEA_FAILURE_REVISION;
   }
   return modelObject.type;
@@ -346,7 +340,7 @@ const _makeTreeNode = async (moList, nodeBeingExpanded) => {
       name,
       nodeBeingExpanded.levelNdx + 1,
       nodeBeingExpanded.levelNdx + 2,
-      iconURL
+      iconURL,
     );
     const addInfo = {
       isLeaf: isLeaf,

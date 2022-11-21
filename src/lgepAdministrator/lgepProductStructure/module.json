@@ -1,5 +1,5 @@
 {
-    "name": "lgepProductStructure",
-    "description": "This is the lgepProductStructure module",
-    "skipTest": true
+  "name": "lgepProductStructure",
+  "description": "This is the lgepProductStructure module",
+  "skipTest": true
 }

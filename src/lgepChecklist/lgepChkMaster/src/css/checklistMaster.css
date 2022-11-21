@@ -1,0 +1,20 @@
+.editor-section {
+  margin-bottom: 20px;
+}
+
+.editor-section .ng-binding.ng-scope {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.editor-button-section {
+  display: flex;
+  justify-content: flex-end;
+}
+.editor-button-section button {
+  margin: 0;
+  margin-right: 10px;
+  height: 30px;
+  padding: 5px 10px;
+}

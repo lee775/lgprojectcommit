@@ -1,26 +1,25 @@
 <aw-command-panel caption="i18n.sequenceTree">
-    <aw-flex-row class="afx-alt-content-background">
+  <aw-flex-row class="afx-alt-content-background">
+    <aw-flex-column>
+      <aw-flex-row height="3.5f" align-content="center">
         <aw-flex-column>
-            <aw-flex-row height="3.5f" align-content="center">
-                <aw-flex-column>
-                    <aw-flex-row>
-                        <aw-icon-button class="btnTop" command="data.addBtn"></aw-icon-button>
-                        <aw-icon-button class="btnTop" command="data.deleteBtn"></aw-icon-button>
-                        <aw-icon-button class="btnTop" command="data.relodeBtn"></aw-icon-button>
-                    </aw-flex-row>
-                </aw-flex-column>
-                <aw-flex-column width="7">
-                    <aw-textbox class="txtTop" prop="data.searchingName" aw-enter-key="searching"></aw-textbox>
-                </aw-flex-column>
-                <aw-flex-column>
-                    <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
-                </aw-flex-column>
-            </aw-flex-row>
-            <aw-flex-row color="white">
-                <aw-include name="designSequenceTree" visible-when="data.searchState==false||data.searchState==undefined">
-                </aw-include>
-                <aw-splm-table gridid="sequenceSearchTable" visible-when="data.searchState==true" class="bye"></aw-splm-table>
-            </aw-flex-row>
+          <aw-flex-row>
+            <aw-icon-button class="btnTop" command="data.addBtn"></aw-icon-button>
+            <aw-icon-button class="btnTop" command="data.deleteBtn"></aw-icon-button>
+            <aw-icon-button class="btnTop" command="data.relodeBtn"></aw-icon-button>
+          </aw-flex-row>
         </aw-flex-column>
-    </aw-flex-row>
+        <aw-flex-column width="7">
+          <aw-textbox class="txtTop" prop="data.searchingName" aw-enter-key="searching"></aw-textbox>
+        </aw-flex-column>
+        <aw-flex-column>
+          <aw-icon-button class="btnTop" command="data.searchBtn"></aw-icon-button>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row color="white">
+        <aw-include name="designSequenceTree" visible-when="data.searchState==false||data.searchState==undefined"> </aw-include>
+        <aw-splm-table gridid="sequenceSearchTable" visible-when="data.searchState==true" class="bye"></aw-splm-table>
+      </aw-flex-row>
+    </aw-flex-column>
+  </aw-flex-row>
 </aw-command-panel>

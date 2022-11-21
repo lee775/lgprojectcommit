@@ -1,11 +1,13 @@
 {
-    "commonFunctionFailed": "함수 '{0}' (이)가 실행에 실패하였습니다.",
-    "commonTitle": "공통 모듈",
-    "lgepCommonLocationHeaderTitle": "공통 모듈",
-    "lgepCommonLocationBrowserTitle": "공통 모듈",
-    "lgepCommonLocationBrowserSubTitle": "공통 모듈",
-    "commonDescription": "질문 및 기술문서를 확인할 수 있습니다.",
-    "classificationCriteriaTitle": "관리자",
-    "classificationCriteriaDescription": "관리자",
-    "open":"열기"
+  "commonFunctionFailed": "함수 '{0}' (이)가 실행에 실패하였습니다.",
+  "commonTitle": "공통 모듈",
+  "lgepCommonLocationHeaderTitle": "공통 모듈",
+  "lgepCommonLocationBrowserTitle": "공통 모듈",
+  "lgepCommonLocationBrowserSubTitle": "공통 모듈",
+  "commonDescription": "질문 및 기술문서를 확인할 수 있습니다.",
+  "classificationCriteriaTitle": "관리자",
+  "classificationCriteriaDescription": "관리자",
+  "open": "열기",
+  "templateLoadError": "템플릿 로드에 실패하였습니다.",
+  "columnError": "컬럼 설정 중 오류 발생"
 }

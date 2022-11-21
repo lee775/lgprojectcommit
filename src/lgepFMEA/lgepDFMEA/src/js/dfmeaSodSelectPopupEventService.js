@@ -27,25 +27,13 @@ const _setResultAp = (row, mainGrid) => {
   const resultOccurence = row[constants.COL_RESULT_OCCURENCE_LANG[langIndex]];
   const resultDetection = row[constants.COL_RESULT_DETECTION_LANG[langIndex]];
 
-  if (
-    resultSeverity === '' ||
-    resultOccurence === '' ||
-    resultDetection === ''
-  ) {
+  if (resultSeverity === '' || resultOccurence === '' || resultDetection === '') {
     return;
   }
 
-  const resultAP = calculateAp(
-    resultSeverity,
-    resultOccurence,
-    resultDetection
-  );
+  const resultAP = calculateAp(resultSeverity, resultOccurence, resultDetection);
 
-  mainGrid.setValue(
-    row.rowKey,
-    constants.COL_RESULT_AP_LANG[langIndex],
-    resultAP
-  );
+  mainGrid.setValue(row.rowKey, constants.COL_RESULT_AP_LANG[langIndex], resultAP);
 
   _addChangeRow(constants.COL_RESULT_AP_LANG[0], resultAP);
 };
@@ -101,11 +89,7 @@ export const resetBtnEvent = (mainGrid) => {
   _resetChangeRowByGrade(selectCell.columnName);
   mainGrid.setValue(selectCell.rowKey, selectCell.columnName, ' ');
 
-  mainGrid.setValue(
-    selectCell.rowKey,
-    constants.COL_RESULT_AP_LANG[langIndex],
-    ' '
-  );
+  mainGrid.setValue(selectCell.rowKey, constants.COL_RESULT_AP_LANG[langIndex], ' ');
 
   _addChangeRow(constants.COL_RESULT_AP_LANG[0], '');
 };
@@ -114,8 +98,7 @@ const _resetChangeRowByGrade = (resetColumn) => {
   const propName = _getPropName(resetColumn);
   const currentSelectRow = appCtxService.ctx[constants.ROW_SELECT];
 
-  const changeRows =
-    appCtxService.ctx[constants.CHANGE_INFO][constants.CHANGE_EDIT_ROWS];
+  const changeRows = appCtxService.ctx[constants.CHANGE_INFO][constants.CHANGE_EDIT_ROWS];
   const currentChagneRow = _getCurrentChangeRow(changeRows, currentSelectRow);
 
   // 2. set empty value / delete prop
@@ -124,9 +107,7 @@ const _resetChangeRowByGrade = (resetColumn) => {
   // 3. 그 외 아무 속성 없으면 해당 체인지 로우 삭제
   const isDeleteRow = _checkDeleteChangeRow(currentChagneRow);
   if (isDeleteRow) {
-    const resultChangeRows = changeRows.filter(
-      (row) => row.row.props.uid !== currentChagneRow.row.props.uid
-    );
+    const resultChangeRows = changeRows.filter((row) => row.row.props.uid !== currentChagneRow.row.props.uid);
     setChangeEditRows(resultChangeRows);
   }
 };

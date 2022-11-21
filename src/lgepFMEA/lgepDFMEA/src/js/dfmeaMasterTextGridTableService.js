@@ -1,31 +1,27 @@
-import Grid from "tui-grid";
-import "tui-grid/dist/tui-grid.css";
-import "tui-date-picker/dist/tui-date-picker.css";
+import Grid from 'tui-grid';
+import 'tui-grid/dist/tui-grid.css';
+import 'tui-date-picker/dist/tui-date-picker.css';
 
-import eventBus from "js/eventBus";
-import appCtxService from "js/appCtxService";
+import eventBus from 'js/eventBus';
+import appCtxService from 'js/appCtxService';
 
-import lgepCommonUtils from "js/utils/lgepCommonUtils";
+import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 
-import { openImagePopup } from "js/dfmeaImageHoverService";
-import { openCellEditor } from "js/dfmeaCellEditorService";
-import { initImgSelectRow } from "js/dfmeaMasterTableInteractionService";
-import { openSodPopup } from "js/dfmeaSodSelectPopupService";
-import { loadTableDatas } from "js/dfmeaMasteTableInitLoadService";
-import { initToastGrid } from "js/utils/fmeaViewCommonUtils";
-import { getColumns } from "js/dfmeaMasterTextGridColumnLoadService";
-import fmeaPopupUtils from "js/utils/fmeaPopupUtils";
-import * as constants from "js/constants/fmeaConstants";
-import { makeShortenValues } from "js/utils/fmeaCommonUtils";
-import { copyCell } from "js/dfmeaMasterImageTableService";
+import { openImagePopup } from 'js/dfmeaImageHoverService';
+import { openCellEditor } from 'js/dfmeaCellEditorService';
+import { initImgSelectRow } from 'js/dfmeaMasterTableInteractionService';
+import { openSodPopup } from 'js/dfmeaSodSelectPopupService';
+import { loadTableDatas } from 'js/dfmeaMasteTableInitLoadService';
+import { initToastGrid } from 'js/utils/fmeaViewCommonUtils';
+import { getColumns } from 'js/dfmeaMasterTextGridColumnLoadService';
+import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
+import * as constants from 'js/constants/fmeaConstants';
+import { makeShortenValues } from 'js/utils/fmeaCommonUtils';
+import { copyCell } from 'js/dfmeaMasterImageTableService';
 
 let grid;
 
-const shortCols = [
-  constants.COL_INSPECTION_RESULTS_LANG,
-  constants.COL_RECOMMENDED_ACTION_LANG,
-  constants.COL_RECOMMENDED_ACTION_RESULT_LANG,
-];
+const shortCols = [constants.COL_INSPECTION_RESULTS_LANG, constants.COL_RECOMMENDED_ACTION_LANG, constants.COL_RECOMMENDED_ACTION_RESULT_LANG];
 
 const getData = (tableList, columns) => {
   const tableData = tableList.map((rowInfo) => {
@@ -37,7 +33,7 @@ const getData = (tableList, columns) => {
         ...prev,
         ...columnInfo,
       };
-    }, "");
+    }, '');
 
     return {
       ...row,
@@ -59,12 +55,12 @@ const _getValue = (rowInfo, prop) => {
 
     return removeImgTagInStr(value);
   }
-  return "";
+  return '';
 };
 
 export const removeImgTagInStr = (value) => {
-  let nonTagValue = value.replaceAll(/<IMG(.*?)>/gi, "");
-  let replaceValue = nonTagValue.replaceAll("&nbsp;", " ");
+  let nonTagValue = value.replaceAll(/<IMG(.*?)>/gi, '');
+  let replaceValue = nonTagValue.replaceAll('&nbsp;', ' ');
   return replaceValue;
 };
 
@@ -82,18 +78,18 @@ const onLoad = async (ctx) => {
     const columns = getColumns();
     const datas = await getData(ctx[constants.FMEA_TABLE_LIST], columns);
     const options = {
-      el: document.getElementById("text-toastGrid"),
+      el: document.getElementById('text-toastGrid'),
       scrollX: true,
       scrollY: true,
       // bodyHeight: 'fitToParent',
       pageOptions: {
-        type: "scroll",
+        type: 'scroll',
         perPage: 50,
       },
-      rowHeight: "auto",
+      rowHeight: 'auto',
       columns: columns,
       contextMenu: null,
-      selectionUnit: "row",
+      selectionUnit: 'row',
     };
 
     initToastGrid();
@@ -115,18 +111,18 @@ const onLoad = async (ctx) => {
     events();
     tableResize();
   } catch (e) {
-    console.log("onLoad", e);
+    //console.log("onLoad", e);
   }
 };
 
 const events = () => {
   let selectedRowKey = null;
-  grid.on("click", async (e) => {
-    if (e.targetType === "columnHeader" || e.rowKey === undefined) {
+  grid.on('click', async (e) => {
+    if (e.targetType === 'columnHeader' || e.rowKey === undefined) {
       return;
     }
     if (selectedRowKey != e.rowKey) {
-      grid.removeRowClassName(selectedRowKey, "select");
+      grid.removeRowClassName(selectedRowKey, 'select');
     }
     _selectRow(e.rowKey);
     selectedRowKey = e.rowKey;
@@ -143,7 +139,7 @@ const events = () => {
     await copyCell(e);
   });
 
-  grid.on("mouseover", (e) => {
+  grid.on('mouseover', (e) => {
     openImagePopup(e, grid);
   });
 };
@@ -167,7 +163,7 @@ const reLayout = async () => {
 const _setSelectionRowModel = (rowData) => {
   appCtxService.registerCtx(constants.DFMEA_DETAIL_INIT, false);
   appCtxService.registerCtx(constants.ROW_SELECT, rowData);
-  eventBus.publish("dfmeaDetail.onmount.imageTable");
+  eventBus.publish('dfmeaDetail.onmount.imageTable');
 };
 
 const updateTable = async (ctx) => {
@@ -181,7 +177,7 @@ const updateTable = async (ctx) => {
 };
 
 const _selectRow = (selectedRowKey) => {
-  grid.addRowClassName(selectedRowKey, "select");
+  grid.addRowClassName(selectedRowKey, 'select');
   _setSelectionRowModel(grid.getRow(selectedRowKey));
 };
 
@@ -194,9 +190,7 @@ const initSelectRow = () => {
 
 const tableResize = async () => {
   await lgepCommonUtils.delay(1000);
-  let getTable = document.querySelectorAll(
-    '#scrollCtrl .tui-grid-rside-area .tui-grid-table > tbody > tr'
-  );
+  let getTable = document.querySelectorAll('#scrollCtrl .tui-grid-rside-area .tui-grid-table > tbody > tr');
   let height = 0;
   for (let tr of getTable) {
     let str = tr.style.height;

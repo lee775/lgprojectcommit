@@ -1,306 +1,299 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-column.directive",
-        "js/aw-command-bar.directive",
-        "js/aw-splm-table.directive"
-    ],
-    "data": {
-        "userName": {
-            "displayName": "{{i18n.name}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "expertState": {
-            "displayName": "{{i18n.expertStatus}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "expertCoverages": {
-            "displayName": "{{i18n.expertCoverages}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "knowledgePoint": {
-            "displayName": "{{i18n.knowledgePoint}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "questionCount": {
-            "displayName": "{{i18n.questionCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "answerCount": {
-            "displayName": "{{i18n.answerCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "selectAnswerCount":{
-            "displayName": "{{i18n.selectAnswerCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "likesCount":{
-            "displayName": "{{i18n.likesCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "pageSize": 40
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-flex-column.directive", "js/aw-command-bar.directive", "js/aw-splm-table.directive"],
+  "data": {
+    "userName": {
+      "displayName": "{{i18n.name}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     },
-    "actions": {
-        "getUserTable": {
-            "actionType": "JSFunction",
-            "method": "getL2UserList",
-            "inputData": {
-                "data" : "{{data}}"
-            },
-            "outputData": {
-                "result": "result",
-                "filterResults": "{{function:applySortAndFilterRows}}"
-            },
-            "deps": "js/lgepUserManagementService"
-        },
-        "editUserPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "editUserPopup",
-                    "locals": {
-                        "caption": "사용자 정보 수정"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "width": 400,
-                        "height":370
-                    }
-                }
-            },
-            "events": {
-                "success": [
-                    {
-                        "name": "editApprovalPopupLoadSuccess"
-                    }
-                ]
-            },
-            "deps": "js/popupService"
-        },
-        "applyFilterFacets": {
-            "actionType": "JSFunction",
-            "method": "getL2UserList",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/lgepUserManagementService"
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/lgepUserManagementService"
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyFilterFacets"
-                }
-            ]
-        },
-        "editUserPopupBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "userSelectedCheck"
-                },
-                {
-                    "condition": "conditions.selectUser",
-                    "action": "editUserPopup"
-                }
-            ]
-        },
-        "userSelectedCheck": {
-            "actionType": "JSFunction",
-            "method": "userSelectedCheck",
-            "inputData": {
-                "value": "{{data.dataProviders}}"
-            },
-            "outputData": {
-                "userSelectedState": "userSelectedState"
-            },
-            "deps": "js/lgepUserManagementService"
+    "expertState": {
+      "displayName": "{{i18n.expertStatus}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "expertCoverages": {
+      "displayName": "{{i18n.expertCoverages}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "knowledgePoint": {
+      "displayName": "{{i18n.knowledgePoint}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "questionCount": {
+      "displayName": "{{i18n.questionCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "answerCount": {
+      "displayName": "{{i18n.answerCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "selectAnswerCount": {
+      "displayName": "{{i18n.selectAnswerCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "likesCount": {
+      "displayName": "{{i18n.likesCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "pageSize": 40
+  },
+  "actions": {
+    "getUserTable": {
+      "actionType": "JSFunction",
+      "method": "getL2UserList",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "result": "result",
+        "filterResults": "{{function:applySortAndFilterRows}}"
+      },
+      "deps": "js/lgepUserManagementService"
+    },
+    "editUserPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "editUserPopup",
+          "locals": {
+            "caption": "사용자 정보 수정"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "width": 400,
+            "height": 370
+          }
         }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "editApprovalPopupLoadSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
     },
-    "dataProviders": {
-        "userDataProvider": {
-            "action": "getUserTable",
-            "response": "{{data.filterResults}}",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}"
-        }
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "getL2UserList",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/lgepUserManagementService"
     },
-    "columnProviders": {
-        "userColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "object_name",
-                    "displayName": "{{i18n.name}}",
-                    "maxWidth":300,
-                    "minWidth": 80,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_is_expert",
-                    "displayName": "{{i18n.expertStatus}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_expert_coverages",
-                    "displayName": "{{i18n.expertCoverages}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_point",
-                    "displayName": "{{i18n.knowledgePoint}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_knowledge_count",
-                    "displayName": "{{i18n.questionCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_answer_count",
-                    "displayName": "{{i18n.answerCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_selected_knowledge_count",
-                    "displayName": "{{i18n.selectAnswerCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_good_count",
-                    "displayName": "{{i18n.likesCount}}",
-                    "maxWidth":300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                }
-            ]
-        }
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/lgepUserManagementService"
     },
-    "grids": {
-        "userList": {
-            "dataProvider": "userDataProvider",
-            "columnProvider": "userColumnProvider",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": true,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "applySortAndFilterRows": {
-            "functionName": "applySortAndFilterRows",
-            "parameters": [
-                "{{data.columnProviders.userColumnProvider.columnFilters}}",
-                "{{data.columnProviders.userColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.userDataProvider.startIndex}}",
-                "{{data.pageSize}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.userColumnProvider.columnFilters}}",
-                "{{data.fullData}}"
-            ]
-        }
-    },
-    "onEvent": [
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
         {
-            "eventId": "userManagement.edit",
-            "action": "editUserPopupBat"
+          "action": "getFilterFacetData"
+        },
+        {
+          "action": "applyFilterFacets"
         }
-    ],
-    "conditions": {
-        "selectUser" : {
-            "expression": "data.userSelectedState===true"
-        }
+      ]
     },
-    "i18n": {
-        "name": [ "lgepUserManagementMessages" ],
-        "expertStatus": [ "lgepUserManagementMessages" ],
-        "expertCoverages": [ "lgepUserManagementMessages" ],
-        "knowledgePoint": [ "lgepUserManagementMessages" ],
-        "questionCount": [ "lgepUserManagementMessages" ],
-        "answerCount": [ "lgepUserManagementMessages" ],
-        "selectAnswerCount": [ "lgepUserManagementMessages" ],
-        "likesCount": [ "lgepUserManagementMessages" ]
+    "editUserPopupBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "userSelectedCheck"
+        },
+        {
+          "condition": "conditions.selectUser",
+          "action": "editUserPopup"
+        }
+      ]
+    },
+    "userSelectedCheck": {
+      "actionType": "JSFunction",
+      "method": "userSelectedCheck",
+      "inputData": {
+        "value": "{{data.dataProviders}}"
+      },
+      "outputData": {
+        "userSelectedState": "userSelectedState"
+      },
+      "deps": "js/lgepUserManagementService"
     }
+  },
+  "dataProviders": {
+    "userDataProvider": {
+      "action": "getUserTable",
+      "response": "{{data.filterResults}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "columnProviders": {
+    "userColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "maxWidth": 300,
+          "minWidth": 80,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_is_expert",
+          "displayName": "{{i18n.expertStatus}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_expert_coverages",
+          "displayName": "{{i18n.expertCoverages}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_point",
+          "displayName": "{{i18n.knowledgePoint}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_knowledge_count",
+          "displayName": "{{i18n.questionCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_answer_count",
+          "displayName": "{{i18n.answerCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_selected_knowledge_count",
+          "displayName": "{{i18n.selectAnswerCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_good_count",
+          "displayName": "{{i18n.likesCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        }
+      ]
+    }
+  },
+  "grids": {
+    "userList": {
+      "dataProvider": "userDataProvider",
+      "columnProvider": "userColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.userColumnProvider.columnFilters}}",
+        "{{data.columnProviders.userColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.userDataProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.userColumnProvider.columnFilters}}", "{{data.fullData}}"]
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "userManagement.edit",
+      "action": "editUserPopupBat"
+    }
+  ],
+  "conditions": {
+    "selectUser": {
+      "expression": "data.userSelectedState===true"
+    }
+  },
+  "i18n": {
+    "name": ["lgepUserManagementMessages"],
+    "expertStatus": ["lgepUserManagementMessages"],
+    "expertCoverages": ["lgepUserManagementMessages"],
+    "knowledgePoint": ["lgepUserManagementMessages"],
+    "questionCount": ["lgepUserManagementMessages"],
+    "answerCount": ["lgepUserManagementMessages"],
+    "selectAnswerCount": ["lgepUserManagementMessages"],
+    "likesCount": ["lgepUserManagementMessages"]
+  }
 }

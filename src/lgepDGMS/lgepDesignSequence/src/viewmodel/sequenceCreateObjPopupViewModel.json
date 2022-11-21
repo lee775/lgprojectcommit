@@ -1,142 +1,138 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-button.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-popup2.directive",
-        "js/aw-label.directive",
-        "js/aw-textbox.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "openMoreinfoComplete",
-            "action": "createInitialize"
-        },
-        {
-            "eventId": "aw.windowResize",
-            "action": "createResize"
-        }
-    ],
-    "actions": {
-        "createProcedure": {
-            "actionType": "JSFunction",
-            "method": "createProcedure",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/sequenceDatesetCreateService"
-        },
-        "stringSlice": {
-            "actionType": "JSFunction",
-            "method": "stringSlice",
-            "deps": "js/sequenceDatesetCreateService"
-        },
-        "linkRelationsSequence": {
-            "actionType": "JSFunction",
-            "method": "linkRelationsSequence",
-            "inputData": {
-                "value": "{{data.createdItem}}",
-                "dataset": "{{data.dataset}}"
-            },
-            "deps": "js/sequenceDatesetCreateService"
-        },
-        "imageBase64ToFile": {
-            "actionType": "JSFunction",
-            "method": "imageBase64ToFile",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "step1": "step1"
-            },
-            "deps": "js/sequenceDatesetCreateService"
-        },
-        "uploadFileToDataset": {
-            "actionType": "JSFunction",
-            "method": "uploadFileToDataset",
-            "inputData": {
-                "file": "{{data.sequenceImageFile}}"
-            },
-            "outputData": {
-                "dataset": "dataset",
-                "step2": "step2"
-            },
-            "deps": "js/sequenceDatesetCreateService"
-        },
-        "createResize": {
-            "actionType": "JSFunction",
-            "method": "createResize",
-            "deps": "js/sequencePopupService"
-        },
-        "createSequence": {
-            "actionType": "JSFunction",
-            "method": "createSequence",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/sequenceService"
-        },
-        "createInitialize": {
-            "actionType": "JSFunction",
-            "method": "createInitialize",
-            "deps": "js/sequenceService"
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "createSequenceAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "createSequence"
-                },
-                {
-                    "action": "closePopupWindow"              
-                }
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-label.directive",
+    "js/aw-textbox.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "openMoreinfoComplete",
+      "action": "createInitialize"
     },
-    "data": {
-        "sequenceTitle": {
-            "displayName": "설계 지침서 제목",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "sequenceContent": {
-            "displayName": "설계 지침서 내용",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "false",
-            "dbValue": "",
-            "dispValue": ""
-        }
-    },
-    "conditions": {
-        "step1": {
-            "expression": "data.step1===true"
-        },
-        "step2": {
-            "expression": "data.step2===true"
-        },
-        "step3": {
-            "expression": "data.step3===true"
-        }
-    },
-    "i18n": {
-        "ok": [
-            "lgepDesignSequenceMessages"
-        ],
-        "close": [
-            "lgepDesignSequenceMessages"
-        ]
+    {
+      "eventId": "aw.windowResize",
+      "action": "createResize"
     }
+  ],
+  "actions": {
+    "createProcedure": {
+      "actionType": "JSFunction",
+      "method": "createProcedure",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/sequenceDatesetCreateService"
+    },
+    "stringSlice": {
+      "actionType": "JSFunction",
+      "method": "stringSlice",
+      "deps": "js/sequenceDatesetCreateService"
+    },
+    "linkRelationsSequence": {
+      "actionType": "JSFunction",
+      "method": "linkRelationsSequence",
+      "inputData": {
+        "value": "{{data.createdItem}}",
+        "dataset": "{{data.dataset}}"
+      },
+      "deps": "js/sequenceDatesetCreateService"
+    },
+    "imageBase64ToFile": {
+      "actionType": "JSFunction",
+      "method": "imageBase64ToFile",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "step1": "step1"
+      },
+      "deps": "js/sequenceDatesetCreateService"
+    },
+    "uploadFileToDataset": {
+      "actionType": "JSFunction",
+      "method": "uploadFileToDataset",
+      "inputData": {
+        "file": "{{data.sequenceImageFile}}"
+      },
+      "outputData": {
+        "dataset": "dataset",
+        "step2": "step2"
+      },
+      "deps": "js/sequenceDatesetCreateService"
+    },
+    "createResize": {
+      "actionType": "JSFunction",
+      "method": "createResize",
+      "deps": "js/sequencePopupService"
+    },
+    "createSequence": {
+      "actionType": "JSFunction",
+      "method": "createSequence",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/sequenceService"
+    },
+    "createInitialize": {
+      "actionType": "JSFunction",
+      "method": "createInitialize",
+      "deps": "js/sequenceService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "createSequenceAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "createSequence"
+        },
+        {
+          "action": "closePopupWindow"
+        }
+      ]
+    }
+  },
+  "data": {
+    "sequenceTitle": {
+      "displayName": "설계 지침서 제목",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "sequenceContent": {
+      "displayName": "설계 지침서 내용",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "false",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "conditions": {
+    "step1": {
+      "expression": "data.step1===true"
+    },
+    "step2": {
+      "expression": "data.step2===true"
+    },
+    "step3": {
+      "expression": "data.step3===true"
+    }
+  },
+  "i18n": {
+    "ok": ["lgepDesignSequenceMessages"],
+    "close": ["lgepDesignSequenceMessages"]
+  }
 }

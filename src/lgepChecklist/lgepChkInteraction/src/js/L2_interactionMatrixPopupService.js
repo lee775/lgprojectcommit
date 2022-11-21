@@ -1,30 +1,35 @@
-import popupService from "js/popupService";
-import appCtxService from "js/appCtxService";
+import popupService from 'js/popupService';
+import appCtxService from 'js/appCtxService';
 
-import { makeTable } from "js/L2_interactionMatrixPopupTableService";
-import { getLang } from "js/L2_ChecklistInteractionUtils";
+import lgepCommonUtils from 'js/utils/lgepCommonUtils';
+import { makeTable } from 'js/L2_interactionMatrixPopupTableService';
+import { getLang } from 'js/L2_ChecklistInteractionUtils';
 
 let langIndex;
 
-const FMEA_INERATION_INIT = "interaction_init"; // Interaction Table 편집창 init
+const FMEA_INERATION_INIT = 'interaction_init'; // Interaction Table 편집창 init
 
 // Interaction Matrix Popup open
 export const openInteractionPopup = (ctx) => {
   const inputParam = {
-    declView: "interactionMatrixPopup",
+    declView: 'L2_interactionMatrixPopup',
     locals: {
-      caption: "Interaction Matrix",
-      anchor: "closePopupAnchor",
+      caption: 'Interaction Matrix',
+      anchor: 'closeInteraction',
     },
     options: {
       width: 1640,
       height: 950,
-      isModal: false,
+      isModal: true,
       clickOutsideToClose: false,
       draggable: true,
+      closable: true,
       hooks: {
         whenOpened: () => {
           initializePopup(ctx);
+        },
+        whenClosed: () => {
+          closePopup(ctx);
         },
       },
     },
@@ -33,8 +38,8 @@ export const openInteractionPopup = (ctx) => {
 };
 
 const initializePopup = async (ctx) => {
-  const grid = document.querySelector("#interaction-grid");
-  grid.style.visibility = "hidden";
+  const grid = document.querySelector('#interaction-grid');
+  grid.style.visibility = 'hidden';
   langIndex = getLang();
 
   _setTextDesc();
@@ -43,37 +48,30 @@ const initializePopup = async (ctx) => {
 
   await makeTable();
 
-  grid.style.visibility = "visible";
+  grid.style.visibility = 'visible';
   appCtxService.registerCtx(FMEA_INERATION_INIT, true);
 };
-
 //// popup make
 const _resizePoup = () => {
   try {
     let height = document.childNodes[1].offsetHeight;
     let width = document.childNodes[1].offsetWidth;
     document
-      .getElementsByClassName("aw-popup-contentContainer")[0]
-      .children[0].setAttribute(
-        "style",
-        "height: " + (height - 20) + "px; width: " + (width - 40) + "px;"
-      );
+      .getElementsByClassName('aw-popup-contentContainer')[0]
+      .children[0].setAttribute('style', 'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;');
     window.onresize = function () {
       try {
         let height = document.childNodes[1].offsetHeight;
         let width = document.childNodes[1].offsetWidth;
         document
-          .getElementsByClassName("aw-popup-contentContainer")[0]
-          .children[0].setAttribute(
-            "style",
-            "height: " + (height - 20) + "px; width: " + (width - 40) + "px;"
-          );
+          .getElementsByClassName('aw-popup-contentContainer')[0]
+          .children[0].setAttribute('style', 'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;');
       } catch (error) {
-        console.error("Failed to execute popup resizing");
+        //console.error("Failed to execute popup resizing");
       }
     };
   } catch (error) {
-    console.error("Failed to execute popup resizing");
+    //console.error("Failed to execute popup resizing");
   }
 };
 
@@ -101,8 +99,41 @@ const _setTextDesc = () => {
     </strong>
   </p>
   `;
-  const textDescEl = document.querySelector(".text-desc");
-  textDescEl.innerHTML = langIndex === 1 ? INTERACTION_DESC_KR : "english..";
+  const INTERACTION_DESC_EN = `
+  <p>1) Purpose</p>
+  <p>- Failure mode/mechanism analysis according to selection 
+  of related parts and induction environment</p>
+  <p>2) Written content</p>
+  <p>
+    - Item selection based on assembly or sub-assembly unit 
+      (list up by dividing the affected side and the affected side)
+  </p>
+  <p>
+    - Interaction analysis for each derived item: Based on past 
+    cases/experiences or reference data, if necessary, analysis 
+    is carried out through W/S (Brainstorming, Voting) between members
+  </p>
+  <p>
+    3) Creation order: Interaction analysis between parts → Failure mode/mechanism analysis
+  </p>
+  <p>4) Caution</p>
+  <p>
+    <strong>- Among the derived results, the items with the 
+    greatest influence are classified by color according to 
+    each influence characteristic and reflected in the development of the FMEA.
+    </strong>
+  </p>
+  `;
+  const textDescEl = document.querySelector('.text-desc');
+  textDescEl.innerHTML = langIndex === 1 ? INTERACTION_DESC_KR : INTERACTION_DESC_EN;
+};
+
+const closePopup = async (ctx) => {
+  lgepCommonUtils.delay(100);
+  appCtxService.updateCtx('norefresh', false);
+  window.onbeforeunload = function (e) {
+    return e.preventDefault();
+  };
 };
 
 export default {

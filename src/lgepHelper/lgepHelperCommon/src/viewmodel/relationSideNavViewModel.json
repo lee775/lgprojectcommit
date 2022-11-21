@@ -1,254 +1,249 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-command-panel.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-button.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-action-section.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId":  "removeMessages",
-            "action": "buttonAction1"
-        },
-        {
-            "eventId":  "relationItemData.modelObjectsUpdated",
-            "action": "setSelectedItem"
-        },
-        {
-            "eventId": "backSpacePopup",
-            "action": "backSpacePopupAction"
-        },
-        {
-            "eventId": "relationItemData.selectionChangeEvent",
-            "action": "addSelectRelation"
-        }
-    ],
-    "actions": {
-        "setSelectedItem": {
-            "actionType": "JSFunction",
-            "method": "setSelectedItem",
-            "inputData": {
-                "data" : "{{data}}"
-            },
-            "deps": "js/relationSideNavService"
-        },
-        "relationing": {
-            "actionType": "JSFunction",
-            "method": "relationing",
-            "inputData": {
-                "data" : "{{data}}"
-            },
-            "deps": "js/relationSideNavService"
-        },
-        "loadData": {
-            "actionType": "JSFunction",
-            "method": "relationItemTableLoad",
-            "inputData": {
-                "data":"{{data}}",
-                "ctx":"{{ctx}}"
-            },
-            "outputData": {
-                "response": "{{function:applySortAndFilterRows}}",
-                "totalFound": "totalFound"
-            },
-            "deps": "js/relationSideNavService"
-        },
-        "buttonAction1": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awsidenav.openClose"
-                    }
-                ]
-            }
-        },
-        "tableMultiCheck": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "relationItemData.multiSelectModeAction",
-                        "eventData": {
-                            "multiSelect": true
-                        }
-                    }
-                ]
-            }
-        },
-        "backSpacePopup": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "backSpacePopup"
-                    }
-                ]
-            }
-        },
-        "relationingBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "relationing"
-                },
-                {
-                    "action": "backSpacePopup"
-                },
-                {
-                    "action": "buttonAction1"
-                }
-            ]
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyFilterFacets"
-                }
-            ]
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/relationSideNavService"
-        },
-        "applyFilterFacets": {
-            "actionType": "JSFunction",
-            "method": "relationItemTableLoad",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx":"{{ctx}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/relationSideNavService"
-        },
-        "backSpacePopupAction": {
-            "actionType": "JSFunction",
-            "method": "backSpacePopupAction",
-            "deps": "js/relationSideNavService"
-        },
-        "resetSelect":{
-            "actionType": "JSFunction",
-            "method": "resetSelect",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/relationSideNavService"
-        },
-        "addSelectRelation":{
-            "actionType": "JSFunction",
-            "method": "addSelectRelation",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/relationSideNavService"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-button.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-action-section.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "removeMessages",
+      "action": "buttonAction1"
     },
-    "data": {
-        "pageSize": 40
+    {
+      "eventId": "relationItemData.modelObjectsUpdated",
+      "action": "setSelectedItem"
     },
-    "dataProviders": {
-        "relationItemData": {
-            "action": "loadData",
-            "response": "{{data.response}}",
-            "totalFound": "{{data.totalFound}}",
-            "selectionModelMode": "multiple",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}"
-        }
+    {
+      "eventId": "backSpacePopup",
+      "action": "backSpacePopupAction"
     },
-    "columnProviders": {
-        "relationItemColumn": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "l2_file_name",
-                    "displayName": "{{i18n.itemName}}",
-                    "width": 250,
-                    "pinnedLeft": true,
-                    "enableColumnMoving": false
-                },
-                {
-                    "name": "l2_page_index",
-                    "displayName": "{{i18n.itemType}}",
-                    "width": 140,
-                    "pinnedLeft": false,
-                    "enableColumnMoving": false
-                },
-                {
-                    "name": "l2_creator",
-                    "displayName": "{{i18n.user}}",
-                    "width": 110,
-                    "pinnedLeft": false,
-                    "enableColumnMoving": false
-                }
-            ]
-        }
-    },
-    "grids": {
-        "relationItemTable": {
-            "dataProvider": "relationItemData",
-            "columnProvider": "relationItemColumn",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": true,
-                "enableGridMenu": false
-            }
-        }
-    },
-    "conditions": {
-    },
-    "functions": {
-        "applySortAndFilterRows": {
-            "functionName": "applySortAndFilterRows",
-            "parameters": [
-                "{{data.columnProviders.relationItemColumn.columnFilters}}",
-                "{{data.columnProviders.relationItemColumn.sortCriteria}}",
-                "{{data.dataProviders.relationItemData.startIndex}}",
-                "{{data.pageSize}}",
-                "{{data}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.relationItemColumn.columnFilters}}",
-                "{{data.fullData}}",
-                "{{data}}"
-            ]
-        }
-    },
-    "i18n": {
-        "itemName": [ "lgepKnowldegeManageMessages"],
-        "itemType": [ "lgepKnowldegeManageMessages" ],
-        "lastModify": [ "lgepKnowldegeManageMessages" ],
-        "user": [ "lgepKnowldegeManageMessages" ],
-        "buttonDemo": "아이템 참조",
-        "realtioning": [ "lgepKnowldegeManageMessages" ],
-        "resetButton" : [ "lgepKnowldegeManageMessages" ]
-    },
-    "lifecycleHooks": {
-        "onInit": "tableMultiCheck"
+    {
+      "eventId": "relationItemData.selectionChangeEvent",
+      "action": "addSelectRelation"
     }
+  ],
+  "actions": {
+    "setSelectedItem": {
+      "actionType": "JSFunction",
+      "method": "setSelectedItem",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/relationSideNavService"
+    },
+    "relationing": {
+      "actionType": "JSFunction",
+      "method": "relationing",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/relationSideNavService"
+    },
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "relationItemTableLoad",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "response": "{{function:applySortAndFilterRows}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/relationSideNavService"
+    },
+    "buttonAction1": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awsidenav.openClose"
+          }
+        ]
+      }
+    },
+    "tableMultiCheck": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "relationItemData.multiSelectModeAction",
+            "eventData": {
+              "multiSelect": true
+            }
+          }
+        ]
+      }
+    },
+    "backSpacePopup": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "backSpacePopup"
+          }
+        ]
+      }
+    },
+    "relationingBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "relationing"
+        },
+        {
+          "action": "backSpacePopup"
+        },
+        {
+          "action": "buttonAction1"
+        }
+      ]
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
+        },
+        {
+          "action": "applyFilterFacets"
+        }
+      ]
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/relationSideNavService"
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "relationItemTableLoad",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/relationSideNavService"
+    },
+    "backSpacePopupAction": {
+      "actionType": "JSFunction",
+      "method": "backSpacePopupAction",
+      "deps": "js/relationSideNavService"
+    },
+    "resetSelect": {
+      "actionType": "JSFunction",
+      "method": "resetSelect",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/relationSideNavService"
+    },
+    "addSelectRelation": {
+      "actionType": "JSFunction",
+      "method": "addSelectRelation",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/relationSideNavService"
+    }
+  },
+  "data": {
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "relationItemData": {
+      "action": "loadData",
+      "response": "{{data.response}}",
+      "totalFound": "{{data.totalFound}}",
+      "selectionModelMode": "multiple",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "columnProviders": {
+    "relationItemColumn": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "l2_file_name",
+          "displayName": "{{i18n.itemName}}",
+          "width": 250,
+          "pinnedLeft": true,
+          "enableColumnMoving": false
+        },
+        {
+          "name": "l2_page_index",
+          "displayName": "{{i18n.itemType}}",
+          "width": 140,
+          "pinnedLeft": false,
+          "enableColumnMoving": false
+        },
+        {
+          "name": "l2_creator",
+          "displayName": "{{i18n.user}}",
+          "width": 110,
+          "pinnedLeft": false,
+          "enableColumnMoving": false
+        }
+      ]
+    }
+  },
+  "grids": {
+    "relationItemTable": {
+      "dataProvider": "relationItemData",
+      "columnProvider": "relationItemColumn",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true,
+        "enableGridMenu": false
+      }
+    }
+  },
+  "conditions": {},
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.relationItemColumn.columnFilters}}",
+        "{{data.columnProviders.relationItemColumn.sortCriteria}}",
+        "{{data.dataProviders.relationItemData.startIndex}}",
+        "{{data.pageSize}}",
+        "{{data}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.relationItemColumn.columnFilters}}", "{{data.fullData}}", "{{data}}"]
+    }
+  },
+  "i18n": {
+    "itemName": ["lgepKnowldegeManageMessages"],
+    "itemType": ["lgepKnowldegeManageMessages"],
+    "lastModify": ["lgepKnowldegeManageMessages"],
+    "user": ["lgepKnowldegeManageMessages"],
+    "buttonDemo": "아이템 참조",
+    "realtioning": ["lgepKnowldegeManageMessages"],
+    "resetButton": ["lgepKnowldegeManageMessages"]
+  },
+  "lifecycleHooks": {
+    "onInit": "tableMultiCheck"
+  }
 }

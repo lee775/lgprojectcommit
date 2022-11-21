@@ -1,0 +1,10 @@
+<aw-popup2>
+  <aw-panel>
+    <aw-panel-body>
+      <aw-textbox prop="data.checklistName"></aw-textbox>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer exist-when="data.checklistName.dbValue.length > 0">
+    <aw-button action="confirm">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-popup2>

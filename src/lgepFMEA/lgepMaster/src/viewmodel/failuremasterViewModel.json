@@ -67,7 +67,7 @@
       "method": "selectTableRowAction",
       "inputData": {
         "selectionModel": "{{data.eventData.selectedObjects[0]}}",
-        "ctx":"{{ctx}}"
+        "ctx": "{{ctx}}"
       },
       "deps": "js/cmListService"
     },
@@ -105,10 +105,7 @@
     },
     "getFilterFacets": {
       "functionName": "getFilterFacets",
-      "parameters": [
-        "{{data.columnProviders.fmFailureTableColumnProvider.columnFilters}}",
-        "{{data.fullData}}"
-      ],
+      "parameters": ["{{data.columnProviders.fmFailureTableColumnProvider.columnFilters}}", "{{data.fullData}}"],
       "deps": "js/utils/fmeaTableSortFilterUtils"
     }
   },

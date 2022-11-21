@@ -498,7 +498,7 @@ function($scope){
         }
       }
       if($scope.selectedLib) {
-        // //console.log(service);
+        //console.log(service);
         if(service.lib !== $scope.selectedLib){
           return false;
         }
@@ -558,7 +558,7 @@ function($scope){
         }
         var i = values.indexOf(varName);
         if(i !== -1){
-          // //console.log(values);
+          //console.log(values);
           values[i+1] = newValue;
           for(var i in locations){
             locations[i] = values[2*i] + '=' + values[2*i+1];

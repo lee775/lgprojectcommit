@@ -1,0 +1,49 @@
+<aw-panel>
+  <aw-panel-body>
+    <div class="editor-button-section">
+      <aw-button class="editor-button" exist-when="!conditions.openEdit" size="auto" action="editOpen"> {{i18n.modifyChecklist}}</aw-button>
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editSave">
+        {{i18n.openChecklistBomSave}}</aw-button
+      >
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editCancel">
+        {{i18n.openChecklistBomCancelEdit}}</aw-button
+      >
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.failureModeLabel}}</div>
+      <div id="failureMode"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.failureEffectLabel}}</div>
+      <div id="failureEffect"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.failureDetailLabel}}</div>
+      <div id="failureDetail"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.preventionLabel}}</div>
+      <div id="prevention"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.referenceDataLabel}}</div>
+      <div id="referenceData"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.detectivityLabel}}</div>
+      <div id="detectivity"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.classificationLabel}}</div>
+      <div id="classification"></div>
+    </div>
+    <div class="editor-button-section">
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editSave">
+        {{i18n.openChecklistBomSave}}</aw-button
+      >
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editCancel">
+        {{i18n.openChecklistBomCancelEdit}}</aw-button
+      >
+    </div>
+  </aw-panel-body>
+</aw-panel>

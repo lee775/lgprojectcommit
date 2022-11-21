@@ -1,26 +1,26 @@
-import Grid from "tui-grid";
-import "tui-grid/dist/tui-grid.css";
+import Grid from 'tui-grid';
+import 'tui-grid/dist/tui-grid.css';
 
-import appCtxService from "js/appCtxService";
-import eventBus from "js/eventBus";
+import appCtxService from 'js/appCtxService';
+import eventBus from 'js/eventBus';
 
-import lgepCommonUtils from "js/utils/lgepCommonUtils";
-import loadUtils from "js/utils/lgepLoadingUtils";
+import lgepCommonUtils from 'js/utils/lgepCommonUtils';
+import loadUtils from 'js/utils/lgepLoadingUtils';
 
-import { openCellEditor } from "js/dfmeaCellEditorService";
-import { getLangIndex } from "js/utils/fmeaCommonUtils";
-import { openImagePopup } from "js/dfmeaImageHoverService";
-import { openSodPopup } from "js/dfmeaSodSelectPopupService";
-import { initToastGrid } from "js/utils/fmeaViewCommonUtils";
-import { initImgSelectRow } from "js/dfmeaMasterTableInteractionService";
-import { getColumns } from "js/dfmeaMasterImageTableColumnLoadService";
-import { loadTableDatas } from "js/dfmeaMasteTableInitLoadService";
-import fmeaPopupUtils from "js/utils/fmeaPopupUtils";
-import { showErrorMessageByText } from "js/utils/fmeaMessageUtils";
-import * as constants from "js/constants/fmeaConstants";
+import { openCellEditor } from 'js/dfmeaCellEditorService';
+import { getLangIndex } from 'js/utils/fmeaCommonUtils';
+import { openImagePopup } from 'js/dfmeaImageHoverService';
+import { openSodPopup } from 'js/dfmeaSodSelectPopupService';
+import { initToastGrid } from 'js/utils/fmeaViewCommonUtils';
+import { initImgSelectRow } from 'js/dfmeaMasterTableInteractionService';
+import { getColumns } from 'js/dfmeaMasterImageTableColumnLoadService';
+import { loadTableDatas } from 'js/dfmeaMasteTableInitLoadService';
+import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
+import { showErrorMessageByText } from 'js/utils/fmeaMessageUtils';
+import * as constants from 'js/constants/fmeaConstants';
 
-import lgepSummerNoteUtils from "js/utils/lgepSummerNoteUtils";
-import notySvc from "js/NotyModule";
+import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
+import notySvc from 'js/NotyModule';
 
 export let langIndex;
 let grid;
@@ -45,7 +45,7 @@ const onLoad = async (ctx, data) => {
     tableResize();
   } catch (e) {
     showErrorMessageByText('errorLoadTable');
-    console.log("onLoad", e);
+    //console.log("onLoad", e);
   }
 };
 
@@ -70,15 +70,15 @@ const initTable = async (ctx, data) => {
   const datas = getData(ctx[constants.FMEA_TABLE_LIST], columns);
 
   const options = {
-    el: document.getElementById("toastGrid"),
+    el: document.getElementById('toastGrid'),
     scrollX: false,
     scrollY: true,
     // bodyHeight: 'fitToParent',
     pageOptions: {
-      type: "scroll",
+      type: 'scroll',
       perPage: 50,
     },
-    rowHeight: "auto",
+    rowHeight: 'auto',
     // columnOptions: {
     //   frozenCount: 3,
     //   resizable: true,
@@ -87,7 +87,7 @@ const initTable = async (ctx, data) => {
     columns: columns,
     data: datas,
     contextMenu: null,
-    selectionUnit: "row",
+    selectionUnit: 'row',
     // draggable: true
   };
 
@@ -96,30 +96,25 @@ const initTable = async (ctx, data) => {
   appCtxService.registerCtx(constants.FMEA_IMAGE_GRID, grid);
   // ctx.grid_table = grid;
 
-  let getTable = document.querySelectorAll(
-    "#scrollCtrl .tui-grid-rside-area .tui-grid-table > tbody > tr > th"
-  );
+  let getTable = document.querySelectorAll('#scrollCtrl .tui-grid-rside-area .tui-grid-table > tbody > tr > th');
   let width = 0;
   for (let th of getTable) {
     width += th.offsetWidth;
   }
   grid.setWidth(width + 25);
 
-  let headerLayout = document.querySelector(
-    "#scrollCtrl .tui-grid-rside-area .tui-grid-header-area"
-  );
-  headerLayout.style.width =
-    document.querySelector("#toastGrid").offsetWidth + "px";
+  let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area');
+  headerLayout.style.width = document.querySelector('#toastGrid').offsetWidth + 'px';
 };
 
 const events = () => {
   let selectedRowKey = null;
-  grid.on("click", async (e) => {
-    if (e.targetType === "columnHeader" || e.rowKey === undefined) {
+  grid.on('click', async (e) => {
+    if (e.targetType === 'columnHeader' || e.rowKey === undefined) {
       return;
     }
     if (selectedRowKey != e.rowKey) {
-      grid.removeRowClassName(selectedRowKey, "select");
+      grid.removeRowClassName(selectedRowKey, 'select');
     }
     _selectRow(e.rowKey);
     selectedRowKey = e.rowKey;
@@ -136,22 +131,20 @@ const events = () => {
     await copyCell(e);
   });
 
-  grid.on("mouseover", (e) => {
+  grid.on('mouseover', (e) => {
     openImagePopup(e, grid);
   });
 };
 
 // 클릭시 셀 값이 클립보드에 저장
 export const copyCell = async (e) => {
-  let cellValue = await lgepSummerNoteUtils.stripTags(
-    grid.getValue(e.rowKey, e.columnName)
-  );
-  if(cellValue.length > 1) {
+  let cellValue = await lgepSummerNoteUtils.stripTags(grid.getValue(e.rowKey, e.columnName));
+  if (cellValue.length > 1) {
     // clipboard API 사용
     if (navigator.clipboard !== undefined) {
       navigator.clipboard.writeText(cellValue).then(() => {
-        notySvc.setTimeout("info", 1500);
-        notySvc.showInfo("\"" + cellValue + "\"이(가) Teamcenter 및 OS 클립보드로 복사되었습니다.");
+        notySvc.setTimeout('info', 1500);
+        notySvc.showInfo('"' + cellValue + '"이(가) Teamcenter 및 OS 클립보드로 복사되었습니다.');
       });
     } else {
       // execCommand 사용
@@ -161,10 +154,10 @@ export const copyCell = async (e) => {
       textArea.select();
       try {
         document.execCommand('copy');
-        notySvc.setTimeout("info", 1500);
-        notySvc.showInfo("\"" + cellValue + "\"이(가) Teamcenter 및 OS 클립보드로 복사되었습니다.");
+        notySvc.setTimeout('info', 1500);
+        notySvc.showInfo('"' + cellValue + '"이(가) Teamcenter 및 OS 클립보드로 복사되었습니다.');
       } catch (err) {
-        // console.error('복사 실패', err);
+        //console.error('복사 실패', err);
       }
       document.body.removeChild(textArea);
     }
@@ -185,7 +178,7 @@ const _setSelectionRowModel = (rowData) => {
   appCtxService.registerCtx(constants.DFMEA_DETAIL_INIT, false);
   appCtxService.registerCtx(constants.ROW_SELECT, rowData);
   if (appCtxService.ctx[constants.DFMEA_DETAIL_MODE]) {
-    eventBus.publish("dfmeaDetail.onmount.imageTable");
+    eventBus.publish('dfmeaDetail.onmount.imageTable');
   }
 };
 
@@ -196,7 +189,7 @@ export const reLayout = async () => {
 };
 
 const _selectRow = (selectedRowKey) => {
-  grid.addRowClassName(selectedRowKey, "select");
+  grid.addRowClassName(selectedRowKey, 'select');
   _setSelectionRowModel(grid.getRow(selectedRowKey));
 };
 
@@ -226,7 +219,7 @@ const getData = (tableList, columns) => {
         ...prev,
         ...columnInfo,
       };
-    }, "");
+    }, '');
 
     return {
       ...row,
@@ -242,27 +235,22 @@ const _getValue = (rowInfo, prop) => {
   if (rowInfo[prop]) {
     return rowInfo[prop].value;
   }
-  return "";
+  return '';
 };
 
 const windowResize = () => {
-  let headerLayout = document.querySelector(
-    "#scrollCtrl .tui-grid-rside-area .tui-grid-header-area"
-  );
-  headerLayout.style.width =
-    document.querySelector("#toastGrid").offsetWidth + "px";
+  let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area');
+  headerLayout.style.width = document.querySelector('#toastGrid').offsetWidth + 'px';
 };
 
 const tableResize = async () => {
   await lgepCommonUtils.delay(1000);
-  let getTable = document.querySelectorAll(
-    "#scrollCtrl .tui-grid-rside-area .tui-grid-table > tbody > tr"
-  );
+  let getTable = document.querySelectorAll('#scrollCtrl .tui-grid-rside-area .tui-grid-table > tbody > tr');
   let height = 0;
   for (let tr of getTable) {
     let str = tr.style.height;
     const regex = /[^0-9]/g;
-    const result = str.replace(regex, "");
+    const result = str.replace(regex, '');
 
     height += parseInt(result);
   }

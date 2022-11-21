@@ -26,11 +26,7 @@ export const createDetection = async (failureRev) => {
   const editorValue = getEditorValueById(editorId);
   const shortenValue = makeShortenValues(editorValue);
   // FIXME: Failure Revision 의 속성으로 변경
-  await lgepObjectUtils.setProperties(
-    failureRev,
-    [prop.DETECTION_ACTIONS, prop.DETECTION_ACTIONS_SHORT],
-    [editorValue, shortenValue]
-  );
+  await lgepObjectUtils.setProperties(failureRev, [prop.DETECTION_ACTIONS, prop.DETECTION_ACTIONS_SHORT], [editorValue, shortenValue]);
 
   return failureRev;
 };
@@ -43,17 +39,10 @@ export const createDetection = async (failureRev) => {
 export const saveasDetection = async (baseDetection, newDetectionValue) => {
   await lgepObjectUtils.getProperties([baseDetection], [prop.OBJECT_NAME]);
   const name = baseDetection.props[prop.OBJECT_NAME].dbValues[0];
-  const detectionActionUid = await createObject(
-    prop.TYPE_FMEA_DETECTION_ACTION,
-    name
-  );
+  const detectionActionUid = await createObject(prop.TYPE_FMEA_DETECTION_ACTION, name);
   const detectionAction = await lgepObjectUtils.getObject(detectionActionUid);
   const shortenValue = makeShortenValues(newDetectionValue);
 
-  await lgepObjectUtils.setProperties(
-    detectionAction,
-    [prop.DETECTION_ACTION, prop.DETECTION_ACTION_SHORT],
-    [newDetectionValue, shortenValue]
-  );
+  await lgepObjectUtils.setProperties(detectionAction, [prop.DETECTION_ACTION, prop.DETECTION_ACTION_SHORT], [newDetectionValue, shortenValue]);
   return detectionAction;
 };

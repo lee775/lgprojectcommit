@@ -4,12 +4,7 @@
  */
 import appCtxService from 'js/appCtxService';
 
-import {
-  navigationFmea,
-  pageUnMount,
-  initGroupProuct,
-  getLangIndex,
-} from 'js/utils/fmeaCommonUtils';
+import { navigationFmea, pageUnMount, initGroupProuct, getLangIndex } from 'js/utils/fmeaCommonUtils';
 import { tableRefresh } from 'js/utils/fmeaViewCommonUtils';
 import { getLocalizedText } from 'js/utils/fmeaMessageUtils';
 import * as constants from 'js/constants/fmeaConstants';
@@ -23,10 +18,7 @@ import { initMasterDatas } from 'js/dfmeaMasterEditInitService';
  * @param {ModelObject} dfmeaMasterRev
  */
 const goDFmeaMasterView = (dfmeaMasterRev) => {
-  appCtxService.registerCtx(
-    constants.DFMEA_TABLE_MODE,
-    constants.DFMEA_TABLE_MODE_KEY_IMAGE
-  );
+  appCtxService.registerCtx(constants.DFMEA_TABLE_MODE, constants.DFMEA_TABLE_MODE_KEY_IMAGE);
   appCtxService.registerCtx(constants.FMEA_SELECT, dfmeaMasterRev);
   navigationFmea(dfmeaMasterRev);
 };
@@ -58,11 +50,7 @@ const entryValueByProduct = (productValue) => {
 };
 
 const _loadSod = async (entryValue) => {
-  const queryResults = await queryUtil.executeSavedQuery(
-    prop.QUERY_FMEA_SOD,
-    prop.QUERY_ENTRY_NAME,
-    entryValue
-  );
+  const queryResults = await queryUtil.executeSavedQuery(prop.QUERY_FMEA_SOD, prop.QUERY_ENTRY_NAME, entryValue);
   return queryResults;
 };
 
@@ -71,19 +59,10 @@ const _setProductTitle = (productInfo) => {
   const productTitleEl = document.createElement('div');
   productTitleEl.classList.add('product-title');
 
-  const localProductTitle = getLocalizedText(
-    'lgepDFMEAViewMessages',
-    'productTitle'
-  );
-  const localProdcutVale =
-    getLangIndex() === 1 ? productInfo.name : productInfo.value;
+  const localProductTitle = getLocalizedText('lgepDFMEAViewMessages', 'productTitle');
+  const localProdcutVale = getLangIndex() === 1 ? productInfo.name : productInfo.value;
 
-  productTitleEl.textContent =
-    localProductTitle +
-    constants.TWOSPACING +
-    ':' +
-    constants.TWOSPACING +
-    localProdcutVale;
+  productTitleEl.textContent = localProductTitle + constants.TWOSPACING + ':' + constants.TWOSPACING + localProdcutVale;
   headerTitleEl.appendChild(productTitleEl);
 };
 

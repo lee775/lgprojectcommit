@@ -1,0 +1,60 @@
+.tui-grid-cell-header {
+  border-bottom: 4px solid #aaaaaa !important;
+  border-top: 2px solid #aaaaaa !important;
+}
+
+.tui-grid-border-line-left {
+  background-color: #e0e0e0;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.select {
+  background-color: #cde6eb;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.select.sod-select {
+  background-color: #c8f5ff !important;
+}
+
+.checklist-cell-padding {
+  padding: 5px 5px 5px 5px !important;
+}
+
+.tui-grid-layer-focus-deactive .tui-grid-layer-focus-border {
+  background-color: transparent !important;
+}
+
+.tui-grid-layer-focus-border {
+  background-color: transparent !important;
+}
+
+.tui-grid-cell {
+  font-size: 14px !important;
+  font-family: inherit !important;
+  border-left-width: 1px !important;
+  border-right-width: 1px !important;
+  border-color: #9b9b9b !important;
+}
+
+.tui-grid-container p,
+.tui-grid-container input,
+.tui-grid-container textarea {
+  font-size: 14px !important;
+  font-family: inherit !important;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.interaction-same {
+  background-color: #cde6eb;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.interaction-init-select {
+  background-color: #cfcfcf;
+}
+
+#checklist-open-view .tui-grid-no-scroll-x .tui-grid-border-line-bottom {
+  border-bottom: none;
+}
+
+#checklist-open-view .tui-grid-border-line-left,
+#checklist-open-view .tui-grid-border-line-right {
+  background-color: transparent;
+}

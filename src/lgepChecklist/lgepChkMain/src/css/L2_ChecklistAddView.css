@@ -1,0 +1,65 @@
+.label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chkadd {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.chkeditor-section,
+.chkstructure-section,
+.sod-section {
+  padding-right: 10px;
+}
+
+.chkeditor-section {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.chkeditor-section:first-child {
+  margin-top: 5px;
+}
+
+.sod-section {
+  margin-top: 10px;
+}
+
+.sod-section .ng-scope.ng-isolate-scope{
+  min-width: 900px;
+}
+
+.sod {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chkstructure-section {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.chkstructure-section .label {
+  margin-right: 30px;
+  min-width: 80px;
+}
+
+.chkstructure-section button {
+  margin: 0;
+  max-width: 150px;
+}
+
+.structure-name {
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+#functioncontent {
+  max-height: 350px;
+  overflow-y: scroll;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}

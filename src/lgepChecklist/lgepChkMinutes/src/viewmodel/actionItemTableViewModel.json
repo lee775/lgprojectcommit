@@ -1,0 +1,103 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+        "js/aw-splm-table.directive"
+    ],
+    "actions": {
+        "loadActionItem": {
+          "actionType": "JSFunction",
+          "method": "loadActionItem",
+          "inputData": {
+            "data": "{{data}}"
+          },
+          "outputData": {
+            "actionItem": "{{function:sortActionItem}}",
+            "actionItemLength": "actionItemLength"
+          },
+          "deps": "js/minutesService"
+        },
+        "tableSelect": {
+          "actionType": "JSFunction",
+          "method": "tableSelect",
+          "inputData": {
+            "ctx": "{{ctx}}",
+            "data": "{{data}}",
+            "eventData": "{{parameters.eventData}}"
+          },
+          "deps": "js/minutesService"
+        }
+    },
+    "data": {
+        "actionItemPageSize": 40
+    },
+    "dataProviders": {
+        "actionItemTableProvider": {
+          "action": "loadActionItem",
+          "response": "{{data.actionItem}}",
+          "totalFound": "{{data.actionItemLength}}"
+        }
+    },
+    "columnProviders": {
+        "actionItemColumnProvider": {
+          "frozenColumnIndex": -1,
+          "columns": [
+            {
+              "name": "l2_comment",
+              "displayName": "코멘트",
+              "minWidth": 60,
+              "width": 150
+            },
+            {
+              "name": "l2_follow_up",
+              "displayName": "F/up",
+              "minWidth": 60,
+              "width": 150
+            },
+            {
+              "name": "l2_worker",
+              "displayName": "담당자",
+              "minWidth": 60,
+              "width": 150
+            },
+            {
+              "name": "l2_expected_date",
+              "displayName": "일시",
+              "minWidth": 60,
+              "width": 150
+            }
+          ]
+        }
+    },
+    "grids": {
+        "actionItemTable": {
+          "dataProvider": "actionItemTableProvider",
+          "columnProvider": "actionItemColumnProvider",
+          "addIconColumn": false,
+          "gridOptions": {
+            "enablePinning": true,
+            "enableSorting": true,
+            "enableGridMenu": true
+          }
+        }
+    },
+    "onEvent": [
+        {
+          "eventId": "minutesListProvider.selectionChangeEvent",
+          "action": "loadActionItem"
+        },
+        {
+          "eventId": "actionItemTable.gridSelection",
+          "action": "tableSelect",
+          "cacheEventData": true,
+          "inputArgs": {
+            "eventData": "{{eventData}}"
+          }
+        }
+    ],
+    "functions": {
+        "sortActionItem": {
+          "functionName": "sortActionItem",
+          "parameters": ["{{data.dataProviders.actionItemTableProvider.startIndex}}", "{{data.actionItemPageSize}}"]
+        }
+    }
+}

@@ -1,10 +1,4 @@
 {
   "schemaVersion": "1.0.0",
-  "imports": [
-    "js/aw-flex-row.directive",
-    "js/aw-command-bar.directive",
-    "js/aw-include.directive",
-    "js/exist-when.directive",
-    "js/aw-xrt-summary.directive"
-  ]
+  "imports": ["js/aw-flex-row.directive", "js/aw-command-bar.directive", "js/aw-include.directive", "js/exist-when.directive", "js/aw-xrt-summary.directive"]
 }

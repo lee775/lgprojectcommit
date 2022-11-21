@@ -1,5 +1,5 @@
 {
-    "name": "lgepKnowledgeWarehouse",
-    "description": "This is the lgepKnowledgeWarehouse module",
-    "skipTest": true
+  "name": "lgepKnowledgeWarehouse",
+  "description": "This is the lgepKnowledgeWarehouse module",
+  "skipTest": true
 }

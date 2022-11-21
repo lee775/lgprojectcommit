@@ -1,136 +1,136 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-button.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-popup2.directive",
-        "js/aw-file-upload.directive",
-        "js/aw-label.directive",
-        "css/technicalDocumentationView.css",
-        "js/aw-widget.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "invalidFileSelected",
-            "message": "invalidFileError"
-        },
-        {
-            "eventId": "fileUploaded",
-            "message": "fileUploadSuccess"
-        },
-        {
-            "eventId": "technicalDataProvider.selectionChangeEvent",
-            "cacheEventData": true
-        },
-        {
-            "eventId": "technicalDocumentationEditPopupSuccessEvent",
-            "action": "editInitialize"
-        }
-    ],
-    "actions": {
-        "fileDelete": {
-            "actionType": "JSFunction",
-            "method": "fileDelete",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/lgepNoticeBoardManualService"
-        },
-        "editTechnicalDocument": {
-            "actionType": "JSFunction",
-            "method": "editTechnicalDocument",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/lgepNoticeBoardManualService"
-        },
-        "editInitialize": {
-            "actionType": "JSFunction",
-            "method": "editInitialize",
-            "deps": "js/lgepNoticeBoardManualService"
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "editTechnicalDocumentBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "uploadFiles"
-                },
-                {
-                    "action": "editTechnicalDocument"
-                }
-            ]
-        },
-        "updateFormData": {
-            "actionType": "JSFunction",
-            "method": "updateFormData",
-            "inputData": {
-                "fileData": {
-                    "key": "name",
-                    "value": "{{data.fileName}}"
-                },
-                "data": "{{data}}"
-            },
-            "deps": "js/declUtils"
-        },
-        "uploadFiles": {
-            "actionType": "JSFunction",
-            "method": "uploadFileToDataset",
-            "inputData": {
-                "fileData": "{{data.formData}}"
-            },
-            "outputData": {
-                "dataset": ""
-            },
-            "deps": "js/lgepNoticeBoardManualService"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-file-upload.directive",
+    "js/aw-label.directive",
+    "css/technicalDocumentationView.css",
+    "js/aw-widget.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "invalidFileSelected",
+      "message": "invalidFileError"
     },
-    "data": {
-        "technicalTitle": {
-            "displayName": "{{i18n.technicalTitle}}",
-            "type": "STRING",
-            "isRequired": "true",
-            "isEditable": "true",
-            "maxLength": 128,
-            "renderingHint": "textbox",
-            "arrayLength": 1
-        },
-        "technicalContent": {
-            "displayName": "{{i18n.technicalContent}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "false",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "technicalDataSet": {
-            "displayName": "{{i18n.technicalDataSet}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "false",
-            "dbValue": "",
-            "dispValue": ""
-        }
+    {
+      "eventId": "fileUploaded",
+      "message": "fileUploadSuccess"
     },
-    "i18n": {
-        "close": ["lgepKnowldegeManageMessages"],
-        "technicalTitle": ["lgepKnowldegeManageMessages"],
-        "technicalContent": ["lgepKnowldegeManageMessages"],
-        "technicalDataSet": ["lgepKnowldegeManageMessages"],
-        "fileRemove": ["lgepTechnicalMessages"],
-        "update": ["lgepTechnicalMessages"]
+    {
+      "eventId": "technicalDataProvider.selectionChangeEvent",
+      "cacheEventData": true
     },
-    "conditions": {
-        "validFile": {
-            "expression": "data.validFile == true"
-        }
+    {
+      "eventId": "technicalDocumentationEditPopupSuccessEvent",
+      "action": "editInitialize"
     }
+  ],
+  "actions": {
+    "fileDelete": {
+      "actionType": "JSFunction",
+      "method": "fileDelete",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/lgepNoticeBoardManualService"
+    },
+    "editTechnicalDocument": {
+      "actionType": "JSFunction",
+      "method": "editTechnicalDocument",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/lgepNoticeBoardManualService"
+    },
+    "editInitialize": {
+      "actionType": "JSFunction",
+      "method": "editInitialize",
+      "deps": "js/lgepNoticeBoardManualService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "editTechnicalDocumentBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "uploadFiles"
+        },
+        {
+          "action": "editTechnicalDocument"
+        }
+      ]
+    },
+    "updateFormData": {
+      "actionType": "JSFunction",
+      "method": "updateFormData",
+      "inputData": {
+        "fileData": {
+          "key": "name",
+          "value": "{{data.fileName}}"
+        },
+        "data": "{{data}}"
+      },
+      "deps": "js/declUtils"
+    },
+    "uploadFiles": {
+      "actionType": "JSFunction",
+      "method": "uploadFileToDataset",
+      "inputData": {
+        "fileData": "{{data.formData}}"
+      },
+      "outputData": {
+        "dataset": ""
+      },
+      "deps": "js/lgepNoticeBoardManualService"
+    }
+  },
+  "data": {
+    "technicalTitle": {
+      "displayName": "{{i18n.technicalTitle}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "maxLength": 128,
+      "renderingHint": "textbox",
+      "arrayLength": 1
+    },
+    "technicalContent": {
+      "displayName": "{{i18n.technicalContent}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "false",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "technicalDataSet": {
+      "displayName": "{{i18n.technicalDataSet}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "false",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "i18n": {
+    "close": ["lgepKnowldegeManageMessages"],
+    "technicalTitle": ["lgepKnowldegeManageMessages"],
+    "technicalContent": ["lgepKnowldegeManageMessages"],
+    "technicalDataSet": ["lgepKnowldegeManageMessages"],
+    "fileRemove": ["lgepTechnicalMessages"],
+    "update": ["lgepTechnicalMessages"]
+  },
+  "conditions": {
+    "validFile": {
+      "expression": "data.validFile == true"
+    }
+  }
 }

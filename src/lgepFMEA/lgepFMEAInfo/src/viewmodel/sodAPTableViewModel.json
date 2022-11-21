@@ -1,10 +1,19 @@
 {
   "schemaVersion": "1.0.0",
-  "imports": ["js/aw-column.directive", "js/aw-row.directive"],
+  "imports": ["js/aw-column.directive", "js/aw-row.directive", "js/aw-command-bar.directive"],
   "actions": {
     "onMount": {
       "actionType": "JSFunction",
       "method": "onMount",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/sodAPTableService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
       "inputData": {
         "ctx": "{{ctx}}"
       },
@@ -17,9 +26,23 @@
         "ctx": "{{ctx}}"
       },
       "deps": "js/sodAPTableService"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/sodAPTableService"
     }
   },
+  "onEvent": [{
+    "eventId": "ThemeChangeEvent",
+    "action": "setTuiGridStyle"
+  }
+],
   "lifecycleHooks": {
-    "onMount": "onMount"
+    "onMount": "onMount",
+    "onUnmount": "unMount"
   }
 }

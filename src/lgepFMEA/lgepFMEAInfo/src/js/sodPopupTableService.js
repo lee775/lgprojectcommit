@@ -80,7 +80,7 @@ export const getTableInfo = async (tableId) => {
 };
 
 const _getColumnWidth = (tableId) => {
-  if(typeTable === constants.SOD_VACUUM_TABLE_INFO){
+  if (typeTable === constants.SOD_VACUUM_TABLE_INFO) {
     if (tableId === constants.COL_SEVERITY_LANG[0]) {
       return [70, 250, 1100];
     } else if (tableId === constants.COL_OCCURENCE_LANG[0]) {

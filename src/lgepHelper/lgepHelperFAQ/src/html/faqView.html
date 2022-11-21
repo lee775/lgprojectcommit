@@ -1,63 +1,59 @@
 <aw-flex-column class="afx-alt-content-background" color="white" id="qnaDatas">
-    <aw-flex-row>
-        <aw-flex-column width="4" justify="top" class="leftPadding insideMargin" id="summaryContentStyle">
-            <aw-search-box prop="data.searchBox" action="questionSearch"></aw-search-box>
-            <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadowFaq2">
-                <aw-command-bar anchor="faqCommand" alignment="HORIZONTAL" id="commandColorId"></aw-command-bar>
+  <aw-flex-row>
+    <aw-flex-column width="4" justify="top" class="leftPadding insideMargin" id="summaryContentStyle">
+      <aw-search-box prop="data.searchBox" action="questionSearch"></aw-search-box>
+      <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadowFaq2">
+        <aw-command-bar anchor="faqCommand" alignment="HORIZONTAL" id="commandColorId"></aw-command-bar>
+      </aw-flex-row>
+      <div style="text-align: center" visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length === 0">
+        <h3>{{i18n.noPost}}</h3>
+      </div>
+      <aw-flex-row height="fill" class="borderShadowFaq">
+        <aw-splm-table
+          gridid="qaList"
+          visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
+          align-content="center"
+        ></aw-splm-table>
+      </aw-flex-row>
+      <aw-flex-row id="alink" justify="center">
+        <aw-link prop="data.firstPage" action="firstPageAction" style="font-weight: bolder; margin-top: 5px"> </aw-link>
+        <aw-link prop="data.beforePage" action="pagingBeforeAction" style="font-weight: bolder; margin-top: 5px"></aw-link>
+        <aw-chip-list dataprovider="data.dataProviders.pageChipDataProvider" action="clickedPageAction" id="chipStyle"></aw-chip-list>
+        <aw-link prop="data.afterPage" action="pagingAfterAction" style="font-weight: bolder; margin-top: 5px"> </aw-link>
+        <aw-link prop="data.lastPage" action="lastPageAction" style="font-weight: bolder; margin-top: 5px"> </aw-link>
+      </aw-flex-row>
+    </aw-flex-column>
+    <aw-splitter min-size-1="300" min-size-2="40"></aw-splitter>
+    <aw-flex-column class="borderShadow3" width="fill">
+      <aw-flex-row
+        justify="center"
+        visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length == 0 && data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
+      >
+        <h3 class="h3TopMargin">{{i18n.pleaseSelectDocument}}</h3>
+      </aw-flex-row>
+      <aw-tab-set tabs="data.faqTabModel" visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length > 0">
+        <aw-panel-body visible-when="conditions.showProps">
+          <aw-command-panel-section caption="{{i18n.property}}" anchor="data.qaOptionAnchor" collapsed="false" class="faqBorder">
+            <aw-flex-row>
+              <aw-label prop="data.qaID" class="marginUp lblLayout"></aw-label>
             </aw-flex-row>
-            <div style="text-align: center;"
-                visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length === 0">
-                <h3>{{i18n.noPost}}</h3>
-            </div>
-            <aw-flex-row height="fill" class="borderShadowFaq">
-                <aw-splm-table gridid="qaList"
-                    visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
-                    align-content="center"></aw-splm-table>
+            <aw-flex-row>
+              <aw-label prop="data.qaTitle" class="lblLayout"></aw-label>
             </aw-flex-row>
-            <aw-flex-row id="alink" justify="center">
-                <aw-link prop="data.firstPage" action="firstPageAction" style="font-weight: bolder; margin-top: 5px;">
-                </aw-link>
-                <aw-link prop="data.beforePage" action="pagingBeforeAction"
-                    style="font-weight: bolder; margin-top: 5px;"></aw-link>
-                <aw-chip-list dataprovider="data.dataProviders.pageChipDataProvider" action="clickedPageAction"
-                    id="chipStyle"></aw-chip-list>
-                <aw-link prop="data.afterPage" action="pagingAfterAction" style="font-weight: bolder; margin-top: 5px;">
-                </aw-link>
-                <aw-link prop="data.lastPage" action="lastPageAction" style="font-weight: bolder; margin-top: 5px;">
-                </aw-link>
+            <aw-label prop="data.qaQuestion" class="lblLayout2"></aw-label>
+            <aw-panel-body class="faqSummernotePanel">
+              <textarea id="qaContentSummernoteQ"></textarea>
+            </aw-panel-body>
+            <aw-break></aw-break>
+            <aw-flex-row>
+              <aw-label prop="data.qaWriter" class="lblLayout"></aw-label>
             </aw-flex-row>
-        </aw-flex-column>
-        <aw-splitter min-size-1="300" min-size-2="40"></aw-splitter>
-        <aw-flex-column class="borderShadow3" width="fill">
-            <aw-flex-row justify="center"
-                visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length == 0 && data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0">
-                <h3 class="h3TopMargin">{{i18n.pleaseSelectDocument}}</h3>
+            <aw-flex-row>
+              <aw-label prop="data.qaWriteDate" class="lblLayout"></aw-label>
             </aw-flex-row>
-            <aw-tab-set tabs="data.faqTabModel"
-                visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length > 0">
-                <aw-panel-body visible-when="conditions.showProps">
-                    <aw-command-panel-section caption="{{i18n.property}}" anchor="data.qaOptionAnchor" collapsed="false"
-                        class="faqBorder">
-                        <aw-flex-row>
-                            <aw-label prop="data.qaID" class="marginUp lblLayout"></aw-label>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-label prop="data.qaTitle" class="lblLayout"></aw-label>
-                        </aw-flex-row>
-                        <aw-label prop="data.qaQuestion" class="lblLayout2"></aw-label>
-                        <aw-panel-body class="faqSummernotePanel">
-                            <textarea id="qaContentSummernoteQ"></textarea>
-                        </aw-panel-body>
-                        <aw-break></aw-break>
-                        <aw-flex-row>
-                            <aw-label prop="data.qaWriter" class="lblLayout"></aw-label>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-label prop="data.qaWriteDate" class="lblLayout"></aw-label>
-                        </aw-flex-row>
-                    </aw-command-panel-section>
-                </aw-panel-body>
-            </aw-tab-set>
-        </aw-flex-column>
-    </aw-flex-row>
+          </aw-command-panel-section>
+        </aw-panel-body>
+      </aw-tab-set>
+    </aw-flex-column>
+  </aw-flex-row>
 </aw-flex-column>

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-panel.directive",
+    "js/visible-when.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-command-bar.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "startTableEdit",
+      "action": "startEditAction"
+    },
+    {
+      "eventId": "cancelTableEdit",
+      "action": "cancelEditActionBat"
+    },
+    {
+      "eventId": "saveTableEdit",
+      "action": "saveEditActionBat"
+    }
+  ],
+  "actions": {
+    "reviseHistoryTableSet": {
+      "actionType": "JSFunction",
+      "method": "reviseHistoryTableSet",
+      "outputData": {
+        "result": "result",
+        "totalFound": "totalFound",
+        "uid": "uid"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "tableEditSaveAction": {
+      "actionType": "JSFunction",
+      "method": "tableEditSaveAction",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "tableEditStartAction": {
+      "actionType": "JSFunction",
+      "method": "tableEditStartAction",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "cancelMode": {
+      "actionType": "JSFunction",
+      "method": "cancelMode",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "startEditAction": {
+      "actionType": "dataProvider",
+      "method": "reviseHistoryTableData",
+      "inputData": {
+        "action": "startEdit"
+      }
+    },
+    "cancelEditAction": {
+      "actionType": "dataProvider",
+      "method": "reviseHistoryTableData",
+      "inputData": {
+        "action": "cancelEdits"
+      }
+    },
+    "saveEditAction": {
+      "actionType": "dataProvider",
+      "method": "reviseHistoryTableData",
+      "inputData": {
+        "action": "saveEdits"
+      }
+    },
+    "saveEditActionBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "saveEditAction"
+        },
+        {
+          "action": "tableEditSaveAction"
+        }
+      ]
+    },
+    "cancelEditActionBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "cancelEditAction"
+        },
+        {
+          "action": "cancelMode"
+        }
+      ]
+    }
+  },
+  "data": {
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "reviseHistoryTableData": {
+      "action": "reviseHistoryTableSet",
+      "response": "{{data.result}}",
+      "totalFound": "{{data.totalFound}}",
+      "editConfig": {
+        "startEditAction": "tableEditStartAction",
+        "saveEditAction": "tableEditSaveAction",
+        "identifier": "uid"
+      }
+    }
+  },
+  "columnProviders": {
+    "reviseHistoryTableColumn": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "item_revision_id",
+          "displayName": "Rev",
+          "width": 50,
+          "pinnedLeft": true,
+          "enableColumnMenu": false,
+          "enableColumnMoving": false
+        },
+        {
+          "name": "l2_revise_reason",
+          "displayName": "{{i18n.reviseReason}}",
+          "width": 300,
+          "pinnedLeft": false,
+          "enableColumnMenu": false,
+          "enableColumnMoving": false
+        },
+        {
+          "name": "l2_revise_date",
+          "displayName": "{{i18n.revisedate}}",
+          "width": 150,
+          "pinnedLeft": false,
+          "enableColumnMenu": false,
+          "enableColumnMoving": false
+        },
+        {
+          "name": "l2_revise_user",
+          "displayName": "{{i18n.reviseUser}}",
+          "width": 100,
+          "pinnedLeft": false,
+          "enableColumnMenu": false,
+          "enableColumnMoving": false
+        }
+      ]
+    }
+  },
+  "grids": {
+    "reviseHistoryTable": {
+      "dataProvider": "reviseHistoryTableData",
+      "columnProvider": "reviseHistoryTableColumn",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": false,
+        "enablePinning": false,
+        "enableSorting": false
+      }
+    }
+  },
+  "conditions": {
+    "tableEditMode": {
+      "expression": "data.tableEditMode === true"
+    }
+  },
+  "i18n": {
+    "ok": ["lgepDesignSequenceMessages"],
+    "close": ["lgepDesignSequenceMessages"],
+    "name": ["L2_DesignStandardMessages"],
+    "objType": ["L2_DesignStandardMessages"],
+    "objDetailType": ["L2_DesignStandardMessages"],
+    "fileSize": ["L2_DesignStandardMessages"],
+    "selectDownload": ["L2_DesignStandardMessages"],
+    "downloadAll": ["L2_DesignStandardMessages"],
+    "dateCreated": ["L2_DesignStandardMessages"],
+    "user": ["L2_DesignStandardMessages"],
+    "datasetType": ["L2_DesignStandardMessages"],
+    "dataset": ["L2_DesignStandardMessages"],
+    "page": ["L2_DesignStandardMessages"],
+    "book": ["L2_DesignStandardMessages"],
+    "fileDelete": ["L2_DesignStandardMessages"],
+    "fileAdd": ["L2_DesignStandardMessages"],
+    "reviseUser": ["L2_DesignStandardMessages"],
+    "revisedate": ["L2_DesignStandardMessages"],
+    "reviseReason": ["L2_DesignStandardMessages"]
+  }
+}

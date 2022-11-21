@@ -1,21 +1,11 @@
 import uwPropertySvc from 'js/uwPropertyService';
 import { getLangIndex } from 'js/utils/fmeaCommonUtils';
 
-export const makeVmPropertyOnTextTable = (
-  rev,
-  dbValueProp,
-  displayProp = dbValueProp
-) => {
+export const makeVmPropertyOnTextTable = (rev, dbValueProp, displayProp = dbValueProp) => {
   try {
     const dbValue = rev.props[dbValueProp].dbValues[0];
     const displayValue = rev.props[displayProp].dbValues[0];
-    const vmProperty = uwPropertySvc.createViewModelProperty(
-      dbValueProp,
-      dbValue,
-      'STRING',
-      dbValue,
-      [displayValue]
-    );
+    const vmProperty = uwPropertySvc.createViewModelProperty(dbValueProp, dbValue, 'STRING', dbValue, [displayValue]);
     vmProperty.uid = rev.uid;
     uwPropertySvc.setIsEditable(vmProperty, true);
     uwPropertySvc.setIsPropertyModifiable(vmProperty, true);
@@ -32,26 +22,14 @@ export const makeVmPropertyOnTextTable = (
  * @returns
  */
 export const makeVmProperty = (prop, dbValue, dispValue = dbValue) => {
-  const vmProperty = uwPropertySvc.createViewModelProperty(
-    prop,
-    dbValue,
-    'STRING',
-    dbValue,
-    [dispValue]
-  );
+  const vmProperty = uwPropertySvc.createViewModelProperty(prop, dbValue, 'STRING', dbValue, [dispValue]);
   uwPropertySvc.setIsEditable(vmProperty, true);
   uwPropertySvc.setIsPropertyModifiable(vmProperty, true);
   return vmProperty;
 };
 
 export const makeEmptyProperty = () => {
-  const vmProperty = uwPropertySvc.createViewModelProperty(
-    '',
-    '',
-    'STRING',
-    '',
-    ['displayValue']
-  );
+  const vmProperty = uwPropertySvc.createViewModelProperty('', '', 'STRING', '', ['displayValue']);
   vmProperty.uid = null;
   uwPropertySvc.setIsEditable(vmProperty, true);
   uwPropertySvc.setIsPropertyModifiable(vmProperty, true);

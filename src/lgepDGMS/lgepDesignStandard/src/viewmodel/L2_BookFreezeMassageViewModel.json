@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-textarea.directive",
+    "js/aw-popup2.directive"
+  ],
+  "data": {
+    "FreezeMessage": {
+      "displayName": "{{i18n.FreezeMessge}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "requiredText": "{{i18n.FreezeMessgeEnter}}",
+      "numberOfLines": 5
+    }
+  },
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "bookFreeze": {
+      "actionType": "JSFunction",
+      "method": "bookFreeze",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bookFreezeBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "bookFreeze"
+        },
+        {
+          "condition": "conditions.closeCond",
+          "action": "closePopupWindow"
+        }
+      ]
+    }
+  },
+  "conditions": {
+    "closeCond": {
+      "expression": "data.result == true"
+    }
+  },
+  "i18n": {
+    "FreezeMessge": ["L2_DesignStandardMessages"],
+    "close": ["L2_DesignStandardMessages"],
+    "ok": ["L2_DesignStandardMessages"],
+    "FreezeMessgeEnter": ["L2_DesignStandardMessages"]
+  }
+}

@@ -1,143 +1,119 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-listbox.directive",
-        "js/aw-command-panel-section.directive",
-        "js/visible-when.directive",
-        "js/aw-chart.directive",
-        "css/askExpertView.css"
-    ],
-    "data": {
-        "chartModeChange": {
-            "displayName": "{{i18n.chartMode}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "hasLov": "true",
-            "dbValue": "{{i18n.column}}",
-            "dispValue": "{{i18n.column}}"
-        },
-        "chartModeChangeValues": {
-            "type": "STRING",
-            "dbValue": [
-                {
-                    "propDisplayValue": "{{i18n.column}}",
-                    "propInternalValue": "{{i18n.column}}"
-                },
-                {
-                    "propDisplayValue": "{{i18n.pie}}",
-                    "propInternalValue": "{{i18n.pie}}"
-                }
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-listbox.directive",
+    "js/aw-command-panel-section.directive",
+    "js/visible-when.directive",
+    "js/aw-chart.directive",
+    "css/askExpertView.css"
+  ],
+  "data": {
+    "chartModeChange": {
+      "displayName": "{{i18n.chartMode}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "true",
+      "dbValue": "{{i18n.column}}",
+      "dispValue": "{{i18n.column}}"
     },
-    "actions": {
-        "getColumnChartDataExpert": {
-            "actionType": "JSFunction",
-            "method": "getColumnChartDataExpert",
-            "outputData": {
-                "chartProviders.columnChartProviderExpert.chartPoints": ""
-            },
-            "deps": "js/askExpertChartService"
-        },
-        "pieChartProviderExpert": {
-            "actionType": "JSFunction",
-            "method": "pieChartProviderExpert",
-            "outputData": {
-                "chartProviders.pieChartProviderExpert.chartPoints": ""
-            },
-            "deps": "js/askExpertChartService"
-        },
-        "chartReLoad": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getColumnChartDataExpert"
-                },
-                {
-                    "action": "pieChartProviderExpert"
-                }
-            ]
-        }
-    },
-    "chartProviders": {
-        "columnChartProviderExpert": {
-            "title": "",
-            "chartType": "column",
-            "loadDataAction": "getColumnChartDataExpert",
-            "chartConfig": {
-                "isChartZoomable": true,
-                "xAxisLabel": "",
-                "yAxisLabel": "",
-                "isDataLabelOnChartEnabled": true
-            }
-        },
-        "pieChartProviderExpert": {
-            "title": "",
-            "chartType": "pie",
-            "loadDataAction": "pieChartProviderExpert",
-            "chartColorOverrideClass": "charts-custom-colors",
-            "chartConfig": {
-                "isChartZoomable": true,
-                "isYAxisLinearOrLogarithmic": "logarithmic",
-                "xAxisLabel": "",
-                "yAxisLabel": "",
-                "isDataLabelOnChartEnabled": true
-            }
-        }
-    },
-    "onEvent": [
+    "chartModeChangeValues": {
+      "type": "STRING",
+      "dbValue": [
         {
-            "eventId": "chartReLoad",
-            "action": "chartReLoad"
+          "propDisplayValue": "{{i18n.column}}",
+          "propInternalValue": "{{i18n.column}}"
         },
         {
-            "eventId": "qaListDataProvider.modelObjectsUpdated",
-            "action": "chartReLoad"
+          "propDisplayValue": "{{i18n.pie}}",
+          "propInternalValue": "{{i18n.pie}}"
         }
-    ],
-    "i18n": {
-        "chartMode": [ "L2_DesignStandardMessages" ],
-        "column": [ "L2_DesignStandardMessages" ],
-        "pie": [ "L2_DesignStandardMessages" ],
-        "helloText": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "relationItem": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "property": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "answer": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "title":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "createDate":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "editing":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "addAnswer":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "addQuestion":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "content":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "point":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "user":[
-            "lgepKnowldegeManageMessages"
-        ],
-        "pleaseSelectDocument": ["lgepKnowldegeManageMessages"],
-        "expertChartTitle": ["lgepKnowldegeManageMessages"]
+      ]
     }
+  },
+  "actions": {
+    "getColumnChartDataExpert": {
+      "actionType": "JSFunction",
+      "method": "getColumnChartDataExpert",
+      "outputData": {
+        "chartProviders.columnChartProviderExpert.chartPoints": ""
+      },
+      "deps": "js/askExpertChartService"
+    },
+    "pieChartProviderExpert": {
+      "actionType": "JSFunction",
+      "method": "pieChartProviderExpert",
+      "outputData": {
+        "chartProviders.pieChartProviderExpert.chartPoints": ""
+      },
+      "deps": "js/askExpertChartService"
+    },
+    "chartReLoad": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getColumnChartDataExpert"
+        },
+        {
+          "action": "pieChartProviderExpert"
+        }
+      ]
+    }
+  },
+  "chartProviders": {
+    "columnChartProviderExpert": {
+      "title": "",
+      "chartType": "column",
+      "loadDataAction": "getColumnChartDataExpert",
+      "chartConfig": {
+        "isChartZoomable": true,
+        "xAxisLabel": "",
+        "yAxisLabel": "",
+        "isDataLabelOnChartEnabled": true
+      }
+    },
+    "pieChartProviderExpert": {
+      "title": "",
+      "chartType": "pie",
+      "loadDataAction": "pieChartProviderExpert",
+      "chartColorOverrideClass": "charts-custom-colors",
+      "chartConfig": {
+        "isChartZoomable": true,
+        "isYAxisLinearOrLogarithmic": "logarithmic",
+        "xAxisLabel": "",
+        "yAxisLabel": "",
+        "isDataLabelOnChartEnabled": true
+      }
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "chartReLoad",
+      "action": "chartReLoad"
+    },
+    {
+      "eventId": "qaListDataProvider.modelObjectsUpdated",
+      "action": "chartReLoad"
+    }
+  ],
+  "i18n": {
+    "chartMode": ["L2_DesignStandardMessages"],
+    "column": ["L2_DesignStandardMessages"],
+    "pie": ["L2_DesignStandardMessages"],
+    "helloText": ["lgepKnowldegeManageMessages"],
+    "relationItem": ["lgepKnowldegeManageMessages"],
+    "property": ["lgepKnowldegeManageMessages"],
+    "answer": ["lgepKnowldegeManageMessages"],
+    "title": ["lgepKnowldegeManageMessages"],
+    "createDate": ["lgepKnowldegeManageMessages"],
+    "editing": ["lgepKnowldegeManageMessages"],
+    "addAnswer": ["lgepKnowldegeManageMessages"],
+    "addQuestion": ["lgepKnowldegeManageMessages"],
+    "content": ["lgepKnowldegeManageMessages"],
+    "point": ["lgepKnowldegeManageMessages"],
+    "user": ["lgepKnowldegeManageMessages"],
+    "pleaseSelectDocument": ["lgepKnowldegeManageMessages"],
+    "expertChartTitle": ["lgepKnowldegeManageMessages"]
+  }
 }

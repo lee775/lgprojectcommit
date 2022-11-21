@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-textarea.directive"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "goUserDetail": {
+      "actionType": "JSFunction",
+      "method": "goUserDetail",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "createproceed": {
+      "actionType": "JSFunction",
+      "method": "createproceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "createProceedBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "createproceed"
+        },
+        {
+          "action": "closePopupWindow"
+        }
+      ]
+    }
+  },
+  "data": {
+    "object_name": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_date": {
+      "displayName": "{{i18n.date}}",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_meeting_place": {
+      "displayName": "{{i18n.place}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_participants": {
+      "displayName": "{{i18n.participants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 3
+    },
+    "l2_meeting_details": {
+      "displayName": "{{i18n.meetingDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 10
+    },
+    "l2_meeting_agenda": {
+      "displayName": "{{i18n.meetingAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_related_schedule": {
+      "displayName": "{{i18n.relatedSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 5
+    },
+    "object_nameLbl": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_dateLbl": {
+      "displayName": "{{i18n.date}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_placeLbl": {
+      "displayName": "{{i18n.place}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriter": {
+      "displayName": "{{i18n.writer}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriterLink": {
+      "displayName": "",
+      "type": "STRING",
+      "isEditable": "false"
+    },
+    "l2_meeting_participantsLbl": {
+      "displayName": "{{i18n.participants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_agendaLbl": {
+      "displayName": "{{i18n.meetingAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedDetails": {
+      "displayName": "{{i18n.meetingDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_related_scheduleLbl": {
+      "displayName": "{{i18n.relatedSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "onEvent": [],
+  "i18n": {
+    "minutesTitle": ["lgepChkMinutesMessages"],
+    "date": ["lgepChkMinutesMessages"],
+    "place": ["lgepChkMinutesMessages"],
+    "participants": ["lgepChkMinutesMessages"],
+    "meetingDetails": ["lgepChkMinutesMessages"],
+    "meetingAgenda": ["lgepChkMinutesMessages"],
+    "relatedSchedule": ["lgepChkMinutesMessages"],
+    "writer": ["lgepChkMinutesMessages"],
+    "detail": ["lgepChkMinutesMessages"],
+    "minutesList": ["lgepChkMinutesMessages"],
+    "minutes": ["lgepChkMinutesMessages"]
+  }
+}

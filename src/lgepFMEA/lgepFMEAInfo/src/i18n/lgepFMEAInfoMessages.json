@@ -1,15 +1,13 @@
 {
-    "fmeaInfoLocationHeaderTitle": "SOD Master",
-    "fmeaInfoLocationBrowserTitle": "Digital DGMS",
-    "fmeaInfoLocationBrowserSubTitle": "SOD Master",
-    "systemFmeaListTitle": "System FMEA",
-    "systemFmeaCreateTitle": "System FMEA",
+  "fmeaInfoLocationHeaderTitle": "SOD Master",
+  "fmeaInfoLocationBrowserTitle": "Digital DGMS",
+  "fmeaInfoLocationBrowserSubTitle": "SOD Master",
+  "systemFmeaListTitle": "System FMEA",
+  "systemFmeaCreateTitle": "System FMEA",
 
-    "interactionMatrixCreateTitle": "Interaction Matrix",
-    "interactionMatrixListTitle": "Interaction Matrix",
+  "interactionMatrixCreateTitle": "Interaction Matrix",
+  "interactionMatrixListTitle": "Interaction Matrix",
 
-    "sodStandardCreateTitle": "SOD Standard",
-    "sodStandardListTitle": "SOD Standard List"
-
-
+  "sodStandardCreateTitle": "SOD Standard",
+  "sodStandardListTitle": "SOD Standard List"
 }

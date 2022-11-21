@@ -255,13 +255,13 @@
   },
   "actions": {
     "activatemasterManagement": {
-      "actionType": "Navigate",
-      "navigateTo": "structuremaster",
-      "navigationParams": {}
+      "actionType": "JSFunction",
+      "method": "navigateToMaster",
+      "deps": "js/utils/checklistUtils"
     },
     "activatesheetManagement": {
       "actionType": "Navigate",
-      "navigateTo": "dchecklist",
+      "navigateTo": "#/checklistMain",
       "navigationParams": {}
     },
     "fmeaAddAction": {

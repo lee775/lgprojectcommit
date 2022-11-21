@@ -1,0 +1,198 @@
+<aw-panel-section>
+    <aw-panel id="mainNav">
+        <aw-panel-body>
+            <aw-flex-row id="btnBox">
+                <aw-icon-button command="data.createproceed" class="createBtn">
+                </aw-icon-button>
+                <aw-icon-button command="data.deleteproceed" class="deleteBtn">
+                </aw-icon-button>
+            </aw-flex-row>
+            <aw-panel-section caption="i18n.minutesList" id="minutesTable">
+                <aw-splm-table gridid="minutesTable" use-tree="false" show-decorate="true">
+                </aw-splm-table>
+            </aw-panel-section>
+            <aw-separator></aw-separator>
+            <aw-tab-set tabs="data.tabDetails">
+                <aw-panel-body visible-when="conditions.showDetailsPage">
+                    <aw-flex-column id="labelCSS">
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.object_nameLbl" visible-when="!data.editMode" id="title">
+                                </aw-label>
+                                <aw-textarea prop="data.object_name" visible-when="data.editMode"></aw-textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_meeting_dateLbl" id="date" visible-when="!data.editMode">
+                                </aw-label>
+                                <aw-datetime prop="data.l2_meeting_date" visible-when="data.editMode"></aw-datetime>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_meeting_placeLbl" visible-when="!data.editMode" id="place">
+                                </aw-label>
+                                <aw-textarea prop="data.l2_meeting_place" visible-when="data.editMode">
+                                </aw-textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition1">
+                                <aw-label prop="data.proceedWriter"></aw-label>
+                            </aw-flex-column>
+                            <aw-flex-column class="linkPosition">
+                                <aw-link prop="data.proceedWriterLink" action="goUserDetail"></aw-link>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_meeting_participantsLbl" visible-when="!data.editMode"
+                                    id="participant"></aw-label>
+                                <aw-textarea prop="data.l2_meeting_participants" visible-when="data.editMode">
+                                </aw-textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_meeting_agendaLbl" visible-when="!data.editMode" id="subject">
+                                </aw-label>
+                                <aw-textarea prop="data.l2_meeting_agenda" visible-when="data.editMode">
+                                </aw-textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row height="auto">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_meeting_related_scheduleLbl" visible-when="!data.editMode"
+                                    id="schedule"></aw-label>
+                                <aw-textarea prop="data.l2_meeting_related_schedule" visible-when="data.editMode">
+                                </aw-textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column visible-when="data.editMode" id="addUpload">
+                                <aw-flex-row>
+                                    <aw-label prop="data.fileDataSet" class="labelMargin"></aw-label>
+                                </aw-flex-row>
+                                <aw-flex-row class="fileLabel">
+                                    <label for="fileUpload">
+                                        <div class="btn-upload">파일 업로드</div>
+                                    </label>
+                                    <input type="file" id="fileUpload" multiple='multiple'
+                                        accept=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"></input>
+                                </aw-flex-row>
+                                <aw-flex-row id="uploadList">
+                                    <div id="preview"></div>
+                                </aw-flex-row>
+                            </aw-flex-column>
+                            <aw-flex-column class="namePosition2" visible-when="!data.editMode">
+                                <aw-label prop="data.fileDataSet"></aw-label>
+                            </aw-flex-column>
+                            <aw-flex-column visible-when="!data.editMode" class="linkPosition2">
+                                <aw-flex-row aw-repeat="result : data.datasetLink.dbValue">
+                                    <aw-link prop="result" exist-when="data.datasetLink.dbValue.length > 0"
+                                        action="datasetLinkEvent">
+                                    </aw-link>
+                                    <p
+                                        exist-when="result.displayName != data.datasetLink.dbValue[data.datasetLink.dbValue.length - 1].displayName">
+                                        <br>
+                                    </p>
+                                </aw-flex-row>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row id="summernotePosit" height="auto">
+                            <aw-flex-column>
+                                <textarea id="minutesMainSummernote"></textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-panel-body>
+                <aw-panel-body visible-when="conditions.showReferencePage">
+                    <aw-flex-column>
+                        <div style="text-align: center;"
+                            exist-when="data.dataProviders.failureList.viewModelCollection.loadedVMObjects.length == 0">
+                            <h3>관련된 고장이 없습니다.</h3>
+                        </div>
+                        <aw-flex-row height="auto">
+                            <aw-list dataprovider="data.dataProviders.failureList" id="failureList">
+                                <aw-default-cell vmo="item"></aw-default-cell>
+                            </aw-list>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-panel-body>
+                <aw-panel-body visible-when="conditions.actionItemPage">
+                    <aw-flex-column>
+                        <aw-flex-row>
+                            <aw-include name="actionItemTable"></aw-include>
+                        </aw-flex-row>
+                        <div style="text-align: center;"
+                            exist-when="!ctx.selectActionItemRev">
+                            <h3>조회할 액션 아이템을 선택해 주세요.</h3>
+                        </div>
+                        <aw-flex-row visible-when="ctx.selectActionItemRev">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_workerLbl"></aw-label>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row visible-when="ctx.selectActionItemRev">
+                            <aw-flex-column class="namePosition">
+                                <aw-label prop="data.l2_expected_dateLbl"></aw-label>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row visible-when="ctx.selectActionItemRev">
+                            <aw-flex-column class="summernoteLblPosition">
+                                <aw-label prop="data.l2_commentLbl"></aw-label>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row id="summernotePosit" height="auto" visible-when="ctx.selectActionItemRev">
+                            <aw-flex-column>
+                                <textarea id="commentDetailsSummernote"></textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row visible-when="ctx.selectActionItemRev">
+                            <aw-flex-column class="summernoteLblPosition">
+                                <aw-label prop="data.l2_follow_upLbl"></aw-label>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                        <aw-flex-row id="summernotePosit" height="auto" visible-when="ctx.selectActionItemRev">
+                            <aw-flex-column>
+                                <textarea id="followUpDetailsSummernote"></textarea>
+                            </aw-flex-column>
+                        </aw-flex-row>
+                    </aw-flex-column>
+                </aw-panel-body>
+            </aw-tab-set>
+        </aw-panel-body>
+    </aw-panel>
+    <aw-panel-footer>
+        <aw-flex-row visible-when="conditions.showDetailsPage">
+            <aw-flex-column>
+                <aw-button action="editMinutesMain" visible-when="!data.editMode">회의록 편집</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row visible-when="conditions.showDetailsPage">
+            <aw-flex-column>
+                <aw-button action="saveMinutesBatch" visible-when="data.editMode">편집 저장</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="cancelMinutesMain" visible-when="data.editMode">편집 취소</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row visible-when="conditions.showReferencePage">
+            <aw-flex-column>
+                <aw-button action="failureAdd">고장 추가</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="deleteFailureBatchAction">고장 제거</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row visible-when="conditions.actionItemPage">
+            <aw-flex-column>
+                <aw-button action="openCreateActionItem">액션아이템 추가</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="deleteActionItem">액션아이템 제거</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-footer>
+</aw-panel-section>

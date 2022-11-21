@@ -1,31 +1,31 @@
 <aw-popup2>
-    <style>
-        .txtBox{
-            padding-top: 5px;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-        
-        .pageNumStyle {
-            border: 2px solid lightgray;
-            border-radius: 8px;
-            padding: 4px;
-        }
-    </style>
-    <aw-flex-row id="homeList">
-        <aw-panel-body>
-            <aw-panel-section caption="{{i18n.list}}">
-                <aw-list dataprovider="data.dataProviders.searchAllList">
-                    <aw-default-cell vmo="item"></aw-default-cell>
-                </aw-list>
-            </aw-panel-section>
-        </aw-panel-body>
-    </aw-flex-row>
-    <aw-flex-row height="6f" class="txtBox">
-        <aw-textbox prop="data.ref_PartsTxtBox"></aw-textbox>
-    </aw-flex-row>
-    <aw-panel-footer>
-        <aw-button action="specAddPopup" size="auto">{{i18n.addBtn}}</aw-button>
-        <aw-button action="partsResetAndOpen" size="auto">{{i18n.close}}</aw-button>
-    </aw-panel-footer>
+  <style>
+    .txtBox {
+      padding-top: 5px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .pageNumStyle {
+      border: 2px solid lightgray;
+      border-radius: 8px;
+      padding: 4px;
+    }
+  </style>
+  <aw-flex-row id="homeList">
+    <aw-panel-body>
+      <aw-panel-section caption="{{i18n.list}}">
+        <aw-list dataprovider="data.dataProviders.searchAllList">
+          <aw-default-cell vmo="item"></aw-default-cell>
+        </aw-list>
+      </aw-panel-section>
+    </aw-panel-body>
+  </aw-flex-row>
+  <aw-flex-row height="6f" class="txtBox">
+    <aw-textbox prop="data.ref_PartsTxtBox"></aw-textbox>
+  </aw-flex-row>
+  <aw-panel-footer>
+    <aw-button action="specAddPopup" size="auto">{{i18n.addBtn}}</aw-button>
+    <aw-button action="partsResetAndOpen" size="auto">{{i18n.close}}</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

@@ -1,33 +1,33 @@
 {
-    "fmeaInfoLocation": {
-      "data": {
-        "browserTitle": {
-          "source": "/i18n/lgepFMEAInfoMessages",
-          "key": "fmeaInfoLocationBrowserTitle"
-        },
-        "browserSubTitle": {
-          "source": "/i18n/lgepFMEAInfoMessages",
-          "key": "fmeaInfoLocationBrowserSubTitle"
-        },
-        "headerTitle": {
-          "source": "/i18n/lgepFMEAInfoMessages",
-          "key": "fmeaInfoLocationHeaderTitle"
-        }
+  "fmeaInfoLocation": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/lgepFMEAInfoMessages",
+        "key": "fmeaInfoLocationBrowserTitle"
       },
-      "type": "location"
+      "browserSubTitle": {
+        "source": "/i18n/lgepFMEAInfoMessages",
+        "key": "fmeaInfoLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/lgepFMEAInfoMessages",
+        "key": "fmeaInfoLocationHeaderTitle"
+      }
     },
-    "sodlist": {
-      "controller": "NativeSubLocationCtrl",
-      "data": {
-        "priority": 1,
-        "clientScopeURI": "Awp0SearchResults",
-        "nameToken": "sodStandard"
-      },
-      "dependencies": ["js/aw.native.sublocation.controller"],
-      "parent": "fmeaInfoLocation",
-      "reloadOnSearch": false,
-      "template": "<aw-include name=\"sodStandardList\"></aw-include>",
-      "type": "subLocation",
-      "url": "/sodlist"
-    }
+    "type": "location"
+  },
+  "sodlist": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 1,
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "sodStandard"
+    },
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "parent": "fmeaInfoLocation",
+    "reloadOnSearch": false,
+    "template": "<aw-include name=\"sodStandardList\"></aw-include>",
+    "type": "subLocation",
+    "url": "/sodlist"
   }
+}

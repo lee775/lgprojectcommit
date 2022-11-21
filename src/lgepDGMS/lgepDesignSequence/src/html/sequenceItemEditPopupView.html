@@ -1,22 +1,22 @@
 <aw-popup2>
-    <style>
-        .labelMargin{
-            margin-top: 15px;
-        }
-    </style>
-    <aw-flex-column id="itemEditPopupData">
+  <style>
+    .labelMargin {
+      margin-top: 15px;
+    }
+  </style>
+  <aw-flex-column id="itemEditPopupData">
     <aw-panel-body>
-            <aw-textbox prop="data.technicalTitle"></aw-textbox>
-            <aw-label prop="data.technicalContent"></aw-label>
-            <aw-panel-body class="contentHei">
-                <body>
-                    <textarea id="sequenceItemEditor"></textarea>
-                </body>
-            </aw-panel-body>
+      <aw-textbox prop="data.technicalTitle"></aw-textbox>
+      <aw-label prop="data.technicalContent"></aw-label>
+      <aw-panel-body class="contentHei">
+        <body>
+          <textarea id="sequenceItemEditor"></textarea>
+        </body>
+      </aw-panel-body>
     </aw-panel-body>
     <aw-panel-footer>
-        <aw-button action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
-        <aw-button size="auto" action="sequenceEditBat">{{i18n.edit}}</aw-button>
+      <aw-button action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+      <aw-button size="auto" action="sequenceEditBat">{{i18n.edit}}</aw-button>
     </aw-panel-footer>
-</aw-flex-column>
+  </aw-flex-column>
 </aw-popup2>

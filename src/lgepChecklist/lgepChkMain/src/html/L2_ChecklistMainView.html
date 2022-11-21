@@ -1,18 +1,42 @@
+<aw-sidenav id="checklist_main_filter" config="data.mainFilterInfo"></aw-sidenav>
 <aw-panel>
-    <aw-panel-body>
+  <aw-panel-body>
+    <aw-flex-row>
+      <aw-flex-column>
         <aw-flex-row>
-            <aw-flex-column width="1" exist-when="ctx.checklist.browseMode=='1'" >
-                <aw-listbox class="checklist-draggable-false" prop="data.tableMode" list="data.tableModeValues.dbValue" action="tableModeChanges" style="margin-top: -15px"></aw-listbox>
-            </aw-flex-column>
-            <aw-flex-column>
-                <aw-command-bar anchor="L2_ChecklistMainAnchor" alignment="HORIZONTAL"></aw-command-bar>
-            </aw-flex-column>
+          <aw-flex-column width="1" exist-when="ctx.checklist.browseMode=='1'" id="checklist-tableMode-listbox-view">
+            <div id="checklist-tableMode-listbox"></div>
+            <aw-listbox class="checklist-draggable-false" prop="data.tableMode" list="data.tableModeValues.dbValue" style="margin-top: -15px"></aw-listbox>
+          </aw-flex-column>
+          <aw-flex-column>
+            <aw-command-bar anchor="L2_ChecklistMainAnchor" alignment="HORIZONTAL"></aw-command-bar>
+          </aw-flex-column>
         </aw-flex-row>
-        <div id="grid" visible-when="ctx.checklist.browseMode=='0'"></div>
-        <div id="gridFlag" exist-when="ctx.checklist.browseMode=='0'"></div>
-        <div id="editor" exist-when="ctx.checklist.browseMode=='1'">
-            <aw-include name="L2_ChecklistOpen"></aw-include>
+        <div id="grid" exist-when="ctx.checklist.browseMode=='0'"></div>
+        <aw-flex-row height="fill" exist-when="ctx.checklist.browseMode=='1'">
+          <!-- <div id="editor" exist-when="ctx.checklist.browseMode=='1'" style="white-space:nowrap; overflow:scroll; height:700px;"> -->
+          <aw-include exist-when="data.tableMode.dbValue == '1'" name="L2_ChecklistImage"></aw-include>
+          <aw-include exist-when="data.tableMode.dbValue == '2'" name="L2_ChecklistTable"></aw-include>
+          <aw-include exist-when="data.tableMode.dbValue == '3'" name="L2_ChecklistTree"></aw-include>
+          <!-- <div class="checklist-open-view">
+                        </div> -->
+          <!-- </div> -->
+        </aw-flex-row>
+        <div class="filter-search-box" exist-when="ctx.checklist.browseMode=='2'">
+          <aw-search-box prop="data.attrSearchBox" placeholder="data.searchBoxPlaceHolder" action="searchFilterAttr"></aw-search-box>
         </div>
-    </aw-panel-body>
+        <div id="filterGrid" exist-when="ctx.checklist.browseMode=='2'"></div>
+      </aw-flex-column>
+    </aw-flex-row>
+  </aw-panel-body>
 </aw-panel>
+<aw-sidenav id="all_minutes_checklist" class="veryBigPanel" config="data.allMinutesInfo"></aw-sidenav>
 <aw-sidenav id="checklist_interaction" config="data.interactionInfo"></aw-sidenav>
+<aw-sidenav id="checklist_minutes" class="veryBigPanel" config="data.minutesInfo"></aw-sidenav>
+<aw-sidenav id="checklist_createStructure" config="data.createStructureInfo"></aw-sidenav>
+<aw-sidenav id="checklist_addStructure" config="data.addStructureInfo"></aw-sidenav>
+<aw-sidenav id="checklist_createMinutes" class="veryBigPanel" config="data.createMinutesInfo"></aw-sidenav>
+<aw-row exist-when="ctx.checklist.browseMode=='1' && ctx.checklist.failure.length > 0" class="sliderBtn">
+  <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
+  <aw-icon-button size="large" command="data.zoomSliderInit" class="zoom-sliderBtn"></aw-icon-button>
+</aw-row>

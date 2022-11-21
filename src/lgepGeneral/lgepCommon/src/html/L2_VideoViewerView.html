@@ -1,11 +1,9 @@
-<aw-panel exist-when="ctx.selected.type == 'Text' || !ctx.support">
-    {{ctx.preview}}
-</aw-panel>
+<aw-panel exist-when="ctx.selected.type == 'Text' || !ctx.support"> {{ctx.preview}} </aw-panel>
 <aw-panel exist-when="ctx.selected.type == 'Fnd0VideoData' && ctx.support">
-    <video width="100%" controls>
-        <source src="{{ctx.preview}}" type="video/ogg">
-        <source src="{{ctx.preview}}" type="video/mp4">
-        <source src="{{ctx.preview}}" type="video/webm">
-        This Browser does not support to play this file.
-    </video>
+  <video width="100%" controls>
+    <source src="{{ctx.preview}}" type="video/ogg"></source>
+    <source src="{{ctx.preview}}" type="video/mp4"></source>
+    <source src="{{ctx.preview}}" type="video/webm"></source>
+    This Browser does not support to play this file.
+  </video>
 </aw-panel>

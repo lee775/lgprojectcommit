@@ -1,23 +1,20 @@
 <style>
-    .aw-commandId-Awp0CloseCommandPanel {
-        display: none;
-    }
+  .aw-commandId-Awp0CloseCommandPanel {
+    display: none;
+  }
 </style>
 <aw-command-panel caption="{{i18n.filter}}" anchor="data.closeAnchor">
-    <aw-flex-row id="specManagementTree">
-        <aw-flex-column>
-            <aw-flex-row height="2.6f">
-                <aw-flex-column align-content="end">
-                    <aw-command-bar anchor="specManagementTreeCommand" alignment="HORIZONTAL"
-                        overflow="true">
-                    </aw-command-bar>
-                </aw-flex-column>
-            </aw-flex-row>
-            <aw-flex-row>
-                <aw-splm-table gridid="specManagementTree" use-tree="true" show-decorate="true" show-check-box=true>
-                </aw-splm-table>
-                <!-- <aw-include name="includeTest"></aw-include> -->
-            </aw-flex-row>
+  <aw-flex-row id="specManagementTree">
+    <aw-flex-column>
+      <aw-flex-row height="2.6f">
+        <aw-flex-column align-content="end">
+          <aw-command-bar anchor="specManagementTreeCommand" alignment="HORIZONTAL" overflow="true"> </aw-command-bar>
         </aw-flex-column>
-    </aw-flex-row>
+      </aw-flex-row>
+      <aw-flex-row>
+        <aw-splm-table gridid="specManagementTree" use-tree="true" show-decorate="true" show-check-box="true"> </aw-splm-table>
+        <!-- <aw-include name="includeTest"></aw-include> -->
+      </aw-flex-row>
+    </aw-flex-column>
+  </aw-flex-row>
 </aw-command-panel>

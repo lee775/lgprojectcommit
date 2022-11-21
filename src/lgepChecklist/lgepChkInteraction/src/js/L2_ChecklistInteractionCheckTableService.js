@@ -1,8 +1,8 @@
-import appCtxService from "js/appCtxService";
-import viewModelObjectService from "js/viewModelObjectService";
+import appCtxService from 'js/appCtxService';
+import viewModelObjectService from 'js/viewModelObjectService';
 
-import { loadObjectByPolicy } from "js/utils/fmeaTcUtils";
-import { getHeaderData, makeVmProperty } from "js/utils/fmeaTableMakeUtils";
+import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
+import { getHeaderData, makeVmProperty } from 'js/utils/fmeaTableMakeUtils';
 import {
   getInteractionTable,
   PROP_PRIMARY,
@@ -15,14 +15,14 @@ import {
   INTERACTION_CHECK_ROW_CLASSNAME,
   INTERACTION_CHECK_ROW_KEYS,
   getSubAssy,
-} from "js/L2_ChecklistInteractionUtils";
+} from 'js/L2_ChecklistInteractionUtils';
 
-const PART_NAME = "part_name";
-const INNTERACTION_TYPE = "l2_interaction_type";
+const PART_NAME = 'part_name';
+const INNTERACTION_TYPE = 'l2_interaction_type';
 
 const loadColumns = (dataProvider) => {
-  const COL_PART = [PART_NAME, "파트", "Part"];
-  const COL_EFFECT_TYPE = ["l2_interaction_type", "영향", "Effect Type"];
+  const COL_PART = [PART_NAME, '파트', 'Part'];
+  const COL_EFFECT_TYPE = ['l2_interaction_type', '영향', 'Effect Type'];
 
   const columns = [COL_PART, COL_EFFECT_TYPE];
   const columnHeader = getHeaderData(columns, 220);
@@ -33,11 +33,7 @@ const loadColumns = (dataProvider) => {
 
 // 영향 주는 측
 const loadDataInfluencing = async (data) => {
-  const tableRows = await _getInteractionTable(
-    PROP_PRIMARY,
-    PROP_SECONDARY,
-    data
-  );
+  const tableRows = await _getInteractionTable(PROP_PRIMARY, PROP_SECONDARY, data);
 
   return {
     influencingResults: tableRows,
@@ -47,11 +43,7 @@ const loadDataInfluencing = async (data) => {
 
 // 영향 받는 측
 const loadDataAffected = async (data) => {
-  const tableRows = await _getInteractionTable(
-    PROP_SECONDARY,
-    PROP_PRIMARY,
-    data
-  );
+  const tableRows = await _getInteractionTable(PROP_SECONDARY, PROP_PRIMARY, data);
 
   return {
     affectedResults: tableRows,
@@ -68,28 +60,49 @@ const _checkEffectType = (targetEffectType, effectTypes) => {
 
   return false;
 };
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
+const _delete = async (interactionTable) => {
+  for (const interactionRow of interactionTable) {
+    console.log('interactionRow', interactionRow);
+    const result = await lgepObjectUtils.deleteObject(interactionRow);
+    console.log('result', result);
+  }
+};
 
 const _getInteractionTable = async (targetType, tableRowType, data) => {
   const effectTypes = data.effectType.dbValue;
 
-  const topObject =
-    appCtxService.ctx.checklist[STRUCTURE_INFO][TOP].getOriginalObject();
+  const topObject = appCtxService.ctx.checklist[STRUCTURE_INFO][TOP].getOriginalObject();
 
-  const targetUid = getSubAssy(
-    appCtxService.ctx.checklist[INTERACTION_TARGET_ROW]
-  ).uid;
+  const targetUid = getSubAssy(appCtxService.ctx.checklist[INTERACTION_TARGET_ROW]).uid;
 
   const interactionTable = await getInteractionTable(topObject);
+
   const interactionResult = interactionTable.filter((tableRow) => {
     if (targetUid === tableRow.props[targetType].dbValues[0]) {
-      if (_checkEffectType(tableRow.props[PROP_GRADE].dbValues[0], effectTypes))
-        return tableRow;
+      if (_checkEffectType(tableRow.props[PROP_GRADE].dbValues[0], effectTypes)) return tableRow;
     }
   });
 
   const tableRows = await _makeTableRows(interactionResult, tableRowType);
-  const sortTableRows = _sortTable(tableRows);
+  const filterRows = _getInteractionTableRowByCurrentRow(tableRows);
+
+  const sortTableRows = _sortTable(filterRows);
+
   return sortTableRows;
+};
+
+// 구조 편집되어 현재는 없는 행 존재 가능성 있음
+const _getInteractionTableRowByCurrentRow = (tableRows) => {
+  const grid = appCtxService.ctx.checklist.grid;
+  const rows = grid.getData();
+  return tableRows.filter((tableRow) => {
+    for (const currentRow of rows) {
+      if (tableRow.uid === getSubAssy(currentRow).uid) {
+        return true;
+      }
+    }
+  });
 };
 
 const _sortTable = (tableRows) => {
@@ -107,13 +120,8 @@ const _makeTableRows = async (interactionResult, type) => {
   }
   const tableRows = Promise.all(
     interactionResult.map(async (interaction) => {
-      const structureObject = await loadObjectByPolicy(
-        interaction.props[type].dbValues[0],
-        "L2_StructureRevision",
-        ["object_name"]
-      );
-      const tableRow =
-        viewModelObjectService.createViewModelObject(structureObject);
+      const structureObject = await loadObjectByPolicy(interaction.props[type].dbValues[0], 'L2_StructureRevision', ['object_name']);
+      const tableRow = viewModelObjectService.createViewModelObject(structureObject);
 
       // add partname
       const partName = tableRow.props.object_name.dbValues[0];
@@ -121,14 +129,12 @@ const _makeTableRows = async (interactionResult, type) => {
       tableRow.props[PART_NAME] = property;
 
       // add effect type
-      const effectType = getInteractionType(
-        interaction.props[PROP_GRADE].dbValues[0]
-      );
+      const effectType = getInteractionType(interaction.props[PROP_GRADE].dbValues[0]);
       const effectTypeProperty = makeVmProperty(INNTERACTION_TYPE, effectType);
       tableRow.props[INNTERACTION_TYPE] = effectTypeProperty;
 
       return tableRow;
-    })
+    }),
   );
 
   return tableRows;

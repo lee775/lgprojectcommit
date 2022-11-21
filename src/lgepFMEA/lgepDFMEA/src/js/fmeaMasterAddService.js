@@ -5,12 +5,8 @@ import appCtxService from 'js/appCtxService';
 
 import { saveOperation } from 'js/fmeaMasterAddOperationService';
 import { setValue } from 'js/utils/fmeaEditorUtils';
-import {
-  beforeSaveAction,
-  afterSaveAction,
-  tableRefreshByTableMode,
-} from 'js/utils/fmeaViewCommonUtils';
-import { showErrorMessage,showInfoMessage } from 'js/utils/fmeaMessageUtils';
+import { beforeSaveAction, afterSaveAction, tableRefreshByTableMode } from 'js/utils/fmeaViewCommonUtils';
+import { showErrorMessage, showInfoMessage } from 'js/utils/fmeaMessageUtils';
 import { validationInputs } from 'js/utils/fmeaValidationUtils';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
@@ -58,10 +54,7 @@ const saveAction = async (ctx, data) => {
 // 생성 오퍼레이션 시작 전 progress, 생성버튼 disable
 const _beforeSaveAction = (data) => {
   beforeSaveAction(data);
-  appCtxService.registerCtx(
-    constants.FMEA_EXECUTE,
-    constants.FMEA_EXECUTE_SAVE
-  );
+  appCtxService.registerCtx(constants.FMEA_EXECUTE, constants.FMEA_EXECUTE_SAVE);
 };
 
 // table refresh 되면 popup창 close

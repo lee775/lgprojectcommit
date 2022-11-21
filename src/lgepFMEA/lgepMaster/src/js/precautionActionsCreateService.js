@@ -30,14 +30,10 @@ export const createPrecaution = async (failureRev, relatedSourceValue) => {
     const shortenValue = makeShortenValues(editorValue);
     const relatedSourceReplaceValue = replaceEmptyValue(relatedSourceValue);
     // FIXME: Failure Revision 의 속성으로 저장하는것으로 변경
-    await lgepObjectUtils.setProperties( 
+    await lgepObjectUtils.setProperties(
       failureRev,
-      [
-        prop.PRECATUION_ACTION, 
-        prop.PRECATUION_ACTION_SHORT, 
-        prop.RELATED_SOURCES,
-      ],
-      [editorValue, shortenValue, relatedSourceReplaceValue]
+      [prop.PRECATUION_ACTION, prop.PRECATUION_ACTION_SHORT, prop.RELATED_SOURCES],
+      [editorValue, shortenValue, relatedSourceReplaceValue],
     );
     return failureRev;
   } catch (e) {
@@ -51,29 +47,14 @@ export const createPrecaution = async (failureRev, relatedSourceValue) => {
  * @param {string} newPrecatuionValue
  */
 export const saveasPrecaution = async (basePrecaution, newPrecatuionValue) => {
-  await lgepObjectUtils.getProperties(
-    [basePrecaution],
-    [prop.OBJECT_NAME, prop.RELATED_SOURCES]
-  );
+  await lgepObjectUtils.getProperties([basePrecaution], [prop.OBJECT_NAME, prop.RELATED_SOURCES]);
   const name = basePrecaution.props[prop.OBJECT_NAME].dbValues[0];
 
-  const precautionActionUid = await createObject(
-    prop.TYPE_FMEA_PREACUTION_ACTION,
-    name
-  );
+  const precautionActionUid = await createObject(prop.TYPE_FMEA_PREACUTION_ACTION, name);
   const precautionAction = await lgepObjectUtils.getObject(precautionActionUid);
   const shortenValue = makeShortenValues(newPrecatuionValue);
-  const relatedSourceValue =
-    basePrecaution.props[prop.RELATED_SOURCES].dbValues[0];
-const values =  [newPrecatuionValue, shortenValue, replaceEmptyValue(relatedSourceValue)];
-  await lgepObjectUtils.setProperties(
-    precautionAction,
-    [
-      prop.PRECATUIONS_ACTION,
-      prop.PRECATUIONS_ACTION_SHORT,
-      prop.RELATED_SOURCES,
-    ],
-    values
-  );
+  const relatedSourceValue = basePrecaution.props[prop.RELATED_SOURCES].dbValues[0];
+  const values = [newPrecatuionValue, shortenValue, replaceEmptyValue(relatedSourceValue)];
+  await lgepObjectUtils.setProperties(precautionAction, [prop.PRECATUIONS_ACTION, prop.PRECATUIONS_ACTION_SHORT, prop.RELATED_SOURCES], values);
   return precautionAction;
 };

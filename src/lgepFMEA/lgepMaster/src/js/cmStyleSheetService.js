@@ -62,11 +62,7 @@ const _getImgSrcFromTicketUri = async (ticket, originalFileName) => {
 };
 
 const _checkTickets = (readFileTicketsResponse) => {
-  if (
-    readFileTicketsResponse &&
-    readFileTicketsResponse.tickets &&
-    readFileTicketsResponse.tickets.length > 1
-  ) {
+  if (readFileTicketsResponse && readFileTicketsResponse.tickets && readFileTicketsResponse.tickets.length > 1) {
     return true;
   }
   return false;
@@ -91,11 +87,7 @@ const _getOriginalFileName = (readFileTicketsResponse) => {
 };
 
 const _insertSrc = (attrValue, srcStartIndex, src) => {
-  return [
-    attrValue.slice(0, srcStartIndex),
-    src,
-    attrValue.slice(srcStartIndex),
-  ].join('');
+  return [attrValue.slice(0, srcStartIndex), src, attrValue.slice(srcStartIndex)].join('');
 };
 
 const _getBase64FromUrl = async (url) => {
@@ -150,11 +142,7 @@ export const getImgReplaceValue = async (master, propValue, relation) => {
     return '';
   }
   if (propValue.includes('<img')) {
-    const containImgValue = await _getValueByIncludeImgTag(
-      master,
-      propValue,
-      relation
-    );
+    const containImgValue = await _getValueByIncludeImgTag(master, propValue, relation);
     return containImgValue;
   }
   return propValue;
@@ -168,11 +156,7 @@ const _getDatatsetList = async (master, relation) => {
   return sortDatasetArray;
 };
 
-const _getValueByIncludeImgTag = async (
-  master,
-  attrValue,
-  relation = prop.IMAN_SPECIFICATION
-) => {
+const _getValueByIncludeImgTag = async (master, attrValue, relation = prop.IMAN_SPECIFICATION) => {
   let imgIndex = 0;
   let resultValue = attrValue;
   const sortDatasetArray = await _getDatatsetList(master, relation);
@@ -186,12 +170,8 @@ const _getValueByIncludeImgTag = async (
     if (!ticketsArray || !originalFileName) {
       return resultValue;
     }
-    const src = await _getImgSrcFromTicketUri(
-      ticketsArray[0],
-      originalFileName
-    );
-    const objectName =
-      dataset.props[prop.OBJECT_NAME].dbValues[0].split('.png')[0];
+    const src = await _getImgSrcFromTicketUri(ticketsArray[0], originalFileName);
+    const objectName = dataset.props[prop.OBJECT_NAME].dbValues[0].split('.png')[0];
     const idInfo = await _getDatasetId(resultValue, imgIndex);
     if (objectName === idInfo.id) {
       resultValue = await _replaceAllSrc(imgIndex, resultValue, src);
@@ -279,19 +259,11 @@ export const initDetailEditorById = async (attrId, master, attrValue) => {
  * @param {ModelObject} master
  * @param {string} attrValue
  */
-export const initDetailEditorByIdByReference = async (
-  attrId,
-  master,
-  attrValue
-) => {
+export const initDetailEditorByIdByReference = async (attrId, master, attrValue) => {
   try {
     makeEditor(attrId, 'disable');
     if (attrValue) {
-      const resultValue = await getImgReplaceValue(
-        master,
-        attrValue,
-        prop.IMAN_REFERENCE
-      );
+      const resultValue = await getImgReplaceValue(master, attrValue, prop.IMAN_REFERENCE);
       setValue(attrId, resultValue);
     } else {
       setValue(attrId, '');

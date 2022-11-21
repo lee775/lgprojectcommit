@@ -12,10 +12,7 @@ import tableUtil from 'js/utils/fmeaTableSortFilterUtils';
 import failureEditService from 'js/failureEditService';
 import functionEditService from 'js/functionEditService';
 import { getHeaderData, getLongHeaderData } from 'js/utils/fmeaTableMakeUtils';
-import {
-  getProductNameValueByGroup,
-  insertLog,
-} from 'js/utils/fmeaCommonUtils';
+import { getProductNameValueByGroup, insertLog } from 'js/utils/fmeaCommonUtils';
 import { cancel } from 'js/cmEditService';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
@@ -66,7 +63,7 @@ export const loadTableData = async (queryName, revProps) => {
 
     insertLog(`Load Checklist ${queryResults[0].type} Master`);
     appCtxService.registerCtx(constants.INIT_COMPLETE, true);
-    
+
     return results;
   }
 
@@ -83,11 +80,7 @@ export const loadTableData = async (queryName, revProps) => {
  * @returns
  */
 const _allMasterSearchByProduct = async (queryName, product) => {
-  const queryResults = await queryUtil.executeSavedQuery(
-    queryName,
-    [prop.QUERY_ENTRY_ISMASTER, prop.QUERY_DFMEA_MASTER_PRODUCT],
-    ['true', product]
-  );
+  const queryResults = await queryUtil.executeSavedQuery(queryName, [prop.QUERY_ENTRY_ISMASTER, prop.QUERY_DFMEA_MASTER_PRODUCT], ['true', product]);
   return queryResults;
 };
 

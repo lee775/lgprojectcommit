@@ -1,16 +1,15 @@
 {
-    "helloText": "!! Hello World !!",
-    "lgepProductStructureLocationHeaderTitle": "제품 구조 관리",
-    "lgepProductStructureLocationBrowserTitle": "제품 구조 관리",
-    "lgepProductStructureLocationBrowserSubTitle": "partManagement",
-    "lgepProductStructureSubLocationTitle": "제품 구조 관리",
-    "createButton": "생성",
-    "closeButton": "닫기",
-    "name":"이름",
-    "add" :"추가",
-    "edit":"수정",
-    "save" :"저장",
-    "cancel":"취소",
-    "delete" :"삭제"
-
+  "helloText": "!! Hello World !!",
+  "lgepProductStructureLocationHeaderTitle": "제품 구조 관리",
+  "lgepProductStructureLocationBrowserTitle": "제품 구조 관리",
+  "lgepProductStructureLocationBrowserSubTitle": "partManagement",
+  "lgepProductStructureSubLocationTitle": "제품 구조 관리",
+  "createButton": "생성",
+  "closeButton": "닫기",
+  "name": "이름",
+  "add": "추가",
+  "edit": "수정",
+  "save": "저장",
+  "cancel": "취소",
+  "delete": "삭제"
 }

@@ -1,31 +1,29 @@
 <style>
-    #scrollCtrl .tui-grid-rside-area .tui-grid-header-area {
-        position: fixed;
-        z-index: 1;
-        border: none;
-    }
-    #scrollCtrl .tui-grid-body-container {
-        margin-top: 40px;
-    }
-    /* .tui-grid-header-area .tui-grid-table {
+  #scrollCtrl .tui-grid-rside-area .tui-grid-header-area {
+    position: fixed;
+    z-index: 1;
+    border: none;
+  }
+  #scrollCtrl .tui-grid-body-container {
+    margin-top: 40px;
+  }
+  /* .tui-grid-header-area .tui-grid-table {
         margin-left: -300px;
     } */
 </style>
 <aw-column width="fill" id="image-container">
-    <div style="white-space:nowrap; overflow:auto;" id="scrollCtrl" onscroll="scrollCtrl()">
-        <div id="toastGrid"></div>
-    </div>
+  <div style="white-space: nowrap; overflow: auto" id="scrollCtrl" onscroll="scrollCtrl()">
+    <div id="toastGrid"></div>
+  </div>
 </aw-column>
 <script>
-    function scrollCtrl() {
+  function scrollCtrl() {
+    let scale = document.querySelector('#toastGrid');
+    scale = scale.style.zoom;
+    scale = scale == '' ? 1 : scale;
 
-        let scale = document.querySelector('#toastGrid');
-        scale = scale.style.zoom;
-        scale = scale == "" ? 1 : scale;
-
-        var div = document.getElementById("scrollCtrl");
-        let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
-        headerLayout.style.marginLeft = "-" + div.scrollLeft / scale + "px";
-
-    }
+    var div = document.getElementById('scrollCtrl');
+    let headerLayout = document.querySelector('#scrollCtrl .tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
+    headerLayout.style.marginLeft = '-' + div.scrollLeft / scale + 'px';
+  }
 </script>

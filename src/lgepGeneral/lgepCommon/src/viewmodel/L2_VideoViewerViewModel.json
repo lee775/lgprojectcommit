@@ -1,40 +1,33 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-panel.directive"
-    ],
-    "data": {
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-panel.directive"],
+  "data": {},
+  "actions": {
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "initialize",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_VideoViewerService"
     },
-    "actions": {
-        "initialize": {
-            "actionType": "JSFunction",
-            "method": "initialize",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/L2_VideoViewerService"
-        },
-        "unMount": {
-            "actionType": "JSFunction",
-            "method": "unMount",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/L2_VideoViewerService"
-        }
-    },
-    "functions": {
-    },
-    "dataProviders": {
-    },
-    "onEvent": [
-    ],
-    "i18n": {
-    },
-    "lifecycleHooks": {
-        "onMount": "initialize",
-        "onUnmount": "unMount"
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_VideoViewerService"
     }
+  },
+  "functions": {},
+  "dataProviders": {},
+  "onEvent": [],
+  "i18n": {},
+  "lifecycleHooks": {
+    "onMount": "initialize",
+    "onUnmount": "unMount"
+  }
 }

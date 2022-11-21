@@ -1,144 +1,148 @@
 :root {
-    --desc-bg-color: #E2EFDA; 
-  }
-  
+  --desc-bg-color: #e2efda;
+}
 
-.aw-layout-panelContent .aw-layout-panelBody.aw-base-scrollPanel{
-    height: 100%;
+.aw-layout-panelContent .aw-layout-panelBody.aw-base-scrollPanel {
+  height: 100%;
 }
 
 .interaction-popup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .interaction-matrix-container {
-    width: 100%;
+  width: 100%;
 }
 
-.interaction-matrix-container>div[id='interaction-grid']>table {
-    border: 1;
-    border-color: black;
+.interaction-matrix-container > div[id='interaction-grid'] > table {
+  border: 1;
+  border-color: black;
 }
 
 .interaction-matrix-header {
-    text-align: center;
+  text-align: center;
 }
 
 .interaction-popup__footer {
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 .interaction-matrix-button-group {
-    width: 100%;
+  width: 100%;
 }
 
 #interactionMatrixSave {
-    height: 35px;
-    font-size: 18px;
+  height: 35px;
+  font-size: 18px;
 }
 
 .dfmea-job-progressing {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 #interaction-grid .tui-grid-cell.tui-grid-cell-editable {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .interaction-desc {
-    display: flex;
-    width: 100%;
-    border: 1px solid black;
-    margin-bottom: 5px;
+  display: flex;
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 5px;
 }
 
 .text-desc {
-    width: 75%;
-    padding: 10px;
-    border-right: 1px solid black;
-    font-size: 16px;
-    background-color: var(--desc-bg-color);
+  width: 75%;
+  padding: 10px;
+  border-right: 1px solid black;
+  font-size: 16px;
+  background-color: var(--desc-bg-color);
 }
 
 .text-desc p {
-    line-height: 30px !important;
+  line-height: 30px !important;
 }
 
 strong {
-    color: #0000FF;
+  color: #0000ff;
 }
 
 .color-desc {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .color-desc tr td:first-child {
-    width: 70%;
+  width: 70%;
 }
 
 .color-desc tr td {
-    height: 25px;
-    font-size: 14pt;
+  height: 25px;
+  font-size: 14pt;
 }
 
 .color__title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 50px;
-    font-size: 20px;
-    font-weight: 600;
-    background-color: var(--desc-bg-color);
-    border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: var(--desc-bg-color);
+  border-bottom: 1px solid black;
 }
 
 .color__table {
-    display: flex;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 5px 0 0 10px;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 0 0 10px;
 }
 
 .td__mechanical {
-    background-color: #92d050;
+  background-color: #92d050;
 }
 
 .td__electrical {
-    background-color: #ffff00;
+  background-color: #ffff00;
 }
 
 .td__heat {
-    background-color: #ffc000;
+  background-color: #ffc000;
 }
 
 .td__chemical {
-    background-color: #00b0f0;
+  background-color: #00b0f0;
 }
 
 .td__radiative {
-    background-color: #632523;
+  background-color: #632523;
+  color: white !important;
 }
 
 .td__mechanical-electrical {
-    background-color: #fcd5b4;
+  background-color: #fcd5b4;
 }
 
 .td__mechanical-heat {
-    background-color: #7030a0;
+  background-color: #7030a0;
 }
 
 .td__mechanical-chemical {
-    background-color: #31869b;
+  background-color: #31869b;
 }
 
 .aw-layout-summaryContent {
-    height: 100% !important;
+  height: 100% !important;
+}
+
+.tui-grid-cell-disabled {
+  background-color: #5f5f5f !important;
 }

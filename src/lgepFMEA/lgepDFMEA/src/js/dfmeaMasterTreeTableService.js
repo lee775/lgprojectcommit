@@ -9,10 +9,7 @@ import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 const selectTableRowAction = async (selectionRow) => {
   appCtxService.registerCtx(constants.ROW_SELECT, selectionRow);
   if (selectionRow.type === prop.TYPE_FMEA_STRUCTURE_REV) {
-    appCtxService.registerCtx(
-      constants.FMEA_SELECT_STRUCTURE_MODEL,
-      selectionRow.modelObject
-    );
+    appCtxService.registerCtx(constants.FMEA_SELECT_STRUCTURE_MODEL, selectionRow.modelObject);
     appCtxService.registerCtx(constants.FMEA_SELECT_STRUCTURE, true);
     return;
   }
@@ -60,13 +57,7 @@ const _getProps = (typeLevel) => {
     const props = [prop.FUNCTION, prop.REQUIREMENT];
     return props;
   } else if (typeLevel === prop.POTENTIAL_FAILURE_MODE) {
-    const props = [
-      prop.POTENTIAL_FAILURE_MODE,
-      prop.CAUSE_OF_FAILURE,
-      prop.FAILURE_EFFECT,
-      prop.PRECATUIONS_ACTION,
-      prop.DETECTION_ACTION,
-    ];
+    const props = [prop.POTENTIAL_FAILURE_MODE, prop.CAUSE_OF_FAILURE, prop.FAILURE_EFFECT, prop.PRECATUIONS_ACTION, prop.DETECTION_ACTION];
     return props;
   }
 };

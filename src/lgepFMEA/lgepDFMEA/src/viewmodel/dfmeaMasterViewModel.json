@@ -270,51 +270,21 @@
     }
   },
   "i18n": {
-    "dfmeaName": [
-      "lgepDFMEAViewMessages"
-    ],
-    "l2Product": [
-      "lgepDFMEAViewMessages"
-    ],
-    "editButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "cancelButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "duplicateButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "saveButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "deleteButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "detailView": [
-      "lgepDFMEAViewMessages"
-    ],
-    "unDetailView": [
-      "lgepDFMEAViewMessages"
-    ],
-    "sodStandardButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "interactionMatrixButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "interactionButton": [
-      "lgepDFMEAViewMessages"
-    ],
-    "revisionId": [
-      "lgepDFMEAViewMessages"
-    ],
-    "fmeaHome": [
-      "lgepDFMEAViewMessages"
-    ],
-    "editFunction": [
-      "lgepDFMEAViewMessages"
-    ]
+    "dfmeaName": ["lgepDFMEAViewMessages"],
+    "l2Product": ["lgepDFMEAViewMessages"],
+    "editButton": ["lgepDFMEAViewMessages"],
+    "cancelButton": ["lgepDFMEAViewMessages"],
+    "duplicateButton": ["lgepDFMEAViewMessages"],
+    "saveButton": ["lgepDFMEAViewMessages"],
+    "deleteButton": ["lgepDFMEAViewMessages"],
+    "detailView": ["lgepDFMEAViewMessages"],
+    "unDetailView": ["lgepDFMEAViewMessages"],
+    "sodStandardButton": ["lgepDFMEAViewMessages"],
+    "interactionMatrixButton": ["lgepDFMEAViewMessages"],
+    "interactionButton": ["lgepDFMEAViewMessages"],
+    "revisionId": ["lgepDFMEAViewMessages"],
+    "fmeaHome": ["lgepDFMEAViewMessages"],
+    "editFunction": ["lgepDFMEAViewMessages"]
   },
   "onEvent": [
     {

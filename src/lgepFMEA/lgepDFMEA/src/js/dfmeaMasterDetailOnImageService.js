@@ -2,12 +2,12 @@
  * DFMEA Master Detail View
  * @module js/dfmeaMasterDetailService
  */
-import appCtxService from "js/appCtxService";
+import appCtxService from 'js/appCtxService';
 
-import lgepCommonUtils from "js/utils/lgepCommonUtils";
+import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 
-import { showErrorMessage } from "js/utils/fmeaMessageUtils";
-import * as constants from "js/constants/fmeaConstants";
+import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
+import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
 import { makeEditor, setValue } from 'js/utils/fmeaEditorUtils';
 /**
@@ -30,10 +30,7 @@ export const onMountByImageTable = async (ctx) => {
 };
 
 export const loadDetail = (selectRow) => {
-  const props = [
-    prop.FUNCTION,
-    prop.POTENTIAL_FAILURE_MODE,
-  ];
+  const props = [prop.FUNCTION, prop.POTENTIAL_FAILURE_MODE];
 
   for (const prop of props) {
     const {

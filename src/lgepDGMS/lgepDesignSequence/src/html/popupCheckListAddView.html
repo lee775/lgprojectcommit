@@ -1,37 +1,38 @@
 <aw-popup2>
-    <style>
-        .btnPadding {
-            padding: 0 25px;
-        }
+  <style>
+    .btnPadding {
+      padding: 0 25px;
+    }
 
-        .lableMargin {
-            margin-top: -15px
-        }
-        .btnSize {
-            padding: 15px 45px;
-        }
-        .second input{
-        pointer-events: none;
-        background-color: #eee;
-        color: #555;
-        opacity: 1;
-        }
+    .lableMargin {
+      margin-top: -15px;
+    }
+    .btnSize {
+      padding: 15px 45px;
+    }
+    .second input {
+      pointer-events: none;
+      background-color: #eee;
+      color: #555;
+      opacity: 1;
+    }
 
-        .last input{
-        pointer-events: none;
-        background-color: #eee;
-        color: #555;
-        opacity: 1;
-        }
-        .noColor{
-        background: #FFFFFF;
-        }
-        .aw-layout-panelBody, .popupInner .aw-layout-panelBody{
-            color: black !important;
-        }
-    </style>
-    <aw-panel-body>
-        <!-- <aw-flex-row height="auto">
+    .last input {
+      pointer-events: none;
+      background-color: #eee;
+      color: #555;
+      opacity: 1;
+    }
+    .noColor {
+      background: #ffffff;
+    }
+    .aw-layout-panelBody,
+    .popupInner .aw-layout-panelBody {
+      color: black !important;
+    }
+  </style>
+  <aw-panel-body>
+    <!-- <aw-flex-row height="auto">
             <aw-flex-column width="2">
                 <aw-label prop="data.categorySel"></aw-label>
             </aw-flex-column>
@@ -60,22 +61,22 @@
             <aw-label prop="data.checkListTable"></aw-label>
             <aw-splm-table gridid="checkListTable" show-decorators="true" show-check-box="true"></aw-splm-table>
         </aw-flex-column> -->
-        <aw-flex-row height="6f" class="header__search" id="checkPopupData">
-            <aw-label prop="data.productGroup"></aw-label>
-            <span>{{data.productGroup.dbValue}}</span>
-            <!-- <aw-listbox class="search__listbox" style="margin-right: 20px" isSelectOnly="true" prop="data.productGroup" list="data.productGroupValues.dbValue"></aw-listbox> -->
-            <!-- <aw-button aw-class="{'disabled': ctx.fmea_popup}" action="searchAction">{{i18n.search}}</aw-button> -->
-          </aw-flex-row>
-          <aw-row height="fill">
-            <aw-column width="6">
-                <aw-splm-table class="sheet-table" use-tree="true" gridid="dfmeaListTable" show-decorators="true"></aw-splm-table>
-            </aw-column>
-          </aw-row>
-    </aw-panel-body>
-    <aw-panel-footer>
-        <aw-flex-row justify="center">
-            <aw-button action="closePopupWindow" size="auto" class="btnSize">{{i18n.close}}</aw-button>
-            <aw-button action="checkListItemCopyBat" size="auto" class="btnSize">{{i18n.add}}</aw-button>
-        </aw-flex-row>
-    </aw-panel-footer>
+    <aw-flex-row height="6f" class="header__search" id="checkPopupData">
+      <aw-label prop="data.productGroup"></aw-label>
+      <span>{{data.productGroup.dbValue}}</span>
+      <!-- <aw-listbox class="search__listbox" style="margin-right: 20px" isSelectOnly="true" prop="data.productGroup" list="data.productGroupValues.dbValue"></aw-listbox> -->
+      <!-- <aw-button aw-class="{'disabled': ctx.fmea_popup}" action="searchAction">{{i18n.search}}</aw-button> -->
+    </aw-flex-row>
+    <aw-row height="fill">
+      <aw-column width="6">
+        <aw-splm-table class="sheet-table" use-tree="true" gridid="dfmeaListTable" show-decorators="true"></aw-splm-table>
+      </aw-column>
+    </aw-row>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-flex-row justify="center">
+      <aw-button action="closePopupWindow" size="auto" class="btnSize">{{i18n.close}}</aw-button>
+      <aw-button action="checkListItemCopyBat" size="auto" class="btnSize">{{i18n.add}}</aw-button>
+    </aw-flex-row>
+  </aw-panel-footer>
 </aw-popup2>

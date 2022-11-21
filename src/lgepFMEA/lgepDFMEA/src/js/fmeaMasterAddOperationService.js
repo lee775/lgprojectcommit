@@ -8,13 +8,9 @@ import appCtxService from 'js/appCtxService';
 import { createPrecaution } from 'js/precautionActionsCreateService';
 import { createDetection } from 'js/detectionActionCreateService';
 import { createRequirementByCreate } from 'js/requirementCreateService';
-import { makeShortenValues, replaceEmptyValue,insertLog } from 'js/utils/fmeaCommonUtils';
+import { makeShortenValues, replaceEmptyValue, insertLog } from 'js/utils/fmeaCommonUtils';
 import { getSelectItemRev } from 'js/utils/fmeaViewCommonUtils';
-import {
-  saveAsItemToRev,
-  saveCloseBomWindow,
-  recursionRevise,
-} from 'js/utils/fmeaTcUtils';
+import { saveAsItemToRev, saveCloseBomWindow, recursionRevise } from 'js/utils/fmeaTcUtils';
 import { getEditorValueById } from 'js/utils/fmeaEditorUtils';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
@@ -32,7 +28,7 @@ let reviseRev; // ReviseFMEA Master Revision
 export const saveOperation = async (ctx, data) => {
   const dfmeaRev = await _getFmeaRev(ctx);
   await _addRow(dfmeaRev, data, ctx);
-  
+
   insertLog('Add CheckList Row', dfmeaRev.uid);
 
   return reviseRev;
@@ -124,10 +120,7 @@ const _addRow = async (dfmeaRev, data, ctx) => {
     const structureBomline = await _saveAsStructure(data, topLine);
 
     // 기능 save as
-    const newFunctionData = await _saveFunctionAction(
-      functionData,
-      structureBomline
-    );
+    const newFunctionData = await _saveFunctionAction(functionData, structureBomline);
 
     // 요구사항 생성(Original)
     //const requirementRev = await createRequirementByCreate(
@@ -138,15 +131,10 @@ const _addRow = async (dfmeaRev, data, ctx) => {
     const failureData = await _saveAsFailure(data, newFunctionData.bomLine);
 
     // 요구사항 생성(Original)
-    const requirementRev = await createRequirementByCreate(
-      failureData.revision
-    );
+    const requirementRev = await createRequirementByCreate(failureData.revision);
 
     // 예방 조치 생성
-    const precautionAction = await createPrecaution(
-      failureData.revision,
-      l2RelatedSources.dbValue
-    );
+    const precautionAction = await createPrecaution(failureData.revision, l2RelatedSources.dbValue);
 
     // 검출 조치 생성
     const detectionAction = await createDetection(failureData.revision);
@@ -194,36 +182,20 @@ const _saveAsStructure = async (data, topLine) => {
     if (singleItem.dbValue && !subAssy.dbValue) {
       throw new Error('하위 Assy 없이 단품을 선택 할 수 없습니다');
     }
-    const {
-      parentAssyList: parentAssys,
-      subAssyList: subAssys,
-      singleAssyList: singleAssys,
-    } = masterDatas[constants.MASTER_DATA_KEY_STRUCTURE];
+    const { parentAssyList: parentAssys, subAssyList: subAssys, singleAssyList: singleAssys } = masterDatas[constants.MASTER_DATA_KEY_STRUCTURE];
 
     // 상위 ASSY
-    const parentAssyBomline = await _getStructureBomLineBySaveAs(
-      parentAssys,
-      parentAssy,
-      topLine
-    );
+    const parentAssyBomline = await _getStructureBomLineBySaveAs(parentAssys, parentAssy, topLine);
     if (!subAssy.dbValue) {
       return parentAssyBomline;
     }
     // 하위 ASSY
-    const subAssyBomline = await _getStructureBomLineBySaveAs(
-      subAssys,
-      subAssy,
-      parentAssyBomline
-    );
+    const subAssyBomline = await _getStructureBomLineBySaveAs(subAssys, subAssy, parentAssyBomline);
     if (!singleItem.dbValue) {
       return subAssyBomline;
     }
     // 단품
-    const newSingleBomLine = await _getStructureBomLineBySaveAs(
-      singleAssys,
-      singleItem,
-      subAssyBomline
-    );
+    const newSingleBomLine = await _getStructureBomLineBySaveAs(singleAssys, singleItem, subAssyBomline);
     if (newSingleBomLine) {
       return newSingleBomLine;
     }
@@ -246,18 +218,11 @@ const _getStructureBomLineBySaveAs = async (datas, master, parentBomline) => {
   }
   const structureRev = await getSelectItemRev(datas, master);
 
-  const existingBomline = await _getExistingBomLine(
-    parentBomline,
-    structureRev,
-    prop.TYPE_FMEA_STRUCTURE_REV
-  );
+  const existingBomline = await _getExistingBomLine(parentBomline, structureRev, prop.TYPE_FMEA_STRUCTURE_REV);
   if (!existingBomline) {
     const newStructureRev = await saveAsItemToRev(structureRev);
     await recursionRevise(fmeaRevId, newStructureRev);
-    const parentAssyAddResult = await lgepBomUtils.add(
-      parentBomline,
-      newStructureRev
-    );
+    const parentAssyAddResult = await lgepBomUtils.add(parentBomline, newStructureRev);
     const parentAssyBomline = parentAssyAddResult.addedLines[0];
     return parentAssyBomline;
   }
@@ -295,16 +260,9 @@ const _getExistingBomLine = async (parentBomline, revision, type) => {
  * @returns
  */
 const _saveFunctionAction = async (functionData, structureBomline) => {
-  const masterFunction = await getSelectItemRev(
-    masterDatas[constants.MASTER_DATA_KEY_FUNCTION],
-    functionData
-  );
+  const masterFunction = await getSelectItemRev(masterDatas[constants.MASTER_DATA_KEY_FUNCTION], functionData);
   // saveas할 기능이 이미 존재하는 경우 있음
-  const existingFunction = await _getExistingBomLine(
-    structureBomline,
-    masterFunction,
-    prop.TYPE_FMEA_FUNC_REVISION
-  );
+  const existingFunction = await _getExistingBomLine(structureBomline, masterFunction, prop.TYPE_FMEA_FUNC_REVISION);
   if (existingFunction) {
     return {
       revision: existingFunction.itemRevOfBOMLine,
@@ -313,10 +271,7 @@ const _saveFunctionAction = async (functionData, structureBomline) => {
   }
   const newFunctionRev = await saveAsItemToRev(masterFunction);
   await recursionRevise(fmeaRevId, newFunctionRev);
-  const functionAddResult = await lgepBomUtils.add(
-    structureBomline,
-    newFunctionRev
-  );
+  const functionAddResult = await lgepBomUtils.add(structureBomline, newFunctionRev);
   return {
     revision: newFunctionRev,
     bomLine: functionAddResult.addedLines[0],
@@ -332,25 +287,15 @@ const _saveFunctionAction = async (functionData, structureBomline) => {
 const _saveAsFailure = async (data, functionBomLine) => {
   const { failure, classification } = data;
 
-  const masterFailureRev = await getSelectItemRev(
-    masterDatas[constants.MASTER_DATA_KEY_FAILURE],
-    failure
-  );
+  const masterFailureRev = await getSelectItemRev(masterDatas[constants.MASTER_DATA_KEY_FAILURE], failure);
   const newFailureRev = await saveAsItemToRev(masterFailureRev);
   await recursionRevise(fmeaRevId, newFailureRev);
 
   // TODO:: 봄라인인가
   const classificationValue = replaceEmptyValue(classification.dbValue);
-  await lgepObjectUtils.setProperties(
-    newFailureRev,
-    [prop.CLASSFICATION],
-    [classificationValue]
-  );
+  await lgepObjectUtils.setProperties(newFailureRev, [prop.CLASSFICATION], [classificationValue]);
 
-  const failureAddResult = await lgepBomUtils.add(
-    functionBomLine,
-    newFailureRev
-  );
+  const failureAddResult = await lgepBomUtils.add(functionBomLine, newFailureRev);
 
   // TODO :: DATASET으로 변경
   const tempRev = await _getFailureDataset(newFailureRev);
@@ -371,29 +316,15 @@ export const _getFailureDataset = async (newFailureRev) => {
   // 임시 고장 객체 생성
   //const tempRev = await saveAsItemToRev(newFailureRev);
 
-  const failureEffectValue = getEditorValueById(
-    prop.FAILURE_EFFECT + constants.CREATE_SUFFIX
-  );
+  const failureEffectValue = getEditorValueById(prop.FAILURE_EFFECT + constants.CREATE_SUFFIX);
   const shortFailureEffect = makeShortenValues(failureEffectValue);
 
-  const causeOfFailureValue = getEditorValueById(
-    prop.CAUSE_OF_FAILURE + constants.CREATE_SUFFIX
-  );
+  const causeOfFailureValue = getEditorValueById(prop.CAUSE_OF_FAILURE + constants.CREATE_SUFFIX);
   const shortCauseOfFailure = makeShortenValues(causeOfFailureValue);
 
-  const props = [
-    prop.FAILURE_EFFECT,
-    prop.CAUSE_OF_FAILURE,
-    prop.FAILURE_EFFECT_SHORT,
-    prop.CAUSE_OF_FAILURE_SHORT,
-  ];
+  const props = [prop.FAILURE_EFFECT, prop.CAUSE_OF_FAILURE, prop.FAILURE_EFFECT_SHORT, prop.CAUSE_OF_FAILURE_SHORT];
 
-  const values = [
-    failureEffectValue,
-    causeOfFailureValue,
-    shortFailureEffect,
-    shortCauseOfFailure,
-  ];
+  const values = [failureEffectValue, causeOfFailureValue, shortFailureEffect, shortCauseOfFailure];
 
   await lgepObjectUtils.setProperties(newFailureRev, props, values);
 
@@ -406,9 +337,5 @@ export const _getFailureDataset = async (newFailureRev) => {
  * @param {object} noteData
  */
 const _setNoteTypes = async (failureBomLine, noteData) => {
-  await lgepObjectUtils.setProperties(
-    failureBomLine,
-    constants.NOTETYPE_PROPS,
-    noteData
-  );
+  await lgepObjectUtils.setProperties(failureBomLine, constants.NOTETYPE_PROPS, noteData);
 };

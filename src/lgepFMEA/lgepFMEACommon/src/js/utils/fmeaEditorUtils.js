@@ -124,9 +124,9 @@ export const emptryCheck = (requireIds) => {
 };
 
 /**
- * 
+ *
  * @param {string} id - editor id
- * @param {number} width 
+ * @param {number} width
  */
 export const initeEditorByCreate = (id, width = 790) => {
   const placeHolder = _setPlaceHolder(id);

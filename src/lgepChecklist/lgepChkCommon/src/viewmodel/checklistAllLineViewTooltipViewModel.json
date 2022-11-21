@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-i18n.directive"],
+  "onEvent": [],
+  "data": {},
+  "actions": {},
+  "i18n": {
+    "openChecklistAllLineView": ["L2_ChkMainMessages"],
+    "openChecklistAllLineViewDesc": ["L2_ChkMainMessages"]
+  }
+}

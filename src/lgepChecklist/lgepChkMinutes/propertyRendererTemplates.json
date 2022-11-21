@@ -1,0 +1,12 @@
+{
+  "showAllMunitesView": {
+    "grids": ["showAllMinutesTable"],
+    "columns": ["object_name"],
+    "tooltip": [],
+    "template": "",
+    "templateUrl": "",
+    "renderFunction": "linkedName",
+    "deps": "js/showAllMinutesService",
+    "dependentServices": []
+  }
+}

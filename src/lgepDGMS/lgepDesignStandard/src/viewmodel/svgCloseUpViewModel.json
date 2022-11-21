@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-popup2.directive", "js/aw-panel-body.directive"],
+  "onEvent": [
+    {
+      "eventId": "closeupViewSuccess",
+      "action": "closeupInit"
+    }
+  ],
+  "data": {},
+  "actions": {
+    "closeupInit": {
+      "actionType": "JSFunction",
+      "method": "closeupInit",
+      "deps": "js/L2_DesignStandardService"
+    }
+  },
+  "i18n": {}
+}

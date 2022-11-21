@@ -1,273 +1,268 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-label.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-splitter.directive",
-        "js/aw-panel.directive",
-        "js/visible-when.directive",
-        "js/aw-command-panel-section.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-command-bar.directive",
-        "js/aw-tab-set.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "userDataProvider.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "pointLabel"
-        },
-        {
-            "eventId": "qaList.edit",
-            "action": "pointPaymentPopupBat"
-        }
-    ],
-    "data": {
-        "summaryTab": [
-            {
-                "name": "{{i18n.summary}}",
-                "tabKey": "summary"
-            }
-        ],
-        "expertName": {
-            "displayName": "{{i18n.name}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "knowledgePoint": {
-            "displayName": "{{i18n.knowledgePoint}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "knowledgeCount": {
-            "displayName": "{{i18n.documentCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "answerCount": {
-            "displayName": "{{i18n.answerCount}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "pageSize": 40
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-label.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-splitter.directive",
+    "js/aw-panel.directive",
+    "js/visible-when.directive",
+    "js/aw-command-panel-section.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-tab-set.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "userDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "pointLabel"
     },
-    "actions": {
-        "userSelectedCheck": {
-            "actionType": "JSFunction",
-            "method": "userSelectedCheck",
-            "inputData": {
-                "value": "{{data.dataProviders}}"
-            },
-            "outputData": {
-                "userSelectedState": "userSelectedState"
-            },
-            "deps": "js/technicalService"
-        },
-        "pointPaymentPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "pointPayment",
-                    "locals": {
-                        "caption": "{{i18n.PointPayments}}"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": true,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "width": 400,
-                        "height": 280
-                    }
-                }
-            },
-            "deps": "js/popupService"
-        },
-        "pointLabel": {
-            "actionType": "JSFunction",
-            "method": "pointLabel",
-            "inputData": {
-                "value": "{{data.eventData.selectedObjects[0]}}",
-                "data": "{{data}}"
-            },
-            "deps": "js/technicalService"
-        },
-        "getUserTable": {
-            "actionType": "JSFunction",
-            "method": "getUserTable",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx":"{{ctx}}"
-            },
-            "outputData": {
-                "result": "result",
-                "filterResults": "{{function:applySortAndFilterRows}}"
-            },
-            "deps": "js/technicalService"
-        },
-        "applyFilterFacets": {
-            "actionType": "JSFunction",
-            "method": "getUserTable",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/technicalService"
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/technicalService"
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyFilterFacets"
-                }
-            ]
-        },
-        "pointPaymentPopupBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "userSelectedCheck"
-                },
-                {
-                    "condition": "conditions.cond1",
-                    "action": "pointPaymentPopup"
-                }
-            ]
-        }
-    },
-    "dataProviders": {
-        "userDataProvider": {
-            "action": "getUserTable",
-            "response": "{{data.filterResults}}",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}"
-        }
-    },
-    "columnProviders": {
-        "userColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "l2_user_name",
-                    "displayName": "{{i18n.name}}",
-                    "maxWidth": 500,
-                    "minWidth": 80,
-                    "width": 400,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_point",
-                    "displayName": "{{i18n.knowledgePoint}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_knowledge_count",
-                    "displayName": "{{i18n.questionCount}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                },
-                {
-                    "name": "l2_answer_count",
-                    "displayName": "{{i18n.answerCount}}",
-                    "maxWidth": 300,
-                    "minWidth": 60,
-                    "width": 200,
-                    "enableColumnMenu": true
-                }
-            ]
-        }
-    },
-    "grids": {
-        "userList": {
-            "dataProvider": "userDataProvider",
-            "columnProvider": "userColumnProvider",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": true,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "applySortAndFilterRows": {
-            "functionName": "applySortAndFilterRows",
-            "parameters": [
-                "{{data.columnProviders.userColumnProvider.columnFilters}}",
-                "{{data.columnProviders.userColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.userDataProvider.startIndex}}",
-                "{{data.pageSize}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.userColumnProvider.columnFilters}}",
-                "{{data.fullData}}"
-            ]
-        }
-    },
-    "conditions": {
-        "showSummaryTab": {
-            "expression": "data.selectedTab.tabKey === 'summary'"
-        },
-        "cond1": {
-            "expression": "data.userSelectedState===true"
-        },
-        "selectedDba": {
-            "expression": "ctx.userSession.props.group_name.uiValue === 'dba'"
-        }
-    },
-    "i18n": {
-        "helloText": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "property": ["lgepTechnicalMessages"],
-        "documentCount": ["lgepTechnicalMessages"],
-        "knowledgePoint": ["lgepTechnicalMessages"],
-        "name": ["lgepTechnicalMessages"],
-        "answerCount": ["lgepTechnicalMessages"],
-        "summary": ["lgepTechnicalMessages"],
-        "PointPayments": ["lgepTechnicalMessages"],
-        "questionCount": ["lgepTechnicalMessages"]
+    {
+      "eventId": "qaList.edit",
+      "action": "pointPaymentPopupBat"
     }
+  ],
+  "data": {
+    "summaryTab": [
+      {
+        "name": "{{i18n.summary}}",
+        "tabKey": "summary"
+      }
+    ],
+    "expertName": {
+      "displayName": "{{i18n.name}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "knowledgePoint": {
+      "displayName": "{{i18n.knowledgePoint}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "knowledgeCount": {
+      "displayName": "{{i18n.documentCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "answerCount": {
+      "displayName": "{{i18n.answerCount}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "pageSize": 40
+  },
+  "actions": {
+    "userSelectedCheck": {
+      "actionType": "JSFunction",
+      "method": "userSelectedCheck",
+      "inputData": {
+        "value": "{{data.dataProviders}}"
+      },
+      "outputData": {
+        "userSelectedState": "userSelectedState"
+      },
+      "deps": "js/technicalService"
+    },
+    "pointPaymentPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "pointPayment",
+          "locals": {
+            "caption": "{{i18n.PointPayments}}"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": true,
+            "draggable": true,
+            "placement": "bottom-start",
+            "width": 400,
+            "height": 280
+          }
+        }
+      },
+      "deps": "js/popupService"
+    },
+    "pointLabel": {
+      "actionType": "JSFunction",
+      "method": "pointLabel",
+      "inputData": {
+        "value": "{{data.eventData.selectedObjects[0]}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/technicalService"
+    },
+    "getUserTable": {
+      "actionType": "JSFunction",
+      "method": "getUserTable",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "result": "result",
+        "filterResults": "{{function:applySortAndFilterRows}}"
+      },
+      "deps": "js/technicalService"
+    },
+    "applyFilterFacets": {
+      "actionType": "JSFunction",
+      "method": "getUserTable",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/technicalService"
+    },
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/technicalService"
+    },
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "getFilterFacetData"
+        },
+        {
+          "action": "applyFilterFacets"
+        }
+      ]
+    },
+    "pointPaymentPopupBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "userSelectedCheck"
+        },
+        {
+          "condition": "conditions.cond1",
+          "action": "pointPaymentPopup"
+        }
+      ]
+    }
+  },
+  "dataProviders": {
+    "userDataProvider": {
+      "action": "getUserTable",
+      "response": "{{data.filterResults}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}"
+    }
+  },
+  "columnProviders": {
+    "userColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "l2_user_name",
+          "displayName": "{{i18n.name}}",
+          "maxWidth": 500,
+          "minWidth": 80,
+          "width": 400,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_point",
+          "displayName": "{{i18n.knowledgePoint}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_knowledge_count",
+          "displayName": "{{i18n.questionCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        },
+        {
+          "name": "l2_answer_count",
+          "displayName": "{{i18n.answerCount}}",
+          "maxWidth": 300,
+          "minWidth": 60,
+          "width": 200,
+          "enableColumnMenu": true
+        }
+      ]
+    }
+  },
+  "grids": {
+    "userList": {
+      "dataProvider": "userDataProvider",
+      "columnProvider": "userColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": true,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "applySortAndFilterRows": {
+      "functionName": "applySortAndFilterRows",
+      "parameters": [
+        "{{data.columnProviders.userColumnProvider.columnFilters}}",
+        "{{data.columnProviders.userColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.userDataProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.userColumnProvider.columnFilters}}", "{{data.fullData}}"]
+    }
+  },
+  "conditions": {
+    "showSummaryTab": {
+      "expression": "data.selectedTab.tabKey === 'summary'"
+    },
+    "cond1": {
+      "expression": "data.userSelectedState===true"
+    },
+    "selectedDba": {
+      "expression": "ctx.userSession.props.group_name.uiValue === 'dba'"
+    }
+  },
+  "i18n": {
+    "helloText": ["lgepKnowldegeManageMessages"],
+    "property": ["lgepTechnicalMessages"],
+    "documentCount": ["lgepTechnicalMessages"],
+    "knowledgePoint": ["lgepTechnicalMessages"],
+    "name": ["lgepTechnicalMessages"],
+    "answerCount": ["lgepTechnicalMessages"],
+    "summary": ["lgepTechnicalMessages"],
+    "PointPayments": ["lgepTechnicalMessages"],
+    "questionCount": ["lgepTechnicalMessages"]
+  }
 }

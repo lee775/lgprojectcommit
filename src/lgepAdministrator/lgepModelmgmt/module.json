@@ -1,5 +1,5 @@
 {
-    "name": "lgepModelmgmt",
-    "description": "This is the lgepModelmgmt module",
-    "skipTest": true
+  "name": "lgepModelmgmt",
+  "description": "This is the lgepModelmgmt module",
+  "skipTest": true
 }

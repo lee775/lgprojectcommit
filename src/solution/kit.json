@@ -383,6 +383,23 @@
         "js/Awp0ViewerGalleryUtils",
         "js/ImgViewer"
       ]
+    },
+    "js/lgep.bundle.js": {
+      "include": [
+        "js/configurationService",
+        "js/utils/lgepObjectUtils",
+        "js/utils/lgepCommonUtils",
+        "js/utils/lgepBomUtils",
+        "js/utils/lgepMessagingUtils",
+        "js/utils/lgepLocalizationUtils",
+        "js/utils/lgepPanelUtils",
+        "js/utils/lgepPopupUtils",
+        "js/utils/lgepPreferenceUtils",
+        "js/utils/lgepQueryUtils",
+        "js/utils/lgepSummerNoteUtils",
+        "js/utils/lgepExcelExportUtils",
+        "js/utils/lgepLoadingUtils"
+      ]
     }
   },
   "solutionDef": {

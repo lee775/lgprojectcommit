@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-command-panel.directive", "css/minutesMainCss.css"],
+  "actions": {},
+  "data": {
+    "viewName": "all"
+  },
+  "onEvent": [],
+  "lifecycleHooks": {},
+  "i18n": {
+    "minutes": ["lgepChkMinutesMessages"]
+  }
+}

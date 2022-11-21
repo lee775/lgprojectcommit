@@ -1,34 +1,15 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-command-bar.directive"
-    ],
-    "actions": {
-    },
-    "data": {
-    },
-    "conditions": {
-    },
-    "i18n": {
-        "summerNoteWidthMax": [
-            "lgepDesignSequenceMessages"
-        ],
-        "treeShowTooltip": [
-            "lgepDesignSequenceMessages"
-        ],
-        "tabShowTooltip": [
-            "lgepDesignSequenceMessages"
-        ],
-        "leftSelectPlease": [
-            "L2_DesignStandardMessages"
-        ],
-        "viewDetails": [
-            "L2_DesignStandardMessages"
-        ],
-        "mostPosts": [
-            "lgepKnowldegeManageMessages"
-        ]
-    }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-flex-row.directive", "js/aw-flex-column.directive", "js/aw-command-bar.directive"],
+  "actions": {},
+  "data": {},
+  "conditions": {},
+  "i18n": {
+    "summerNoteWidthMax": ["lgepDesignSequenceMessages"],
+    "treeShowTooltip": ["lgepDesignSequenceMessages"],
+    "tabShowTooltip": ["lgepDesignSequenceMessages"],
+    "leftSelectPlease": ["L2_DesignStandardMessages"],
+    "viewDetails": ["L2_DesignStandardMessages"],
+    "mostPosts": ["lgepKnowldegeManageMessages"]
+  }
 }

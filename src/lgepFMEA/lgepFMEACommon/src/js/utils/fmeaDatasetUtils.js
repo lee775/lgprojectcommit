@@ -9,20 +9,12 @@ import fmsUtils from 'js/fmsUtils';
 import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
 
 export const getHtmlValue = async (uid) => {
-  const dataset = await loadObjectByPolicy(uid, prop.TYPE_DATASET, [
-    prop.REF_LIST,
-  ]);
-  const fileText = lgepObjectUtils.getObject(
-    dataset.props[prop.REF_LIST].dbValues
-  );
+  const dataset = await loadObjectByPolicy(uid, prop.TYPE_DATASET, [prop.REF_LIST]);
+  const fileText = lgepObjectUtils.getObject(dataset.props[prop.REF_LIST].dbValues);
   try {
-    const result = await SoaService.post(
-      'Core-2006-03-FileManagement',
-      'getFileReadTickets',
-      {
-        files: fileText,
-      }
-    );
+    const result = await SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', {
+      files: fileText,
+    });
     const textTicket = result.tickets[1][0];
     const baseUrl = browserUtils.getBaseURL();
     const fileName = fmsUtils.getFilenameFromTicket(textTicket);
@@ -35,7 +27,7 @@ export const getHtmlValue = async (uid) => {
     const blobText = await blob.text();
     return blobText;
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 
@@ -140,28 +132,18 @@ export async function uploadFileToDataset(file) {
     for (let i of file) {
       let result = await _createDatasets(i);
       _uploadFile(result, i);
-      datasetArr.push(
-        await _commitDatasetFiles(result.modelObject, i, result.ticket)
-      );
+      datasetArr.push(await _commitDatasetFiles(result.modelObject, i, result.ticket));
     }
     return datasetArr;
   } else {
     let result = await _createDatasets(file);
     _uploadFile(result, file);
-    let dataset = await _commitDatasetFiles(
-      result.modelObject,
-      file,
-      result.ticket
-    );
+    let dataset = await _commitDatasetFiles(result.modelObject, file, result.ticket);
     return dataset;
   }
 }
 
-async function linkRelationsSequence(
-  item,
-  dataset,
-  relation = prop.IMAN_SPECIFICATION
-) {
+async function linkRelationsSequence(item, dataset, relation = prop.IMAN_SPECIFICATION) {
   if (Array.isArray(dataset)) {
     for (let i = 0; i < dataset.length; i++) {
       var jsoObj = {
@@ -175,11 +157,7 @@ async function linkRelationsSequence(
         ],
       };
       try {
-        await SoaService.post(
-          'Core-2006-03-DataManagement',
-          'createRelations',
-          jsoObj
-        );
+        await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
       } catch (err) {
         //console.log(err);
       }
@@ -196,11 +174,7 @@ async function linkRelationsSequence(
       ],
     };
     try {
-      await SoaService.post(
-        'Core-2006-03-DataManagement',
-        'createRelations',
-        jsoObj
-      );
+      await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
     } catch (err) {
       //console.log(err);
     }
@@ -213,9 +187,7 @@ export async function deleteRelation(value) {
   }
   value = lgepObjectUtils.getObject(value.uid);
   value = viewC.constructViewModelObjectFromModelObject(value);
-  let dataset = lgepObjectUtils.getObject(
-    value.props.IMAN_specification.dbValues
-  );
+  let dataset = lgepObjectUtils.getObject(value.props.IMAN_specification.dbValues);
   for (let i = 0; i < dataset.length; i++) {
     let param = {
       input: [
@@ -228,11 +200,7 @@ export async function deleteRelation(value) {
       ],
     };
     try {
-      await SoaService.post(
-        'Core-2006-03-DataManagement',
-        'deleteRelations',
-        param
-      );
+      await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', param);
     } catch (err) {
       //console.log(err);
     }
@@ -241,11 +209,7 @@ export async function deleteRelation(value) {
     objects: dataset,
   };
   try {
-    await SoaService.post(
-      'Core-2006-03-DataManagement',
-      'deleteObjects',
-      testParam
-    );
+    await SoaService.post('Core-2006-03-DataManagement', 'deleteObjects', testParam);
   } catch (err) {
     //console.log(err);
   }
@@ -263,17 +227,12 @@ export const createHtml = async (itemRev) => {
   // // 3. ref_list 업로드
   let result = {
     modelObject: dataset.datasetOutput[0].dataset,
-    ticket:
-      dataset.datasetOutput[0].commitInfo[0].datasetFileTicketInfos[0].ticket,
+    ticket: dataset.datasetOutput[0].commitInfo[0].datasetFileTicketInfos[0].ticket,
   };
 
   _uploadFile(result, file);
 
-  const fileDataset = await _addFileOnDataset(
-    result.modelObject,
-    file,
-    result.ticket
-  );
+  const fileDataset = await _addFileOnDataset(result.modelObject, file, result.ticket);
   //console.log('fileDataset', fileDataset);
 
   // 4. revision add
@@ -301,11 +260,7 @@ const _addFileOnDataset = async (targetDataset, file, ticket) => {
     ],
   };
   try {
-    const result = await SoaService.post(
-      'Core-2006-03-FileManagement',
-      'commitDatasetFiles',
-      inputParam
-    );
+    const result = await SoaService.post('Core-2006-03-FileManagement', 'commitDatasetFiles', inputParam);
     return result;
   } catch (e) {
     //console.log('eee', e);
@@ -333,11 +288,7 @@ const _createHtmlDataset = async (fileName) => {
     ],
   };
 
-  const dataset = await SoaService.post(
-    'Core-2010-04-DataManagement',
-    'createDatasets',
-    inputParam
-  );
+  const dataset = await SoaService.post('Core-2010-04-DataManagement', 'createDatasets', inputParam);
   return dataset;
 };
 
@@ -411,12 +362,7 @@ function _createDatasets(file) {
     } else if (type === 'par') {
       selectedtype = ['SE Part', 'SE Part', 'Plain', 'SE-part'];
     } else if (type === 'psm') {
-      selectedtype = [
-        'SE SheetMetal',
-        'SE SheetMetal',
-        'Plain',
-        'SE-sheetMetal',
-      ];
+      selectedtype = ['SE SheetMetal', 'SE SheetMetal', 'Plain', 'SE-sheetMetal'];
     } else if (type === 'pwd') {
       selectedtype = ['SE Weldment', 'SE Weldment', 'Plain', 'SE-weldment'];
     } else if (type === 'tif') {
@@ -450,15 +396,10 @@ function _createDatasets(file) {
       },
     ],
   };
-  SoaService.post(
-    'Core-2010-04-DataManagement',
-    'createDatasets',
-    inputParam
-  ).then((res) => {
+  SoaService.post('Core-2010-04-DataManagement', 'createDatasets', inputParam).then((res) => {
     let result = {
       modelObject: res.datasetOutput[0].dataset,
-      ticket:
-        res.datasetOutput[0].commitInfo[0].datasetFileTicketInfos[0].ticket,
+      ticket: res.datasetOutput[0].commitInfo[0].datasetFileTicketInfos[0].ticket,
     };
     deferred.resolve(result);
   });
@@ -551,12 +492,7 @@ function _commitDatasetFiles(targetDataset, file, ticket) {
     } else if (type === 'par') {
       selectedtype = ['SE Part', 'SE Part', 'Plain', 'SE-part'];
     } else if (type === 'psm') {
-      selectedtype = [
-        'SE SheetMetal',
-        'SE SheetMetal',
-        'Plain',
-        'SE-sheetMetal',
-      ];
+      selectedtype = ['SE SheetMetal', 'SE SheetMetal', 'Plain', 'SE-sheetMetal'];
     } else if (type === 'pwd') {
       selectedtype = ['SE Weldment', 'SE Weldment', 'Plain', 'SE-weldment'];
     } else if (type === 'tif') {
@@ -594,11 +530,7 @@ function _commitDatasetFiles(targetDataset, file, ticket) {
   if (type == 'txt' || type == 'mht') {
     inputParam.commitInput[0].datasetFileTicketInfos[0].datasetFileInfo.isText = true;
   }
-  SoaService.post(
-    'Core-2006-03-FileManagement',
-    'commitDatasetFiles',
-    inputParam
-  ).then((res) => {
+  SoaService.post('Core-2006-03-FileManagement', 'commitDatasetFiles', inputParam).then((res) => {
     let keys = Object.keys(res.modelObjects);
     for (const key of keys) {
       if (lgepObjectUtils.instanceOf(res.modelObjects[key], 'Dataset')) {

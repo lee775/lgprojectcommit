@@ -1,76 +1,71 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-      "js/aw-splm-table.directive"
-    ],
-    "data": {
-    },
-    "actions": {
-      "loadColumnOccurence": {
-        "actionType": "JSFunction",
-        "method": "loadColumnOccurence",
-        "inputData": {
-          "dataProvider": "{{data.dataProviders.occurenceTableProvider}}"
-        },
-        "deps": "js/sodBallonService"
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-splm-table.directive"],
+  "data": {},
+  "actions": {
+    "loadColumnOccurence": {
+      "actionType": "JSFunction",
+      "method": "loadColumnOccurence",
+      "inputData": {
+        "dataProvider": "{{data.dataProviders.occurenceTableProvider}}"
       },
-      "loadDataOccurence": {
-        "actionType": "JSFunction",
-        "method": "loadDataOccurence",
-        "inputData": {
-          "ctx": "{{ctx}}"
-        },
-        "outputData": {
-          "occurenceResults": "result.filterResults",
-          "occurenceTotalFound": "result.totalFound"
-        },
-        "deps": "js/sodBallonService"
+      "deps": "js/sodBallonService"
+    },
+    "loadDataOccurence": {
+      "actionType": "JSFunction",
+      "method": "loadDataOccurence",
+      "inputData": {
+        "ctx": "{{ctx}}"
       },
-      "selectTableRow": {
-        "actionType": "JSFunction",
-        "method": "selectTableRow",
-        "inputData": {
-          "selectionModel": "{{data.eventData.selectedObjects[0]}}",
-          "ctx": "{{ctx}}"
-        },
-        "deps": "js/listboxRenderService"
+      "outputData": {
+        "occurenceResults": "result.filterResults",
+        "occurenceTotalFound": "result.totalFound"
+      },
+      "deps": "js/sodBallonService"
+    },
+    "selectTableRow": {
+      "actionType": "JSFunction",
+      "method": "selectTableRow",
+      "inputData": {
+        "selectionModel": "{{data.eventData.selectedObjects[0]}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/listboxRenderService"
+    }
+  },
+  "columnProviders": {
+    "occurenceTableColumnProvider": {
+      "loadColumnAction": "loadColumnOccurence",
+      "frozenColumnIndex": -1
+    }
+  },
+  "dataProviders": {
+    "occurenceTableProvider": {
+      "action": "loadDataOccurence",
+      "response": "{{data.occurenceResults}}",
+      "totalFound": "{{data.occurenceTotalFound}}"
+    }
+  },
+  "grids": {
+    "occurenceTable": {
+      "dataProvider": "occurenceTableProvider",
+      "columnProvider": "occurenceTableColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
       }
-    },
-    "columnProviders": {
-      "occurenceTableColumnProvider": {
-        "loadColumnAction": "loadColumnOccurence",
-        "frozenColumnIndex": -1
-      }
-    },
-    "dataProviders": {
-      "occurenceTableProvider": {
-        "action": "loadDataOccurence",
-        "response": "{{data.occurenceResults}}",
-        "totalFound": "{{data.occurenceTotalFound}}"
-      }
-    },
-    "grids": {
-      "occurenceTable": {
-        "dataProvider": "occurenceTableProvider",
-        "columnProvider": "occurenceTableColumnProvider",
-        "addIconColumn": false,
-        "gridOptions": {
-          "enablePinning": true,
-          "enableSorting": false
-        }
-      }
-    },
-    "i18n": {
-      "occurenceName": ["lgepDFMEAViewMessages"]
-    },
-    "conditions": {
-    },
-    "onEvent": [
-        {
-            "eventId": "occurenceTableProvider.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "selectTableRow"
-        }
-    ]
-  }
-  
+    }
+  },
+  "i18n": {
+    "occurenceName": ["lgepDFMEAViewMessages"]
+  },
+  "conditions": {},
+  "onEvent": [
+    {
+      "eventId": "occurenceTableProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "selectTableRow"
+    }
+  ]
+}

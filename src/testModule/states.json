@@ -1,51 +1,49 @@
 {
-    "testLocation": {
-        "data": {
-            "browserTitle": {
-                "source": "/i18n/testModuleMessages",
-                "key": "testLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/testModuleMessages",
-                "key": "testLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/testModuleMessages",
-                "key": "testLocationHeaderTitle"
-            }
-        },
-        "type": "location"
+  "testLocation": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/testModuleMessages",
+        "key": "testLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/testModuleMessages",
+        "key": "testLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/testModuleMessages",
+        "key": "testLocationHeaderTitle"
+      }
     },
-    "testSubLocation": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "priority": 0,
-            "label": {
-                "source": "/i18n/testModuleMessages",
-                "key": "testSubLocationTitle"
-            },
-            "clientScopeURI": "Awp0SearchResults",
-            "nameToken": "testSubLocation",
-            "context": {
-                "search": {
-                    "chartTitle": {
-                        "source": "/i18n/testModuleMessages",
-                        "key": "testSubLocationChartTitle"
-                    }
-                }
-            }
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "params": {
-            "filter": null
-        },
-        "parent": "testLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation",
-        "view": "testSubLocation",
-        "url": "/testSubLocation"
-    }
+    "type": "location"
+  },
+  "testSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/testModuleMessages",
+        "key": "testSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "testSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/testModuleMessages",
+            "key": "testSubLocationChartTitle"
+          }
+        }
+      }
+    },
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
+    },
+    "parent": "testLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "view": "testSubLocation",
+    "url": "/testSubLocation"
+  }
 }

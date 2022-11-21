@@ -1,0 +1,31 @@
+<aw-panel>
+  <aw-panel-body>
+    <div class="editor-button-section">
+      <aw-button id="ckMeditSaveBtn" class="editor-button" exist-when="!conditions.openEdit && conditions.completeInit" size="auto" action="editOpen"
+        >{{i18n.modifyChecklist}}</aw-button
+      >
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editSave"
+        >{{i18n.openChecklistBomSave}}</aw-button
+      >
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editCancel"
+        >{{i18n.openChecklistBomCancelEdit}}</aw-button
+      >
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.functionLabel}}</div>
+      <div id="function"></div>
+    </div>
+    <div class="editor-section">
+      <div class="ng-binding ng-scope">{{i18n.requirementLabel}}</div>
+      <div id="requirement"></div>
+    </div>
+    <div class="editor-button-section">
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editSave"
+        >{{i18n.openChecklistBomSave}}</aw-button
+      >
+      <aw-button class="editor-button" aw-class="{'disabled': data.disabledButtonChk.dbValue}" exist-when="conditions.openEdit" size="auto" action="editCancel"
+        >{{i18n.openChecklistBomCancelEdit}}</aw-button
+      >
+    </div>
+  </aw-panel-body>
+</aw-panel>

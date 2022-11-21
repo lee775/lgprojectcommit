@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/exist-when.directive",
+    "css/checklistMaster.css"
+  ],
+  "onEvent": [],
+  "data": {
+    "editorIds": {
+      "dbValues": ["function", "requirement"]
+    },
+    "isEditing": {
+      "dbValue": false
+    },
+    "completeInit": {
+      "dbValue": true
+    },
+    "disabledButtonChk": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    }
+  },
+  "actions": {
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "functionCreateInitialize",
+      "inputData": {
+        "editorIds": "{{data.editorIds.dbValues}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistMasterCreateService"
+    },
+    "editOpen": {
+      "actionType": "JSFunction",
+      "method": "editOpen",
+      "inputData": {
+        "isEditing": "{{data.isEditing}}",
+        "editorIds": "{{data.editorIds.dbValues}}"
+      },
+      "deps": "js/L2_ChecklistMasterEditService"
+    },
+    "editSave": {
+      "actionType": "JSFunction",
+      "method": "saveEdit",
+      "inputData": {
+        "data": "{{data}}",
+        "editorIds": "{{data.editorIds.dbValues}}"
+      },
+      "deps": "js/L2_ChecklistMasterEditService"
+    },
+    "editCancel": {
+      "actionType": "JSFunction",
+      "method": "cancelEdit",
+      "inputData": {
+        "isEditing": "{{data.isEditing}}",
+        "editorIds": "{{data.editorIds.dbValues}}"
+      },
+      "deps": "js/L2_ChecklistMasterEditService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unMount",
+      "inputData": {
+        "isEditing": "{{data.isEditing}}",
+        "editorIds": "{{data.editorIds.dbValues}}"
+      },
+      "deps": "js/L2_ChecklistMasterEditService"
+    }
+  },
+  "conditions": {
+    "openEdit": {
+      "expression": "data.isEditing.dbValue === true"
+    },
+    "completeInit": {
+      "expression": "data.completeInit.dbValue === true"
+    }
+  },
+  "dataProviders": {},
+  "lifecycleHooks": {
+    "onMount": "initialize",
+    "onUnmount": "unMount"
+  },
+  "i18n": {
+    "functionLabel": ["L2_ChkMainMessages"],
+    "requirementLabel": ["L2_ChkMainMessages"],
+    "modifyChecklist": ["L2_ChkMainMessages"],
+    "openChecklistBomSave": ["L2_ChkMainMessages"],
+    "openChecklistBomCancelEdit": ["L2_ChkMainMessages"],
+    "editorSave": ["L2_ChkMainMessages"]
+  }
+}

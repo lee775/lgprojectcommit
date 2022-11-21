@@ -1,15 +1,11 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-i18n.directive"
-    ],
-    "onEvent": [
-    ],
-    "data": {},
-    "actions": {
-    },
-    "i18n": {
-        "openChecklistBomSave":["L2_ChkMainMessages"],
-        "openChecklistBomSaveDesc":["L2_ChkMainMessages"]
-    }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-i18n.directive"],
+  "onEvent": [],
+  "data": {},
+  "actions": {},
+  "i18n": {
+    "openChecklistBomSave": ["L2_ChkMainMessages"],
+    "openChecklistBomSaveDesc": ["L2_ChkMainMessages"]
+  }
 }

@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-listbox.directive",
+    "js/aw-checkbox.directive",
+    "js/aw-separator.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-popup2.directive",
+    "js/aw-label.directive",
+    "js/aw-button.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "revisionComparePopupSuccess",
+      "action": "revisionCompareInit"
+    },
+    {
+      "eventId": "compareBSeting",
+      "action": "compareBSeting"
+    }
+  ],
+  "actions": {
+    "tableOnlyChanges": {
+      "actionType": "JSFunction",
+      "method": "tableOnlyChanges",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "compareTreeDataSet": {
+      "actionType": "JSFunction",
+      "method": "compareTreeDataSet",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "compareRevSet": {
+      "actionType": "JSFunction",
+      "method": "compareRevSet",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "compareBSeting": {
+      "actionType": "JSFunction",
+      "method": "compareBSeting",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "standardRevSet": {
+      "actionType": "JSFunction",
+      "method": "standardRevSet",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "revisionCompareInit": {
+      "actionType": "JSFunction",
+      "method": "revisionCompareInit",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "loadDataA": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "outputData": {
+        "result": "result",
+        "treeALoadResult": "{{function:treeALoadData}}"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "loadDataB": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "outputData": {
+        "result": "result",
+        "treeBLoadResult": "{{function:treeBLoadData}}"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
+    }
+  },
+  "data": {
+    "onlyChanges": {
+      "displayName": "{{i18n.onlyChanges}}",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "{{i18n.onlyChanges}}",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "compareAList": {
+      "displayName": "{{i18n.standardRev}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "false",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "compareAListValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "compareBList": {
+      "displayName": "{{i18n.compareRev}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "hasLov": "false",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "compareBListValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "AOwningUser": {
+      "displayName": "{{i18n.owningUser}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "ARevDate": {
+      "displayName": "{{i18n.revDate}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "ARevReason": {
+      "displayName": "{{i18n.revReason}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "BOwningUser": {
+      "displayName": "{{i18n.owningUser}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "BRevDate": {
+      "displayName": "{{i18n.revDate}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "BRevReason": {
+      "displayName": "{{i18n.revReason}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "compareTreeAData": {
+      "action": "loadDataA",
+      "initializeAction": "loadDataA",
+      "treeLoadResult": "{{data.treeALoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    },
+    "compareTreeBData": {
+      "action": "loadDataB",
+      "initializeAction": "loadDataB",
+      "treeLoadResult": "{{data.treeBLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "columnProviders": {
+    "compareTreeAColumn": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "width": 300,
+          "isTreeNavigation": true
+        },
+        {
+          "name": "item_revision_id",
+          "displayName": "Rev",
+          "width": 50
+        },
+        {
+          "name": "comparison",
+          "displayName": "{{i18n.content}}",
+          "width": 100
+        }
+      ]
+    },
+    "compareTreeBColumn": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "width": 300,
+          "isTreeNavigation": true
+        },
+        {
+          "name": "item_revision_id",
+          "displayName": "Rev",
+          "width": 50
+        },
+        {
+          "name": "comparison",
+          "displayName": "{{i18n.content}}",
+          "width": 100
+        }
+      ]
+    }
+  },
+  "grids": {
+    "compareTreeA": {
+      "dataProvider": "compareTreeAData",
+      "columnProvider": "compareTreeAColumn",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": false,
+        "enablePinning": false,
+        "enableSorting": false,
+        "enableExpansionStateCaching": true
+      }
+    },
+    "compareTreeB": {
+      "dataProvider": "compareTreeBData",
+      "columnProvider": "compareTreeBColumn",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": false,
+        "enablePinning": false,
+        "enableSorting": false,
+        "enableExpansionStateCaching": true
+      }
+    }
+  },
+  "conditions": {},
+  "functions": {
+    "treeALoadData": {
+      "functionName": "treeALoadData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}", "{{data.treeLoadInput}}"]
+    },
+    "treeBLoadData": {
+      "functionName": "treeBLoadData",
+      "parameters": ["{{data.treeLoadInput.parentNode}}", "{{data.treeLoadInput}}"]
+    }
+  },
+  "i18n": {
+    "owningUser": ["L2_DesignStandardMessages"],
+    "revDate": ["L2_DesignStandardMessages"],
+    "revReason": ["L2_DesignStandardMessages"],
+    "content": ["L2_DesignStandardMessages"],
+    "name": ["L2_DesignStandardMessages"],
+    "standardRev": ["L2_DesignStandardMessages"],
+    "compareRev": ["L2_DesignStandardMessages"],
+    "compareBtn": ["L2_DesignStandardMessages"],
+    "onlyChanges": ["L2_DesignStandardMessages"]
+  }
+}

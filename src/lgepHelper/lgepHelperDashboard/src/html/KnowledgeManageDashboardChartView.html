@@ -1,76 +1,96 @@
 <aw-flex-row class="chartColor">
-    <aw-panel-body id="chartDashboardSite">
-        <aw-flex-column width="12">
-            <aw-flex-row>
-                <aw-flex-column width="6">
-                    <aw-flex-row id="chartDashboard">
-                        <div class="bestSubmit">
-                            <aw-panel style="box-shadow: 1px 4px 2px 0px rgb(29 37 42 / 0.233);">
-                                <aw-flex-column>
-                                    <aw-panel-section caption="{{i18n.mostPosts}}" collapsed="false">
-                                        <aw-list dataprovider="data.dataProviders.postList">
-                                            <aw-flex-row>
-                                                <h4 style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(243, 66, 95);" exist-when="item.rank == 1">{{item.rank}}</h4>
-                                                <h4 style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(0, 122, 179);" exist-when="item.rank != 1">{{item.rank}}</h4>
-                                                <aw-default-cell vmo="item"></aw-default-cell>
-                                            </aw-flex-row>
-                                        </aw-list>
-                                    </aw-panel-section>
-                                </aw-flex-column>
-                            </aw-panel>
-                        </div>
-                        <div class="bestLike">
-                            <aw-panel style="box-shadow: 1px 4px 2px 0px rgb(29 37 42 / 0.233);">
-                                <aw-flex-column>
-                                    <aw-panel-section caption="{{i18n.mostRecommendations}}" collapsed="false">
-                                        <aw-list dataprovider="data.dataProviders.thumbsList">
-                                            <aw-flex-row>
-                                                <h4 style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(243, 66, 95);" exist-when="item.rank == 1">{{item.rank}}</h4>
-                                                <h4 style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(0, 122, 179);" exist-when="item.rank != 1">{{item.rank}}</h4>
-                                                <aw-default-cell vmo="item" class="profileImg"></aw-default-cell>
-                                            </aw-flex-row>
-                                        </aw-list>
-                                    </aw-panel-section>
-                                </aw-flex-column>
-                            </aw-panel>
-                        </div>
-                    </aw-flex-row>
-                    <aw-flex-row>
-                        <div class="scatterSize">
-                            <aw-panel style="box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233);">
-                                <aw-flex-column>
-                                    <aw-panel-section caption="{{i18n.scatterChartTitle}}" collapsed="false">
-                                        <aw-chart class="cChart" chart-provider="data.chartProviders.scatterChartProvider"></aw-chart>
-                                    </aw-panel-section>
-                                </aw-flex-column>
-                            </aw-panel>
-                        </div>
-                    </aw-flex-row>
+  <aw-panel-body id="chartDashboardSite">
+    <aw-flex-column width="12">
+      <aw-flex-row>
+        <aw-flex-column width="6">
+          <aw-flex-row id="chartDashboard">
+            <div class="bestSubmit">
+              <aw-panel style="box-shadow: 1px 4px 2px 0px rgb(29 37 42 / 0.233)">
+                <aw-flex-column>
+                  <aw-panel-section caption="{{i18n.mostPosts}}" collapsed="false" id="mostPosts">
+                    <aw-list dataprovider="data.dataProviders.postList">
+                      <aw-flex-row>
+                        <h4
+                          style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(243, 66, 95)"
+                          exist-when="item.rank == 1"
+                        >
+                          {{item.rank}}
+                        </h4>
+                        <h4
+                          style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(0, 122, 179)"
+                          exist-when="item.rank != 1"
+                        >
+                          {{item.rank}}
+                        </h4>
+                        <aw-default-cell vmo="item"></aw-default-cell>
+                      </aw-flex-row>
+                    </aw-list>
+                  </aw-panel-section>
                 </aw-flex-column>
-                <aw-separator is-vertical="true"></aw-separator>
-                <aw-flex-column width="6">
-                    <aw-flex-row class="pieSize">
-                        <aw-panel>
-                            <aw-flex-column>
-                                <aw-panel-section caption="{{i18n.pieChartTitle}}" collapsed="false">
-                                    <aw-chart class="pChart" chart-provider="data.chartProviders.pieChartProvider"></aw-chart>
-                                </aw-panel-section>
-                            </aw-flex-column>
-                        </aw-panel>
-                    </aw-flex-row>
-                    <aw-flex-row>
-                        <div class="lineSize">
-                            <aw-panel style="box-shadow: 1px 4px 2px 0px rgb(29 37 42 / 0.233);">
-                                <aw-flex-column>
-                                    <aw-panel-section caption={{i18n.lineChartTitle}} collapsed="false">
-                                        <aw-chart class="mChart" chart-provider="data.chartProviders.lineChartProvider"></aw-chart>
-                                    </aw-panel-section>
-                                </aw-flex-column>
-                            </aw-panel>
-                        </div>
-                    </aw-flex-row>
+              </aw-panel>
+            </div>
+            <div class="bestLike">
+              <aw-panel style="box-shadow: 1px 4px 2px 0px rgb(29 37 42 / 0.233)">
+                <aw-flex-column>
+                  <aw-panel-section caption="{{i18n.mostRecommendations}}" collapsed="false" id="mostRecommendations">
+                    <aw-list dataprovider="data.dataProviders.thumbsList">
+                      <aw-flex-row>
+                        <h4
+                          style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(243, 66, 95)"
+                          exist-when="item.rank == 1"
+                        >
+                          {{item.rank}}
+                        </h4>
+                        <h4
+                          style="margin-top: 20px; margin-left: 15px; margin-right: 10px; font-weight: bolder; color: rgb(0, 122, 179)"
+                          exist-when="item.rank != 1"
+                        >
+                          {{item.rank}}
+                        </h4>
+                        <aw-default-cell vmo="item" class="profileImg"></aw-default-cell>
+                      </aw-flex-row>
+                    </aw-list>
+                  </aw-panel-section>
                 </aw-flex-column>
-            </aw-flex-row>
+              </aw-panel>
+            </div>
+          </aw-flex-row>
+          <aw-flex-row>
+            <div class="scatterSize">
+              <aw-panel style="box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233)">
+                <aw-flex-column>
+                  <aw-panel-section caption="{{i18n.scatterChartTitle}}" collapsed="false">
+                    <aw-chart class="cChart" chart-provider="data.chartProviders.scatterChartProvider"></aw-chart>
+                  </aw-panel-section>
+                </aw-flex-column>
+              </aw-panel>
+            </div>
+          </aw-flex-row>
         </aw-flex-column>
-    </aw-panel-body>
+        <aw-separator is-vertical="true"></aw-separator>
+        <aw-flex-column width="6">
+          <aw-flex-row class="pieSize">
+            <aw-panel>
+              <aw-flex-column>
+                <aw-panel-section caption="{{i18n.pieChartTitle}}" collapsed="false">
+                  <aw-chart class="pChart" chart-provider="data.chartProviders.pieChartProvider"></aw-chart>
+                </aw-panel-section>
+              </aw-flex-column>
+            </aw-panel>
+          </aw-flex-row>
+          <aw-flex-row>
+            <div class="lineSize">
+              <aw-panel style="box-shadow: 1px 4px 2px 0px rgb(29 37 42 / 0.233)">
+                <aw-flex-column>
+                  <aw-panel-section caption="{{i18n.lineChartTitle}}" collapsed="false">
+                    <aw-chart class="mChart" chart-provider="data.chartProviders.lineChartProvider"></aw-chart>
+                  </aw-panel-section>
+                </aw-flex-column>
+              </aw-panel>
+            </div>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-flex-column>
+  </aw-panel-body>
 </aw-flex-row>

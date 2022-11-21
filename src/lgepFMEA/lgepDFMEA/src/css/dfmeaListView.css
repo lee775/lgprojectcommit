@@ -1,73 +1,72 @@
-
-.aw-commands-showIconLabel.aw-commands-commandIconButtonText.ng-binding{
-    width: 100% !important;
+.aw-commands-showIconLabel.aw-commands-commandIconButtonText.ng-binding {
+  width: 100% !important;
 }
 
 .dmasterList-table-command-header div aw-command {
-    float: left;
+  float: left;
 }
 
 .dmasterList-table-command-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 0 0 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 10px;
 }
 
 .sheet-table .aw-splm-tableRow[aria-level='2']:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .text-row {
-    display: flex;
+  display: flex;
 }
 
 .dmaster-table-controller {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .dmaster-table-controller button {
-    width: 100px;
-    height: 35px;
-    margin: 0 15px 0 0;
+  width: 100px;
+  height: 35px;
+  margin: 0 15px 0 0;
 }
 
 .controller-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .checklist-tree-container {
-    padding: 10px;
+  padding: 10px;
 }
 
 .label-column {
-    min-width: 250px;
+  min-width: 250px;
 }
 
-.text-row{
-    margin-top: 10px;
+.text-row {
+  margin-top: 10px;
 }
 
-.product-title{
-    margin-left: 50px;
-    margin-top: 5px;
-    font-weight: 400;
+.product-title {
+  margin-left: 50px;
+  margin-top: 5px;
+  font-weight: 400;
 }
 
 .sheet-table .aw-splm-tableHeaderCellSplitter {
-    border-right-width: 0.2px;
-    width: 1px;
+  border-right-width: 0.2px;
+  width: 1px;
 }
 
-.sheet-table .aw-splm-tableRow[draggable="true"]{
-    border-bottom: 2px solid #dcdcdc;
+.sheet-table .aw-splm-tableRow[draggable='true'] {
+  border-bottom: 2px solid #dcdcdc;
 }
 
-.sheet-table .ui-grid-cell{
-    border-right: 1px solid #dcdcdc !important;
+.sheet-table .ui-grid-cell {
+  border-right: 1px solid #dcdcdc !important;
 }

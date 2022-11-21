@@ -1,5 +1,5 @@
 {
-    "name": "testModule",
-    "description": "This is the testModule module",
-    "skipTest": true
+  "name": "testModule",
+  "description": "This is the testModule module",
+  "skipTest": true
 }

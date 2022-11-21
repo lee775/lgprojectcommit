@@ -1,215 +1,359 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-enter-key.directive",
-        "js/exist-when.directive",
-        "js/aw-textbox.directive",
-        "js/visible-when.directive",
-        "js/aw-command-bar.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-icon-button.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "manualAllSearchedWordList.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "recentAllSearcingBat"
-        }
-    ],
-    "actions": {
-        "recentAllSearcing": {
-            "actionType": "JSFunction",
-            "method": "recentAllSearcing",
-            "inputData": {
-                "eventData": "{{data.eventData}}"
-            },
-            "deps": "js/L2_DesignStandardPopupService"
-        },
-        "loadData": {
-            "actionType": "JSFunction",
-            "method": "loadData",
-            "outputData": {
-                "result": "result",
-                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "pageAllSearchingPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "L2_DesignStandardPageSearchingTable",
-                    "locals": {
-                        "caption": "{{i18n.pageAllSearcing}}",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "height": "450",
-                        "width": "800"
-                    }
-                }
-            },
-            "events": {
-                "success": [
-                    {
-                        "name": "pageAllSearchingPopupSuccess"
-                    }
-                ]
-            },
-            "deps": "js/popupService"
-        },
-        "pageAllSearching": {
-            "actionType": "JSFunction",
-            "method": "pageAllSearching",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "searcNonehData": "searcNonehData"
-            },
-            "deps": "js/L2_DesignStandardPopupService"
-        },
-        "pageAllSearchingPopupBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "pageAllSearching"
-                },
-                {
-                    "condition": "conditions.searcNonehData",
-                    "action": "pageAllSearchingPopup"
-                }
-            ]
-        },
-        "recentAllSearcingBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "recentAllSearcing"
-                },
-                {
-                    "action": "pageAllSearching"
-                },
-                {
-                    "condition": "conditions.searcNonehData",
-                    "action": "pageAllSearchingPopup"
-                }
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-enter-key.directive",
+    "js/exist-when.directive",
+    "js/aw-textbox.directive",
+    "js/visible-when.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-icon-button.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "designStandardTreeTableData.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "treeSelectionChangeEventBat",
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
     },
-    "data": {
-        "bookmark": {
-            "iconName": "EmptyStar",
-            "tooltip": "{{i18n.bookmark}}"
-        },
-        "searchBtn": {
-            "iconName": "Search",
-            "tooltip": "{{i18n.search}}",
-            "action": "pageAllSearchingPopupBat"
-        },
-        "pageSize": 40,
-        "searchingName": {
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "requiredText": "{{i18n.requiredText}}"
-        }
+    {
+      "eventId": "dgnPageAllSearchedWordList.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "recentAllSearcingBat"
     },
-    "dataProviders": {
-        "designStandardTreeTableData": {
-            "action": "loadData",
-            "initializeAction": "loadData",
-            "treeLoadResult": "{{data.treeLoadResult}}",
-            "inputData": {
-                "accessMode": "tree",
-                "topNodeUid": "{{data.top}}"
-            }
-        }
+    {
+      "eventId": "treeExpand",
+      "cacheEventData": true,
+      "action": "treeCLoad"
     },
-    "columnProviders": {
-        "designStandardTreeTableColumn": {
-            "columns": [
-                {
-                    "name": "object_name",
-                    "displayName": "{{i18n.name}}",
-                    "width": 350,
-                    "isTreeNavigation": true
-                },
-                {
-                    "name": "dgnStdStatus",
-                    "displayName": "{{i18n.dgnStdStatus}}",
-                    "width": 100
-                }
-            ],
-            "frozenColumnIndex": -1
-        }
+    {
+      "eventId": "treeShrink",
+      "cacheEventData": true,
+      "action": "treeShrink"
     },
-    "grids": {
-        "designStandardTreeTable": {
-            "dataProvider": "designStandardTreeTableData",
-            "columnProvider": "designStandardTreeTableColumn",
-            "addIconColumn": false,
-            "gridOptions": {
-                "enableGridMenu": false,
-                "enablePinning": false,
-                "enableSorting": false
-            }
-        }
+    {
+      "eventId": "stdBomCopyCmd",
+      "cacheEventData": true,
+      "action": "stdBomCopyMode"
     },
-    "conditions": {
-        "backArrowStatus": {
-            "expression": "data.backArrowStatus == true"
-        },
-        "pageSearchMode": {
-            "expression": "data.pageSearchMode == true"
-        },
-        "searcNonehData": {
-            "expression": "data.searcNonehData != true"
-        }
+    {
+      "eventId": "startTreeEdit",
+      "action": "folderNameEditBat"
     },
-    "i18n": {
-        "add": [
-            "L2_DesignStandardMessages"
-        ],
-        "delete": [
-            "L2_DesignStandardMessages"
-        ],
-        "refresh": [
-            "L2_DesignStandardMessages"
-        ],
-        "search": [
-            "L2_DesignStandardMessages"
-        ],
-        "requiredText": [
-            "L2_DesignStandardMessages"
-        ],
-        "bookmark": [
-            "L2_DesignStandardMessages"
-        ],
-        "pageAllSearcing": [
-            "L2_DesignStandardMessages"
-        ],
-        "dgnStdStatus": ["L2_DesignStandardMessages"],
-        "name": [ "L2_DesignStandardMessages"]
+    {
+      "eventId": "cancelTreeEdit",
+      "action": "cancelEditActionBat"
     },
-    "functions": {
-        "loadEmployeeTreeTableData": {
-            "functionName": "loadEmployeeTreeTableData",
-            "parameters": [
-                "{{data.treeLoadInput.parentNode}}",
-                "{{data.columnProviders.designStandardTreeTableColumn.sortCriteria}}",
-                "{{data.treeLoadInput}}",
-                "{{ctx}}"
-            ]
-        }
+    {
+      "eventId": "saveTreeEdit",
+      "action": "saveEditActionBat"
     }
+  ],
+  "actions": {
+  "folderNameEditCheck": {
+    "actionType": "JSFunction",
+    "method": "folderNameEditCheck",
+    "outputData": {
+      "folderNameEditMode": "folderNameEditMode"
+    },
+    "deps": "js/L2_DesignStandardService"
+  },
+    "folderNameEdit": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_FolderNameEdit",
+          "locals": {
+            "caption": "{{i18n.folderNameEdit}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": "200",
+            "width": "400"
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "folderNameEditSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "folderNameEditBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "folderNameEditCheck"
+        },
+        {
+          "condition": "conditions.folderNameEditMode",
+          "action": "folderNameEdit"
+        }
+      ]
+    },
+    "treeSelectionChangeEventBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "treeSelectionChangeEvent"
+        },
+        {
+          "action": "copyAndPasteBook"
+        }
+      ]
+    },
+    "copyAndPasteBook": {
+      "actionType": "JSFunction",
+      "method": "copyAndPasteBook",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "stdBomCopyMode": {
+      "actionType": "JSFunction",
+      "method": "stdBomCopyMode",
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "treeSelectionChangeEvent": {
+      "actionType": "JSFunction",
+      "method": "treeSelectionChangeEvent",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/L2_DesignCheckListService"
+    },
+    "recentAllSearcing": {
+      "actionType": "JSFunction",
+      "method": "recentAllSearcing",
+      "inputData": {
+        "eventData": "{{data.eventData}}"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "outputData": {
+        "result": "result",
+        "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "treeUp": {
+      "actionType": "JSFunction",
+      "method": "treeUp",
+      "inputData": {
+        "indata": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_DesignCheckListService"
+    },
+    "treeCLoad": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "treeUp"
+        }
+      ]
+    },
+    "treeShrink": {
+      "actionType": "JSFunction",
+      "method": "treeShrink",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_DesignCheckListService"
+    },
+    "reload": {
+      "actionType": "JSFunction",
+      "method": "reload",
+      "deps": "js/L2_DesignCheckListService"
+    },
+    "pageAllSearchingPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_DesignStandardPageSearchingTable",
+          "locals": {
+            "caption": "{{i18n.pageAllSearcing}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": "450",
+            "width": "800"
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "pageAllSearchingPopupSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "pageAllSearching": {
+      "actionType": "JSFunction",
+      "method": "pageAllSearching",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "searcNonehData": "searcNonehData"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "pageAllSearchingPopupBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "pageAllSearching"
+        },
+        {
+          "condition": "conditions.searcNonehData",
+          "action": "pageAllSearchingPopup"
+        }
+      ]
+    },
+    "recentAllSearcingBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "recentAllSearcing"
+        },
+        {
+          "action": "pageAllSearching"
+        },
+        {
+          "condition": "conditions.searcNonehData",
+          "action": "pageAllSearchingPopup"
+        }
+      ]
+    }
+  },
+  "data": {
+    "openOrNot": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": ""
+    },
+    "bookmark": {
+      "iconName": "EmptyStar",
+      "tooltip": "{{i18n.bookmark}}"
+    },
+    "searchBtn": {
+      "iconName": "Search",
+      "tooltip": "{{i18n.search}}",
+      "action": "pageAllSearchingPopupBat"
+    },
+    "pageSize": 40,
+    "searchingName": {
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "requiredText": "{{i18n.requiredText}}"
+    }
+  },
+  "dataProviders": {
+    "designStandardTreeTableData": {
+      "action": "loadData",
+      "initializeAction": "loadData",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "columnProviders": {
+    "designStandardTreeTableColumn": {
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "width": 350,
+          "isTreeNavigation": true
+        },
+        {
+          "name": "dgnStdStatus",
+          "displayName": "{{i18n.dgnStdStatus}}",
+          "width": 105
+        }
+      ],
+      "frozenColumnIndex": -1
+    }
+  },
+  "grids": {
+    "designStandardTreeTable": {
+      "dataProvider": "designStandardTreeTableData",
+      "columnProvider": "designStandardTreeTableColumn",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enableGridMenu": false,
+        "enablePinning": false,
+        "enableSorting": false,
+        "enableExpansionStateCaching": true
+      }
+    }
+  },
+  "conditions": {
+    "backArrowStatus": {
+      "expression": "data.backArrowStatus == true"
+    },
+    "pageSearchMode": {
+      "expression": "data.pageSearchMode == true"
+    },
+    "searcNonehData": {
+      "expression": "data.searcNonehData != true"
+    },
+    "folderNameEditMode": {
+      "expression": "data.folderNameEditMode === true"
+    }
+  },
+  "i18n": {
+    "add": ["L2_DesignStandardMessages"],
+    "delete": ["L2_DesignStandardMessages"],
+    "refresh": ["L2_DesignStandardMessages"],
+    "search": ["L2_DesignStandardMessages"],
+    "requiredText": ["L2_DesignStandardMessages"],
+    "bookmark": ["L2_DesignStandardMessages"],
+    "pageAllSearcing": ["L2_DesignStandardMessages"],
+    "dgnStdStatus": ["L2_DesignStandardMessages"],
+    "name": ["L2_DesignStandardMessages"],
+    "folderNameEdit": ["L2_DesignStandardMessages"]
+  },
+  "functions": {
+    "loadEmployeeTreeTableData": {
+      "functionName": "loadEmployeeTreeTableData",
+      "parameters": [
+        "{{data.treeLoadInput.parentNode}}",
+        "{{data.columnProviders.designStandardTreeTableColumn.sortCriteria}}",
+        "{{data.treeLoadInput}}",
+        "{{ctx}}"
+      ]
+    }
+  }
 }

@@ -1,58 +1,58 @@
 .leftPadding {
-    margin-left: 0px;
+  margin-left: 0px;
 }
 
-.lblLayout {    
-    height: 35px;
-    margin: 0px 15px;
-    min-width: 97.5%;
+.lblLayout {
+  height: 35px;
+  margin: 0px 15px;
+  min-width: 97.5%;
 }
-.faqSummernotePanel{
-    margin-top: -1%;
+.faqSummernotePanel {
+  margin-top: -1%;
 }
-.lblLayout2 {    
-    height: 35px;
-    margin: 0px 15px;
-    min-width: 97.5%;
+.lblLayout2 {
+  height: 35px;
+  margin: 0px 15px;
+  min-width: 97.5%;
 }
 .faqBorder {
-    border: solid 1px lightgray;
+  border: solid 1px lightgray;
 }
 .lblLayout .aw-widgets-propertyContainer {
-    border-bottom: solid 1px lightgray;
+  border-bottom: solid 1px lightgray;
 }
-.h3TopMargin{
-    margin-top: 20px;
+.h3TopMargin {
+  margin-top: 20px;
 }
 .borderShadowFaq {
-    border: solid 1px lightgray;
-    box-shadow: 1px 1px 2px 0px lightgray;
+  border: solid 1px lightgray;
+  box-shadow: 1px 1px 2px 0px lightgray;
 }
 
 .borderShadowFaq2 {
-    border: solid 1px lightgray;
-    box-shadow: 1px 1px 2px 0px lightgray;
-    background-color: rgb(234,234,234);
+  border: solid 1px lightgray;
+  box-shadow: 1px 1px 2px 0px lightgray;
+  background-color: rgb(234, 234, 234);
 }
 
-#commandColorId div aw-command[command-id="2"] button div{
-    color: rgb(215, 28, 59) !important;
-    font-weight: bold !important;
+#commandColorId div aw-command[command-id='2'] button div {
+  color: rgb(215, 28, 59) !important;
+  font-weight: bold !important;
 }
 
-#commandColorId div aw-command[command-id="1"] button div{
-    color: rgb(0, 123, 182) !important;
-    font-weight: bold !important;
+#commandColorId div aw-command[command-id='1'] button div {
+  color: rgb(0, 123, 182) !important;
+  font-weight: bold !important;
 }
 
-#commandColorId div aw-command[command-id="0"] button div{
-    font-weight: bold !important;
+#commandColorId div aw-command[command-id='0'] button div {
+  font-weight: bold !important;
 }
 
-.insideMargin{
-    margin: 16px;
+.insideMargin {
+  margin: 16px;
 }
 
 #chipStyle .aw-widgets-chip .aw-widgets-chipCheckmark {
-    display: none;
+  display: none;
 }

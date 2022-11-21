@@ -1,468 +1,417 @@
 {
-    "commands": {
-        "common": {
-            "iconId": "LNBimodule",
-            "isGroup": true,
-            "title": "{{i18n.commonTitle}}",
-            "description": "{{i18n.commonDescription}}"
-        },
-        "L2_DesignStandardcmd": {
-            "iconId": "cmdShowAllResultsIn3dViewer",
-            "title": "{{i18n.L2_DesignStandardcmdTitle}}",
-            "description": "{{i18n.L2_DesignStandardcmdDescription}}"
-        },
-        "cmdKnowledgeManagement": {
-            "iconId": "cmdReuseDocument",
-            "title": "{{i18n.cmdKnowledgeManagementTitle}}",
-            "description": "{{i18n.cmdKnowledgeManagementDescription}}"
-        },
-        "cmdChecklist": {
-            "iconId": "cmdCheckAlignment",
-            "title": "{{i18n.cmdChecklistTitle}}",
-            "description": "{{i18n.cmdChecklistDescription}}"
-        },
-        "TroubleDB": {
-            "iconId": "cmdSurface",
-            "title": "{{i18n.TroubleDBTitle}}",
-            "description": "{{i18n.TroubleDBDescription}}"
-        },
-        "cmdGlossary": {
-            "iconId": "indicatorReadOnly",
-            "title": "{{i18n.cmdGlossaryTitle}}",
-            "description": "{{i18n.cmdGlossaryDescription}}"
-        },
-        "cmdDesignStandard": {
-            "iconId": "cmdApplyGradeRuleTemplate",
-            "title": "{{i18n.designSequenceCommandTitle}}",
-            "description": "{{i18n.designSequenceCommandDescription}}"
-        },
-        "cmdCategori": {
-            "iconId": "cmdMirrorAsProxy",
-            "title": "{{i18n.cmdCategoriTitle}}",
-            "description": "{{i18n.cmdCategoriDescription}}"
-        },
-        "designSequenceCommand": {
-            "iconId": "cmdShowConnectedPorts",
-            "title": "{{i18n.designSequenceCommandTitle}}",
-            "description": "{{i18n.designSequenceCommandDescription}}"
-        },
-        "cmdDesignGuideSystem": {
-            "iconId": "LNBguide",
-            "isGroup": true,
-            "title": "{{i18n.cmdDesignGuideSystemMessagesTitle}}",
-            "description": "{{i18n.cmdDesignGuideSystemMessagesDescription}}"
-        },
-        "lgepSpecManagement": {
-            "iconId": "cmdSimToolProgressMonitor",
-            "title": "{{i18n.lgepSpecManagementTitle}}",
-            "description": "{{i18n.lgepSpecManagementDescription}}"
-        },
-        "cmdKnowledgeSystem": {
-            "iconId": "cmdViewDeliverables",
-            "title": "{{i18n.knowledgeSearchLocationHeaderTitle}}",
-            "description": "{{i18n.knowledgeSearchLocationDescription}}"
-        },
-        "classificationCriteria": {
-            "iconId": "cmdDashboardSummary",
-            "isGroup": true,
-            "title": "{{i18n.classificationCriteriaTitle}}",
-            "description": "{{i18n.classificationCriteriaDescription}}"
-        },
-        "cmdNoticeBoard": {
-            "iconId": "cmdShowPanelRight",
-            "title": "헬프데스크",
-            "description": ""
-        },
-        "cmdXcelerator":{
-            "iconId": "cmdHelp",
-            "title":"Xcelerator",
-            "description":""
-        },
-        "cmdDesignStandards": {
-            "iconId": "cmdApplyGradeRuleTemplate",
-            "title": "{{i18n.L2_DesignStandardLocationHeaderTitle}}",
-            "description": "{{i18n.designSequenceCommandDescription}}"
-        },
-        "cmdSearchIcon": {
-            "iconId": "cmdSearch",
-            "title": "{{i18n.search}}"
-        }
+  "commands": {
+    "common": {
+      "iconId": "LNBimodule",
+      "isGroup": true,
+      "title": "{{i18n.commonTitle}}",
+      "description": "{{i18n.commonDescription}}"
     },
-    "commandHandlers": {
-        "cmdSearchIconHandler": {
-            "id": "cmdSearchIcon",
-            "action": "cmdSearchIconAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "L2_DesignStandardcmdHandler": {
-            "id": "L2_DesignStandardcmd",
-            "action": "activateL2_DesignStandardcmd",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdDefectmgmtHandler": {
-            "id": "cmdDefectmgmt",
-            "action": "activatecmdDefectmgmt",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdPartmgmtHandler": {
-            "id": "cmdPartmgmt",
-            "action": "activatecmdPartmgmt",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdModelmgmtHandler": {
-            "id": "cmdModelmgmt",
-            "action": "activatecmdModelmgmt",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "hiddenHandler": {
-            "id": "Awp0GoBack",
-            "activeWhen": true,
-            "visibleWhen": false
-        },
-        "commonHandler": {
-            "id": "common",
-            "action": "activatecommon",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdKnowledgeManagementHandler": {
-            "id": "cmdKnowledgeManagement",
-            "action": "cmdKnowledgeManagementAction",
-            "activeWhen": true,
-            "visibleWhen": true,
-            "enableWhen": true
-        },
-        "cmdChecklistHandler": {
-            "id": "cmdChecklist",
-            "action": "activatecmdChecklist",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "TroubleDBHandler": {
-            "id": "TroubleDB",
-            "action": "activatecmdTroubleDB",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdGlossaryHandler": {
-            "id": "cmdGlossary",
-            "action": "activatecmdGlossary",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdDesignStandardHandler": {
-            "id": "cmdDesignStandard",
-            "action": "activatecmdDesignStandard",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdCategoriHandler": {
-            "id": "cmdCategori",
-            "action": "activatecmdCategori",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "designSequenceCommandHandler": {
-            "id": "designSequenceCommand",
-            "action": "activatedesignSequenceCommand",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdDesignGuideSystemHandler": {
-            "id": "cmdDesignGuideSystem",
-            "action": "activatecmdDesignGuideSystem",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "lgepSpecManagementHandler": {
-            "id": "lgepSpecManagement",
-            "action": "activatelgepSpecManagement",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdKnowledgeSystemHandler": {
-            "id": "cmdKnowledgeSystem",
-            "action": "cmdKnowledgeSystemAction",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "classificationCriteriaHandler": {
-            "id": "classificationCriteria",
-            "action": "activateclassificationCriteria",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.onlyDBA"
-            }
-        },
-        "cmdDesignStandardsHandler": {
-            "id": "cmdDesignStandards",
-            "action": "activatecmdDesignStandards",
-            "activeWhen": true,
-            "visibleWhen": {
-                "condition": "conditions.tcWorkspace"
-            }
-        },
-        "cmdNoticeBoardHandler":{
-            "id":"cmdNoticeBoard",
-            "action": "cmdNoticeBoardHandlerAction",
-            "activeWhen": true,
-            "visibleWhen": true,
-            "enableWhen": true
-        },
-        "cmdXceleratorHandler":{
-            "id":"cmdXcelerator",
-            "action": "cmdXceleratorHandlerAction",
-            "activeWhen": true,
-            "visibleWhen": true,
-            "enableWhen": true
-        }
+    "L2_DesignStandardcmd": {
+      "iconId": "cmdShowAllResultsIn3dViewer",
+      "title": "{{i18n.L2_DesignStandardcmdTitle}}",
+      "description": "{{i18n.L2_DesignStandardcmdDescription}}"
     },
-    "commandPlacements": {
-        "cmdSearchIconPlacement": {
-            "id": "cmdSearchIcon",
-            "uiAnchor": "cmdSearchIcon",
-            "priority": 100
-        },
-        "L2_DesignStandardcmdaw_globalNavigationbar": {
-            "id": "L2_DesignStandardcmd",
-            "parentGroupId": "cmdDesignGuideSystem",
-            "priority": 1
-        },
-        "cmdDefectmgmtaw_globalNavigationbar": {
-            "id": "cmdDefectmgmt",
-            "parentGroupId": "classificationCriteria",
-            "priority": 110
-        },
-        "cmdPartmgmtaw_globalNavigationbar": {
-            "id": "cmdPartmgmt",
-            "parentGroupId": "classificationCriteria",
-            "priority": 100
-        },
-        "cmdModelmgmtaw_globalNavigationbar": {
-            "id": "cmdModelmgmt",
-            "parentGroupId": "classificationCriteria",
-            "priority": 90
-        },
-        "cmdUserManagementaw_globalNavigationbar": {
-            "id": "cmdUserManagement",
-            "parentGroupId": "classificationCriteria",
-            "priority": 80
-        },
-        "commonaw_globalNavigationbar": {
-            "id": "common",
-            "uiAnchor": "aw_globalNavigationbar",
-            "priority": 50
-        },
-        "cmdDesignGuideSystemaw_globalNavigationbar": {
-            "id": "cmdDesignGuideSystem",
-            "uiAnchor": "aw_globalNavigationbar",
-            "priority": 40
-        },
-        "cmdKnowledgeSystemaw_globalNavigationbar": {
-            "id": "cmdKnowledgeSystem",
-            "uiAnchor": "aw_globalNavigationbar",
-            "priority": 30
-        },
-        "cmdDesignStandardsaw_globalNavigationbar": {
-            "id": "cmdDesignStandards",
-            "parentGroupId": "cmdDesignGuideSystem",
-            "priority": 100
-        },
-        "cmdKnowledgeManagementCommandPlace": {
-            "id": "cmdKnowledgeManagement",
-            "parentGroupId": "common",
-            "priority": 170
-        },
-        "classificationCriteriaaw_globalNavigationbar": {
-            "id": "classificationCriteria",
-            "uiAnchor": "aw_globalNavigationbar",
-            "priority": 2
-        },
-        "cmdNoticeBoardPlace":{
-            "id":"cmdNoticeBoard",
-            "uiAnchor": "aw_userSessionbar",
-            "parentGroupId": "Awp0HelpGroup",
-            "priority": 30
-        },
-        "cmdXceleratorPlace":{
-            "id":"cmdXcelerator",
-            "uiAnchor": "aw_userSessionbar",
-            "parentGroupId": "Awp0HelpGroup",
-            "priority": 100
-        }
+    "cmdKnowledgeManagement": {
+      "iconId": "cmdReuseDocument",
+      "title": "{{i18n.cmdKnowledgeManagementTitle}}",
+      "description": "{{i18n.cmdKnowledgeManagementDescription}}"
     },
-    "actions": {
-        "cmdSearchIconAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "cmdSearchIconEvent"
-                    }
-                ]
-            }
-        },
-        "activatecommon": {
-            "actionType": "JSFunction",
-            "method": "alert",
-            "deps": "js/commonService",
-            "inputData": {
-                "text": "Hello cmdDesignGuideSystem!"
-            }
-        },
-        "activateclassificationCriteria": {
-            "actionType": "JSFunction",
-            "method": "alert",
-            "deps": "js/classificationCriteriaService",
-            "inputData": {
-                "text": "Hello classificationCriteria!"
-            }
-        },
-        "activateL2_DesignStandardcmd": {
-            "actionType": "Navigate",
-            "navigateTo": "L2_DesignStandard",
-            "navigationParams": {}
-        },
-        "activatecmdDesignStandards": {
-            "actionType": "Navigate",
-            "navigateTo": "#/lgepDesignStandards",
-            "navigationParams": {}
-        },
-        "cmdNoticeBoardHandlerAction":{
-            "actionType": "Navigate",
-            "navigateTo": "lgepNoticeBoardHelpDesk",
-            "navigationParams": {}
-        },
-        "cmdXceleratorHandlerAction":{
-            "actionType": "Navigate",
-            "navigateIn": "newTab",
-            "navigateTo": "https://siemens.highspot.com/",
-            "navigationParams": {}
-        }
+    "cmdChecklist": {
+      "iconId": "cmdCheckAlignment",
+      "title": "{{i18n.cmdChecklistTitle}}",
+      "description": "{{i18n.cmdChecklistDescription}}"
     },
-    "conditions": {
-        "objectIsSelected": {
-            "expression": "ctx.selected"
-        },
-        "tcWorkspace": {
-            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
-        },
-        "onlyDBA": {
-            "expression": "ctx.userSession.props.role.uiValue == 'DBA'"
-        }
+    "TroubleDB": {
+      "iconId": "cmdSurface",
+      "title": "{{i18n.TroubleDBTitle}}",
+      "description": "{{i18n.TroubleDBDescription}}"
     },
-    "i18n": {
-        "commonTitle": [
-            "lgepCommonMessages"
-        ],
-        "commonDescription": [
-            "lgepCommonMessages"
-        ],
-        "cmdKnowledgeManagementTitle": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "cmdKnowledgeManagementDescription": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "cmdChecklistTitle": [
-            "lgepChecklistMessages"
-        ],
-        "cmdChecklistDescription": [
-            "lgepChecklistMessages"
-        ],
-        "TroubleDBTitle": [
-            "lgepKnowHowMessages"
-        ],
-        "TroubleDBDescription": [
-            "lgepKnowHowMessages"
-        ],
-        "cmdGlossaryTitle": [
-            "lgepGlossaryMessages"
-        ],
-        "cmdGlossaryDescription": [
-            "lgepGlossaryMessages"
-        ],
-        "L2_DesignStandardLocationHeaderTitle": [
-            "L2_DesignStandardMessages"
-        ],
-        "cmdCategoriTitle": [
-            "lgepDesignCategoriMessages"
-        ],
-        "cmdCategoriDescription": [
-            "lgepDesignCategoriMessages"
-        ],
-        "designSequenceCommandTitle": [
-            "lgepDesignSequenceMessages"
-        ],
-        "designSequenceCommandDescription": [
-            "lgepDesignSequenceMessages"
-        ],
-        "cmdDesignGuideSystemMessagesTitle": [
-            "cmdDesignGuideSystemMessages"
-        ],
-        "cmdDesignGuideSystemMessagesDescription": [
-            "cmdDesignGuideSystemMessages"
-        ],
-        "lgepSpecManagementTitle": [
-            "lgepSpecManagementMessages"
-        ],
-        "lgepSpecManagementDescription": [
-            "lgepSpecManagementMessages"
-        ],
-        "knowledgeSearchLocationHeaderTitle": [
-            "knowledgeSearchMessages"
-        ],
-        "knowledgeSearchLocationDescription": [
-            "knowledgeSearchMessages"
-        ],
-        "classificationCriteriaTitle": [
-            "lgepCommonMessages"
-        ],
-        "classificationCriteriaDescription": [
-            "lgepCommonMessages"
-        ],
-        "L2_DesignStandardcmdTitle": [
-            "L2_DesignStandardMessages"
-        ],
-        "L2_DesignStandardcmdDescription": [
-            "L2_DesignStandardMessages"
-        ],
-        "search":[
-            "lgepNoticeBoardManualMessages"
-        ]
+    "cmdGlossary": {
+      "iconId": "indicatorReadOnly",
+      "title": "{{i18n.cmdGlossaryTitle}}",
+      "description": "{{i18n.cmdGlossaryDescription}}"
+    },
+    "cmdDesignStandard": {
+      "iconId": "cmdApplyGradeRuleTemplate",
+      "title": "{{i18n.designSequenceCommandTitle}}",
+      "description": "{{i18n.designSequenceCommandDescription}}"
+    },
+    "cmdCategori": {
+      "iconId": "cmdMirrorAsProxy",
+      "title": "{{i18n.cmdCategoriTitle}}",
+      "description": "{{i18n.cmdCategoriDescription}}"
+    },
+    "designSequenceCommand": {
+      "iconId": "cmdShowConnectedPorts",
+      "title": "{{i18n.designSequenceCommandTitle}}",
+      "description": "{{i18n.designSequenceCommandDescription}}"
+    },
+    "cmdDesignGuideSystem": {
+      "iconId": "LNBguide",
+      "isGroup": true,
+      "title": "{{i18n.cmdDesignGuideSystemMessagesTitle}}",
+      "description": "{{i18n.cmdDesignGuideSystemMessagesDescription}}"
+    },
+    "lgepSpecManagement": {
+      "iconId": "cmdSimToolProgressMonitor",
+      "title": "{{i18n.lgepSpecManagementTitle}}",
+      "description": "{{i18n.lgepSpecManagementDescription}}"
+    },
+    "cmdKnowledgeSystem": {
+      "iconId": "cmdViewDeliverables",
+      "title": "{{i18n.knowledgeSearchLocationHeaderTitle}}",
+      "description": "{{i18n.knowledgeSearchLocationDescription}}"
+    },
+    "classificationCriteria": {
+      "iconId": "cmdDashboardSummary",
+      "isGroup": true,
+      "title": "{{i18n.classificationCriteriaTitle}}",
+      "description": "{{i18n.classificationCriteriaDescription}}"
+    },
+    "cmdNoticeBoard": {
+      "iconId": "cmdShowPanelRight",
+      "title": "{{i18n.lgepNoticeBoardLocationHeaderTitle}}",
+      "description": "{{i18n.lgepNoticeBoardLocationHeaderTitle}}"
+    },
+    "cmdXcelerator": {
+      "iconId": "cmdHelp",
+      "title": "Xcelerator",
+      "description": ""
+    },
+    "cmdDesignStandards": {
+      "iconId": "cmdApplyGradeRuleTemplate",
+      "title": "{{i18n.L2_DesignStandardLocationHeaderTitle}}",
+      "description": "{{i18n.designSequenceCommandDescription}}"
+    },
+    "cmdSearchIcon": {
+      "iconId": "cmdSearch",
+      "title": "{{i18n.search}}"
     }
+  },
+  "commandHandlers": {
+    "cmdSearchIconHandler": {
+      "id": "cmdSearchIcon",
+      "action": "cmdSearchIconAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "L2_DesignStandardcmdHandler": {
+      "id": "L2_DesignStandardcmd",
+      "action": "activateL2_DesignStandardcmd",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdDefectmgmtHandler": {
+      "id": "cmdDefectmgmt",
+      "action": "activatecmdDefectmgmt",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdPartmgmtHandler": {
+      "id": "cmdPartmgmt",
+      "action": "activatecmdPartmgmt",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdModelmgmtHandler": {
+      "id": "cmdModelmgmt",
+      "action": "activatecmdModelmgmt",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "hiddenHandler": {
+      "id": "Awp0GoBack",
+      "activeWhen": true,
+      "visibleWhen": false
+    },
+    "commonHandler": {
+      "id": "common",
+      "action": "activatecommon",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdKnowledgeManagementHandler": {
+      "id": "cmdKnowledgeManagement",
+      "action": "cmdKnowledgeManagementAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "cmdChecklistHandler": {
+      "id": "cmdChecklist",
+      "action": "activatecmdChecklist",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "TroubleDBHandler": {
+      "id": "TroubleDB",
+      "action": "activatecmdTroubleDB",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdGlossaryHandler": {
+      "id": "cmdGlossary",
+      "action": "activatecmdGlossary",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdDesignStandardHandler": {
+      "id": "cmdDesignStandard",
+      "action": "activatecmdDesignStandard",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdCategoriHandler": {
+      "id": "cmdCategori",
+      "action": "activatecmdCategori",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "designSequenceCommandHandler": {
+      "id": "designSequenceCommand",
+      "action": "activatedesignSequenceCommand",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdDesignGuideSystemHandler": {
+      "id": "cmdDesignGuideSystem",
+      "action": "activatecmdDesignGuideSystem",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "lgepSpecManagementHandler": {
+      "id": "lgepSpecManagement",
+      "action": "activatelgepSpecManagement",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdKnowledgeSystemHandler": {
+      "id": "cmdKnowledgeSystem",
+      "action": "cmdKnowledgeSystemAction",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "classificationCriteriaHandler": {
+      "id": "classificationCriteria",
+      "action": "activateclassificationCriteria",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.onlyDBA"
+      }
+    },
+    "cmdDesignStandardsHandler": {
+      "id": "cmdDesignStandards",
+      "action": "activatecmdDesignStandards",
+      "activeWhen": true,
+      "visibleWhen": {
+        "condition": "conditions.tcWorkspace"
+      }
+    },
+    "cmdNoticeBoardHandler": {
+      "id": "cmdNoticeBoard",
+      "action": "cmdNoticeBoardHandlerAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "cmdXceleratorHandler": {
+      "id": "cmdXcelerator",
+      "action": "cmdXceleratorHandlerAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    }
+  },
+  "commandPlacements": {
+    "cmdSearchIconPlacement": {
+      "id": "cmdSearchIcon",
+      "uiAnchor": "cmdSearchIcon",
+      "priority": 100
+    },
+    "L2_DesignStandardcmdaw_globalNavigationbar": {
+      "id": "L2_DesignStandardcmd",
+      "parentGroupId": "cmdDesignGuideSystem",
+      "priority": 1
+    },
+    "cmdDefectmgmtaw_globalNavigationbar": {
+      "id": "cmdDefectmgmt",
+      "parentGroupId": "classificationCriteria",
+      "priority": 110
+    },
+    "cmdPartmgmtaw_globalNavigationbar": {
+      "id": "cmdPartmgmt",
+      "parentGroupId": "classificationCriteria",
+      "priority": 100
+    },
+    "cmdModelmgmtaw_globalNavigationbar": {
+      "id": "cmdModelmgmt",
+      "parentGroupId": "classificationCriteria",
+      "priority": 90
+    },
+    "cmdUserManagementaw_globalNavigationbar": {
+      "id": "cmdUserManagement",
+      "parentGroupId": "classificationCriteria",
+      "priority": 80
+    },
+    "commonaw_globalNavigationbar": {
+      "id": "common",
+      "uiAnchor": "aw_globalNavigationbar",
+      "priority": 50
+    },
+    "cmdDesignGuideSystemaw_globalNavigationbar": {
+      "id": "cmdDesignGuideSystem",
+      "uiAnchor": "aw_globalNavigationbar",
+      "priority": 40
+    },
+    "cmdKnowledgeSystemaw_globalNavigationbar": {
+      "id": "cmdKnowledgeSystem",
+      "uiAnchor": "aw_globalNavigationbar",
+      "priority": 30
+    },
+    "cmdDesignStandardsaw_globalNavigationbar": {
+      "id": "cmdDesignStandards",
+      "parentGroupId": "cmdDesignGuideSystem",
+      "priority": 100
+    },
+    "cmdKnowledgeManagementCommandPlace": {
+      "id": "cmdKnowledgeManagement",
+      "parentGroupId": "common",
+      "priority": 170
+    },
+    "classificationCriteriaaw_globalNavigationbar": {
+      "id": "classificationCriteria",
+      "uiAnchor": "aw_globalNavigationbar",
+      "priority": 2
+    },
+    "cmdNoticeBoardPlace": {
+      "id": "cmdNoticeBoard",
+      "uiAnchor": "aw_userSessionbar",
+      "parentGroupId": "Awp0HelpGroup",
+      "priority": 30
+    },
+    "cmdXceleratorPlace": {
+      "id": "cmdXcelerator",
+      "uiAnchor": "aw_userSessionbar",
+      "parentGroupId": "Awp0HelpGroup",
+      "priority": 100
+    }
+  },
+  "actions": {
+    "cmdSearchIconAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "cmdSearchIconEvent"
+          }
+        ]
+      }
+    },
+    "activatecommon": {
+      "actionType": "JSFunction",
+      "method": "alert",
+      "deps": "js/commonService",
+      "inputData": {
+        "text": "Hello cmdDesignGuideSystem!"
+      }
+    },
+    "activateclassificationCriteria": {
+      "actionType": "JSFunction",
+      "method": "alert",
+      "deps": "js/classificationCriteriaService",
+      "inputData": {
+        "text": "Hello classificationCriteria!"
+      }
+    },
+    "activateL2_DesignStandardcmd": {
+      "actionType": "Navigate",
+      "navigateTo": "L2_DesignStandard",
+      "navigationParams": {}
+    },
+    "activatecmdDesignStandards": {
+      "actionType": "Navigate",
+      "navigateTo": "#/L2_DesignStandard",
+      "navigationParams": {}
+    },
+    "cmdNoticeBoardHandlerAction": {
+      "actionType": "Navigate",
+      "navigateTo": "lgepNoticeBoardHelpDesk",
+      "navigationParams": {}
+    },
+    "cmdXceleratorHandlerAction": {
+      "actionType": "Navigate",
+      "navigateIn": "newTab",
+      "navigateTo": "https://siemens.highspot.com/",
+      "navigationParams": {}
+    }
+  },
+  "conditions": {
+    "objectIsSelected": {
+      "expression": "ctx.selected"
+    },
+    "tcWorkspace": {
+      "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+    },
+    "onlyDBA": {
+      "expression": "ctx.userSession.props.role.uiValue == 'DBA'"
+    }
+  },
+  "i18n": {
+    "commonTitle": ["lgepCommonMessages"],
+    "commonDescription": ["lgepCommonMessages"],
+    "cmdKnowledgeManagementTitle": ["lgepKnowldegeManageMessages"],
+    "cmdKnowledgeManagementDescription": ["lgepKnowldegeManageMessages"],
+    "cmdChecklistTitle": ["lgepChecklistMessages"],
+    "cmdChecklistDescription": ["lgepChecklistMessages"],
+    "TroubleDBTitle": ["lgepKnowHowMessages"],
+    "TroubleDBDescription": ["lgepKnowHowMessages"],
+    "cmdGlossaryTitle": ["lgepGlossaryMessages"],
+    "cmdGlossaryDescription": ["lgepGlossaryMessages"],
+    "L2_DesignStandardLocationHeaderTitle": ["L2_DesignStandardMessages"],
+    "cmdCategoriTitle": ["lgepDesignCategoriMessages"],
+    "cmdCategoriDescription": ["lgepDesignCategoriMessages"],
+    "designSequenceCommandTitle": ["lgepDesignSequenceMessages"],
+    "designSequenceCommandDescription": ["lgepDesignSequenceMessages"],
+    "cmdDesignGuideSystemMessagesTitle": ["cmdDesignGuideSystemMessages"],
+    "cmdDesignGuideSystemMessagesDescription": ["cmdDesignGuideSystemMessages"],
+    "lgepSpecManagementTitle": ["lgepSpecManagementMessages"],
+    "lgepSpecManagementDescription": ["lgepSpecManagementMessages"],
+    "knowledgeSearchLocationHeaderTitle": ["knowledgeSearchMessages"],
+    "knowledgeSearchLocationDescription": ["knowledgeSearchMessages"],
+    "classificationCriteriaTitle": ["lgepCommonMessages"],
+    "classificationCriteriaDescription": ["lgepCommonMessages"],
+    "L2_DesignStandardcmdTitle": ["L2_DesignStandardMessages"],
+    "L2_DesignStandardcmdDescription": ["L2_DesignStandardMessages"],
+    "lgepNoticeBoardLocationHeaderTitle": ["lgepNoticeBoardMessages"],
+    "search": ["lgepNoticeBoardManualMessages"]
+  }
 }

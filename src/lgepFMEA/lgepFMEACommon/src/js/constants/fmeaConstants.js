@@ -112,271 +112,109 @@ export const CHANGE_EDIT_ROWS = 'edit_rows'; // 편집된 로우
 export const UID = 'uid'; // key
 export const VALUE = 'value'; // key
 
-export const CLASS_LIST = [
-  'Parent Assembly',
-  'Sub Assembly',
-  'Single Assembly',
-]; // TODO :: 구분 LOV List
+export const CLASS_LIST = ['Parent Assembly', 'Sub Assembly', 'Single Assembly']; // TODO :: 구분 LOV List
 
 /** Editors */
 export const CREATE_SUFFIX = '_create'; // 생성창 editor id 접미사
 
 /** TABLE */
-export const COL_STRUTURE_NAME_LANG = [
-  prop.OBJECT_NAME,
-  '구조명',
-  'Structure Name',
-];
-export const COL_PRODUCT_OBJECT_NAME_LANG = [
-  prop.PRODUCT_CATEGORY,
-  '제품',
-  'Product',
-];
+export const COL_STRUTURE_NAME_LANG = [prop.OBJECT_NAME, '구조명', 'Structure Name'];
+export const COL_PRODUCT_OBJECT_NAME_LANG = [prop.PRODUCT_CATEGORY, '제품', 'Product'];
 export const COL_CATEGORY_LANG = [prop.CLASS, '분류', 'Category'];
 export const COL_OWNING_USER_LANG = [prop.OWNING_USER, '등록자', 'Registrant'];
-export const COL_CREATION_DATE_LANG = [
-  prop.CREATION_DATE,
-  '등록일',
-  'Registration date',
-];
+export const COL_CREATION_DATE_LANG = [prop.CREATION_DATE, '등록일', 'Registration date'];
 export const COL_FUNCTION_LANG = [prop.FUNCTION_SHORT, '기능', 'Fcuntion'];
-export const COL_FAILURE_LANG = [
-  prop.POTENTIAL_FAILURE_MODE,
-  '고장 모드',
-  'Potential Failure Mode',
-];
+export const COL_FAILURE_LANG = [prop.POTENTIAL_FAILURE_MODE, '고장 모드', 'Potential Failure Mode'];
 
-export const COL_FAILURE_EFFECT_LANG = [
-  prop.FAILURE_EFFECT,
-  '고장의 영향',
-  'Failure Effect',
-];
-export const COL_CAUSE_OF_FAILURE_LANG = [
-  prop.CAUSE_OF_FAILURE,
-  '고장 매커니즘',
-  'Cause of Failure',
-];
+export const COL_FAILURE_EFFECT_LANG = [prop.FAILURE_EFFECT, '고장의 영향', 'Failure Effect'];
+export const COL_CAUSE_OF_FAILURE_LANG = [prop.CAUSE_OF_FAILURE, '고장 매커니즘', 'Cause of Failure'];
 export const COL_REVISION_ID = [prop.REVISION_ID, 'Revision ID', 'Revision ID'];
 export const COL_OBJECT_NAME_LANG = [prop.OBJECT_STRING, '이름', 'Name'];
-export const COL_PRECATUIONS_ACTION_LANG = [
-  prop.PRECATUIONS_ACTION,
-  '예방',
-  'Precautions Action',
-];
-export const COL_PRECATUIONS_ACTION_SHORT_LANG = [
-  prop.PRECATUIONS_ACTION_SHORT,
-  '예방',
-  'Precautions Action',
-];
-export const COL_DETECTION_ACTION_LANG_SHORT_LANG = [
-  prop.DETECTION_ACTION_SHORT,
-  '검출',
-  'Detection Action',
-];
-export const COL_DETECTION_ACTION_LANG = [
-  prop.DETECTION_ACTION,
-  '검출',
-  'Detection Action',
-];
+export const COL_PRECATUIONS_ACTION_LANG = [prop.PRECATUIONS_ACTION, '예방', 'Precautions Action'];
+export const COL_PRECATUIONS_ACTION_SHORT_LANG = [prop.PRECATUIONS_ACTION_SHORT, '예방', 'Precautions Action'];
+export const COL_DETECTION_ACTION_LANG_SHORT_LANG = [prop.DETECTION_ACTION_SHORT, '검출', 'Detection Action'];
+export const COL_DETECTION_ACTION_LANG = [prop.DETECTION_ACTION, '검출', 'Detection Action'];
 export const COL_FAILURE_FUNCTION_LANG = [prop.FUNCTION, '기능', ' Function'];
-export const COL_FAILURE_REQUIREMENT_LANG = [
-  prop.REQUIREMENT,
-  '요구사항',
-  'Requirements',
-];
-export const COL_AP_LANG = [
-  prop.BOMLINE_ACTION_PRIORITY,
-  '조치우선순위',
-  'Action Priority',
-];
-export const COL_CLASSIFICATION_LANG = [
-  prop.CLASSFICATION,
-  'Classification',
-  'Classification',
-];
+export const COL_FAILURE_REQUIREMENT_LANG = [prop.REQUIREMENT, '요구사항', 'Requirements'];
+export const COL_AP_LANG = [prop.BOMLINE_ACTION_PRIORITY, '조치우선순위', 'Action Priority'];
+export const COL_CLASSIFICATION_LANG = [prop.CLASSFICATION, 'Classification', 'Classification'];
 export const COL_SEVERITY_LANG = [prop.BOMLINE_SEVERITY, '심각도', 'Severity'];
-export const COL_OCCURENCE_LANG = [
-  prop.BOMLINE_OCCURENCE,
-  '발생도',
-  'Occurence',
-];
-export const COL_DETECTION_LANG = [
-  prop.BOMLINE_DETECTION,
-  '검출도',
-  'Detection',
-];
+export const COL_OCCURENCE_LANG = [prop.BOMLINE_OCCURENCE, '발생도', 'Occurence'];
+export const COL_DETECTION_LANG = [prop.BOMLINE_DETECTION, '검출도', 'Detection'];
 
-export const COL_INSPECTION_RESULTS_LANG = [
-  prop.BOMLINE_INSPECTION_RESULTS,
-  '점검결과',
-  'InspectionResults',
-];
+export const COL_INSPECTION_RESULTS_LANG = [prop.BOMLINE_INSPECTION_RESULTS, '점검결과', 'InspectionResults'];
 
-export const COL_PARENT_ASSY_LANG = [
-  prop.PARENT_ASSY,
-  '상위 Assembly',
-  'Parent Assembly',
-];
-export const COL_SUB_ASSY_LANG = [
-  prop.SUB_ASSY,
-  '하위 Assembly',
-  'Sub Assembly',
-];
+export const COL_PARENT_ASSY_LANG = [prop.PARENT_ASSY, '상위 Assembly', 'Parent Assembly'];
+export const COL_SUB_ASSY_LANG = [prop.SUB_ASSY, '하위 Assembly', 'Sub Assembly'];
 export const SINGLE_ITEM = 'l2_single_item';
 export const COL_SINGLE_ITEM_LANG = [SINGLE_ITEM, '단품', 'Single Assembly'];
-export const COL_RECOMMENDED_ACTION_LANG = [
-  prop.BOMLINE_PRECAUTIONS,
-  '권고조치사항',
-  'Precautions',
-];
-export const COL_RESPONSIBLE_LANG = [
-  prop.BOMLINE_RESPONSIBILITY,
-  '책임자',
-  'Responsibility',
-];
-export const COL_TARGET_DATE_LANG = [
-  prop.BOMLINE_TARGET_DATE,
-  '목표일자',
-  'Target Date',
-];
-export const COL_RECOMMENDED_ACTION_RESULT_LANG = [
-  prop.BOMLINE_ETC_NOTE,
-  '권고조치결과',
-  'Result',
-];
-export const COL_RELATED_SOURCES_LANG = [
-  prop.RELATED_SOURCES,
-  '관련자료',
-  'Related Sources',
-];
-export const COL_RESULT_SEVERITY_LANG = [
-  prop.BOMLINE_RESULT_SEVERITY,
-  'New SEV',
-  'New Severity',
-];
-export const COL_RESULT_OCCURENCE_LANG = [
-  prop.BOMLINE_RESULT_OCCURENCE,
-  'New OCC',
-  'New Occurence',
-];
-export const COL_RESULT_DETECTION_LANG = [
-  prop.BOMLINE_RESULT_DETECTION,
-  'New DET',
-  'New Detection',
-];
-export const COL_RESULT_AP_LANG = [
-  prop.BOMLINE_RESULT_ACTION_PRIORITY,
-  'New AP',
-  'New Action Priority',
-];
+export const COL_RECOMMENDED_ACTION_LANG = [prop.BOMLINE_PRECAUTIONS, '권고조치사항', 'Precautions'];
+export const COL_RESPONSIBLE_LANG = [prop.BOMLINE_RESPONSIBILITY, '책임자', 'Responsibility'];
+export const COL_TARGET_DATE_LANG = [prop.BOMLINE_TARGET_DATE, '목표일자', 'Target Date'];
+export const COL_RECOMMENDED_ACTION_RESULT_LANG = [prop.BOMLINE_ETC_NOTE, '권고조치결과', 'Result'];
+export const COL_RELATED_SOURCES_LANG = [prop.RELATED_SOURCES, '관련자료', 'Related Sources'];
+export const COL_RESULT_SEVERITY_LANG = [prop.BOMLINE_RESULT_SEVERITY, 'New SEV', 'New Severity'];
+export const COL_RESULT_OCCURENCE_LANG = [prop.BOMLINE_RESULT_OCCURENCE, 'New OCC', 'New Occurence'];
+export const COL_RESULT_DETECTION_LANG = [prop.BOMLINE_RESULT_DETECTION, 'New DET', 'New Detection'];
+export const COL_RESULT_AP_LANG = [prop.BOMLINE_RESULT_ACTION_PRIORITY, 'New AP', 'New Action Priority'];
 export const COL_NAME = [prop.OBJECT_NAME, 'SOD 기준 명', 'Name'];
 export const COL_TYPE = [prop.PRODUCT, '제품', 'Product'];
 
 export const COL_GRADE = [prop.SOD_GRADE, '등급', 'Grade'];
-export const COL_CAUSE_EFFECT = [
-  prop.SOD_CAUSE_EFFECT,
-  '영향 원인',
-  'Cause Effect',
-];
+export const COL_CAUSE_EFFECT = [prop.SOD_CAUSE_EFFECT, '영향 원인', 'Cause Effect'];
 export const COL_EFFECT = [prop.SOD_EFFECT, '영향', 'Effect'];
-export const COL_EVALUATION_STANDARD = [
-  prop.SOD_EVALUATION_STANDARD,
-  '평가 기준',
-  'Evauluation Standard',
-];
+export const COL_EVALUATION_STANDARD = [prop.SOD_EVALUATION_STANDARD, '평가 기준', 'Evauluation Standard'];
 
-export const COL_NUMBER_OF_OCCURRENCES = [
-  prop.SOD_NUMBER_OF_OCCURRENCES,
-  '제품당 발생횟수',
-  'Number of occurrences per product',
-]
-export const COL_POSSIBILITY_OF_FAILURE = [
-  prop.SOD_POSSIBILITY_OF_FAILURE,
-  '고장 가능성',
-  'Possibility Of Failure',
-];
+export const COL_NUMBER_OF_OCCURRENCES = [prop.SOD_NUMBER_OF_OCCURRENCES, '제품당 발생횟수', 'Number of occurrences per product'];
+export const COL_POSSIBILITY_OF_FAILURE = [prop.SOD_POSSIBILITY_OF_FAILURE, '고장 가능성', 'Possibility Of Failure'];
 
-export const COL_DETECTION_RANGE = [
-  prop.SOD_DETECTION_RANGE,
-  '검출 방법에 대한 제안된 범위',
-  'Detection Range',
-];
-export const COL_DETECTION_OPPORTUNITY = [
-  prop.SOD_DETECTION_OPPORTUNITY,
-  '검출 기회',
-  'Detection Opportunity',
-];
-export const COL_DETECTABILITY = [
-  prop.SOD_DETECTABILITY,
-  '검출 가능성',
-  'Detectability',
-];
-export const COL_DESIGN_LIFE_RELIABILITY = [
-  prop.SOD_DESIGN_LIFE_RELIABILITY,
-  '부품/제품의 설계수명/신뢰성',
-  'Design Life Reliablity',
-];
+export const COL_DETECTION_RANGE = [prop.SOD_DETECTION_RANGE, '검출 방법에 대한 제안된 범위', 'Detection Range'];
+export const COL_DETECTION_OPPORTUNITY = [prop.SOD_DETECTION_OPPORTUNITY, '검출 기회', 'Detection Opportunity'];
+export const COL_DETECTABILITY = [prop.SOD_DETECTABILITY, '검출 가능성', 'Detectability'];
+export const COL_DESIGN_LIFE_RELIABILITY = [prop.SOD_DESIGN_LIFE_RELIABILITY, '부품/제품의 설계수명/신뢰성', 'Design Life Reliablity'];
 
-export const COL_SHORT_FUNCTION_LANG = [
-  prop.FUNCTION_SHORT,
-  '기능',
-  ' Function',
-];
-export const COL_REQUIREMENT_SHORT_LANG = [
-  prop.REQUIREMENT_SHORT,
-  '요구사항',
-  'Requirements',
-];
+export const COL_SHORT_FUNCTION_LANG = [prop.FUNCTION_SHORT, '기능', ' Function'];
+export const COL_REQUIREMENT_SHORT_LANG = [prop.REQUIREMENT_SHORT, '요구사항', 'Requirements'];
 
-export const COL_REQUIREMENT_LANG = [
-  prop.REQUIREMENT,
-  '요구사항',
-  'Requirements',
-];
-export const COL_FAILURE_SHORT_LANG = [
-  prop.POTENTIAL_FAILURE_MODE_SHORT,
-  '고장 모드',
-  'Potential Failure Mode',
-];
-export const COL_FAILURE_EFFECT_SHORT_LANG = [
-  prop.FAILURE_EFFECT_SHORT,
-  '고장의 영향',
-  'Failure Effect',
-];
-export const COL_FAILURE_EFFECT_SHORT = [
-  prop.FAILURE_EFFECT,
-  '고장의 영향',
-  'Failure Effect',
-];
-export const COL_CAUSE_OF_FAILURE_SHORT_LANG = [
-  prop.CAUSE_OF_FAILURE_SHORT,
-  '고장 매커니즘',
-  'Cause of Failure',
-];
+export const COL_REQUIREMENT_LANG = [prop.REQUIREMENT, '요구사항', 'Requirements'];
+export const COL_FAILURE_SHORT_LANG = [prop.POTENTIAL_FAILURE_MODE_SHORT, '고장 모드', 'Potential Failure Mode'];
+export const COL_FAILURE_EFFECT_SHORT_LANG = [prop.FAILURE_EFFECT_SHORT, '고장의 영향', 'Failure Effect'];
+export const COL_FAILURE_EFFECT_SHORT = [prop.FAILURE_EFFECT, '고장의 영향', 'Failure Effect'];
+export const COL_CAUSE_OF_FAILURE_SHORT_LANG = [prop.CAUSE_OF_FAILURE_SHORT, '고장 매커니즘', 'Cause of Failure'];
 
 export const PART_NAME = 'part_name';
 export const COL_PART = [PART_NAME, '파트', 'Part'];
 export const COL_EFFECT_TYPE = [prop.INNTERACTION_TYPE, '영향', 'Effect Type'];
 
-export const COL_AP = [prop.SOD_AP, '조치 우선순위(AP)', 'AP'];
-export const COL_DETECTION_CAPABILITY = [prop.SOD_DETECTION_CAPABILITY, '검출 능력', 'Detection capability'];
-export const COL_DETECTION_E = [prop.SOD_DETECTION_E, '검출도(Detection) 상한', 'Detection End'];
-export const COL_DETECTION_S = [prop.SOD_DETECTION_S, '검출도(Detection) 하한', 'Detection Start'];
-export const COL_EFFECTIVITY = [prop.SOD_EFFECTIVITY, '영향', 'Effectivity'];
-export const COL_INDEX = [prop.SOD_INDEX, '순서', 'Index'];
-export const COL_OCCURENCE_E = [prop.SOD_OCCURENCE_E, '발생도(Occurrence) 상한', 'Occurrence End'];
-export const COL_OCCURENCE_S = [prop.SOD_OCCURENCE_S, '발생도(Occurrence) 하한', 'Occurrence Start'];
-export const COL_SEVERITY_E = [prop.SOD_SEVERITY_E, '심각도(Serveruty) 상한', 'Serverity End'];
-export const COL_SEVERITY_S = [prop.SOD_SEVERITY_S, '심각도(Serveruty) 하한', 'Serverity Start'];
-export const COL_POTENTIAL_FAILURE_CAUSE = [prop.SOD_POTENTIAL_FAILURE_CAUSE, '발생한 잠재적 고장 원인 예측', 'Potential Failure Cause'];
-export const COL_OPINION = [prop.SOD_OPINION, '의견', 'Opinion'];
+// export const COL_AP = [prop.SOD_AP, '조치 우선순위(AP)', 'AP'];
+// export const COL_DETECTION_CAPABILITY = [prop.SOD_DETECTION_CAPABILITY, '검출 능력', 'Detection capability'];
+// export const COL_DETECTION_E = [prop.SOD_DETECTION_E, '검출도(Detection) 상한', 'Detection End'];
+// export const COL_DETECTION_S = [prop.SOD_DETECTION_S, '검출도(Detection) 하한', 'Detection Start'];
+// export const COL_EFFECTIVITY = [prop.SOD_EFFECTIVITY, '영향', 'Effectivity'];
+// export const COL_INDEX = [prop.SOD_INDEX, '순서', 'Index'];
+// export const COL_OCCURENCE_E = [prop.SOD_OCCURENCE_E, '발생도(Occurrence) 상한', 'Occurrence End'];
+// export const COL_OCCURENCE_S = [prop.SOD_OCCURENCE_S, '발생도(Occurrence) 하한', 'Occurrence Start'];
+// export const COL_SEVERITY_E = [prop.SOD_SEVERITY_E, '심각도(Serveruty) 상한', 'Serverity End'];
+// export const COL_SEVERITY_S = [prop.SOD_SEVERITY_S, '심각도(Serveruty) 하한', 'Serverity Start'];
+// export const COL_POTENTIAL_FAILURE_CAUSE = [prop.SOD_POTENTIAL_FAILURE_CAUSE, '발생한 잠재적 고장 원인 예측', 'Potential Failure Cause'];
+// export const COL_OPINION = [prop.SOD_OPINION, '의견', 'Opinion'];
 
-export const SEVERITY = 'severity';
-export const COL_SEVERITY = [SEVERITY, 'S', 'S'];
-export const OCCURRENCE = 'occurence';
-export const COL_OCCURRENCE = [OCCURRENCE, 'O', 'O'];
-export const DETECTION = 'detection';
-export const COL_DETECTION = [DETECTION, 'D', 'D'];
+// export const SEVERITY = 'severity';
+// export const COL_SEVERITY = [SEVERITY, 'S', 'S'];
+// export const OCCURRENCE = 'occurence';
+// export const COL_OCCURRENCE = [OCCURRENCE, 'O', 'O'];
+// export const DETECTION = 'detection';
+// export const COL_DETECTION = [DETECTION, 'D', 'D'];
+
+export const COL_EFFECTIVITY = [prop.SOD_EFFECTIVITY, '영향', 'Effectivity'];
+export const COL_SEVERITY = [prop.SOD_SEVERITY, 'S', 'Serverity Start'];
+export const COL_POTENTIAL_FAILURE_CAUSE = [prop.SOD_POTENTIAL_FAILURE_CAUSE, '발생한 잠재적 고장 원인 예측', 'Potential Failure Cause'];
+export const COL_OCCURRENCE = [prop.SOD_OCCURRENCE, 'O', 'Occurrence Start'];
+export const COL_DETECTION_CAPABILITY = [prop.SOD_DETECTION_CAPABILITY, '검출 능력', 'Detection capability'];
+export const COL_DETECTION = [prop.SOD_DETECTION, 'D', 'Detection Start'];
+export const COL_AP = [prop.SOD_AP, '조치 우선순위(AP)', 'AP'];
+export const COL_OPINION = [prop.SOD_OPINION, '의견', 'Opinion'];
+export const COL_VERSION = [prop.SOD_VERSION, '버전 정보', 'Version'];
 
 export const NOTETYPE_PROPS = [
   prop.BOMLINE_REQUIREMENT,
@@ -425,11 +263,7 @@ export const EDITOR_NOTETYPES_COLS = [
   COL_RECOMMENDED_ACTION_RESULT_LANG,
 ];
 
-export const EDITOR_NOTETYPES_PROPS = [
-  prop.BOMLINE_INSPECTION_RESULTS,
-  prop.BOMLINE_PRECAUTIONS,
-  prop.BOMLINE_ETC_NOTE,
-];
+export const EDITOR_NOTETYPES_PROPS = [prop.BOMLINE_INSPECTION_RESULTS, prop.BOMLINE_PRECAUTIONS, prop.BOMLINE_ETC_NOTE];
 
 export const INTERACTION_TYPES = [
   {
@@ -469,12 +303,7 @@ export const INTERACTION_TYPES = [
 export const INTERACTION_INIT_SELECT_CLASSNAME = 'interaction-init-select'; // Interaction 기능 실행 시 css 위한 ClassName
 export const INTERACTION_INIT_SAME_SELECT = 'interaction-same';
 
-export const GROUP_PRODUCT = [
-  { DVZ: '청소기' },
-  { CNZ: '냉장고' },
-  { DGZ: '에어컨' },
-  { DFZ: '세탁기' },
-];
+export const GROUP_PRODUCT = [{ DVZ: '청소기' }, { CNZ: '냉장고' }, { DGZ: '에어컨' }, { DFZ: '세탁기' }];
 
 // -RAC(DGZ) : 에어컨
 // -SAC(DMZ) : 에어컨
@@ -497,12 +326,7 @@ export const SOD_VACUUM_TABLE_INFO = {
     cols: [COL_GRADE, COL_EVALUATION_STANDARD, COL_NUMBER_OF_OCCURRENCES],
   },
   [prop.SOD_DETECTION_TABLE]: {
-    cols: [
-      COL_GRADE,
-      COL_DETECTION_OPPORTUNITY,
-      COL_DETECTION_RANGE,
-      COL_DETECTABILITY,
-    ],
+    cols: [COL_GRADE, COL_DETECTION_OPPORTUNITY, COL_DETECTION_RANGE, COL_DETECTABILITY],
   },
   [prop.SOD_AP_TABLE]: {
     cols: [
@@ -514,6 +338,7 @@ export const SOD_VACUUM_TABLE_INFO = {
       COL_DETECTION,
       COL_AP,
       COL_OPINION,
+      COL_VERSION,
     ],
   },
 };
@@ -526,12 +351,7 @@ export const SOD_REFRIGERATOR_TABLE_INFO = {
     cols: [COL_GRADE, COL_POSSIBILITY_OF_FAILURE, COL_DESIGN_LIFE_RELIABILITY],
   },
   [prop.SOD_DETECTION_TABLE]: {
-    cols: [
-      COL_GRADE,
-      COL_DETECTION_OPPORTUNITY,
-      COL_DETECTION_RANGE,
-      COL_DETECTABILITY,
-    ],
+    cols: [COL_GRADE, COL_DETECTION_OPPORTUNITY, COL_DETECTION_RANGE, COL_DETECTABILITY],
   },
   [prop.SOD_AP_TABLE]: {
     cols: [
@@ -543,6 +363,7 @@ export const SOD_REFRIGERATOR_TABLE_INFO = {
       COL_DETECTION,
       COL_AP,
       COL_OPINION,
+      COL_VERSION,
     ],
   },
 };

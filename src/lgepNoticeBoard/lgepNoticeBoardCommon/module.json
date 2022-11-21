@@ -1,5 +1,5 @@
 {
-    "name": "lgepNoticeBoardCommon",
-    "description": "This is the lgepNoticeBoardCommon module",
-    "skipTest": true
+  "name": "lgepNoticeBoardCommon",
+  "description": "This is the lgepNoticeBoardCommon module",
+  "skipTest": true
 }

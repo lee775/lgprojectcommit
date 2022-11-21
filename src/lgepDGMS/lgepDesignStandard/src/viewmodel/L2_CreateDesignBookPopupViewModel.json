@@ -1,88 +1,83 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-button.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-popup2.directive",
-        "js/aw-textbox.directive"
-    ],
-    "actions": {
-        "createDgnBook": {
-            "actionType": "JSFunction",
-            "method": "createDgnBook",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "state": "state"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "createDgnBookBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "createDgnBook"
-                },
-                {
-                    "condition": "conditions.state",
-                    "action": "closePopupWindow"
-                }
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-button.directive", "js/aw-panel-body.directive", "js/aw-panel-footer.directive", "js/aw-popup2.directive", "js/aw-textbox.directive"],
+  "actions": {
+    "createDgnBook": {
+      "actionType": "JSFunction",
+      "method": "createDgnBook",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "state": "state"
+      },
+      "deps": "js/L2_DesignStandardService"
     },
-    "data": {
-        "containerName": {
-            "type": "STRING",
-            "uiValue": ""
-        },
-        "objName": {
-            "displayName": "{{i18n.name}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "objType": {
-            "displayName": "{{i18n.objType}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "objDetailType": {
-            "displayName": "{{i18n.objDetailType}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        }
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
     },
-    "conditions": {
-        "state": {
-            "expression": "data.state=='1'"
+    "createDgnBookBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "createDgnBook"
         },
-        "popup": {
-            "expression": "data.popupState===true"
+        {
+          "condition": "conditions.state",
+          "action": "closePopupWindow"
         }
-    },
-    "i18n": {
-        "ok": ["lgepDesignSequenceMessages"],
-        "close": ["lgepDesignSequenceMessages"],
-        "name": ["L2_DesignStandardMessages"],
-        "objType": ["L2_DesignStandardMessages"],
-        "objDetailType": ["L2_DesignStandardMessages"]
+      ]
     }
+  },
+  "data": {
+    "containerName": {
+      "type": "STRING",
+      "uiValue": ""
+    },
+    "objName": {
+      "displayName": "{{i18n.name}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "objType": {
+      "displayName": "{{i18n.objType}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "objDetailType": {
+      "displayName": "{{i18n.objDetailType}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "conditions": {
+    "state": {
+      "expression": "data.state=='1'"
+    },
+    "popup": {
+      "expression": "data.popupState===true"
+    }
+  },
+  "i18n": {
+    "ok": ["lgepDesignSequenceMessages"],
+    "close": ["lgepDesignSequenceMessages"],
+    "name": ["L2_DesignStandardMessages"],
+    "objType": ["L2_DesignStandardMessages"],
+    "objDetailType": ["L2_DesignStandardMessages"]
+  }
 }

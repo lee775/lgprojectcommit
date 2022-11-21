@@ -2,20 +2,20 @@
  * FMEA MessageUtil Util
  * @module js/fmeaMessageUtils
  */
-import lgepMessagingUtils from "js/utils/lgepMessagingUtils";
-import lgepLocalizationUtils from "js/utils/lgepLocalizationUtils";
+import lgepMessagingUtils from 'js/utils/lgepMessagingUtils';
+import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
 
-const FMEA_MESSAGE = "lgepDFMEAMessages";
-const FMEA_MASTER_MESSAGE = "lgepMasterMessages";
-const FMEA_VIEW_MESSAGE = "lgepDFMEAViewMessages";
+const FMEA_MESSAGE = 'lgepDFMEAMessages';
+const FMEA_MASTER_MESSAGE = 'lgepMasterMessages';
+const FMEA_VIEW_MESSAGE = 'lgepDFMEAViewMessages';
 
-export const TYPE_INFO = "INFO";
-const TYPE_WARNING = "WARNING";
-const TYPE_ERROR = "ERROR";
+export const TYPE_INFO = 'INFO';
+const TYPE_WARNING = 'WARNING';
+const TYPE_ERROR = 'ERROR';
 
-const SUCCESS_SAVE = "successSave";
-const SUCCESS_SAVE_EDIT = "successEditSave";
-const MSG_ERROR_EMPTY = "errorEmptyCheck";
+const SUCCESS_SAVE = 'successSave';
+const SUCCESS_SAVE_EDIT = 'successEditSave';
+const MSG_ERROR_EMPTY = 'errorEmptyCheck';
 
 /**
  * 에러 메시지 호출
@@ -31,8 +31,8 @@ export const showErrorMessageByText = (msg) => {
  * @param {Error} e
  */
 export const showErrorMessage = (e) => {
-  console.log(e);
-  const message = getLocalizedMessageByMaster("errorExcute");
+  //console.log(e);
+  const message = getLocalizedMessageByMaster('errorExcute');
   lgepMessagingUtils.show(TYPE_ERROR, message);
 };
 
@@ -68,11 +68,7 @@ export const getLocalizedMessageByMasterView = (text, ...args) => {
  * @returns
  */
 export const getLocalizedText = (fileName, text, ...args) => {
-  const message = lgepLocalizationUtils.getLocalizedText(
-    fileName,
-    text,
-    ...args
-  );
+  const message = lgepLocalizationUtils.getLocalizedText(fileName, text, ...args);
   return message;
 };
 

@@ -1,28 +1,26 @@
 <aw-popup2>
-    <aw-panel id="manualRecentData">
-        <aw-panel-body>
-            <aw-flex-row id="searchPopup">
-                <aw-flex-column>
-                    {{i18n.recentSearches}}
-                </aw-flex-column>
-                <aw-flex-column align-content="end">
-                    <aw-link prop="data.delBox" action="delLinkBat"></aw-link>
-                </aw-flex-column>
-            </aw-flex-row>
-        </aw-panel-body>
+  <aw-panel id="manualRecentData">
+    <aw-panel-body>
+      <aw-flex-row id="searchPopup">
+        <aw-flex-column> {{i18n.recentSearches}} </aw-flex-column>
+        <aw-flex-column align-content="end">
+          <aw-link prop="data.delBox" action="delLinkBat"></aw-link>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-flex-row visible-when="conditions.allSearchMode">
+    <aw-panel>
+      <aw-list dataprovider="data.dataProviders.manualAllSearchedWordList">
+        <aw-link prop="item"></aw-link>
+      </aw-list>
     </aw-panel>
-    <aw-flex-row visible-when="conditions.allSearchMode">
-        <aw-panel>
-            <aw-list dataprovider="data.dataProviders.manualAllSearchedWordList">
-                <aw-link prop="item"></aw-link>
-            </aw-list>
-        </aw-panel>
-    </aw-flex-row>
-    <aw-flex-row visible-when="conditions.pageSearchMode">
-        <aw-panel>
-            <aw-list dataprovider="data.dataProviders.manualPageSearchedWordList">
-                <aw-link prop="item"></aw-link>
-            </aw-list>
-        </aw-panel>
-    </aw-flex-row>
+  </aw-flex-row>
+  <aw-flex-row visible-when="conditions.pageSearchMode">
+    <aw-panel>
+      <aw-list dataprovider="data.dataProviders.manualPageSearchedWordList">
+        <aw-link prop="item"></aw-link>
+      </aw-list>
+    </aw-panel>
+  </aw-flex-row>
 </aw-popup2>

@@ -1,53 +1,50 @@
 <aw-popup2>
-    <aw-panel-body id="addPop">
-        <aw-sidenav id="relationSideNavRight" config="data.sideNavRightData"></aw-sidenav>
-        <aw-flex-row visible-when="conditions.showCategory">
-            <aw-flex-column>
-                <aw-listbox prop="data.listPart" action="changeIssue" list="data.listPartValues.dbValue"></aw-listbox>
-            </aw-flex-column>
-            <aw-flex-column>
-                <aw-listbox prop="data.listIssue" list="data.listIssueValues.dbValue" class="issue" id="issueDisalbe">
-                </aw-listbox>
-            </aw-flex-column>
-            <aw-flex-column width="5f" align-content="center">
-                <aw-checkbox prop="data.checkExpertQ" action="checkExpert"></aw-checkbox>
-            </aw-flex-column>
-            <aw-flex-column>
-                <aw-listbox prop="data.listExpert" list="data.listExpertValues.dbValue" class="expert" id="issueDisalbe">
-                </aw-listbox>
-            </aw-flex-column>
+  <aw-panel-body id="addPop">
+    <aw-sidenav id="relationSideNavRight" config="data.sideNavRightData"></aw-sidenav>
+    <aw-flex-row visible-when="conditions.showCategory">
+      <aw-flex-column>
+        <aw-listbox prop="data.listPart" action="changeIssue" list="data.listPartValues.dbValue"></aw-listbox>
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-listbox prop="data.listIssue" list="data.listIssueValues.dbValue" class="issue" id="issueDisalbe"> </aw-listbox>
+      </aw-flex-column>
+      <aw-flex-column width="5f" align-content="center">
+        <aw-checkbox prop="data.checkExpertQ" action="checkExpert"></aw-checkbox>
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-listbox prop="data.listExpert" list="data.listExpertValues.dbValue" class="expert" id="issueDisalbe"> </aw-listbox>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-panel-body id="questionData">
+      <aw-widget prop="data.questionTitle" hint="textarea" aria-label="{{i18n.questionTitle}}" id="addPopupData" class="textareaSize"></aw-widget>
+      <!-- <aw-textbox prop="data.questionTitle" id="addPopupData"></aw-textbox> -->
+      <aw-break></aw-break>
+      <aw-label prop="data.questionContent" class="contentPadding"></aw-label>
+      <aw-panel-body>
+        <body>
+          <textarea id="qaAddPopSummernote" class="summerNote"></textarea>
+        </body>
+      </aw-panel-body>
+      <aw-flex-column>
+        <aw-label prop="data.relationItem" class="noMaxWidthPopup testMarginTop"> </aw-label>
+        <aw-flex-row class="marginTop fitContent testMarginTop">
+          <aw-flex-column aw-repeat="result : data.linkRepeat.dbValue" width="auto">
+            <aw-flex-row>
+              <aw-link prop="result" action="relationLinkAction" exist-when="data.linkRepeat.dbValue.length > 0" width="auto"></aw-link>
+              <p exist-when="result.displayName != data.linkRepeat.dbValue[data.linkRepeat.dbValue.length - 1].displayName">&nbsp;/&nbsp;</p>
+            </aw-flex-row>
+          </aw-flex-column>
         </aw-flex-row>
-        <aw-panel-body id="questionData">
-            <aw-widget  prop="data.questionTitle" hint="textarea" aria-label='{{i18n.questionTitle}}' id="addPopupData" class="textareaSize"></aw-widget>
-            <!-- <aw-textbox prop="data.questionTitle" id="addPopupData"></aw-textbox> -->
-            <aw-break></aw-break>
-            <aw-label prop="data.questionContent" class="contentPadding"></aw-label>
-            <aw-panel-body>
-                <body>
-                    <textarea id="qaAddPopSummernote" class="summerNote"></textarea>
-                </body>
-            </aw-panel-body>
-            <aw-flex-column>
-                <aw-label prop="data.relationItem" class="noMaxWidthPopup testMarginTop">
-                </aw-label>
-                <aw-flex-row class="marginTop fitContent testMarginTop">
-                    <aw-flex-column aw-repeat="result : data.linkRepeat.dbValue" width="auto">
-                        <aw-flex-row>
-                            <aw-link prop="result" action="relationLinkAction" exist-when="data.linkRepeat.dbValue.length > 0" width="auto"></aw-link>
-                            <p exist-when="result.displayName != data.linkRepeat.dbValue[data.linkRepeat.dbValue.length - 1].displayName">&nbsp;/&nbsp;</p>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                </aw-flex-row>
-                <aw-flex-column width="1" class="marginTop testMarginTop">
-                    <aw-button action="relationSideNavRight" button-type="base" size="auto">{{i18n.find}}</aw-button>
-                </aw-flex-column>
-            </aw-flex-column>
-            <aw-textbox prop="data.questionPoint" class="pointPadding"></aw-textbox>
-        </aw-panel-body>
-        <aw-panel-footer>
-            <aw-button button-type="base" action="closePopup" size="auto">{{i18n.close}}</aw-button>
-            <aw-button action="createQnaQuestionBat" size="auto" exist-when="data.window == 'qna'" id="addQuestion">{{i18n.ok}}</aw-button>
-            <aw-button action="createAskExpertBat" size="auto" exist-when="data.window == 'askExpert'" id="addQuestion">{{i18n.ok}}</aw-button>
-        </aw-panel-footer>
+        <aw-flex-column width="1" class="marginTop testMarginTop">
+          <aw-button action="relationSideNavRight" button-type="base" size="auto">{{i18n.find}}</aw-button>
+        </aw-flex-column>
+      </aw-flex-column>
+      <aw-textbox prop="data.questionPoint" class="pointPadding"></aw-textbox>
     </aw-panel-body>
+    <aw-panel-footer>
+      <aw-button button-type="base" action="closePopup" size="auto">{{i18n.close}}</aw-button>
+      <aw-button action="createQnaQuestionBat" size="auto" exist-when="data.window == 'qna'" id="addQuestion">{{i18n.ok}}</aw-button>
+      <aw-button action="createAskExpertBat" size="auto" exist-when="data.window == 'askExpert'" id="addQuestion">{{i18n.ok}}</aw-button>
+    </aw-panel-footer>
+  </aw-panel-body>
 </aw-popup2>

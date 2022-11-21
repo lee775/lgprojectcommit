@@ -1,5 +1,5 @@
 {
-    "name": "lgepChkSOD",
-    "description": "This is the lgepChkSOD module",
-    "skipTest": true
+  "name": "lgepChkSOD",
+  "description": "This is the lgepChkSOD module",
+  "skipTest": true
 }

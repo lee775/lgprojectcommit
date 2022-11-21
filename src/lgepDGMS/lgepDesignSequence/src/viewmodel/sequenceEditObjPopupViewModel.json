@@ -1,117 +1,117 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-button.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-popup2.directive",
-        "js/aw-label.directive",
-        "js/aw-textbox.directive"
-    ],
-    "onEvent": [],
-    "actions": {
-        "editTreeObject": {
-            "actionType": "JSFunction",
-            "method": "editTreeObject",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/sequencePopupService"
-        },
-        "initialize": {
-            "actionType": "JSFunction",
-            "method": "editInitialize",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/sequencePopupService"
-        },
-        "treeManagement": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "treeManagementPopup",
-                    "locals": {
-                        "caption": "공통 트리관리"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "width": 550,
-                        "height": 700
-                    }
-                }
-            },
-            "deps": "js/popupService"
-        },
-        "createObject": {
-            "actionType": "JSFunction",
-            "method": "createObject",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "state": "state"
-            },
-            "deps": "js/sequenceService"
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "editActionBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "editTreeObject"
-                },
-                {
-                    "condition": "conditions.cond1",
-                    "action": "treeManagement"
-                }
-            ]
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-label.directive",
+    "js/aw-textbox.directive"
+  ],
+  "onEvent": [],
+  "actions": {
+    "editTreeObject": {
+      "actionType": "JSFunction",
+      "method": "editTreeObject",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/sequencePopupService"
+    },
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "editInitialize",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/sequencePopupService"
+    },
+    "treeManagement": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "treeManagementPopup",
+          "locals": {
+            "caption": "공통 트리관리"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "width": 550,
+            "height": 700
+          }
         }
+      },
+      "deps": "js/popupService"
     },
-    "data": {
-        "containerName": {
-            "type": "STRING",
-            "uiValue": ""
+    "createObject": {
+      "actionType": "JSFunction",
+      "method": "createObject",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "state": "state"
+      },
+      "deps": "js/sequenceService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "editActionBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "editTreeObject"
         },
-        "objName": {
-            "displayName": "이름",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "objDesc": {
-            "displayName": "설명",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
+        {
+          "condition": "conditions.cond1",
+          "action": "treeManagement"
         }
-    },
-    "conditions": {
-        "cond1": {
-            "expression": "data.folderNotName !== true"
-        }
-    },
-    "i18n": {
-        "edit": ["lgepDesignSequenceMessages"],
-        "close": ["lgepDesignSequenceMessages"]
-    },
-    "lifecycleHooks": {
-        "onInit": "initialize"
+      ]
     }
+  },
+  "data": {
+    "containerName": {
+      "type": "STRING",
+      "uiValue": ""
+    },
+    "objName": {
+      "displayName": "이름",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "objDesc": {
+      "displayName": "설명",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "conditions": {
+    "cond1": {
+      "expression": "data.folderNotName !== true"
+    }
+  },
+  "i18n": {
+    "edit": ["lgepDesignSequenceMessages"],
+    "close": ["lgepDesignSequenceMessages"]
+  },
+  "lifecycleHooks": {
+    "onInit": "initialize"
+  }
 }

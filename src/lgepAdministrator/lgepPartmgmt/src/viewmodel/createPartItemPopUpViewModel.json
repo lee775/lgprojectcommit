@@ -1,49 +1,43 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-panel-body.directive",
-        "js/aw-popup2.directive",
-        "js/aw-textbox.directive",
-        "js/aw-button.directive"
-    ],
-    "actions": {
-        "addPartItemData": {
-            "actionType": "JSFunction",
-            "method": "addPartItemData",
-            "deps": "js/createPartItemService",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            }
-        },
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-panel-body.directive", "js/aw-popup2.directive", "js/aw-textbox.directive", "js/aw-button.directive"],
+  "actions": {
+    "addPartItemData": {
+      "actionType": "JSFunction",
+      "method": "addPartItemData",
+      "deps": "js/createPartItemService",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      }
     },
-    "data": {
-        "addPartItemTitle": {
-            "displayName": "title",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true"
-        },
-        "addPartItemDesc": {
-            "displayName": "Desc",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true"
-        }
-       
-},
-"onEvent": [
-    {
-        "eventId": "cdm.updated",
-        "action": "closePopupWindow"
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
     }
-]
+  },
+  "data": {
+    "addPartItemTitle": {
+      "displayName": "title",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "addPartItemDesc": {
+      "displayName": "Desc",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "cdm.updated",
+      "action": "closePopupWindow"
+    }
+  ]
 }

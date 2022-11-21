@@ -91,10 +91,7 @@ const _checkExistRow = (baseChangeRows, changeRow) => {
   }
 };
 
-export const setChangeEditRows = (
-  resultChangeRows,
-  changeInfo = appCtxService.ctx[constants.CHANGE_INFO]
-) => {
+export const setChangeEditRows = (resultChangeRows, changeInfo = appCtxService.ctx[constants.CHANGE_INFO]) => {
   const resultInfo = {
     ...changeInfo,
     [constants.CHANGE_EDIT_ROWS]: resultChangeRows,

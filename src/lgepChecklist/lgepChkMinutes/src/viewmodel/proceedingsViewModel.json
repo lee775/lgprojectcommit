@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel-section.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-icon-button.directive",
+    "js/aw-label.directive",
+    "js/aw-link.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-separator.directive",
+    "js/aw-textarea.directive",
+    "js/visible-when.directive",
+    "css/proceedingsCss.css"
+  ],
+  "actions": {
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "initialize",
+      "deps": "js/proceedingService"
+    },
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "goUserDetail": {
+      "actionType": "JSFunction",
+      "method": "goUserDetail",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "popupProceed": {
+      "actionType": "JSFunction",
+      "method": "popupProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "deleteProceed": {
+      "actionType": "JSFunction",
+      "method": "deleteProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "editProceed": {
+      "actionType": "JSFunction",
+      "method": "editProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "saveProceed": {
+      "actionType": "JSFunction",
+      "method": "saveProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "cancelProceed": {
+      "actionType": "JSFunction",
+      "method": "cancelProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    },
+    "exportProceed": {
+      "actionType": "JSFunction",
+      "method": "exportProceed",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/proceedingService"
+    }
+  },
+  "data": {
+    "titleTxt": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "placeTxt": {
+      "displayName": "{{i18n.place}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "participantsTxt": {
+      "displayName": "{{i18n.participants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "subjectTxt": {
+      "displayName": "{{i18n.meetingAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "scheduleTxt": {
+      "displayName": "{{i18n.relatedSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "exportproceed": {
+      "action": "exportProceed",
+      "iconName": "cmdDownload"
+    },
+    "deleteproceed": {
+      "action": "deleteProceed",
+      "iconName": "cmdDelete"
+    },
+    "editProceed": {
+      "action": "editProceed",
+      "iconName": "cmdEditSearch"
+    },
+    "saveProceed": {
+      "action": "saveProceed",
+      "iconName": "cmdSave"
+    },
+    "cancelProceed": {
+      "action": "cancelProceed",
+      "iconName": "cmdCancelEdit"
+    },
+    "proceedTitle": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedDate": {
+      "displayName": "{{i18n.date}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedPlace": {
+      "displayName": "{{i18n.place}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriter": {
+      "displayName": "{{i18n.writer}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriterLink": {
+      "displayName": "",
+      "type": "STRING",
+      "isEditable": "false"
+    },
+    "proceedParticipants": {
+      "displayName": "{{i18n.participants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedSubject": {
+      "displayName": "{{i18n.meetingAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedDetails": {
+      "displayName": "{{i18n.meetingDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedSchedule": {
+      "displayName": "{{i18n.relatedSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "proceedings.contentLoaded",
+      "action": "loadData"
+    },
+    {
+      "eventId": "proceedings.initialize",
+      "action": "initialize"
+    }
+  ],
+  "conditions": {
+    "editMode": {
+      "expression": "data.editMode === true"
+    }
+  },
+  "i18n": {
+    "minutesTitle": ["lgepChkMinutesMessages"],
+    "date": ["lgepChkMinutesMessages"],
+    "place": ["lgepChkMinutesMessages"],
+    "participants": ["lgepChkMinutesMessages"],
+    "meetingDetails": ["lgepChkMinutesMessages"],
+    "meetingAgenda": ["lgepChkMinutesMessages"],
+    "relatedSchedule": ["lgepChkMinutesMessages"],
+    "writer": ["lgepChkMinutesMessages"],
+    "detail": ["lgepChkMinutesMessages"],
+    "minutesList": ["lgepChkMinutesMessages"],
+    "minutes": ["lgepChkMinutesMessages"]
+  }
+}

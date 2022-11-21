@@ -20,16 +20,14 @@ export const initMasterDatas = async (productValue) => {
   const functionValues = _getFunctionValues(productValue);
   const failureValues = _getFailureValues(productValue);
 
-  Promise.allSettled([structureValues, functionValues, failureValues]).then(
-    (results) => {
-      const result = {
-        [constants.MASTER_DATA_KEY_STRUCTURE]: results[0].value,
-        [constants.MASTER_DATA_KEY_FUNCTION]: results[1].value,
-        [constants.MASTER_DATA_KEY_FAILURE]: results[2].value,
-      };
-      appCtxService.registerCtx(constants.DFMEA_ALL_MASTER_DATA, result);
-    }
-  );
+  Promise.allSettled([structureValues, functionValues, failureValues]).then((results) => {
+    const result = {
+      [constants.MASTER_DATA_KEY_STRUCTURE]: results[0].value,
+      [constants.MASTER_DATA_KEY_FUNCTION]: results[1].value,
+      [constants.MASTER_DATA_KEY_FAILURE]: results[2].value,
+    };
+    appCtxService.registerCtx(constants.DFMEA_ALL_MASTER_DATA, result);
+  });
 };
 
 // export const initMasterDatas = async (ctx) => {
@@ -55,23 +53,17 @@ const _getStructureValues = async (productValue) => {
   const revList = await queryUtil.executeSavedQuery(
     prop.QUERY_FMEA_STRUCTURE,
     [prop.QUERY_DFMEA_MASTER_PRODUCT, prop.QUERY_ENTRY_ISMASTER],
-    [productValue, 'true']
+    [productValue, 'true'],
   );
 
   // 분류
-  const parentAssyValues = revList.filter(
-    (rev) => constants.CLASS_LIST[0] === rev.props[prop.CALSS].dbValues[0]
-  );
+  const parentAssyValues = revList.filter((rev) => constants.CLASS_LIST[0] === rev.props[prop.CALSS].dbValues[0]);
   const parentAssyList = _makeListValues(parentAssyValues, prop.OBJECT_NAME);
 
-  const subAssyValues = revList.filter(
-    (rev) => constants.CLASS_LIST[1] === rev.props[prop.CALSS].dbValues[0]
-  );
+  const subAssyValues = revList.filter((rev) => constants.CLASS_LIST[1] === rev.props[prop.CALSS].dbValues[0]);
   const subAssyList = _makeListValues(subAssyValues, prop.OBJECT_NAME);
 
-  const singleAssyValues = revList.filter(
-    (rev) => constants.CLASS_LIST[2] === rev.props[prop.CALSS].dbValues[0]
-  );
+  const singleAssyValues = revList.filter((rev) => constants.CLASS_LIST[2] === rev.props[prop.CALSS].dbValues[0]);
   const singleAssyList = _makeListValues(singleAssyValues, prop.OBJECT_NAME);
 
   const structureValues = {
@@ -105,13 +97,11 @@ const _getFailureValues = async (productValue) => {
   const revList = await queryUtil.executeSavedQuery(
     prop.QUERY_FMEA_FAILURE,
     [prop.QUERY_DFMEA_MASTER_PRODUCT, prop.QUERY_ENTRY_ISMASTER],
-    [productValue, 'true']
+    [productValue, 'true'],
   );
   const _getFailureValues = revList.map((failureRev) => {
-    const functionValue =
-      failureRev.props[prop.POTENTIAL_FAILURE_MODE].dbValues[0];
-    const displayValue =
-      failureRev.props[prop.POTENTIAL_FAILURE_MODE_SHORT].dbValues[0];
+    const functionValue = failureRev.props[prop.POTENTIAL_FAILURE_MODE].dbValues[0];
+    const displayValue = failureRev.props[prop.POTENTIAL_FAILURE_MODE_SHORT].dbValues[0];
     return {
       propDisplayValue: displayValue,
       dispValue: failureRev.uid,
@@ -126,13 +116,11 @@ const _getFunctionValues = async (productValue) => {
   const revList = await queryUtil.executeSavedQuery(
     prop.QUERY_FMEA_FUNCTION,
     [prop.QUERY_DFMEA_MASTER_PRODUCT, prop.QUERY_ENTRY_ISMASTER],
-    [productValue, 'true']
+    [productValue, 'true'],
   );
   const functionValues = revList.map((functionRev) => {
     const functionValue = functionRev.props[prop.FUNCTION].dbValues[0];
-    const displayValue = replaceAmp(
-      functionRev.props[prop.FUNCTION_SHORT].dbValues[0]
-    );
+    const displayValue = replaceAmp(functionRev.props[prop.FUNCTION_SHORT].dbValues[0]);
 
     return {
       propDisplayValue: displayValue,
@@ -156,7 +144,7 @@ const _getRevList = async (queryResults) => {
     queryResults.map(async (item) => {
       const rev = await lgepObjectUtils.getLatestItemRevision(item);
       return rev;
-    })
+    }),
   );
   return revList;
 };

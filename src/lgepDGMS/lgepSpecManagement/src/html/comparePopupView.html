@@ -1,9 +1,9 @@
 <style>
-    .radioBtn {
-        padding-top: 5px;
-    }
+  .radioBtn {
+    padding-top: 5px;
+  }
 
-    /* 나중에 안깜빡이게 바꿀때 사용
+  /* 나중에 안깜빡이게 바꿀때 사용
         #specCompare_row2_col3{
             background-color: brown;
         } 
@@ -13,34 +13,32 @@
 </style>
 
 <aw-panel-body>
-    <aw-panel-section>
-        <aw-flex-row id="compareData">
-            <aw-flex-column style="margin-right:20px">
-                <aw-flex-row height="3f">
-                    <aw-flex-column width="20f">
-                        <aw-label prop="data.referenceModelLbl"></aw-label>
-                    </aw-flex-column>
-                    <aw-flex-column width="fill"></aw-flex-column>
-                </aw-flex-row>
-                <aw-flex-row height="3f">
-                    <aw-flex-column>
-                        <aw-radiobutton prop="data.changeRadio" action="compareEvent" class="radioBtn">
-                        </aw-radiobutton>
-                    </aw-flex-column>
-                    <aw-flex-column align-content="end">
-                        <aw-command-bar anchor="specManagementCompareCommand" alignment="HORIZONTAL" id="excelDownload">
-                        </aw-command-bar>
-                    </aw-flex-column>
-                </aw-flex-row>
-            </aw-flex-column>
+  <aw-panel-section>
+    <aw-flex-row id="compareData">
+      <aw-flex-column style="margin-right: 20px">
+        <aw-flex-row height="3f">
+          <aw-flex-column width="20f">
+            <aw-label prop="data.referenceModelLbl"></aw-label>
+          </aw-flex-column>
+          <aw-flex-column width="fill"></aw-flex-column>
         </aw-flex-row>
-        <aw-separator></aw-separator>
-        <aw-flex-row height="fill">
-            <aw-flex-column width="fill" style="margin-right:20px">
-                <aw-flex-row id="compareTablee">
-                    <aw-compare2 gridid="specCompare"></aw-compare2>
-                </aw-flex-row>
-            </aw-flex-column>
+        <aw-flex-row height="3f">
+          <aw-flex-column>
+            <aw-radiobutton prop="data.changeRadio" action="compareEvent" class="radioBtn"> </aw-radiobutton>
+          </aw-flex-column>
+          <aw-flex-column align-content="end">
+            <aw-command-bar anchor="specManagementCompareCommand" alignment="HORIZONTAL" id="excelDownload"> </aw-command-bar>
+          </aw-flex-column>
         </aw-flex-row>
-    </aw-panel-section>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-separator></aw-separator>
+    <aw-flex-row height="fill">
+      <aw-flex-column width="fill" style="margin-right: 20px">
+        <aw-flex-row id="compareTablee">
+          <aw-compare2 gridid="specCompare"></aw-compare2>
+        </aw-flex-row>
+      </aw-flex-column>
+    </aw-flex-row>
+  </aw-panel-section>
 </aw-panel-body>

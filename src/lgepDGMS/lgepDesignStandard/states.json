@@ -1,60 +1,114 @@
 {
-    "L2_DesignStandard": {
-        "url": "/L2_DesignStandard",
-        "data": {},
-        "view": "L2_DesignStandard",
-        "parent": "L2_DesignStandardLocation"
+  "L2_DesignStandard": {
+    "url": "/L2_DesignStandard",
+    "data": {},
+    "view": "L2_DesignStandard",
+    "parent": "L2_DesignStandardLocation"
+  },
+  "L2_DesignStandardEnterTree": {
+    "url": "/L2_DesignStandardEnterTree",
+    "data": {},
+    "view": "L2_DesignStandardEnterTree",
+    "parent": "L2_DesignStandardEnterTreeLocation"
+  },
+  "L2_DesignStandardLocation": {
+    "data": {
+      "label": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardSubLocationTitle"
+      },
+      "browserTitle": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardLocationHeaderTitle"
+      }
     },
-    "L2_DesignStandardLocation": {
-        "data": {
-            "label": {
-                "source": "/i18n/L2_DesignStandardMessages",
-                "key": "L2_DesignStandardSubLocationTitle"
-            },
-            "browserTitle": {
-                "source": "/i18n/L2_DesignStandardMessages",
-                "key": "L2_DesignStandardLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/L2_DesignStandardMessages",
-                "key": "L2_DesignStandardLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/L2_DesignStandardMessages",
-                "key": "L2_DesignStandardLocationHeaderTitle"
-            }
-        },
-        "type": "location"
+    "type": "location"
+  },
+  "L2_DesignStandardEnterTreeLocation": {
+    "data": {
+      "label": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardSubLocationTitle"
+      },
+      "browserTitle": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardLocationHeaderTitle"
+      }
     },
-    "L2_DesignStandardSubLocation": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "priority": 0,
-            "label": {
-                "source": "/i18n/L2_DesignStandardMessages",
-                "key": "L2_DesignStandardSubLocationTitle"
-            },
-            "clientScopeURI": "Awp0SearchResults",
-            "nameToken": "L2_DesignStandardSubLocation",
-            "context": {
-                "search": {
-                    "chartTitle": {
-                        "source": "/i18n/L2_DesignStandardMessages",
-                        "key": "L2_DesignStandardSubLocationChartTitle"
-                    }
-                }
-            }
-        },
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "params": {
-            "filter": null
-        },
-        "parent": "L2_DesignStandardLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation",
-        "url": "/L2_DesignStandardSubLocation"
-    }
+    "type": "location"
+  },
+  "L2_DesignStandardSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "L2_DesignStandardSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/L2_DesignStandardMessages",
+            "key": "L2_DesignStandardSubLocationChartTitle"
+          }
+        }
+      }
+    },
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
+    },
+    "parent": "L2_DesignStandardLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "url": "/L2_DesignStandardSubLocation"
+  },
+  "L2_DesignStandardEnterTreeSubLocation": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "priority": 0,
+      "label": {
+        "source": "/i18n/L2_DesignStandardMessages",
+        "key": "L2_DesignStandardSubLocationTitle"
+      },
+      "clientScopeURI": "Awp0SearchResults",
+      "nameToken": "L2_DesignStandardEnterTreeLocationSubLocation",
+      "context": {
+        "search": {
+          "chartTitle": {
+            "source": "/i18n/L2_DesignStandardMessages",
+            "key": "L2_DesignStandardSubLocationChartTitle"
+          }
+        }
+      }
+    },
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "params": {
+      "filter": null
+    },
+    "parent": "L2_DesignStandardEnterTreeLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "url": "/L2_DesignStandardEnterTreeSubLocation"
+  }
 }

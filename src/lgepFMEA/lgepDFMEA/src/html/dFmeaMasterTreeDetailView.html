@@ -1,9 +1,5 @@
 <aw-column>
-  <aw-flex-row
-    height="4f"
-    class="row-edit-container"
-    exist-when="ctx.fmea_edit_init"
-  >
+  <aw-flex-row height="4f" class="row-edit-container" exist-when="ctx.fmea_edit_init">
     <aw-command-bar
       exist-when="ctx.fmea_edit_init"
       class="dmaster-row-edit-command-header"
@@ -12,6 +8,6 @@
     ></aw-command-bar>
   </aw-flex-row>
   <aw-xrt-summary exist-when="ctx.fmea_tree_structure" model-object="ctx.fmea_structure_model"></aw-xrt-summary>
-  <aw-include exist-when="ctx.fmea_row_select.typeLevel === 'l2_potential_failure_mode'"name ="dFmeaMasterTreeDetailFailure"></aw-include>
-  <aw-include exist-when="ctx.fmea_row_select.typeLevel === 'l2_function'"name ="dFmeaMasterTreeDetailFunction"></aw-include>
+  <aw-include exist-when="ctx.fmea_row_select.typeLevel === 'l2_potential_failure_mode'" name="dFmeaMasterTreeDetailFailure"></aw-include>
+  <aw-include exist-when="ctx.fmea_row_select.typeLevel === 'l2_function'" name="dFmeaMasterTreeDetailFunction"></aw-include>
 </aw-column>

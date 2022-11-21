@@ -1,13 +1,9 @@
 import appCtxService from 'js/appCtxService';
 
-import {
-  makeEditor,
-  setValue,
-  getEditorValueById,
-} from 'js/utils/fmeaEditorUtils';
+import { makeEditor, setValue, getEditorValueById } from 'js/utils/fmeaEditorUtils';
 import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
 import { langIndex } from 'js/dfmeaMasterImageTableService';
-import {lineBreak} from 'js/dfmeaMasterImageTableColumnLoadService';
+import { lineBreak } from 'js/dfmeaMasterImageTableColumnLoadService';
 import { addChangeRow } from 'js/dfmeaMasterRowEditService';
 import * as constants from 'js/constants/fmeaConstants';
 import { getTableMode } from 'js/utils/fmeaViewCommonUtils';
@@ -88,11 +84,7 @@ const editSave = () => {
 
   const tableMode = getTableMode();
   if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
-    table.setValue(
-      tableCell.rowKey,
-      tableCell.columnName,
-      lineBreak(removeImgTagInStr(value))
-    );
+    table.setValue(tableCell.rowKey, tableCell.columnName, lineBreak(removeImgTagInStr(value)));
   } else {
     table.setValue(tableCell.rowKey, tableCell.columnName, value);
   }

@@ -45,7 +45,6 @@ const loadColumns = (dataProvider) => {
   };
 };
 
-
 const _getColumnWidth = (column) => {
   switch (column) {
     case constants.COL_PARENT_ASSY_LANG[0]:

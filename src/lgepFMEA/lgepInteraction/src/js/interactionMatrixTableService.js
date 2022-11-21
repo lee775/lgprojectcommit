@@ -11,13 +11,13 @@ import { getLangIndex } from 'js/utils/fmeaCommonUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 
+import { setTuiGridStyle } from 'js/sodAPTableService';
+
 let grid;
 let langIndex;
 
 const _interactionHeaderInit = () => {
-  const cellHeader = document.querySelector(
-    'th[data-column-name="interactionHeader"]'
-  );
+  const cellHeader = document.querySelector('th[data-column-name="interactionHeader"]');
   cellHeader.innerHTML = `
     Item<br /><strong>(${constants.INTERACTION_CELL_HEADER_SIDE[langIndex]}↓)</strong>
   `;
@@ -92,16 +92,13 @@ export const initTable = async (ctx) => {
                   referenced.props[prop.ITEM_ID].dbValues[0],
                   referenced.props[prop.REVISION_ID].dbValues[0],
                   referenced.props[prop.OBJECT_NAME].dbValues[0],
-                ]
+                ],
               )
               .then((result) => {
-                let filtered = datas.filter(
-                  (data) => data.id == referencer.uid
-                );
-                if(filtered.length > 0) {
+                let filtered = datas.filter((data) => data.id == referencer.uid);
+                if (filtered.length > 0) {
                   let rowKey = filtered[0]['rowKey'];
-                  datas[rowKey][referenced.props[prop.OBJECT_NAME].dbValues[0]] =
-                    result[0].props[prop.INNTERACTION_TYPE].dbValues[0];
+                  datas[rowKey][referenced.props[prop.OBJECT_NAME].dbValues[0]] = result[0].props[prop.INNTERACTION_TYPE].dbValues[0];
                   grid.resetData(datas);
                 }
               });
@@ -129,8 +126,7 @@ export const initTable = async (ctx) => {
           type: DefaultRender,
         },
       });
-      interactionHeaders[fmeaSubAssy.props[prop.OBJECT_NAME].dbValues[0]] =
-        fmeaSubAssy.uid;
+      interactionHeaders[fmeaSubAssy.props[prop.OBJECT_NAME].dbValues[0]] = fmeaSubAssy.uid;
       datas.push({
         id: fmeaSubAssy.uid,
         name: fmeaSubAssy.props[prop.OBJECT_NAME].dbValues[0],
@@ -162,6 +158,8 @@ export const initTable = async (ctx) => {
     columns: columns,
     draggable: false,
   });
+
+  setTuiGridStyle(ctx);
 
   for (let i = 0; i < datas.length; i++) {
     grid.disableCell(i, datas[i].name);

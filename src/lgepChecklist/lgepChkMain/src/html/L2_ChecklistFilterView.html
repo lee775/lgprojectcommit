@@ -1,0 +1,155 @@
+<aw-command-panel caption="i18n.filterChecklist" context="data">
+  <aw-panel>
+    <aw-panel-body>
+      <div class="filter-box">
+        <div class="filter-title">체크리스트명</div>
+        <aw-list dataprovider="data.dataProviders.nameConditions">
+          <aw-checkbox prop="item" action="selectFilterNameCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Name'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeNameConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Name'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeNameConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">프로젝트명</div>
+        <aw-list dataprovider="data.dataProviders.projectConditions">
+          <aw-checkbox prop="item" action="selectFilterProjectCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Project Name'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeProjectNameConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Project Name'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeProjectNameConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">제품 타입</div>
+        <aw-list dataprovider="data.dataProviders.productTypeConditions">
+          <aw-checkbox prop="item" action="selectFilterProductTypeCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Product Type'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeProductTypeConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Product Type'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeProductTypeConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">제품 클래스</div>
+        <aw-list dataprovider="data.dataProviders.productClassConditions">
+          <aw-checkbox prop="item" action="selectFilterProductClassCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Product Class'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeProductClassConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Product Class'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeProductClassConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">제품코드</div>
+        <aw-list dataprovider="data.dataProviders.productNameConditions">
+          <aw-checkbox prop="item" action="selectFilterProductNameCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Product ID'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeProductNameConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Product ID'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeProductNameConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">모듈명</div>
+        <aw-list dataprovider="data.dataProviders.moduleNameConditions">
+          <aw-checkbox prop="item" action="selectFilterModuleNameCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Module Name'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeModuleNameConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Module Name'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeModuleNameConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">생성자</div>
+        <aw-list dataprovider="data.dataProviders.creationUserConditions">
+          <aw-checkbox prop="item" action="selectFilterCreationCondition"></aw-checkbox>
+        </aw-list>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Creation User'].moreStatus === 'more'"
+          prop="data.moreView"
+          action="loadChangeCreationUserConditinos"
+        >
+        </aw-link>
+        <aw-link
+          class="filter-more"
+          visible-when="ctx.checklist.filterConditions['Creation User'].moreStatus === 'less'"
+          prop="data.lessView"
+          action="loadChangeCreationUserConditinos"
+        >
+        </aw-link>
+      </div>
+      <div class="filter-box">
+        <div class="filter-title">생성일</div>
+        <div class="filter-datebox">
+          <aw-date id="filter-startDate" prop="data.startDate"></aw-date>
+          <span>~</span>
+          <aw-date id="filter-endDate" prop="data.endDate"></aw-date>
+          <aw-icon-button class="date-btn" command="data.dateSearch"></aw-icon-button>
+        </div>
+      </div>
+    </aw-panel-body>
+  </aw-panel>
+</aw-command-panel>

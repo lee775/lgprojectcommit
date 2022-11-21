@@ -2,28 +2,18 @@
  * DFMEA Master Detail View
  * @module js/dfmeaMasterRowEditService
  */
-import appCtxService from "js/appCtxService";
-import eventBus from "js/eventBus";
+import appCtxService from 'js/appCtxService';
+import eventBus from 'js/eventBus';
 
-import { makeShortenValues } from "js/utils/fmeaCommonUtils";
-import {
-  getSelectItemRev,
-  isTreeTable,
-  getTableMode,
-} from "js/utils/fmeaViewCommonUtils";
-import { showErrorMessage, showInfoMessage } from "js/utils/fmeaMessageUtils";
-import {
-  getEditorValueById,
-  changeEnableEditors,
-} from "js/utils/fmeaEditorUtils";
-import {
-  changeListUIOncloseEdit,
-  editCtxHandle,
-} from "js/dfmeaMasterRowEditService";
-import { makeVmProperty } from "js/utils/fmeaTableMakeUtils";
-import { ROW_EDITORS } from "js/dfmeaMasterRowEditInitService";
-import * as constants from "js/constants/fmeaConstants";
-import * as prop from "js/constants/fmeaProperty";
+import { makeShortenValues } from 'js/utils/fmeaCommonUtils';
+import { getSelectItemRev, isTreeTable, getTableMode } from 'js/utils/fmeaViewCommonUtils';
+import { showErrorMessage, showInfoMessage } from 'js/utils/fmeaMessageUtils';
+import { getEditorValueById, changeEnableEditors } from 'js/utils/fmeaEditorUtils';
+import { changeListUIOncloseEdit, editCtxHandle } from 'js/dfmeaMasterRowEditService';
+import { makeVmProperty } from 'js/utils/fmeaTableMakeUtils';
+import { ROW_EDITORS } from 'js/dfmeaMasterRowEditInitService';
+import * as constants from 'js/constants/fmeaConstants';
+import * as prop from 'js/constants/fmeaProperty';
 
 /**
  * 편집한 로우 내용 저장
@@ -40,17 +30,13 @@ const editRowSaveAction = async (ctx, functionData, failureData) => {
     }
 
     if (isTreeTable()) {
-      newChangeInfo["row"] = selectRow.viewModel;
+      newChangeInfo['row'] = selectRow.viewModel;
     } else {
-      newChangeInfo["row"] = selectRow;
+      newChangeInfo['row'] = selectRow;
     }
 
     const ctxChangeInfo = ctx[constants.CHANGE_INFO]; // 현재 changeInfo
-    const editRows = getEditRows(
-      ctxChangeInfo,
-      newChangeInfo,
-      selectRow.props.uid
-    );
+    const editRows = getEditRows(ctxChangeInfo, newChangeInfo, selectRow.props.uid);
     const resultInfo = {
       ...ctxChangeInfo,
       isChagne: true,
@@ -59,7 +45,7 @@ const editRowSaveAction = async (ctx, functionData, failureData) => {
     appCtxService.registerCtx(constants.CHANGE_INFO, resultInfo);
 
     _updateUI(ctx, selectRow, newChangeInfo);
-    showInfoMessage("successEditSave");
+    showInfoMessage('successEditSave');
     appCtxService.registerCtx(constants.FMEA_ROW_EDIT_SAVE, true);
   } catch (e) {
     showErrorMessage(e);
@@ -79,9 +65,7 @@ const editRowSaveAction = async (ctx, functionData, failureData) => {
 const getEditRows = (ctxChangeInfo, newChangeInfo, selectRowUid) => {
   const currentEditRows = [...ctxChangeInfo[constants.CHANGE_EDIT_ROWS]];
   try {
-    const replaceIndex = currentEditRows.findIndex(
-      (currentEditRow) => currentEditRow.row.uid === selectRowUid
-    );
+    const replaceIndex = currentEditRows.findIndex((currentEditRow) => currentEditRow.row.uid === selectRowUid);
     if (replaceIndex < 0) {
       return [...ctxChangeInfo[constants.CHANGE_EDIT_ROWS], newChangeInfo];
     }
@@ -90,7 +74,7 @@ const getEditRows = (ctxChangeInfo, newChangeInfo, selectRowUid) => {
     currentEditRows.splice(replaceIndex, 1, changeEidtRow);
     return currentEditRows;
   } catch (e) {
-    console.log("getEditRows", e);
+    //console.log("getEditRows", e);
   }
 };
 
@@ -103,7 +87,7 @@ const _checkResultChange = (newChangeInfo) => {
   const infos = Object.values(newChangeInfo);
   for (const info of infos) {
     const { uid, value } = info;
-    if (value !== "") {
+    if (value !== '') {
       return true;
     }
   }
@@ -115,9 +99,7 @@ const _updateUI = (ctx, selectRow, changeInfo) => {
   const changeRow = _getChangeRow(ctx, selectRow, changeInfo);
 
   // 2. ChangeTableList 만들기
-  const replaceIndex = changeTableList.findIndex(
-    (row) => row.uid === changeRow.uid
-  );
+  const replaceIndex = changeTableList.findIndex((row) => row.uid === changeRow.uid);
   changeTableList.splice(replaceIndex, 1, changeRow);
 
   // 3. Editor Disabled
@@ -134,11 +116,11 @@ export const _chagneTable = (changeTableList) => {
   appCtxService.registerCtx(constants.DFMEA_CHANGE_TABLE_LIST, changeTableList);
   const tableMode = getTableMode();
   if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TREE) {
-    eventBus.publish("fmea.tree.update");
+    eventBus.publish('fmea.tree.update');
   } else if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
-    eventBus.publish("fmea.textTable.update");
+    eventBus.publish('fmea.textTable.update');
   } else if (tableMode === constants.DFMEA_TABLE_MODE_KEY_IMAGE) {
-    eventBus.publish("fmea.imageTable.update");
+    eventBus.publish('fmea.imageTable.update');
   }
 };
 
@@ -149,7 +131,7 @@ const _updateRow = () => {
   } else if (tableMode === constants.DFMEA_TABLE_MODE_KEY_TEXT) {
     // eventBus.publish('fmea.textTable.update');
   } else if (tableMode === constants.DFMEA_TABLE_MODE_KEY_IMAGE) {
-    eventBus.publish("fmea.imageTable.updateRow");
+    eventBus.publish('fmea.imageTable.updateRow');
   }
 };
 
@@ -168,7 +150,7 @@ const _updateImageRow = (selectRow, changeInfo, ctx) => {
   const props = Object.keys(changeInfo);
   for (const prop of props) {
     const value = changeInfo[prop].value;
-    if (value !== "") {
+    if (value !== '') {
       const displayValue = makeShortenValues(value);
       const property = makeVmProperty(prop, value, displayValue);
       changeRow[prop] = property;
@@ -191,7 +173,7 @@ const _updateTreeRow = (selectRow, changeInfo) => {
   const props = Object.keys(changeInfo);
   for (const prop of props) {
     const value = changeInfo[prop].value;
-    if (value !== "") {
+    if (value !== '') {
       const displayValue = makeShortenValues(value);
       const property = makeVmProperty(prop, value, displayValue);
       changeRow.props[prop] = property;
@@ -202,26 +184,26 @@ const _updateTreeRow = (selectRow, changeInfo) => {
 
 const _makeNewChangeInfo = () => {
   return {
-    [prop.FUNCTION]: { [constants.UID]: "", [constants.VALUE]: "" },
-    [prop.FUNCTION_SHORT]: { [constants.UID]: "", [constants.VALUE]: "" },
-    [prop.REQUIREMENT]: { [constants.UID]: "", [constants.VALUE]: "" },
+    [prop.FUNCTION]: { [constants.UID]: '', [constants.VALUE]: '' },
+    [prop.FUNCTION_SHORT]: { [constants.UID]: '', [constants.VALUE]: '' },
+    [prop.REQUIREMENT]: { [constants.UID]: '', [constants.VALUE]: '' },
     [prop.POTENTIAL_FAILURE_MODE]: {
-      [constants.UID]: "",
-      [constants.VALUE]: "",
+      [constants.UID]: '',
+      [constants.VALUE]: '',
     },
     [prop.POTENTIAL_FAILURE_MODE_SHORT]: {
-      [constants.UID]: "",
-      [constants.VALUE]: "",
+      [constants.UID]: '',
+      [constants.VALUE]: '',
     },
-    [prop.FAILURE_EFFECT]: { [constants.UID]: "", [constants.VALUE]: "" },
-    [prop.FAILURE_EFFECT_SHORT]: { [constants.UID]: "", [constants.VALUE]: "" },
-    [prop.CAUSE_OF_FAILURE]: { [constants.UID]: "", [constants.VALUE]: "" },
+    [prop.FAILURE_EFFECT]: { [constants.UID]: '', [constants.VALUE]: '' },
+    [prop.FAILURE_EFFECT_SHORT]: { [constants.UID]: '', [constants.VALUE]: '' },
+    [prop.CAUSE_OF_FAILURE]: { [constants.UID]: '', [constants.VALUE]: '' },
     [prop.CAUSE_OF_FAILURE_SHORT]: {
-      [constants.UID]: "",
-      [constants.VALUE]: "",
+      [constants.UID]: '',
+      [constants.VALUE]: '',
     },
-    [prop.PRECATUIONS_ACTION]: { [constants.UID]: "", [constants.VALUE]: "" },
-    [prop.DETECTION_ACTION]: { [constants.UID]: "", [constants.VALUE]: "" },
+    [prop.PRECATUIONS_ACTION]: { [constants.UID]: '', [constants.VALUE]: '' },
+    [prop.DETECTION_ACTION]: { [constants.UID]: '', [constants.VALUE]: '' },
   };
 };
 
@@ -244,10 +226,7 @@ const _getChangeInfo = async (ctx, functionData, failureData) => {
   const originValues = ctx[constants.DFMEA_ROW_EDIT_INIT_VALUES];
   // 기능
   if (_isSaveas(newFunctionValue, originValues, prop.FUNCTION)) {
-    const newFunction = await getSelectItemRev(
-      selectListDatas[constants.MASTER_DATA_KEY_FUNCTION],
-      functionData
-    );
+    const newFunction = await getSelectItemRev(selectListDatas[constants.MASTER_DATA_KEY_FUNCTION], functionData);
     newChangeInfo[prop.FUNCTION] = {
       [constants.UID]: newFunction.uid,
       [constants.VALUE]: newFunctionValue,
@@ -268,10 +247,7 @@ const _getChangeInfo = async (ctx, functionData, failureData) => {
 
   // 고장
   if (_isSaveas(newFailureValue, originValues, prop.POTENTIAL_FAILURE_MODE)) {
-    const newFailureRev = await getSelectItemRev(
-      selectListDatas[constants.MASTER_DATA_KEY_FAILURE],
-      failureData
-    );
+    const newFailureRev = await getSelectItemRev(selectListDatas[constants.MASTER_DATA_KEY_FAILURE], failureData);
     newChangeInfo[prop.POTENTIAL_FAILURE_MODE] = {
       [constants.UID]: newFailureRev.uid,
       [constants.VALUE]: newFailureValue,
@@ -337,7 +313,7 @@ const _getChangeEditorValue = (initEditorDatas, propId) => {
   if (newEditorValue !== originEditorValue) {
     return newEditorValue;
   }
-  return "";
+  return '';
 };
 
 /**
@@ -358,8 +334,7 @@ const _getOriginEditorValue = (initEditorDatas, propId) => {
  * @returns
  */
 const _isSaveas = (newValue, originValues, propId) => {
-  const originFuncitonValue = originValues.filter(({ id }) => id === propId)[0]
-    .value;
+  const originFuncitonValue = originValues.filter(({ id }) => id === propId)[0].value;
   if (newValue === originFuncitonValue) {
     return false;
   }

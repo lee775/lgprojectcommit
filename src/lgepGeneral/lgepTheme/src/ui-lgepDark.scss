@@ -11,8 +11,7 @@ $ltop: 86;
 $linc: calc(($ltop - $lbase) / 12);
 // The core colors for your theme
 $aw_accent_1: $color;
-$aw_accent_2: mix(white, $color, $linc * 1
-);
+$aw_accent_2: mix(white, $color, $linc * 1);
 $aw_accent_3: mix(white, $color, $linc * 2);
 $aw_accent_4: mix(white, $color, $linc * 3);
 $aw_accent_5: mix(white, $color, $linc * 4);
@@ -35,7 +34,7 @@ $aw_foreground_5: #464646 !important;
 $aw_background_6: #a50034 !important;
 $aw_foreground_6: $Siemens_Snow !important;
 .aw-theme-locationsTile .aw-theme-tileText {
-    color: #464646 !important;
+  color: #464646 !important;
 }
 // include some brand colors; more can be added and overidden as-needed from _afx-theme-vars.scss
 $aw_accent_7a: $aw_accent_7;
@@ -66,389 +65,411 @@ $brand_tab_title_selected_border_color_hover: $aw_accent_5;
 */
 @import 'consumer-themes';
 .justify-flex-end {
-    justify-content: flex-end;
-    background: #1d1d1b;
+  justify-content: flex-end;
+  background: #1d1d1b;
 }
 #wareHouse .aw-flex-row {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
 .aw-layout-header {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    -webkit-transition: padding .5s;
-    -moz-transition: padding .5s;
-    -o-transition: padding .5s;
-    -ms-transition: padding .5s;
-    transition: padding .5s;
-    background: #181c1f;
-    color: rgb(255, 255, 255);
-    border-bottom: 0.3rem solid transparent;
-    border-image: linear-gradient(90deg, rgb(215, 5, 70) 30%, rgb(203, 24, 80) 53%, rgb(187, 134, 154) 82%, rgba(245, 245, 245, 1) 100%);
-    border-image-slice: 1;
-    width:100%;
-    // background: linear-gradient(90deg, rgba(107,107,107,1) 83%, rgba(255,255,255,1) 100%);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  -webkit-transition: padding 0.5s;
+  -moz-transition: padding 0.5s;
+  -o-transition: padding 0.5s;
+  -ms-transition: padding 0.5s;
+  transition: padding 0.5s;
+  background: #181c1f;
+  color: rgb(255, 255, 255);
+  border-bottom: 0.3rem solid transparent;
+  border-image: linear-gradient(90deg, rgb(215, 5, 70) 30%, rgb(203, 24, 80) 53%, rgb(187, 134, 154) 82%, rgba(245, 245, 245, 1) 100%);
+  border-image-slice: 1;
+  width: 100%;
+  // background: linear-gradient(90deg, rgba(107,107,107,1) 83%, rgba(255,255,255,1) 100%);
 }
 
-#proceduerThemeRow{
-    background: rgb(40, 45, 51);
-    color: white;
+#proceduerThemeRow {
+  background: rgb(40, 45, 51);
+  color: white;
 }
 
 #sequenceTree > div.aw-splm-tableContainer > div.aw-splm-tableScrollContainer > div.aw-splm-tableViewport.aw-splm-tableCanvas > div div,
 #checkListCopyTable > div.aw-splm-tableContainer > div.aw-splm-tableScrollContainer > div.aw-splm-tableViewport.aw-splm-tableCanvas > div > div,
-#checkListCopyTable > div.aw-splm-tableContainer > div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft > div.aw-splm-tableCanvas.aw-splm-tableViewport > div > div,
+#checkListCopyTable
+  > div.aw-splm-tableContainer
+  > div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft
+  > div.aw-splm-tableCanvas.aw-splm-tableViewport
+  > div
+  > div,
 #deStandardTable > div.aw-splm-tableContainer > div.aw-splm-tableScrollContainer > div.aw-splm-tableViewport.aw-splm-tableCanvas > div > div,
-#deStandardTable > div.aw-splm-tableContainer > div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft > div.aw-splm-tableCanvas.aw-splm-tableViewport > div > div,
+#deStandardTable
+  > div.aw-splm-tableContainer
+  > div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft
+  > div.aw-splm-tableCanvas.aw-splm-tableViewport
+  > div
+  > div,
 #dataSetTable > div.aw-splm-tableContainer > div.aw-splm-tableScrollContainer > div.aw-splm-tableViewport.aw-splm-tableCanvas > div > div,
-#dataSetTable > div.aw-splm-tableContainer > div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft > div.aw-splm-tableCanvas.aw-splm-tableViewport > div > div{
-    border-color:rgb(51, 56, 60) !important;
-    color: white !important;
-    background: rgb(40, 45, 51);
+#dataSetTable
+  > div.aw-splm-tableContainer
+  > div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft
+  > div.aw-splm-tableCanvas.aw-splm-tableViewport
+  > div
+  > div {
+  border-color: rgb(51, 56, 60) !important;
+  color: white !important;
+  background: rgb(40, 45, 51);
 }
 .aw-layout-breadCrumbs aw-property-image svg {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 #checkListCopyTable .aw-splm-tableHeaderCell,
 #deStandardTable .aw-splm-tableHeaderCell,
 #dataSetTable .aw-splm-tableHeaderCell,
 #checkListCopyTable .aw-splm-tableHeaderRow,
 #deStandardTable .aw-splm-tableHeaderRow,
-#dataSetTable .aw-splm-tableHeaderRow{
-    background-color: #171b1e;
-    color : white;
+#dataSetTable .aw-splm-tableHeaderRow {
+  background-color: #171b1e;
+  color: white;
 }
-.aw-layout-subLocation .aw-commands-commandIconButton.aw-state-selected, .aw-layout-subLocation .aw-commands-commandIconButton:hover {
-    background-color: #3f3f3f;
+.aw-layout-subLocation .aw-commands-commandIconButton.aw-state-selected,
+.aw-layout-subLocation .aw-commands-commandIconButton:hover {
+  background-color: #3f3f3f;
 }
 .aw-command-panelContainer .aw-layout-commandPanelContent {
-    border: none;
-    color: #8c8c8c;
+  border: none;
+  color: #8c8c8c;
 }
-.awRoot .aw-ui-filterCategoryLabel, .awRoot .aw-theme-childListContent, .aw-ui-filterSeparator, .awRoot .aw-ui-filterCategoryNameAndCountContainer {
-    color: #8c8c8c;
+.awRoot .aw-ui-filterCategoryLabel,
+.awRoot .aw-theme-childListContent,
+.aw-ui-filterSeparator,
+.awRoot .aw-ui-filterCategoryNameAndCountContainer {
+  color: #8c8c8c;
 }
-.aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer input.aw-uiwidgets-searchBox
-, .aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer
-, .aw-search-globalSearchBoxContainer aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
-    background: #282d33;
-    color: white;
+.aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer input.aw-uiwidgets-searchBox,
+.aw-search-globalSearchWrapper aw-search-box .aw-uiwidgets-searchBoxContainer,
+.aw-search-globalSearchBoxContainer aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
+  background: #282d33;
+  color: white;
 }
 .aw-uiwidgets-searchBoxIcon .aw-theme-iconOutline {
-    fill: #868688;
+  fill: #868688;
 }
-.aw-tile-tileGroups, .aw-tile-tileCanvasPanel {
-    background: #181c1f;
+.aw-tile-tileGroups,
+.aw-tile-tileCanvasPanel {
+  background: #181c1f;
 }
 .awRoot .aw-order-one {
-    order: 1;
-    background: #181c1f;
+  order: 1;
+  background: #181c1f;
 }
 .aw-layout-headerTitleContainer {
-    padding-top: 20px;
-    margin-left: 50px;
+  padding-top: 20px;
+  margin-left: 50px;
 }
 .aw-search-resultsCountArea span {
-    margin-left: 50px !important;
-    font-weight: normal !important;
+  margin-left: 50px !important;
+  font-weight: normal !important;
 }
 aw-showobject-header .aw-layout-headerIcon {
-    padding-right: 16px;
-    margin-left: 50px;
+  padding-right: 16px;
+  margin-left: 50px;
 }
 .aw-uiwidgets-searchBoxIcon .aw-theme-iconOutline {
-    fill: #868688 !important;
+  fill: #868688 !important;
 }
 .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
-    border-color: #31393f !important;
-    // border: none !important;
+  border-color: #31393f !important;
+  // border: none !important;
 }
 .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle {
-    color: #868688 !important;
+  color: #868688 !important;
 }
 .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
+  color: white !important;
 }
 .aw-layout-subLocation .aw-layout-splitterLine {
-    border-color: black;
+  border-color: black;
 }
 .aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
-    width: auto;
-    height: auto;
-    margin: 0;
-    font-size: var(--nav_bar_font_size);
-    display: block;
-    word-wrap: break-word;
-    white-space: normal;
-    overflow: hidden;
-    max-height: 28px;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
+  width: auto;
+  height: auto;
+  margin: 0;
+  font-size: var(--nav_bar_font_size);
+  display: block;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  max-height: 28px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
 }
 button.aw-base-blk-button:not(.disabled).aw-accent-highContrast:not(.aw-widgets-staticChip):hover {
-    background-color: #6b6b6b !important;
+  background-color: #6b6b6b !important;
 }
 button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
-    background-color: #8b8b8b !important;
-    color: black !important;
-    border-color: #6b6b6b !important;
+  background-color: #8b8b8b !important;
+  color: black !important;
+  border-color: #6b6b6b !important;
 }
 .aw-session-tcLoginView {
-    background-image: url("./images/lgMainWall.jpg");
+  background-image: url('./images/lgMainWall.jpg');
 }
+.development-environment {
+  background-image: url('./images/lgMainWallDev.jpg') !important;
+}
+
 .aw-session-companyLogo {
-    background-image: url(images/lgMainLogo.svg);
-    background-repeat: no-repeat;
-    width: 281px;
-    height: 119px;
-    left: 70px;
-    display: flex;
-    position: relative;
-    background-size: contain;
-    top: 70px;
+  background-repeat: no-repeat;
+  width: 281px;
+  height: 119px;
+  left: 70px;
+  display: flex;
+  position: relative;
+  background-size: contain;
+  top: 70px;
 }
 
-
-.afx-checkbox input[type=checkbox]:checked + .afx-checkbox-md-style .check {
-    color: white;
+.afx-checkbox input[type='checkbox']:checked + .afx-checkbox-md-style .check {
+  color: white;
 }
 #addPop .aw-command-panelContainer .aw-layout-commandPanelContent {
-    border: none;
+  border: none;
 }
 #addPop .aw-splm-tableHeaderCellSortIcon {
-    background-color: #181c1f;
+  background-color: #181c1f;
 }
-
 
 // 페이징 칩 css
 #dashboardListSite #summaryContentStyle .aw-layout-flexbox {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 #dashboardListSite .aw-layout-splitter {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
-#summaryContentStyle .aw-flex-row {
-    background-color: #181c1f !important;
-}
+// #summaryContentStyle .aw-flex-row {
+//     background-color: #181c1f !important;
+// }
 #alink .aw-flex-row {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 #summaryContentStyle .aw-layout-summaryContent {
-    border: solid 1px rgb(50, 53, 58) !important;
-    box-shadow: 5px 2px 2px 2px rgb(37, 37, 37) !important;
-    background-color: #282d33;
+  border: solid 1px rgb(50, 53, 58) !important;
+  box-shadow: 5px 2px 2px 2px rgb(37, 37, 37) !important;
+  background-color: #282d33;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-accent-midContrast {
-    background-color: #282d33 !important;
-    border-color: #282d33 !important;
-    color: rgb(255, 255, 255) !important;
-    fill: #282d33 !important;
+  background-color: #282d33 !important;
+  border-color: #282d33 !important;
+  color: rgb(255, 255, 255) !important;
+  fill: #282d33 !important;
 }
 .aw-layout-subLocation .aw-widgets-chip:not(.disabled).aw-base-button {
-    color: #828282 !important;
+  color: #828282 !important;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-base-button:not(.aw-widgets-staticChip):hover {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-base-button {
-    background-color: #282d33 !important;
-    border-color: #282d33 !important;
+  background-color: #282d33 !important;
+  border-color: #282d33 !important;
 }
 #summaryContentStyle .aw-widgets-chip:not(.disabled):not(.aw-widgets-staticChip) {
-    box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 #alink a {
-    color: #828282 !important;
-    margin-top: -3px;
+  color: #828282 !important;
+  margin-top: -3px;
 }
 #dashboardListSite .aw-widgets-cellListCellImage img {
-    border-radius: 0 !important;
-    overflow: visible !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
 }
-#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem .aw-widgets-cellListCellTitle
-, #dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem .aw-widgets-cellListCellTitle {
-    color: white;
-    font-weight: normal;
+#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem .aw-widgets-cellListCellTitle,
+#dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem .aw-widgets-cellListCellTitle {
+  color: white;
+  font-weight: normal;
 }
 #summaryContentStyle .aw-widgets-cellListItemContainer {
-    border-bottom: solid 1px #4f545c !important;
+  border-bottom: solid 1px #4f545c !important;
 }
-#dashboardListSite input[type="text"] {
-    background-color: #181c1f !important;
-    color: #4f545c !important;
-    border-color: #4f545c !important;
+#dashboardListSite input[type='text'] {
+  background-color: #181c1f !important;
+  color: #4f545c !important;
+  border-color: #4f545c !important;
 }
 #dashboardListSite .aw-theme-iconOutline {
-    fill: #898b8a !important;
+  fill: #898b8a !important;
 }
-#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem
-, #dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem {
-    color: white;
+#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem,
+#dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem {
+  color: white;
 }
-#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem
-, #dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem {
-    color: #898b8a;
+#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem,
+#dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem {
+  color: #898b8a;
 }
-#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, #dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #464f58;
-    border-color: #464f58;
-    color: #898b8a;
+#dashboardListSite .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+#dashboardListSite .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #464f58;
+  border-color: #464f58;
+  color: #898b8a;
 }
 #dashboardListSite .aw-layout-panelSectionTitle {
-    color: #8a8a8a !important;
-    background-color: #171b1e !important;
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
 }
 #dashboardListSite h3 {
-    color: #898b8a;
+  color: #898b8a;
 }
 //내문서
 .aw-flex-row.height-12 {
-    background-color: #181c1f;
+  background-color: #181c1f;
 }
-#sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected
-, #sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover
-, #sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
-    border-bottom-color: white !important;
+#sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected,
+#sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+#sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: white !important;
+  border-bottom-color: white !important;
 }
 #sidenavCommandPanel .aw-jswidget-tabContainer .aw-jswidget-tab a {
-    color: #8a8a8a !important;
+  color: #8a8a8a !important;
 }
 // #linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon *{
 //     color: white !important;
 //     font-weight: bold !important;
 // }
 #linkTableAllId div div div div div div .aw-splm-tableRow {
-    background-color: #171b1e !important;
+  background-color: #171b1e !important;
 }
-#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon{
-    // margin-top: 5px !important;
-    border-color:#33383c !important;
-    color: white !important;
-    font-weight: bold !important;
-    background-color: #171b1e !important;
+#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon {
+  // margin-top: 5px !important;
+  border-color: #33383c !important;
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #171b1e !important;
 }
 // #linkTableAllId div div div div div div .aw-splm-tableRow {
 //     background-color: #171b1e !important;
 // }
-#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.aw-splm-tableHoverRow{
-    // margin-top: 5px !important;
-    border-color:#31393f !important;
-    background-color: #31393f !important;
-    color: white !important;
-    font-weight: bold !important;
+#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.aw-splm-tableHoverRow {
+  // margin-top: 5px !important;
+  border-color: #31393f !important;
+  background-color: #31393f !important;
+  color: white !important;
+  font-weight: bold !important;
 }
 .minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div img {
-    border: 7px solid #d81d3c !important
+  border: 7px solid #d81d3c !important;
 }
 .minColumn aw-list div div div ul li:hover div div div img {
-    border: 7px solid #d81d3c !important
+  border: 7px solid #d81d3c !important;
 }
 .minColumn aw-list div div div ul li div div div img {
-    border: 7px solid white;
+  border: 7px solid white;
 }
 #folderNameData .aw-layout-panelBody {
-    // border: 1px solid #33383c;
-    background-color: #282d33;
-    color: white;
+  // border: 1px solid #33383c;
+  background-color: #282d33;
+  color: white;
 }
-.mainNav.navBox, .sideNav.navBox {
-    border: 1px solid #33383c !important;
-    // box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 30%), 2px -4px 4px 0 rgb(0 0 0 / 30%) inset !important;
+.mainNav.navBox,
+.sideNav.navBox {
+  border: 1px solid #33383c !important;
+  // box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 30%), 2px -4px 4px 0 rgb(0 0 0 / 30%) inset !important;
 }
 #folderNameData .aw-layout-panelSectionTitle {
-    color: #8a8a8a !important;
-    background-color: #171b1e !important;
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
 }
 .minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: white !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: white !important;
 }
 .minColumn aw-list div div div ul li:hover div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: white !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: white !important;
 }
-.minColumn aw-list div div div ul li{
-    border-bottom: 0px !important;
-    border-top:0px !important;
-    border-left:0px !important;
-    border-right:0px !important;
+.minColumn aw-list div div div ul li {
+  border-bottom: 0px !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
 }
-#folderNameData .aw-widgets-cellListWidget .aw-widgets-cellListItem
-, #folderNameData .aw-base-scrollPanel .aw-widgets-cellListItem {
-    color: white;
+#folderNameData .aw-widgets-cellListWidget .aw-widgets-cellListItem,
+#folderNameData .aw-base-scrollPanel .aw-widgets-cellListItem {
+  color: white;
 }
-#qnaListId .aw-widgets-cellListWidget .aw-widgets-cellListItem
-, #qnaListId .aw-base-scrollPanel .aw-widgets-cellListItem {
-    color: #898b8a;
+#qnaListId .aw-widgets-cellListWidget .aw-widgets-cellListItem,
+#qnaListId .aw-base-scrollPanel .aw-widgets-cellListItem {
+  color: #898b8a;
 }
-#expertListId .aw-widgets-cellListWidget .aw-widgets-cellListItem
-, #expertListId .aw-base-scrollPanel .aw-widgets-cellListItem {
-    color: #898b8a;
+#expertListId .aw-widgets-cellListWidget .aw-widgets-cellListItem,
+#expertListId .aw-base-scrollPanel .aw-widgets-cellListItem {
+  color: #898b8a;
 }
-#expertListId .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, #expertListId .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #464f58;
-    border-color: #464f58;
-    color: #898b8a;
+#expertListId .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+#expertListId .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #464f58;
+  border-color: #464f58;
+  color: #898b8a;
 }
-#qnaListId .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, #qnaListId .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #464f58;
-    border-color: #464f58;
-    color: #898b8a;
+#qnaListId .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+#qnaListId .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #464f58;
+  border-color: #464f58;
+  color: #898b8a;
 }
 .aw-layout-subLocation .aw-widgets-cellListItem {
-    border: none !important;
+  border: none !important;
 }
 .minColumn .star-ratings-fill {
-    color: orangered !important;
-    font-size: 1.2rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: orangered !important;
+  color: orangered !important;
+  font-size: 1.2rem;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: orangered !important;
 }
-#folderNameData .aw-avatar-layout{
-    border-color: #32373b !important;
-    background-color: #282d33 !important;
-    color: white !important;
+#folderNameData .aw-avatar-layout {
+  border-color: #32373b !important;
+  background-color: #282d33 !important;
+  color: white !important;
 }
-#linkTableAllId{
-    border-color: #32373b !important;
-    background-color: #282d33 !important;
+#linkTableAllId {
+  border-color: #32373b !important;
+  background-color: #282d33 !important;
 }
-.inBgColor{
-    background-color: #282d33 !important;
+.inBgColor {
+  background-color: #282d33 !important;
 }
-#addFolder{
-    margin: 10px;
-    padding: 5px;
-    border: 0.5px solid #9e9e9e;
-    border-radius: 10px;
-    background-color: #8b8b8b;
+#addFolder {
+  margin: 10px;
+  padding: 5px;
+  border: 0.5px solid #9e9e9e;
+  border-radius: 10px;
+  background-color: #8b8b8b;
 }
-#addFolder div a{
-    color:black !important;
+#addFolder div a {
+  color: black !important;
 }
 // .panelId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected {
 //     border-color: #9e9e9e !important;
@@ -470,432 +491,435 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 //     padding: 5px 0;
 // }
 .panelId div div div div div .aw-splm-tableRow.ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
-    background: rgb(128, 128, 128) !important;
+  background: rgb(128, 128, 128) !important;
 }
-#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected
-, #linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableHoverRow
-, #linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .ui-grid-cell:hover {
-    border: none !important;
-    // width: 100% !important;
+#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected,
+#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableHoverRow,
+#linkTableAllId aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .ui-grid-cell:hover {
+  border: none !important;
+  // width: 100% !important;
 }
-#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.ui-grid-row-selected.aw-state-selected *{
-    /* background-color: #cacaca; */
-    font-weight: bold;
-    color: #ffffff;
-    text-decoration: underline;
-    /* border-color: #cacaca; */
+#linkTableAllId div div div div div .aw-splm-tableRow.ui-grid-row.aw-row-icon.ui-grid-row-selected.aw-state-selected * {
+  /* background-color: #cacaca; */
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: underline;
+  /* border-color: #cacaca; */
 }
 .splitshadow {
-    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
 }
 // 대시보드 차트 css
 #chartDashboardSite text {
-    color: white !important;
-    fill: white !important;
+  color: white !important;
+  fill: white !important;
 }
 #chartDashboardSite .aw-layout-summaryContent {
-    border: solid 1px #31393f;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+  border: solid 1px #31393f;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
 }
 #chartDashboardSite .aw-widgets-cellListItemContainer {
-    border-bottom: solid 1px #31393f;
+  border-bottom: solid 1px #31393f;
 }
 #chartDashboardSite .aw-widgets-cellListCellImage img {
-    border-radius: 70% !important;
-    // overflow: hidden !important;
+  border-radius: 70% !important;
+  // overflow: hidden !important;
 }
-#qnaListId div div div ul li ng-transclude group-header-cell a{
-    color: white !important;
+#qnaListId div div div ul li ng-transclude group-header-cell a {
+  color: white !important;
 }
-#expertListId div div div ul li ng-transclude group-header-cell a{
-    color: white !important;
+#expertListId div div div ul li ng-transclude group-header-cell a {
+  color: white !important;
 }
-#qnaListId .aw-widgets-cellListWidget .aw-widgets-cellListItem .aw-widgets-cellListCellTitle
-, #qnaListId .aw-base-scrollPanel .aw-widgets-cellListItem .aw-widgets-cellListCellTitle {
-    color: rgb(172, 172, 172);
+#qnaListId .aw-widgets-cellListWidget .aw-widgets-cellListItem .aw-widgets-cellListCellTitle,
+#qnaListId .aw-base-scrollPanel .aw-widgets-cellListItem .aw-widgets-cellListCellTitle {
+  color: rgb(172, 172, 172);
 }
-#expertListId .aw-widgets-cellListWidget .aw-widgets-cellListItem .aw-widgets-cellListCellTitle
-, #expertListId .aw-base-scrollPanel .aw-widgets-cellListItem .aw-widgets-cellListCellTitle {
-    color: rgb(172, 172, 172);
+#expertListId .aw-widgets-cellListWidget .aw-widgets-cellListItem .aw-widgets-cellListCellTitle,
+#expertListId .aw-base-scrollPanel .aw-widgets-cellListItem .aw-widgets-cellListCellTitle {
+  color: rgb(172, 172, 172);
 }
 #chartDashboardSite .aw-layout-panelSectionTitle {
-    color: #8a8a8a !important;
-    background-color: #171b1e !important;
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
 }
 .chartColor .aw-layout-panelBody {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
 #chartDashboardSite .aw-flex-column.afx-fill {
-    background-color: #282d33;
-    color: white;
+  background-color: #282d33;
+  color: white;
 }
 // .minColumn {
 //     box-shadow: inset 2px 0px 4px rgba(226, 226, 226, 0.623);
 // }
-#wareHouse .split{
-    margin-left:-8px;
-    margin-right:-8px;
+#wareHouse .split {
+  margin-left: -8px;
+  margin-right: -8px;
 }
 
-#wareHouse .seperatorSizeChange{
-    border-color:white !important;
-    margin: 8px 8px;
+#wareHouse .seperatorSizeChange {
+  border-color: white !important;
+  margin: 8px 8px;
 }
 
-#wareHouse .filterBackground{
-    color : #bdbdbd !important
+#wareHouse .filterBackground {
+  color: #bdbdbd !important;
 }
 
 //지식창고
 .backGroundWhiteImportant {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 #wareHouse .aw-layout-panelMain {
-    background-color: #282d33;
+  background-color: #282d33;
 }
 
-#mainBgColor{
-    background-color: #282d33 !important;   
+#mainBgColor {
+  background-color: #282d33 !important;
 }
 
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div img {
-    border: 7px solid #d81d3c !important;
+  border: 7px solid #d81d3c !important;
 }
 
 #mainListId div div div ul li:hover div div div img {
-    border: 7px solid #d81d3c !important;
+  border: 7px solid #d81d3c !important;
 }
 
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div p {
-    border: 7px solid #d81d3c;
+  border: 7px solid #d81d3c;
 }
 
 #mainListId div div div ul li:hover div div div p {
-    border: 7px solid #d81d3c;
+  border: 7px solid #d81d3c;
 }
 
 #mainListId div div div ul li div div div img {
-    border: 7px solid transparent !important;
+  border: 7px solid transparent !important;
 }
 
 #mainListId div div div ul li div div div h2 {
-    font-weight: 900;
-    font-size: 0.95rem !important;
-    color: white !important;
+  font-weight: 900;
+  font-size: 0.95rem !important;
+  color: white !important;
 }
 
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: white !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: white !important;
 }
 
 #mainListId div div div ul li:hover div div div h2 {
-    font-weight: 900;
-    text-decoration: underline;
-    font-size: 0.95rem !important;
-    color: white !important;
+  font-weight: 900;
+  text-decoration: underline;
+  font-size: 0.95rem !important;
+  color: white !important;
 }
 
-#mainListId div div div ul li{
-    border-bottom: 1px solid #464646 !important;
-    border-top:0px !important;
-    border-left:0px !important;
-    border-right:0px !important;
-
+#mainListId div div div ul li {
+  border-bottom: 1px solid #464646 !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
 }
 
 #wareHouse div div div ul li ng-transclude group-header-cell a {
-    color: white !important;
+  color: white !important;
 }
 
 #wareHouse .star-ratings-fill {
-    color: orangered !important;
-    font-size: 1.2rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: orangered !important;
+  color: orangered !important;
+  font-size: 1.2rem;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: orangered !important;
 }
 
-#wareHouse .middleMargin{
-    margin: 16px;
+#wareHouse .middleMargin {
+  margin: 16px;
 }
 
-#wareHouse .listShadow{
-    border: 1px solid #32373b;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+#wareHouse .listShadow {
+  border: 1px solid #32373b;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-#wareHouse .splitShadow{
-    box-shadow: inset 2px 0px 4px rgba(0, 0, 0, 0.3), 2px 0px 4px rgba(0, 0, 0, 0.3) !important;
+#wareHouse .splitShadow {
+  box-shadow: inset 2px 0px 4px rgba(0, 0, 0, 0.3), 2px 0px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
-#wareHouse .aw-widgets-modelObjectList{
-    margin: 0px;
+#wareHouse .aw-widgets-modelObjectList {
+  margin: 0px;
 }
 
 #awTreeBgColorId ul li {
-    background-color: #171b1e !important;
-    border-top:1px solid #464646 !important;
+  background-color: #171b1e !important;
+  border-top: 1px solid #464646 !important;
 }
 
 #awTreeBgColorId ul li aw-node ul li {
-    border-left: 16px solid #464646;
-    border-right: 16px solid #464646;
-    border-top: 1px solid #464646 !important;
+  border-left: 16px solid #464646;
+  border-right: 16px solid #464646;
+  border-top: 1px solid #464646 !important;
 }
 
 .backGroundWhiteImportant {
-    background-color: #171b1e !important;
-    color : white;
+  background-color: #171b1e !important;
+  color: white;
 }
 
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
-    background-color: #171b1e !important;
-    color : white;
+  background-color: #171b1e !important;
+  color: white;
 }
 
 #wareHouse .aw-state-selected * {
-    color: white !important;
-    text-decoration: underline;
-    font-weight: bold;
+  color: white !important;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 #awTreeBgColorId ul li * {
-    color: #8b8b8b !important;
+  color: #8b8b8b !important;
 }
 
 #awTreeBgColorId ul li div:hover * {
-    color: white !important;
+  color: white !important;
 }
 
-#awTreeBgColorId ul li aw-node *{
-    background-color: #22272d !important;
+#awTreeBgColorId ul li aw-node * {
+  background-color: #22272d !important;
 }
 
-#wareHouse a.aw-base-tabTitle{
-    color: #868686 !important;
+#wareHouse a.aw-base-tabTitle {
+  color: #868686 !important;
 }
 
-#wareHouse a.aw-base-tabTitleSelected, #wareHouse .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
-    border-bottom-color: white !important;
-    transition: border-color 0.2s ease-out;    
+#wareHouse a.aw-base-tabTitleSelected,
+#wareHouse .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: white !important;
+  border-bottom-color: white !important;
+  transition: border-color 0.2s ease-out;
 }
 
-#wareHouse .aw-layout-panelSectionContent{
-    background-color: #282d33;
+#wareHouse .aw-layout-panelSectionContent {
+  background-color: #282d33;
 }
 
-#showPercent, .showReviewText{
-    color: #a8a9ab !important;
+#showPercent,
+.showReviewText {
+  color: #a8a9ab !important;
 }
 
-#wareHouse .aw-layout-panelMain{
-    background-color: #171b1e !important;
+#wareHouse .aw-layout-panelMain {
+  background-color: #171b1e !important;
 }
 
 #wareHouse .aw-layout-panelSectionTitle {
-    color: #8a8a8a !important;
-    background-color: #171b1e !important;
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
 }
 #wareHouse h3 {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 #wareHouse .aw-splm-tableRow {
-    background-color: #22272d !important;
-    color:#868686 !important;
+  background-color: #22272d !important;
+  color: #868686 !important;
 }
 #wareHouse .aw-splm-tableHoverRow {
-    background-color: #868686 !important;
-    color:white !important;
+  background-color: #868686 !important;
+  color: white !important;
 }
 #wareHouse .aw-splm-tableHoverRow a {
-    color:white !important;
+  color: white !important;
 }
 
 //지식창고 상세정보
-.split .aw-layout-splitterLine{
-    border-color:#464646
+.split .aw-layout-splitterLine {
+  border-color: #464646;
 }
 
 .split2 {
-    margin-right:-7px;
-    flex: 0 0 8px !important;
+  margin-right: -7px;
+  flex: 0 0 8px !important;
 }
 
-.split2 .aw-layout-splitterLine{
-    border-color:#464646;
+.split2 .aw-layout-splitterLine {
+  border-color: #464646;
 }
 
 #reviews .aw-widgets-cellListItem {
-    border-color:transparent;
+  border-color: transparent;
 }
 
 #reviews .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover {
-    background-color:#ccc !important;
+  background-color: #ccc !important;
 }
 
-#moreViewLeftSide .aw-jswidget-tabPage{
-    background-color: #171b1e;
+#moreViewLeftSide .aw-jswidget-tabPage {
+  background-color: #171b1e;
 }
 
-#reListId div div div ul .aw-widgets-cellListItemSelected{
-    border: 7px solid #d81d3c !important;
-    background-color: white;
+#reListId div div div ul .aw-widgets-cellListItemSelected {
+  border: 7px solid #d81d3c !important;
+  background-color: white;
 }
 
-#reListId div div div ul li:hover{
-    border: 7px solid #d81d3c !important;
-    background-color: white;
+#reListId div div div ul li:hover {
+  border: 7px solid #d81d3c !important;
+  background-color: white;
 }
 
-#reListId div div div ul li{
-    border: 7px solid transparent;
-    background-clip: padding-box;
-    background-color: transparent;
-    color: white !important;
+#reListId div div div ul li {
+  border: 7px solid transparent;
+  background-clip: padding-box;
+  background-color: transparent;
+  color: white !important;
 }
 
-#reListId div div div ul li{
-    margin: 3px 0px;
+#reListId div div div ul li {
+  margin: 3px 0px;
 }
 
-#reListId .aw-widgets-cellListItemContainer{
-    justify-content: center !important;
+#reListId .aw-widgets-cellListItemContainer {
+  justify-content: center !important;
 }
 
 #reListId div div div ul .aw-widgets-cellListItemSelected .textSize {
-    color: black !important;
+  color: black !important;
 }
 
 #reListId div div div ul li:hover .textSize {
-    color: black !important;
+  color: black !important;
 }
 
-#fileListId div div div ul .aw-widgets-cellListItemSelected{
-    border: 7px solid #d81d3c !important;
-    background-color: white;
+#fileListId div div div ul .aw-widgets-cellListItemSelected {
+  border: 7px solid #d81d3c !important;
+  background-color: white;
 }
 
-#fileListId div div div ul li:hover{
-    border: 7px solid #d81d3c !important;
-    background-color: white;
+#fileListId div div div ul li:hover {
+  border: 7px solid #d81d3c !important;
+  background-color: white;
 }
 
-#fileListId div div div ul li{
-    border: 7px solid transparent;
-    background-clip: padding-box;
+#fileListId div div div ul li {
+  border: 7px solid transparent;
+  background-clip: padding-box;
 }
 
-#fileListId div div div ul li{
-    margin: 3px 0px;
+#fileListId div div div ul li {
+  margin: 3px 0px;
 }
 
-#fileListId .aw-widgets-cellListItemContainer{
-    justify-content: center !important;
+#fileListId .aw-widgets-cellListItemContainer {
+  justify-content: center !important;
 }
 
 #fileListId div div div ul .aw-widgets-cellListItemSelected .textSize {
-    color: black !important;
+  color: black !important;
 }
 
 #fileListId div div div ul li:hover .textSize {
-    color: black !important;
+  color: black !important;
 }
-
 
 #test1 .star-ratings-fill {
-    color: orangered !important;
-    font-size: 1.2rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    -webkit-text-fill-color: orangered !important;
+  color: orangered !important;
+  font-size: 1.2rem;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  -webkit-text-fill-color: orangered !important;
 }
 
-#test1 .star-rating :checked~label {
-    color: orangered !important;
+#test1 .star-rating :checked ~ label {
+  color: orangered !important;
 }
 
 #test1 .star-rating label:hover,
-#test1 .star-rating label:hover~label {
-    color: orangered !important;
+#test1 .star-rating label:hover ~ label {
+  color: orangered !important;
 }
 
-#test1 .leftArrowSpace:hover{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#test1 .leftArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-#test1 .rightArrowSpace:hover{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#test1 .rightArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-#test1 .rightArrowSpace svg line, #test1 .leftArrowSpace svg line{
-    stroke:white !important
+#test1 .rightArrowSpace svg line,
+#test1 .leftArrowSpace svg line {
+  stroke: white !important;
 }
 
-#showFullStar svg path{
-    fill:orange;
+#showFullStar svg path {
+  fill: orange;
 }
 
-#test1 .aw-layout-panelBody{
-    background-color: #181c1f;
+#test1 .aw-layout-panelBody {
+  background-color: #181c1f;
 }
-#test1 textarea, #test1 textarea:hover{
-    background-color: #222222 !important;
-    color:white !important;
+#test1 textarea,
+#test1 textarea:hover {
+  background-color: #222222 !important;
+  color: white !important;
 }
 
 #test1 .aw-xrt-tabsContainer {
-    background-color: black !important;
+  background-color: black !important;
 }
 
-#test1 a.aw-base-tabTitle{
-    color: #868686 !important;
+#test1 a.aw-base-tabTitle {
+  color: #868686 !important;
 }
 
-#test1 a.aw-base-tabTitleSelected, #test1 .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
-    border-bottom-color: white !important;
-    transition: border-color 0.2s ease-out;    
+#test1 a.aw-base-tabTitleSelected,
+#test1 .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: white !important;
+  border-bottom-color: white !important;
+  transition: border-color 0.2s ease-out;
 }
 
-#test1 .aw-layout-panelMain{
-    background-color: #181c1f;
+#test1 .aw-layout-panelMain {
+  background-color: #181c1f;
 }
 
 #test1 a {
-    color: #d81d3c;
+  color: #d81d3c;
 }
 
-.textSize{
-    color: white !important;
+.textSize {
+  color: white !important;
 }
 
 //필터
 #filterView .aw-widgets-propertyContainer {
-    color: #868686 !important;
+  color: #868686 !important;
 }
 
 .aw-popup-balloon .popupInner {
-    background-color: #171b1e;
+  background-color: #171b1e;
 }
 
 // .aw-layout-popup .popupArrow .arrow_bg .arrow_fg {
@@ -915,188 +939,206 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 //     color: white;
 // }
 
-#filterView input[type="text"] {
-    background-color: #464646 !important;
-    color: white !important;
+#filterView input[type='text'] {
+  background-color: #464646 !important;
+  color: white !important;
 }
 
 #searchTableResult a {
-    color: #868686 !important;
+  color: #868686 !important;
 }
 
-#searchTableResult .aw-splm-tableHeaderCell{
-    background-color: #171b1e;
-    color : white;
+#searchTableResult .aw-splm-tableHeaderCell {
+  background-color: #171b1e;
+  color: white;
 }
 
 #searchTableResult .aw-splm-tableHeaderRow {
-    background-color: #171b1e;
+  background-color: #171b1e;
 }
 // Q&A css
 .answerSection .aw-widgets-cellListItem {
-    border: solid 1px #31393f !important;
+  border: solid 1px #31393f !important;
 }
-.changeWhite{
-    background-color: #52575e !important;
+.changeWhite {
+  background-color: #52575e !important;
 }
 #qnaDatas .aw-layout-panelSectionTitle {
-    color: #8a8a8a !important;
-    background-color: #171b1e !important;
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
 }
 #qnaDatas .aw-layout-splitter {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
 #qnaDatas .aw-commands-commandBarHorizontal .aw-commandIcon {
-    display: none !important;
+  display: none !important;
 }
-.borderShadow2, .borderShadowFaq2 {
-    border-color: #31393f !important;
-    box-shadow: none !important;
-    background-color: #181c1f !important;
+.borderShadow2,
+.borderShadowFaq2 {
+  border-color: #31393f !important;
+  box-shadow: none !important;
+  background-color: #181c1f !important;
 }
-#commandColorId div aw-command[command-id="0"] button div {
-    color: #8a8a8a;
-    font-weight: bold;
+#commandColorId div aw-command[command-id='0'] button div {
+  color: #8a8a8a;
+  font-weight: bold;
 }
 // #qnaDatas .leftPadding h3 {
 //     background-color: #181c1f !important;
 //     color: #898b8a;
 // }
-#qnaDatas h3, #mainTechnicalData h3 {
-    color: #898b8a;
+#qnaDatas h3,
+#mainTechnicalData h3 {
+  color: #898b8a;
 }
 #mainTechnicalData h3 {
-    background-color: #181c1f;
+  background-color: #181c1f;
 }
-#qnaDatas .aw-splm-tableHeaderRow, #qnaDatas .aw-splm-tableHeaderCell, #mainTechnicalData .aw-splm-tableHeaderRow, #mainTechnicalData .aw-splm-tableHeaderCell {
-    background-color: #282d33 !important;
-    color: white !important;
+#qnaDatas .aw-splm-tableHeaderRow,
+#qnaDatas .aw-splm-tableHeaderCell,
+#mainTechnicalData .aw-splm-tableHeaderRow,
+#mainTechnicalData .aw-splm-tableHeaderCell {
+  background-color: #282d33 !important;
+  color: white !important;
 }
-#qnaDatas .borderShadow, #mainTechnicalData .borderShadow {
-    border: solid 1px #31393f !important;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+#qnaDatas .borderShadow,
+#mainTechnicalData .borderShadow {
+  border: solid 1px #31393f !important;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
 }
 .borderShadowFaq {
-    border: solid 1px #31393f !important;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+  border: solid 1px #31393f !important;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
 }
-#qnaDatas .aw-jswidgets-grid, #mainTechnicalData .aw-jswidgets-grid {
-    border: none;
+#qnaDatas .aw-jswidgets-grid,
+#mainTechnicalData .aw-jswidgets-grid {
+  border: none;
 }
-#qnaDatas .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row, #mainTechnicalData .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row {
-    background-color: #282d33 !important;
-    border-color: #31393f !important;
-    color: #bdbdbd !important;
+#qnaDatas .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+#mainTechnicalData .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row {
+  background-color: #282d33 !important;
+  border-color: #31393f !important;
+  color: #bdbdbd !important;
 }
 #qnaDatas .aw-flex-row.afx-static-size {
-    // background-color: #282d33 !important;
-    color: white;
+  // background-color: #282d33 !important;
+  color: white;
 }
 .relativeW {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 .relativeE {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
-#qnaDatas .aw-flex-row.afx-fill, #mainTechnicalData .aw-flex-row.afx-fill {
-    background-color: #181c1f !important;
+#qnaDatas .aw-flex-row.afx-fill,
+#mainTechnicalData .aw-flex-row.afx-fill {
+  background-color: #181c1f !important;
 }
 #qnaDatas .borderShadow3 .aw-flex-row.afx-fill {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 // #qnaDatas .aw-flex-row.afx-fill {
 //     background-color: #181c1f !important;
 // }
-#qnaDatas .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected > .ui-grid-cell, #mainTechnicalData .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
-    color: #bdbdbd !important;
-    border-color: #969696 !important;
-    // width: 100% !important;
+#qnaDatas .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+#mainTechnicalData .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
+  color: #bdbdbd !important;
+  border-color: #969696 !important;
+  // width: 100% !important;
 }
-#qnaDatas aw-listbox input.aw-jswidgets-choice, #mainTechnicalData aw-listbox input.aw-jswidgets-choice {
-    background-color: rgb(187, 187, 187);
+#qnaDatas aw-listbox input.aw-jswidgets-choice,
+#mainTechnicalData aw-listbox input.aw-jswidgets-choice {
+  background-color: rgb(187, 187, 187);
 }
-#qnaDatas .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected, #mainTechnicalData .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected {
-    background-color: rgb(46, 55, 64) !important;
+#qnaDatas .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected,
+#mainTechnicalData .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected {
+  background-color: rgb(46, 55, 64) !important;
 }
-#qnaDatas .aw-splm-table .ui-grid-row.aw-splm-tableHoverRow, #mainTechnicalData .aw-splm-table .ui-grid-row.aw-splm-tableHoverRow {
-    background: rgb(56, 66, 77) !important;
+#qnaDatas .aw-splm-table .ui-grid-row.aw-splm-tableHoverRow,
+#mainTechnicalData .aw-splm-table .ui-grid-row.aw-splm-tableHoverRow {
+  background: rgb(56, 66, 77) !important;
 }
-#qnaDatas .aw-splm-table .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow, #mainTechnicalData .aw-splm-table .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
-    background: rgb(73, 88, 102) !important;
+#qnaDatas .aw-splm-table .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+#mainTechnicalData .aw-splm-table .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
+  background: rgb(73, 88, 102) !important;
 }
-.borderShadow a, .borderShadowFaq a {
-    color: #bdbdbd;
+.borderShadow a,
+.borderShadowFaq a {
+  color: #bdbdbd;
 }
-.borderShadow a:hover, .borderShadowFaq a:hover {
-    color: rgb(168, 122, 128);
+.borderShadow a:hover,
+.borderShadowFaq a:hover {
+  color: rgb(168, 122, 128);
 }
-.question, .faqBorder {
-    border: solid 1px #31393f !important;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
-    background-color: #282d33 !important;
-    color: #bdbdbd !important;
+.question,
+.faqBorder {
+  border: solid 1px #31393f !important;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+  background-color: #282d33 !important;
+  color: #bdbdbd !important;
 }
 #qnaDatas span {
-    color: white !important;
-    font-weight: bold;
+  color: white !important;
+  font-weight: bold;
 }
 #qnaDatas p {
-    color: white !important;
+  color: white !important;
 }
 .answerSection {
-    border: solid 1px #31393f !important;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
-    background-color: #282d33 !important;
-    color: #bdbdbd !important;
+  border: solid 1px #31393f !important;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+  background-color: #282d33 !important;
+  color: #bdbdbd !important;
 }
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] {
-    color: white !important;
-    background-color: rgb(35, 40, 46) !important;
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'] {
+  color: white !important;
+  background-color: rgb(35, 40, 46) !important;
 }
 #qnaDatas .aw-theme-iconOutline {
-    fill: #bdbdbd !important;
+  fill: #bdbdbd !important;
 }
-#qnaDatas .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, #qnaDatas .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+#qnaDatas .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+#qnaDatas .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-#qnaDatas .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, #qnaDatas .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+#qnaDatas .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+#qnaDatas .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-#qnaDatas .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, #qnaDatas .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+#qnaDatas .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+#qnaDatas .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
 #qnaDatas .answerSection .aw-flex-row.afx-fill {
-    background-color: #464f58 !important;
+  background-color: #464f58 !important;
 }
 // #qnaDatas .aw-widgets-cellListItemContainer {
 //     border-bottom: solid 1px #464f58 !important;
 // }
 #qnaDatas .answerSection .aw-layout-panelBody {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 .note-toolbar {
-    background-color: #181c1f !important;
-    border-color: #464f58 !important;
+  background-color: #181c1f !important;
+  border-color: #464f58 !important;
 }
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=true] {
-    background-color: #52575e !important;
-    color: white !important;
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='true'] {
+  background-color: #52575e !important;
+  color: white !important;
 }
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=true] p, .note-editor.note-frame .note-editing-area .note-editable[contenteditable=false] p {
-    color: white !important;
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='true'] p,
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'] p {
+  color: white !important;
 }
 #qnaDatas .note-toolbar span {
-    color: #333 !important;
-    font-weight: normal;
+  color: #333 !important;
+  font-weight: normal;
 }
 // .note-btn:hover {
 //     background-color: #1f242b !important;
@@ -1104,279 +1146,293 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 // .note-btn {
 //     background-color: #282d33 !important;
 // }
-#addPop .aw-layout-panelBody, .popupInner .aw-layout-panelBody {
-    background-color: #181c1f !important;
-    color: white !important;
+#addPop .aw-layout-panelBody,
+.popupInner .aw-layout-panelBody {
+  background-color: #181c1f !important;
+  color: white;
 }
 .note-frame {
-    color: white;
+  color: white;
 }
-#addPop input[type="text"], .textareaSize textarea {
-    background-color: #181c1f !important;
-    color: #bdbdbd !important;
+#addPop input[type='text'],
+.textareaSize textarea {
+  background-color: #181c1f !important;
+  color: #bdbdbd !important;
 }
-#addPop a, #faqDatas a {
-    color: #bdbdbd !important;
+#addPop a,
+#faqDatas a {
+  color: #bdbdbd !important;
 }
-#addPop .aw-layout-panelFooter, .popupInner .aw-layout-panelFooter, #mainTechnicalData .aw-layout-panelMain {
-    background-color: #181c1f !important;
+#addPop .aw-layout-panelFooter,
+.popupInner .aw-layout-panelFooter,
+#mainTechnicalData .aw-layout-panelMain {
+  background-color: #181c1f !important;
 }
 #qnaDatas text {
-    color: white !important;
-    fill: white !important;
+  color: white !important;
+  fill: white !important;
 }
-.aw-theme-separator, .lblLayout .aw-widgets-propertyContainer {
-    border-color: #464f58 !important;
+.aw-theme-separator,
+.lblLayout .aw-widgets-propertyContainer {
+  border-color: #464f58 !important;
 }
 // 기술문서 css
 #mainTechnicalData .aw-commands-commandBarHorizontal .aw-commandIcon {
-    display: none !important;
+  display: none !important;
 }
 .noPadding .aw-layout-panelSection {
-    border: solid 1px #464f58 !important;
-    background-color: #282d33 !important;
+  border: solid 1px #464f58 !important;
+  background-color: #282d33 !important;
 }
 #mainTechnicalData .aw-layout-panelSection {
-    color: #bdbdbd !important;
+  color: #bdbdbd !important;
 }
 #mainTechnicalData span {
-    color: white !important;
-    font-weight: bold;
+  color: white !important;
+  font-weight: bold;
 }
 #mainTechnicalData a {
-    color: #bdbdbd;
+  color: #bdbdbd;
 }
 #mainTechnicalData a:hover {
-    color: rgb(168, 122, 128);
+  color: rgb(168, 122, 128);
 }
 .labHei .aw-widgets-propertyContainer {
-    border-bottom: solid 1px #464f58 !important;
+  border-bottom: solid 1px #464f58 !important;
 }
 #mainTechnicalData .aw-layout-panelSectionTitle {
-    color: #8a8a8a !important;
-    background-color: #171b1e !important;
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
 }
-#mainTechnicalData .aw-layout-panelSectionContent, #mainTechnicalData .rowColor .aw-flex-row.afx-fill {
-    background-color: #282d33 !important;
+#mainTechnicalData .aw-layout-panelSectionContent,
+#mainTechnicalData .rowColor .aw-flex-row.afx-fill {
+  background-color: #282d33 !important;
 }
 #mainTechnicalData .aw-theme-iconOutline {
-    fill: #bdbdbd !important;
+  fill: #bdbdbd !important;
 }
 .titleMargin textarea {
-    height: 36px;
-    background-color: #181c1f !important;
-    color: #8c8c8c !important;
+  height: 36px;
+  background-color: #181c1f !important;
+  color: #8c8c8c !important;
 }
 // 전문가에게 질문해요 css
 #qnaDatas .expertColor .aw-flex-row.afx-fill {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 #qnaDatas .expertColor .answerSection .aw-flex-row.afx-fill {
-    background-color: #464f58 !important;
+  background-color: #464f58 !important;
 }
-.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected
-, .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover
-, .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: #ffb900 !important;
-    border-bottom-color: #ffb900 !important;
+.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected,
+.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+.aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: #ffb900 !important;
+  border-bottom-color: #ffb900 !important;
 }
 
 // 홈폴더 css
-#main-view aw-secondary-workarea .aw-jswidgets-grid .ui-grid-row .ui-grid-cell
-, #main-view aw-primary-workarea .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
-    border-color: #31393f !important;
-    // border: none !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid .ui-grid-row .ui-grid-cell,
+#main-view aw-primary-workarea .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
+  border-color: #31393f !important;
+  // border: none !important;
 }
 aw-showobject-page .aw-layout-subLocationTitles {
-    background-color: #181c1f;
-    color: #8c8c8c;
-    fill: #8c8c8c;
+  background-color: #181c1f;
+  color: #8c8c8c;
+  fill: #8c8c8c;
 }
 aw-secondary-workarea .aw-layout-sublocationContent {
-    background-color: #181c1f;
-    color: #8c8c8c;
-    fill: #8c8c8c;
+  background-color: #181c1f;
+  color: #8c8c8c;
+  fill: #8c8c8c;
 }
 .aw-layout-splitter {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
 .aw-commands-commandBarVertical .aw-commands-wrapper.aw-no-overflow {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
-.aw-commands-commandBarVertical .aw-commands-wrapper.aw-no-overflow .aw-theme-iconOutline
-, .aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
-    fill: #bdbdbd !important;
-    color: #bdbdbd !important;
+.aw-commands-commandBarVertical .aw-commands-wrapper.aw-no-overflow .aw-theme-iconOutline,
+.aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
+  fill: #bdbdbd !important;
+  color: #bdbdbd !important;
 }
 .aw-layout-subLocation .aw-layout-panelSectionTitle {
-    background-color: #282d33 !important;
-    color: #bdbdbd !important;
+  background-color: #282d33 !important;
+  color: #bdbdbd !important;
 }
 .aw-splm-tablePinnedContainer {
-    // border: solid 1px #31393f !important;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+  // border: solid 1px #31393f !important;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
 }
-#main-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, #main-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+#main-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+#main-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-#main-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, #main-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+#main-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+#main-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-#main-view .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, #main-view .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+#main-view .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+#main-view .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, #main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
-    color: #bdbdbd !important;
-    border-color: #969696 !important;
-    // width: 100% !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
+  color: #bdbdbd !important;
+  border-color: #969696 !important;
+  // width: 100% !important;
 }
-#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected
-, #main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected {
-    background-color: rgb(60, 72, 83) !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected,
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected {
+  background-color: rgb(60, 72, 83) !important;
 }
-#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow
-, #main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow {
-    background: rgb(88, 102, 117) !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow,
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow {
+  background: rgb(88, 102, 117) !important;
 }
-#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, #main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
-    background: rgb(113, 127, 139) !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
+  background: rgb(113, 127, 139) !important;
 }
-#main-view aw-secondary-workarea .aw-splm-tableHeaderRow, #main-view aw-secondary-workarea .aw-splm-tableHeaderCell
-, #main-view aw-primary-workarea .aw-splm-tableHeaderRow, #main-view aw-primary-workarea .aw-splm-tableHeaderCell {
-    background-color: #181c1f !important; 
-    // border: solid 1px #31393f !important;
-    color: white !important;
+#main-view aw-secondary-workarea .aw-splm-tableHeaderRow,
+#main-view aw-secondary-workarea .aw-splm-tableHeaderCell,
+#main-view aw-primary-workarea .aw-splm-tableHeaderRow,
+#main-view aw-primary-workarea .aw-splm-tableHeaderCell {
+  background-color: #181c1f !important;
+  // border: solid 1px #31393f !important;
+  color: white !important;
 }
-#main-view aw-secondary-workarea .aw-jswidgets-grid
-, #main-view aw-primary-workarea .aw-jswidgets-grid {
-    // background-color: #181c1f !important;
-    border: solid 1px #31393f !important;
-    // color: white !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid,
+#main-view aw-primary-workarea .aw-jswidgets-grid {
+  // background-color: #181c1f !important;
+  border: solid 1px #31393f !important;
+  // color: white !important;
 }
-#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row
-, #main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row
-, #main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row {
-    background-color: #282d33 !important;
-    border-color: #31393f !important;
-    color: #bdbdbd !important;
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+#main-view aw-secondary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+#main-view aw-primary-workarea .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row {
+  background-color: #282d33 !important;
+  border-color: #31393f !important;
+  color: #bdbdbd !important;
 }
-#main-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover
-, #main-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected
-, #main-view .afx-content-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover
-, #main-view .afx-content-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected {
-    color: white !important;
-    border-bottom-color: white !important;
-}
+// #main-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+// #main-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected,
+// #main-view .afx-content-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+// #main-view .afx-content-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected {
+//   color: white !important;
+//   border-bottom-color: white !important;
+// }
 #main-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
-    border: none;
+  color: white !important;
+  border: none;
 }
 #main-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle {
-    color: #494c4e !important;
+  color: #494c4e !important;
 }
-#main-view aw-primary-workarea span, #main-view aw-secondary-workarea span {
-    color: white !important;
-    font-weight: bold;
+#main-view aw-primary-workarea span,
+#main-view aw-secondary-workarea span {
+  color: white !important;
+  font-weight: bold;
 }
 #main-view a {
-    color: rgb(199, 131, 137);
+  color: rgb(199, 131, 137);
 }
 #main-view a:hover {
-    color: rgb(241, 80, 102);
+  color: rgb(241, 80, 102);
 }
 #main-view .aw-theme-toolbar {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
 #main-view .aw-theme-iconOutline {
-    fill: #bdbdbd !important;
+  fill: #bdbdbd !important;
 }
 #main-view aw-primary-workarea .aw-base-scrollPanel {
-    background-color: #282d33 !important;
-    border-color: #31393f !important;
-    color: #bdbdbd !important;
+  background-color: #282d33 !important;
+  border-color: #31393f !important;
+  color: #bdbdbd !important;
 }
 #main-view .awRoot aw-primary-workarea {
-    border: solid 1px #31393f !important;
-    box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
+  border: solid 1px #31393f !important;
+  box-shadow: 1px 4px 2px 0px rgba(93, 101, 105, 0.233) !important;
 }
-#main-view .aw-splm-tableHeaderCellSortIcon, #main-view .aw-splm-tableMenuButton {
-    background-color: #181c1f !important;
-    color: #ffffff;
+#main-view .aw-splm-tableHeaderCellSortIcon,
+#main-view .aw-splm-tableMenuButton {
+  background-color: #181c1f !important;
+  color: #ffffff;
 }
 #main-view .awRoot aw-primary-workarea .aw-layout-workareaCommandbar {
-    margin-bottom: 1px;
+  margin-bottom: 1px;
 }
 #main-view .aw-layout-summaryList .aw-widgets-cellListWidget .aw-widgets-cellListItem {
-    border-bottom: 1px solid #464f58 !important;
+  border-bottom: 1px solid #464f58 !important;
 }
 #main-view .aw-layout-sublocationContent.aw-base-scrollPanel {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
-#main-view .afx-base-parentElement .aw-layout-flexbox, #main-view .afx-base-parentElement .afx-alt-content-background {
-    background-color: #181c1f !important;
+#main-view .afx-base-parentElement .aw-layout-flexbox,
+#main-view .afx-base-parentElement .afx-alt-content-background {
+  background-color: #181c1f !important;
 }
 
 //질문추가
-#issueDisalbe input[type="text"] {
-    pointer-events: none;
-    background-color: #555 !important;
-    opacity: 1;
+#issueDisalbe input[type='text'] {
+  pointer-events: none;
+  background-color: #555 !important;
+  opacity: 1;
 }
 
 // 체크리스트
-.fmea-view .aw-jswidgets-grid .ui-grid-row .ui-grid-cell, .table-container .aw-jswidgets-grid .ui-grid-row .ui-grid-cell, .aw-layout-panelMain .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
-    border-color: #31393f !important;
-    // border: none !important;
+.fmea-view .aw-jswidgets-grid .ui-grid-row .ui-grid-cell,
+.table-container .aw-jswidgets-grid .ui-grid-row .ui-grid-cell,
+.aw-layout-panelMain .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
+  border-color: #31393f !important;
+  // border: none !important;
 }
-.fmea-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, .fmea-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, .table-container .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, .table-container .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, .aw-layout-panelMain .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe)
-, .aw-layout-panelMain .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+.fmea-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+.fmea-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+.table-container .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+.table-container .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+.aw-layout-panelMain .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe),
+.aw-layout-panelMain .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe) {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-.fmea-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, .fmea-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, .table-container .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, .table-container .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, .aw-layout-panelMain .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover
-, .aw-layout-panelMain .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+.fmea-view .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+.fmea-view .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+.table-container .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+.table-container .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+.aw-layout-panelMain .aw-widgets-cellListWidget .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover,
+.aw-layout-panelMain .aw-base-scrollPanel .aw-widgets-cellListItem.aw-widgets-cellListItemSelected:not(.aw-widgets-dropframe):hover {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
-.fmea-view .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, .fmea-view .aw-base-scrollPanel .aw-widgets-cellListItem:hover
-, .table-container .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, .table-container .aw-base-scrollPanel .aw-widgets-cellListItem:hover
-, .aw-layout-panelMain .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
-, .aw-layout-panelMain .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
-    background-color: #464f58 !important;
-    border-color: #464f58 !important;
-    color: #bdbdbd !important;
+.fmea-view .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+.fmea-view .aw-base-scrollPanel .aw-widgets-cellListItem:hover,
+.table-container .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+.table-container .aw-base-scrollPanel .aw-widgets-cellListItem:hover,
+.aw-layout-panelMain .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover,
+.aw-layout-panelMain .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
+  background-color: #464f58 !important;
+  border-color: #464f58 !important;
+  color: #bdbdbd !important;
 }
 // .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover
 // , .aw-base-scrollPanel .aw-widgets-cellListItem:hover {
@@ -1384,110 +1440,120 @@ aw-secondary-workarea .aw-layout-sublocationContent {
 //     border-color: #464f58 !important;
 //     color: #bdbdbd !important;
 // }
-.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, .fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, .table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, .table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
-    color: #bdbdbd !important;
-    border-color: #969696 !important;
-    // width: 100% !important;
+.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+.fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+.table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+.table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
+  color: #bdbdbd !important;
+  border-color: #969696 !important;
+  // width: 100% !important;
 }
-.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected
-, .fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected
-, .table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected
-, .table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected {
-    background-color: rgb(60, 72, 83) !important;
+.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected,
+.fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected,
+.table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected,
+.table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected {
+  background-color: rgb(60, 72, 83) !important;
 }
-.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow
-, .fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow
-, .table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow
-, .table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow {
-    background: rgb(88, 102, 117) !important;
+.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow,
+.fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow,
+.table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow,
+.table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow {
+  background: rgb(88, 102, 117) !important;
 }
-.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, .fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, .table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, .table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
-    background: rgb(113, 127, 139) !important;
+.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+.fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+.table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+.table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
+  background: rgb(113, 127, 139) !important;
 }
-.fmea-view .aw-splm-tableHeaderRow, .fmea-view .aw-splm-tableHeaderCell, .table-container .aw-splm-tableHeaderRow, .table-container .aw-splm-tableHeaderCell, .aw-layout-panelMain .aw-splm-tableHeaderRow, .aw-layout-panelMain .aw-splm-tableHeaderCell {
-    background-color: #181c1f !important; 
-    // border: solid 1px #31393f !important;
-    color: white !important;
+.fmea-view .aw-splm-tableHeaderRow,
+.fmea-view .aw-splm-tableHeaderCell,
+.table-container .aw-splm-tableHeaderRow,
+.table-container .aw-splm-tableHeaderCell,
+.aw-layout-panelMain .aw-splm-tableHeaderRow,
+.aw-layout-panelMain .aw-splm-tableHeaderCell {
+  background-color: #181c1f !important;
+  // border: solid 1px #31393f !important;
+  color: white !important;
 }
 // .table-container .aw-splm-tableHeaderRow, .table-container .aw-splm-tableHeaderCell {
 //     margin-left: 0.5px;
 // }
-.fmea-view .aw-jswidgets-grid, .table-container .aw-jswidgets-grid, .aw-layout-panelMain .aw-jswidgets-grid {
-    // background-color: #181c1f !important;
-    border: solid 1px #31393f !important;
-    // color: white !important;
+.fmea-view .aw-jswidgets-grid,
+.table-container .aw-jswidgets-grid,
+.aw-layout-panelMain .aw-jswidgets-grid {
+  // background-color: #181c1f !important;
+  border: solid 1px #31393f !important;
+  // color: white !important;
 }
-.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row
-, .fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row
-, .table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row
-, .table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row
-, .right-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row
-, .right-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row
-, .aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row {
-    background-color: #282d33 !important;
-    border-color: #31393f !important;
-    color: #bdbdbd !important;
+.fmea-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+.fmea-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row,
+.table-container .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+.table-container .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row,
+.right-view .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+.right-view .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+.aw-layout-panelMain .aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row {
+  background-color: #282d33 !important;
+  border-color: #31393f !important;
+  color: #bdbdbd !important;
 }
-.right-view .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover, .aw-selection-summaryContainer .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
-    border-bottom-color: white !important;
+.right-view .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover,
+.aw-selection-summaryContainer .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: white !important;
+  border-bottom-color: white !important;
 }
 .aw-xrt-element span {
-    color: white !important;
-    font-weight: bold;
+  color: white !important;
+  font-weight: bold;
 }
-.aw-xrt-element .aw-widgets-propertyLabelTop, .header__search {
-    background-color: #181c1f !important;
-    color: #8c8c8c !important;
-    fill: #8c8c8c;
+.aw-xrt-element .aw-widgets-propertyLabelTop,
+.header__search {
+  background-color: #181c1f !important;
+  color: #8c8c8c !important;
+  fill: #8c8c8c;
 }
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false]
-, .note-editor.note-airframe .note-editing-area .note-editable[contenteditable=false] {
-    background-color: rgb(35, 40, 46) !important;
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'],
+.note-editor.note-airframe .note-editing-area .note-editable[contenteditable='false'] {
+  background-color: rgb(35, 40, 46) !important;
 }
-.note-editor.note-frame, .note-editor.note-airframe {
-    border: 1px solid #31393f !important;
+.note-editor.note-frame,
+.note-editor.note-airframe {
+  border: 1px solid #31393f !important;
 }
 .aw-layout-panelMain {
-    background-color: #181c1f;
+  background-color: #181c1f;
 }
 .fmea-view .aw-command-panelContainer .aw-layout-commandPanelContent {
-    border: none;
-    color: #8c8c8c;
+  border: none;
+  color: #8c8c8c;
 }
 .header .aw-widgets-propertyLabelTop {
-    background-color: #181c1f;
-    color: #8c8c8c !important;
-    fill: #8c8c8c;
+  background-color: #181c1f;
+  color: #8c8c8c !important;
+  fill: #8c8c8c;
 }
 .header span {
-    color: white !important;
-    font-weight: bold;
+  color: white !important;
+  font-weight: bold;
 }
 .main-container .aw-command-panelContainer .aw-layout-commandPanelContent {
-    border: none;
-    color: #8c8c8c;
+  border: none;
+  color: #8c8c8c;
 }
-.main-container .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected
-, .main-container .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover
-, .main-container .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
-    color: white !important;
-    border-bottom-color: white !important;
+.main-container .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected,
+.main-container .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+.main-container .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitle:hover {
+  color: white !important;
+  border-bottom-color: white !important;
 }
 // .table-container .tui-grid-cell-header {
 //     background-color: #181c1f !important;
@@ -1525,11 +1591,11 @@ aw-secondary-workarea .aw-layout-sublocationContent {
 
 // 설계절차서
 aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
-    margin-left: 50px;
+  margin-left: 50px;
 }
 
 .aw-widgets-breadCrumbCompact .aw-layout-eachCrumb:first-child .aw-widgets-primaryCrumb {
-    margin-left: -50px !important;
+  margin-left: -50px !important;
 }
 
 // .note-editor.note-frame .note-editing-area .note-editable[contenteditable=false]{
@@ -1538,105 +1604,265 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
 
 // 헬프데스크 메뉴얼
 .noColor {
-    background: rgb(40, 45, 51) !important;
-    color: white;
+  background: rgb(40, 45, 51) !important;
+  color: white;
 }
 .noColor button.aw-base-blk-button:not(.disabled).aw-accent-caution:not(.aw-widgets-staticChip):hover {
-    background-color: #6b6b6b !important;
+  background-color: #6b6b6b !important;
 }
 .noColor button.aw-base-blk-button:not(.disabled).aw-accent-caution {
-    background-color: #8b8b8b !important;
-    color: black !important;
-    border-color: #6b6b6b !important;
+  background-color: #8b8b8b !important;
+  color: black !important;
+  border-color: #6b6b6b !important;
 }
 .aw-flex-row.afx-fill {
-    background-color: #181c1f !important;
+  background-color: #181c1f !important;
 }
-.popupInner input[type="text"] {
-    background-color: #181c1f !important;
-    color: #6b6e74 !important;
-    border-color: #4f545c !important;
+.popupInner input[type='text'] {
+  background-color: #181c1f !important;
+  color: #6b6e74 !important;
+  border-color: #4f545c !important;
 }
-#summernoteBodyId .leftArrowSpace:hover{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#summernoteBodyId .leftArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
-#summernoteBodyId .rightArrowSpace:hover{
-    background-color: rgba(0, 0, 0, 0.5) !important;
+#summernoteBodyId .rightArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.interaction-desc .text-desc, .color-desc .color__title{
-    color: #000 !important;
+.interaction-desc .text-desc,
+.color-desc .color__title {
+  color: #000 !important;
 }
 
 // 타일
 .aw-theme-commandsActionsTile {
-    background-color: #808080 !important;
-    fill: #ffffff;
-    color: #ffffff;
-    
+  background-color: #808080 !important;
+  fill: #ffffff;
+  color: #ffffff;
 }
 
 .aw-tile-tileContainer {
-    width: 150px;
-    height: 150px;
-    font-weight: 300;
-    font-size: 1.125rem;
-    letter-spacing: 0.02em;
-    line-height: 19px;
-    box-shadow: none;
-    text-decoration: none;
-    cursor: pointer;
-    position: relative;
-    outline: 0;
-    border: transparent solid 2px;
+  width: 150px;
+  height: 150px;
+  font-weight: 300;
+  font-size: 1.125rem;
+  letter-spacing: 0.02em;
+  line-height: 19px;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  outline: 0;
+  border: transparent solid 2px;
 }
 
 .aw-tile-tileImage .aw-base-icon {
-    min-width: 100%;
-    max-height: 100%;
+  min-width: 100%;
+  max-height: 100%;
 }
 
 .aw-tile-tileContent > .aw-layout-flexColumn {
-    -webkit-justify-content: center;
-    -ms-flex-pack: justify;
-    justify-content: center;
-    padding-top: 15px;
+  -webkit-justify-content: center;
+  -ms-flex-pack: justify;
+  justify-content: center;
+  padding-top: 15px;
 }
 
-#showText{
-    color: #ffffff !important;
+#showText {
+  color: #ffffff !important;
 }
 
 //좌측 커맨드 바
 
 .awRoot .global-navigation-toolbar aw-command-bar.aw-commands-commandBarVertical {
-    width: 72px;
+  width: 72px;
 }
 
-.aw-commands-showIconLabel .global-navigation-toolbar aw-command-bar:not(.aw-layout-userSessionCommands).aw-commands-commandBarVertical .aw-commands-commandIconButton {
-    height: auto;
-    max-height: 3.5rem;
-    width: 72px;
-    padding: 0.375rem 0;
-    margin: 0;
+.aw-commands-showIconLabel
+  .global-navigation-toolbar
+  aw-command-bar:not(.aw-layout-userSessionCommands).aw-commands-commandBarVertical
+  .aw-commands-commandIconButton {
+  height: auto;
+  max-height: 3.5rem;
+  width: 72px;
+  padding: 0.375rem 0;
+  margin: 0;
 }
 //text-View 글자
 
 p#imgSize {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 12;
-    -webkit-box-orient: vertical;
-    white-space: pre-line;
-    line-height: 1rem;
-    color: white !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 12;
+  -webkit-box-orient: vertical;
+  white-space: pre-line;
+  line-height: 1rem;
+  color: white !important;
 }
 
 #qnaDatas #summaryContentStyle .aw-layout-flexbox {
-    background-color: #282d33 !important;
+  background-color: #282d33 !important;
 }
 
-.selectNavigateCommand{
-    background-color: rgba(255,255,255,0.2);
+#summaryContentStyle div#labelHeight {
+  color: #bdbdbd;
+  background-color: #282d33 !important;
+}
+
+div#fontColorChart {
+  color: #bdbdbd;
+  background-color: #282d33 !important;
+}
+
+div#fontColorList {
+  color: #bdbdbd;
+  background-color: #282d33 !important;
+}
+
+#labelHeight .aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  background-color: #282d33 !important;
+  color: #bdbdbd;
+}
+
+.aw-avatar-layout {
+  background-color: #282d33 !important;
+  border-color: #bdbdbd !important;
+  color: #bdbdbd;
+}
+
+#fontColorChart .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
+  background-color: #282d33 !important;
+}
+
+#fontColorList .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
+  background-color: #282d33 !important;
+}
+
+#mostPosts .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
+  background-color: #282d33 !important;
+}
+
+#mostRecommendations .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
+  background-color: #282d33 !important;
+}
+
+div#labelHeight {
+  background-color: #282d33 !important;
+}
+
+.leftSide.aw-flex-column.ng-scope.ng-isolate-scope.afx-static-size {
+  background-color: #282d33 !important;
+}
+
+.selectNavigateCommand {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+aw-search-box .aw-uiwidgets-searchBoxContainer input.aw-uiwidgets-searchBox,
+aw-search-box .aw-uiwidgets-searchBoxContainer,
+aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
+  background: #282d33;
+  color: white;
+  border-color: #31393f !important;
+}
+
+// SOD 마스터 관리
+.fmea-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+.fmea-view .afx-medium-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected,
+.fmea-view .afx-content-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected:hover,
+.fmea-view .afx-content-background .aw-jswidget-tabContainer .aw-jswidget-tab a.aw-base-tabTitleSelected {
+  color: #ffb900 !important;
+  border-bottom-color: #ffb900 !important;
+}
+
+// Toast Grid 기본 설정
+.tui-grid-body-area {
+  background-color: #282d33 !important;
+  border-color: #31393f !important;
+}
+
+.tui-grid-header-area .tui-grid-cell-header {
+  background-color: #181c1f !important;
+  border-color: #31393f !important;
+  color: white !important;
+}
+
+.tui-grid-body-area .tui-grid-cell {
+  background-color: #282d33;
+  border-color: #31393f !important;
+  color: #bdbdbd !important;
+}
+
+.tui-grid-layer-editing {
+  background-color: #505357 !important;
+  border-color: #444a4e !important;
+  color: #bdbdbd !important;
+}
+
+.tui-grid-cell-content input[type='text'] {
+  background-color: #33363a !important;
+  color: #bdbdbd !important;
+  border: solid 1px #444a4e;
+}
+
+.tui-grid-scrollbar-y-inner-border, .tui-grid-scrollbar-y-outer-border {
+  background-color: #282d33 !important;
+}
+
+.tui-grid-border-line-left {
+  background-color: #444a4e !important;
+}
+
+.tui-grid-scrollbar-right-bottom, .tui-grid-scrollbar-right-top, .tui-grid-scrollbar-frozen-border, .tui-grid-scrollbar-left-bottom {
+  background-color: #181c1f !important;
+  border-color: #31393f !important;
+}
+
+.tui-grid-content-area, .tui-grid-border-line-bottom {
+  border-color: #31393f !important;
+}
+
+.tui-grid-layer-focus-border {
+  background-color: #bdbdbd !important;
+}
+
+.tui-grid-layer-selection {
+  background-color: white !important;
+  border-color: white !important;
+  opacity: 0.1 !important;
+}
+
+.tui-grid-cell.tui-grid-cell-has-input.select {
+  background-color: rgb(61, 66, 71) !important;
+}
+
+// .tui-grid-cell.select {
+//   background-color: #d0f5e1;
+// }
+
+// 체크리스트 V2
+#checklist-tableMode-listbox-view aw-listbox input.aw-jswidgets-choice {
+  background-color: rgb(187, 187, 187);
+}
+
+#mainModeNav .aw-widgets-cellListWidget .aw-widgets-cellListCellTitle
+, #mainModeNav .aw-base-scrollPanel .aw-widgets-cellListCellTitle {
+  color: white !important;
+}
+
+// 회의록
+.aw-layout-popup .aw-widgets-cellListItem {
+  border: none !important;
+  color: #8c8c8c !important;
+}
+
+#failureAddPopup .aw-widgets-cellListWidget .aw-widgets-cellListCellTitle
+, #failureAddPopup .aw-base-scrollPanel .aw-widgets-cellListCellTitle {
+  color: white !important;
+}
+
+#failureAddPopup .popupInner .aw-layout-panelBody {
+  color: #8c8c8c !important;
 }

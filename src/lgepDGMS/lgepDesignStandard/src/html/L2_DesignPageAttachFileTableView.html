@@ -1,40 +1,44 @@
 <aw-popup2>
-    <style>
-        .noColor{
-            background: none !important;
-        }
+  <style>
+    .noColor {
+      background: none !important;
+    }
 
-        .visibleHidden{
-            visibility: hidden !important;
-        }
-    </style>
-    <aw-panel-body id="attachFileData">
-        <aw-flex-row>
-            <aw-flex-column width="4">
-                <aw-label prop="data.objName"></aw-label>
-            </aw-flex-column>
-            <aw-flex-column width="8">
-                <aw-flex-row justify="right" class="noColor">
-                    <aw-file-upload class="visibleHidden" type-filter=".png .jpg .gif .xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX" file-change-action="linkRelationsManualBat"></aw-file-upload>
-                    <aw-button button-type="base" action="uploadClick" size="auto">{{i18n.fileAdd}}</aw-button>
-                    <aw-button button-type="base" action="fileDelete" size="auto" visible-when="conditions.page">{{i18n.fileDelete}}</aw-button>
-                </aw-flex-row>
-            </aw-flex-column>
+    .visibleHidden {
+      visibility: hidden !important;
+    }
+  </style>
+  <aw-panel-body id="attachFileData">
+    <aw-flex-row>
+      <aw-flex-column width="4">
+        <aw-label prop="data.objName"></aw-label>
+      </aw-flex-column>
+      <aw-flex-column width="8">
+        <aw-flex-row justify="right" class="noColor">
+          <aw-file-upload
+            class="visibleHidden"
+            type-filter=".png .jpg .gif .xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"
+            file-change-action="linkRelationsManualBat"
+          ></aw-file-upload>
+          <aw-button button-type="base" action="uploadClick" size="auto">{{i18n.fileAdd}}</aw-button>
+          <aw-button button-type="base" action="fileDelete" size="auto" visible-when="conditions.page">{{i18n.fileDelete}}</aw-button>
         </aw-flex-row>
-        <aw-separator></aw-separator>
-        <aw-tab-set tabs="data.tableModel"></aw-tab-set>
-        <aw-flex-row visible-when="conditions.page">
-            <aw-splm-table gridid="dgnStandardAttachFileTable" show-check-box=true ></aw-splm-table>
-        </aw-flex-row>
-        <aw-flex-row visible-when="conditions.book">
-            <aw-splm-table gridid="dgnStandardAllAttachFileTable" show-check-box=true visible-when="conditions.book"></aw-splm-table>
-        </aw-flex-row>
-    </aw-panel-body>
-    <aw-panel-footer>
-        <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
-        <aw-button action="selectDown" size="auto" visible-when="conditions.page">{{i18n.selectDownload}}</aw-button>
-        <aw-button action="downloadAll" size="auto" visible-when="conditions.page">{{i18n.downloadAll}}</aw-button>
-        <aw-button action="selectDownAllFile" size="auto" visible-when="conditions.book">{{i18n.selectDownload}}</aw-button>
-        <aw-button action="downloadAllPage" size="auto" visible-when="conditions.book">{{i18n.downloadAll}}</aw-button>
-    </aw-panel-footer>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-separator></aw-separator>
+    <aw-tab-set tabs="data.tableModel"></aw-tab-set>
+    <aw-flex-row visible-when="conditions.page">
+      <aw-splm-table gridid="dgnStandardAttachFileTable" show-check-box="true"></aw-splm-table>
+    </aw-flex-row>
+    <aw-flex-row visible-when="conditions.book">
+      <aw-splm-table gridid="dgnStandardAllAttachFileTable" show-check-box="true" visible-when="conditions.book"></aw-splm-table>
+    </aw-flex-row>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+    <aw-button action="selectDown" size="auto" visible-when="conditions.page">{{i18n.selectDownload}}</aw-button>
+    <aw-button action="downloadAll" size="auto" visible-when="conditions.page">{{i18n.downloadAll}}</aw-button>
+    <aw-button action="selectDownAllFile" size="auto" visible-when="conditions.book">{{i18n.selectDownload}}</aw-button>
+    <aw-button action="downloadAllPage" size="auto" visible-when="conditions.book">{{i18n.downloadAll}}</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

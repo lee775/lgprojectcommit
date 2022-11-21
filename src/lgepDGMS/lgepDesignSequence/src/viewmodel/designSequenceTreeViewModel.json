@@ -1,69 +1,66 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-splm-table.directive"
-    ],
-    "actions": {
-        "treeDataLoad": {
-            "actionType": "JSFunction",
-            "method": "dataLoad",
-            "outputData": {
-                "result": "result",
-                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
-            },
-            "deps": "js/sequenceService"
-        }
-    },
-    "data": {
-    },
-    "dataProviders": {
-        "sequenceDataProvider": {
-            "action": "treeDataLoad",
-            "initializeAction": "treeDataLoad",
-            "treeLoadResult": "{{data.treeLoadResult}}",
-            "inputData": {
-                "accessMode": "tree",
-                "topNodeUid": "{{data.top}}"
-            }
-        }
-    },
-    "columnProviders": {
-        "sequenceColumnProvider": {
-            "columns": [
-                {
-                    "name": "object_name",
-                    "displayName": "이름",
-                    "minWidth": 150,
-                    "width": 500,
-                    "isTreeNavigation": true
-                }
-            ],
-            "frozenColumnIndex": -1
-        }
-    },
-    "grids": {
-        "sequenceTree": {
-            "dataProvider": "sequenceDataProvider",
-            "columnProvider": "sequenceColumnProvider",
-            "addIconColumn": false,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "isFilteringEnabled": false,
-                "enableGridMenu": true
-            }
-        }
-    },
-    "functions": {
-        "loadEmployeeTreeTableData": {
-            "functionName": "loadEmployeeTreeTableData",
-            "parameters": [
-                "{{data.treeLoadInput.parentNode}}",
-                "{{data.columnProviders.sequenceColumnProvider.sortCriteria}}",
-                "{{data.treeLoadInput}}",
-                "{{data}}",
-                "{{ctx}}"
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-splm-table.directive"],
+  "actions": {
+    "treeDataLoad": {
+      "actionType": "JSFunction",
+      "method": "dataLoad",
+      "outputData": {
+        "result": "result",
+        "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+      },
+      "deps": "js/sequenceService"
     }
+  },
+  "data": {},
+  "dataProviders": {
+    "sequenceDataProvider": {
+      "action": "treeDataLoad",
+      "initializeAction": "treeDataLoad",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    }
+  },
+  "columnProviders": {
+    "sequenceColumnProvider": {
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "이름",
+          "minWidth": 150,
+          "width": 500,
+          "isTreeNavigation": true
+        }
+      ],
+      "frozenColumnIndex": -1
+    }
+  },
+  "grids": {
+    "sequenceTree": {
+      "dataProvider": "sequenceDataProvider",
+      "columnProvider": "sequenceColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "isFilteringEnabled": false,
+        "enableGridMenu": true
+      }
+    }
+  },
+  "functions": {
+    "loadEmployeeTreeTableData": {
+      "functionName": "loadEmployeeTreeTableData",
+      "parameters": [
+        "{{data.treeLoadInput.parentNode}}",
+        "{{data.columnProviders.sequenceColumnProvider.sortCriteria}}",
+        "{{data.treeLoadInput}}",
+        "{{data}}",
+        "{{ctx}}"
+      ]
+    }
+  }
 }

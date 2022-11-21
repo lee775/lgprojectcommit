@@ -1,59 +1,55 @@
 {
-    "lgepNoticeBoardHelpDesk": {
-        "data": {
-            "label": {
-                "source": "/i18n/lgepNoticeBoardMessages",
-                "key": "lgepNoticeBoardHelpDeskTitle"
-            },
-            "clientScopeURI": "",
-            "nameToken": "lgepNoticeBoardHelpDesk"
-        },
-        "view": "lgepNoticeBoardHelpDesk",
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "parent": "lgepNoticeBoardLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation",
-        "url": "/lgepNoticeBoardHelpDesk"
+  "lgepNoticeBoardHelpDesk": {
+    "data": {
+      "label": {
+        "source": "/i18n/lgepNoticeBoardMessages",
+        "key": "lgepNoticeBoardHelpDeskTitle"
+      },
+      "clientScopeURI": "",
+      "nameToken": "lgepNoticeBoardHelpDesk"
     },
-    "lgepNoticeBoardManual": {
-        "controller": "NativeSubLocationCtrl",
-        "data": {
-            "label": {
-                "source": "/i18n/lgepNoticeBoardMessages",
-                "key": "lgepNoticeBoardManualTitle"
-            },
-            "clientScopeURI": "",
-            "nameToken": "lgepNoticeBoardManual"
-        },
-        "view": "L2_ManualStandard",
-        "dependencies": [
-            "js/aw.native.sublocation.controller"
-        ],
-        "parent": "lgepNoticeBoardLocation",
-        "reloadOnSearch": false,
-        "templateUrl": "/html/aw.native.sublocation.html",
-        "type": "subLocation",
-        "url": "/lgepNoticeBoardManual"
+    "view": "lgepNoticeBoardHelpDesk",
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "parent": "lgepNoticeBoardLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "url": "/lgepNoticeBoardHelpDesk"
+  },
+  "lgepNoticeBoardManual": {
+    "controller": "NativeSubLocationCtrl",
+    "data": {
+      "label": {
+        "source": "/i18n/lgepNoticeBoardMessages",
+        "key": "lgepNoticeBoardManualTitle"
+      },
+      "clientScopeURI": "",
+      "nameToken": "lgepNoticeBoardManual"
     },
-    "lgepNoticeBoardLocation": {
-        "data": {
-            "browserTitle": {
-                "source": "/i18n/lgepNoticeBoardMessages",
-                "key": "lgepNoticeBoardLocationBrowserTitle"
-            },
-            "browserSubTitle": {
-                "source": "/i18n/lgepNoticeBoardMessages",
-                "key": "lgepNoticeBoardLocationBrowserSubTitle"
-            },
-            "headerTitle": {
-                "source": "/i18n/lgepNoticeBoardMessages",
-                "key": "lgepNoticeBoardLocationHeaderTitle"
-            },
-            "viewBase": "lgepNoticeBoardHelpDesk"
-        },
-        "type": "location"
-    }
+    "view": "L2_ManualStandard",
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "parent": "lgepNoticeBoardLocation",
+    "reloadOnSearch": false,
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "url": "/lgepNoticeBoardManual"
+  },
+  "lgepNoticeBoardLocation": {
+    "data": {
+      "browserTitle": {
+        "source": "/i18n/lgepNoticeBoardMessages",
+        "key": "lgepNoticeBoardLocationBrowserTitle"
+      },
+      "browserSubTitle": {
+        "source": "/i18n/lgepNoticeBoardMessages",
+        "key": "lgepNoticeBoardLocationBrowserSubTitle"
+      },
+      "headerTitle": {
+        "source": "/i18n/lgepNoticeBoardMessages",
+        "key": "lgepNoticeBoardLocationHeaderTitle"
+      },
+      "viewBase": "lgepNoticeBoardHelpDesk"
+    },
+    "type": "location"
+  }
 }

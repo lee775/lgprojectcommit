@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-command-panel.directive", "js/aw-panel.directive", "js/aw-panel-body.directive", "js/aw-textbox.directive", "js/aw-button.directive"],
+  "data": {
+    "nameBox": {
+      "displayName": "{{i18n.openChecklistTitle}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    }
+  },
+  "actions": {
+    "addStructure": {
+      "actionType": "JSFunction",
+      "method": "addTemplateSave",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateEditService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "onUnmountOnStructureCreatePanel",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateEditService"
+    }
+  },
+  "lifecycleHooks": {
+    "onUnmount": "unMount"
+  },
+  "i18n": {
+    "addTemplate": ["L2_ChkMainMessages"],
+    "save": ["L2_ChkMainMessages"],
+    "openChecklistTitle": ["L2_ChkMainMessages"]
+  }
+}

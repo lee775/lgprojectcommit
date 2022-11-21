@@ -8,10 +8,10 @@
  * Dummy alert.
  * @param {String} text - text to display
  */
-export let alert2 = function( text ) {
-    alert( text ); // eslint-disable-line
+export let alert2 = function (text) {
+  alert(text); // eslint-disable-line
 };
 
 export default {
-    alert: alert2
+  alert: alert2,
 };

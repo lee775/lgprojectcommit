@@ -1,96 +1,98 @@
 <aw-sidenav id="sequenceTreeNav" config="data.sideNavLeftData"></aw-sidenav>
 <aw-flex-row class="afx-alt-content-background" justify="center" id="designSequenceViewData">
-    <aw-splitter> </aw-splitter>
-    <aw-flex-column width="fill" id="procedureData">
-        <aw-flex-row height="11" class="summernoteBasisDefault" id="summernoteId">
-            <aw-flex-column>
-                <aw-flex-row height="3f" id="proceduerThemeRow">
-                    <aw-navigate-breadcrumb provider="data.provider"
-                        breadcrumb-config="data.bcConfig.navigationBreadcrumbConfig" class="flas" id="locationToBread">
-                    </aw-navigate-breadcrumb>
-                    <aw-flex-column width="3" justify="center">
-                        <aw-flex-row justify="left" class="noColor" align-content="center" id="proceduerThemeRow">
-                            <aw-label id="labelMargin" prop="data.itemTitle"
-                                visible-when="conditions.selValueConditions"></aw-label>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                    <aw-flex-column width="9" justify="center">
-                        <aw-flex-row justify="right" class="noColor" align-content="center" id="proceduerThemeRow">
-                            <aw-flex-column width="3" justify="center">
-                                <aw-togglebutton prop="data.themeToggle" action='toggleCssAction'></aw-togglebutton>
-                            </aw-flex-column>
-                            <aw-flex-column width="10f" class="marginLeft">
-                                <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
-                            </aw-flex-column>
-                            <aw-checkbox prop="data.summerNoteWidthMax" action="summerNoteImageWidthMax"
-                                class="checkBoxCenter" id="checkBoxCssId"></aw-checkbox>
-                            <aw-button size="auto" class="checkCate mama" action="tabShowORHide"
-                                extended-tooltip="tabShowTooltip">
-                                {{i18n.tabHideAndShow}}</aw-button>
-                            <aw-button size="auto" class="checkCate mama" action="sidenavPushCommandLeftSequence"
-                                extended-tooltip="treeShowTooltip">
-                                {{i18n.treeView}}</aw-button>
-                            <aw-button size="auto" class="checkCate mama" action="treeManagement"
-                                extended-tooltip="treeEditTooltip">
-                                {{i18n.treeManage}}</aw-button>
-                            <aw-button size="auto" class="checkCate mama tabtab" action="editStartOREnd"
-                                extended-tooltip="editTooltip">{{i18n.editItem}}</aw-button>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                </aw-flex-row>
-                <aw-separator></aw-separator>
-                <aw-panel-body class="noPading" id="summernoteScale">
-                    <div visible-when="!conditions.selValueConditions">
-                        <h3 class="noSelCenter">{{i18n.pleaseSelProcedure}}</h3>
-                    </div>
+  <aw-splitter> </aw-splitter>
+  <aw-flex-column width="fill" id="procedureData">
+    <aw-flex-row height="11" class="summernoteBasisDefault" id="summernoteId">
+      <aw-flex-column>
+        <aw-flex-row height="3f" id="proceduerThemeRow">
+          <aw-navigate-breadcrumb provider="data.provider" breadcrumb-config="data.bcConfig.navigationBreadcrumbConfig" class="flas" id="locationToBread">
+          </aw-navigate-breadcrumb>
+          <aw-flex-column width="3" justify="center">
+            <aw-flex-row justify="left" class="noColor" align-content="center" id="proceduerThemeRow">
+              <aw-label id="labelMargin" prop="data.itemTitle" visible-when="conditions.selValueConditions"></aw-label>
+            </aw-flex-row>
+          </aw-flex-column>
+          <aw-flex-column width="9" justify="center">
+            <aw-flex-row justify="right" class="noColor" align-content="center" id="proceduerThemeRow">
+              <aw-flex-column width="3" justify="center">
+                <aw-togglebutton prop="data.themeToggle" action="toggleCssAction"></aw-togglebutton>
+              </aw-flex-column>
+              <aw-flex-column width="10f" class="marginLeft">
+                <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
+              </aw-flex-column>
+              <aw-checkbox prop="data.summerNoteWidthMax" action="summerNoteImageWidthMax" class="checkBoxCenter" id="checkBoxCssId"></aw-checkbox>
+              <aw-button size="auto" class="checkCate mama" action="tabShowORHide" extended-tooltip="tabShowTooltip"> {{i18n.tabHideAndShow}}</aw-button>
+              <aw-button size="auto" class="checkCate mama" action="sidenavPushCommandLeftSequence" extended-tooltip="treeShowTooltip">
+                {{i18n.treeView}}</aw-button
+              >
+              <aw-button size="auto" class="checkCate mama" action="treeManagement" extended-tooltip="treeEditTooltip"> {{i18n.treeManage}}</aw-button>
+              <aw-button size="auto" class="checkCate mama tabtab" action="editStartOREnd" extended-tooltip="editTooltip">{{i18n.editItem}}</aw-button>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-flex-row>
+        <aw-separator></aw-separator>
+        <aw-panel-body class="noPading" id="summernoteScale">
+          <div visible-when="!conditions.selValueConditions">
+            <h3 class="noSelCenter">{{i18n.pleaseSelProcedure}}</h3>
+          </div>
 
-                    <body>
-                        <div width="100%" visible-when="conditions.selValueConditions">
-                            <textarea id="sequenceSummernote"></textarea>
-                        </div>
-                    </body>
-                </aw-panel-body>
-            </aw-flex-column>
+          <body>
+            <div width="100%" visible-when="conditions.selValueConditions">
+              <textarea id="sequenceSummernote"></textarea>
+            </div>
+          </body>
+        </aw-panel-body>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-splitter direction="HORIZONTAL" class="noneDisGetSet"> </aw-splitter>
+    <aw-flex-row height="fill" class="rowBasisDefault noneDisGetSet">
+      <aw-flex-column width="fill">
+        <aw-flex-row height="auto">
+          <aw-tab-set tabs="data.listClassification" class="marginD" id="tabSetID"></aw-tab-set>
+          <aw-button size="auto" class="checkCate" exist-when="conditions.showCheck" action="checklistOpen" extended-tooltip="addCheckListTooltip"
+            >{{i18n.open}}
+          </aw-button>
+          <aw-button size="auto" class="checkCate" exist-when="conditions.showCheck" action="checklistPopupBat" extended-tooyltip="addCheckListTooltip"
+            >{{i18n.checklistAdd}}
+          </aw-button>
+          <aw-button size="auto" class="checkCate" exist-when="conditions.showDesign" action="designPopupBat" extended-tooltip="addDesignListTooltip"
+            >{{i18n.designStdAdd}}
+          </aw-button>
+          <aw-button
+            size="auto"
+            class="checkCate"
+            action="datasetDownLoad"
+            exist-when="data.dataProviders.dataSetData.selectedObjects.length>0"
+            extended-tooltip="downLoadTooltip"
+            >{{i18n.datasetDownLoad}}</aw-button
+          >
+          <aw-file-upload
+            type-filter=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"
+            file-change-action="linkRelationsSequenceBat"
+            exist-when="conditions.showDataset"
+            class="fileBtn mama"
+            extended-tooltip="fileUploadTooltip"
+          >
+          </aw-file-upload>
+          <aw-button size="auto" class="checkCate addCheckTap" exist-when="conditions.showCheck" action="checkListCopyDelete">{{i18n.delete}}</aw-button>
+          <aw-button size="auto" class="checkCate addCheckTap" exist-when="conditions.showDesign" action="designStdCopyDelete">{{i18n.delete}}</aw-button>
+          <aw-button size="auto" class="checkCate addCheckTap" exist-when="conditions.showDataset" action="deleteRelationsSequence">{{i18n.delete}}</aw-button>
         </aw-flex-row>
-        <aw-splitter direction="HORIZONTAL" class="noneDisGetSet"> </aw-splitter>
-        <aw-flex-row height="fill" class="rowBasisDefault noneDisGetSet">
-            <aw-flex-column width="fill">
-                <aw-flex-row height="auto">
-                    <aw-tab-set tabs="data.listClassification" class="marginD" id="tabSetID"></aw-tab-set>
-                    <aw-button size="auto" class="checkCate" exist-when="conditions.showCheck" action="checklistOpen"
-                        extended-tooltip="addCheckListTooltip">{{i18n.open}}
-                    </aw-button>
-                    <aw-button size="auto" class="checkCate" exist-when="conditions.showCheck"
-                        action="checklistPopupBat" extended-tooyltip="addCheckListTooltip">{{i18n.checklistAdd}}
-                    </aw-button>
-                    <aw-button size="auto" class="checkCate" exist-when="conditions.showDesign" action="designPopupBat"
-                        extended-tooltip="addDesignListTooltip">{{i18n.designStdAdd}}
-                    </aw-button>
-                    <aw-button size="auto" class="checkCate" action="datasetDownLoad"
-                        exist-when="data.dataProviders.dataSetData.selectedObjects.length>0"
-                        extended-tooltip="downLoadTooltip">{{i18n.datasetDownLoad}}</aw-button>
-                    <aw-file-upload
-                        type-filter=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"
-                        file-change-action="linkRelationsSequenceBat" exist-when="conditions.showDataset"
-                        class="fileBtn mama" extended-tooltip="fileUploadTooltip">
-                    </aw-file-upload>
-                    <aw-button size="auto" class="checkCate addCheckTap" exist-when="conditions.showCheck"
-                        action="checkListCopyDelete">{{i18n.delete}}</aw-button>
-                    <aw-button size="auto" class="checkCate addCheckTap" exist-when="conditions.showDesign"
-                        action="designStdCopyDelete">{{i18n.delete}}</aw-button>
-                    <aw-button size="auto" class="checkCate addCheckTap" exist-when="conditions.showDataset"
-                        action="deleteRelationsSequence">{{i18n.delete}}</aw-button>
-                </aw-flex-row>
-                <aw-flex-row height="auto">
-                    <aw-flex-column width="fill">
-                        <aw-label prop="data.writer" exist-when="conditions.showInfo"></aw-label>
-                        <aw-label prop="data.createData" exist-when="conditions.showInfo"></aw-label>
-                        <aw-label prop="data.lastModify" exist-when="conditions.showInfo"></aw-label>
-                        <aw-splm-table gridid="checkListCopyTable" exist-when="conditions.showCheck"
-                            show-decorators="true" show-check-box="true" class="tabTableCss"></aw-splm-table>
-                    </aw-flex-column>
-                </aw-flex-row>
-            </aw-flex-column>
+        <aw-flex-row height="auto">
+          <aw-flex-column width="fill">
+            <aw-label prop="data.writer" exist-when="conditions.showInfo"></aw-label>
+            <aw-label prop="data.createData" exist-when="conditions.showInfo"></aw-label>
+            <aw-label prop="data.lastModify" exist-when="conditions.showInfo"></aw-label>
+            <aw-splm-table
+              gridid="checkListCopyTable"
+              exist-when="conditions.showCheck"
+              show-decorators="true"
+              show-check-box="true"
+              class="tabTableCss"
+            ></aw-splm-table>
+          </aw-flex-column>
         </aw-flex-row>
-    </aw-flex-column>
+      </aw-flex-column>
+    </aw-flex-row>
+  </aw-flex-column>
 </aw-flex-row>

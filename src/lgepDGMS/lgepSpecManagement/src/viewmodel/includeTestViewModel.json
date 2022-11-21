@@ -1,221 +1,206 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-splm-table.directive"
-    ],
-    "actions": {
-        "loadData": {
-            "actionType": "JSFunction",
-            "method": "includeClassificationTree",
-            "outputData": {
-                "result": "result",
-                "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
-            },
-            "deps": "js/includeTestService"
-        },
-        "includeClassificationTree": {
-            "actionType": "JSFunction",
-            "method": "includeClassificationTree",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "result": "result",
-                "partMgmtTreeResults": "{{function:sortAction}}",
-                "totalFound": "totalFound"
-            },
-            "deps": "js/includeTestService"
-        },
-        "getFilterFacetData": {
-            "actionType": "JSFunction",
-            "method": "getFilterFacetData",
-            "inputData": {
-                "filterFacetInput": "{{filterFacetInput}}"
-            },
-            "outputData": {
-                "fullData": ""
-            },
-            "deps": "js/includeTestService"
-        },
-        "getChildrenData": {
-            "actionType": "JSFunction",
-            "method": "getChildrenData",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}",
-                "eventTable": "{{data.eventMap['partMgmtTreeDataProvider.selectionChangeEvent']}}"
-            },
-            "outputData": {
-                "totalFound": "totalFound",
-                "example": "{{function:sortAction}}"
-            },
-            "deps": "js/includeTestService"
-        },
-        "reload": {
-            "actionType": "JSFunction",
-            "method": "reload",
-            "deps": "js/includeTestService"
-        },
-        "applyData": {
-            "actionType": "JSFunction",
-            "method": "getChildrenData",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "filterFacetResults": "{{function:getFilterFacets}}"
-            },
-            "deps": "js/includeTestService"
-        },
-        "filterFacetBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "getFilterFacetData"
-                },
-                {
-                    "action": "applyData"
-                }
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-splm-table.directive"],
+  "actions": {
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "includeClassificationTree",
+      "outputData": {
+        "result": "result",
+        "treeLoadResult": "{{function:loadEmployeeTreeTableData}}"
+      },
+      "deps": "js/includeTestService"
     },
-    "data": {
-        "pageSize": 40
+    "includeClassificationTree": {
+      "actionType": "JSFunction",
+      "method": "includeClassificationTree",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "result": "result",
+        "partMgmtTreeResults": "{{function:sortAction}}",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/includeTestService"
     },
-    "dataProviders": {
-        "partMgmtTreeDataProvider": {
-            "action": "loadData",
-            "initializeAction": "loadData",
-            "treeLoadResult": "{{data.treeLoadResult}}",
-            "inputData": {
-                "accessMode": "tree",
-                "topNodeUid": "{{data.top}}"
-            }
-        },
-        "partMgmtTableDataProvider": {
-            "action": "getChildrenData",
-            "response": "{{data.example}}",
-            "totalFound": "{{data.totalFound}}",
-            "searchIndex": "{{data.searchIndex}}",
-            "filterFacetAction": "filterFacetBatchAction",
-            "filterFacetResults": "{{data.filterFacetResults}}",
-            "selectionModelMode": "single"
-        }
+    "getFilterFacetData": {
+      "actionType": "JSFunction",
+      "method": "getFilterFacetData",
+      "inputData": {
+        "filterFacetInput": "{{filterFacetInput}}"
+      },
+      "outputData": {
+        "fullData": ""
+      },
+      "deps": "js/includeTestService"
     },
-    "columnProviders": {
-        "partMgmtTreeColumnProvider": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "object_string",
-                    "displayName": "{{i18n.treeHeaderParts}}",
-                    "minWidth": 80,
-                    "width": 360,
-                    "isTreeNavigation": true,
-                    "pinnedLeft": true
-                }
-            ]
-        },
-        "partMgmtTableColumnProvider": {
-            "frozenColumnIndex": 1,
-            "columns": [
-                {
-                    "name": "object_string",
-                    "displayName": "이름",
-                    "minWidth": 150,
-                    "width": 300,
-                    "isTableCommand": true,
-                    "pinnedLeft": true
-                },
-                {
-                    "name": "l2_division",
-                    "displayName": "{{i18n.division}}",
-                    "minWidth": 100,
-                    "width": 100
-                }
-            ]
-        }
+    "getChildrenData": {
+      "actionType": "JSFunction",
+      "method": "getChildrenData",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}",
+        "eventTable": "{{data.eventMap['partMgmtTreeDataProvider.selectionChangeEvent']}}"
+      },
+      "outputData": {
+        "totalFound": "totalFound",
+        "example": "{{function:sortAction}}"
+      },
+      "deps": "js/includeTestService"
     },
-    "grids": {
-        "partMgmtTree": {
-            "dataProvider": "partMgmtTreeDataProvider",
-            "columnProvider": "partMgmtTreeColumnProvider",
-            "addIconColumn": false,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": false,
-                "isFilteringEnabled": true,
-                "enableGridMenu": false
-            }
-        },
-        "partMgmtTable": {
-            "dataProvider": "partMgmtTableDataProvider",
-            "columnProvider": "partMgmtTableColumnProvider",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": true,
-                "enableSorting": true,
-                "enableExpandAndPaginationInEdit": true,
-                "enableGridMenu": true,
-                "isFilteringEnabled": false
-            }
-        }
+    "reload": {
+      "actionType": "JSFunction",
+      "method": "reload",
+      "deps": "js/includeTestService"
     },
-    "functions": {
-        "loadEmployeeTreeTableData": {
-            "functionName": "loadEmployeeTreeTableData",
-            "parameters": [
-                "{{data.treeLoadInput.parentNode}}",
-                "{{data.columnProviders.partMgmtTreeColumnProvider.sortCriteria}}",
-                "{{data.treeLoadInput}}",
-                "{{ctx}}"
-            ]
-        },
-        "sortAction": {
-            "functionName": "sortAction",
-            "parameters": [
-                "{{data.columnProviders.partMgmtTableColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.partMgmtTableDataProvider.startIndex}}",
-                "{{data.pageSize}}",
-                "{{data.columnProviders.partMgmtTableColumnProvider.columnFilters}}"
-            ]
-        },
-        "getFilterFacets": {
-            "functionName": "getFilterFacets",
-            "parameters": [
-                "{{data.columnProviders.partMgmtTreeColumnProvider.columnFilters}}",
-                "{{data.fullData}}"
-            ]
-        }
+    "applyData": {
+      "actionType": "JSFunction",
+      "method": "getChildrenData",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "filterFacetResults": "{{function:getFilterFacets}}"
+      },
+      "deps": "js/includeTestService"
     },
-    "onEvent": [
+    "filterFacetBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
         {
-            "eventId": "partMgmtTreeDataProvider.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "getChildrenData"
+          "action": "getFilterFacetData"
         },
         {
-            "eventId": "partMgmtTable.gridSelection",
-            "cacheEventData": true,
-            "action": "reload"
+          "action": "applyData"
         }
-    ],
-    "i18n": {
-        "treeHeaderParts": [
-            "lgepPartmgmtMessages"
-        ],
-        "grouping": [
-            "lgepPartmgmtMessages"
-        ],
-        "parts": [
-            "lgepPartmgmtMessages"
-        ],
-        "classification": [
-            "lgepPartmgmtMessages"
-        ],
-        "division": [
-            "lgepPartmgmtMessages"
-        ]
+      ]
     }
+  },
+  "data": {
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "partMgmtTreeDataProvider": {
+      "action": "loadData",
+      "initializeAction": "loadData",
+      "treeLoadResult": "{{data.treeLoadResult}}",
+      "inputData": {
+        "accessMode": "tree",
+        "topNodeUid": "{{data.top}}"
+      }
+    },
+    "partMgmtTableDataProvider": {
+      "action": "getChildrenData",
+      "response": "{{data.example}}",
+      "totalFound": "{{data.totalFound}}",
+      "searchIndex": "{{data.searchIndex}}",
+      "filterFacetAction": "filterFacetBatchAction",
+      "filterFacetResults": "{{data.filterFacetResults}}",
+      "selectionModelMode": "single"
+    }
+  },
+  "columnProviders": {
+    "partMgmtTreeColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "{{i18n.treeHeaderParts}}",
+          "minWidth": 80,
+          "width": 360,
+          "isTreeNavigation": true,
+          "pinnedLeft": true
+        }
+      ]
+    },
+    "partMgmtTableColumnProvider": {
+      "frozenColumnIndex": 1,
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "이름",
+          "minWidth": 150,
+          "width": 300,
+          "isTableCommand": true,
+          "pinnedLeft": true
+        },
+        {
+          "name": "l2_division",
+          "displayName": "{{i18n.division}}",
+          "minWidth": 100,
+          "width": 100
+        }
+      ]
+    }
+  },
+  "grids": {
+    "partMgmtTree": {
+      "dataProvider": "partMgmtTreeDataProvider",
+      "columnProvider": "partMgmtTreeColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false,
+        "isFilteringEnabled": true,
+        "enableGridMenu": false
+      }
+    },
+    "partMgmtTable": {
+      "dataProvider": "partMgmtTableDataProvider",
+      "columnProvider": "partMgmtTableColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "enableExpandAndPaginationInEdit": true,
+        "enableGridMenu": true,
+        "isFilteringEnabled": false
+      }
+    }
+  },
+  "functions": {
+    "loadEmployeeTreeTableData": {
+      "functionName": "loadEmployeeTreeTableData",
+      "parameters": [
+        "{{data.treeLoadInput.parentNode}}",
+        "{{data.columnProviders.partMgmtTreeColumnProvider.sortCriteria}}",
+        "{{data.treeLoadInput}}",
+        "{{ctx}}"
+      ]
+    },
+    "sortAction": {
+      "functionName": "sortAction",
+      "parameters": [
+        "{{data.columnProviders.partMgmtTableColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.partMgmtTableDataProvider.startIndex}}",
+        "{{data.pageSize}}",
+        "{{data.columnProviders.partMgmtTableColumnProvider.columnFilters}}"
+      ]
+    },
+    "getFilterFacets": {
+      "functionName": "getFilterFacets",
+      "parameters": ["{{data.columnProviders.partMgmtTreeColumnProvider.columnFilters}}", "{{data.fullData}}"]
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "partMgmtTreeDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "getChildrenData"
+    },
+    {
+      "eventId": "partMgmtTable.gridSelection",
+      "cacheEventData": true,
+      "action": "reload"
+    }
+  ],
+  "i18n": {
+    "treeHeaderParts": ["lgepPartmgmtMessages"],
+    "grouping": ["lgepPartmgmtMessages"],
+    "parts": ["lgepPartmgmtMessages"],
+    "classification": ["lgepPartmgmtMessages"],
+    "division": ["lgepPartmgmtMessages"]
+  }
 }

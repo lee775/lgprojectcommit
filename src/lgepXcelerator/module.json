@@ -1,5 +1,5 @@
 {
-    "name": "lgepXcelerator",
-    "description": "This is the lgepXcelerator module",
-    "skipTest": true
+  "name": "lgepXcelerator",
+  "description": "This is the lgepXcelerator module",
+  "skipTest": true
 }

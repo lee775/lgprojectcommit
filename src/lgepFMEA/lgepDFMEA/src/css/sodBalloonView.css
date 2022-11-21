@@ -1,18 +1,18 @@
 #popup .inner-table {
-    font-size: 15px;
-    color: #eee;
+  font-size: 15px;
+  color: #eee;
 }
 
 .inner-table .tui-grid-cell {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .inner-table tr:hover {
-    cursor: pointer;
-    background-color: #CDE6EB !important;
+  cursor: pointer;
+  background-color: #cde6eb !important;
 }
 
-.sod-resetBtn{
-    margin-bottom: 10px;
-    height: 30px;
+.sod-resetBtn {
+  margin-bottom: 10px;
+  height: 30px;
 }

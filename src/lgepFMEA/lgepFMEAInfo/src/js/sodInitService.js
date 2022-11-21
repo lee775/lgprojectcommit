@@ -14,11 +14,7 @@ export const initSod = async (sodUid) => {
     return;
   }
 
-  const sod = await loadObjectByPolicy(sodUid, prop.TYPE_SOD, [
-    prop.SOD_SEVERITY_TABLE,
-    prop.SOD_OCCURENCE_TABLE,
-    prop.SOD_DETECTION_TABLE,
-  ]);
+  const sod = await loadObjectByPolicy(sodUid, prop.TYPE_SOD, [prop.SOD_SEVERITY_TABLE, prop.SOD_OCCURENCE_TABLE, prop.SOD_DETECTION_TABLE]);
 
   await _getTableInfo();
 
@@ -45,9 +41,7 @@ const _getTableInfo = async () => {
 };
 
 const _makeTableRow = async (sod, tableName) => {
-  const props = tableInfo[tableName].cols.map(
-    (col) => col[0]
-  );
+  const props = tableInfo[tableName].cols.map((col) => col[0]);
   const objects = await _loadSodTables(sod, tableName, props);
   return _getTableDatas(objects, tableName, props);
 };
@@ -57,7 +51,7 @@ const _loadSodTables = async (sod, tableName, props) => {
     sod.props[tableName].dbValues.map(async (uid) => {
       const tableRow = await loadObjectByPolicy(uid, prop.TYPE_SOD_ROW, props);
       return tableRow;
-    })
+    }),
   );
   return tables;
 };

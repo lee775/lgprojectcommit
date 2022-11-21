@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.action-summary__editor-section>label {
+.action-summary__editor-section > label {
   font-weight: 700;
   margin-bottom: 10px;
 }
@@ -18,8 +18,8 @@
   display: block;
 }
 
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false],
-.note-editor.note-airframe .note-editing-area .note-editable[contenteditable=false] {
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'],
+.note-editor.note-airframe .note-editing-area .note-editable[contenteditable='false'] {
   background-color: #fff;
 }
 
@@ -28,7 +28,7 @@
   padding-bottom: 10px;
   min-width: 800px;
 }
-.right-view{
+.right-view {
   min-width: 1000px;
 }
 

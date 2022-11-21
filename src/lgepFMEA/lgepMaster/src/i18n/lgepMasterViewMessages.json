@@ -42,8 +42,8 @@
   "precatuionsActionEditSaveDesc": "Precatuions Action Edit Save",
   "precatuionsActionEditCancelDesc": "Precatuions Action Edit Cancel",
 
-  "l2RelatedSourcesPlaceholder":"DGMS, QMS, standards, drawings, etc.",
-  "l2ClassificationPlaceholder":"CTQ",
+  "l2RelatedSourcesPlaceholder": "DGMS, QMS, standards, drawings, etc.",
+  "l2ClassificationPlaceholder": "CTQ",
 
-  "l2ClassificationTitle":"Classification"
+  "l2ClassificationTitle": "Classification"
 }

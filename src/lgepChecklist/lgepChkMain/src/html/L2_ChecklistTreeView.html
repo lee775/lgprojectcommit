@@ -1,0 +1,29 @@
+<style>
+    #checklist-open-view .tui-grid-rside-area .tui-grid-header-area {
+        position: fixed;
+        z-index: 1;
+        border: none;
+    }
+    #checklist-open-view .tui-grid-body-container {
+        margin-top: 40px;
+    }
+    /* .tui-grid-header-area .tui-grid-table {
+        margin-left: -300px;
+    } */
+</style>
+<div id="checklist-open-view" style="white-space:nowrap; overflow:auto; height: 700px;" onscroll="scrollCtrlV2Editor()">
+    <div id="openGrid"></div>
+</div>
+<script>
+    function scrollCtrlV2Editor() {
+
+        let scale = document.querySelector('#openGrid');
+        scale = scale.style.zoom;
+        scale = scale == "" ? 1 : scale;
+
+        var div = document.getElementById("checklist-open-view");
+        let headerLayout = document.querySelector('#checklist-open-view .tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
+        headerLayout.style.marginLeft = "-" + div.scrollLeft / scale + "px";
+
+    }
+</script>

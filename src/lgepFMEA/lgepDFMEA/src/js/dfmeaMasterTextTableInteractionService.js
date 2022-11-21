@@ -10,9 +10,7 @@ import * as constants from 'js/constants/fmeaConstants';
 export const initOnTextTable = (ctx) => {
   const id = constants.INTERACTION_INIT_SELECT_CLASSNAME;
   constants.INTERACTION_INIT_SELECT_CLASSNAME;
-  const selectEls = document.querySelectorAll(
-    '.aw-splm-tableRow[aria-selected="true"]'
-  );
+  const selectEls = document.querySelectorAll('.aw-splm-tableRow[aria-selected="true"]');
   for (const selectEl of selectEls) {
     selectEl.setAttribute('id', id);
   }
@@ -34,11 +32,7 @@ const _setInteractionRow = (ctx, provider, interactionRow) => {
     const structureUid = getStructureUidUntilSubAssy(row);
     if (interactionRow.uid === structureUid) {
       provider.selectionModel.setSelection(row);
-      _addStyleBySameStructure(
-        textTableRows,
-        row,
-        constants.INTERACTION_INIT_SAME_SELECT
-      );
+      _addStyleBySameStructure(textTableRows, row, constants.INTERACTION_INIT_SAME_SELECT);
       return;
     }
   }

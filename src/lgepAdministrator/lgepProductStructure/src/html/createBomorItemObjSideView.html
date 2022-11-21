@@ -1,38 +1,35 @@
 <style>
-.addTextBoxforTitle{
-    width:70%;
+  .addTextBoxforTitle {
+    width: 70%;
     margin-left: -40px;
-}
+  }
 
-.firstText{
-    margin-top :30px;
-}
+  .firstText {
+    margin-top: 30px;
+  }
 
-.labelTitle{
+  .labelTitle {
     padding-left: 20px;
-}
+  }
 
-.createButton{
+  .createButton {
     position: relative;
     bottom: 25px;
-}
-
-
+  }
 </style>
 
 <aw-command-panel caption="{{i18n.add}}">
-    <aw-flex-row class="firstText" >
-        <aw-flex-column width="4">
-            <aw-label prop="data.addModelTitle" class="labelTitle"></aw-label>
-        </aw-flex-column>
-            <aw-textbox prop="data.addModelTitleText" class = "addTextBoxforTitle"></aw-textbox>
-    </aw-flex-row>
-    <aw-panel-footer>
-        <aw-action-section>
-            <!-- <aw-button action="addData" size="auto">생성</aw-button> -->
-            <aw-button action="addModel" button-type="positive" class="createButton">{{i18n.createButton}}</aw-button>
-            <!-- <aw-button action="closeSide" size="auto" button-type="negative" class="closeButton">{{i18n.closeButton}}</aw-button> -->
-        </aw-action-section>
-    </aw-panel-footer>
+  <aw-flex-row class="firstText">
+    <aw-flex-column width="4">
+      <aw-label prop="data.addModelTitle" class="labelTitle"></aw-label>
+    </aw-flex-column>
+    <aw-textbox prop="data.addModelTitleText" class="addTextBoxforTitle"></aw-textbox>
+  </aw-flex-row>
+  <aw-panel-footer>
+    <aw-action-section>
+      <!-- <aw-button action="addData" size="auto">생성</aw-button> -->
+      <aw-button action="addModel" button-type="positive" class="createButton">{{i18n.createButton}}</aw-button>
+      <!-- <aw-button action="closeSide" size="auto" button-type="negative" class="closeButton">{{i18n.closeButton}}</aw-button> -->
+    </aw-action-section>
+  </aw-panel-footer>
 </aw-command-panel>
-

@@ -1,21 +1,22 @@
-import Excel from "exceljs";
-import appCtxService from "js/appCtxService";
+import Excel from 'exceljs';
+import appCtxService from 'js/appCtxService';
 
-import * as prop from "js/constants/fmeaProperty";
-import * as constants from "js/constants/fmeaConstants";
-import * as datas from "js/dfmeaExcelServiceDatas";
-import { removeTagInStr, getLangIndex } from "js/utils/fmeaCommonUtils";
-import { makeColumnCells } from "js/dfmeaExcelColumnService";
+import * as prop from 'js/constants/fmeaProperty';
+import * as constants from 'js/constants/fmeaConstants';
+import * as datas from 'js/dfmeaExcelServiceDatas';
+import { removeTagInStr, getLangIndex } from 'js/utils/fmeaCommonUtils';
+import { makeColumnCells } from 'js/dfmeaExcelColumnService';
 
 export const MAX_COLUMN_COUNT = 28;
 let workbook;
 let worksheet;
 let rowIndex = 5;
 let langIndex;
-const IS_IMAGE = "src=";
-const ESCAPE = "\r\n";
-const P_STYLE_TAG =
-  '<p style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 15px;">';
+const IS_IMAGE = 'src=';
+const ESCAPE = '\r\n';
+const P_STYLE_TAG = '<p style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 15px;">';
+let objDataArray = [];
+let mergeStartIndexArray = [];
 
 const exportExcel = async (ctx, data) => {
   try {
@@ -24,7 +25,7 @@ const exportExcel = async (ctx, data) => {
     const fmeaName = fmea.props[prop.OBJECT_NAME].dbValues[0];
 
     workbook = new Excel.Workbook();
-    workbook.addWorksheet("DFMEA");
+    workbook.addWorksheet('DFMEA');
     worksheet = workbook.getWorksheet(1);
 
     makeColumnCells(worksheet);
@@ -35,16 +36,16 @@ const exportExcel = async (ctx, data) => {
 
     _setMergeFirstValues();
 
+    _sameValueMerges();
+
     _downloadExcel(fmeaName);
   } catch (error) {
-    console.error(error);
+    //console.error(error);
   } finally {
     rowIndex = 5;
   }
 };
 
-let objDataArray = [];
-let mergeStartIndexArray = [];
 // 행 데이터 추가
 const _addRowData = (ctx) => {
   const tableList = ctx[constants.FMEA_TABLE_LIST];
@@ -55,58 +56,9 @@ const _addRowData = (ctx) => {
     objDataArray.push(objDatas);
 
     _setValueRow(objDatas, index);
-    _mergeCells(startRowIndex, rowIndex);
+    _mergeCells(startRowIndex);
     mergeStartIndexArray.push(startRowIndex);
   }
-};
-
-// 행 데이터 추가2
-const _setMergeFirstValues = () => {
-  let cnt = 0;
-  for (const mergeStartIndex of mergeStartIndexArray) {
-    const values = _getMergeFirstValues(objDataArray[cnt++]);
-    worksheet.getRow(mergeStartIndex).values = ["", ...values];
-    _setCellStyle(mergeStartIndex);
-  }
-};
-
-const _getMergeFirstValues = (data) => {
-  let result = [];
-  for (const column of datas.COLUMNS) {
-    const key = column.key;
-    const originKey = key + "_origin";
-    if (data[originKey]) {
-      result.push(data[originKey]);
-    } else {
-      const value = test1(data[key]);
-      result.push(value);
-    }
-  }
-  return result;
-};
-
-const test1 = (value) => {
-  if (!value) {
-    return "";
-  }
-  if (Array.isArray(value)) {
-    return test2(value[0]);
-  }
-
-  return test2(value);
-};
-
-const test2 = (value) => {
-  if (!value) {
-    return "";
-  }
-  if (Number.isInteger(value)) {
-    return value;
-  }
-  if (!value.includes(IS_IMAGE)) {
-    return value;
-  }
-  return "";
 };
 
 // 시트의 row에 set values 후 row의 높이 값 조정
@@ -130,7 +82,7 @@ const _getValues = (data, index, tableIndex) => {
     result.push(value);
   }
 
-  return ["", ...result];
+  return ['', ...result];
 };
 
 // 로우 높이값 조정
@@ -148,6 +100,7 @@ const _mergeCells = (startRowIndex) => {
     return;
   }
   for (let i = 1; i <= 28; i++) {
+    // 이전 내용과 같으면 합침
     worksheet.mergeCells(startRowIndex, i, rowIndex - 1, i);
   }
 };
@@ -176,13 +129,13 @@ const _getMaxRowHeight = (values) => {
 
 const _getDataValue = (dataValues, index, tableIndex, key) => {
   if (!dataValues) {
-    return "";
+    return '';
   }
   if (index > 0 && !Array.isArray(dataValues)) {
     return dataValues;
   }
   if (!dataValues[index]) {
-    return "";
+    return '';
   }
   if (Number.isInteger(dataValues[index])) {
     return dataValues[index];
@@ -194,15 +147,15 @@ const _getDataValue = (dataValues, index, tableIndex, key) => {
     _addImage(tableIndex, dataValues[index], key);
   }
 
-  return "";
+  return '';
 };
 
 const _addImage = (tableIndex, imageDataValue, key) => {
   const grid = appCtxService.ctx[constants.FMEA_IMAGE_GRID];
   const columnIndex = _getImageColumnIndex(key);
-  const column = datas.EXCEL_IMAGE_COLUMNS[columnIndex][langIndex];
+  const column = datas.EXCEL_COLUMNS[columnIndex][langIndex];
   const el = grid.getElement(tableIndex, column);
-  const imgTags = el.getElementsByTagName("img");
+  const imgTags = el.getElementsByTagName('img');
   if (!imgTags || imgTags.length === 0) {
     return;
   }
@@ -212,10 +165,12 @@ const _addImage = (tableIndex, imageDataValue, key) => {
   const height = imgTag.offsetHeight;
   const imageId = workbook.addImage({
     base64: imgTag.src,
-    extension: "png",
+    extension: 'png',
   });
 
-  worksheet.getRow(rowIndex).height = height;
+  if (!worksheet.getRow(rowIndex).height || worksheet.getRow(rowIndex).height < height) {
+    worksheet.getRow(rowIndex).height = height;
+  }
 
   const imageRowIndex = rowIndex - 1;
   const colIndex = columnIndex + 2 + 0.1;
@@ -235,8 +190,8 @@ const _getImageTag = (imgTags, imageDataValue) => {
 };
 
 const _getImageColumnIndex = (key) => {
-  for (let index = 0; index < datas.EXCEL_IMAGE_COLUMNS.length; index++) {
-    const col = datas.EXCEL_IMAGE_COLUMNS[index];
+  for (let index = 0; index < datas.EXCEL_COLUMNS.length; index++) {
+    const col = datas.EXCEL_COLUMNS[index];
     if (col[0] === key) {
       return index;
     }
@@ -281,25 +236,10 @@ const _getCalRowCnt = (maxLenght) => {
   return ONE_LINE_HEIGHT * (maxLenght + 1);
 };
 
-const _setAllContentCellStyle = () => {
-  for (let i = 5; i < rowIndex; i++) {
-    const index = i;
-    _setCellStyle(index);
-  }
-};
-const _setCellStyle = (rowIndex) => {
-  for (let j = 2; j <= MAX_COLUMN_COUNT; j++) {
-    const cell = worksheet.getRow(rowIndex).getCell(j);
-    cell.font = datas.COL_FONT_STYLE;
-    cell.border = datas.BORDER_STYLE;
-    cell.alignment = { vertical: "top", wrapText: true };
-  }
-};
-
 // 이미지 포함된 경우 one cell에 넣어야 하기 때문에 데이터 자름
 // return { l2_precautions_action : ["..text..value..", " src="image/path.."]}
 const _makeDataByRow = (tableRow, tableIndex) => {
-  let data = { className: "" };
+  let data = { className: '' };
   for (const column of datas.COLUMNS) {
     const key = column.key;
     if (!_cellCheck(datas.INSERT_CELLS, key)) {
@@ -309,19 +249,27 @@ const _makeDataByRow = (tableRow, tableIndex) => {
       const targetRowValue = tableRow[key].value;
       // SOD 관련 컬럼인 경우(Number)
       if (_cellCheck(datas.SOD_CELLS, key)) {
-        const value = targetRowValue ? Number.parseInt(targetRowValue) : "";
+        const value = targetRowValue ? Number.parseInt(targetRowValue) : '';
         data[key] = [value];
       } else {
+        const originKey = key + '_origin';
+        // 윗 셀과 같은지 확인
+        if (tableIndex > 0 && _cellCheck(datas.IMAGE_CELLS, key)) {
+          const tableList = appCtxService.ctx[constants.FMEA_TABLE_LIST];
+          const prevRow = tableList[tableIndex - 1];
+          const prevCellValue = prevRow[key].value;
+          if (targetRowValue === prevCellValue) {
+            const prevOriginValue = objDataArray[objDataArray.length - 1][originKey];
+            if (prevOriginValue) {
+              data[originKey] = prevOriginValue;
+              continue;
+            }
+          }
+        }
         const value = _getValueByReplaceTag(targetRowValue, key, tableIndex);
         data[key] = value;
-        const firstValue = _getFirstValue(
-          targetRowValue,
-          value,
-          tableIndex,
-          key
-        );
+        const firstValue = _getFirstValue(targetRowValue, value, tableIndex, key);
         if (firstValue) {
-          const originKey = key + "_origin";
           data[originKey] = firstValue;
         }
       }
@@ -332,15 +280,15 @@ const _makeDataByRow = (tableRow, tableIndex) => {
 
 // 전체 text와 img 분리.
 // 0번째에 text 일부 들어있음
-const _getValueByReplaceTag = (value, columnKey, tableIndex) => {
+const _getValueByReplaceTag = (value) => {
   let result = [];
-  const splitResult = value.split("<img");
+  const splitResult = value.split('<img');
   for (let index = 0; index < splitResult.length; index++) {
     const text = splitResult[index];
     if (text.includes(IS_IMAGE)) {
-      const text1 = text.substring(0, text.indexOf(">"));
+      const text1 = text.substring(0, text.indexOf('>'));
       result.push(text1);
-      const text2 = text.substring(text.indexOf(">") + 1, text.length);
+      const text2 = text.substring(text.indexOf('>') + 1, text.length);
       if (removeTagInStr(text2).length > 0) {
         result.push(_getValueByReplaceTag2(text2));
       }
@@ -358,14 +306,12 @@ const _getFirstValue = (value, splitResult, tableIndex, columnKey) => {
     return;
   }
   // text 하나면 return;
-  const onlyTxtValues = splitResult.filter(
-    (s) => !s.includes("src=") && s !== ""
-  );
+  const onlyTxtValues = splitResult.filter((s) => !s.includes(' src=') && s !== '');
   if (onlyTxtValues.length === 1) {
-    return;
+    return onlyTxtValues[0];
   }
 
-  let result = "";
+  let result = '';
 
   for (let index = 0; index < splitResult.length; index++) {
     const splitValue = splitResult[index];
@@ -373,7 +319,7 @@ const _getFirstValue = (value, splitResult, tableIndex, columnKey) => {
       continue;
     }
 
-    if (splitValue.includes("src=")) {
+    if (splitValue.includes(' src=')) {
       const imgTag = _getImgTag(columnKey, tableIndex, splitValue);
       if (!imgTag) {
         continue;
@@ -387,13 +333,8 @@ const _getFirstValue = (value, splitResult, tableIndex, columnKey) => {
       if (!match) {
         continue;
       }
-      const previousTextEscapeIndex = previousImgValue.lastIndexOf(
-        match[match.length - 1]
-      );
-      const previousTextSubstring = previousImgValue.substring(
-        previousTextEscapeIndex,
-        previousImgValue.length
-      );
+      const previousTextEscapeIndex = previousImgValue.lastIndexOf(match[match.length - 1]);
+      const previousTextSubstring = previousImgValue.substring(previousTextEscapeIndex, previousImgValue.length);
       const calRNCnt = Math.ceil(imgTagHeight / 14);
       const rnNum = _countRN(previousTextSubstring);
       for (let index = rnNum; index <= calRNCnt; index++) {
@@ -408,9 +349,9 @@ const _getFirstValue = (value, splitResult, tableIndex, columnKey) => {
 const _getImgTag = (columnKey, tableIndex, splitValue) => {
   const grid = appCtxService.ctx[constants.FMEA_IMAGE_GRID];
   const columnIndex = _getImageColumnIndex(columnKey);
-  const column = datas.EXCEL_IMAGE_COLUMNS[columnIndex][1];
+  const column = datas.EXCEL_COLUMNS[columnIndex][1];
   const el = grid.getElement(tableIndex, column);
-  const imgTags = el.getElementsByTagName("img");
+  const imgTags = el.getElementsByTagName('img');
   if (!imgTags || imgTags.length === 0 || imgTags.length === 1) {
     return;
   }
@@ -423,13 +364,13 @@ const _getImgTag = (columnKey, tableIndex, splitValue) => {
 
 const _getValueByReplaceTag2 = (value) => {
   let result;
-  result = value.replace(/<img[^>]+>/gi, "");
+  result = value.replace(/<img[^>]+>/gi, '');
 
   // 1. <p>태그는 \r\n으로 치환
-  result = result.replace("<p>", "");
-  result = result.replaceAll("<p>", ESCAPE);
+  result = result.replace('<p>', '');
+  result = result.replaceAll('<p>', ESCAPE);
   result = result.replaceAll(P_STYLE_TAG, ESCAPE);
-  result = result.replaceAll("&nbsp;", "");
+  result = result.replaceAll('&nbsp;', '');
 
   return removeTagInStr(result);
 };
@@ -444,15 +385,108 @@ const _cellCheck = (checkCells, key) => {
   return false;
 };
 
+// merge 첫 행에 가공한 새 value
+const _setMergeFirstValues = () => {
+  let cnt = 0;
+  for (const mergeStartIndex of mergeStartIndexArray) {
+    const values = _getMergeFirstValues(objDataArray[cnt++]);
+    worksheet.getRow(mergeStartIndex).values = ['', ...values];
+    _setCellStyle(mergeStartIndex);
+  }
+};
+
+const _getMergeFirstValues = (data) => {
+  let result = [];
+  for (const column of datas.COLUMNS) {
+    const key = column.key;
+    const originKey = key + '_origin';
+    if (data[originKey]) {
+      result.push(data[originKey]);
+    } else {
+      const value = _getValidValue(data[key]);
+      result.push(value);
+    }
+  }
+
+  return result;
+};
+
+// 유효값 리턴
+const _getValidValue = (value) => {
+  if (!value) {
+    return '';
+  }
+  if (Array.isArray(value)) {
+    value = value[0];
+  }
+
+  if (Number.isInteger(value)) {
+    return value;
+  }
+  if (!value.includes(IS_IMAGE)) {
+    return value;
+  }
+
+  return '';
+};
+
+// 컬럼별 동일 내용인 경우 병합 처리
+const _sameValueMerges = () => {
+  for (const MERGE_CELL of datas.MERGE_CELLS) {
+    let prevCellIndex = mergeStartIndexArray[0];
+    const colIndex = MERGE_CELL[1];
+    // 이미지 때문에 병합했던 인덱스 기준으로 for
+    // 0번째 행은 비교할 윗행이 없어 1부터 시작
+    for (let index = 1; index < mergeStartIndexArray.length; index++) {
+      const mergeStartIndex = mergeStartIndexArray[index];
+      const value = worksheet.getRow(mergeStartIndex).getCell(colIndex).value;
+
+      // 비교할 윗행셀 value
+      const prevCellValue = worksheet.getRow(prevCellIndex).getCell(colIndex).value;
+      if (value === prevCellValue) {
+        const mergeEndIndex = isNaN(mergeStartIndexArray[index + 1] - 1) ? rowIndex - 1 : mergeStartIndexArray[index + 1] - 1;
+        // 기존 merge 해제
+        worksheet.unMergeCells(prevCellIndex, colIndex, mergeEndIndex, colIndex);
+        // 최종 merge
+        worksheet.mergeCells(prevCellIndex, colIndex, mergeEndIndex, colIndex);
+        if (colIndex === 3) {
+          // 부품(1레벨) 셀의 merge에 따라 구분 셀도 똑같이 처리
+          worksheet.unMergeCells(prevCellIndex, 2, mergeEndIndex, 2);
+          worksheet.mergeCells(prevCellIndex, 2, mergeEndIndex, 2);
+        }
+      } else {
+        prevCellIndex = mergeStartIndex;
+      }
+    }
+  }
+};
+
+// sheet 공통 style
+const _setAllContentCellStyle = () => {
+  for (let i = 5; i < rowIndex; i++) {
+    const index = i;
+    _setCellStyle(index);
+  }
+};
+
+const _setCellStyle = (rowIndex) => {
+  for (let j = 2; j <= MAX_COLUMN_COUNT; j++) {
+    const cell = worksheet.getRow(rowIndex).getCell(j);
+    cell.font = datas.COL_FONT_STYLE;
+    cell.border = datas.BORDER_STYLE;
+    cell.alignment = { vertical: 'top', wrapText: true };
+  }
+};
+
 // 로컬 pc에 엑셀 다운로드
 const _downloadExcel = (fmeaName) => {
-  const XLSX = "xlsx";
+  const XLSX = 'xlsx';
   workbook.xlsx.writeBuffer().then((data) => {
     const blob = new Blob([data], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     });
     const url = window.URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
+    const anchor = document.createElement('a');
     anchor.href = url;
     anchor.download = `${fmeaName}.${XLSX}`;
     anchor.click();

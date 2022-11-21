@@ -1,6 +1,4 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-frame.directive"
-    ]
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-frame.directive"]
 }

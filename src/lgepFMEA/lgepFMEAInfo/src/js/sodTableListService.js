@@ -14,12 +14,7 @@ import tableUtil from 'js/utils/fmeaTableSortFilterUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 
-const TABLE_COLS = [
-  constants.COL_NAME,
-  constants.COL_TYPE,
-  constants.COL_OWNING_USER_LANG,
-  constants.COL_CREATION_DATE_LANG,
-];
+const TABLE_COLS = [constants.COL_NAME, constants.COL_TYPE, constants.COL_OWNING_USER_LANG, constants.COL_CREATION_DATE_LANG];
 
 /**
  * @param {TableDataProvider} dataProvider
@@ -35,9 +30,10 @@ const loadColumns = (dataProvider) => {
  * [ViewModelObject]
  * }
  */
-const loadData = async () => {
+const loadData = async (ctx) => {
   const results = await loadTableData(prop.QUERY_FMEA_SOD, TABLE_COLS);
-  console.log("results", results);
+  //console.log("results", results);
+  ctx.ap_edited = false;
   appCtxService.registerCtx(constants.FMEA_SET_VMO, results);
   return {
     totalFound: results.length,
@@ -50,7 +46,8 @@ export const loadTableData = async (queryName, revProps, itemProps) => {
   const queryResults = await queryUtil.executeSavedQuery(
     queryName,
     [prop.QUERY_ENTRY_NAME, prop.QUERY_DFMEA_MASTER_PRODUCT],
-    ['*', product]
+    ['*', product],
+    lgepObjectUtils.createPolicy(['l2_severity_table', 'l2_occurence_table', 'l2_detection_table', 'l2_product', 'object_name', 'l2_ap_table'], 'L2_SODTable'),
   );
 
   if (queryResults) {
@@ -72,7 +69,7 @@ const makeTableDatas = async (queryResults, revProps) => {
       let vmo = vmoc.createViewModelObject(model);
 
       return vmo;
-    })
+    }),
   );
 
   return results;
@@ -80,12 +77,12 @@ const makeTableDatas = async (queryResults, revProps) => {
 
 const setVmoXrt = async () => {
   const results = await loadTableData(prop.QUERY_FMEA_SOD, TABLE_COLS);
-  console.log("results", results);
+  //console.log("results", results);
   appCtxService.registerCtx(constants.FMEA_SET_VMO, results);
 };
 
 export default {
   loadData,
   loadColumns,
-  setVmoXrt
+  setVmoXrt,
 };

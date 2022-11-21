@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [],
+  "onEvent": [],
+  "data": {},
+  "actions": {
+    "tableModeChanges": {
+      "actionType": "JSFunction",
+      "method": "tableModeChanges",
+      "inputData": {
+        "currentValue": "1"
+      },
+      "deps": "js/L2_ChecklistOpenService"
+    }
+  },
+  "dataProviders": {},
+  "lifecycleHooks": {
+    "onMount": "tableModeChanges"
+  }
+}

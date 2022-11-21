@@ -1,8 +1,8 @@
 {
-    "sodAddDesc":"SOD 등록",
-    "sodDeleteDesc":"SOD 삭제",
-    "sodCaption":"SOD 생성",
-    "sodEditDesc" : "SOD 편집",
-    "sodEditCancelDesc":"SOD 편집 취소",
-    "sodEditSaveDesc" : "SOD 편집 저장"
+  "sodAddDesc": "SOD 등록",
+  "sodDeleteDesc": "SOD 삭제",
+  "sodCaption": "SOD 생성",
+  "sodEditDesc": "SOD 편집",
+  "sodEditCancelDesc": "SOD 편집 취소",
+  "sodEditSaveDesc": "SOD 편집 저장"
 }

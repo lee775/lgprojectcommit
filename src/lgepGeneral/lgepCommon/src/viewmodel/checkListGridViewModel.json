@@ -1,26 +1,36 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-column.directive"
-    ],
-    "onEvent": [{
-        "action" :"goToLink"
-        }
-    ],
-    "data": {
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-flex-column.directive"],
+  "onEvent": [
+    {
+      "action": "goToLink"
     },
-    "actions": {
-        "loadData":{
-            "actionType": "JSFunction",
-            "method": "loadData",
-            "inputData": {
-                "ctx": "{{ctx}}",
-                "data":"{{data}}"
-            },
-            "deps": "js/checkListGrid"
-        }
-    },
-    "lifecycleHooks": {
-        "onMount": "loadData"
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setTuiGridStyle"
     }
+  ],
+  "data": {},
+  "actions": {
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "loadData",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/checkListGrid"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/sodAPTableService"
+    }
+  },
+  "lifecycleHooks": {
+    "onMount": "loadData"
+  }
 }

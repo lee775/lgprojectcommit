@@ -1,12 +1,12 @@
 {
-    "panelSection_PartUnfoldGroup": "Classification",
-    "l2Product" : "Product",
-    "l2ParentAssy" : "Parent Assy",
-    "registrationButton":"Save",
-    "cancelButton":"Cancel",
-    "panelSection_StnadardGroup":"SOD",
-    "severity":"Severity",
-    "occurence":"Occurence",
-    "detection":"Detection",
-    "objectName" :"Name"
+  "panelSection_PartUnfoldGroup": "Classification",
+  "l2Product": "Product",
+  "l2ParentAssy": "Parent Assy",
+  "registrationButton": "Save",
+  "cancelButton": "Cancel",
+  "panelSection_StnadardGroup": "SOD",
+  "severity": "Severity",
+  "occurence": "Occurence",
+  "detection": "Detection",
+  "objectName": "Name"
 }

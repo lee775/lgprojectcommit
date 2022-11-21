@@ -1,154 +1,141 @@
 <aw-popup2>
-    <style>
-        .labelPosition {
-            padding-top: 30px;
-            padding-left: 20%;
-        }
-        
-        .btnStyle {
-            padding-top: 22px;
-        }
+  <style>
+    .labelPosition {
+      padding-top: 30px;
+      padding-left: 20%;
+    }
 
-        .ref_left1{
-            margin-right: 100px;
-        }
-        
-        .ref_left2{
-            margin-right: 90px;
-        }
-    </style>
-    <aw-flex-row>
-        <aw-flex-column>
-            <aw-panel-body>
-                <aw-panel-section caption="Information">
-                    <aw-flex-column width="fill" class="labelPosition">
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.itemIdLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.revisionLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.nameLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.descLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textarea prop="data.descTxtArea" exist-when="data.window == 'editMode'">
-                                </aw-textarea>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.typeLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.createrLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                </aw-panel-section>
+    .btnStyle {
+      padding-top: 22px;
+    }
 
-                <aw-panel-section caption="standard">
-                    <aw-flex-column class="labelPosition">
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.divisionLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.modelTypeLbl"></aw-label>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.makerLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textbox prop="data.makerTxtBox" exist-when="data.window == 'editMode'"></aw-textbox>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.diameterLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textbox prop="data.diameterTxtBox" exist-when="data.window == 'editMode'">
-                                </aw-textbox>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.lengthLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textbox prop="data.lengthTxtBox" exist-when="data.window == 'editMode'">
-                                </aw-textbox>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.materialLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textbox prop="data.materialTxtBox" exist-when="data.window == 'editMode'">
-                                </aw-textbox>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.rpmLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textbox prop="data.rpmTxtBox" exist-when="data.window == 'editMode'"></aw-textbox>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.voltageLbl"
-                                    exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
-                                <aw-textbox prop="data.voltageTxtBox" exist-when="data.window == 'editMode'">
-                                </aw-textbox>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                    </aw-flex-column>
-                </aw-panel-section>
+    .ref_left1 {
+      margin-right: 100px;
+    }
 
-                <aw-panel-section caption="References">
-                    <aw-flex-column class="labelPosition">
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.ref_ModelsLbl"></aw-label>
-                            </aw-flex-column>
-                            <aw-flex-column class="ref_left1">
-                                <aw-property-val prop="data.ref_ModelsLink"></aw-property-val>
-                            </aw-flex-column>
-                        </aw-flex-row>
-                        <aw-flex-row>
-                            <aw-flex-column width="fill">
-                                <aw-label prop="data.ref_PartsLbl"></aw-label>                              
-                            </aw-flex-column>
-                            <aw-flex-column class="ref_left2">
-                                <aw-property-val prop="data.ref_PartsLink"></aw-property-val>                            
-                            </aw-flex-column>
-                        </aw-flex-row>                        
-                    </aw-flex-column>
-                </aw-panel-section>
-            </aw-panel-body>
-        </aw-flex-column>
-    </aw-flex-row>
+    .ref_left2 {
+      margin-right: 90px;
+    }
+  </style>
+  <aw-flex-row>
+    <aw-flex-column>
+      <aw-panel-body>
+        <aw-panel-section caption="Information">
+          <aw-flex-column width="fill" class="labelPosition">
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.itemIdLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.revisionLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.nameLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.descLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textarea prop="data.descTxtArea" exist-when="data.window == 'editMode'"> </aw-textarea>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.typeLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.createrLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-panel-section>
 
-    <aw-separator></aw-separator>
+        <aw-panel-section caption="standard">
+          <aw-flex-column class="labelPosition">
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.divisionLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.modelTypeLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.makerLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textbox prop="data.makerTxtBox" exist-when="data.window == 'editMode'"></aw-textbox>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.diameterLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textbox prop="data.diameterTxtBox" exist-when="data.window == 'editMode'"> </aw-textbox>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.lengthLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textbox prop="data.lengthTxtBox" exist-when="data.window == 'editMode'"> </aw-textbox>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.materialLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textbox prop="data.materialTxtBox" exist-when="data.window == 'editMode'"> </aw-textbox>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.rpmLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textbox prop="data.rpmTxtBox" exist-when="data.window == 'editMode'"></aw-textbox>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.voltageLbl" exist-when="data.window != 'editMode' || data.window == 'summaryMode'"></aw-label>
+                <aw-textbox prop="data.voltageTxtBox" exist-when="data.window == 'editMode'"> </aw-textbox>
+              </aw-flex-column>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-panel-section>
 
-    <aw-panel-footer>
-        <aw-button action="editCommandAction" size="auto"
-            exist-when="data.window != 'editMode' || data.window == 'summaryMode'">수정</aw-button>
-        <aw-button action="completeEdit" size="auto" exist-when="data.window == 'editMode'">완료</aw-button>
-        <aw-button action="closePopupWindow" size="auto">닫기</aw-button>
-    </aw-panel-footer>
+        <aw-panel-section caption="References">
+          <aw-flex-column class="labelPosition">
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.ref_ModelsLbl"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column class="ref_left1">
+                <aw-property-val prop="data.ref_ModelsLink"></aw-property-val>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column width="fill">
+                <aw-label prop="data.ref_PartsLbl"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column class="ref_left2">
+                <aw-property-val prop="data.ref_PartsLink"></aw-property-val>
+              </aw-flex-column>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-panel-section>
+      </aw-panel-body>
+    </aw-flex-column>
+  </aw-flex-row>
+
+  <aw-separator></aw-separator>
+
+  <aw-panel-footer>
+    <aw-button action="editCommandAction" size="auto" exist-when="data.window != 'editMode' || data.window == 'summaryMode'">수정</aw-button>
+    <aw-button action="completeEdit" size="auto" exist-when="data.window == 'editMode'">완료</aw-button>
+    <aw-button action="closePopupWindow" size="auto">닫기</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

@@ -1,5 +1,5 @@
 {
-    "name": "lgepUserLogs",
-    "description": "This is the lgepUserLogs module",
-    "skipTest": true
+  "name": "lgepUserLogs",
+  "description": "This is the lgepUserLogs module",
+  "skipTest": true
 }

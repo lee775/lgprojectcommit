@@ -23,15 +23,15 @@ function _excludeCommandWithMap(data, ctx, e) {
     try {
       if (ctx.workspace.excludedCommands && ctx.sublocation.nameToken === key) {
         for (const value of values) {
-            if (!ctx.workspace.excludedCommands.includes(value)) {
-              ctx.workspace.excludedCommands.push(value);
-            }
+          if (!ctx.workspace.excludedCommands.includes(value)) {
+            ctx.workspace.excludedCommands.push(value);
+          }
         }
       } else {
         for (const value of values) {
-            if (ctx.workspace.excludedCommands.includes(value)) {
-              ctx.workspace.excludedCommands.filter((element) => element !== value);
-            }
+          if (ctx.workspace.excludedCommands.includes(value)) {
+            ctx.workspace.excludedCommands.filter((element) => element !== value);
+          }
         }
       }
     } catch (e) {

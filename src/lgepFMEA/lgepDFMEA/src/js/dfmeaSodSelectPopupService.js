@@ -4,19 +4,10 @@ import 'tui-grid/dist/tui-grid.css';
 import popupService from 'js/popupService';
 import appCtxService from 'js/appCtxService';
 
-import {
-  resetBtnEvent
-} from 'js/dfmeaSodSelectPopupEventService';
-import {
-  langIndex
-} from 'js/dfmeaMasterImageTableService';
-import {
-  getTableInfo
-} from 'js/sodPopupTableService';
-import {
-  getGradeValue,
-  addChangeRowByGrade,
-} from 'js/dfmeaSodSelectPopupEventService';
+import { resetBtnEvent } from 'js/dfmeaSodSelectPopupEventService';
+import { langIndex } from 'js/dfmeaMasterImageTableService';
+import { getTableInfo } from 'js/sodPopupTableService';
+import { getGradeValue, addChangeRowByGrade } from 'js/dfmeaSodSelectPopupEventService';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
 import fmeaPopupUtils from 'js/utils/fmeaPopupUtils';
@@ -122,7 +113,7 @@ export const makeGridTable = async (tableId) => {
   });
 };
 
-const makePopupTableOption =async (tableId) => {
+const makePopupTableOption = async (tableId) => {
   const tableInfo = await getTableInfo(tableId);
   const columns = _getColumns(tableInfo);
 

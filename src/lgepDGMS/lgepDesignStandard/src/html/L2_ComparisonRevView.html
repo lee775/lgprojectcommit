@@ -1,0 +1,105 @@
+<aw-popup2>
+  <style>
+    #sepId {
+      margin: 8px 0px;
+    }
+
+    .labelMargin {
+      margin-left: 10px;
+    }
+
+    .listTopMargin {
+      margin-top: 10px;
+    }
+
+    .compareRevlistSet input {
+      pointer-events: none;
+      background-color: #eee;
+      color: #555;
+      opacity: 1;
+    }
+
+    .noColorJusti {
+      background: none !important;
+    }
+
+    .createBackground {
+      background: #bdecb6 !important;
+    }
+
+    .deleteBackground {
+      background: #fbceb1 !important;
+    }
+
+    .reviseBackground {
+      background: #bed7fc !important;
+    }
+  </style>
+  <aw-flex-row height="12" id="compareRevData">
+    <aw-flex-column width="6">
+      <aw-flex-row height="3" justify="center">
+        <aw-flex-column width="11">
+          <aw-flex-row>
+            <aw-flex-column justify="center" width="9">
+              <aw-label class="labelMargin" prop="data.AOwningUser"></aw-label>
+              <aw-label class="labelMargin" prop="data.ARevDate"></aw-label>
+              <aw-label class="labelMargin" prop="data.ARevReason"></aw-label>
+            </aw-flex-column>
+            <aw-flex-column justify="top" width="3">
+              <aw-listbox class="listTopMargin" prop="data.compareAList" list="data.compareAListValues.dbValue" action="standardRevSet"></aw-listbox>
+            </aw-flex-column>
+          </aw-flex-row>
+          <aw-separator></aw-separator>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row height="9" justify="center">
+        <aw-flex-column width="11">
+          <aw-flex-row height="1" justify="right" class="noColorJusti"> </aw-flex-row>
+          <aw-flex-row height="11" justify="center">
+            <aw-splm-table gridid="compareTreeA" id="compareATreeId" use-tree="true" show-decorators="true"> </aw-splm-table>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-flex-column>
+    <aw-separator id="sepId" is-vertical="true"></aw-separator>
+    <aw-flex-column width="6">
+      <aw-flex-row height="3" justify="center">
+        <aw-flex-column width="11">
+          <aw-flex-row>
+            <aw-flex-column justify="center" width="9">
+              <aw-label class="labelMargin" prop="data.BOwningUser"></aw-label>
+              <aw-label class="labelMargin" prop="data.BRevDate"></aw-label>
+              <aw-label class="labelMargin" prop="data.BRevReason"></aw-label>
+            </aw-flex-column>
+            <aw-flex-column justify="top" width="3">
+              <aw-flex-row height="9">
+                <aw-listbox
+                  class="listTopMargin compareRevlistSet"
+                  prop="data.compareBList"
+                  list="data.compareBListValues.dbValue"
+                  action="compareRevSet"
+                  id="listboxB"
+                >
+                </aw-listbox>
+              </aw-flex-row>
+              <aw-flex-row height="3" justify="right" class="noColorJusti">
+                <aw-button action="compareTreeDataSet" size="auto">{{i18n.compareBtn}}</aw-button>
+              </aw-flex-row>
+            </aw-flex-column>
+          </aw-flex-row>
+          <aw-separator></aw-separator>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row height="9" justify="center">
+        <aw-flex-column width="11">
+          <aw-flex-row height="1" justify="right" class="noColorJusti">
+            <aw-checkbox prop="data.onlyChanges" action="tableOnlyChanges"></aw-checkbox>
+          </aw-flex-row>
+          <aw-flex-row height="11" justify="center">
+            <aw-splm-table gridid="compareTreeB" id="compareBTreeId" use-tree="true" show-decorators="true"> </aw-splm-table>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-flex-column>
+  </aw-flex-row>
+</aw-popup2>

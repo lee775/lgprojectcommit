@@ -1,15 +1,11 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-i18n.directive"
-    ],
-    "onEvent": [
-    ],
-    "data": {},
-    "actions": {
-    },
-    "i18n": {
-        "addChecklist":["L2_ChkMainMessages"],
-        "addChecklistDesc":["L2_ChkMainMessages"]
-    }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-i18n.directive"],
+  "onEvent": [],
+  "data": {},
+  "actions": {},
+  "i18n": {
+    "addChecklist": ["L2_ChkMainMessages"],
+    "addChecklistDesc": ["L2_ChkMainMessages"]
+  }
 }

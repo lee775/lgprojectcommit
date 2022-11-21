@@ -4,22 +4,12 @@
  */
 import appCtxService from 'js/appCtxService';
 
-import {
-  setValue,
-  getEditorValueById,
-  changeEnableEditors,
-} from 'js/utils/fmeaEditorUtils';
+import { setValue, getEditorValueById, changeEnableEditors } from 'js/utils/fmeaEditorUtils';
 import * as constants from 'js/constants/fmeaConstants';
 import * as prop from 'js/constants/fmeaProperty';
 
 // 에디터 value 저장 및 활성화
-export const ROW_EDITORS = [
-  prop.REQUIREMENT,
-  prop.FAILURE_EFFECT,
-  prop.CAUSE_OF_FAILURE,
-  prop.PRECATUIONS_ACTION,
-  prop.DETECTION_ACTION,
-];
+export const ROW_EDITORS = [prop.REQUIREMENT, prop.FAILURE_EFFECT, prop.CAUSE_OF_FAILURE, prop.PRECATUIONS_ACTION, prop.DETECTION_ACTION];
 
 /**
  * 로우 편집 실행
@@ -60,14 +50,8 @@ const _getListValues = (ctx, selectRow) => {
   const currentValues = _getCurrentValues(selectRow);
   const [currentFunctionValue, currentFailureValue] = currentValues;
 
-  const resultFunctionValues = _changeOrderValues(
-    functionValues,
-    currentFunctionValue
-  );
-  const resultFailureValues = _changeOrderValues(
-    failureValues,
-    currentFailureValue
-  );
+  const resultFunctionValues = _changeOrderValues(functionValues, currentFunctionValue);
+  const resultFailureValues = _changeOrderValues(failureValues, currentFailureValue);
 
   return {
     l2_function: resultFunctionValues,
@@ -78,48 +62,32 @@ const _getListValues = (ctx, selectRow) => {
 };
 
 const _getCurrentValues = (selectRow) => {
-  const changeRows =
-    appCtxService.ctx[constants.CHANGE_INFO][constants.CHANGE_EDIT_ROWS];
+  const changeRows = appCtxService.ctx[constants.CHANGE_INFO][constants.CHANGE_EDIT_ROWS];
   // chagne rows에 있으면
   for (const changeRow of changeRows) {
     if (selectRow.props.uid === changeRow.row.props.uid) {
       //function이나 failure를 이미 바꿨으면
-      const functionValue = _getCurrentListValueByProp(
-        changeRow,
-        selectRow,
-        prop.FUNCTION_SHORT
-      );
-      const failureValue = _getCurrentListValueByProp(
-        changeRow,
-        selectRow,
-        prop.POTENTIAL_FAILURE_MODE_SHORT
-      );
+      const functionValue = _getCurrentListValueByProp(changeRow, selectRow, prop.FUNCTION_SHORT);
+      const failureValue = _getCurrentListValueByProp(changeRow, selectRow, prop.POTENTIAL_FAILURE_MODE_SHORT);
 
       return [functionValue, failureValue];
     }
   }
-  return [
-    selectRow.props[prop.FUNCTION_SHORT].value,
-    selectRow.props[prop.POTENTIAL_FAILURE_MODE_SHORT].value,
-  ];
+  return [selectRow.props[prop.FUNCTION_SHORT].value, selectRow.props[prop.POTENTIAL_FAILURE_MODE_SHORT].value];
 };
 
 const _getCurrentListValueByProp = (changeRow, selectRow, prop) => {
   const changeRowProp = changeRow[prop];
   if (!changeRowProp || !changeRowProp.value) {
     return selectRow.props[prop].value;
-  }else{
+  } else {
     return changeRowProp.value;
   }
 };
 
 const _changeOrderValues = (values, currentValue) => {
-  const currentValueObj = values.find(
-    (value) => value.propDisplayValue === currentValue
-  );
-  const filaterValues = values.filter(
-    (value) => value.propDisplayValue !== currentValueObj.propDisplayValue
-  );
+  const currentValueObj = values.find((value) => value.propDisplayValue === currentValue);
+  const filaterValues = values.filter((value) => value.propDisplayValue !== currentValueObj.propDisplayValue);
   return [currentValueObj, ...filaterValues];
 };
 

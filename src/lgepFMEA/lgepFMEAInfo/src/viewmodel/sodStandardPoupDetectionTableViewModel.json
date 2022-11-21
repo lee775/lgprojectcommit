@@ -7,7 +7,7 @@
       "method": "onMount",
       "inputData": {
         "ctx": "{{ctx}}",
-        "tableId":"L2_Detection"
+        "tableId": "L2_Detection"
       },
       "deps": "js/sodPopupTableService"
     }

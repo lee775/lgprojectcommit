@@ -1,69 +1,17 @@
 {
-    "typeTranslationRevision48_custom": [
-        "L2_Question",
-        "L2_QuestionRevision"
-    ],
-    "typeAnswer48": [
-        "L2_Answer",
-        "L2_AnswerRevision"
-    ],
-    "typeTestProcedureRevision48_custom": [
-        "L2_FAQ",
-        "L2_FAQRevision"
-    ],
-    "typeWorkBreakdownStructureRevision48_custom": [
-        "L2_TechDoc",
-        "L2_TechDocRevision"
-    ],
-    "typeGroup48_custom": [
-        "L2_QuestionExp",
-        "L2_QuestionExpRevision"
-    ],
-    "typeOpportunity48": [
-        "L2_Reply",
-        "L2_ReplyRevision"
-    ],
-    "typeToggleRating48": [
-        "L2_Like",
-        "L2_LikeRevision"
-    ],
-    "typeQualityRating48": [
-        "L2_Rating",
-        "L2_RatingRevision"
-    ],
-    "typePageTab48": [
-        "L2_IssuePage",
-        "L2_IssuePageRevision"
-    ],
-    "typePlanningProgram48": [
-        "L2_DevKnowledgeIssue"
-    ],
-    "typeAnalysisRequest48": [
-        "L2_DgnBook",
-        "L2_ManualBook",
-        "L2_DgnBook2"
-    ],
-    "typeAnalysisRequestRevision48": [
-        "L2_DgnBookRevision",
-        "L2_DgnBook2Revision",
-        "L2_ManualBookRevision"
-    ],
-    "typeFile48": [
-        "L2_DgnPage",
-        "L2_DgnPageRevision",
-        "L2_DgnProcedureRevision",
-        "L2_ManualPage",
-        "L2_ManualPageRevision"
-    ],
-    "typeTechnicalGoalDocumentRevision48": [
-        "L2_ClsfyMgmtFolder"
-    ],
-    "typeProperty48": [
-        "L2_DgnChapter",
-        "L2_DgnChapter2",
-        "L2_DgnChapterRevision",
-        "L2_DgnChapter2Revision",
-        "L2_ManualChapter",
-        "L2_ManualChapterRevision"
-    ]
+  "typeTranslationRevision48_custom": ["L2_Question", "L2_QuestionRevision"],
+  "typeAnswer48": ["L2_Answer", "L2_AnswerRevision"],
+  "typeTestProcedureRevision48_custom": ["L2_FAQ", "L2_FAQRevision"],
+  "typeWorkBreakdownStructureRevision48_custom": ["L2_TechDoc", "L2_TechDocRevision"],
+  "typeGroup48_custom": ["L2_QuestionExp", "L2_QuestionExpRevision"],
+  "typeOpportunity48": ["L2_Reply", "L2_ReplyRevision"],
+  "typeToggleRating48": ["L2_Like", "L2_LikeRevision"],
+  "typeQualityRating48": ["L2_Rating", "L2_RatingRevision"],
+  "typePageTab48": ["L2_IssuePage", "L2_IssuePageRevision"],
+  "typePlanningProgram48": ["L2_DevKnowledgeIssue"],
+  "typeAnalysisRequest48": ["L2_DgnBook", "L2_ManualBook", "L2_DgnBook2"],
+  "typeAnalysisRequestRevision48": ["L2_DgnBookRevision", "L2_DgnBook2Revision", "L2_ManualBookRevision"],
+  "typeFile48": ["L2_DgnPage", "L2_DgnPageRevision", "L2_DgnProcedureRevision", "L2_ManualPage", "L2_ManualPageRevision"],
+  "typeTechnicalGoalDocumentRevision48": ["L2_ClsfyMgmtFolder"],
+  "typeProperty48": ["L2_DgnChapter", "L2_DgnChapter2", "L2_DgnChapterRevision", "L2_DgnChapter2Revision", "L2_ManualChapter", "L2_ManualChapterRevision"]
 }

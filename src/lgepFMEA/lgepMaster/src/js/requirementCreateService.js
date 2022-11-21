@@ -45,19 +45,13 @@ export const createRequirementByCreate = async (failureRev) => {
  * @returns
  */
 export const reviseRequirement = async (baseBomline, requirementValue) => {
-  const baseRequirementUid =
-    baseBomline.props[prop.BOMLINE_REQUIREMENT].dbValues[0];
+  const baseRequirementUid = baseBomline.props[prop.BOMLINE_REQUIREMENT].dbValues[0];
   const baseRequirement = await lgepObjectUtils.getObject(baseRequirementUid);
 
   const reviseRequirementRev = await reviseByRevision(baseRequirement);
   const shortenValue = makeShortenValues(requirementValue);
 
-
-  await lgepObjectUtils.setProperties(
-    reviseRequirementRev,
-    [prop.REQUIREMENT, prop.REQUIREMENT_SHORT],
-    [requirementValue, shortenValue]
-  );
+  await lgepObjectUtils.setProperties(reviseRequirementRev, [prop.REQUIREMENT, prop.REQUIREMENT_SHORT], [requirementValue, shortenValue]);
   return reviseRequirementRev;
 };
 

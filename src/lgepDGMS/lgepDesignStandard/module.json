@@ -1,5 +1,5 @@
 {
-    "name": "lgepDesignStandard",
-    "description": "This is the lgepDesignStandard module",
-    "skipTest": true
+  "name": "lgepDesignStandard",
+  "description": "This is the lgepDesignStandard module",
+  "skipTest": true
 }

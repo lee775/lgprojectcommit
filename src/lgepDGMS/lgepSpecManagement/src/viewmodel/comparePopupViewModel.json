@@ -1,113 +1,111 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-column.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-label.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-section.directive",
-        "js/aw-radiobutton.directive",
-        "js/aw-separator.directive",
-        "js/aw-compare2.directive"
-    ],
-    "actions": {
-        "exportToExcel": {
-            "actionType": "JSFunction",
-            "method": "exportToExcel",
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "compareEvent": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "specManagement.compare"
-                    }
-                ]
-            }
-        },
-        "realGetCompareData": {
-            "actionType": "JSFunction",
-            "method": "realGetCompareData",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "response": "response",
-                "totalFound": "totalFound"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-label.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-radiobutton.directive",
+    "js/aw-separator.directive",
+    "js/aw-compare2.directive"
+  ],
+  "actions": {
+    "exportToExcel": {
+      "actionType": "JSFunction",
+      "method": "exportToExcel",
+      "deps": "js/protoTypeSpecManagementService"
     },
-    "data": {
-        "pageSize": 40,
-        "referenceModelLbl": {
-            "displayName": "{{i18n.stdItem}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },        
-
-
-        "changeRadio": {
-            "displayName": "",
-            "type": "BOOLEAN",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": true,
-            "vertical": false,
-            "labelPosition": "PROPERTY_LABEL_AT_TOP",
-            "propertyRadioTrueText": "mm,kg,lpm,cc,L,km/h",
-            "propertyRadioFalseText": "inch,lbs,gpm,gal,moh"
-        }
+    "compareEvent": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "specManagement.compare"
+          }
+        ]
+      }
     },
-    "dataProviders": {
-        "specManagementCompareDataProvider": {
-            "action": "realGetCompareData",
-            "response": "{{data.dataProviders.specMgmtTableDataProvider.selectedObjects}}",
-            "totalFound": "{{data.totalFound}}"
-        }
-    },
-    "columnProviders": {
-        "specManagementCompareColumnProvider": {
-            "columns": [
-                {
-                    "name": "l2_division",
-                    "displayName": "{{i18n.c_division}}"
-                },
-                {
-                    "name": "l2_source",
-                    "displayName": "출처",
-                    "width": 100
-                },
-                {
-                    "name": "l2_model_name",
-                    "displayName": "모델명",
-                    "width": 100
-                },
-                {
-                    "name": "l2_issue_date",
-                    "displayName": "생성일",
-                    "width": 100
-                }
-            ]
-        }
-    },
-    "grids": {
-        "specCompare": {
-            "dataProvider": "specManagementCompareDataProvider",
-            "columnProvider": "specManagementCompareColumnProvider",
-            "gridOptions": {}
-        }
-    },
-    "onEvent": [
-    ],
-    "i18n": {
-        "stdItem": ["lgepSpecManagementMessages"],
-        "c_division": ["lgepSpecManagementMessages"]
+    "realGetCompareData": {
+      "actionType": "JSFunction",
+      "method": "realGetCompareData",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "response": "response",
+        "totalFound": "totalFound"
+      },
+      "deps": "js/protoTypeSpecManagementService"
     }
+  },
+  "data": {
+    "pageSize": 40,
+    "referenceModelLbl": {
+      "displayName": "{{i18n.stdItem}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+
+    "changeRadio": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": true,
+      "vertical": false,
+      "labelPosition": "PROPERTY_LABEL_AT_TOP",
+      "propertyRadioTrueText": "mm,kg,lpm,cc,L,km/h",
+      "propertyRadioFalseText": "inch,lbs,gpm,gal,moh"
+    }
+  },
+  "dataProviders": {
+    "specManagementCompareDataProvider": {
+      "action": "realGetCompareData",
+      "response": "{{data.dataProviders.specMgmtTableDataProvider.selectedObjects}}",
+      "totalFound": "{{data.totalFound}}"
+    }
+  },
+  "columnProviders": {
+    "specManagementCompareColumnProvider": {
+      "columns": [
+        {
+          "name": "l2_division",
+          "displayName": "{{i18n.c_division}}"
+        },
+        {
+          "name": "l2_source",
+          "displayName": "출처",
+          "width": 100
+        },
+        {
+          "name": "l2_model_name",
+          "displayName": "모델명",
+          "width": 100
+        },
+        {
+          "name": "l2_issue_date",
+          "displayName": "생성일",
+          "width": 100
+        }
+      ]
+    }
+  },
+  "grids": {
+    "specCompare": {
+      "dataProvider": "specManagementCompareDataProvider",
+      "columnProvider": "specManagementCompareColumnProvider",
+      "gridOptions": {}
+    }
+  },
+  "onEvent": [],
+  "i18n": {
+    "stdItem": ["lgepSpecManagementMessages"],
+    "c_division": ["lgepSpecManagementMessages"]
+  }
 }

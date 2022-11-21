@@ -1,722 +1,722 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-button.directive",
-        "js/aw-checkbox.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-list.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-popup2.directive",
-        "js/aw-splm-table.directive",
-        "js/aw-tab-set.directive",
-        "js/aw-textbox.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "specMgmtTableDataProvider.selectionChangeEvent",
-            "cacheEventData": true,
-            "action": "loadBOM"
-        },
-        {
-            "eventId": "specManagement.compare",
-            "cacheEventData": true,
-            "action": "originCompare"
-        },
-        {
-            "eventId": "specMgmtCheckBoxListReload",
-            "cacheEventData": true,
-            "action": "loadCheckboxBatchAction"
-        },
-        {
-            "eventId": "specMgmtCheckBoxListReload",
-            "cacheEventData": true,
-            "action": "checkBoxDivision"
-        },
-        {
-            "eventId": "selectCheckBoxEvent",
-            "cacheEventData": true,
-            "action": "actionList"
-        }
-    ],
-    "data": {
-        "pageSize": 40,
-        "tabModels": [
-            {
-                "name": "Technical Spec",
-                "tabKey": "techPage"
-            },
-            {
-                "name": "Marketing Spec",
-                "tabKey": "marketingPage"
-            }
-        ],
-        "categoryCCZ": {
-            "displayName": "CCZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "CCZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCDZ": {
-            "displayName": "CDZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "CDZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCNZ": {
-            "displayName": "CNZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "CNZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCWZ": {
-            "displayName": "CWZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "CWZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryDFZ": {
-            "displayName": "DFZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "DFZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryDGZ": {
-            "displayName": "DGZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "DGZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryDMZ": {
-            "displayName": "DMZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "DMZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryDVZ": {
-            "displayName": "DVZ",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "DVZ",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryVacuum": {
-            "displayName": "진공청소기",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "진공청소기",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryHandy": {
-            "displayName": "핸디/스틱청소기",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "핸디/스틱청소기",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryRobot": {
-            "displayName": "로봇청소기",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "로봇청소기",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryRestaurant": {
-            "displayName": "업소용청소기",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "업소용청소기",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryHP": {
-            "displayName": "고압청소기",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "고압청소기",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryBed": {
-            "displayName": "침구청소기",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "침구청소기",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySuction1": {
-            "displayName": "~100W",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "~100W",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySuction2": {
-            "displayName": "~150W",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "~150W",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySuction3": {
-            "displayName": "~200W",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "~200W",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySuction4": {
-            "displayName": "~300W",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "~300W",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySuction5": {
-            "displayName": "~400W",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "~400W",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySuction6": {
-            "displayName": "401W~",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "401W~",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryWhite": {
-            "displayName": "White",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "White",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryBlack": {
-            "displayName": "Black",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Black",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryGray": {
-            "displayName": "Gray",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Gray",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryGold": {
-            "displayName": "Gold",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Gold",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySilver": {
-            "displayName": "Silver",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Silver",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryBrown": {
-            "displayName": "Brown",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Brown",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryNavy": {
-            "displayName": "Navy",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Navy",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryOne": {
-            "displayName": "1",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "1",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryTwo": {
-            "displayName": "2",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "2",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryThree": {
-            "displayName": "3",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "3",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryFour": {
-            "displayName": "4",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "4",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryFive": {
-            "displayName": "5",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "5",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCode0Obj": {
-            "displayName": "코드제로 오브제컬렉션",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "코드제로 오브제컬렉션",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCode0": {
-            "displayName": "코드제로",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "코드제로",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCode0Turbo": {
-            "displayName": "코드제로 터보",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "코드제로 터보",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCode0Bed": {
-            "displayName": "코드제로 침구킹",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "코드제로 침구킹",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCyking": {
-            "displayName": "싸이킹",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "싸이킹",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryCykingPower": {
-            "displayName": "싸이킹 파워",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "싸이킹 파워",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryRoboking": {
-            "displayName": "로보킹",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "로보킹",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryMotor1": {
-            "displayName": "인버터모터",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "인버터모터",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryMotor2": {
-            "displayName": "BLDC모터",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "BLDC모터",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryMotor3": {
-            "displayName": "DC모터",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "DC모터",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryAddition1": {
-            "displayName": "상태표시창",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "상태표시창",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryAddition2": {
-            "displayName": "필터세척기능",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "필터세척기능",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryAddition3": {
-            "displayName": "스틱길이조정",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "스틱길이조정",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryAddition4": {
-            "displayName": "먼지압축",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "먼지압축",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryAddition5": {
-            "displayName": "문턱넘기(2cm)",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "문턱넘기(2cm)",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryAddition6": {
-            "displayName": "리모컨",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "리모컨",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart1": {
-            "displayName": "Wi-Fi",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "Wi-Fi",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart2": {
-            "displayName": "전용앱 제공",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "전용앱 제공",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart3": {
-            "displayName": "스테이션",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "스테이션",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart4": {
-            "displayName": "3D센서",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "3D센서",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart5": {
-            "displayName": "3D듀얼아이",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "3D듀얼아이",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart6": {
-            "displayName": "원격제어",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "원격제어",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart7": {
-            "displayName": "홈뷰",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "홈뷰",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart8": {
-            "displayName": "홈가드",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "홈가드",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categorySmart9": {
-            "displayName": "음성인식",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "음성인식",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryNoise1": {
-            "displayName": "AAA",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "AAA",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryNoise2": {
-            "displayName": "AA",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "AA",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "categoryNoise3": {
-            "displayName": "A",
-            "type": "BOOLEAN",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "A",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "modelTxt": {
-            "displayName": "",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "requiredText": "검색할 모델명을 입력해주세요."
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-checkbox.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-list.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-tab-set.directive",
+    "js/aw-textbox.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "specMgmtTableDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "loadBOM"
     },
-    "actions": {
-        "divisionCheckBoxLoad": {
-            "actionType": "dataProvider",
-            "method": "categoryDivision"
-        },
-        "actionList": {
-            "actionType": "JSFunction",
-            "method": "actionList",
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "loadBOM": {
-            "actionType": "JSFunction",
-            "method": "loadBOM",
-            "inputData": {
-                "ctx": "{{ctx}}",
-                "data": "{{data}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "originCompare": {
-            "actionType": "JSFunction",
-            "method": "originCompare",
-            "inputData": {
-                "ctx": "{{ctx}}",
-                "data": "{{data}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "loadData": {
-            "actionType": "JSFunction",
-            "method": "specMgmtTable",
-            "inputData": {
-                "ctx": "{{ctx}}",
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "result": "result",
-                "totalFound": "totalFound",
-                "filterResults": "{{function:filterRowsWithSort}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "searchItem": {
-            "actionType": "JSFunction",
-            "method": "searchItem",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "checkBoxDivision": {
-            "actionType": "JSFunction",
-            "method": "checkBoxDivision",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "reload": {
-            "actionType": "JSFunction",
-            "method": "reload",
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "technicalInitialization": {
-            "actionType": "JSFunction",
-            "method": "technicalInitialization",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "marketingInitialization": {
-            "actionType": "JSFunction",
-            "method": "marketingInitialization",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/protoTypeSpecManagementService"
-        },
-        "selectCheckBoxEvent": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "selectCheckBoxEvent"
-                    }
-                ]
-            }
-        },
-        "loadCheckboxBatchAction": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "divisionCheckBoxLoad"
-                }
-            ]
-        },
-        "multiSelection": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "specMgmtTableDataProvider.multiSelectModeAction",
-                        "eventData": {
-                            "multiSelect": true
-                        }
-                    }
-                ]
-            }
-        }
+    {
+      "eventId": "specManagement.compare",
+      "cacheEventData": true,
+      "action": "originCompare"
     },
-    "dataProviders": {
-        "specMgmtTableDataProvider": {
-            "action": "loadData",
-            "response": "{{data.filterResults}}",
-            "totalFound": "{{data.totalFound}}",
-            "selectionModelMode": "multiple"
-        },
-        "categoryDivision": {
-            "dataProviderType": "Static",
-            "response": [],
-            "totalFound": 1,
-            "selectionModelMode": "none"
-        }
+    {
+      "eventId": "specMgmtCheckBoxListReload",
+      "cacheEventData": true,
+      "action": "loadCheckboxBatchAction"
     },
-    "columnProviders": {
-        "specMgmtTableColumnProvider": {
-            "frozenColumnIndex": 1,
-            "columns": [
-                {
-                    "name": "object_string",
-                    "displayName": "이름",
-                    "width": 300,
-                    "isTableCommand": true,
-                    "pinnedLeft": true
-                },
-                {
-                    "name": "l2_division",
-                    "displayName": "부서",
-                    "width": 100
-                }
-            ]
-        }
+    {
+      "eventId": "specMgmtCheckBoxListReload",
+      "cacheEventData": true,
+      "action": "checkBoxDivision"
     },
-    "grids": {
-        "specMgmtTable": {
-            "dataProvider": "specMgmtTableDataProvider",
-            "columnProvider": "specMgmtTableColumnProvider",
-            "addIconColumn": true,
-            "gridOptions": {
-                "enablePinning": false,
-                "enableSorting": true
-            }
-        }
-    },
-    "functions": {
-        "filterRowsWithSort": {
-            "functionName": "filterRowsWithSort",
-            "parameters": [
-                "{{data.columnProviders.specMgmtTableColumnProvider.sortCriteria}}",
-                "{{data.dataProviders.specMgmtTableDataProvider.startIndex}}",
-                "{{data.pageSize}}"
-            ]
-        }
-    },
-    "i18n": {},
-    "conditions": {
-        "technicalSpec": {
-            "expression": "data.selectedTab.tabKey === 'techPage'"
-        },
-        "marketingSpec": {
-            "expression": "data.selectedTab.tabKey === 'marketingPage'"
-        }
-    },
-    "lifecycleHooks": {
-        "onInit": "multiSelection"
+    {
+      "eventId": "selectCheckBoxEvent",
+      "cacheEventData": true,
+      "action": "actionList"
     }
+  ],
+  "data": {
+    "pageSize": 40,
+    "tabModels": [
+      {
+        "name": "Technical Spec",
+        "tabKey": "techPage"
+      },
+      {
+        "name": "Marketing Spec",
+        "tabKey": "marketingPage"
+      }
+    ],
+    "categoryCCZ": {
+      "displayName": "CCZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "CCZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCDZ": {
+      "displayName": "CDZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "CDZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCNZ": {
+      "displayName": "CNZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "CNZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCWZ": {
+      "displayName": "CWZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "CWZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryDFZ": {
+      "displayName": "DFZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "DFZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryDGZ": {
+      "displayName": "DGZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "DGZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryDMZ": {
+      "displayName": "DMZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "DMZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryDVZ": {
+      "displayName": "DVZ",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "DVZ",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryVacuum": {
+      "displayName": "진공청소기",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "진공청소기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryHandy": {
+      "displayName": "핸디/스틱청소기",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "핸디/스틱청소기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryRobot": {
+      "displayName": "로봇청소기",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "로봇청소기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryRestaurant": {
+      "displayName": "업소용청소기",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "업소용청소기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryHP": {
+      "displayName": "고압청소기",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "고압청소기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryBed": {
+      "displayName": "침구청소기",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "침구청소기",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySuction1": {
+      "displayName": "~100W",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "~100W",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySuction2": {
+      "displayName": "~150W",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "~150W",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySuction3": {
+      "displayName": "~200W",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "~200W",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySuction4": {
+      "displayName": "~300W",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "~300W",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySuction5": {
+      "displayName": "~400W",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "~400W",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySuction6": {
+      "displayName": "401W~",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "401W~",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryWhite": {
+      "displayName": "White",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "White",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryBlack": {
+      "displayName": "Black",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Black",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryGray": {
+      "displayName": "Gray",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Gray",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryGold": {
+      "displayName": "Gold",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Gold",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySilver": {
+      "displayName": "Silver",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Silver",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryBrown": {
+      "displayName": "Brown",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Brown",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryNavy": {
+      "displayName": "Navy",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Navy",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryOne": {
+      "displayName": "1",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "1",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryTwo": {
+      "displayName": "2",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "2",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryThree": {
+      "displayName": "3",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "3",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryFour": {
+      "displayName": "4",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "4",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryFive": {
+      "displayName": "5",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "5",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCode0Obj": {
+      "displayName": "코드제로 오브제컬렉션",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "코드제로 오브제컬렉션",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCode0": {
+      "displayName": "코드제로",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "코드제로",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCode0Turbo": {
+      "displayName": "코드제로 터보",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "코드제로 터보",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCode0Bed": {
+      "displayName": "코드제로 침구킹",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "코드제로 침구킹",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCyking": {
+      "displayName": "싸이킹",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "싸이킹",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryCykingPower": {
+      "displayName": "싸이킹 파워",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "싸이킹 파워",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryRoboking": {
+      "displayName": "로보킹",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "로보킹",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryMotor1": {
+      "displayName": "인버터모터",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "인버터모터",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryMotor2": {
+      "displayName": "BLDC모터",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "BLDC모터",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryMotor3": {
+      "displayName": "DC모터",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "DC모터",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryAddition1": {
+      "displayName": "상태표시창",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "상태표시창",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryAddition2": {
+      "displayName": "필터세척기능",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "필터세척기능",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryAddition3": {
+      "displayName": "스틱길이조정",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "스틱길이조정",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryAddition4": {
+      "displayName": "먼지압축",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "먼지압축",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryAddition5": {
+      "displayName": "문턱넘기(2cm)",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "문턱넘기(2cm)",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryAddition6": {
+      "displayName": "리모컨",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "리모컨",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart1": {
+      "displayName": "Wi-Fi",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "Wi-Fi",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart2": {
+      "displayName": "전용앱 제공",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "전용앱 제공",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart3": {
+      "displayName": "스테이션",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "스테이션",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart4": {
+      "displayName": "3D센서",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "3D센서",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart5": {
+      "displayName": "3D듀얼아이",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "3D듀얼아이",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart6": {
+      "displayName": "원격제어",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "원격제어",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart7": {
+      "displayName": "홈뷰",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "홈뷰",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart8": {
+      "displayName": "홈가드",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "홈가드",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categorySmart9": {
+      "displayName": "음성인식",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "음성인식",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryNoise1": {
+      "displayName": "AAA",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "AAA",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryNoise2": {
+      "displayName": "AA",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "AA",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "categoryNoise3": {
+      "displayName": "A",
+      "type": "BOOLEAN",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "A",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "modelTxt": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "requiredText": "검색할 모델명을 입력해주세요."
+    }
+  },
+  "actions": {
+    "divisionCheckBoxLoad": {
+      "actionType": "dataProvider",
+      "method": "categoryDivision"
+    },
+    "actionList": {
+      "actionType": "JSFunction",
+      "method": "actionList",
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "loadBOM": {
+      "actionType": "JSFunction",
+      "method": "loadBOM",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "originCompare": {
+      "actionType": "JSFunction",
+      "method": "originCompare",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "loadData": {
+      "actionType": "JSFunction",
+      "method": "specMgmtTable",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "result": "result",
+        "totalFound": "totalFound",
+        "filterResults": "{{function:filterRowsWithSort}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "searchItem": {
+      "actionType": "JSFunction",
+      "method": "searchItem",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "checkBoxDivision": {
+      "actionType": "JSFunction",
+      "method": "checkBoxDivision",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "reload": {
+      "actionType": "JSFunction",
+      "method": "reload",
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "technicalInitialization": {
+      "actionType": "JSFunction",
+      "method": "technicalInitialization",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "marketingInitialization": {
+      "actionType": "JSFunction",
+      "method": "marketingInitialization",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/protoTypeSpecManagementService"
+    },
+    "selectCheckBoxEvent": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "selectCheckBoxEvent"
+          }
+        ]
+      }
+    },
+    "loadCheckboxBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "divisionCheckBoxLoad"
+        }
+      ]
+    },
+    "multiSelection": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "specMgmtTableDataProvider.multiSelectModeAction",
+            "eventData": {
+              "multiSelect": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "dataProviders": {
+    "specMgmtTableDataProvider": {
+      "action": "loadData",
+      "response": "{{data.filterResults}}",
+      "totalFound": "{{data.totalFound}}",
+      "selectionModelMode": "multiple"
+    },
+    "categoryDivision": {
+      "dataProviderType": "Static",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    }
+  },
+  "columnProviders": {
+    "specMgmtTableColumnProvider": {
+      "frozenColumnIndex": 1,
+      "columns": [
+        {
+          "name": "object_string",
+          "displayName": "이름",
+          "width": 300,
+          "isTableCommand": true,
+          "pinnedLeft": true
+        },
+        {
+          "name": "l2_division",
+          "displayName": "부서",
+          "width": 100
+        }
+      ]
+    }
+  },
+  "grids": {
+    "specMgmtTable": {
+      "dataProvider": "specMgmtTableDataProvider",
+      "columnProvider": "specMgmtTableColumnProvider",
+      "addIconColumn": true,
+      "gridOptions": {
+        "enablePinning": false,
+        "enableSorting": true
+      }
+    }
+  },
+  "functions": {
+    "filterRowsWithSort": {
+      "functionName": "filterRowsWithSort",
+      "parameters": [
+        "{{data.columnProviders.specMgmtTableColumnProvider.sortCriteria}}",
+        "{{data.dataProviders.specMgmtTableDataProvider.startIndex}}",
+        "{{data.pageSize}}"
+      ]
+    }
+  },
+  "i18n": {},
+  "conditions": {
+    "technicalSpec": {
+      "expression": "data.selectedTab.tabKey === 'techPage'"
+    },
+    "marketingSpec": {
+      "expression": "data.selectedTab.tabKey === 'marketingPage'"
+    }
+  },
+  "lifecycleHooks": {
+    "onInit": "multiSelection"
+  }
 }

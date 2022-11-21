@@ -1,485 +1,637 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-icon-button.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-button.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-sidenav.directive",
-        "js/visible-when.directive",
-        "js/aw-slider.directive",
-        "js/aw-splitter.directive",
-        "js/aw-checkbox.directive",
-        "js/aw-separator.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "treeLoadAction",
-            "cacheEventData": true,
-            "action": "designStdContentLoad"
-        },
-        {
-            "eventId": "bomLineTree.treeNodeSelected",
-            "cacheEventData": true,
-            "action": "pageContentViewBat"
-        }
-    ],
-    "actions": {
-        "updateSliderValue": {
-            "actionType": "JSFunction",
-            "method": "updateSliderValue",
-            "inputData": {
-                "value": "{{prop.dbValue[0].sliderOption.value}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "bookFreeze": {
-            "actionType": "JSFunction",
-            "method": "bookFreeze",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "attachPopupAction": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "L2_DesignPageAttachFileTable",
-                    "locals": {
-                        "caption": "{{i18n.dgnStandard2Attach}}",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "placement": "bottom-start",
-                        "draggable": true,
-                        "height": "450",
-                        "width": "800"
-                    }
-                }
-            },
-            "events": {
-                "success": [
-                    {
-                        "name": "attachPopupActionSuccess"
-                    }
-                ]
-            },
-            "deps": "js/popupService"
-        },
-        "parameterCheck": {
-            "actionType": "JSFunction",
-            "method": "parameterCheck",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "urlBookUidMapping": {
-            "actionType": "JSFunction",
-            "method": "urlBookUidMapping",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "bomlineTreeSetBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "bomlineTreeSet2"
-                },
-                {
-                    "action": "urlBookUidMapping"
-                }
-            ]
-        },
-        "backPage": {
-            "actionType": "JSFunction",
-            "method": "backPage",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "frontPage": {
-            "actionType": "JSFunction",
-            "method": "frontPage",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "summerNoteImageWidthMax": {
-            "actionType": "JSFunction",
-            "method": "summerNoteImageWidthMax",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "navModeTemp": {
-            "actionType": "JSFunction",
-            "method": "navModeTemp",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "pageContentView": {
-            "actionType": "JSFunction",
-            "method": "pageContentView",
-            "inputData": {
-                "eventData": "{{data.eventData}}"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "pageContentViewBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "pageContentView"
-                },
-                {
-                    "action": "urlBookUidMapping"
-                }
-            ]
-        },
-        "silveraction": {
-            "actionType": "JSFunction",
-            "method": "silveraction",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "selFolderCheck": {
-            "actionType": "JSFunction",
-            "method": "selFolderCheck",
-            "outputData": {
-                "folder": "folder"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "createDgnBookPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "L2_CreateDesignBookPopup",
-                    "locals": {
-                        "caption": "{{i18n.createDgnBook}}",
-                        "anchor": "closePopupAnchor"
-                    },
-                    "options": {
-                        "reference": "referenceId",
-                        "isModal": true,
-                        "clickOutsideToClose": false,
-                        "draggable": true,
-                        "placement": "bottom-start",
-                        "height": "350",
-                        "width": "500"
-                    }
-                }
-            },
-            "events": {
-                "success": [
-                    {
-                        "name": "createDgnBookPopupSuccess"
-                    }
-                ]
-            },
-            "deps": "js/popupService"
-        },
-        "getUserList": {
-            "actionType": "JSFunction",
-            "method": "getUserList",
-            "outputData": {
-                "userList": "userList"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "getDataProvider": {
-            "actionType": "dataProvider",
-            "methods": [
-                "postList"
-            ]
-        },
-        "loadPostList": {
-            "actionType": "JSFunction",
-            "method": "loadPostList",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "outputData": {
-                "searchPostResponse": "{{function:setPostList}}",
-                "postTotalFound": "postTotalFound"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "bomlineTreeSet2": {
-            "actionType": "JSFunction",
-            "method": "bomlineTreeSet2",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "bomAdd": {
-            "actionType": "JSFunction",
-            "method": "bomAdd",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "itemCreate": {
-            "actionType": "JSFunction",
-            "method": "itemCreate",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "bomlineOn": {
-            "actionType": "JSFunction",
-            "method": "bomlineOn",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "bomlineOff": {
-            "actionType": "JSFunction",
-            "method": "bomlineOff",
-            "deps": "js/L2_DesignStandardService"
-        },
-        "sidenavPushCommandRight": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awsidenav.openClose",
-                        "eventData": {
-                            "id": "sidenavPushRight",
-                            "includeView": "L2_DesignStandardQnANav",
-                            "commandId": "sidenavPushCommandRight"
-                        }
-                    }
-                ]
-            }
-        },
-        "treeNavPushLeftAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "awsidenav.openClose",
-                        "eventData": {
-                            "id": "treeNavPushLeft",
-                            "includeView": "L2_DesignStandardTreeNav",
-                            "commandId": "treeNavPushLeftAction"
-                        }
-                    }
-                ]
-            },
-            "events": {
-                "success": [
-                    {
-                        "name": "treeNavPushLeftActionSuccess"
-                    }
-                ]
-            }
-        },
-        "navModeBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "navModeTemp"
-                },
-                {
-                    "action": "treeNavPushLeftAction"
-                }
-            ]
-        },
-        "designStdContentLoad": {
-            "actionType": "JSFunction",
-            "method": "designStdContentLoad",
-            "inputData": {
-                "ctx": "{{ctx}}",
-                "data": "{{data}}"
-            },
-            "deps": "js/L2_DesignStandardService"
-        },
-        "initialize": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "treeNavPushLeftAction"
-                },
-                {
-                    "action": "parameterCheck"
-                }
-            ]
-        },
-        "createDesignBookBat": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "selFolderCheck"
-                },
-                {
-                    "condition": "conditions.folder",
-                    "action": "createDgnBookPopup"
-                }
-            ]
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-icon-button.directive",
+    "js/aw-listbox.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-button.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-sidenav.directive",
+    "js/visible-when.directive",
+    "js/aw-slider.directive",
+    "js/aw-splitter.directive",
+    "js/aw-checkbox.directive",
+    "js/aw-separator.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "treeLoadAction",
+      "cacheEventData": true,
+      "action": "designStdContentLoad"
     },
-    "data": {
-        "chapterMergeView": {
-            "displayName": "{{i18n.chapterMergeView}}",
-            "type": "BOOLEAN",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": "",
-            "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
-        },
-        "zoomSliderProp": {
-            "isArray": "true",
-            "dbValue": [
-                {
-                    "sliderOption": {
-                        "disabled": false,
-                        "min": 0.1,
-                        "max": 2,
-                        "step": 0.13,
-                        "value": 1.04,
-                        "orientation": "horizontal",
-                        "range": false
-                    },
-                    "showIncrementButtons": true,
-                    "sliderChangeEventAction": "updateSliderValue"
-                }
-            ]
-        },
-        "upArrow": {
-            "action": "backPage",
-            "iconName": "leftArrowIcon"
-        },
-        "downArrow": {
-            "action": "frontPage",
-            "iconName": "leftArrowIcon"
-        },
-        "upArrow2": {
-            "iconName": "leftArrowIcon"
-        },
-        "downArrow2": {
-            "iconName": "leftArrowIcon"
-        },
-        "revisionListBox": {
-            "displayName": "",
-            "type": "STRING",
-            "isRequired": "true",
-            "hasLov": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "revisionListBoxValues": {
-            "type": "STRING",
-            "dbValue": []
-        },
-        "sideNavRightData": {
-            "slide": "PUSH",
-            "direction": "RIGHT_TO_LEFT",
-            "animation": false,
-            "width": "STANDARD",
-            "height": "FULL"
-        },
-        "treeNavPushLeftData": {
-            "slide": "WIDE",
-            "direction": "LEFT_TO_RIGHT",
-            "animation": false,
-            "width": "STANDARD",
-            "height": "FULL"
-        },
-        "summerNoteWidthMax": {
-            "displayName": "{{i18n.summerNoteWidthMax}}",
-            "type": "BOOLEAN",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": true,
-            "dispValue": "{{i18n.summerNoteWidthMax}}",
-            "labelPosition": "PROPERTY_LABEL_AT_SIDE"
-        },
-        "pageSize": 40
+    {
+      "eventId": "bomLineTree.treeNodeSelected",
+      "cacheEventData": true,
+      "action": "pageContentView"
     },
-    "dataProviders": {
-        "postList": {
-            "action": "loadPostList",
-            "response": "{{data.searchPostResponse}}",
-            "totalFound": "{{data.searchPostResponse.length}}"
-        }
+    {
+      "eventId": "awsidenav.openClose",
+      "cacheEventData": true,
+      "action": "fitSizeOfToast"
     },
-    "columnProviders": {
-        "searchColumn": {
-            "frozenColumnIndex": -1,
-            "columns": [
-                {
-                    "name": "object_name",
-                    "displayName": "{{i18n.name}}",
-                    "minWidth": 60,
-                    "width": 150
-                }
-            ]
-        }
-    },
-    "functions": {
-        "setPostList": {
-            "functionName": "setPostList",
-            "parameters": [
-                "{{data}}"
-            ]
-        }
-    },
-    "conditions": {
-        "selValueConditions": {
-            "expression": "data.selPage !== undefined"
-        },
-        "folder": {
-            "expression": "data.folder===true"
-        },
-        "pageOpenConditions": {
-            "expression": "data.pageOpenState === true"
-        },
-        "selectedBookCond": {
-            "expression": "data.selectedBook != undefined && data.selectedTreeNodeType === true"
-        },
-        "selectedBookNoneManual": {
-            "expression": "data.selectedBook != undefined"
-        }
-    },
-    "i18n": {
-        "summerNoteWidthMax": [
-            "lgepDesignSequenceMessages"
-        ],
-        "treeShowTooltip": [
-            "lgepDesignSequenceMessages"
-        ],
-        "tabShowTooltip": [
-            "lgepDesignSequenceMessages"
-        ],
-        "leftSelectPlease": [
-            "L2_DesignStandardMessages"
-        ],
-        "viewDetails": [
-            "L2_DesignStandardMessages"
-        ],
-        "mostPosts": [
-            "lgepKnowldegeManageMessages"
-        ],
-        "treeViewShowOrHide": [
-            "L2_DesignStandardMessages"
-        ],
-        "createDgnBook": [
-            "L2_DesignStandardMessages"
-        ],
-        "tabHideAndShow": [
-            "L2_DesignStandardMessages"
-        ],
-        "createDgnStandardBook": [
-            "L2_DesignStandardMessages"
-        ],
-        "FileAttach": [
-            "L2_DesignStandardMessages"
-        ],
-        "manualAttach": [
-            "L2_DesignStandardMessages"
-        ],
-        "chapterMergeView": [
-            "L2_DesignStandardMessages"
-        ],
-        "dgnStandard2Attach": [
-            "L2_DesignStandardMessages"
-        ],
-        "bookFreeze": ["L2_DesignStandardMessages"],
-        "name": ["L2_DesignStandardMessages"]
-    },
-    "lifecycleHooks": {
-        "onInit": "initialize"
+    {
+      "eventId": "aw-splitter-update",
+      "cacheEventData": true,
+      "action": "fitSizeOfToast"
     }
+  ],
+  "actions": {
+    "openNewTabofToast": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "showTableCheck"
+        },
+        {
+          "action": "toastNewTab"
+        }
+      ]
+    },
+    "revisionCompareSizeSet": {
+      "actionType": "JSFunction",
+      "method": "revisionCompareSizeSet",
+      "outputData": {
+        "compareWidth": "compareWidth",
+        "compareHeight": "compareHeight"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
+    },
+    "revisionComparePopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_ComparisonRev",
+          "locals": {
+            "caption": "{{i18n.revCompare}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": "{{data.compareHeight}}",
+            "width": "{{data.compareWidth}}"
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "revisionComparePopupSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "revisionComparePopupBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "revisionCompareSizeSet"
+        },
+        {
+          "action": "revisionComparePopup"
+        }
+      ]
+    },
+    "toastNewTab1": {
+      "actionType": "JSFunction",
+      "method": "toastNewTab1",
+      "deps": "js/L2_DesignCheckListService"
+    },
+    "toastNewTab": {
+      "actionType": "JSFunction",
+      "method": "toastNewTab",
+      "deps": "js/L2_DesignCheckListService",
+      "events": {
+        "success": [
+          {
+            "name": "newTabofToast"
+          }
+        ]
+      }
+    },
+    "fitSizeOfToastStart": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "showTableCheck"
+        },
+        {
+          "action": "fitSizeOfToast"
+        }
+      ]
+    },
+    "reviseHistoryPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_BookReviseHistory",
+          "locals": {
+            "caption": "{{data.selBookName}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": "550",
+            "width": "750"
+          }
+        }
+      },
+      "deps": "js/popupService"
+    },
+    "FreezeMessagePopupAc": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_BookFreezeMassage",
+          "locals": {
+            "caption": "{{i18n.FreezeMessge}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": "300",
+            "width": "500"
+          }
+        }
+      },
+      "deps": "js/popupService"
+    },
+    "treeRevChange": {
+      "actionType": "JSFunction",
+      "method": "treeRevChange",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "fitSizeOfToast": {
+      "actionType": "JSFunction",
+      "method": "fitSizeOfToast",
+      "deps": "js/L2_DesignCheckListService"
+    },
+    "updateSliderValue": {
+      "actionType": "JSFunction",
+      "method": "updateSliderValue",
+      "inputData": {
+        "value": "{{prop.dbValue[0].sliderOption.value}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bookFreeze": {
+      "actionType": "JSFunction",
+      "method": "bookFreeze",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "attachPopupAction": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_DesignPageAttachFileTable",
+          "locals": {
+            "caption": "{{i18n.dgnStandard2Attach}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "placement": "bottom-start",
+            "draggable": true,
+            "height": "450",
+            "width": "800"
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "attachPopupActionSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "parameterCheck": {
+      "actionType": "JSFunction",
+      "method": "parameterCheck",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "urlBookUidMapping": {
+      "actionType": "JSFunction",
+      "method": "urlBookUidMapping",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bomlineTreeSetBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "bomlineTreeSet2"
+        },
+        {
+          "action": "urlBookUidMapping"
+        }
+      ]
+    },
+    "backPage": {
+      "actionType": "JSFunction",
+      "method": "backPage",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "frontPage": {
+      "actionType": "JSFunction",
+      "method": "frontPage",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "summerNoteImageWidthMax": {
+      "actionType": "JSFunction",
+      "method": "summerNoteImageWidthMax",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "navModeTemp": {
+      "actionType": "JSFunction",
+      "method": "navModeTemp",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "pageContentView": {
+      "actionType": "JSFunction",
+      "method": "pageContentView",
+      "inputData": {
+        "eventData": "{{data.eventData}}"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "silveraction": {
+      "actionType": "JSFunction",
+      "method": "silveraction",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "selFolderCheck": {
+      "actionType": "JSFunction",
+      "method": "selFolderCheck",
+      "outputData": {
+        "folder": "folder"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "createDgnBookPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "L2_CreateDesignBookPopup",
+          "locals": {
+            "caption": "{{i18n.createDgnBook2}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": "350",
+            "width": "500"
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "createDgnBookPopupSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "getUserList": {
+      "actionType": "JSFunction",
+      "method": "getUserList",
+      "outputData": {
+        "userList": "userList"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "getDataProvider": {
+      "actionType": "dataProvider",
+      "methods": ["postList"]
+    },
+    "loadPostList": {
+      "actionType": "JSFunction",
+      "method": "loadPostList",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "searchPostResponse": "{{function:setPostList}}",
+        "postTotalFound": "postTotalFound"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bomlineTreeSet2": {
+      "actionType": "JSFunction",
+      "method": "bomlineTreeSet2",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bomAdd": {
+      "actionType": "JSFunction",
+      "method": "bomAdd",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "itemCreate": {
+      "actionType": "JSFunction",
+      "method": "itemCreate",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bomlineOn": {
+      "actionType": "JSFunction",
+      "method": "bomlineOn",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "bomlineOff": {
+      "actionType": "JSFunction",
+      "method": "bomlineOff",
+      "deps": "js/L2_DesignStandardService"
+    },
+    "sidenavPushCommandRight": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awsidenav.openClose",
+            "eventData": {
+              "id": "sidenavPushRight",
+              "includeView": "L2_DesignStandardQnANav",
+              "commandId": "sidenavPushCommandRight"
+            }
+          }
+        ]
+      }
+    },
+    "treeNavPushLeftAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "awsidenav.openClose",
+            "eventData": {
+              "id": "treeNavPushLeft",
+              "includeView": "L2_DesignStandardTreeNav",
+              "commandId": "treeNavPushLeftAction"
+            }
+          }
+        ]
+      },
+      "events": {
+        "success": [
+          {
+            "name": "treeNavPushLeftActionSuccess"
+          }
+        ]
+      }
+    },
+    "navModeBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "navModeTemp"
+        },
+        {
+          "action": "treeNavPushLeftAction"
+        }
+      ]
+    },
+    "designStdContentLoad": {
+      "actionType": "JSFunction",
+      "method": "designStdContentLoad",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_DesignStandardService"
+    },
+    "initialize": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "treeNavPushLeftAction"
+        },
+        {
+          "action": "parameterCheck"
+        }
+      ]
+    },
+    "createDesignBookBat": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "selFolderCheck"
+        },
+        {
+          "condition": "conditions.folder",
+          "action": "createDgnBookPopup"
+        }
+      ]
+    },
+    "showTableCheck": {
+      "actionType": "JSFunction",
+      "method": "showTableCheck",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_DesignCheckListService"
+    }
+  },
+  "data": {
+    "chapterMergeView": {
+      "displayName": "{{i18n.chapterMergeView}}",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
+    },
+    "zoomSliderProp": {
+      "isArray": "true",
+      "dbValue": [
+        {
+          "sliderOption": {
+            "disabled": false,
+            "min": 0.1,
+            "max": 2,
+            "step": 0.13,
+            "value": 1.04,
+            "orientation": "horizontal",
+            "range": false
+          },
+          "showIncrementButtons": true,
+          "sliderChangeEventAction": "updateSliderValue"
+        }
+      ]
+    },
+    "upArrow": {
+      "action": "backPage",
+      "iconName": "leftArrowIcon"
+    },
+    "downArrow": {
+      "action": "frontPage",
+      "iconName": "leftArrowIcon"
+    },
+    "upArrow2": {
+      "iconName": "leftArrowIcon"
+    },
+    "downArrow2": {
+      "iconName": "leftArrowIcon"
+    },
+    "revisionListBox": {
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "revisionListBoxValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "sideNavRightData": {
+      "slide": "PUSH",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "STANDARD",
+      "height": "FULL"
+    },
+    "treeNavPushLeftData": {
+      "slide": "WIDE",
+      "direction": "LEFT_TO_RIGHT",
+      "animation": false,
+      "width": "STANDARD",
+      "height": "FULL"
+    },
+    "summerNoteWidthMax": {
+      "displayName": "{{i18n.summerNoteWidthMax}}",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": true,
+      "dispValue": "{{i18n.summerNoteWidthMax}}",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "pageSize": 40
+  },
+  "dataProviders": {
+    "postList": {
+      "action": "loadPostList",
+      "response": "{{data.searchPostResponse}}",
+      "totalFound": "{{data.searchPostResponse.length}}"
+    },
+    "exampleDataProvider": {
+      "action": "loadFailTable",
+      "response": "{{data.filterResults}}",
+      "totalFound": "{{data.totalFound}}"
+    }
+  },
+  "columnProviders": {
+    "exampleColumnProvider": {
+      "frozenColumnIndex": 1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "",
+          "maxWidth": 30,
+          "minWidth": 30,
+          "width": 30,
+          "enableColumnMenu": false,
+          "pinnedLeft": true
+        }
+      ]
+    },
+    "searchColumn": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name",
+          "displayName": "{{i18n.name}}",
+          "minWidth": 60,
+          "width": 150
+        }
+      ]
+    }
+  },
+  "functions": {
+    "setPostList": {
+      "functionName": "setPostList",
+      "parameters": ["{{data}}"]
+    }
+  },
+  "conditions": {
+    "selValueConditions": {
+      "expression": "data.selPage === true"
+    },
+    "folder": {
+      "expression": "data.folder===true"
+    },
+    "pageOpenConditions": {
+      "expression": "data.pageOpenState === true"
+    },
+    "showToast": {
+      "expression": "data.showToast === true"
+    },
+    "selectedBookCond": {
+      "expression": "data.selectedBook != undefined && data.selectedTreeNodeType === true"
+    },
+    "selectedBookNoneManual": {
+      "expression": "data.selectedBook != undefined"
+    },
+    "showNewTab": {
+      "expression": "data.showNewTab === true"
+    }
+  },
+  "i18n": {
+    "summerNoteWidthMax": ["lgepDesignSequenceMessages"],
+    "treeShowTooltip": ["lgepDesignSequenceMessages"],
+    "tabShowTooltip": ["lgepDesignSequenceMessages"],
+    "leftSelectPlease": ["L2_DesignStandardMessages"],
+    "viewDetails": ["L2_DesignStandardMessages"],
+    "mostPosts": ["lgepKnowldegeManageMessages"],
+    "treeViewShowOrHide": ["L2_DesignStandardMessages"],
+    "createDgnBook": ["L2_DesignStandardMessages"],
+    "showCheckTable": ["L2_DesignStandardMessages"],
+    "tabHideAndShow": ["L2_DesignStandardMessages"],
+    "createDgnStandardBook": ["L2_DesignStandardMessages"],
+    "FileAttach": ["L2_DesignStandardMessages"],
+    "manualAttach": ["L2_DesignStandardMessages"],
+    "chapterMergeView": ["L2_DesignStandardMessages"],
+    "dgnStandard2Attach": ["L2_DesignStandardMessages"],
+    "FreezeMessge": ["L2_DesignStandardMessages"],
+    "reviseHistory": ["L2_DesignStandardMessages"],
+    "bookFreeze": ["L2_DesignStandardMessages"],
+    "name": ["L2_DesignStandardMessages"],
+    "openNewTap": ["L2_DesignStandardMessages"],
+    "createDgnBook2": ["L2_DesignStandardMessages"],
+    "revCompare": ["L2_DesignStandardMessages"]
+  },
+  "lifecycleHooks": {
+    "onInit": "initialize"
+  }
 }

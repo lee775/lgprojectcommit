@@ -1,458 +1,715 @@
 {
-    "commands": {
-        "L2_DesignStandardcmd": {
-            "iconId": "cmdShowAllResultsIn3dViewer",
-            "title": "{{i18n.L2_DesignStandardcmdTitle2}}",
-            "description": "{{i18n.L2_DesignStandardcmdDescription}}"
-        },
-        "pageSearchCmd": {
-            "iconId": "typeSearchQuery",
-            "isGroup": false,
-            "title": "{{i18n.search}}"
-        },
-        "bookmarkCommand": {
-            "iconId": "cmdEmptyStar",
-            "isGroup": false,
-            "title": "{{i18n.bookmark}}"
-        },
-        "backArrowCommand": {
-            "iconId": "backArrow",
-            "isGroup": false,
-            "title": "{{i18n.backArrow}}"
-        },
-        "backArrowBookmarkCommand": {
-            "iconId": "backArrow",
-            "isGroup": false,
-            "title": "{{i18n.backArrow}}"
-        },
-        "backArrowViewDetailCommand": {
-            "iconId": "backArrow",
-            "isGroup": false,
-            "title": "{{i18n.backArrow}}"
-        },
-        "forwardArrowCommand": {
-            "iconId": "forwardArrow",
-            "isGroup": false,
-            "title": "{{i18n.forwardArrow}}"
-        },
-        "bomlineAddCmd": {
-            "iconId": "cmdAddDependency",
-            "isGroup": true,
-            "title": "{{i18n.bomLineAdd}}"
-        },
-        "pageAddCmd": {
-            "iconId": "homeRule",
-            "isGroup": false,
-            "title": "{{i18n.pageAdd}}"
-        },
-        "chapterAddCmd": {
-            "iconId": "cmdJumpToToday",
-            "isGroup": false,
-            "title": "{{i18n.chapterAdd}}"
-        },
-        "reviseCmd": {
-            "iconId": "cmdManage",
-            "isGroup": false,
-            "title": "{{i18n.revise}}"
-        },
-        "viewDetailCmd": {
-            "iconId": "cmdSearchReport",
-            "isGroup": false,
-            "title": "{{i18n.viewDetail}}"
-        },
-        "editCmd": {
-            "iconId": "cmdEdit",
-            "isGroup": false,
-            "title": "{{i18n.edit}}"
-        },
-        "deleteCmd": {
-            "iconId": "cmdDelete",
-            "isGroup": false,
-            "title": "{{i18n.delete}}"
-        },
-        "addFolderCmd": {
-            "iconId": "cmdAddFolder",
-            "isGroup": false,
-            "title": "{{i18n.folderAdd}}"
-        }
+  "commands": {
+    "treeShrink": {
+      "iconId": "cmdCollapseBelow",
+      "title": "트리 축소",
+      "description": "트리 축소"
     },
-    "commandHandlers": {
-        "pageSearchCmdHandler": {
-            "id": "pageSearchCmd",
-            "action": "pageSearchCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "addFolderCmdHandler": {
-            "id": "addFolderCmd",
-            "action": "addFolderCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "pageAddCmdHandler": {
-            "id": "pageAddCmd",
-            "action": "pageAddCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "chapterAddCmdHandler": {
-            "id": "chapterAddCmd",
-            "action": "chapterAddCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "editCmdHandler": {
-            "id": "editCmd",
-            "action": "editCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "deleteCmdHandler": {
-            "id": "deleteCmd",
-            "action": "deleteCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "viewDetailCmdHandler": {
-            "id": "viewDetailCmd",
-            "action": "viewDetailCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "reviseCmdHandler": {
-            "id": "reviseCmd",
-            "action": "reviseCmdAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "L2_DesignStandardcmdHandler": {
-            "id": "L2_DesignStandardcmd",
-            "action": "activateL2_DesignStandardcmd",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "bookmarkCommandHandler": {
-            "id": "bookmarkCommand",
-            "action": "bookmarkCommandAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "backArrowCommandHandler": {
-            "id": "backArrowCommand",
-            "action": "backArrowCommandAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "backArrowBookmarkCommandHandler": {
-            "id": "backArrowBookmarkCommand",
-            "action": "backArrowBookmarkCommandAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "backArrowViewDetailCommandHandler": {
-            "id": "backArrowViewDetailCommand",
-            "action": "backArrowViewDetailCommandAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        },
-        "forwardArrowCommandHandler": {
-            "id": "forwardArrowCommand",
-            "action": "forwardArrowCommandAction",
-            "activeWhen": true,
-            "visibleWhen": true
-        }
+    "treeUp": {
+      "iconId": "cmdExpandBelow",
+      "title": "트리 확장",
+      "description": "트리 확장"
     },
-    "commandPlacements": {
-        "pageSearchCmdPlacement": {
-            "id": "pageSearchCmd",
-            "uiAnchor": "pageSearch",
-            "priority": 100
-        },
-        "addFolderCmdPlacement": {
-            "id": "addFolderCmd",
-            "uiAnchor": "addFolder",
-            "priority": 100
-        },
-        "pageAddCmdPlacement": {
-            "id": "pageAddCmd",
-            "priority": 100,
-            "parentGroupId": "bomlineAddCmd"
-        },
-        "chapterAddCmdPlacement": {
-            "id": "chapterAddCmd",
-            "priority": 100,
-            "parentGroupId": "bomlineAddCmd"
-        },
-        "editCmdPlacement": {
-            "id": "editCmd",
-            "uiAnchor": "editCmd",
-            "priority": 100
-        },
-        "deleteCmdPlacement": {
-            "id": "deleteCmd",
-            "uiAnchor": "deleteCmd",
-            "priority": 100
-        },
-        "viewDetailCmdPlacement": {
-            "id": "viewDetailCmd",
-            "uiAnchor": "viewDetailCmd",
-            "priority": 100
-        },
-        "reviseCmdPlacement": {
-            "id": "reviseCmd",
-            "uiAnchor": "reviseCmd",
-            "priority": 100
-        },
-        "L2_DesignStandardcmdaw_globalNavigationbar": {
-            "id": "L2_DesignStandardcmd",
-            "uiAnchor": "aw_globalNavigationbar",
-            "priority": 100
-        },
-        "bookmarkCommandPlacement": {
-            "id": "bookmarkCommand",
-            "uiAnchor": "bookmarkcmd",
-            "priority": 100
-        },
-        "backArrowCommandPlacement": {
-            "id": "backArrowCommand",
-            "uiAnchor": "backArrowcmd",
-            "priority": 100
-        },
-        "backArrowBookmarkCommandPlacement": {
-            "id": "backArrowBookmarkCommand",
-            "uiAnchor": "backArrowBookmarkcmd",
-            "priority": 100
-        },
-        "backArrowViewDetailCommandPlacement": {
-            "id": "backArrowViewDetailCommand",
-            "uiAnchor": "backArrowViewDetailcmd",
-            "priority": 100
-        },
-        "forwardArrowCommandPlacement": {
-            "id": "forwardArrowCommand",
-            "uiAnchor": "forwardArrowcmd",
-            "priority": 100
-        },
-        "bomlineAddCmdPlacement": {
-            "id": "bomlineAddCmd",
-            "uiAnchor": "bomlineAdd",
-            "priority": 100
-        }
+    "L2_DesignStandardcmd": {
+      "iconId": "cmdShowAllResultsIn3dViewer",
+      "title": "{{i18n.L2_DesignStandardcmdTitle2}}",
+      "description": "{{i18n.L2_DesignStandardcmdDescription}}"
     },
-    "actions": {
-        "pageSearchCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "pageSearchCmdAction"
-                    }
-                ]
-            }
-        },
-        "addFolderCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "addFolderCmdAction"
-                    }
-                ]
-            }
-        },
-        "pageAddCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "pageAddCmdAction"
-                    }
-                ]
-            }
-        },
-        "chapterAddCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "chapterAddCmdAction"
-                    }
-                ]
-            }
-        },
-        "editCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "editCmdAction"
-                    }
-                ]
-            }
-        },
-        "deleteCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "deleteCmdAction"
-                    }
-                ]
-            }
-        },
-        "bookmarkCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "bookmarkAction"
-                    }
-                ]
-            }
-        },
-        "backArrowCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "backArrowAction"
-                    }
-                ]
-            }
-        },
-        "backArrowBookmarkCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "backArrowBookmarkAction"
-                    }
-                ]
-            }
-        },
-        "backArrowViewDetailCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "backArrowViewDetailAction"
-                    }
-                ]
-            }
-        },
-        "forwardArrowCommandAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "forwardArrowAction"
-                    }
-                ]
-            }
-        },
-        "bomlineAddCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "bomlineAddEvent"
-                    }
-                ]
-            }
-        },
-        "reviseCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "reviseEvent"
-                    }
-                ]
-            }
-        },
-        "viewDetailCmdAction": {
-            "actionType": "Event",
-            "method": "Event",
-            "inputData": {
-                "events": [
-                    {
-                        "name": "viewDetailEvent"
-                    }
-                ]
-            }
-        },
-        "activateL2_DesignStandardcmd": {
-            "actionType": "Navigate",
-            "navigateTo": "L2_DesignStandard",
-            "navigationParams": {}
-        }
+    "pageSearchCmd": {
+      "iconId": "typeSearchQuery",
+      "isGroup": false,
+      "title": "{{i18n.search}}"
     },
-    "conditions": {
-        "objectIsSelected": {
-            "expression": "ctx.selected"
-        },
-        "tcWorkspace": {
-            "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
-        }
+    "bookmarkCommand": {
+      "iconId": "cmdEmptyStar",
+      "isGroup": false,
+      "title": "{{i18n.bookmark}}"
     },
-    "i18n": {
-        "L2_DesignStandardcmdTitle": [
-            "L2_DesignStandardMessages"
-        ],
-        "L2_DesignStandardcmdTitle2": [
-            "L2_DesignStandardMessages"
-        ],
-        "L2_DesignStandardcmdDescription": [
-            "L2_DesignStandardMessages"
-        ],
-        "bookmark": [
-            "L2_DesignStandardMessages"
-        ],
-        "backArrow": [
-            "L2_DesignStandardMessages"
-        ],
-        "forwardArrow": [
-            "L2_DesignStandardMessages"
-        ],
-        "bomLineAdd": [
-            "L2_DesignStandardMessages"
-        ],
-        "revise": [
-            "L2_DesignStandardMessages"
-        ],
-        "viewDetail": [
-            "L2_DesignStandardMessages"
-        ],
-        "edit": [
-            "L2_DesignStandardMessages"
-        ],
-        "delete": [
-            "L2_DesignStandardMessages"
-        ],
-        "pageAdd": [
-            "L2_DesignStandardMessages"
-        ],
-        "chapterAdd": [
-            "L2_DesignStandardMessages"
-        ],
-        "folderAdd": [
-            "L2_DesignStandardMessages"
-        ],
-        "search": [
-            "L2_DesignStandardMessages"
-        ]
+    "backArrowCommand": {
+      "iconId": "backArrow",
+      "isGroup": false,
+      "title": "{{i18n.backArrow}}"
+    },
+    "backArrowBookmarkCommand": {
+      "iconId": "backArrow",
+      "isGroup": false,
+      "title": "{{i18n.backArrow}}"
+    },
+    "backArrowViewDetailCommand": {
+      "iconId": "backArrow",
+      "isGroup": false,
+      "title": "{{i18n.backArrow}}"
+    },
+    "forwardArrowCommand": {
+      "iconId": "forwardArrow",
+      "isGroup": false,
+      "title": "{{i18n.forwardArrow}}"
+    },
+    "bomlineAddCmd": {
+      "iconId": "cmdAddDependency",
+      "isGroup": true,
+      "title": "{{i18n.bomLineAdd}}"
+    },
+    "treeFolderNameSaveCmd": {
+      "iconId": "cmdEdit",
+      "isGroup": true,
+      "title": "{{i18n.update}}"
+    },
+    "pageAddCmd": {
+      "iconId": "homeRule",
+      "isGroup": false,
+      "title": "{{i18n.pageAdd}}"
+    },
+    "chapterAddCmd": {
+      "iconId": "cmdJumpToToday",
+      "isGroup": false,
+      "title": "{{i18n.chapterAdd}}"
+    },
+    "reviseCmd": {
+      "iconId": "cmdManage",
+      "isGroup": false,
+      "title": "{{i18n.revise}}"
+    },
+    "viewDetailCmd": {
+      "iconId": "cmdSearchReport",
+      "isGroup": false,
+      "title": "{{i18n.viewDetail}}"
+    },
+    "editParentCmd": {
+      "iconId": "cmdOpenApplicationLogMaintenance",
+      "isGroup": true,
+      "title": "{{i18n.update}}"
+    },
+    "editCmd": {
+      "iconId": "cmdEdit",
+      "isGroup": false,
+      "title": "{{i18n.edit}}"
+    },
+    "deleteCmd": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "{{i18n.delete}}"
+    },
+    "addFolderCmd": {
+      "iconId": "cmdAddFolder",
+      "isGroup": false,
+      "title": "{{i18n.folderAdd}}"
+    },
+    "startEditTableCommand": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.edit}}"
+    },
+    "cancelEditTableCommand": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.cancel}}"
+    },
+    "saveEditTableCommand": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.editSave}}"
+    },
+    "startEditTreeCommand": {
+      "iconId": "cmdEdit",
+      "title": "{{i18n.edit}}"
+    },
+    "cancelEditTreeCommand": {
+      "iconId": "cmdCancelEdit",
+      "title": "{{i18n.cancel}}"
+    },
+    "saveEditTreeCommand": {
+      "iconId": "cmdSave",
+      "title": "{{i18n.editSave}}"
+    },
+    "stdBomCopyCmd": {
+      "iconId": "cmdCopy",
+      "title": "{{i18n.stdBomCopy}}"
+    },
+    "changePosition": {
+      "iconId": "cmdRestructureGroup",
+      "title": "{{i18n.treePositionChange}}"
     }
+  },
+  "commandHandlers": {
+    "stdBomCopyCmdHandler": {
+      "id": "stdBomCopyCmd",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "stdBomCopyCmdAction"
+    },
+    "startEditTableCommandHandler": {
+      "id": "startEditTableCommand",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "startEditTableCommandAction"
+    },
+    "cancelEditTableCommandHandler": {
+      "id": "cancelEditTableCommand",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "cancelEditTableCommandAction"
+    },
+    "saveEditTableCommandHandler": {
+      "id": "saveEditTableCommand",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "saveEditTableCommandAction"
+    },
+    "startEditTreeCommandHandler": {
+      "id": "startEditTreeCommand",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "startEditTreeCommandAction"
+    },
+    "cancelEditTreeCommandHandler": {
+      "id": "cancelEditTreeCommand",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "cancelEditTreeCommandAction"
+    },
+    "saveEditTreeCommandHandler": {
+      "id": "saveEditTreeCommand",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "action": "saveEditTreeCommandAction"
+    },
+    "treeShrinkHandler": {
+      "id": "treeShrink",
+      "action": "treeShrink",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "treeUpHandler": {
+      "id": "treeUp",
+      "action": "treeExpand",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "pageSearchCmdHandler": {
+      "id": "pageSearchCmd",
+      "action": "pageSearchCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "addFolderCmdHandler": {
+      "id": "addFolderCmd",
+      "action": "addFolderCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "pageAddCmdHandler": {
+      "id": "pageAddCmd",
+      "action": "pageAddCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "chapterAddCmdHandler": {
+      "id": "chapterAddCmd",
+      "action": "chapterAddCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "editCmdHandler": {
+      "id": "editCmd",
+      "action": "editCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "deleteCmdHandler": {
+      "id": "deleteCmd",
+      "action": "deleteCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "viewDetailCmdHandler": {
+      "id": "viewDetailCmd",
+      "action": "viewDetailCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "reviseCmdHandler": {
+      "id": "reviseCmd",
+      "action": "reviseCmdAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "L2_DesignStandardcmdHandler": {
+      "id": "L2_DesignStandardcmd",
+      "action": "activateL2_DesignStandardcmd",
+      "activeWhen": true,
+      "visibleWhen": false
+    },
+    "bookmarkCommandHandler": {
+      "id": "bookmarkCommand",
+      "action": "bookmarkCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "backArrowCommandHandler": {
+      "id": "backArrowCommand",
+      "action": "backArrowCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "backArrowBookmarkCommandHandler": {
+      "id": "backArrowBookmarkCommand",
+      "action": "backArrowBookmarkCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "backArrowViewDetailCommandHandler": {
+      "id": "backArrowViewDetailCommand",
+      "action": "backArrowViewDetailCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "forwardArrowCommandHandler": {
+      "id": "forwardArrowCommand",
+      "action": "forwardArrowCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "changePositionHandler": {
+      "id": "changePosition",
+      "action": "changePositionAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    }
+  },
+  "commandPlacements": {
+    "stdBomCopyCmdPlacement": {
+      "id": "stdBomCopyCmd",
+      "uiAnchor": "stdBomCopyCmd",
+      "priority": 100
+    },
+    "startEditTableCommandPlacement": {
+      "id": "startEditTableCommand",
+      "uiAnchor": "editAnchor",
+      "priority": 100
+    },
+    "cancelEditTableCommandPlacement": {
+      "id": "cancelEditTableCommand",
+      "uiAnchor": "cancelAnchor",
+      "priority": 150
+    },
+    "saveEditTableCommandPlacement": {
+      "id": "saveEditTableCommand",
+      "uiAnchor": "saveAnchor",
+      "priority": 250
+    },
+    "startEditTreeCommandPlacement": {
+      "id": "startEditTreeCommand",
+      "uiAnchor": "editTreeFolderAnchor",
+      "priority": 100
+    },
+    "cancelEditTreeCommandPlacement": {
+      "id": "cancelEditTreeCommand",
+      "parentGroupId": "treeFolderNameSaveCmd",
+      "priority": 150
+    },
+    "saveEditTreeCommandPlacement": {
+      "id": "saveEditTreeCommand",
+      "parentGroupId": "treeFolderNameSaveCmd",
+      "priority": 250
+    },
+    "treeShrinkPlacement": {
+      "id": "treeShrink",
+      "uiAnchor": "downTreecmd",
+      "priority": 100
+    },
+    "treeUpPlacement": {
+      "id": "treeUp",
+      "uiAnchor": "upTreecmd",
+      "priority": 100
+    },
+    "pageSearchCmdPlacement": {
+      "id": "pageSearchCmd",
+      "uiAnchor": "pageSearch",
+      "priority": 100
+    },
+    "addFolderCmdPlacement": {
+      "id": "addFolderCmd",
+      "uiAnchor": "addFolder",
+      "priority": 100
+    },
+    "pageAddCmdPlacement": {
+      "id": "pageAddCmd",
+      "priority": 100,
+      "parentGroupId": "bomlineAddCmd"
+    },
+    "chapterAddCmdPlacement": {
+      "id": "chapterAddCmd",
+      "priority": 100,
+      "parentGroupId": "bomlineAddCmd"
+    },
+    "editCmdPlacement": {
+      "id": "editCmd",
+      "parentGroupId": "editParentCmd",
+      "priority": 100
+    },
+    "deleteCmdPlacement": {
+      "id": "deleteCmd",
+      "parentGroupId": "editParentCmd",
+      "priority": 100
+    },
+    "viewDetailCmdPlacement": {
+      "id": "viewDetailCmd",
+      "uiAnchor": "viewDetailCmd",
+      "priority": 100
+    },
+    "reviseCmdPlacement": {
+      "id": "reviseCmd",
+      "uiAnchor": "reviseCmd",
+      "priority": 100
+    },
+    "L2_DesignStandardcmdaw_globalNavigationbar": {
+      "id": "L2_DesignStandardcmd",
+      "uiAnchor": "aw_globalNavigationbar",
+      "priority": 100
+    },
+    "bookmarkCommandPlacement": {
+      "id": "bookmarkCommand",
+      "uiAnchor": "bookmarkcmd",
+      "priority": 100
+    },
+    "backArrowCommandPlacement": {
+      "id": "backArrowCommand",
+      "uiAnchor": "backArrowcmd",
+      "priority": 100
+    },
+    "backArrowBookmarkCommandPlacement": {
+      "id": "backArrowBookmarkCommand",
+      "uiAnchor": "backArrowBookmarkcmd",
+      "priority": 100
+    },
+    "backArrowViewDetailCommandPlacement": {
+      "id": "backArrowViewDetailCommand",
+      "uiAnchor": "backArrowViewDetailcmd",
+      "priority": 100
+    },
+    "forwardArrowCommandPlacement": {
+      "id": "forwardArrowCommand",
+      "uiAnchor": "forwardArrowcmd",
+      "priority": 100
+    },
+    "bomlineAddCmdPlacement": {
+      "id": "bomlineAddCmd",
+      "uiAnchor": "bomlineAdd",
+      "priority": 100
+    },
+    "treeFolderNameSaveCmdPlacement": {
+      "id": "treeFolderNameSaveCmd",
+      "uiAnchor": "treeFolderNameSaveAnchor",
+      "priority": 100
+    },
+    "editParentCmdPlacement": {
+      "id": "editParentCmd",
+      "uiAnchor": "editParentGroupCmd",
+      "priority": 100
+    },
+    "changePositionPlacement": {
+      "id": "changePosition",
+      "uiAnchor": "changePosition",
+      "priority": 100
+    }
+  },
+  "actions": {
+    "stdBomCopyCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "stdBomCopyCmd"
+          }
+        ]
+      }
+    },
+    "startEditTableCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "startTableEdit"
+          }
+        ]
+      }
+    },
+    "cancelEditTableCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "cancelTableEdit"
+          }
+        ]
+      }
+    },
+    "saveEditTableCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "saveTableEdit"
+          }
+        ]
+      }
+    },
+    "startEditTreeCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "startTreeEdit"
+          }
+        ]
+      }
+    },
+    "cancelEditTreeCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "cancelTreeEdit"
+          }
+        ]
+      }
+    },
+    "saveEditTreeCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "saveTreeEdit"
+          }
+        ]
+      }
+    },
+    "treeShrink": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "treeShrink"
+          }
+        ]
+      }
+    },
+    "treeExpand": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "treeExpand"
+          }
+        ]
+      }
+    },
+    "pageSearchCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "pageSearchCmdAction"
+          }
+        ]
+      }
+    },
+    "addFolderCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "addFolderCmdAction"
+          }
+        ]
+      }
+    },
+    "pageAddCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "pageAddCmdAction"
+          }
+        ]
+      }
+    },
+    "chapterAddCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "chapterAddCmdAction"
+          }
+        ]
+      }
+    },
+    "editCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "editCmdAction"
+          }
+        ]
+      }
+    },
+    "deleteCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "deleteCmdAction"
+          }
+        ]
+      }
+    },
+    "bookmarkCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "bookmarkAction"
+          }
+        ]
+      }
+    },
+    "backArrowCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "backArrowAction"
+          }
+        ]
+      }
+    },
+    "backArrowBookmarkCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "backArrowBookmarkAction"
+          }
+        ]
+      }
+    },
+    "backArrowViewDetailCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "backArrowViewDetailAction"
+          }
+        ]
+      }
+    },
+    "forwardArrowCommandAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "forwardArrowAction"
+          }
+        ]
+      }
+    },
+    "bomlineAddCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "bomlineAddEvent"
+          }
+        ]
+      }
+    },
+    "reviseCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "reviseEvent"
+          }
+        ]
+      }
+    },
+    "viewDetailCmdAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "viewDetailEvent"
+          }
+        ]
+      }
+    },
+    "activateL2_DesignStandardcmd": {
+      "actionType": "Navigate",
+      "navigateTo": "L2_DesignStandard",
+      "navigationParams": {}
+    },
+    "changePositionAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "changePositionEvent"
+          }
+        ]
+      }
+    }
+  },
+  "conditions": {
+    "objectIsSelected": {
+      "expression": "ctx.selected"
+    },
+    "tcWorkspace": {
+      "expression": "ctx.workspace.workspaceId == 'TcAuthorWorkspace'"
+    }
+  },
+  "i18n": {
+    "L2_DesignStandardcmdTitle": ["L2_DesignStandardMessages"],
+    "L2_DesignStandardcmdTitle2": ["L2_DesignStandardMessages"],
+    "L2_DesignStandardcmdDescription": ["L2_DesignStandardMessages"],
+    "bookmark": ["L2_DesignStandardMessages"],
+    "backArrow": ["L2_DesignStandardMessages"],
+    "forwardArrow": ["L2_DesignStandardMessages"],
+    "bomLineAdd": ["L2_DesignStandardMessages"],
+    "revise": ["L2_DesignStandardMessages"],
+    "viewDetail": ["L2_DesignStandardMessages"],
+    "edit": ["L2_DesignStandardMessages"],
+    "delete": ["L2_DesignStandardMessages"],
+    "pageAdd": ["L2_DesignStandardMessages"],
+    "chapterAdd": ["L2_DesignStandardMessages"],
+    "folderAdd": ["L2_DesignStandardMessages"],
+    "search": ["L2_DesignStandardMessages"],
+    "editSave": ["L2_DesignStandardMessages"],
+    "cancel": ["L2_DesignStandardMessages"],
+    "stdBomCopy": ["L2_DesignStandardMessages"],
+    "update": ["L2_DesignStandardMessages"],
+    "treePositionChange": ["L2_DesignStandardMessages"]
+  }
 }

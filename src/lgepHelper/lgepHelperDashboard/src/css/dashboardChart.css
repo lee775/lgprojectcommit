@@ -1,57 +1,60 @@
-.pieSize{
-    width: 95%;
-    margin: 10px;
-    height:200px;
+.pieSize {
+  width: 95%;
+  margin: 10px;
+  height: 200px;
 }
 
-
 .scatterSize {
-    width: 97.7%;
-    margin: 10px;
+  width: 97.7%;
+  margin: 10px;
 }
 
 .lineSize {
-    width: 95%;
-    margin: 10px;
-    height: 200px;
+  width: 94%;
+  margin: 10px;
+  height: 200px;
 }
 
 #chartDashboardSite .aw-widgets-cellListCellImage {
-border-radius: 70%;
-overflow: hidden;
+  border-radius: 70%;
+  overflow: hidden;
 }
 
 .aw-layout-panelSectionTitle {
-    background-color: rgb(234, 234, 234);
+  background-color: rgb(234, 234, 234);
 }
 
 .bestSubmit {
-    width: 70%;
-    margin: 10px;
+  width: 70%;
+  margin: 10px;
 }
 
 .bestLike {
-    width: 70%;
-    margin: 10px;
+  width: 70%;
+  margin: 10px;
 }
 
 /* rect[class="highcharts-background"]:hover {
     height: 70% !important;
 } */
 
-rect[class="highcharts-background"] {
-    height:70%;
+rect[class='highcharts-background'] {
+  height: 70%;
 }
 
-.cChart{
-    height:250px;
+.cChart {
+  height: 250px;
 }
 
-.mChart{
-    height:250px;
-    padding-top: -20px;
+.mChart {
+  height: 250px;
+  padding-top: -20px;
 }
 
-.pChart{
-    height:250px;
+.pChart {
+  height: 250px;
+}
+
+.pieSize.aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
+  width: 99%;
 }

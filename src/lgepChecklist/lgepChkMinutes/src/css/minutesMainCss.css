@@ -1,0 +1,202 @@
+div#btnBox {
+  position: absolute;
+  margin-left: 83%;
+  width: 10%;
+  height: auto;
+  z-index: 10;
+  margin-top: -0.5%;
+}
+
+button.createBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 50%;
+  z-index: 15;
+  margin-bottom: 6%;
+}
+
+button.deleteBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 50%;
+  z-index: 15;
+  margin-bottom: 6%;
+}
+
+button.editBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 6%;
+  position: absolute;
+  margin-left: 75%;
+  margin-top: -0.5%;
+}
+
+.namePosition1.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 0%;
+  margin-right: -6.5%;
+}
+
+button.editPosit1.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 6%;
+  position: absolute;
+  margin-left: 75%;
+  margin-top: -0.5%;
+}
+
+button.editPosit2.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 6%;
+  position: absolute;
+  margin-left: 82%;
+  margin-top: -0.5%;
+}
+
+aw-list#failureList {
+  min-width: -webkit-fill-available;
+}
+
+.namePosition1.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-right: -46.7% !important;
+  width: 0px;
+}
+
+.namePosition2.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-right: -45.4% !important;
+}
+
+.namePosition1 aw-label.ng-scope.ng-isolate-scope {
+  width: 242.33px;
+}
+
+.namePosition aw-property-label.ng-isolate-scope {
+  margin-right: -15%;
+}
+
+.summernoteLblPosition.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-bottom: -2%;
+}
+
+#summernotePosit .aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  padding-bottom: 2%;
+}
+
+button.failureAdd.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 6%;
+}
+
+button.failureDelete.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 6%;
+}
+
+.linkPosit.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-right: 9%;
+}
+
+.btn-upload {
+  width: 150px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid rgb(77, 77, 77);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4%;
+}
+
+.btn-upload:hover {
+  background: rgb(77, 77, 77);
+  color: #fff;
+}
+
+#fileUpload {
+  display: none;
+}
+
+#createFileUpload {
+  display: none;
+}
+
+#showAllCreateFileUpload {
+  display: none;
+}
+
+div#uploadList {
+  width: 100%;
+  padding: 2% 0;
+}
+
+div#createUploadList {
+  width: 100%;
+  padding-bottom: 2%;
+}
+
+div#preview {
+  width: 100%;
+  border: solid;
+  border-color: black;
+  border-width: thin;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 30%);
+}
+
+div#createPreview {
+  width: 100%;
+  border: solid;
+  border-color: black;
+  border-width: thin;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 30%);
+}
+
+div#createAllPreview {
+  width: 100%;
+  border: solid;
+  border-color: black;
+  border-width: thin;
+  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 30%);
+}
+
+p.uploadFileList {
+  padding: 1%;
+}
+
+button.file-remove {
+  height: auto;
+  margin-left: 1%;
+  border-radius: 25%;
+  width: 4%;
+  background-color: #747474;
+  color: rgb(255, 246, 226);
+}
+
+div#summernotePosit {
+  margin-top: 1%;
+}
+
+/* 고장 추가 팝업 관련 */
+#failureAddPopup aw-command-bar.aw-layout-justifyFlexEnd.aw-layout-workareaCommandbar.ng-isolate-scope.aw-commands-commandBarHorizontal {
+  display: none;
+}
+
+aw-list#failureControlList {
+  min-width: -webkit-fill-available;
+}
+
+.linkPosition.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 10%;
+}
+
+.linkPosition2.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 19.7%;
+}
+
+aw-label.labelMargin.ng-scope.ng-isolate-scope {
+  width: 50%;
+}
+
+/* 액션 아이템 관련 */
+.actionCSS aw-datetime.ng-scope.ng-isolate-scope {
+  width: -webkit-fill-available;
+}
+
+.actionCSS aw-label.ng-scope.ng-isolate-scope {
+  width: -webkit-fill-available;
+}
+
+.actionCSS aw-textarea.ng-scope.ng-isolate-scope {
+  width: -webkit-fill-available;
+}

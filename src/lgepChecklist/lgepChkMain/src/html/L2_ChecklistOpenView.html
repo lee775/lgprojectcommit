@@ -1,8 +1,7 @@
 <div class="checklist-open-view">
-    <aw-flex-row>
-        <div id="openGrid"></div>
-        <!-- <aw-include exist-when="ctx.checklist.tableMode == '1'" name="L2_ChecklistImage"></aw-include>
-        <aw-include exist-when="ctx.checklist.tableMode == '2'" name="L2_ChecklistText"></aw-include>
-        <aw-include exist-when="ctx.checklist.tableMode == '3'" name="L2_ChecklistTree"></aw-include> -->
-    </aw-flex-row>
+  <aw-flex-row>
+    <aw-include exist-when="ctx.checklist.tableMode == '1'" name="L2_ChecklistImage"></aw-include>
+    <aw-include exist-when="ctx.checklist.tableMode == '2'" name="L2_ChecklistTable"></aw-include>
+    <aw-include exist-when="ctx.checklist.tableMode == '3'" name="L2_ChecklistTree"></aw-include>
+  </aw-flex-row>
 </div>

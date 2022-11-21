@@ -7,17 +7,8 @@ import appCtxService from 'js/appCtxService';
 
 import messageUtil from 'js/utils/lgepMessagingUtils';
 
-import {
-  showErrorMessage,
-  getLocalizedMessage,
-  TYPE_INFO,
-  showInfoMessage,
-} from 'js/utils/fmeaMessageUtils';
-import {
-  deleteItem,
-  deleteAllDatasetOnSpecification,
-  deleteWorkspcaeObject,
-} from 'js/utils/fmeaTcUtils';
+import { showErrorMessage, getLocalizedMessage, TYPE_INFO, showInfoMessage } from 'js/utils/fmeaMessageUtils';
+import { deleteItem, deleteAllDatasetOnSpecification, deleteWorkspcaeObject } from 'js/utils/fmeaTcUtils';
 import { insertLog } from 'js/utils/fmeaCommonUtils';
 import * as constants from 'js/constants/fmeaConstants';
 
@@ -51,7 +42,7 @@ export const deleteAction = async (ctx) => {
       function () {
         return;
       },
-    ]
+    ],
   );
 };
 
@@ -79,7 +70,7 @@ export const deleteWorkspaceObject = async (ctx) => {
       function () {
         return;
       },
-    ]
+    ],
   );
 };
 

@@ -10,10 +10,7 @@ import lgepBomUtils from 'js/utils/lgepBomUtils';
 
 import dfmeaMasterService from 'js/dfmeaMasterService';
 import { makeShortenValues } from 'js/utils/fmeaCommonUtils';
-import {
-  makeEmptyProperty,
-  makeVmPropertyOnTextTable,
-} from 'js/utils/fmeaTableMakeUtils';
+import { makeEmptyProperty, makeVmPropertyOnTextTable } from 'js/utils/fmeaTableMakeUtils';
 import { loadObjectByPolicy, getRevisionByRevId } from 'js/utils/fmeaTcUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
@@ -111,7 +108,7 @@ const _getTableData = async (parent) => {
           const assyInfo = {
             [prop.PARENT_ASSY]: parentAssyProperty,
           };
-          
+
           await _createTableRow(parentChild, assyInfo);
         }
       }
@@ -133,20 +130,11 @@ const _createTableRow = async (parentChild, assyData) => {
 
 // 구조 프로퍼티 get (상위/하위/단품)
 const _getStructureProperty = async (bomLine) => {
-  const assyRevision = await loadObjectByPolicy(
-    bomLine.itemRevOfBOMLine.uid,
-    prop.TYPE_FMEA_STRUCTURE_REV,
-    [prop.OBJECT_NAME]
-  );
+  const assyRevision = await loadObjectByPolicy(bomLine.itemRevOfBOMLine.uid, prop.TYPE_FMEA_STRUCTURE_REV, [prop.OBJECT_NAME]);
   const currentAssyRevision = await getRevisionByRevId(assyRevision, fmeaRevId);
-  const assyProperty = makeVmPropertyOnTextTable(
-    currentAssyRevision,
-    prop.OBJECT_NAME
-  );
+  const assyProperty = makeVmPropertyOnTextTable(currentAssyRevision, prop.OBJECT_NAME);
   return assyProperty;
 };
-
-
 
 /**
  * 기능, 기능요약 property 및 rev 반환
@@ -154,17 +142,8 @@ const _getStructureProperty = async (bomLine) => {
  * @returns
  */
 const _getFunctionData = async (structureRev) => {
-  const props = [
-    prop.FUNCTION,
-    prop.FUNCTION_SHORT,
-    prop.REF_REQUIREMENTS,
-    prop.REVISION_ID,
-  ];
-  const functionRev = await loadObjectByPolicy(
-    structureRev.itemRevOfBOMLine.uid,
-    prop.TYPE_FMEA_FUNC_REVISION,
-    props
-  );
+  const props = [prop.FUNCTION, prop.FUNCTION_SHORT, prop.REF_REQUIREMENTS, prop.REVISION_ID];
+  const functionRev = await loadObjectByPolicy(structureRev.itemRevOfBOMLine.uid, prop.TYPE_FMEA_FUNC_REVISION, props);
   const currentFunctionRev = await getRevisionByRevId(functionRev, fmeaRevId, props);
   const functionProperties = _getFunctionProperties(currentFunctionRev);
   const funcResChildren = await _getFunctionChildren(currentFunctionRev);
@@ -191,16 +170,8 @@ const _getFunctionChildren = async (functionRev) => {
 
 // 기능, 기능요약 property 반환
 const _getFunctionProperties = (functionRev) => {
-  const functionProperty = makeVmPropertyOnTextTable(
-    functionRev,
-    prop.FUNCTION,
-    prop.FUNCTION_SHORT
-  );
-  const functionShortenProperty = makeVmPropertyOnTextTable(
-    functionRev,
-    prop.FUNCTION_SHORT,
-    prop.FUNCTION_SHORT
-  );
+  const functionProperty = makeVmPropertyOnTextTable(functionRev, prop.FUNCTION, prop.FUNCTION_SHORT);
+  const functionShortenProperty = makeVmPropertyOnTextTable(functionRev, prop.FUNCTION_SHORT, prop.FUNCTION_SHORT);
   return {
     functionProperty,
     functionShortenProperty,
@@ -246,25 +217,15 @@ const _makeViewModelProperty = async (functionData, assyData) => {
         prop.CLASSFICATION,
       ];
 
-      const failureRev = await loadObjectByPolicy(
-        funcChild.itemRevOfBOMLine.uid,
-        prop.TYPE_FMEA_FAILURE_REVISION,
-        props
-      );
+      const failureRev = await loadObjectByPolicy(funcChild.itemRevOfBOMLine.uid, prop.TYPE_FMEA_FAILURE_REVISION, props);
 
       const failureBomline = funcChild.bomLine;
 
       // 요구사항 추가
-      const requirementProperty = await _makeRequirementProperty(
-        failureBomline
-      );
+      const requirementProperty = await _makeRequirementProperty(failureBomline);
 
       // 고장 vmo 생성
-      const vmo = await _createVmoByFailure(
-        failureRev,
-        failureBomline,
-        functionData.functionRev
-      );
+      const vmo = await _createVmoByFailure(failureRev, failureBomline, functionData.functionRev);
       _addProperty(vmo, assyData, functionData, requirementProperty);
       results.push(vmo);
     }
@@ -275,28 +236,16 @@ const _makeViewModelProperty = async (functionData, assyData) => {
  * 요구사항 property 추가
  */
 const _makeRequirementProperty = async (failureBomline) => {
-  await lgepObjectUtils.getProperties(
-    [failureBomline],
-    [prop.BOMLINE_REQUIREMENT]
-  );
-  const requirmentUid =
-    failureBomline.props[prop.BOMLINE_REQUIREMENT].dbValues[0];
+  await lgepObjectUtils.getProperties([failureBomline], [prop.BOMLINE_REQUIREMENT]);
+  const requirmentUid = failureBomline.props[prop.BOMLINE_REQUIREMENT].dbValues[0];
   if (!requirmentUid) {
     return makeEmptyProperty();
   }
   try {
     const props = [prop.REQUIREMENT, prop.REQUIREMENT_SHORT];
-    const requirementRev = await loadObjectByPolicy(
-      requirmentUid,
-      prop.TYPE_FMEA_REQ_REVISION,
-      props
-    );
+    const requirementRev = await loadObjectByPolicy(requirmentUid, prop.TYPE_FMEA_REQ_REVISION, props);
 
-    const requirementProperty = makeVmPropertyOnTextTable(
-      requirementRev,
-      props[0],
-      props[1]
-    );
+    const requirementProperty = makeVmPropertyOnTextTable(requirementRev, props[0], props[1]);
     return requirementProperty;
   } catch (e) {
     //console.log('_makeRequirementProperty', e);
@@ -313,12 +262,7 @@ const _makeRequirementProperty = async (failureBomline) => {
 const _createVmoByFailure = async (failureRev, failureBomline, functionRev) => {
   await lgepObjectUtils.getProperties(
     [failureBomline],
-    [
-      prop.BOMLINE_PRECAUTION_ACTION,
-      prop.BOMLINE_DETECTION_ACTION,
-      prop.BOMLINE_FAILURE_EFFECT,
-      prop.BOMLINE_CAUSE_OF_FAILURE,
-    ]
+    [prop.BOMLINE_PRECAUTION_ACTION, prop.BOMLINE_DETECTION_ACTION, prop.BOMLINE_FAILURE_EFFECT, prop.BOMLINE_CAUSE_OF_FAILURE],
   );
   let vmo = _createFailureViewModelObject(failureRev);
 
@@ -341,8 +285,7 @@ const _createVmoByFailure = async (failureRev, failureBomline, functionRev) => {
 const _createFailureViewModelObject = (failureRev) => {
   const vmo = vmoc.createViewModelObject(failureRev);
   vmo.props[prop.POTENTIAL_FAILURE_MODE].uid = failureRev.uid;
-  vmo.props[prop.POTENTIAL_FAILURE_MODE].displayValues[0] =
-    vmo.props[prop.POTENTIAL_FAILURE_MODE_SHORT].displayValues[0];
+  vmo.props[prop.POTENTIAL_FAILURE_MODE].displayValues[0] = vmo.props[prop.POTENTIAL_FAILURE_MODE_SHORT].displayValues[0];
   return vmo;
 };
 
@@ -365,69 +308,38 @@ const _addProperty = (vmo, assyData, functionData, requirementProperty) => {
 
 // 고장 영향, 고장영향 요약 프로퍼티 get
 const _addFailureEffectProperty = async (vmo, failureBomline) => {
-  const tempFailureUid =
-  failureBomline.props[prop.BOMLINE_FAILURE_EFFECT].dbValues[0];
+  const tempFailureUid = failureBomline.props[prop.BOMLINE_FAILURE_EFFECT].dbValues[0];
   const props = [prop.FAILURE_EFFECT, prop.FAILURE_EFFECT_SHORT];
-  const tempFailure = await loadObjectByPolicy(
-    tempFailureUid,
-    prop.TYPE_FMEA_FAILURE_REVISION,
-    props
-  );
+  const tempFailure = await loadObjectByPolicy(tempFailureUid, prop.TYPE_FMEA_FAILURE_REVISION, props);
 
   const shortValue = tempFailure.props[prop.FAILURE_EFFECT_SHORT].dbValues[0];
-  const failureEffectProperty = makeVmPropertyOnTextTable2(
-    tempFailure,
-    prop.FAILURE_EFFECT,
-    shortValue
-  );
+  const failureEffectProperty = makeVmPropertyOnTextTable2(tempFailure, prop.FAILURE_EFFECT, shortValue);
   vmo.props[prop.FAILURE_EFFECT] = failureEffectProperty;
 
-  const failureEffectShortenProperty = makeVmPropertyOnTextTable2(
-    tempFailure,
-    prop.FAILURE_EFFECT_SHORT,
-    shortValue
-  );
+  const failureEffectShortenProperty = makeVmPropertyOnTextTable2(tempFailure, prop.FAILURE_EFFECT_SHORT, shortValue);
   vmo.props[prop.FAILURE_EFFECT_SHORT] = failureEffectShortenProperty;
 };
 
 // 고장 원인, 고장원인 요약 프로퍼티 get
 const _addCauseFailureProperty = async (vmo, failureBomline) => {
-  await lgepObjectUtils.getProperties(failureBomline, [
-    prop.BOMLINE_CAUSE_OF_FAILURE,
-  ]);
+  await lgepObjectUtils.getProperties(failureBomline, [prop.BOMLINE_CAUSE_OF_FAILURE]);
 
-  const tempFailureUid =
-    failureBomline.props[prop.BOMLINE_CAUSE_OF_FAILURE].dbValues[0];
+  const tempFailureUid = failureBomline.props[prop.BOMLINE_CAUSE_OF_FAILURE].dbValues[0];
 
   const props = [prop.CAUSE_OF_FAILURE, prop.CAUSE_OF_FAILURE_SHORT];
 
-  const tempFailure = await loadObjectByPolicy(
-    tempFailureUid,
-    prop.TYPE_FMEA_FAILURE_REVISION,
-    props
-  );
+  const tempFailure = await loadObjectByPolicy(tempFailureUid, prop.TYPE_FMEA_FAILURE_REVISION, props);
 
   const shortValue = tempFailure.props[prop.CAUSE_OF_FAILURE_SHORT].dbValues[0];
 
-  const failureEffectProperty = makeVmPropertyOnTextTable2(
-    tempFailure,
-    prop.CAUSE_OF_FAILURE,
-    shortValue
-  );
+  const failureEffectProperty = makeVmPropertyOnTextTable2(tempFailure, prop.CAUSE_OF_FAILURE, shortValue);
   vmo.props[prop.CAUSE_OF_FAILURE] = failureEffectProperty;
-  const failureEffectShortenProperty = makeVmPropertyOnTextTable2(
-    tempFailure,
-    prop.CAUSE_OF_FAILURE_SHORT,
-    shortValue
-  );
+  const failureEffectShortenProperty = makeVmPropertyOnTextTable2(tempFailure, prop.CAUSE_OF_FAILURE_SHORT, shortValue);
   vmo.props[prop.CAUSE_OF_FAILURE_SHORT] = failureEffectShortenProperty;
 };
 
 const _addNoteTypeProperties = async (vmo, failureBomline) => {
-  await lgepObjectUtils.getProperties(
-    failureBomline,
-    constants.RESULT_NOTETYPES_PROPS
-  );
+  await lgepObjectUtils.getProperties(failureBomline, constants.RESULT_NOTETYPES_PROPS);
 
   for (const noteTypeProp of constants.RESULT_NOTETYPES_PROPS) {
     const property = makeVmPropertyOnTextTable(failureBomline, noteTypeProp);
@@ -436,97 +348,42 @@ const _addNoteTypeProperties = async (vmo, failureBomline) => {
 };
 
 const _addDetectionProperty = async (vmo, failureBomline) => {
-  await lgepObjectUtils.getProperties(failureBomline, [
-    prop.BOMLINE_DETECTION_ACTION,
-  ]);
+  await lgepObjectUtils.getProperties(failureBomline, [prop.BOMLINE_DETECTION_ACTION]);
 
-  const detectionUid =
-    failureBomline.props[prop.BOMLINE_DETECTION_ACTION].dbValues[0];
+  const detectionUid = failureBomline.props[prop.BOMLINE_DETECTION_ACTION].dbValues[0];
   const props = [prop.DETECTION_ACTION, prop.OBJECT_NAME, prop.DETECTION];
-  const detection = await loadObjectByPolicy(
-    detectionUid,
-    prop.TYPE_FMEA_DETECTION_ACTION,
-    props
-  );
+  const detection = await loadObjectByPolicy(detectionUid, prop.TYPE_FMEA_DETECTION_ACTION, props);
 
-  const isEmptyDbValue = !detection.props[prop.DETECTION_ACTION].dbValues[0]
-    ? true
-    : false;
+  const isEmptyDbValue = !detection.props[prop.DETECTION_ACTION].dbValues[0] ? true : false;
 
-  const value = getShortValue(
-    isEmptyDbValue,
-    detection.props[prop.DETECTION_ACTION].dbValues[0]
-  );
+  const value = getShortValue(isEmptyDbValue, detection.props[prop.DETECTION_ACTION].dbValues[0]);
 
-  const detectionActionProperty = makeVmPropertyOnTextTable2(
-    detection,
-    prop.DETECTION_ACTION,
-    value
-  );
+  const detectionActionProperty = makeVmPropertyOnTextTable2(detection, prop.DETECTION_ACTION, value);
   vmo.props[prop.DETECTION_ACTION] = detectionActionProperty;
-  const detectionProperty = makeVmPropertyOnTextTable(
-    detection,
-    prop.DETECTION,
-    prop.DETECTION
-  );
+  const detectionProperty = makeVmPropertyOnTextTable(detection, prop.DETECTION, prop.DETECTION);
   vmo.props[prop.DETECTION] = detectionProperty;
 };
 
 const _addPrecatuionProperty = async (vmo, failureBomline) => {
-  await lgepObjectUtils.getProperties(failureBomline, [
-    prop.BOMLINE_PRECAUTION_ACTION,
-  ]);
-  const precautionUid =
-    failureBomline.props[prop.BOMLINE_PRECAUTION_ACTION].dbValues[0];
-  const props = [
-    prop.PRECATUIONS_ACTION,
-    prop.OBJECT_NAME,
-    prop.OCCURENCE,
-    prop.RELATED_SOURCES,
-  ];
-  const precaution = await loadObjectByPolicy(
-    precautionUid,
-    prop.TYPE_FMEA_PREACUTION_ACTION,
-    props
-  );
-  const isEmptyDbValue = !precaution.props[prop.PRECATUIONS_ACTION].dbValues[0]
-    ? true
-    : false;
+  await lgepObjectUtils.getProperties(failureBomline, [prop.BOMLINE_PRECAUTION_ACTION]);
+  const precautionUid = failureBomline.props[prop.BOMLINE_PRECAUTION_ACTION].dbValues[0];
+  const props = [prop.PRECATUIONS_ACTION, prop.OBJECT_NAME, prop.OCCURENCE, prop.RELATED_SOURCES];
+  const precaution = await loadObjectByPolicy(precautionUid, prop.TYPE_FMEA_PREACUTION_ACTION, props);
+  const isEmptyDbValue = !precaution.props[prop.PRECATUIONS_ACTION].dbValues[0] ? true : false;
 
-  const value = getShortValue(
-    isEmptyDbValue,
-    precaution.props[prop.PRECATUIONS_ACTION].dbValues[0]
-  );
+  const value = getShortValue(isEmptyDbValue, precaution.props[prop.PRECATUIONS_ACTION].dbValues[0]);
 
-  const precautionProperty = makeVmPropertyOnTextTable2(
-    precaution,
-    prop.PRECATUIONS_ACTION,
-    value
-  );
+  const precautionProperty = makeVmPropertyOnTextTable2(precaution, prop.PRECATUIONS_ACTION, value);
   vmo.props[prop.PRECATUIONS_ACTION] = precautionProperty;
-  const occurenceProperty = makeVmPropertyOnTextTable(
-    precaution,
-    prop.OCCURENCE,
-    prop.OCCURENCE
-  );
+  const occurenceProperty = makeVmPropertyOnTextTable(precaution, prop.OCCURENCE, prop.OCCURENCE);
   vmo.props[prop.OCCURENCE] = occurenceProperty;
-  const relatedSourcesProperty = makeVmPropertyOnTextTable(
-    precaution,
-    prop.RELATED_SOURCES,
-    prop.RELATED_SOURCES
-  );
+  const relatedSourcesProperty = makeVmPropertyOnTextTable(precaution, prop.RELATED_SOURCES, prop.RELATED_SOURCES);
   vmo.props[prop.RELATED_SOURCES] = relatedSourcesProperty;
 };
 
 const makeVmPropertyOnTextTable2 = (rev, dbValueProp, displayValue) => {
   const dbValue = rev.props[dbValueProp].dbValues[0];
-  const vmProperty = uwPropertySvc.createViewModelProperty(
-    dbValueProp,
-    dbValue,
-    'STRING',
-    dbValue,
-    [displayValue]
-  );
+  const vmProperty = uwPropertySvc.createViewModelProperty(dbValueProp, dbValue, 'STRING', dbValue, [displayValue]);
   vmProperty.uid = rev.uid;
   uwPropertySvc.setIsEditable(vmProperty, true);
   uwPropertySvc.setIsPropertyModifiable(vmProperty, true);
@@ -541,7 +398,4 @@ const getShortValue = (isEmptyDbValue, value) => {
   return shortAction;
 };
 
-
-const _createBomPath = (uid) => {
-
-}
+const _createBomPath = (uid) => {};

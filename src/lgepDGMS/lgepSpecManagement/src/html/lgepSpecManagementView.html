@@ -1,168 +1,161 @@
 <style>
-    .searchBtn {
-        height: 95px;
-        margin-bottom: 5px;
-    }
+  .searchBtn {
+    height: 95px;
+    margin-bottom: 5px;
+  }
 
-    .clearBtn {
-        margin-top: 5px;
-    }
+  .clearBtn {
+    margin-top: 5px;
+  }
 
-    .boxPosition {
-        padding-right: 10px;
-        padding-top: 4px;
-    }
+  .boxPosition {
+    padding-right: 10px;
+    padding-top: 4px;
+  }
 
-    .rowPosition {
-        padding-right: 10px;
-    }
+  .rowPosition {
+    padding-right: 10px;
+  }
 
-    .widthTreeSearchBox {
-        width: 324px;
-    }
+  .widthTreeSearchBox {
+    width: 324px;
+  }
 
-    .txtboxPosit {
-        padding-top: 2px;
-    }
+  .txtboxPosit {
+    padding-top: 2px;
+  }
 
-    .leftSearch {
-        height: 30px;
-    }
+  .leftSearch {
+    height: 30px;
+  }
 
-    .lblSize {
-        padding-left: 15px;
-        font-weight: bold;
-    }
+  .lblSize {
+    padding-left: 15px;
+    font-weight: bold;
+  }
 
-    .lblSize1 {
-        padding-top: 8px;
-        padding-left: 15px;
-        font-weight: bold;
-    }
+  .lblSize1 {
+    padding-top: 8px;
+    padding-left: 15px;
+    font-weight: bold;
+  }
 
-    .listboxPosit {
-        padding-top: 5px;
-    }
+  .listboxPosit {
+    padding-top: 5px;
+  }
 </style>
 
 <!--  class="aw-importexport-header" -->
 
 <aw-sidenav id="specSidePanel" config="data.specSidePanel"></aw-sidenav>
 <aw-flex-row height="fill">
-    <aw-flex-column width="12">
-        <aw-panel-section>
-            <aw-flex-row id="specManagementTree">
-                <aw-flex-column width="fill">
-                    <aw-flex-row height="12f" color="lightgray" id="searchBox" class="rowPosition">
-                        <aw-flex-column class="boxPosition">
-                            <aw-flex-row height="6f">
-                                <aw-flex-column width="4">
-                                    <aw-flex-row>
-                                        <aw-flex-column width="8f" justify="center">
-                                            <aw-label prop="data.modelLbl"></aw-label>
-                                        </aw-flex-column>
-                                        <aw-flex-column justify="center">
-                                            <aw-textbox prop="data.modelTxtBox"></aw-textbox>
-                                        </aw-flex-column>
-                                    </aw-flex-row>
-                                </aw-flex-column>
-                                <aw-flex-column width="4">
-                                    <aw-flex-row>
-                                        <aw-flex-column width="8f" justify="center">
-                                            <aw-label prop="data.divisionLbl"></aw-label>
-                                        </aw-flex-column>
-                                        <aw-flex-column class="listboxPosit">
-                                            <aw-listbox prop="data.divisionListBox"
-                                                list="data.divisionListBoxValues.dbValue">
-                                            </aw-listbox>
-                                        </aw-flex-column>
-                                    </aw-flex-row>
-                                </aw-flex-column>
-                                <aw-flex-column width="4">
-                                    <aw-flex-row>
-                                        <aw-flex-column width="8f" justify="center">
-                                            <aw-label prop="data.makerLbl"></aw-label>
-                                        </aw-flex-column>
-                                        <aw-flex-column class="listboxPosit">
-                                            <aw-listbox prop="data.makerListBox" list="data.makerListBoxValues.dbValue">
-                                            </aw-listbox>
-                                        </aw-flex-column>
-                                    </aw-flex-row>
-                                </aw-flex-column>
-                            </aw-flex-row>
-
-                            <aw-flex-row height="6f">
-                                <aw-flex-column width="6">
-                                    <aw-flex-row>
-                                        <aw-flex-column width="8f" justify="center">
-                                            <aw-label prop="data.typeLbl"></aw-label>
-                                        </aw-flex-column>
-                                        <aw-flex-column class="listboxPosit">
-                                            <aw-listbox prop="data.typeListBox" list="data.typeListBoxValues.dbValue">
-                                            </aw-listbox>
-                                        </aw-flex-column>
-                                    </aw-flex-row>
-                                </aw-flex-column>
-                                <aw-flex-column width="6">
-                                    <aw-flex-row>
-                                        <aw-flex-column width="8f" justify="center">
-                                            <aw-label prop="data.createUserLbl"></aw-label>
-                                        </aw-flex-column>
-                                        <aw-flex-column justify="center">
-                                            <aw-textbox prop="data.createUserTxtBox"></aw-textbox>
-                                        </aw-flex-column>
-                                    </aw-flex-row>
-                                </aw-flex-column>
-                            </aw-flex-row>
-                        </aw-flex-column>
-
-                        <aw-flex-column width="12f">
-                            <aw-flex-row>
-                                <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" class="searchBtn"
-                                    action="searchSpecTable">{{i18n.searchBtn}}
-                                </aw-button>
-                            </aw-flex-row>
-                            <aw-flex-row>
-                                <aw-button button-type="base" action="clearBatchAction" class="clearBtn">
-                                    {{i18n.clearBtn}}
-                                </aw-button>
-                            </aw-flex-row>
-                        </aw-flex-column>
-                    </aw-flex-row>
-
-                    <aw-flex-row height="fill">
-                        <aw-flex-column width="3">
-                            <aw-flex-row height="2.6f">
-                                <aw-flex-column align-content="end">
-                                    <aw-command-bar anchor="specManagementTableCommand" alignment="HORIZONTAL"
-                                        overflow="true">
-                                    </aw-command-bar>
-                                </aw-flex-column>
-                            </aw-flex-row>
-                            <aw-flex-row id="specManagementTable">
-                                <aw-splm-table gridid="specManagementTable" show-decorators="true" show-check-box=true>
-                                </aw-splm-table>
-                            </aw-flex-row>
-                        </aw-flex-column>
-
-                        <aw-splitter> </aw-splitter>
-
-                        <aw-flex-column width="fill">
-                            <aw-panel-body>
-                                <aw-flex-row height="49f" id="summaryArea">
-                                    <aw-xrt-summary
-                                        model-object="data.dataProviders.specManagementChildrenDataProvider.selectedObjects[0]"
-                                        exist-when="data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length == 1 || ctx.startEdit == false">
-                                    </aw-xrt-summary>
-                                    <aw-include name="comparePopup" id="compareTable"
-                                        exist-when="data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length == 2 && ctx.startEdit == true">
-                                    </aw-include>
-                                </aw-flex-row>
-                            </aw-panel-body>
-                        </aw-flex-column>
-                    </aw-flex-row>
+  <aw-flex-column width="12">
+    <aw-panel-section>
+      <aw-flex-row id="specManagementTree">
+        <aw-flex-column width="fill">
+          <aw-flex-row height="12f" color="lightgray" id="searchBox" class="rowPosition">
+            <aw-flex-column class="boxPosition">
+              <aw-flex-row height="6f">
+                <aw-flex-column width="4">
+                  <aw-flex-row>
+                    <aw-flex-column width="8f" justify="center">
+                      <aw-label prop="data.modelLbl"></aw-label>
+                    </aw-flex-column>
+                    <aw-flex-column justify="center">
+                      <aw-textbox prop="data.modelTxtBox"></aw-textbox>
+                    </aw-flex-column>
+                  </aw-flex-row>
                 </aw-flex-column>
-            </aw-flex-row>
-        </aw-panel-section>
-    </aw-flex-column>
+                <aw-flex-column width="4">
+                  <aw-flex-row>
+                    <aw-flex-column width="8f" justify="center">
+                      <aw-label prop="data.divisionLbl"></aw-label>
+                    </aw-flex-column>
+                    <aw-flex-column class="listboxPosit">
+                      <aw-listbox prop="data.divisionListBox" list="data.divisionListBoxValues.dbValue"> </aw-listbox>
+                    </aw-flex-column>
+                  </aw-flex-row>
+                </aw-flex-column>
+                <aw-flex-column width="4">
+                  <aw-flex-row>
+                    <aw-flex-column width="8f" justify="center">
+                      <aw-label prop="data.makerLbl"></aw-label>
+                    </aw-flex-column>
+                    <aw-flex-column class="listboxPosit">
+                      <aw-listbox prop="data.makerListBox" list="data.makerListBoxValues.dbValue"> </aw-listbox>
+                    </aw-flex-column>
+                  </aw-flex-row>
+                </aw-flex-column>
+              </aw-flex-row>
+
+              <aw-flex-row height="6f">
+                <aw-flex-column width="6">
+                  <aw-flex-row>
+                    <aw-flex-column width="8f" justify="center">
+                      <aw-label prop="data.typeLbl"></aw-label>
+                    </aw-flex-column>
+                    <aw-flex-column class="listboxPosit">
+                      <aw-listbox prop="data.typeListBox" list="data.typeListBoxValues.dbValue"> </aw-listbox>
+                    </aw-flex-column>
+                  </aw-flex-row>
+                </aw-flex-column>
+                <aw-flex-column width="6">
+                  <aw-flex-row>
+                    <aw-flex-column width="8f" justify="center">
+                      <aw-label prop="data.createUserLbl"></aw-label>
+                    </aw-flex-column>
+                    <aw-flex-column justify="center">
+                      <aw-textbox prop="data.createUserTxtBox"></aw-textbox>
+                    </aw-flex-column>
+                  </aw-flex-row>
+                </aw-flex-column>
+              </aw-flex-row>
+            </aw-flex-column>
+
+            <aw-flex-column width="12f">
+              <aw-flex-row>
+                <aw-button aw-class="{'disabled': data.disabledButtonChk.dbValue}" class="searchBtn" action="searchSpecTable">{{i18n.searchBtn}} </aw-button>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-button button-type="base" action="clearBatchAction" class="clearBtn"> {{i18n.clearBtn}} </aw-button>
+              </aw-flex-row>
+            </aw-flex-column>
+          </aw-flex-row>
+
+          <aw-flex-row height="fill">
+            <aw-flex-column width="3">
+              <aw-flex-row height="2.6f">
+                <aw-flex-column align-content="end">
+                  <aw-command-bar anchor="specManagementTableCommand" alignment="HORIZONTAL" overflow="true"> </aw-command-bar>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row id="specManagementTable">
+                <aw-splm-table gridid="specManagementTable" show-decorators="true" show-check-box="true"> </aw-splm-table>
+              </aw-flex-row>
+            </aw-flex-column>
+
+            <aw-splitter> </aw-splitter>
+
+            <aw-flex-column width="fill">
+              <aw-panel-body>
+                <aw-flex-row height="49f" id="summaryArea">
+                  <aw-xrt-summary
+                    model-object="data.dataProviders.specManagementChildrenDataProvider.selectedObjects[0]"
+                    exist-when="data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length == 1 || ctx.startEdit == false"
+                  >
+                  </aw-xrt-summary>
+                  <aw-include
+                    name="comparePopup"
+                    id="compareTable"
+                    exist-when="data.dataProviders.specManagementChildrenDataProvider.selectedObjects.length == 2 && ctx.startEdit == true"
+                  >
+                  </aw-include>
+                </aw-flex-row>
+              </aw-panel-body>
+            </aw-flex-column>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-panel-section>
+  </aw-flex-column>
 </aw-flex-row>

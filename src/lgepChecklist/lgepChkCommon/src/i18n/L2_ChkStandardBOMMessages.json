@@ -1,0 +1,13 @@
+{
+  "allLineView": "View all components",
+  "allLineViewDesc": "View all components",
+  "isChecklistTarget": "Is Checklist Target",
+  "isSelect": "Is Select",
+  "standardBOMSearchAndSelect": "View and select standard BOM list",
+  "standardBOMSelectAndChecklistCreate": "Standard BOM selection and checklist creation",
+  "template": "Template",
+  "templateList": "Template List",
+  "templateEdit": "Template Edit",
+  "pinPanel": "Panel Fastening",
+  "unPinPanel" : "Unfreeze"
+}

@@ -19,7 +19,6 @@ var exports = {};
 let grid;
 
 export async function initialize(data, ctx) {
-
   // 0. Waiting for Popup Opened
   await _waitPopupOpen();
 
@@ -45,30 +44,24 @@ const _resizePoup = () => {
     let width = document.childNodes[1].offsetWidth;
     document
       .getElementsByClassName('aw-popup-contentContainer')[0]
-      .children[0].setAttribute(
-        'style',
-        'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;'
-      );
+      .children[0].setAttribute('style', 'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;');
     window.onresize = function () {
       try {
         let height = document.childNodes[1].offsetHeight;
         let width = document.childNodes[1].offsetWidth;
         document
           .getElementsByClassName('aw-popup-contentContainer')[0]
-          .children[0].setAttribute(
-            'style',
-            'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;'
-          );
+          .children[0].setAttribute('style', 'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;');
       } catch (error) {
-        console.error('Failed to execute popup resizing');
+        //console.error('Failed to execute popup resizing');
       }
     };
   } catch (error) {
-    console.error('Failed to execute popup resizing');
+    //console.error('Failed to execute popup resizing');
   }
 };
 
-//  Save button event
+//  Save button even
 const saveInteractionMatrix = async () => {
   grid.setSelectionRange({ start: [0, 0], end: [0, 0] });
   lgepMessagingUtils.show('INFO', '편집을 시작합니다. 잠시만 기다려주세요.');
@@ -97,11 +90,7 @@ const saveInteractionMatrix = async () => {
         }
         let primaryObject = lgepObjectUtils.getObject(primaryObjectUid);
         if (primaryObject.props[prop.RELATION_INTERACTION].dbValues.length > 0) {
-          await lgepObjectUtils.deleteRelations(
-            prop.RELATION_INTERACTION,
-            primaryObject,
-            { uid: secondaryObjectUid, type: prop.TYPE_FMEA_STRUCTURE_REV }
-          );
+          await lgepObjectUtils.deleteRelations(prop.RELATION_INTERACTION, primaryObject, { uid: secondaryObjectUid, type: prop.TYPE_FMEA_STRUCTURE_REV });
           if (interactionType == '-' || interactionType == ' - ') {
             continue;
           }
@@ -109,18 +98,14 @@ const saveInteractionMatrix = async () => {
         let value = await lgepObjectUtils.createRelation(
           prop.RELATION_INTERACTION,
           { uid: primaryObjectUid, type: prop.TYPE_FMEA_STRUCTURE_REV },
-          { uid: secondaryObjectUid, type: prop.TYPE_FMEA_STRUCTURE_REV }
+          { uid: secondaryObjectUid, type: prop.TYPE_FMEA_STRUCTURE_REV },
         );
         let relation = value.output[0].relation;
-        await lgepObjectUtils.setProperty(
-          relation,
-          prop.INNTERACTION_TYPE,
-          interactionType
-        );
+        await lgepObjectUtils.setProperty(relation, prop.INNTERACTION_TYPE, interactionType);
       }
     }
   } catch (error) {
-    console.error(error.message);
+    //console.error(error.message);
   } finally {
     lgepPopupUtils.closePopup();
     eventBus.publish('removeMessages');
@@ -128,10 +113,24 @@ const saveInteractionMatrix = async () => {
     lgepMessagingUtils.show('INFO', '편집이 완료되었습니다.');
   }
 };
+export async function beforeClose() {
+  lgepMessagingUtils.show(
+    0,
+    `창을 닫으시면 변경된 사항이 저장되지 않습니다. 닫으시겠습니까?`,
+    ['취소', '닫기'],
+    [
+      function () {},
+      function () {
+        lgepPopupUtils.closePopup();
+      },
+    ],
+  );
+}
 
 export default exports = {
   initialize,
   saveInteractionMatrix,
+  beforeClose,
 };
 
 app.factory('interactionMatrixService', () => exports);

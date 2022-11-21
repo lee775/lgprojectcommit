@@ -12,6 +12,10 @@
     {
       "eventId": "interactionMatrix.contentLoaded",
       "action": "initialize"
+    },
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setTuiGridStyle"
     }
   ],
   "data": {},
@@ -29,6 +33,14 @@
       "actionType": "JSFunction",
       "method": "saveInteractionMatrix",
       "deps": "js/interactionMatrixService"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/sodAPTableService"
     }
   },
   "i18n": {

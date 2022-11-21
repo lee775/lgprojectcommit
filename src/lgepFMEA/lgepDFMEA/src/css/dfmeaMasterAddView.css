@@ -64,7 +64,7 @@
   font-weight: 800;
 }
 
-.note-editor.note-frame .note-editing-area .note-editable[contenteditable=false],
-.note-editor.note-airframe .note-editing-area .note-editable[contenteditable=false] {
+.note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'],
+.note-editor.note-airframe .note-editing-area .note-editable[contenteditable='false'] {
   background-color: #fff;
 }

@@ -162,11 +162,7 @@ const getProductLovResults = async () => {
   //     propInternalValues: { lov_values: [ALL] },
   //   };
   // }
-  const productLovResult = await lgepObjectUtils.getInitialLOVValues(
-    prop.TYPE_FMEA_REVISION,
-    'Create',
-    prop.PRODUCT_CATEGORY
-  );
+  const productLovResult = await lgepObjectUtils.getInitialLOVValues(prop.TYPE_FMEA_REVISION, 'Create', prop.PRODUCT_CATEGORY);
 
   for (const lov of productLovResult.lovValues) {
     const {
@@ -202,9 +198,9 @@ export const getProductNameByGroup = () => {
 };
 
 export const insertLog = (msg, uid = '') => {
-  try{
+  try {
     lgepCommonUtils.userLogsInsert(msg, uid, 'S', 'Success');
-  }catch(e){
-    console.log('insert log ', e);
+  } catch (e) {
+    //console.log('insert log ', e);
   }
 };

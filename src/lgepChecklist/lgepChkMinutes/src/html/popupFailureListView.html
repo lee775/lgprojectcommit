@@ -1,0 +1,21 @@
+<aw-popup2>
+  <aw-command-panel caption="고장 추가" context="data" id="failureAddPopup">
+    <aw-panel-body>
+      <aw-flex-column>
+        <aw-flex-row>
+          <aw-list dataprovider="data.dataProviders.failureControlList" id="failureControlList" show-check-box="true">
+            <aw-default-cell vmo="item"></aw-default-cell>
+          </aw-list>
+        </aw-flex-row>
+      </aw-flex-column>
+    </aw-panel-body>
+    <aw-panel-footer>
+      <aw-flex-column>
+        <aw-button action="addFailureBatchAction">고장 추가</aw-button>
+      </aw-flex-column>
+      <aw-flex-column>
+        <aw-button action="closePopupWindow">취소</aw-button>
+      </aw-flex-column>
+    </aw-panel-footer>
+  </aw-command-panel>
+</aw-popup2>

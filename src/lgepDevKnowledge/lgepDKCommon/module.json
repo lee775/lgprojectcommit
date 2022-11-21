@@ -1,5 +1,5 @@
 {
-    "name": "lgepDKCommon",
-    "description": "This is the lgepDKCommon module",
-    "skipTest": true
+  "name": "lgepDKCommon",
+  "description": "This is the lgepDKCommon module",
+  "skipTest": true
 }

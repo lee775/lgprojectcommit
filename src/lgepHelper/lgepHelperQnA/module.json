@@ -1,5 +1,5 @@
 {
-    "name": "lgepHelperQnA",
-    "description": "This is the lgepHelperQnA module",
-    "skipTest": true
+  "name": "lgepHelperQnA",
+  "description": "This is the lgepHelperQnA module",
+  "skipTest": true
 }

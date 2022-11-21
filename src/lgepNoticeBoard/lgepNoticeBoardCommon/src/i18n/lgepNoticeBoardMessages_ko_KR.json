@@ -1,0 +1,14 @@
+{
+  "helloText": "!! Hello World !!",
+  "lgepNoticeBoardLocationHeaderTitle": "헬프 데스크",
+  "lgepNoticeBoardLocationBrowserTitle": "헬프 데스크",
+  "lgepNoticeBoardLocationBrowserSubTitle": "lgepNoticeBoardLocation",
+  "lgepNoticeBoardVocTitle": "VoC",
+  "lgepNoticeBoardHelpDeskTitle": "VoE",
+  "lgepNoticeBoardDashBoardTitle": "대시보드",
+  "lgepNoticeBoardManualTitle": "매뉴얼",
+  "lgepNoticeBoardHelperTitle": "도움말",
+  "addQuestion": "VoE 추가",
+  "questionTitle": "VoE 제목",
+  "questionContent": "VoE 내용"
+}

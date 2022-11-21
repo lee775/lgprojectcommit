@@ -8,16 +8,9 @@ import editHandlerService from 'js/editHandlerService';
 import { insertLog } from 'js/utils/fmeaCommonUtils';
 import { eidtRevProperties } from 'js/functionCreateService';
 import { eidtRevisionProperties } from 'js/failureCreateService';
-import {
-  getEditorValueById,
-  changeEnableEditors,
-  setValue,
-} from 'js/utils/fmeaEditorUtils';
+import { getEditorValueById, changeEnableEditors, setValue } from 'js/utils/fmeaEditorUtils';
 import { checkEmptyByEditor } from 'js/utils/fmeaValidationUtils';
-import {
-  showEditSuccessMsg,
-  showErrorMessage,
-} from 'js/utils/fmeaMessageUtils';
+import { showEditSuccessMsg, showErrorMessage } from 'js/utils/fmeaMessageUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 

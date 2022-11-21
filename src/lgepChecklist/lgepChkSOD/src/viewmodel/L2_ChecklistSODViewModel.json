@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-popup2.directive", "js/aw-include.directive"],
+  "onEvent": [],
+  "data": {},
+  "actions": {},
+  "dataProviders": {},
+  "lifecycleHooks": {}
+}

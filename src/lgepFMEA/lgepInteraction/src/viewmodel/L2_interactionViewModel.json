@@ -9,9 +9,16 @@
     "js/exist-when.directive",
     "js/aw-label.directive",
     "js/aw-widget.directive",
+    "js/aw-button.directive",
     "css/L2_interactionView.css"
   ],
   "data": {
+    "allCheckButton": {
+      "displayName": "",
+      "type": "STRING",
+      "dbValue": true,
+      "dispValue": "{{i18n.allUnCheck}}"
+    },
     "selectPart": {
       "displayName": "{{i18n.selectPart}}",
       "type": "STRING",
@@ -26,7 +33,40 @@
     },
     "effectTypes": {
       "type": "STRING",
-      "dbValue": []
+      "dbValue": [
+        {
+          "propDisplayValue": "A: 기계적",
+          "propInternalValue": "A"
+        },
+        {
+          "propDisplayValue": "B: 전기적",
+          "propInternalValue": "B"
+        },
+        {
+          "propDisplayValue": "C: 열",
+          "propInternalValue": "C"
+        },
+        {
+          "propDisplayValue": "D: 화학적",
+          "propInternalValue": "D"
+        },
+        {
+          "propDisplayValue": "E: 방사적",
+          "propInternalValue": "E"
+        },
+        {
+          "propDisplayValue": "AB: 기계 - 전기",
+          "propInternalValue": "AB"
+        },
+        {
+          "propDisplayValue": "AC: 기계 - 열",
+          "propInternalValue": "AC"
+        },
+        {
+          "propDisplayValue": "AD: 기계 - 화학",
+          "propInternalValue": "AD"
+        }
+      ]
     },
     "tabModels": [
       {
@@ -44,12 +84,12 @@
       "actionType": "JSFunction",
       "method": "initAction",
       "inputData": {
-        "ctx": "{{ctx}}"
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
       },
       "outputData": {
         "selectPart.dbValue": "result.selectPartName",
-        "selectPart.dispValue": "result.selectPartName",
-        "effectTypes.dbValue": "result.effectTypes"
+        "selectPart.dispValue": "result.selectPartName"
       },
       "deps": "js/L2_ChecklistInteractionCheckPanelService"
     },
@@ -126,6 +166,22 @@
         "tabKey": "{{data.selectedTab.tabKey}}"
       },
       "deps": "js/L2_ChecklistInteractionCheckPanelService"
+    },
+    "allCheckAction": {
+      "actionType": "JSFunction",
+      "method": "allCheckAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistInteractionCheckPanelService"
+    },
+    "setTuiGridStyle": {
+      "actionType": "JSFunction",
+      "method": "setTuiGridStyle",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/sodAPTableService"
     }
   },
   "columnProviders": {
@@ -184,6 +240,9 @@
     },
     "affected": {
       "expression": "data.selectedTab.tabKey === 'affected'"
+    },
+    "currentAllUnCheck": {
+      "expression": "data.selectedTab.tabKey === 'affected'"
     }
   },
   "onEvent": [
@@ -204,14 +263,19 @@
     {
       "eventId": "fmea.change.effectTypes",
       "action": "selectionEffectType"
+    },
+    {
+      "eventId": "ThemeChangeEvent",
+      "action": "setTuiGridStyle"
     }
   ],
   "i18n": {
     "L2_InteractionPanelCaption": ["L2_ChkMainMessages"],
-    "searc": ["lgepDFMEAViewMessages"],
     "selectPart": ["lgepDFMEAViewMessages"],
     "effectType": ["lgepDFMEAViewMessages"],
     "influencingSide": ["lgepDFMEAViewMessages"],
-    "affectedSide": ["lgepDFMEAViewMessages"]
+    "affectedSide": ["lgepDFMEAViewMessages"],
+    "allCheck": ["L2_ChkMainMessages"],
+    "allUnCheck": ["L2_ChkMainMessages"]
   }
 }

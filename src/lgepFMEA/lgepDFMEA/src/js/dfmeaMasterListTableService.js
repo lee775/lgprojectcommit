@@ -6,26 +6,14 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import queryUtil from 'js/utils/lgepQueryUtils';
 
 import fmeaTableSortFilterUtils from 'js/utils/fmeaTableSortFilterUtils';
-import {
-  showInfoMessage,
-  showErrorMessage
-} from 'js/utils/fmeaMessageUtils';
-import {
-  navigationFmea,
-  getLangIndex,
-  initGroupProuct,
-} from 'js/utils/fmeaCommonUtils';
+import { showInfoMessage, showErrorMessage } from 'js/utils/fmeaMessageUtils';
+import { navigationFmea, getLangIndex, initGroupProuct } from 'js/utils/fmeaCommonUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 
 const commonProps = [prop.OBJECT_NAME, prop.OWNING_USER, prop.CREATION_DATE];
 
-const columns = [
-  constants.COL_OBJECT_NAME_LANG,
-  constants.COL_REVISION_ID,
-  constants.COL_OWNING_USER_LANG,
-  constants.COL_CREATION_DATE_LANG,
-];
+const columns = [constants.COL_OBJECT_NAME_LANG, constants.COL_REVISION_ID, constants.COL_OWNING_USER_LANG, constants.COL_CREATION_DATE_LANG];
 
 /**
  * Tree Table Columns 생성
@@ -55,7 +43,7 @@ const _getTreeHeaderData = (columns) => {
       minWidth: 150,
       width: isFirstCol ? 600 : 200,
       isTreeNavigation: isFirstCol,
-      pinnedLeft: isFirstCol ? true : false
+      pinnedLeft: isFirstCol ? true : false,
     };
   });
   return headerData;
@@ -82,16 +70,12 @@ const loadTreeTableData = async (result, nodeBeingExpanded) => {
   try {
     const productInfo = await initGroupProuct();
     const product = productInfo.value;
-    const queryResults = await queryUtil.executeSavedQuery(
-      prop.QUERY_DFMEA_MASTER,
-      prop.QUERY_DFMEA_MASTER_PRODUCT,
-      product
-    );
+    const queryResults = await queryUtil.executeSavedQuery(prop.QUERY_DFMEA_MASTER, prop.QUERY_DFMEA_MASTER_PRODUCT, product);
     const datas = await _getDatas(queryResults, nodeBeingExpanded);
     const resultNodes = await Promise.all(
       datas.map(async (item) => {
         return await _makeTreeNode(item, nodeBeingExpanded);
-      })
+      }),
     );
     return {
       parentNode: nodeBeingExpanded,
@@ -138,12 +122,9 @@ const _getDataByTopNode = async (nodeBeingExpanded) => {
   const result = await Promise.all(
     revisionUids.map(async (uid) => {
       const revision = lgepObjectUtils.getObject(uid);
-      await lgepObjectUtils.getProperties(
-        [revision],
-        [...commonProps, prop.REVISION_ID]
-      );
+      await lgepObjectUtils.getProperties([revision], [...commonProps, prop.REVISION_ID]);
       return revision;
-    })
+    }),
   );
   return result;
 };
@@ -157,18 +138,9 @@ const _getDataByTopNode = async (nodeBeingExpanded) => {
 const _makeTreeNode = async (item, nodeBeingExpanded) => {
   const iconURL = iconSvc.getTypeIconURL(item.type);
   const isLeaf = item.type === prop.TYPE_DFMEA_MASTER_ITEM ? false : true;
-  const name = isLeaf ?
-    item.props[prop.OBJECT_NAME].dbValues[0] :
-    item.props[prop.OBJECT_STRING].dbValues[0];
+  const name = isLeaf ? item.props[prop.OBJECT_NAME].dbValues[0] : item.props[prop.OBJECT_STRING].dbValues[0];
 
-  const treeNode = treeView.createViewModelTreeNode(
-    item.uid,
-    item.type,
-    name,
-    nodeBeingExpanded.levelNdx + 1,
-    nodeBeingExpanded.levelNdx + 2,
-    iconURL
-  );
+  const treeNode = treeView.createViewModelTreeNode(item.uid, item.type, name, nodeBeingExpanded.levelNdx + 1, nodeBeingExpanded.levelNdx + 2, iconURL);
   const addInfo = {
     isLeaf: isLeaf,
     alternateID: treeNode.uid,
@@ -185,11 +157,7 @@ const _makeTreeNode = async (item, nodeBeingExpanded) => {
     _addTreePropData(addInfo.props, propKey, value);
   }
   if (item.type !== prop.TYPE_DFMEA_MASTER_ITEM) {
-    _addTreePropData(
-      addInfo.props,
-      prop.REVISION_ID,
-      addInfo.props[prop.REVISION_ID].dbValues[0]
-    );
+    _addTreePropData(addInfo.props, prop.REVISION_ID, addInfo.props[prop.REVISION_ID].dbValues[0]);
   }
   return {
     ...treeNode,

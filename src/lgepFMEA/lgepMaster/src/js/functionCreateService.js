@@ -5,16 +5,9 @@
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 import { getEditorValueById } from 'js/utils/fmeaEditorUtils';
-import {
-  setMasterItemProperty,
-  masterCreateAfterActionByPopup,
-  insertLogByCreate,
-} from 'js/cmCreateService';
+import { setMasterItemProperty, masterCreateAfterActionByPopup, insertLogByCreate } from 'js/cmCreateService';
 import { makeShortenValues, initGroupProuct } from 'js/utils/fmeaCommonUtils';
-import {
-  afterSaveAction,
-  beforeSaveAction,
-} from 'js/utils/fmeaViewCommonUtils';
+import { afterSaveAction, beforeSaveAction } from 'js/utils/fmeaViewCommonUtils';
 import { createItem } from 'js/utils/fmeaTcUtils';
 import { checkEmptyByEditor } from 'js/utils/fmeaValidationUtils';
 import { showErrorMessage } from 'js/utils/fmeaMessageUtils';
@@ -48,12 +41,7 @@ const createAction = async (ctx, data) => {
     insertLogByCreate(master);
 
     // 성공 처리
-    masterCreateAfterActionByPopup(
-      'fmFunctionTableGrid',
-      ctx[constants.IS_PIN],
-      [createEditorId],
-      data
-    );
+    masterCreateAfterActionByPopup('fmFunctionTableGrid', ctx[constants.IS_PIN], [createEditorId], data);
   } catch (e) {
     afterSaveAction(data);
     showErrorMessage(e);

@@ -1,15 +1,15 @@
-import * as datas from "js/dfmeaExcelServiceDatas";
-import { MAX_COLUMN_COUNT } from "js/dfmeaExcelService";
+import * as datas from 'js/dfmeaExcelServiceDatas';
+import { MAX_COLUMN_COUNT } from 'js/dfmeaExcelService';
 
 export const makeColumnCells = (sheet) => {
   try {
     _makeFirstRow(sheet);
     _makeGroupCols(sheet);
     const columns = _makeColumns(sheet);
-    sheet.columns = [{ key: "A", width: 1 }, ...columns];
+    sheet.columns = [{ key: 'A', width: 1 }, ...columns];
     _makeColsDesc(sheet);
   } catch (error) {
-    console.error(error);
+    //console.error(error);
   }
 };
 
@@ -82,7 +82,7 @@ const _makeColsDesc = (sheet) => {
   for (let j = 2; j <= MAX_COLUMN_COUNT; j++) {
     const cell = sheet.getRow(descRowIndex).getCell(j);
     cell.border = datas.BORDER_STYLE;
-    cell.alignment = { vertical: "top", wrapText: true };
+    cell.alignment = { vertical: 'top', wrapText: true };
   }
 };
 
@@ -90,10 +90,10 @@ const _setColCellStyle = (cell, data) => {
   cell.font = { ...datas.COL_FONT_STYLE, bold: true };
   cell.border = datas.BORDER_STYLE;
   cell.fill = {
-    type: "pattern",
-    pattern: "solid",
-    fgColor: { argb: data.color ? data.color : "FF99CCFF" },
-    bgColor: { argb: "FF0000FF" },
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: data.color ? data.color : 'FF99CCFF' },
+    bgColor: { argb: 'FF0000FF' },
   };
   cell.alignment = { ...datas.ALIGNMENT_CENTER, wrapText: true };
 };

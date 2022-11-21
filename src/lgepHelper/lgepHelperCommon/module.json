@@ -1,14 +1,12 @@
 {
-    "name": "lgepHelperCommon",
-    "description": "This is the lgepHelperCommon module",
-    "skipTest": true,
+  "name": "lgepHelperCommon",
+  "description": "This is the lgepHelperCommon module",
+  "skipTest": true,
+  "typeProperties": {
     "typeProperties": {
-        "typeProperties": {
-            "L2_KnowledgeRevision": {
-                "additionalProperties": [
-                    {"name": "l2_knowledge_type"}
-                ]
-            }
-        }
+      "L2_KnowledgeRevision": {
+        "additionalProperties": [{ "name": "l2_knowledge_type" }]
+      }
     }
+  }
 }

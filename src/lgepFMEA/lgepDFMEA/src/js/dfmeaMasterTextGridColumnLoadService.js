@@ -1,6 +1,6 @@
-import { getLangIndex } from "js/utils/fmeaCommonUtils";
-import { lineBreak } from "js/dfmeaMasterImageTableColumnLoadService";
-import * as constants from "js/constants/fmeaConstants";
+import { getLangIndex } from 'js/utils/fmeaCommonUtils';
+import { lineBreak } from 'js/dfmeaMasterImageTableColumnLoadService';
+import * as constants from 'js/constants/fmeaConstants';
 
 // export const COLUMNS = [
 //   constants.COL_PARENT_ASSY_LANG,
@@ -71,7 +71,7 @@ const _getLangColumn = (column) => {
     width: _getColumnWidth(column[0]),
     sortable: true,
     filter: {
-      type: "text",
+      type: 'text',
       showApplyBtn: true,
       showClearBtn: true,
     },
@@ -106,7 +106,7 @@ const _getColumnWidth = (column) => {
 };
 class CellRender {
   constructor(props) {
-    const el = document.createElement("div");
+    const el = document.createElement('div');
     this.el = el;
     this.render(props);
   }

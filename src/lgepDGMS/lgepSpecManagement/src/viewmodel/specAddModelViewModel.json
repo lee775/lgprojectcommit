@@ -1,273 +1,267 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-button.directive", 
-        "js/aw-default-cell.directive",
-        "js/aw-flex-row.directive",
-        "js/aw-list.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-panel-footer.directive",
-        "js/aw-popup2.directive",
-        "js/aw-textbox.directive"
-    ],
-    "actions" :{
-        "closePopupWindow": {
-            "actionType": "JSFunction",
-            "method": "hide",
-            "inputData": {
-                "popupId": "{{data.popupId}}"
-            },
-            "deps": "js/popupService"
-        },
-        "loadHomeList": {
-            "actionType": "JSFunction",
-            "method": "loadHomeList",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "homeList": "homeList",
-                "findAllItemProps" : "findAllItemProps"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "pagination": {
-            "actionType": "JSFunction",
-            "method": "pagination",
-            "inputData": {
-                "data":"{{data}}"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "clickPageNum": {
-            "actionType": "JSFunction",
-            "method": "clickPageNum",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "clickPrevBtn": {
-            "actionType": "JSFunction",
-            "method": "clickPrevBtn",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "clickNextBtn": {
-            "actionType": "JSFunction",
-            "method": "clickNextBtn",
-            "inputData": {
-                "data": "{{data}}"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "clickPageBtn":{
-            "actionType":"Event",
-            "method":"Event",
-            "inputData":
-            {
-                "events":
-                [
-                    {
-                        "name":"click.page"
-                    }
-                ]
-            }
-        },
-        "getDataProvider": {
-            "actionType": "dataProvider",
-            "methods": [
-                "searchAllList"
-            ]
-        },
-        "loadAllList": {
-            "actionType":"JSFunction",
-            "method":"loadAllList",
-            "inputData": {
-                "data":"{{data}}"
-            },
-            "outputData": {
-                "searchAllResponse":"{{function:allList}}",
-                "allTotalFound":"allTotalFound"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "applyTxtbox": {
-            "actionType":"JSFunction",
-            "method":"applyTxtbox",
-            "inputData": {
-                "data":"{{data}}"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "initializeJob": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "loadHomeList"
-                },
-                {
-                    "action": "getDataProvider"
-                }
-            ]
-        },
-        "specAddPopup": {
-            "actionType": "JSFunction",
-            "method": "show",
-            "inputData": {
-                "data": {
-                    "declView": "popupSpecAdd",
-                    "locals": {
-                        "caption": "{{i18n.addPopup}}"
-                    },
-                    "options": {
-                        "reference": "addId",
-                        "isModal": true,
-                        "clickOutsideToClose": true,
-                        "draggable": true,
-                        "placement": "center",
-                        "width": 700,
-                        "height": 900
-                    }
-                }
-            },
-            "outputData": {
-                "popupId": "addId"
-            },
-            "deps": "js/popupService"
-        },
-        "resetAndOpen": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "modelAddNameReset"
-                },
-                {
-                    "action": "specAddPopup"
-                }
-            ]
-        },
-        "openAndReset": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "specAddPopup"
-                },
-                {
-                    "action": "modelAddNameReset"
-                }
-            ]
-        },
-        "addModel": {
-            "actionType": "JSFunction",
-            "method": "addModel",
-            "deps": "js/SpecManagementService"
-        },
-        "modelAddNameReset": {
-            "actionType": "JSFunction",
-            "method": "modelAddNameReset",
-            "deps": "js/SpecManagementService"
-        },
-        "loadAddData": {
-            "actionType":"JSFunction",
-            "method":"loadAddData",
-            "inputData": {
-                "data":"{{data}}"
-            },
-            "deps": "js/SpecManagementService"
-        },
-        "openAddModel": {
-            "actionType": "batchJob",
-            "steps": [
-                {
-                    "action": "specAddPopup"
-                },
-                {
-                    "action": "loadAddData"
-                }
-            ]
-        },
-        "sendRef_Model": {
-            "actionType":"JSFunction",
-            "method":"sendRef_Model",
-            "deps": "js/SpecManagementService"
-        },
-        "sendRef_Parts": {
-            "actionType":"JSFunction",
-            "method":"sendRef_Parts",
-            "deps": "js/SpecManagementService"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-default-cell.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-list.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-textbox.directive"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
     },
-    "data": {        
-        "ref_ModelTxtBox": {
-            "displayName": "{{i18n.addModels}}",
-            "type": "STRING",
-            "isRequired": "false",
-            "isEditable": "true",
-            "dbValue": "",
-            "dispValue": ""
-        },
-        "pageNum": {
-            "type": "STRING",
-            "dbValue": []
-        },
-        "backBtn": {
-            "displayName": "<",
-            "type": "STRING",
-            "isRequired": "false"
-        },
-        "nextBtn": {
-            "displayName": ">",
-            "type": "STRING",
-            "isRequired": "false"
-        }
+    "loadHomeList": {
+      "actionType": "JSFunction",
+      "method": "loadHomeList",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "homeList": "homeList",
+        "findAllItemProps": "findAllItemProps"
+      },
+      "deps": "js/SpecManagementService"
     },
-    "dataProviders": {
-        "searchAllList": {
-            "action":"loadAllList",
-            "response":"{{data.searchAllResponse}}",
-            "totalFound": "{{data.allTotalFound}}"
-        }
+    "pagination": {
+      "actionType": "JSFunction",
+      "method": "pagination",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/SpecManagementService"
     },
-    "functions": {        
-        "allList":{
-            "functionName": "allList",
-            "parameters": [
-                "{{data}}"
-            ]
-        }
+    "clickPageNum": {
+      "actionType": "JSFunction",
+      "method": "clickPageNum",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/SpecManagementService"
     },
-    "i18n": {
-        "addModels": ["lgepSpecManagementMessages"],
-        "list": ["lgepSpecManagementMessages"],
-        "addBtn": ["lgepSpecManagementMessages"],
-        "close": ["lgepSpecManagementMessages"],
-        "addPopup": ["lgepSpecManagementMessages"]
+    "clickPrevBtn": {
+      "actionType": "JSFunction",
+      "method": "clickPrevBtn",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/SpecManagementService"
     },
-    "onEvent": [
+    "clickNextBtn": {
+      "actionType": "JSFunction",
+      "method": "clickNextBtn",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/SpecManagementService"
+    },
+    "clickPageBtn": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "click.page"
+          }
+        ]
+      }
+    },
+    "getDataProvider": {
+      "actionType": "dataProvider",
+      "methods": ["searchAllList"]
+    },
+    "loadAllList": {
+      "actionType": "JSFunction",
+      "method": "loadAllList",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "searchAllResponse": "{{function:allList}}",
+        "allTotalFound": "allTotalFound"
+      },
+      "deps": "js/SpecManagementService"
+    },
+    "applyTxtbox": {
+      "actionType": "JSFunction",
+      "method": "applyTxtbox",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/SpecManagementService"
+    },
+    "initializeJob": {
+      "actionType": "batchJob",
+      "steps": [
         {
-            "eventId": "specAddModel.contentLoaded",
-            "action": "loadHomeList"
+          "action": "loadHomeList"
         },
         {
-            "eventId": "searchAllList.modelObjectsUpdated",
-            "action": "pagination",
-            "cacheEventData": true
-        },
-        {
-            "eventId": "click.page",
-            "action": "clickPageNum",
-            "cacheEventData": true
-        },
-        {
-            "eventId": "searchAllList.selectionChangeEvent",
-            "action": "applyTxtbox"
+          "action": "getDataProvider"
         }
-    ],
-    "lifecycleHooks": {
-        "onInit": "initializeJob"
+      ]
+    },
+    "specAddPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "popupSpecAdd",
+          "locals": {
+            "caption": "{{i18n.addPopup}}"
+          },
+          "options": {
+            "reference": "addId",
+            "isModal": true,
+            "clickOutsideToClose": true,
+            "draggable": true,
+            "placement": "center",
+            "width": 700,
+            "height": 900
+          }
+        }
+      },
+      "outputData": {
+        "popupId": "addId"
+      },
+      "deps": "js/popupService"
+    },
+    "resetAndOpen": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "modelAddNameReset"
+        },
+        {
+          "action": "specAddPopup"
+        }
+      ]
+    },
+    "openAndReset": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "specAddPopup"
+        },
+        {
+          "action": "modelAddNameReset"
+        }
+      ]
+    },
+    "addModel": {
+      "actionType": "JSFunction",
+      "method": "addModel",
+      "deps": "js/SpecManagementService"
+    },
+    "modelAddNameReset": {
+      "actionType": "JSFunction",
+      "method": "modelAddNameReset",
+      "deps": "js/SpecManagementService"
+    },
+    "loadAddData": {
+      "actionType": "JSFunction",
+      "method": "loadAddData",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/SpecManagementService"
+    },
+    "openAddModel": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "specAddPopup"
+        },
+        {
+          "action": "loadAddData"
+        }
+      ]
+    },
+    "sendRef_Model": {
+      "actionType": "JSFunction",
+      "method": "sendRef_Model",
+      "deps": "js/SpecManagementService"
+    },
+    "sendRef_Parts": {
+      "actionType": "JSFunction",
+      "method": "sendRef_Parts",
+      "deps": "js/SpecManagementService"
     }
+  },
+  "data": {
+    "ref_ModelTxtBox": {
+      "displayName": "{{i18n.addModels}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "pageNum": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "backBtn": {
+      "displayName": "<",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "nextBtn": {
+      "displayName": ">",
+      "type": "STRING",
+      "isRequired": "false"
+    }
+  },
+  "dataProviders": {
+    "searchAllList": {
+      "action": "loadAllList",
+      "response": "{{data.searchAllResponse}}",
+      "totalFound": "{{data.allTotalFound}}"
+    }
+  },
+  "functions": {
+    "allList": {
+      "functionName": "allList",
+      "parameters": ["{{data}}"]
+    }
+  },
+  "i18n": {
+    "addModels": ["lgepSpecManagementMessages"],
+    "list": ["lgepSpecManagementMessages"],
+    "addBtn": ["lgepSpecManagementMessages"],
+    "close": ["lgepSpecManagementMessages"],
+    "addPopup": ["lgepSpecManagementMessages"]
+  },
+  "onEvent": [
+    {
+      "eventId": "specAddModel.contentLoaded",
+      "action": "loadHomeList"
+    },
+    {
+      "eventId": "searchAllList.modelObjectsUpdated",
+      "action": "pagination",
+      "cacheEventData": true
+    },
+    {
+      "eventId": "click.page",
+      "action": "clickPageNum",
+      "cacheEventData": true
+    },
+    {
+      "eventId": "searchAllList.selectionChangeEvent",
+      "action": "applyTxtbox"
+    }
+  ],
+  "lifecycleHooks": {
+    "onInit": "initializeJob"
+  }
 }

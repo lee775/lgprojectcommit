@@ -1,56 +1,56 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-flex-row.directive",
-        "js/aw-flex-column.directive",
-        "js/aw-panel.directive",
-        "js/aw-panel-body.directive",
-        "js/aw-popup2.directive",
-        "js/aw-link.directive"
-    ],
-    "actions": {
-        "reveal": {
-            "actionType": "dataProvider",
-            "method": "searchedWordList"
-        },
-        "loadSearchList": {
-            "actionType": "JSFunction",
-            "method": "loadSearchList",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "outputData": {
-                "searchResponse":"searchResponse"
-            },
-            "deps": "js/dashboardList"
-        },
-        "delLink": {
-            "actionType": "JSFunction",
-            "method": "delLink",
-            "inputData": {
-                "data": "{{data}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/dashboardList"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-flex-row.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-popup2.directive",
+    "js/aw-link.directive"
+  ],
+  "actions": {
+    "reveal": {
+      "actionType": "dataProvider",
+      "method": "searchedWordList"
     },
-    "data": {
-        "delBox": {
-            "displayName": "{{i18n.clear}}",
-            "type": "STRING",
-            "isEditable": "true"
-        }
+    "loadSearchList": {
+      "actionType": "JSFunction",
+      "method": "loadSearchList",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "searchResponse": "searchResponse"
+      },
+      "deps": "js/dashboardList"
     },
-    "dataProviders": {
-        "searchedWordList": {
-            "action":"loadSearchList",
-            "response":"{{data.searchResponse}}",
-            "totalFound": "{{data.searchResponse.length}}"
-        }
-    },
-    "i18n": {
-        "recentSearches": [ "lgepKnowldegeManageMessages" ],
-        "clear": [ "lgepKnowldegeManageMessages" ]
+    "delLink": {
+      "actionType": "JSFunction",
+      "method": "delLink",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/dashboardList"
     }
+  },
+  "data": {
+    "delBox": {
+      "displayName": "{{i18n.clear}}",
+      "type": "STRING",
+      "isEditable": "true"
+    }
+  },
+  "dataProviders": {
+    "searchedWordList": {
+      "action": "loadSearchList",
+      "response": "{{data.searchResponse}}",
+      "totalFound": "{{data.searchResponse.length}}"
+    }
+  },
+  "i18n": {
+    "recentSearches": ["lgepKnowldegeManageMessages"],
+    "clear": ["lgepKnowldegeManageMessages"]
+  }
 }

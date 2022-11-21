@@ -16,11 +16,7 @@ export const deleteAllDatasetOnSpecification = async (revision) => {
   const datasetUidArray = revision.props[prop.IMAN_SPECIFICATION].dbValues;
   const datasetArray = await lgepObjectUtils.getObjects(datasetUidArray);
   for (const dataset of datasetArray) {
-    await lgepObjectUtils.deleteRelations(
-      prop.IMAN_SPECIFICATION,
-      revision,
-      dataset
-    );
+    await lgepObjectUtils.deleteRelations(prop.IMAN_SPECIFICATION, revision, dataset);
     await lgepObjectUtils.deleteObject(dataset);
   }
 };
@@ -73,19 +69,9 @@ export const addDataset = async (revision, imgTags, releation) => {
  * @param {string} desc
  * @returns {ModelObject} - response
  */
-export const createItem = async (
-  itemType,
-  name = '',
-  itemId = '',
-  desc = ''
-) => {
+export const createItem = async (itemType, name = '', itemId = '', desc = '') => {
   try {
-    const result = await lgepObjectUtils.createItem(
-      itemId,
-      itemType,
-      name,
-      desc
-    );
+    const result = await lgepObjectUtils.createItem(itemId, itemType, name, desc);
     return result.output[0];
   } catch (e) {
     throw new Error(e);
@@ -106,9 +92,9 @@ export const createObject = async (itemType, name = '') => {
         data: {
           boName: itemType,
           stringProps: {
-            l2_primary : name,
-            l2_secondary :name,
-            l2_grade:'A'
+            l2_primary: name,
+            l2_secondary: name,
+            l2_grade: 'A',
           },
           stringArrayProps: {},
           tagProps: {},
@@ -129,11 +115,7 @@ export const createObject = async (itemType, name = '') => {
     ],
   };
 
-  const result = await SoaService.post(
-    'Core-2008-06-DataManagement',
-    'createObjects',
-    soaInputParam
-  );
+  const result = await SoaService.post('Core-2008-06-DataManagement', 'createObjects', soaInputParam);
   return result.ServiceData.created[0];
 };
 
@@ -153,11 +135,7 @@ export const saveAsItem = async (originRevision, name) => {
       },
     ],
   };
-  const response = await SoaService.post(
-    'Core-2007-01-DataManagement',
-    'saveAsNewItem',
-    soaInputParam
-  );
+  const response = await SoaService.post('Core-2007-01-DataManagement', 'saveAsNewItem', soaInputParam);
   return response.inputToNewItem.SAVEAS;
 };
 /**
@@ -167,10 +145,7 @@ export const saveAsItem = async (originRevision, name) => {
  */
 export const saveAsItemToRev = async (originRevision) => {
   await lgepObjectUtils.getProperties(originRevision, [prop.OBJECT_NAME]);
-  const result = await saveAsItem(
-    originRevision,
-    originRevision.props[prop.OBJECT_NAME].dbValues[0]
-  );
+  const result = await saveAsItem(originRevision, originRevision.props[prop.OBJECT_NAME].dbValues[0]);
   const newParentAssyRev = result.itemRev;
   return newParentAssyRev;
 };
@@ -193,23 +168,14 @@ const _getGenerateRevisionIdByRevisoin = async (revision) => {
  */
 export const reviseByRevision = async (originRevision) => {
   const newRevId = await _getGenerateRevisionIdByRevisoin(originRevision);
-  const reviseRevision = await lgepObjectUtils.revise2(
-    originRevision,
-    newRevId
-  );
+  const reviseRevision = await lgepObjectUtils.revise2(originRevision, newRevId);
   return reviseRevision;
 };
 
 export const reviseByRevisionUid = async (originRevisionUid, type) => {
-  const originRevision = await loadObjectByPolicy(originRevisionUid, type, [
-    prop.ITEM_ID,
-    prop.ITEMS_TAG,
-  ]);
+  const originRevision = await loadObjectByPolicy(originRevisionUid, type, [prop.ITEM_ID, prop.ITEMS_TAG]);
   const newRevId = await _getGenerateRevisionIdByRevisoin(originRevision);
-  const reviseRevision = await lgepObjectUtils.revise2(
-    originRevision,
-    newRevId
-  );
+  const reviseRevision = await lgepObjectUtils.revise2(originRevision, newRevId);
   return reviseRevision;
 };
 
@@ -262,11 +228,7 @@ export const loadObjectByPolicy = async (uid, type, props) => {
  * @param {[string]} props
  * @returns
  */
-export const makePolicyWithProperties = (
-  uid,
-  type,
-  props = [prop.OBJECT_NAME]
-) => {
+export const makePolicyWithProperties = (uid, type, props = [prop.OBJECT_NAME]) => {
   const properties = _makeProperties(props);
   const policy = {
     uids: [uid],
@@ -288,10 +250,7 @@ const _makeProperties = (props) => {
 };
 
 export const getLatestItemRevisionByRevUid = async (revUid, type) => {
-  const revision = await loadObjectByPolicy(revUid, type, [
-    prop.ITEM_ID,
-    prop.ITEMS_TAG,
-  ]);
+  const revision = await loadObjectByPolicy(revUid, type, [prop.ITEM_ID, prop.ITEMS_TAG]);
   const item = await lgepObjectUtils.getItemByItemRevision(revision);
   // await lgepObjectUtils.getProperties([item], [prop.ITEMS_TAG]);
   const latestRevision = await lgepObjectUtils.getLatestItemRevision(item);
@@ -344,9 +303,7 @@ export const getFmeaRevId = async (fmeaRev) => {
 export const getRevisionByRevId = async (revision, revId) => {
   const item = await lgepObjectUtils.getItemByItemRevision(revision);
   await lgepObjectUtils.getProperties(item, [prop.REVISION_LIST]);
-  const revisionList = lgepObjectUtils.getObjects(
-    item.props[prop.REVISION_LIST].dbValues
-  );
+  const revisionList = lgepObjectUtils.getObjects(item.props[prop.REVISION_LIST].dbValues);
   for (const revision of revisionList) {
     if (Object.keys(revision.props).length === 0) {
       await lgepObjectUtils.getProperties([revision], [prop.REVISION_ID]);

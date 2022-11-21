@@ -1,23 +1,23 @@
 <aw-popup2>
-    <style>
-        .marginT{
-            margin-top: 15px;
-        }
-        .marginB{
-            margin-bottom: 15px;
-        }
-    </style>
+  <style>
+    .marginT {
+      margin-top: 15px;
+    }
+    .marginB {
+      margin-bottom: 15px;
+    }
+  </style>
+  <aw-panel-body>
+    <aw-textbox prop="data.sequenceTitle" class="marginB"></aw-textbox>
+    <aw-label prop="data.sequenceContent" class="marginT"></aw-label>
     <aw-panel-body>
-        <aw-textbox prop="data.sequenceTitle" class="marginB"></aw-textbox>
-        <aw-label prop="data.sequenceContent" class="marginT"></aw-label>
-        <aw-panel-body>
-            <body>
-                <textarea id="sequenceCreateSummernote"></textarea>
-            </body>
-        </aw-panel-body>
+      <body>
+        <textarea id="sequenceCreateSummernote"></textarea>
+      </body>
     </aw-panel-body>
-    <aw-panel-footer>
-        <aw-button action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
-        <aw-button action="createSequenceAction" size="auto">{{i18n.ok}}</aw-button>
-    </aw-panel-footer>
+  </aw-panel-body>
+  <aw-panel-footer>
+    <aw-button action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+    <aw-button action="createSequenceAction" size="auto">{{i18n.ok}}</aw-button>
+  </aw-panel-footer>
 </aw-popup2>

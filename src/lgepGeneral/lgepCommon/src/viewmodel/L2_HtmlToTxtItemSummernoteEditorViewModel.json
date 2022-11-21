@@ -1,46 +1,44 @@
 {
-    "schemaVersion": "1.0.0",
-    "imports": [
-        "js/aw-panel-body.directive"
-    ],
-    "onEvent": [
-        {
-            "eventId": "editHandlerStateChange",
-            "cacheEventData": true,
-            "action": "editSummerNoteChange"
-        },
-        {
-            "eventId": "L2_HtmlToTxtItemSummernoteEditor.contentLoaded",
-            "cacheEventData": true,
-            "action": "relationReadSummernote"
-        }
-    ],
-    "data": {},
-    "actions": {
-        "testAc": {
-            "actionType": "JSFunction",
-            "method": "testAc",
-            "inputData": {
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/L2_StandardStyleSheetService"
-        },
-        "relationReadSummernote": {
-            "actionType": "JSFunction",
-            "method": "relationReadSummernote",
-            "inputData": {
-                "eventData": "{{data.eventData}}",
-                "ctx": "{{ctx}}"
-            },
-            "deps": "js/utils/lgepSummerNoteUtils"
-        },
-        "editSummerNoteChange": {
-            "actionType": "JSFunction",
-            "method": "editSummerNoteChange",
-            "inputData": {
-                "eventData": "{{data.eventData}}"
-            },
-            "deps": "js/utils/lgepSummerNoteUtils"
-        }
+  "schemaVersion": "1.0.0",
+  "imports": ["js/aw-panel-body.directive"],
+  "onEvent": [
+    {
+      "eventId": "editHandlerStateChange",
+      "cacheEventData": true,
+      "action": "editSummerNoteChange"
+    },
+    {
+      "eventId": "L2_HtmlToTxtItemSummernoteEditor.contentLoaded",
+      "cacheEventData": true,
+      "action": "relationReadSummernote"
     }
+  ],
+  "data": {},
+  "actions": {
+    "testAc": {
+      "actionType": "JSFunction",
+      "method": "testAc",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardStyleSheetService"
+    },
+    "relationReadSummernote": {
+      "actionType": "JSFunction",
+      "method": "relationReadSummernote",
+      "inputData": {
+        "eventData": "{{data.eventData}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/utils/lgepSummerNoteUtils"
+    },
+    "editSummerNoteChange": {
+      "actionType": "JSFunction",
+      "method": "editSummerNoteChange",
+      "inputData": {
+        "eventData": "{{data.eventData}}"
+      },
+      "deps": "js/utils/lgepSummerNoteUtils"
+    }
+  }
 }
