@@ -14,11 +14,11 @@
   "actions": {
     "addStructure": {
       "actionType": "JSFunction",
-      "method": "addTemplateSave",
+      "method": "editTemplateSave",
       "inputData": {
         "data": "{{data}}"
       },
-      "deps": "js/L2_StandardBOMSearchAndSelectTemplateEditService"
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateService"
     },
     "unMount": {
       "actionType": "JSFunction",
@@ -26,7 +26,7 @@
       "inputData": {
         "data": "{{data}}"
       },
-      "deps": "js/L2_StandardBOMSearchAndSelectTemplateEditService"
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateService"
     }
   },
   "lifecycleHooks": {

@@ -11,8 +11,14 @@ import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 import message from 'js/utils/lgepMessagingUtils';
 import $ from 'jquery';
 import { rgb } from 'd3';
+import lgepPreferenceUtils from 'js/utils/lgepPreferenceUtils';
+import awPromiseService from 'js/awPromiseService';
+
+let selectKey;
+let selectRow;
 
 const exportExcel = async (data, ctx) => {
+  let templateUid = await lgepPreferenceUtils.getPreference('L2_Excel_Template');
   try {
     if (ctx) {
       ctx = appCtxService.ctx;
@@ -33,12 +39,12 @@ const exportExcel = async (data, ctx) => {
     let fileName = `Checklist_${project}_${product}_${module}_${rev}`;
     fileName = fileName.replaceAll('_null', '');
 
-    // let fileName = ctx.checklist.target.props.object_name.dbValues[0]
     if (!fileName) {
-      fileName = 'DFEMA';
+      fileName = 'DFMEA';
     }
 
     await exportUtils.exportExcel(ctx.checklist.grid, 'MUiN2c0s5p7XAC', fileName, '6.Worksheet');
+    findAttach();
 
     ctx.checklist.grid.setWidth(gridWidth + 25);
     ctx.checklist.grid.setBodyHeight(gridheight);
@@ -47,6 +53,9 @@ const exportExcel = async (data, ctx) => {
   }
 };
 
+let beforeRow;
+let beforeKey;
+
 function fixed(data, ctx, num) {
   try {
     let change = document.querySelector(
@@ -54,6 +63,42 @@ function fixed(data, ctx, num) {
     );
     let headTable = document.querySelector('.tui-grid-rside-area .tui-grid-header-area .tui-grid-table');
     let cellTable = document.querySelector('.tui-grid-rside-area .tui-grid-body-area .tui-grid-table');
+    let container = document.querySelector('.tui-grid-rside-area .tui-grid-body-area');
+    let container2 = document.querySelectorAll('.tui-grid-cell-selected');
+    for (let cell of container2) {
+      let name = cell.dataset.columnName;
+      let tds = $(`td[data-column-name="${name}"]`);
+      for (let td of tds) {
+        td.style.backgroundColor = '#e5f6ff';
+      }
+    }
+
+    container.onmousedown = function (e) {
+      beforeRow;
+      beforeKey;
+      let selectTd = $('#checklist-open-view .tui-grid-rside-area .tui-grid-body-area td');
+      selectKey = [];
+      selectRow = [];
+      for (let td of selectTd) {
+        td.style.backgroundColor = '';
+        td.addEventListener('mousemove', changeColor);
+      }
+    };
+    container.onmouseup = function (e) {
+      // let selectedRow = $('.changeBorder .tui-grid-cell-current-row');
+      // console.log('showRow', selectedRow);
+      // let testBox = $('div.tui-grid-layer-selection');
+      // console.log('test', testBox);
+      let selectTd = $('#checklist-open-view .tui-grid-rside-area .tui-grid-body-area td');
+      for (let td of selectTd) {
+        td.removeEventListener('mousemove', changeColor);
+        td.removeEventListener('mousemove', moveTest);
+      }
+      let ths = $('.tui-grid-rside-area .tui-grid-header-area th');
+      for (let th of ths) {
+        th.removeEventListener('mousemove', moveTest);
+      }
+    };
 
     const grid = ctx.checklist.grid;
     let columnLength = grid.store.column.visibleColumns.length;
@@ -78,41 +123,60 @@ function fixed(data, ctx, num) {
       // grid.setFrozenColumnCount(selectColumn.length);
       let setWidth = 0;
       for (let head of tableHeader) {
-        head.style.setProperty('border-bottom-color', 'transparent', 'important');
+        // head.style.setProperty('border-bottom-color', 'transparent', 'important');
         head.style.setProperty('border-left-color', 'transparent', 'important');
-        head.style.setProperty('border-top-width', '1px', 'important');
-        head.onclick = function (head) {
-          let targetName = head.target.dataset.columnName;
-          let tds = $('#checklist-open-view .tui-grid-rside-area .tui-grid-body-area td');
+        // head.style.setProperty('border-top-width', '1px', 'important');
+        head.onclick = '';
+        head.onmousedown = function (e) {
+          let targetName = e.target.dataset.columnName;
+          let ths = $('.tui-grid-rside-area .tui-grid-header-area th');
+          for (let th of ths) {
+            th.addEventListener('mousemove', moveTest);
+          }
+          let tds = $('.tui-grid-rside-area .tui-grid-body-area td');
           for (let td of tds) {
-            if (td.dataset.columnName == targetName) {
-              // td.style.backgroundColor = '#e5f6ff';
+            td.addEventListener('mousemove', moveTest);
+            if (td.dataset.columnName == targetName && td.style.position == 'sticky') {
+              td.style.backgroundColor = '#e5f6ff';
             } else {
               td.style.backgroundColor = '';
             }
           }
         };
+        head.onmouseup = function (e) {
+          let ths = $('.tui-grid-rside-area .tui-grid-header-area th');
+          for (let th of ths) {
+            th.removeEventListener('mousemove', moveTest);
+          }
+          let tds = $('.tui-grid-rside-area .tui-grid-body-area td');
+          for (let td of tds) {
+            td.removeEventListener('mousemove', moveTest);
+          }
+        };
         // head.style = "border-bottom : 0 !important; border-left-width : 0 !important;";
       }
       for (let column of tableColumn) {
-        column.style.setProperty('border-bottom-color', 'transparent', 'important');
+        // column.style.setProperty('border-bottom-color', 'transparent', 'important');
         column.style.setProperty('border-left-color', 'transparent', 'important');
-        column.onclick = function (column) {
-          let trs = $('.tui-grid-rside-area .tui-grid-body-area .tui-grid-table tr');
-          for (let tr of trs) {
-            let classNames = tr.classList.value;
-            if (classNames.includes('tui-grid-cell-current-row')) {
-              for (let td of tr.childNodes) {
-                td.style.backgroundColor = ctx.theme == 'ui-lgepDark' ? rgb(61, 66, 71) : '#e5f6ff';
-              }
-              // tr.childNodes[0].style.backgroundColor = ctx.theme == 'ui-lgepDark' ? rgb(61, 66, 71) : '#e5f6ff';
-            } else {
-              for (let td of tr.childNodes) {
-                td.style.backgroundColor = '';
-              }
-              // tr.childNodes[0].style.backgroundColor = '';
-            }
-          }
+        column.style.setProperty('border-top-width', '0px');
+        column.onclick = async function (column) {
+          await common.delay(10);
+          let temp1 = $('.tui-grid-layer-selection');
+          temp1[0].style.zIndex = 2;
+          // let trs = $('.tui-grid-rside-area .tui-grid-body-area .tui-grid-table tr');
+          // for (let tr of trs) {
+          //   let classNames = tr.classList.value;
+          //   if (classNames.includes('tui-grid-cell-current-row')) {
+          //     for (let td of tr.childNodes) {
+          //       td.style.backgroundColor = '#e5f6ff';
+          //       console.log('test2', td);
+          //     }
+          //   } else {
+          //     for (let td of tr.childNodes) {
+          //       td.style.backgroundColor = '';
+          //     }
+          //   }
+          // }
         };
         // column.style = "border-left-width: 0 !important;  border-bottom: 0 !important";
       }
@@ -130,7 +194,7 @@ function fixed(data, ctx, num) {
         for (let head of header) {
           head.style.position = 'sticky';
           head.style.left = setWidth + 'px';
-          head.style.zIndex = 1;
+          head.style.zIndex = 2;
           if (i == selectColumnNum) {
             head.style.setProperty('border-right-width', '3px', 'important');
           }
@@ -142,6 +206,7 @@ function fixed(data, ctx, num) {
       message.show(2, '컬럼을 선택해야 합니다.');
     }
   } catch (err) {
+    console.log(err);
     message.show(2, '틀 고정 중 오류가 발생했습니다.');
   }
 }
@@ -160,6 +225,10 @@ export function fixedOff(data, ctx, num) {
   change.style.overflow = 'hidden';
   headerStyle.style.top = '';
 
+  let container = document.querySelector('.tui-grid-rside-area .tui-grid-body-area');
+  container.onmousedown = '';
+  container.onmouseup = '';
+
   // grid.setFrozenColumnCount(0);
   let tableHeader = document.querySelectorAll('#checklist-open-view .tui-grid-rside-area .tui-grid-header-area th');
   let tableColumn = document.querySelectorAll('#checklist-open-view .tui-grid-rside-area .tui-grid-body-area td');
@@ -172,6 +241,13 @@ export function fixedOff(data, ctx, num) {
       head.style.position = '';
       head.style.left = '';
     }
+    // head.onclick = function (head) {
+    //   console.log('click');
+    //   let tds = $(`.tui-grid-rside-area .tui-grid-body-area td`);
+    //   for (let td of tds) {
+    //     td.style.backgroundColor = '';
+    //   }
+    // };
     // head.style = "border-bottom : ''; border-left-width : ''";
   }
   for (let column of tableColumn) {
@@ -182,6 +258,8 @@ export function fixedOff(data, ctx, num) {
       column.style.position = '';
       column.style.left = '';
     }
+    column.style.backgroundColor = '';
+    column.onclick = '';
     // column.style = "border-left-width: ''; border-bottom: ''";
   }
   // let selectLength = 0;
@@ -211,10 +289,11 @@ export function fixedOff(data, ctx, num) {
   delete ctx.fixed;
 }
 
-export function autoResize(data, ctx) {
+export async function autoResize(data, ctx) {
   const grid = ctx.checklist.grid;
 
   grid.setWidth(50000);
+  await lgepCommonUtils.delay(500);
 
   let columns = grid.store.column.visibleColumns;
   let totalWidth = 0;
@@ -260,30 +339,49 @@ function getContentWidth(column) {
   let imgTag = $(`td[data-column-name=${column.name}]`).find('img');
   let imgCount = imgTag.length;
   let value = $(`td[data-column-name=${column.name}]`);
-
+  const names = ['upperAssy', 'lowerAssy', 'single'];
+  let check = names.find((val) => val == column.name);
   try {
+    let imgWidth = 0;
     if (imgCount > 0) {
       for (let i = 0; i < imgCount; i++) {
-        if (width < imgTag[i].width + 10) {
-          width = imgTag[i].width + 10;
+        if (imgWidth < imgTag[i].width + 10) {
+          imgWidth = imgTag[i].width + 10;
         }
+      }
+    }
+    let totalValue = value.length;
+    let textLong = 0;
+    for (let i = 0; i < totalValue; i++) {
+      let text = value[i].innerText;
+      let splitText = text.split('\n');
+      for (let txt of splitText) {
+        if (textLong < txt.length) {
+          textLong = txt.length;
+        }
+      }
+    }
+    if (textLong > maxLength) {
+      textLong = maxLength;
+    }
+    if (imgWidth < textLong * 14) {
+      width = textLong * 14;
+    } else {
+      width = imgWidth;
+    }
+    if (check && imgCount < 1) {
+      return 125;
+    } else if (check && imgCount > 0) {
+      if (width < 125) {
+        return 125;
+      } else {
+        return width;
       }
     } else {
-      let totalValue = value.length;
-      for (let i = 0; i < totalValue; i++) {
-        let text = value[i].innerText;
-        let textLong = text.length;
-        if (textLong > maxLength) {
-          textLong = maxLength;
-        }
-        if (width < textLong) {
-          width = textLong;
-        }
-      }
-      width = width * 13;
+      return width;
     }
-    return width;
   } catch (err) {
+    console.log(err);
     return width;
   }
 }
@@ -362,7 +460,6 @@ async function hideColumn(data, ctx) {
     } else {
       //틀 고정 있을 때
       let fixedNum = ctx.fixed + ctx.hideFixColumn;
-      console.log('숨긴고정컬럼 갯수', ctx.hideFixColumn);
       for (let name of ctx.hideColumn) {
         grid.showColumn(name);
       }
@@ -393,8 +490,14 @@ async function checkSelected(data, ctx) {
       }
     }
   }
-  await lgepCommonUtils.delay(100);
-  autoResize(data, ctx);
+  try {
+    await insertImage(ctx);
+    // await lgepCommonUtils.delay(5000);
+    await tableResize();
+    await autoResize(data, ctx);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function resetCmdData(data, ctx) {
@@ -404,7 +507,168 @@ function resetCmdData(data, ctx) {
   delete ctx.hideColumn;
 }
 
-function changeColor() {}
+function changeColor(e) {
+  let temp1 = $('.tui-grid-layer-selection');
+  temp1.addClass('hideEvent');
+  // if(temp1.length>0){
+  //   temp1[0].style.zIndex = 2;
+  // }
+  // this.style.backgroundColor = '#ffa500';
+  let check1 = selectKey.find((key) => key == this.dataset.columnName);
+  let check2 = selectRow.find((row) => row == this.dataset.rowKey);
+  let delete1 = false;
+  let delete2 = false;
+  let deleteRow;
+  let deleteKey;
+  if (beforeRow && beforeRow != this.dataset.rowKey) {
+    if (!check2) {
+      selectRow.push(this.dataset.rowKey);
+    } else {
+      deleteRow = selectRow.pop();
+      delete2 = true;
+    }
+  } else {
+    if (!check2) {
+      selectRow.push(this.dataset.rowKey);
+    }
+  }
+
+  if (beforeKey && beforeKey != this.dataset.columnName) {
+    if (!check1) {
+      selectKey.push(this.dataset.columnName);
+    } else {
+      deleteKey = selectKey.pop();
+      delete1 = true;
+    }
+  } else {
+    if (!check1) {
+      selectKey.push(this.dataset.columnName);
+    }
+  }
+
+  if (delete1 == true && delete2 == true) {
+    //
+  } else if (delete2 == true) {
+    for (let key of selectKey) {
+      let cell = $(`td[data-row-key=${deleteRow}][data-column-name=${key}]`);
+      cell[0].style.backgroundColor = '';
+    }
+  } else if (delete1 == true) {
+    for (let row of selectRow) {
+      let cell = $(`td[data-row-key=${row}][data-column-name=${deleteKey}]`);
+      cell[0].style.backgroundColor = '';
+    }
+  }
+  beforeRow = this.dataset.rowKey;
+  beforeKey = this.dataset.columnName;
+  for (let key of selectKey) {
+    for (let row of selectRow) {
+      let cell = $(`td[data-row-key=${row}][data-column-name=${key}]`);
+      if (cell[0].style.position == 'sticky') {
+        cell[0].style.backgroundColor = '#e5f6ff';
+      }
+    }
+  }
+}
+
+function moveTest(e) {
+  let columnName = this.dataset.columnName;
+  let tds = $(`td[data-column-name="${columnName}"]`);
+  for (let td of tds) {
+    if (td.style.position == 'sticky') {
+      td.style.backgroundColor = '#e5f6ff';
+    }
+  }
+}
+
+export const tableResize = async () => {
+  let ctx = appCtxService.ctx;
+  // ctx.checklist.grid.setBodyHeight(50000);
+  await lgepCommonUtils.delay(300);
+
+  let headerLayout = document.querySelector('#checklist-open-view .tui-grid-rside-area .tui-grid-header-area');
+  headerLayout.style.width = document.querySelector('#openGrid').offsetWidth + 'px';
+
+  let getTable = document.querySelectorAll('#checklist-open-view .tui-grid-rside-area .tui-grid-table > tbody > tr');
+  let height = 0;
+  for (let tr of getTable) {
+    let str = tr.offsetHeight;
+    height += parseInt(str);
+  }
+  ctx.checklist.grid.setBodyHeight(height + 40);
+  return;
+};
+
+function insertImage(ctx) {
+  var deferred = awPromiseService.instance.defer();
+  let rawDatas = ctx.checklist.grid.store.data.rawData;
+  let promiseArray = [];
+  for (let raw of rawDatas) {
+    let single;
+    let lower;
+    let upper;
+    single = raw.getParent().getParent();
+    if (!single.parent) {
+      upper = single;
+      lower = '';
+      single = '';
+    } else {
+      lower = single.getParent();
+    }
+    if (!lower.parent) {
+      upper = lower;
+      lower = single;
+      single = '';
+    } else {
+      upper = lower.getParent();
+    }
+
+    if (upper) {
+      promiseArray.push(getImageUrls(upper, raw, 'upperAssy'));
+    }
+    if (lower) {
+      promiseArray.push(getImageUrls(lower, raw, 'lowerAssy'));
+    }
+    if (single) {
+      promiseArray.push(getImageUrls(single, raw, 'single'));
+    }
+  }
+  if (promiseArray.length > 0) {
+    Promise.all(promiseArray).then(() => {
+      deferred.resolve(true);
+    });
+  }
+  return deferred.promise;
+}
+
+function getImageUrls(obj, raw, key) {
+  return obj.getImageTicket().then((result) => {
+    let img1 = result;
+    if (img1) {
+      for (let url of img1) {
+        let tag1 = `<br><img src=${url}>`;
+        raw[key] += tag1;
+      }
+    }
+    return;
+  });
+}
+
+function findAttach() {
+  let aTags = $('a[datauid]');
+  let uids = '';
+  if (aTags.length > 0) {
+    for (let a of aTags) {
+      let uid = a.attributes.datauid.value;
+      uids += `${uid},`;
+    }
+    let link = document.createElement('a');
+    let url = browserUtils.getBaseURL() + '#/lgepXcelerator?uids=' + uids;
+    link.href = url;
+    link.target = '_blank';
+    link.click();
+  }
+}
 
 export default {
   exportExcel,

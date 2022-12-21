@@ -292,6 +292,11 @@ export const setTuiGridStyle = async (ctx) => {
     });
   } else {
     Grid.applyTheme('custom', {
+      cell: {
+        normal: {
+          background: '#fff',
+        },
+      },
       scrollbar: {
         border: '#eee',
         background: '#fff',
@@ -405,14 +410,14 @@ export function loadAndRefreshGrid(grid) {
       let currentGroup = appCtxService.ctx.userSession.props.group_name.dbValues[0];
       let treeDatas = [];
       let objectUids = [];
-      if (currentGroup != 'H&A') {
+      if (res && currentGroup != 'H&A') {
         res = res.filter((mo) => mo.props.owning_group.uiValues[0] == currentGroup);
         if (res.length == 0) {
           show(INFORMATION, i18n.chkNoObjsInYourGroup(currentGroup));
           return;
         }
       } else {
-        if (res.length == 0) {
+        if (!res || res.length == 0) {
           show(INFORMATION, i18n.chkNoObjsInDDGMS);
           return;
         }
@@ -513,6 +518,7 @@ export function modifyItemName(data, ctx) {
   }
 }
 
+// 체크리스트 이름 편집 기능 실행
 export function confirmItemName(itemName) {
   try {
     let row = appCtxService.ctx.checklist.list.getCheckedRows()[0];

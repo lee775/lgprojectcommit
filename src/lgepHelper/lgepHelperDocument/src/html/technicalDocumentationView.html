@@ -1,17 +1,16 @@
 <aw-flex-column class="afx-alt-content-background" color="white" id="mainTechnicalData">
   <aw-flex-row>
     <aw-flex-column width="4" class="leftPadding insideMargin" id="summaryContentStyle">
-      <aw-search-box prop="data.searchBox" action="questionSearch"></aw-search-box>
+      <aw-search-box prop="data.searchBox" action="questionSearch" placeholder="data.searchBoxPlaceHolder"></aw-search-box>
       <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadow2">
         <aw-command-bar anchor="tableCommand" alignment="HORIZONTAL" class="fontUp" id="commandColorId"> </aw-command-bar>
       </aw-flex-row>
-      <div style="text-align: center" visible-when="data.dataProviders.technicalDataProvider.viewModelCollection.loadedVMObjects.length === 0">
+      <div style="text-align: center" visible-when="ctx.techList === 0">
         <h3>{{i18n.noPost}}</h3>
       </div>
-      <aw-flex-row class="borderShadow">
+      <aw-flex-row class="borderShadow" visible-when="data.dataProviders.technicalDataProvider.viewModelCollection.loadedVMObjects.length != 0">
         <aw-splm-table
           gridid="technicalDocumentationTable"
-          visible-when="data.dataProviders.technicalDataProvider.viewModelCollection.loadedVMObjects.length != 0"
           align-content="center"
         ></aw-splm-table>
       </aw-flex-row>

@@ -17,6 +17,9 @@ import sodTableListService from 'js/sodTableListService';
 import lgepPreferenceUtils from 'js/utils/lgepPreferenceUtils';
 import L2_ChecklistOpenService from 'js/L2_ChecklistOpenService';
 import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
+import awPromiseService from 'js/awPromiseService';
+import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
+import lgepTicketUtils from 'js/utils/lgepTicketUtils';
 import { ERROR, INFORMATION, show, WARNING, closeMessages } from 'js/utils/lgepMessagingUtils';
 
 let exports = {};
@@ -332,10 +335,11 @@ export class ImageCellEditor {
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['picture', 'link']],
             ['codeview', ['fullscreen']],
-            ['CustomButton', ['saveButton', 'cancelButton']],
+            ['CustomButton', ['saveButton', 'attachButton']],
           ],
           buttons: {
             saveButton: _saveEditorCell(appCtxService.ctx.checklist.editingStacks.length - 1),
+            attachButton: attachButton,
           },
           fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
         });
@@ -673,7 +677,9 @@ export const checklistProperties = [
   'object_name',
   'last_mod_user',
   'last_mod_date',
+  'item_id',
   'item_revision_id',
+  'items_tag',
   'revision_list',
   'ps_children',
   'l2_function',
@@ -707,6 +713,17 @@ export const checklistProperties = [
   'owning_group',
   'awb0ArchetypeId',
   'l2_product_id',
+  'l2_event_phase',
+  'l2_is_IM_target',
+  'l2_image',
+  'l2_images',
+  'l2_attached_files',
+  'based_on',
+  'IMAN_based_on',
+  'awb0Archetype',
+  'awb0UnderlyingObject',
+  'l2_comments',
+  'l2_files',
 ];
 /**
  *  테이블 ROW 속성명
@@ -1306,6 +1323,38 @@ export function getColumnBalloonData(columnName) {
   };
   return columnDatas[columnName];
 }
+
+var attachButton = function (context) {
+  var ui = $.summernote.ui;
+  var button = ui.button({
+    contents: '<div class="fa fa-pencil"/>UPLOAD</div>',
+    click: async function (event) {
+      let file = await openFileChooser();
+      let fileName = file.name;
+      let dataset = await lgepSummerNoteUtils.uploadFileToDataset(file);
+      let url = browserUtils.getBaseURL() + '#/lgepXcelerator?uid=' + dataset.uid;
+      let aTag = `<a href=${url} dataUid=${dataset.uid} target="_blank">${fileName}<\a>`;
+      let contents = $('.summernote').summernote('code');
+      contents = contents.replaceAll('<a></a>', '');
+      contents += aTag;
+      $('.summernote').summernote('code', contents);
+    },
+  });
+  return button.render();
+};
+
+var openFileChooser = () => {
+  var deferred = awPromiseService.instance.defer();
+  var input = document.createElement('input');
+  input.type = 'file';
+
+  input.onchange = (e) => {
+    var file = e.target.files[0];
+    deferred.resolve(file);
+  };
+  input.click();
+  return deferred.promise;
+};
 
 export default exports = {
   getUrlParameter,

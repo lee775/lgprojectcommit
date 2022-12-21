@@ -1,0 +1,10 @@
+<aw-command-panel caption="i18n.openChecklistFreeze">
+  <aw-panel>
+    <aw-panel-body>
+      <aw-listbox prop="data.checklistEvent" list="data.checklistEventValues.dbValue"></aw-listbox>
+    </aw-panel-body>
+  </aw-panel>
+  <aw-panel-footer exist-when="data.checklistEvent.dbValue != ' '">
+    <aw-button action="confirm">{{i18n.save}}</aw-button>
+  </aw-panel-footer>
+</aw-command-panel>

@@ -1,0 +1,42 @@
+{
+  "L2_ChecklistCreateView": {
+    "grids": ["checklistCreateTree"],
+    "columns": ["interaction_target"],
+    "tooltip": [],
+    "template": "",
+    "templateUrl": "",
+    "renderFunction": "setInteractionCheck",
+    "deps": "js/L2_InteractionMatrixAddService",
+    "dependentServices": []
+  },
+  "L2_ChecklistSaveAsView": {
+    "grids": ["checklistSaveAsTree"],
+    "columns": ["interaction_target"],
+    "tooltip": [],
+    "template": "",
+    "templateUrl": "",
+    "renderFunction": "setInteractionCheck",
+    "deps": "js/L2_InteractionMatrixAddService",
+    "dependentServices": []
+  },
+  "L2_ChecklistStructureEditView": {
+    "grids": ["checklistStructureEditTree"],
+    "columns": ["interaction_target"],
+    "tooltip": [],
+    "template": "",
+    "templateUrl": "",
+    "renderFunction": "setInteractionCheck",
+    "deps": "js/L2_InteractionMatrixAddService",
+    "dependentServices": []
+  },
+  "L2_StandardBOMSearchDetailView": {
+    "grids": ["standardBOMTreeDetail"],
+    "columns": ["interaction_target"],
+    "tooltip": [],
+    "template": "",
+    "templateUrl": "",
+    "renderFunction": "setInteractionCheck",
+    "deps": "js/L2_InteractionMatrixAddService",
+    "dependentServices": []
+  }
+}

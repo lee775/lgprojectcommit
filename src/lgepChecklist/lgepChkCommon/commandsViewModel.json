@@ -20,7 +20,7 @@
     "addChecklist": {
       "iconId": "cmdAdd",
       "isGroup": false,
-      "title": "{{i18n.addChecklist}}",
+      "title": "{{i18n.viewMaster}}",
       "extendedTooltip": {
         "view": "checklistMainAddTooltip"
       }
@@ -246,6 +246,18 @@
       "title": "{{i18n.collapseBelow}}",
       "description": "{{i18n.Awb0CollapseBelowDesc}}"
     },
+    "checklistStructureEditTreeSearchingCommand": {
+      "iconId": "cmdShapeSearch",
+      "isGroup": false,
+      "title": "{{i18n.search}}",
+      "description": "{{i18n.Awb0CollapseBelowDesc}}"
+    },
+    "checklistStructureCreateTreeSearchingCommand": {
+      "iconId": "cmdShapeSearch",
+      "isGroup": false,
+      "title": "{{i18n.search}}",
+      "description": "{{i18n.Awb0CollapseBelowDesc}}"
+    },
     "openChecklistMinutes": {
       "iconId": "cmdLogging",
       "isGroup": false,
@@ -272,22 +284,22 @@
     "columnFixOn": {
       "iconId": "cmdPin",
       "isGroup": false,
-      "title": "틀고정"
+      "title": "{{i18n.frameFixed}}"
     },
     "columnFixOff": {
       "iconId": "cmdUnpin",
       "isGroup": false,
-      "title": "틀고정 해제"
+      "title": "{{i18n.fixedCancel}}"
     },
     "columnHideOn": {
       "iconId": "cmdHide",
       "isGroup": false,
-      "title": "컬럼 숨기기"
+      "title": "{{i18n.hideColumn}}"
     },
     "columnHideOff": {
       "iconId": "cmdShow",
       "isGroup": false,
-      "title": "컬럼 보이기"
+      "title": "{{i18n.showColumn}}"
     },
     "standardBomTreeAddGroup": {
       "iconId": "cmdAdd",
@@ -352,7 +364,7 @@
     "viewMinutes": {
       "iconId": "cmdViewProgramBoard",
       "isGroup": false,
-      "title": "회의록 조회"
+      "title": "{{i18n.viewMinutes}}"
     },
     "closeInterPopup": {
       "iconId": "cmdClosePanel",
@@ -378,6 +390,26 @@
       "iconId": "cmdUnPin",
       "isGroup": false,
       "title": "{{i18n.unPinPanel}}"
+    },
+    "standardBomExpand": {
+      "iconId": "cmdExpandBelow",
+      "isGroup": false,
+      "title": "{{i18n.expand}}"
+    },
+    "standardBomCollapse": {
+      "iconId": "cmdCollapseBelow",
+      "isGroup": false,
+      "title": "{{i18n.collapse}}"
+    },
+    "standardBomPartSave": {
+      "iconId": "cmdSave",
+      "isGroup": false,
+      "title": "{{i18n.partSave}}"
+    },
+    "standardBomListEdit": {
+      "iconId": "cmdAddSibling",
+      "isGroup": false,
+      "title": "{{i18n.editIsChecklistTarget}}"
     }
   },
   "commandHandlers": {
@@ -578,6 +610,12 @@
         "condition": "conditions.isSelectAll"
       }
     },
+    "checklistStructureCreateTreeSearchingCommandHandler": {
+      "id": "checklistStructureCreateTreeSearchingCommand",
+      "action": "checklistStructureCreateTreeSearchingCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
     "checklistCreateTreeExpandBelowCommandHandler": {
       "id": "checklistCreateTreeExpandBelowCommand",
       "action": "checklistCreateTreeExpandBelowCommandAction",
@@ -651,6 +689,12 @@
     "checklistStructureEditTreeCollapseBelowCommandHandler": {
       "id": "checklistStructureEditTreeCollapseBelowCommand",
       "action": "checklistStructureEditTreeCollapseBelowCommandAction",
+      "activeWhen": true,
+      "visibleWhen": true
+    },
+    "checklistStructureEditTreeSearchingCommandHandler": {
+      "id": "checklistStructureEditTreeSearchingCommand",
+      "action": "checklistStructureEditTreeSearchingCommandAction",
       "activeWhen": true,
       "visibleWhen": true
     },
@@ -772,9 +816,7 @@
       "id": "templateDuplicate",
       "action": "templateDuplicateAction",
       "activeWhen": true,
-      "visibleWhen": {
-        "condition": "conditions.standardBOMTemplateView"
-      },
+      "visibleWhen": false,
       "enableWhen": {
         "condition": "conditions.unableTempalteEdit"
       }
@@ -891,6 +933,33 @@
       "visibleWhen": {
         "condition": "conditions.addStructureUnPinSet"
       }
+    },
+    "standardBomExpandHandler": {
+      "id": "standardBomExpand",
+      "action": "expandStandardBom",
+      "activeWhen": true,
+      "visibleWhen": false
+    },
+    "standardBomCollapseHandler": {
+      "id": "standardBomCollapse",
+      "action": "collapseStandardBom",
+      "activeWhen": true,
+      "visibleWhen": false
+    },
+    "standardBomPartSaveHandler": {
+      "id": "standardBomPartSave",
+      "action": "standardBomPartSave",
+      "activeWhen": true,
+      "enableWhen": {
+        "condition": "conditions.moduleNonEditSaving"
+      },
+      "visibleWhen": true
+    },
+    "standardBomListEditCmdsHanlder": {
+      "id": "standardBomListEdit",
+      "action": "editIsChecklist",
+      "activeWhen": true,
+      "visibleWhen": true
     }
   },
   "commandPlacements": {
@@ -994,6 +1063,11 @@
       "uiAnchor": "checklistCreateTreeAnchor",
       "priority": 100
     },
+    "checklistStructureCreateTreeSearchingCommandPlacements": {
+      "id": "checklistStructureCreateTreeSearchingCommand",
+      "uiAnchor": "checklistCreateTreeAnchor",
+      "priority": 104
+    },
     "checklistCreateTreeExpandBelowCommandPlacement": {
       "id": "checklistCreateTreeExpandBelowCommand",
       "uiAnchor": "checklistCreateTreeAnchor",
@@ -1043,6 +1117,11 @@
       "id": "checklistStructureEditTreeCollapseBelowCommand",
       "uiAnchor": "checklistStructureEditTreeAnchor",
       "priority": 103
+    },
+    "checklistStructureEditTreeSearchingCommandPlacement": {
+      "id": "checklistStructureEditTreeSearchingCommand",
+      "uiAnchor": "checklistStructureEditTreeAnchor",
+      "priority": 104
     },
     "openChecklistAllLineViewPlacement": {
       "id": "openChecklistAllLineView",
@@ -1183,6 +1262,26 @@
       "id": "addStructureUnPin",
       "uiAnchor": "aw_commandPanel",
       "priority": 102
+    },
+    "standardBomExpandPlacement": {
+      "id": "standardBomExpand",
+      "uiAnchor": "standardBomTreeAnchor",
+      "priority": 101
+    },
+    "standardBomCollapsePlacement": {
+      "id": "standardBomCollapse",
+      "uiAnchor": "standardBomTreeAnchor",
+      "priority": 102
+    },
+    "standardBomPartSavePlacement": {
+      "id": "standardBomPartSave",
+      "uiAnchor": "standardBomEditAnchor",
+      "priority": 101
+    },
+    "standardBomListEditPlacement": {
+      "id": "standardBomListEdit",
+      "uiAnchor": "standardBomListEditAnchor",
+      "priority": 101
     }
   },
   "actions": {
@@ -1345,6 +1444,15 @@
       },
       "deps": "js/L2_ChecklistCreateService"
     },
+    "checklistStructureCreateTreeSearchingCommandAction": {
+      "actionType": "JSFunction",
+      "method": "treeSearchBackground",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistCreateService"
+    },
     "checklistCreateTreeExpandBelowCommandAction": {
       "actionType": "JSFunction",
       "method": "treeExpandBelow",
@@ -1429,6 +1537,15 @@
     "checklistStructureEditTreeCollapseBelowCommandAction": {
       "actionType": "JSFunction",
       "method": "treeCollapseBelow",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_ChecklistStructureEditService"
+    },
+    "checklistStructureEditTreeSearchingCommandAction": {
+      "actionType": "JSFunction",
+      "method": "treeSearchBackground",
       "inputData": {
         "ctx": "{{ctx}}",
         "data": "{{data}}"
@@ -1569,7 +1686,7 @@
         "data": "{{data}}",
         "ctx": "{{ctx}}"
       },
-      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateService"
     },
     "standardBOMEditAction": {
       "actionType": "JSFunction",
@@ -1636,7 +1753,7 @@
     "closeInterPopup": {
       "actionType": "JSFunction",
       "method": "beforeClose",
-      "deps": "js/interactionMatrixService"
+      "deps": "js/L2_ChecklistMatrixPopupSaveService"
     },
     "addTemplate": {
       "actionType": "JSFunction",
@@ -1645,7 +1762,7 @@
         "data": "{{data}}",
         "ctx": "{{ctx}}"
       },
-      "deps": "js/L2_StandardBOMSearchAndSelectTemplateEditService"
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateService"
     },
     "addChecklistFailure": {
       "actionType": "JSFunction",
@@ -1671,6 +1788,38 @@
         "ctx": "{{ctx}}"
       },
       "deps": "js/L2_StandardBOMSearchAndSelectAddRemoveService"
+    },
+    "expandStandardBom": {
+      "actionType": "JSFunction",
+      "method": "standardBomExpand",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "collapseStandardBom": {
+      "actionType": "JSFunction",
+      "method": "standardBomCollapse",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "standardBomPartSave": {
+      "actionType": "JSFunction",
+      "method": "savePart",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
+    },
+    "editIsChecklist": {
+      "actionType": "JSFunction",
+      "method": "editIsChecklist",
+      "inputData": {
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
     }
   },
   "onEvent": [],
@@ -1733,10 +1882,10 @@
       "expression": "ctx.checklist.standardBOM.isEditing === true"
     },
     "startBomEditing": {
-      "expression": "!ctx.checklist.standardBOM.startBomEditing && !ctx.checklist.standardBOM.isEditing"
+      "expression": "!ctx.checklist.standardBOM.startBomEditing && !ctx.checklist.standardBOM.isEditing && ctx.checklist.standardBOM.templateNode"
     },
     "standardBOMNonEdit": {
-      "expression": "!ctx.checklist.standardBOM.isEditing && ctx.checklist.standardBOM.isEditableNode"
+      "expression": "!ctx.checklist.standardBOM.isEditing && ctx.checklist.standardBOM.isEditableNode && !ctx.checklist.standardBOM.isTopEditing"
     },
     "standardBOMBack": {
       "expression": "ctx.checklist.standardBOM.isDetailView && !ctx.checklist.standardBOM.startBomEditing"
@@ -1775,7 +1924,7 @@
       "expression": "conditions.standardBOMEdit && ctx.checklist.standardBOM.selectBomTreeNodeType==='L2_FunctionRevision'"
     },
     "visibleModuleEdit": {
-      "expression": "conditions.standardBOMTemplateView && ctx.checklist.standardBOM.topElement"
+      "expression": "conditions.standardBOMTemplateView && ctx.checklist.standardBOM.templateNode"
     }
   },
   "messages": {},
@@ -1804,6 +1953,7 @@
     "expandBelow": ["OccurrenceManagementConstants"],
     "Awb0ExpandBelowDesc": ["OccurrenceManagementConstants"],
     "collapseBelow": ["OccurrenceManagementConstants"],
+    "search": ["L2_ChkMainMessages"],
     "Awb0CollapseBelowDesc": ["OccurrenceManagementConstants"],
     "Awp0SelectAllDesc": ["ZeroCompileCommandMessages"],
     "selectAll": ["ZeroCompileCommandMessages"],
@@ -1827,6 +1977,16 @@
     "exit": ["L2_ChkMainMessages"],
     "pinPanel": ["L2_ChkStandardBOMMessages"],
     "unPinPanel": ["L2_ChkStandardBOMMessages"],
-    "allSave": ["L2_ChkMainMessages"]
+    "allSave": ["L2_ChkMainMessages"],
+    "viewMinutes": ["L2_ChkMainMessages"],
+    "expand": ["L2_ChkStandardBOMMessages"],
+    "collapse": ["L2_ChkStandardBOMMessages"],
+    "frameFixed": ["L2_ChkMainMessages"],
+    "fixedCancel": ["L2_ChkMainMessages"],
+    "hideColumn": ["L2_ChkMainMessages"],
+    "showColumn": ["L2_ChkMainMessages"],
+    "partSave": ["L2_ChkStandardBOMMessages"],
+    "editIsChecklistTarget": ["L2_ChkMainMessages"],
+    "viewMaster": ["L2_ChkMainMessages"]
   }
 }

@@ -79,9 +79,7 @@
       "id": "masterManagement",
       "action": "activatemasterManagement",
       "activeWhen": true,
-      "visibleWhen": {
-        "condition": "conditions.tcWorkspace"
-      }
+      "visibleWhen": false
     },
     "sheetManagementHandler": {
       "id": "sheetManagement",

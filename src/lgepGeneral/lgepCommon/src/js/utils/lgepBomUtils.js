@@ -584,5 +584,6 @@ export default exports = {
   getTableViewModelProperties,
   dateTo_GMTString,
   saveUserWorkingContextState2,
+  saveViewModelEditAndSubmitWorkflow2,
 };
 app.factory('lgepBomUtils', () => exports);

@@ -142,6 +142,9 @@
     "searchBox": {
       "displayName": "",
       "type": "STRING"
+    },
+    "searchBoxPlaceHolder": {
+      "dbValue": "검색어 입력"
     }
   },
   "actions": {

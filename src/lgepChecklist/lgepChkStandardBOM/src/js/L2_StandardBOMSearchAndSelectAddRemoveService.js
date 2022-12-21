@@ -7,6 +7,8 @@ import soaService from 'soa/kernel/soaService';
 import viewModelService from 'js/viewModelService';
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import lgepMessagingUtils from 'js/utils/lgepMessagingUtils';
+import viewModelObjectService from 'js/viewModelObjectService';
+import awTableService from 'js/awTableService';
 import { onMount } from 'js/L2_StandardBOMSearchDetailService';
 
 let exports;
@@ -27,7 +29,7 @@ function unPinPanel() {
 
 // 모듈 내의 구조/기능/고장 삭제
 async function removeStandardBom(data, ctx) {
-  const selectedStructureBOMLine = ctx.checklist.standardBOM.bomTreeSelection;
+  const selectedStructureBOMLine = ctx.checklist.standardBOM.selectBomTreeNode;
   if (!selectedStructureBOMLine) {
     notySvc.showInfo('로우를 선택해주세요');
     return;
@@ -41,12 +43,13 @@ async function removeStandardBom(data, ctx) {
     [
       async function () {
         await _removeNodes(selectedStructureBOMLine);
-        await _getDeleteItemByType(selectedStructureBOMLine);
-        await _deleteItems();
-        delete ctx.checklist.standardBOM.bomTreeSelection;
+        // await _getDeleteItemByType(selectedStructureBOMLine);
+        // await _deleteItems();
+        delete ctx.checklist.standardBOM.selectBomTreeNode;
         delete ctx.checklist.standardBOM.selectBomTreeNode;
         delete ctx.checklist.standardBOM.selectBomTreeNodeType;
-        ctx.checklist.standardBOM.deleteNode = selectedStructureBOMLine;
+        const existNodes = ctx.checklist.standardBOM.deleteNodes ? ctx.checklist.standardBOM.deleteNodes : [];
+        ctx.checklist.standardBOM.deleteNodes = [...existNodes, selectedStructureBOMLine];
       },
       function () {
         return;
@@ -63,7 +66,7 @@ async function _removeNodes(selectedStructureBOMLine) {
           type: 'Awb0DesignElement',
           uid: selectedStructureBOMLine.uid,
         },
-        productContextInfo: ctx.checklist.standardBOM.productContext,
+        productContextInfo: ctx.checklist.standardBOM.currentProductContext,
       },
     ],
   };
@@ -130,7 +133,7 @@ function openStructurePanel(includeView) {
 // 템플릿에 모듈 추가
 async function addModuleAssy(data) {
   const structureName = data.structureNameText.dbValues[0];
-  const isChecklistTarget = data.isChecklistTarget.dbValue;
+  const isChecklistTarget = data.isChecklistTarget.dbValue ? 'Y' : 'N';
   if (!structureName) {
     notySvc.showInfo('모듈명을 입력해주세요');
     return;
@@ -138,15 +141,14 @@ async function addModuleAssy(data) {
 
   data.disabledButtonChk.dbValue = true;
 
-  const tepElement = ctx.checklist.standardBOM.topElement;
+  const tepElement = ctx.checklist.standardBOM.templateNode;
   const createObject = await _createItem('L2_Structure', structureName);
   const newItemRevision = createObject.output[0].itemRev;
   const newItem = createObject.output[0].item;
   // 체크리스트 대상, 모듈명
   await lgepObjectUtils.setProperties(newItem, ['l2_is_checklist_target', 'l2_module_name'], [isChecklistTarget, structureName]);
-  await _addLine(newItemRevision, tepElement, ctx.checklist.standardBOM.productContext);
+  await _addLine(newItemRevision, tepElement, ctx.checklist.standardBOM.templateProductContext);
 
-  ctx.checklist.standardBOM.isFirstBomTreeLoad = true;
   eventBus.publish('standardBOMTree.plTable.reload');
   delete ctx.checklist.standardBOM.isTopEditing;
   eventBus.publish('awsidenav.openClose', {});
@@ -168,6 +170,10 @@ function _getName(createType) {
 }
 
 async function _addLine(newItemRevision, parentNode, productContext) {
+  if (!parentNode) {
+    console.log('_addLine parentNode null');
+    return;
+  }
   try {
     // 봄라인 추가
     let requestParam = {
@@ -230,8 +236,12 @@ async function _addLine(newItemRevision, parentNode, productContext) {
       },
     };
     const addResult = await soaService.post('Internal-ActiveWorkspaceBom-2019-06-OccurrenceManagement', 'addObject2', requestParam);
-    const newBomLine = addResult.selectedNewElementInfo.newElements[0];
+    const newBomLine = addResult.selectedNewElementInfo.newElements ? addResult.selectedNewElementInfo.newElements[0] : null;
     ctx.checklist.standardBOM.newBomLine = newBomLine;
+    let item = lgepObjectUtils.getObject(newItemRevision.props.items_tag.dbValues[0]);
+    if (item && item.props && item.props.item_id) {
+      newBomLine.props.awb0ArchetypeId = { dbValues: [item.props.item_id.dbValues[0]] };
+    }
     return newBomLine;
   } catch (err) {
     console.log('err', err);
@@ -240,8 +250,8 @@ async function _addLine(newItemRevision, parentNode, productContext) {
 
 // 템플릿의 모듈 제거
 function removeModuleAssy() {
-  notySvc.setTimeout(lgepMessagingUtils.INFORMATION, 100);
-  const selectedStructureBOMLine = ctx.checklist.standardBOM.bomTreeSelection;
+  notySvc.setTimeout(lgepMessagingUtils.INFO, 100);
+  const selectedStructureBOMLine = ctx.checklist.standardBOM.selectBomTreeNode;
   if (!selectedStructureBOMLine) {
     notySvc.showInfo('로우를 선택해주세요');
     return;
@@ -260,7 +270,7 @@ function removeModuleAssy() {
                 type: 'Awb0DesignElement',
                 uid: selectedStructureBOMLine.uid,
               },
-              productContextInfo: ctx.checklist.standardBOM.productContext,
+              productContextInfo: ctx.checklist.standardBOM.templateProductContext,
             },
           ],
         };
@@ -273,6 +283,16 @@ function removeModuleAssy() {
   );
 }
 
+function _check4Level(node) {
+  try {
+    if (node.parentNode.parentNode.parentNode) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
+}
 // 모듈에 구조 추가
 async function addStructureSave(data) {
   const structureName = data.structureNameText.dbValues[0];
@@ -280,15 +300,32 @@ async function addStructureSave(data) {
     notySvc.showInfo('구조명을 입력해주세요');
     return;
   }
+  // 4레벨 이상은 xxx,
+  const parentNode = ctx.checklist.standardBOM.selectBomTreeNode;
+  if (_check4Level(parentNode)) {
+    notySvc.showInfo('구조는 3레벨까지만 등록 가능합니다');
+    return;
+  }
+  let view = viewModelService.getViewModelUsingElement(document.getElementById('standardBOMTreeDetail'));
+  if (view.dataProviders.standardBOMTreeDetailDataProvider.selectedObjects.length == 0) {
+    notySvc.showInfo('로우를 선택해주세요');
+    return;
+  }
 
   data.disabledButtonChk.dbValue = true;
 
-  const parentNode = ctx.checklist.standardBOM.bomTreeSelection;
   const createObject = await _createItem('L2_Structure', structureName);
   const newItemRevision = createObject.output[0].itemRev;
-  await _addLine(newItemRevision, parentNode, ctx.checklist.standardBOM.productContext);
-
-  onMount();
+  let newObject = await _addLine(newItemRevision, parentNode, ctx.checklist.standardBOM.currentProductContext);
+  let index = Object.values(view.dataProviders)[0]
+    .viewModelCollection.loadedVMObjects.map((e) => e.uid)
+    .indexOf(parentNode.uid);
+  let failureTreeNode = createTreeNode(newObject, parentNode);
+  childCount = 0;
+  getChildrenCountRecursively(parentNode);
+  arrayInsertAt(Object.values(view.dataProviders)[0].viewModelCollection.loadedVMObjects, index + childCount + 1, failureTreeNode);
+  parentNode.children.push(failureTreeNode);
+  // onMount();
 
   if (!ctx.checklist.standardBOM.isPin) {
     eventBus.publish('awsidenav.openClose', {});
@@ -305,21 +342,37 @@ function unmountModulePanel() {
 
 // 기능, 고장 추가
 async function addStandardBom(data, ctx, createType) {
-  const productContext = ctx.checklist.standardBOM.editmode.occurrenceInfo.productContext;
-  notySvc.setTimeout(lgepMessagingUtils.INFORMATION, 100);
-  const selectedStructureBOMLine = ctx.checklist.standardBOM.bomTreeSelection;
-  const selectNode = ctx.checklist.standardBOM.selectBomTreeNode;
+  const productContext = ctx.checklist.standardBOM.currentProductContext;
+  notySvc.setTimeout(lgepMessagingUtils.INFO, 100);
+
+  const selectedStructureBOMLine = ctx.checklist.standardBOM.selectBomTreeNode;
   if (!selectedStructureBOMLine) {
     notySvc.showInfo('로우를 선택해주세요');
     return;
   }
+  if (createType === 'L2_Function') {
+    // 모듈에는 기능 추가 할 수 없음
+    if (ctx.checklist.standardBOM.currentDetailObject.uid === selectedStructureBOMLine.props.awb0Archetype.dbValues[0]) {
+      notySvc.showInfo('모듈에는 기능을 추가할 수 없습니다');
+      return;
+    }
+  }
   ctx.checklist.standardBOM.moduleSaving = true;
-  // 1. 아이템 생성 후
   const newItemName = _getName(createType);
   const newObjectModel = await _createItem(createType, newItemName);
   const newItemRevision = newObjectModel.output[0].itemRev;
   await _setProperties(createType, newItemRevision, newItemName);
   const addLineNode = await _addLine(newItemRevision, selectedStructureBOMLine, productContext);
+  let view = viewModelService.getViewModelUsingElement(document.getElementById('standardBOMTreeDetail'));
+  let index = Object.values(view.dataProviders)[0]
+    .viewModelCollection.loadedVMObjects.map((e) => e.uid)
+    .indexOf(selectedStructureBOMLine.uid);
+  let addLineTreeNode = createTreeNode(addLineNode, selectedStructureBOMLine);
+  childCount = 0;
+  getChildrenCountRecursively(selectedStructureBOMLine);
+  let result = index + childCount + 1;
+  arrayInsertAt(Object.values(view.dataProviders)[0].viewModelCollection.loadedVMObjects, result, addLineTreeNode);
+  selectedStructureBOMLine.children.push(addLineTreeNode);
 
   // 기능을 생성한 경우 고장도 같이 생성 해야 한다.
   if (createType === 'L2_Function') {
@@ -327,16 +380,73 @@ async function addStandardBom(data, ctx, createType) {
     const newObjectModel = await _createItem('L2_Failure', newItemName);
     const newItemRevision = newObjectModel.output[0].itemRev;
     await _setProperties('L2_Failure', newItemRevision, newItemName);
-    await _addLine(newItemRevision, addLineNode, productContext);
+    let failureObject = await _addLine(newItemRevision, addLineTreeNode, productContext);
+    addLineTreeNode.isExpanded = true;
+    let failureTreeNode = createTreeNode(failureObject, addLineTreeNode);
+    arrayInsertAt(Object.values(view.dataProviders)[0].viewModelCollection.loadedVMObjects, result + 1, failureTreeNode);
+    addLineTreeNode.children.push(failureTreeNode);
+
+    if (!addLineTreeNode.failureChildren) addLineTreeNode.failureChildren = [];
+    addLineTreeNode.failureChildren.push(failureTreeNode);
   }
 
-  onMount();
   ctx.checklist.standardBOM.moduleSaving = false;
+}
+
+let childCount = 0;
+function getChildrenCountRecursively(node) {
+  if (node.children) {
+    childCount += node.children.length;
+    for (const child of node.children) {
+      getChildrenCountRecursively(child);
+    }
+  }
 }
 
 async function _setProperties(createType, newItemRevision, newItemName) {
   const propName = createType === 'L2_Function' ? 'l2_function' : 'l2_failure_mode';
   await lgepObjectUtils.setProperties(newItemRevision, [propName], [newItemName]);
+}
+
+function createTreeNode(modelObject, parentNode) {
+  let vmoChild = viewModelObjectService.constructViewModelObjectFromModelObject(modelObject);
+  let treeVmoChild = awTableService.createViewModelTreeNode(
+    vmoChild.uid,
+    vmoChild.type,
+    vmoChild.props.object_string.dbValues[0],
+    parentNode.levelNdx + 1,
+    parentNode.levelNdx + 2,
+    vmoChild.typeIconURL,
+  );
+  treeVmoChild.parentNode = parentNode;
+  treeVmoChild.props = vmoChild.props;
+  treeVmoChild.originalObject = modelObject;
+  treeVmoChild.alternateID = treeVmoChild.uid + ',' + parentNode.alternateID;
+  treeVmoChild.displayName = treeVmoChild.props.object_string.dbValues[0];
+  treeVmoChild.isLeaf = true;
+  if (parentNode && !parentNode.children) {
+    parentNode.children = [];
+  }
+
+  if (!parentNode.numberOfChildren) {
+    parentNode.numberOfChildren = 1;
+  } else {
+    parentNode.numberOfChildren += 1;
+  }
+  if (parentNode.numberOfChildren && parentNode.numberOfChildren > 0) {
+    parentNode.isLeaf = false;
+  } else {
+    parentNode.isLeaf = true;
+  }
+  return treeVmoChild;
+}
+
+function arrayInsertAt(destArray, pos, arrayToInsert) {
+  var args = [];
+  args.push(pos); // where to insert
+  args.push(0); // nothing to remove
+  args = args.concat(arrayToInsert); // add on array to insert
+  destArray.splice.apply(destArray, args); // splice it in
 }
 
 export default exports = {

@@ -1,0 +1,48 @@
+<aw-popup2 caption="{{i18n.actionItem}}">
+    <aw-panel>
+        <aw-panel-body>
+            <aw-flex-column class="actionCSS">
+              <aw-flex-row>
+                <aw-label prop="data.l2_commentLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonEditCommentSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.l2_follow_upLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonEditFollowUpSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row id="listBoxWidth">
+                <aw-listbox prop="data.l2_worker" list="data.l2_workerValues.dbValue"></aw-listbox>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-date prop="data.l2_expected_date"></aw-date>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.object_descLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonEditRemarkSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+            </aw-flex-column>
+        </aw-panel-body>
+    </aw-panel>
+    <aw-panel-footer>
+        <aw-flex-row>
+            <aw-flex-column>
+                <aw-button action="createActionBatchAction">{{i18n.save}}</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="closePopupWindow">{{i18n.close}}</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-footer>
+</aw-popup2>

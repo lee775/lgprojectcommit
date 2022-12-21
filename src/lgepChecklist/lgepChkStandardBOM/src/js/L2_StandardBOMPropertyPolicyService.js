@@ -53,6 +53,9 @@ export let registerPropertyPolicy = function () {
           {
             name: standardBOMConstants.l2_is_checklist_target,
           },
+          {
+            name: 'l2_comments',
+          },
         ],
       },
       {
@@ -82,6 +85,37 @@ export let registerPropertyPolicy = function () {
           },
           {
             name: standardBOMConstants.object_string,
+          },
+          {
+            name: 'l2_comments',
+          },
+        ],
+      },
+      {
+        name: 'L2_FunctionRevision',
+        properties: [
+          {
+            name: standardBOMConstants.object_name,
+          },
+          {
+            name: standardBOMConstants.object_string,
+          },
+          {
+            name: 'l2_files',
+          },
+        ],
+      },
+      {
+        name: 'L2_FailureRevision',
+        properties: [
+          {
+            name: standardBOMConstants.object_name,
+          },
+          {
+            name: standardBOMConstants.object_string,
+          },
+          {
+            name: 'l2_files',
           },
         ],
       },

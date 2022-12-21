@@ -10,6 +10,7 @@ import browserUtils from 'js/browserUtils';
 import common from 'js/utils/lgepCommonUtils';
 import loding from 'js/utils/lgepLoadingUtils';
 import fmsUtils from 'js/fmsUtils';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 var $ = require('jQuery');
 
 /**
@@ -30,9 +31,35 @@ async function txtFileToDataset(content, itemRev) {
   // let file = new File([content], itemRev.props.items_tag.uiValues[0] + ".TXT", {
   //     type: 'text'
   // });
+  let fileIndex = 1;
   for (let svg of svgSlice) {
     files.push(
-      new File([svg], itemRev.props.items_tag.uiValues[0] + '.TXT', {
+      new File([svg], itemRev.props.items_tag.uiValues[0] + fileIndex + '.TXT', {
+        type: 'text',
+      }),
+    );
+    fileIndex++;
+  }
+  let dataset = await uploadFileToDataset(files);
+  await deleteRelation(itemRev);
+  await linkRelationsSequence(itemRev, dataset);
+}
+
+async function txtFileToDataset2(content, itemRev) {
+  let svgSlice = content.split('</svg>');
+  // let svgTemp = [];
+  // for(let temp of svgSlice){
+  //     if(temp.includes("<svg")){
+  //         svgTemp.push(temp);
+  //     }
+  // }
+  let files = [];
+  // let file = new File([content], itemRev.props.items_tag.uiValues[0] + ".TXT", {
+  //     type: 'text'
+  // });
+  for (let svg of svgSlice) {
+    files.push(
+      new File([svg], itemRev.props.item_id.uiValues[0] + '.TXT', {
         type: 'text',
       }),
     );
@@ -194,14 +221,47 @@ async function readHtmlToSummernote(itemRev) {
   if (fileSize > 2097152) {
     loding.openWindow();
   }
+  let tempDataset = dataset.sort(function (a, b) {
+    let aTemp = a.props.object_string.dbValues[0];
+    aTemp = aTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+    aTemp = aTemp.replace('.TXT', '');
+    if (aTemp == '') {
+      return;
+    }
+    aTemp = Number(aTemp);
+    let bTemp = b.props.object_string.dbValues[0];
+    bTemp = bTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+    bTemp = bTemp.replace('.TXT', '');
+    if (bTemp == '') {
+      return;
+    }
+    bTemp = Number(bTemp);
+    return aTemp - bTemp;
+  });
+  dataset = [];
+  dataset = tempDataset;
   //파일티켓 읽기
-  let inputParam = {
-    files: dataset,
-  };
   let textTicket;
   let string = '';
   try {
-    let serachResult = await SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', inputParam);
+    let serachResult = {
+      tickets: [[], []],
+    };
+    let promiseArr = [];
+    for (let i of dataset) {
+      let inputParam = {
+        files: [i],
+      };
+      let ticketTemp = SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', inputParam);
+      promiseArr.push(ticketTemp);
+    }
+    await Promise.all(promiseArr).then((promiseArr) => {
+      for (let i of promiseArr) {
+        serachResult.tickets[0].push(i.tickets[0][0]);
+        serachResult.tickets[1].push(i.tickets[1][0]);
+      }
+      return;
+    });
     for (let i = 0; i < dataset.length; i++) {
       let stringTemp = '';
       textTicket = serachResult.tickets[1][i];
@@ -253,7 +313,7 @@ async function readHtmlToSummernote(itemRev) {
       loding.closeWindow();
     }
   } catch (err) {
-    //console.log(err);
+    console.log(err);
   }
 
   return string;
@@ -340,6 +400,49 @@ async function readHtmlToSummernoteEdit(itemRev) {
   let string = '';
   try {
     let serachResult = await SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', inputParam);
+    let index = 0;
+    serachResult.tickets[0].sort(function (a, b) {
+      let aTemp = a.props.object_string.dbValues[0];
+      aTemp = aTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      aTemp = aTemp.replace('.TXT', '');
+      if (aTemp == '') {
+        return -1;
+      }
+      aTemp = Number(aTemp);
+      let bTemp = b.props.object_string.dbValues[0];
+      bTemp = bTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      bTemp = bTemp.replace('.TXT', '');
+      if (bTemp == '') {
+        return -1;
+      }
+      bTemp = Number(bTemp);
+      return aTemp - bTemp;
+    });
+    serachResult.tickets[1].sort(function (a, b) {
+      if (index == serachResult.tickets[0].length - 1) return 0;
+      let aTemp = serachResult.tickets[0][index].props.object_string.dbValues[0];
+      aTemp = aTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      aTemp = aTemp.replace('.TXT', '');
+      if (aTemp == '') {
+        return 0;
+      }
+      aTemp = Number(aTemp);
+      let bTemp = serachResult.tickets[0][index + 1].props.object_string.dbValues[0];
+      bTemp = bTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      bTemp = bTemp.replace('.TXT', '');
+      if (bTemp == '') {
+        return 0;
+      }
+      bTemp = Number(bTemp);
+      index++;
+      if (aTemp > bTemp) {
+        return -1;
+      } else if (aTemp < bTemp) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
     for (let i = 0; i < dataset.length; i++) {
       let stringTemp = '';
       textTicket = serachResult.tickets[1][i];
@@ -429,6 +532,25 @@ async function readHtmlToSummernoteChapterAndBook(itemRev) {
       }
     }
   }
+  let tempDataset = dataset.sort(function (a, b) {
+    let aTemp = a.props.object_string.dbValues[0];
+    aTemp = aTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+    aTemp = aTemp.replace('.TXT', '');
+    if (aTemp == '') {
+      return;
+    }
+    aTemp = Number(aTemp);
+    let bTemp = b.props.object_string.dbValues[0];
+    bTemp = bTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+    bTemp = bTemp.replace('.TXT', '');
+    if (bTemp == '') {
+      return;
+    }
+    bTemp = Number(bTemp);
+    return aTemp - bTemp;
+  });
+  dataset = [];
+  dataset = tempDataset;
   //파일티켓 읽기
   let inputParam = {
     files: dataset,
@@ -437,6 +559,49 @@ async function readHtmlToSummernoteChapterAndBook(itemRev) {
   let string = '';
   try {
     let serachResult = await SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', inputParam);
+    let index = 0;
+    serachResult.tickets[0].sort(function (a, b) {
+      let aTemp = a.props.object_string.dbValues[0];
+      aTemp = aTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      aTemp = aTemp.replace('.TXT', '');
+      if (aTemp == '') {
+        return -1;
+      }
+      aTemp = Number(aTemp);
+      let bTemp = b.props.object_string.dbValues[0];
+      bTemp = bTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      bTemp = bTemp.replace('.TXT', '');
+      if (bTemp == '') {
+        return -1;
+      }
+      bTemp = Number(bTemp);
+      return aTemp - bTemp;
+    });
+    serachResult.tickets[1].sort(function (a, b) {
+      if (index == serachResult.tickets[0].length - 1) return 0;
+      let aTemp = serachResult.tickets[0][index].props.object_string.dbValues[0];
+      aTemp = aTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      aTemp = aTemp.replace('.TXT', '');
+      if (aTemp == '') {
+        return 0;
+      }
+      aTemp = Number(aTemp);
+      let bTemp = serachResult.tickets[0][index + 1].props.object_string.dbValues[0];
+      bTemp = bTemp.replace(itemRev.props.items_tag.uiValues[0], '');
+      bTemp = bTemp.replace('.TXT', '');
+      if (bTemp == '') {
+        return 0;
+      }
+      bTemp = Number(bTemp);
+      index++;
+      if (aTemp > bTemp) {
+        return -1;
+      } else if (aTemp < bTemp) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
     for (let i = 0; i < dataset.length; i++) {
       let stringTemp = '';
       textTicket = serachResult.tickets[1][i];
@@ -1418,7 +1583,7 @@ function _commitDatasetFiles(targetDataset, file, ticket) {
       selectedtype = ['DXF', 'DXF', 'Plain', 'DXF'];
     } else if (type === 'gif') {
       selectedtype = ['GIF', 'GIF', 'Plain', 'GIF_Reference'];
-    } else if (type === 'jpg') {
+    } else if (type === 'jpg' || type === 'jpeg') {
       selectedtype = ['JPEG', 'JPEG', 'Plain', 'JPEG_Reference'];
     } else if (type === 'xls') {
       selectedtype = ['MSExcel', 'MSExcel', 'Plain', 'excel'];
@@ -1650,6 +1815,56 @@ export function getDatasetWriteTickets(dataset) {
   return SoaService.post('Core-2006-03-FileManagement', 'getDatasetWriteTickets', inputParam);
 }
 
+async function imgFileToDataset(tag, itemRev, fileName) {
+  try {
+    let temp = tag;
+    let base64File = [];
+    let result = {
+      resultTag: '',
+      dataset: {},
+    };
+    if (fileName == undefined) {
+      fileName = 'image';
+    }
+    let tagTemp = [];
+    tag = tag.match(/\<img.*>/gi);
+    tag = tag[0];
+    tag = tag.replace(/<p[^>]+>/gi, '');
+    tag = tag.replace(/[</p^>]+>/gi, '');
+    tag = tag.replace(/<[/br^>]+>/gi, '');
+    tag = tag.replace(/<br[^>]+>/gi, '');
+    tag = tag.replace(/<br/gi, '');
+    tag = tag.split('"');
+    for (let i = 0; i < tag.length; i++) {
+      if (tag[i].includes('src=')) {
+        tagTemp.push(tag[i + 1]);
+      }
+    }
+    for (let i of tagTemp) {
+      temp = temp.replace(i, '');
+    }
+    for (let i = 0; i < tagTemp.length; i++) {
+      if (tagTemp[i].includes('base64')) {
+        base64File.push(imageToFile(tagTemp[i], fileName + i));
+      } else {
+        base64File.push(await createFile(tagTemp[i], fileName + i));
+      }
+    }
+    result.resultTag = temp;
+    let dataset = await uploadFileToDataset(base64File);
+    let uids = itemRev.props.l2_images.dbValues;
+    let objs = await lgepObjectUtils.getObjects(uids);
+    if (objs.length > 1) {
+      lgepObjectUtils.deleteObjects(objs);
+    }
+    return dataset;
+    // await deleteRelation(itemRev);
+    // await linkRelationsSequence(itemRev, dataset);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 let exports = {};
 
 export default exports = {
@@ -1662,6 +1877,7 @@ export default exports = {
   textFileToDataset,
   stripTags,
   txtFileToDataset,
+  txtFileToDataset2,
   txtFileToDatasetNoDelete,
   readHtmlToSummernote,
   relationReadSummernote,
@@ -1676,6 +1892,8 @@ export default exports = {
   selectFileRelationDelete,
   stringToDataset,
   readHtmlToSummernoteEdit,
+  deleteRelationReference,
+  imgFileToDataset,
 };
 
 app.factory('lgepSummerNoteUtils', () => exports);

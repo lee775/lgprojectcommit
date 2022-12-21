@@ -140,6 +140,7 @@
   "createDgnPage": "Create Design Book Page",
   "createDgnPage2": "Design Book Add",
   "editDgnPage": "Edit Design Book Page",
+  "editDgnPage2": "Edit Design Book Page",
   "contentDetailType": "Content Detail Type",
   "contentType": "Content Type",
   "parts": "Reference Parts",
@@ -291,5 +292,13 @@
   "pagePositionChangeSet": "Please select the page to change the location.",
   "onlyFolder": "Please select a folder only",
   "selectedFolderPlease": "Please select a folder",
-  "folderNameEdit": "Folder Name Edit"
+  "folderNameEdit": "Folder Name Edit",
+  "bookPptDown": "Guide Book PPT",
+  "pptChange": "PPT Change",
+  "guideBookSet": "Design Guide Book Set",
+  "selectGuideBook": "Please select design Guide Book",
+  "copy":"Copy",
+  "copyCancel": "Copy Cancel",
+  "twoChar" : "English can be searched more than 2 characters.",
+  "structureSel" : "Please select a structure to add design instructions."
 }

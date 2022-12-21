@@ -45,6 +45,7 @@ table td {
 .aw-commands-showIconLabel.aw-commands-commandIconButtonText.ng-binding {
   width: 100%;
 }
+
 /* target row  */
 .tui-grid-cell.tui-grid-cell-has-input.interaction-target-select {
   background-color: #cfcfcf;
@@ -97,11 +98,11 @@ div [class='note-editable'] {
 
 /* sideNav 관련 */
 aside#checklist_minutes {
-  width: 40%;
+  width: 30%;
 }
 
 aside#checklist_createMinutes {
-  width: 40%;
+  width: 30%;
 }
 
 /* 전체 회의록 조회 */
@@ -129,10 +130,18 @@ aside#all_minutes_checklist {
 }
 
 /* 선택된 node 하이라이트 */
-/* .tui-grid-cell.checklist-selected {
+.tui-grid-cell.checklist-selected {
   background-color: #e5f6ff;
-} */
+}
 
 .checklist-clickable {
   cursor: pointer;
+}
+
+.hideEvent {
+  pointer-events: none;
+}
+
+.main-anchor-cmds .aw-commands-showIconLabel.aw-commands-commandIconButtonText.ng-binding {
+  width: 100% !important;
 }

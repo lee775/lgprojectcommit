@@ -3,7 +3,7 @@
     <div class="awRoot aw-layout-panelMain aw-layout-subLocation">
       <aw-flex-row height="fill">
         <aw-flex-column width="3">
-          <aw-panel-section caption="i18n.templateList" name="standardBOMFolderTreePanelSection" collapsed="false">
+          <aw-panel-section caption="i18n.masterList" name="standardBOMFolderTreePanelSection" collapsed="false">
             <aw-flex-row height="45f">
               <aw-scrollpanel>
                 <div>
@@ -19,7 +19,7 @@
         </aw-flex-column>
         <aw-splitter></aw-splitter>
         <aw-flex-column width="4">
-          <aw-panel-section caption="i18n.template" name="standardBOMTreePanelSection" collapsed="false">
+          <aw-panel-section caption="i18n.master" name="standardBOMTreePanelSection" collapsed="false">
             <aw-flex-row class="standardBomTreeCmdsSection" style="width: 100%">
               <aw-toolbar class="standardBomTreeCmds" first-anchor="standardBomTreeAnchor" second-anchor="">
               </aw-toolbar>
@@ -27,8 +27,8 @@
             <aw-flex-row height="41f">
               <aw-scrollpanel>
                 <div>
-                  <div visible-when="!ctx.checklist.standardBOM.isDetailView">
-                    <aw-splm-table exist-when="!ctx.checklist.bomTree" gridid="standardBOMTree" use-tree="true">
+                  <div exist-when="!ctx.checklist.standardBOM.isDetailView">
+                    <aw-splm-table gridid="standardBOMTree" use-tree="true">
                     </aw-splm-table>
                   </div>
                   <div exist-when="ctx.checklist.standardBOM.isDetailView">
@@ -41,73 +41,92 @@
         </aw-flex-column>
         <aw-splitter></aw-splitter>
         <aw-flex-column width="fill">
-          <aw-panel-section caption="i18n.templateEdit" name="standardBOMEditPanelSection" collapsed="false">
-            <!-- <aw-flex-row exist-when="ctx.checklist.standardBOM.isEditing" class="standardBomTreeCmdsSection" style="width: 100%">
-              <aw-button>저장</aw-button>
+          <aw-panel-section caption="i18n.editMaster" name="standardBOMEditPanelSection" collapsed="false">
+            <aw-flex-row exist-when="ctx.checklist.standardBOM.isEditing" class="partsavesection" style="width: 100%">
+              <aw-toolbar class="standardBomEditCmds" first-anchor="standardBomEditAnchor" second-anchor="">
+                <!-- <aw-button aw-class="{'disabled': data.partSaveDisabledButtonChk.dbValue}" action="partSave">
+                {{i18n.partSave}}</aw-button> -->
               </aw-toolbar>
-            </aw-flex-row> -->
+            </aw-flex-row>
             <aw-flex-row height="41f">
-              <aw-scrollpanel>
-                <div exist-when="ctx.checklist.standardBOM.selectBomTreeNodeType ==='L2_StructureRevision'">
-                  <div exist-when="!ctx.checklist.standardBOM.isEditing"
-                    visible-when="ctx.checklist.standardBOM.initComplete">
-                    <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">구조명</aw-label>
-                      <aw-label>{{data.structureName.dbValue}}</aw-label>
+              <aw-scrollpanel class="cheklist-input">
+                <div visible-when="ctx.checklist.standardBOM.selectBomTreeNodeType ==='L2_StructureRevision'">
+                  <div visible-when="!ctx.checklist.standardBOM.isEditing && ctx.checklist.standardBOM.initComplete">
+                    <aw-flex-row >
+                      <aw-toolbar class="standardBomListEditCmds" first-anchor="standardBomListEditAnchor" second-anchor="">
                     </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">템플릿?</aw-label>
+                      <div class="str-label">{{i18n.structureName}}</div>
+                      <div>{{data.structureName.dbValue}}</div>
+                      <!-- <aw-label class="str-label">구조명</aw-label> -->
+                      <!-- <aw-label>{{data.structureName.dbValue}}</aw-label> -->
+                    </aw-flex-row>
+                    <!-- <aw-flex-row class="structure_info-row">
+                      <aw-label class="str-label">마스터?</aw-label>
                       <aw-label>{{data.structureTemplate.dbValue}}</aw-label>
                     </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
                       <aw-label class="str-label">체크리스트?</aw-label>
                       <aw-label>{{data.structureIsChecklist.dbValue}}</aw-label>
+                    </aw-flex-row> -->
+                    <aw-flex-row class="structure_info-row">
+                      <div class="str-label">{{i18n.isChecklistTarget}}</div>
+                      <div>{{data.structureTargetChecklist.dbValue}}</div>
+                      <!-- <aw-label class="str-label">체크리스트대상?</aw-label>
+                      <aw-label>{{data.structureTargetChecklist.dbValue}}</aw-label> -->
                     </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">체크리스트대상?</aw-label>
-                      <aw-label>{{data.structureTargetChecklist.dbValue}}</aw-label>
+                      <div class="str-label">{{i18n.productType}}</div>
+                      <div>{{data.productType.dbValue}}</div>
+                      <!-- <aw-label class="str-label">제품 타입</aw-label>
+                      <aw-label>{{data.productType.dbValue}}</aw-label> -->
                     </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">제품 타입</aw-label>
-                      <aw-label>{{data.productType.dbValue}}</aw-label>
+                      <div class="str-label">{{i18n.productClass}}</div>
+                      <div>{{data.productClass.dbValue}}</div>
+                      <!-- <aw-label class="str-label">제품 클래스</aw-label>
+                      <aw-label>{{data.productClass.dbValue}}</aw-label> -->
                     </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">제품 클래스</aw-label>
-                      <aw-label>{{data.productClass.dbValue}}</aw-label>
+                      <div class="str-label">{{i18n.note}}</div>
+                      <div>{{data.comments.dbValue}}</div>
                     </aw-flex-row>
                   </div>
                   <div exist-when="ctx.checklist.standardBOM.isEditing">
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">구조명</aw-label>
+                      <div class="str-label">{{i18n.structureName}}</div>
                       <aw-textbox prop="data.structureNameText"></aw-textbox>
+                      <!-- <aw-label class="str-label">구조명</aw-label>
+                      <aw-textbox prop="data.structureNameText"></aw-textbox> -->
                     </aw-flex-row>
-                    <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">템플릿?</aw-label>
+                    <!-- <aw-flex-row class="structure_info-row">
+                      <aw-label class="str-label">마스터?</aw-label>
                       <aw-listbox isSelectOnly="true" prop="data.templateCheckValue" list="data.checkValues.dbValue">
-                      </aw-listbox>
-                    </aw-flex-row>
+                      </aw-listbox> -->
+                    <!-- </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
                       <aw-label class="str-label">체크리스트?</aw-label>
                       <aw-listbox isSelectOnly="true" prop="data.isChecklistCheckValue" list="data.checkValues.dbValue">
                       </aw-listbox>
-                    </aw-flex-row>
+                    </aw-flex-row> -->
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">체크리스트 대상?</aw-label>
+                      <div class="str-label">{{i18n.isChecklistTarget}}</div>
+                      <!-- <aw-label class="str-label">체크리스트 대상?</aw-label> -->
                       <aw-listbox isSelectOnly="true" prop="data.isChecklistTargetValue"
                         list="data.checkValues.dbValue"> </aw-listbox>
                     </aw-flex-row>
                     <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">제품 타입</aw-label>
-                      <aw-textbox prop="data.productTypeBox"></aw-textbox>
+                      <aw-label class="str-label">{{i18n.note}}</aw-label>
+                      <aw-textarea prop="data.l2_comments"></aw-textarea>
                     </aw-flex-row>
-                    <aw-flex-row class="structure_info-row">
-                      <aw-label class="str-label">제품 클래스</aw-label>
-                      <aw-textbox prop="data.productClassBox"></aw-textbox>
-                    </aw-flex-row>
+                    <div class="stnd_editor-section">
+                      <aw-label class="str-label">{{i18n.attachmentImage}}</aw-label>
+                      <div id="inputImage"></div>
+                    </div>
                   </div>
                 </div>
-                <div exist-when="ctx.checklist.standardBOM.selectBomTreeNodeType ==='L2_FunctionRevision'"
-                  visible-when="ctx.checklist.standardBOM.initComplete">
+                <div
+                  visible-when="ctx.checklist.standardBOM.selectBomTreeNodeType ==='L2_FunctionRevision' && ctx.checklist.standardBOM.initComplete">
                   <div class="stnd_editor-section">
                     <div class="editor-label">{{i18n.functionLabel}}</div>
                     <div id="function"></div>
@@ -116,9 +135,12 @@
                     <div class="editor-label">{{i18n.requirementLabel}}</div>
                     <div id="requirement"></div>
                   </div>
+                  <div class="stnd_editor-section">
+                    <aw-textarea prop="data.comments"></aw-textarea>
+                  </div>
                 </div>
-                <div exist-when="ctx.checklist.standardBOM.selectBomTreeNodeType ==='L2_FailureRevision'"
-                  visible-when="ctx.checklist.standardBOM.initComplete">
+                <div
+                  visible-when="ctx.checklist.standardBOM.selectBomTreeNodeType ==='L2_FailureRevision' && ctx.checklist.standardBOM.initComplete">
                   <div class="stnd_editor-section">
                     <div class="editor-label">{{i18n.failureImportance}}</div>
                     <div exist-when="!ctx.checklist.standardBOM.isEditing">
@@ -157,6 +179,9 @@
                     <div class="editor-label">{{i18n.classificationLabel}}</div>
                     <div id="classification"></div>
                   </div>
+                  <div class="stnd_editor-section">
+                    <aw-textarea prop="data.comments"></aw-textarea>
+                  </div>
                 </div>
               </aw-scrollpanel>
             </aw-flex-row>
@@ -167,7 +192,7 @@
   </aw-panel-body>
   <aw-splitter direction="HORIZONTAL"></aw-splitter>
   <aw-panel-footer>
-    <aw-button action="okAction" size="auto" aw-class="{'disabled': data.disabledButtonChk.dbValue}"> {{i18n.confirm}}
+    <aw-button action="okAction" size="auto" aw-class="{'disabled': data.disabledButtonChk.dbValue}"> {{i18n.createChecklist}}
     </aw-button>
     <aw-button button-type="base" action="closePopupWindow" size="auto"
       aw-class="{'disabled': data.disabledButtonChk.dbValue}">{{i18n.CancelText}}</aw-button>

@@ -13,18 +13,13 @@
     "dependencies": ["js/aw.native.sublocation.controller"],
     "parent": "lgepXceleratorLocaiton",
     "reloadOnSearch": false,
-    "templateUrl": "/html/aw.native.sublocation.html",
-    "type": "subLocation"
+    "templateUrl": "/html/aw.native.sublocation.html"
   },
   "lgepXceleratorLocaiton": {
     "data": {
       "browserTitle": {
         "source": "/i18n/lgepXceleratorMessages",
         "key": "lgepXceleratorBrowserTitle"
-      },
-      "browserSubTitle": {
-        "source": "/i18n/lgepXceleratorMessages",
-        "key": "lgepXceleratorBrowserSubTitle"
       },
       "headerTitle": {
         "source": "/i18n/lgepXceleratorMessages",

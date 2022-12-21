@@ -281,7 +281,8 @@
                                 <aw-flex-column width="10f" class="marginRight" visible-when="conditions.selectedBookCond">
                                     <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
                                 </aw-flex-column>
-                                <aw-button size="auto" class="checkCate mama" action="showTableCheck" visible-when="conditions.selectedBookNoneManual">
+                                <aw-button size="auto" class="checkCate mama" action="pptDownPopup" visible-when="conditions.selectedBookNoneManual" id="pptDownPopupId">{{i18n.bookPptDown}}</aw-button>
+                                <aw-button size="auto" class="checkCate mama" action="showTableCheck" visible-when="conditions.showCheckButton">
                                     {{i18n.showCheckTable}}</aw-button>
                             <aw-button size="auto" class="checkCate mama" action="revisionComparePopupBat" visible-when="conditions.selectedBookNoneManual">{{i18n.revCompare}}</aw-button>
                             <aw-button size="auto" class="checkCate mama" action="reviseHistoryPopup" visible-when="conditions.selectedBookNoneManual">{{i18n.reviseHistory}}</aw-button>

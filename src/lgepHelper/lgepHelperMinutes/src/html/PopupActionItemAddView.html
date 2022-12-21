@@ -1,0 +1,48 @@
+<aw-popup2 caption="{{i18n.actionItem}}">
+    <aw-panel>
+        <aw-panel-body>
+            <aw-flex-column class="actionCSS">
+              <aw-flex-row>
+                <aw-label prop="data.l2_commentLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonAddCommentSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.l2_follow_upLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonAddFollowUpSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row id="listBoxWidth">
+                <aw-listbox prop="data.l2_worker" list="data.l2_workerValues.dbValue"></aw-listbox>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-date prop="data.l2_expected_date"></aw-date>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.object_descLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonAddRemarkSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+            </aw-flex-column>
+        </aw-panel-body>
+    </aw-panel>
+    <aw-panel-footer>
+        <aw-flex-row>
+            <aw-flex-column>
+                <aw-button action="createActionItem">{{i18n.create}}</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="closePopupWindow">{{i18n.close}}</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-footer>
+</aw-popup2>

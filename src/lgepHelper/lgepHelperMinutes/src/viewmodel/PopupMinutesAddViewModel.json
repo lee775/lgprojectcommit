@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-datetime.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-label.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-popup2.directive",
+    "js/aw-textarea.directive",
+    "js/aw-textbox.directive"
+  ],
+  "actions": {
+  "initializeAddPopup": {
+    "actionType": "JSFunction",
+    "method": "initializeAddPopup",
+    "inputData": {
+      "data": "{{data}}"
+    },
+    "deps": "js/generalMinutesService"
+  },
+  "initDate": {
+    "actionType": "JSFunction",
+    "method": "initDate",
+    "inputData": {
+      "data": "{{data}}"
+    },
+    "deps": "js/generalMinutesService"
+  },
+    "minutesTableRefresh": {
+      "actionType": "JSFunction",
+      "method": "minutesTableRefresh",
+      "deps": "js/generalMinutesService"
+    },
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "addMinutes": {
+      "actionType": "JSFunction",
+      "method": "addMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "fileView": {
+      "actionType": "JSFunction",
+      "method": "fileView",
+      "deps": "js/generalMinutesService"
+    },
+    "createMinutesBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "addMinutes"
+        },
+        {
+          "action": "closePopupWindow"
+        },
+        {
+          "action": "minutesTableRefresh"
+        }
+      ]
+    }
+  },
+  "data": {
+    "minutesTitle": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "{{i18n.minutesTitle}}"
+    },
+    "l2_meeting_date": {
+      "displayName": "{{i18n.minutesDate}}",
+      "type": "DATETIME",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_meeting_place": {
+      "displayName": "{{i18n.minutesPlace}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "{{i18n.minutesPlace}}"
+    },
+    "l2_meeting_participants": {
+      "displayName": "{{i18n.minutesParticipants}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "isEditable": "true",
+      "numberOfLines": 4
+    },
+    "l2_meeting_related_schedule": {
+      "displayName": "{{i18n.minutesSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 4
+    },
+    "l2_meeting_agenda": {
+      "displayName": "{{i18n.minutesAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "{{i18n.minutesAgenda}}"
+    },
+    "l2_meeting_detailsLbl": {
+      "displayName": "{{i18n.minutesDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "attachFileLbl": {
+      "displayName": "{{i18n.minutesAttachesFile}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "addPopupOpen.complete",
+      "action": "initializeAddPopup"
+    },
+    {
+      "eventId": "PopupMinutesAdd.contentLoaded",
+      "action": "fileView"
+    },
+    {
+      "eventId": "PopupMinutesAdd.contentLoaded",
+      "action": "initDate"
+    }
+  ],
+  "i18n": {
+    "ok": ["lgepKnowldegeManageMessages"],
+    "close": ["lgepKnowldegeManageMessages"],
+    "fileUpload": ["lgepKnowldegeManageMessages"],
+    "minutesTitle": ["lgepKnowldegeManageMessages"],
+    "minutesDate": ["lgepKnowldegeManageMessages"],
+    "minutesPlace": ["lgepKnowldegeManageMessages"],
+    "minutesParticipants": ["lgepKnowldegeManageMessages"],
+    "minutesDetails": ["lgepKnowldegeManageMessages"],
+    "minutesAgenda": ["lgepKnowldegeManageMessages"],
+    "minutesSchedule": ["lgepKnowldegeManageMessages"],
+    "minutesAttachesFile": ["lgepKnowldegeManageMessages"]
+  }
+}

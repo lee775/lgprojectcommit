@@ -1,0 +1,120 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+      "js/aw-button.directive",
+      "js/aw-date.directive",
+      "js/aw-flex-column.directive",
+      "js/aw-flex-row.directive",
+      "js/aw-label.directive",
+      "js/aw-listbox.directive",
+      "js/aw-panel.directive",
+      "js/aw-panel-body.directive",
+      "js/aw-panel-footer.directive",
+      "js/aw-popup2.directive",
+      "js/aw-textarea.directive",
+      "css/minutesMainCss.css"
+    ],
+    "actions": {
+        "closePopupWindow": {
+          "actionType": "JSFunction",
+          "method": "hide",
+          "inputData": {
+            "popupId": "{{data.popupId}}"
+          },
+          "deps": "js/popupService"
+        },
+        "initializeActionItemEditPopup": {
+          "actionType": "JSFunction",
+          "method": "initializeActionItemEditPopup",
+          "inputData": {
+            "data": "{{data}}"
+          },
+          "deps": "js/generalMinutesService"
+        },
+        "saveActionItem": {
+          "actionType": "JSFunction",
+          "method": "saveActionItem",
+          "inputData": {
+            "ctx": "{{ctx}}",
+            "data": "{{data}}"
+          },
+          "deps": "js/generalMinutesService"
+        },
+        "createActionBatchAction": {
+          "actionType": "batchJob",
+          "steps": [
+            {
+              "action": "saveActionItem"
+            },
+            {
+              "action": "closePopupWindow"
+            }
+          ]
+        }
+    },
+    "data": {
+      "l2_commentLbl": {
+        "displayName": "{{i18n.comment}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "l2_follow_upLbl": {
+        "displayName": "{{i18n.followUp}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "l2_workerTxt": {
+        "displayName": "{{i18n.worker}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "numberOfLines": 3
+      },
+      "object_descLbl": {
+        "displayName": "{{i18n.remark}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "l2_expected_date": {
+        "displayName": "{{i18n.expectedDate}}",
+        "type": "DATE",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dispValue": "",
+        "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+      },
+      "l2_worker": {
+          "displayName": "{{i18n.worker}}",
+          "type": "STRING",
+          "isRequired": "true",
+          "hasLov": "true",
+          "dbValue": "",
+          "dispValue": ""
+      },
+      "l2_workerValues": {
+          "type": "STRING",
+          "dbValue": []
+      }
+    },
+    "onEvent": [
+        {
+          "eventId": "PopupActionItemEdit.contentLoaded",
+          "action": "initializeActionItemEditPopup"
+        }
+    ],
+    "i18n": {
+      "create": ["lgepChkMinutesMessages"],
+      "back": ["lgepChkMinutesMessages"],
+      "comment": ["lgepChkMinutesMessages"],
+      "followUp": ["lgepChkMinutesMessages"],
+      "worker": ["lgepChkMinutesMessages"],
+      "expectedDate": ["lgepChkMinutesMessages"],
+      "remark": ["lgepChkMinutesMessages"],
+      "save": ["lgepKnowldegeManageMessages"],
+      "close": ["lgepKnowldegeManageMessages"]
+    }
+  }
+  

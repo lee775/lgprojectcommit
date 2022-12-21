@@ -6,6 +6,8 @@
     "js/aw-command-bar.directive",
     "js/aw-row.directive",
     "js/aw-sidenav.directive",
+    "js/exist-when.directive", 
+    "js/aw-xrt-summary.directive",
     "css/masterListView.css"
   ],
   "data": {

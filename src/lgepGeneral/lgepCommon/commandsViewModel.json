@@ -86,6 +86,10 @@
     "cmdSearchIcon": {
       "iconId": "cmdSearch",
       "title": "{{i18n.search}}"
+    },
+    "cmdNavigateToTarget": {
+      "iconId": "cmdOpen",
+      "title": ""
     }
   },
   "commandHandlers": {
@@ -248,6 +252,13 @@
       "activeWhen": true,
       "visibleWhen": true,
       "enableWhen": true
+    },
+    "cmdNavigateToTargetHandler": {
+      "id": "cmdNavigateToTarget",
+      "action": "cmdNavigateToTargetAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
     }
   },
   "commandPlacements": {
@@ -322,6 +333,11 @@
       "uiAnchor": "aw_userSessionbar",
       "parentGroupId": "Awp0HelpGroup",
       "priority": 100
+    },
+    "cmdNavigateToTargetPlacement": {
+      "id": "cmdNavigateToTarget",
+      "uiAnchor": "none",
+      "priority": 1
     }
   },
   "actions": {
@@ -372,6 +388,15 @@
       "navigateIn": "newTab",
       "navigateTo": "https://siemens.highspot.com/",
       "navigationParams": {}
+    },
+    "cmdNavigateToTargetAction": {
+      "actionType": "JSFunction",
+      "method": "cmdNavigateToTargetAction",
+      "inputData": {
+        "message": "{{commandContext.lineItem.object.uid}}",
+        "target": "{{commandContext.lineItem.object.props.fnd0TargetObject.dbValues[0]}}"
+      },
+      "deps": "js/changeNavigateColorService"
     }
   },
   "conditions": {

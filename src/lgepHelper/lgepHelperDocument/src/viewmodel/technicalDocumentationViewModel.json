@@ -174,7 +174,10 @@
       "displayName": "",
       "type": "STRING"
     },
-    "pageSize": 40
+    "pageSize": 40,
+    "searchBoxPlaceHolder": {
+      "dbValue": "검색어 입력"
+    }
   },
   "actions": {
     "closePopupWindow": {
@@ -491,7 +494,7 @@
           "displayName": "{{i18n.like}}",
           "maxWidth": 200,
           "minWidth": 60,
-          "width": 80,
+          "width": 75,
           "enableColumnMenu": true
         }
       ]

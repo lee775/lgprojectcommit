@@ -22,6 +22,7 @@ import common from 'js/utils/lgepCommonUtils';
 import advancedSearchUtils from 'js/advancedSearchUtils';
 import { consolidateObjects } from 'js/declUtils';
 import appCtxService from 'js/appCtxService';
+import lgepLoadingUtils from 'js/utils/lgepLoadingUtils';
 
 var $ = require('jQuery');
 
@@ -288,6 +289,8 @@ export async function adopted(data, value) {
 }
 
 export async function loadQaList(data, ctx) {
+  lgepLoadingUtils.openWindow();
+
   let element = document.getElementsByClassName('leftPadding');
   let tableSize = localStorage.getItem('tableSize');
   element[0].style.flexBasis = tableSize != '' ? tableSize : '630px';
@@ -307,6 +310,9 @@ export async function loadQaList(data, ctx) {
 
   // questionList.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
   await common.userLogsInsert('Load Q&A', '', 'S', 'Success');
+
+  lgepLoadingUtils.closeWindow();
+  ctx.qnaList = searchingQuestion.length;
 
   return {
     qaList: searchingQuestion,

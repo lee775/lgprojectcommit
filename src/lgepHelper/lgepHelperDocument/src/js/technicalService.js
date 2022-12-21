@@ -18,6 +18,7 @@ import browserUtils from 'js/browserUtils';
 import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import common from 'js/utils/lgepCommonUtils';
 import advancedSearchUtils from 'js/advancedSearchUtils';
+import lgepLoadingUtils from 'js/utils/lgepLoadingUtils';
 var $ = require('jQuery');
 
 let firstPage = 1;
@@ -275,7 +276,7 @@ export async function likeUp(value, data, ctx) {
     if (likeOverlap) {
       message.show(
         1,
-        lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'checkDislike'),
+        lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'checkDislikeTech'),
         [
           lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'yes'),
           lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'no'),
@@ -413,6 +414,9 @@ export async function editTechnicalDocument(data) {
   let contentString = $('#technicalEditSummernote').summernote('code');
   if (contentString == null || contentString == '' || contentString == '<p><br></p>') {
     notySvc.showError('내용을 입력해주세요.');
+    return;
+  } else if (!data.technicalTitle.dbValue || data.technicalTitle.dbValue == '') {
+    notySvc.showError('제목을 입력해주세요.');
     return;
   } else {
     //정규식을 사용하여 이미지를 제외한 문자열만 남긴다.
@@ -618,6 +622,9 @@ export async function createTechnicalDocument(data) {
   if (contentString == null || contentString == '' || contentString == '<p><br></p>') {
     notySvc.showError('내용을 입력해주세요.');
     return;
+  } else if (!data.technicalTitle.dbValues[0] || data.technicalTitle.dbValues[0] == '') {
+    notySvc.showError('제목을 입력해주세요.');
+    return;
   } else {
     // 중복 생성 방지
     let addBtn = document.querySelector('#addQuestion');
@@ -634,15 +641,23 @@ export async function createTechnicalDocument(data) {
         ],
       };
       createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError(characterLimitMsg);
+      return;
+      // notySvc.showError(characterLimitMsg);
+    }
 
+    try {
       // 아이템 리비전 정의
       let createItemRevision = createResult.output[0].itemRev;
-      await lgepSummerNoteUtils.txtFileToDataset(contentString, createItemRevision);
+      await com.getProperties([createItemRevision], ['item_id']);
+      await lgepSummerNoteUtils.txtFileToDataset2(contentString, createItemRevision);
       //정규식을 사용하여 이미지를 제외한 문자열만 남긴다.
       contentString = await lgepSummerNoteUtils.imgAndsvgOnlyString(contentString);
 
       // 아이템 리비전 속성값 넣기
-      param = {
+      let param = {
         objects: [createItemRevision],
         attributes: {
           l2_content_string: {
@@ -654,6 +669,8 @@ export async function createTechnicalDocument(data) {
         await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
       } catch (err) {
         //console.log(err);
+        notySvc.showError('질문 내용 등록 실패');
+        delItem(createResult.output[0].item);
       }
 
       // IMAN_specification은 createRelation으로 값을 넣는다.
@@ -671,6 +688,8 @@ export async function createTechnicalDocument(data) {
         let result = await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
       } catch (err) {
         //console.log(err);
+        notySvc.showError('relation 생성 실패');
+        delItem(createResult.output[0].item);
       }
       await common.userLogsInsert('Create Document', createItemRevision.uid, 'S', 'Success');
       message.show(
@@ -686,9 +705,9 @@ export async function createTechnicalDocument(data) {
       history.pushState(null, null, '#/technicalDocumentation?tech=' + createItemRevision.uid);
       // reLoad();
     } catch (err) {
-      //console.log(err);
-      notySvc.showError(characterLimitMsg);
-      // notySvc.showError(characterLimitMsg);
+      // 잘못 만들어진 아이템 삭제
+      notySvc.showError('질문 생성 실패');
+      delItem(createResult.output[0].item);
     }
   }
 }
@@ -876,6 +895,8 @@ export function reLoad() {
 }
 
 export async function getTechnicalTable(ctx) {
+  lgepLoadingUtils.openWindow();
+
   let element = document.getElementsByClassName('leftPadding');
   let tableSize = localStorage.getItem('tableSize');
   element[0].style.flexBasis = tableSize != '' ? tableSize : '630px';
@@ -911,6 +932,9 @@ export async function getTechnicalTable(ctx) {
   }
 
   await common.userLogsInsert('Load Document', '', 'S', 'Success');
+
+  lgepLoadingUtils.closeWindow();
+  ctx.techList = searchingQuestion.length;
 
   return {
     result: searchingQuestion,
@@ -1634,6 +1658,21 @@ function questionSearch(data, ctx) {
   nowPage = 1;
   eventBus.publish('pageChipDataProvider.reset');
   eventBus.publish('technicalDocumentationTable.plTable.reload');
+}
+
+export async function delItem(item) {
+  try {
+    let deleteObj = {
+      objects: [item],
+    };
+    await SoaService.post('Core-2006-03-DataManagement', 'deleteObjects', deleteObj);
+
+    let addBtn = document.querySelector('#addQuestion');
+    addBtn.disabled = false;
+    return;
+  } catch (err) {
+    console.log('잘못된 아이템 삭제 실패');
+  }
 }
 
 //기술 문서.js 끝

@@ -12,7 +12,7 @@
       "action": "activatecmdDefectmgmt",
       "activeWhen": true,
       "visibleWhen": {
-        "condition": "conditions.onlyDBA"
+        "condition": "conditions.false"
       }
     }
   },

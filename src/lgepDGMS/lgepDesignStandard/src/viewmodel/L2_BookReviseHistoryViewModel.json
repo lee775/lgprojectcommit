@@ -6,7 +6,6 @@
     "js/aw-panel-footer.directive",
     "js/aw-popup2.directive",
     "js/aw-panel.directive",
-    "js/visible-when.directive",
     "js/aw-splm-table.directive",
     "js/aw-flex-row.directive",
     "js/aw-command-bar.directive"
@@ -113,8 +112,7 @@
       "totalFound": "{{data.totalFound}}",
       "editConfig": {
         "startEditAction": "tableEditStartAction",
-        "saveEditAction": "tableEditSaveAction",
-        "identifier": "uid"
+        "saveEditAction": "tableEditSaveAction"
       }
     }
   },

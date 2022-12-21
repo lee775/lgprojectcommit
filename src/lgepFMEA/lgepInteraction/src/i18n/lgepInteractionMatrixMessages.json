@@ -14,5 +14,9 @@
   "interactionTypeAB": "AB : Mechanical - Electric",
   "interactionTypeAC": "AC : Mechanical - Heat",
   "interactionTypeAD": "AD : Mechanical - Chemical",
-  "cancel": "cancel"
+  "cancel": "cancel",
+  "save":"save",
+  "closeAfterSave": "closeAfterSave",
+  "justClose": "close",
+  "askQuestion":"Closing the popup will not save your changes. Are you sure you want to close it?"
 }

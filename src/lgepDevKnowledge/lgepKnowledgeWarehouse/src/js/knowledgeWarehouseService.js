@@ -1363,6 +1363,9 @@ let performSearch = async function (data, string, type, index, prop1, prop2, pro
   } else {
     data.stringResult = null;
   }
+  if (index < 1) {
+    await common.userLogsInsert('Search Knowledge Files', '', 'S', 'Sucess', '', prop1, prop2);
+  }
   return {
     modelObjects: modelObjects,
     returnData: abc,

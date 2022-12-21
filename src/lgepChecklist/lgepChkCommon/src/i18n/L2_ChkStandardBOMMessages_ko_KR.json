@@ -9,5 +9,9 @@
   "templateList": "템플릿 목록",
   "templateEdit": "템플릿 편집",
   "pinPanel": "패널 고정",
-  "unPinPanel" : "고정 해제"
+  "unPinPanel": "고정 해제",
+  "partSave": "저장",
+  "expand": "확장",
+  "collapse": "축소",
+  "unfold":"펼치기"
 }

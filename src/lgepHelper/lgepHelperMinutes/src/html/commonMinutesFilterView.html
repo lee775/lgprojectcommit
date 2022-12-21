@@ -1,0 +1,54 @@
+<aw-command-panel caption="{{i18n.filter}}" context="data">
+  <aw-panel>
+    <aw-panel-body>
+      <aw-flex-row>
+        <aw-flex-column>
+          <aw-flex-row>
+            <div class="filter-title">{{i18n.filterDivision}}</div>
+          </aw-flex-row>
+          <aw-flex-row class="checkboxPosit">
+            <aw-list dataprovider="data.dataProviders.divisionConditions">
+              <aw-checkbox prop="item" action="checkboxAction"></aw-checkbox>
+            </aw-list>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row>
+        <aw-flex-column>
+          <aw-flex-row>
+            <div class="filter-title">{{i18n.filterWriter}}</div>
+          </aw-flex-row>
+          <aw-flex-row class="checkboxPosit">
+            <aw-list dataprovider="data.dataProviders.writerConditions">
+              <aw-checkbox prop="item" action="checkboxAction"></aw-checkbox>
+            </aw-list>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row>
+        <aw-flex-column>
+          <aw-flex-row>
+            <div class="filter-title">{{i18n.filterCreateDate}}</div>
+          </aw-flex-row>
+          <aw-flex-row>
+            <aw-flex-column>
+              <aw-date prop="data.startDate"></aw-date>
+            </aw-flex-column>
+            <aw-flex-column id="between">
+              <span>~</span>
+            </aw-flex-column>
+            <aw-flex-column>
+              <aw-date prop="data.endDate"></aw-date>
+            </aw-flex-column>
+            <aw-flex-column>
+              <aw-icon-button command="data.dateSearch"></aw-icon-button>
+            </aw-flex-column>
+          </aw-flex-row>
+          <aw-flex-row>
+            <aw-button action="filterReset">{{i18n.reset}}</aw-button>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+    </aw-panel-body>
+  </aw-panel>
+</aw-command-panel>

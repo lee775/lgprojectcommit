@@ -1,0 +1,153 @@
+<aw-sidenav id="commonMinutes_filter" config="data.commonMinutesFilterInfo"></aw-sidenav>
+<aw-flex-column id="commonMinutes" width="fill">
+  <aw-flex-row height="fill" class="expertColor">
+    <aw-flex-column width="38.5f" justify="top" class="leftPadding insideMargin" id="summaryContentStyle">
+      <aw-search-box prop="data.searchBox" action="minutesSearch" placeholder="data.searchBoxPlaceHolder"></aw-search-box>
+      <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadow2">
+        <aw-command-bar anchor="minutesCommand" alignment="HORIZONTAL" id="commandColorId2"></aw-command-bar>
+      </aw-flex-row>
+      <aw-flex-row id="commonMinutesTable" class="borderShadow noPostCSS">
+        <aw-flex-column>
+          <aw-flex-row exist-when="data.dataProviders.generalMinutesListProvider.viewModelCollection.loadedVMObjects.length === 0">
+            <h3>{{i18n.noPost}}</h3>
+          </aw-flex-row>
+          <aw-flex-row visible-when="data.dataProviders.generalMinutesListProvider.viewModelCollection.loadedVMObjects.length !== 0">
+            <aw-splm-table style="overflow-y: hidden" gridid="commonMinutesTable" align-content="center"></aw-splm-table>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-flex-row>
+      <aw-flex-row id="alink" justify="center">
+          <aw-link prop="data.firstPage" action="firstPageAction" style="font-weight: bolder; margin-top: 5px"></aw-link>
+          <aw-link prop="data.beforePage" action="pagingBeforeAction" style="font-weight: bolder; margin-top: 5px"></aw-link>
+          <aw-chip-list dataprovider="data.dataProviders.pageChipDataProvider" action="clickedPageAction" id="chipStyle"></aw-chip-list>
+          <aw-link prop="data.afterPage" action="pagingAfterAction" style="font-weight: bolder; margin-top: 5px"></aw-link>
+          <aw-link prop="data.lastPage" action="lastPageAction" style="font-weight: bolder; margin-top: 5px"></aw-link>
+        </aw-flex-row>
+    </aw-flex-column>
+    <aw-splitter direction="VERTICAL" class="split"></aw-splitter>
+    <aw-flex-column width="fill" class="rightArea">
+      <aw-panel
+        exist-when="data.dataProviders.generalMinutesListProvider.selectedObjects.length == 0 && data.dataProviders.generalMinutesListProvider.viewModelCollection.loadedVMObjects.length != 0"
+      >
+        <aw-flex-row justify="center">
+          <h3>{{i18n.pleaseSelectViewMinutes}}</h3>
+        </aw-flex-row>
+      </aw-panel>
+      <aw-panel visible-when="data.dataProviders.generalMinutesListProvider.selectedObjects.length != 0" id="commonMinutesDetails">
+        <aw-tab-set tabs="data.tabDetails">
+          <aw-panel-section visible-when="conditions.showDetailsPage" caption="{{i18n.property}}" collapsed="false" class="question">
+            <aw-flex-row>
+              <aw-label prop="data.object_nameLbl" class="lblHeight"></aw-label>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-flex-column>
+                <aw-label prop="data.l2_meeting_dateLbl" class="lblHeight"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column>
+                <aw-label prop="data.l2_meeting_placeLbl" class="lblHeight"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-label prop="data.l2_meeting_participantsLbl" class="lblHeight"></aw-label>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-label prop="data.l2_meeting_agendaLbl" class="lblHeight"></aw-label>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-label prop="data.l2_meeting_related_scheduleLbl" class="lblHeight"></aw-label>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-label prop="data.proceedDetails" class="lblHeight"></aw-label>
+            </aw-flex-row>
+            <aw-flex-row id="summernotePosit" height="auto">
+              <aw-flex-column>
+                <textarea id="commonMinutesSummernote"></textarea>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-flex-column width="10f">
+                <aw-label prop="data.proceedWriter" class="lblHeight"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column class="linkCSS">
+                <aw-link prop="data.proceedWriterLink" action="goUserDetailMinutes"></aw-link>
+              </aw-flex-column>
+              <aw-flex-column>
+                <aw-label prop="data.createDateLbl" class="lblHeight3"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-flex-column width="10f">
+                <aw-label prop="data.fileDataSet" class="lblHeight"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column
+                visible-when="data.dataProviders.generalMinutesListProvider.selectedObjects[0].props.TC_Attaches.dbValue.length == 0"
+                id="barCSS"
+              ></aw-flex-column>
+              <aw-flex-column class="linkCSS2">
+                <aw-flex-row aw-repeat="result : data.datasetLink.dbValue">
+                  <aw-link prop="result" exist-when="data.datasetLink.dbValue.length > 0" action="datasetLinkEvent"> </aw-link>
+                  <p exist-when="result.displayName != data.datasetLink.dbValue[data.datasetLink.dbValue.length - 1].displayName">
+                    <br />
+                  </p>
+                </aw-flex-row>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-separator class="separatorHeight"></aw-separator>
+            <aw-flex-row>
+              <aw-flex-column class="connectBtn">
+                <aw-button size="auto" action="checklistConnectPopup">{{i18n.connectChecklist}}</aw-button>
+              </aw-flex-column>              
+            </aw-flex-row>
+          </aw-panel-section>
+          <aw-panel-section exist-when="conditions.actionItemPage" caption="{{i18n.actionItemList}}" class="question">
+            <aw-scrollpanel id="actionItemScroll">
+              <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadow2">
+                <aw-radiobutton prop="data.detailStatusRadio"id="radioStatus"></aw-radiobutton>
+                <aw-command-bar anchor="ActionItemCommand" alignment="HORIZONTAL" id="actionItemCommandColorId"></aw-command-bar>
+              </aw-flex-row>
+              <aw-flex-row class="tableMargin" id="noScrollbar">
+                <aw-splm-table gridid="actionItemTable" use-tree="false" show-decorate="true"></aw-splm-table>
+              </aw-flex-row>
+              <!-- <aw-flex-row>
+                <aw-flex-column class="lilBot">
+                  <aw-label prop="data.l2_workerLbl" class="lblHeight"></aw-label>
+                </aw-flex-column>
+                <aw-flex-column class="linkCSS3 lilBot">
+                  <aw-link prop="data.workerLink" action="goUserDetailAI"></aw-link>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-separator class="separatorHeight2"></aw-separator>
+              <aw-flex-row>
+                <aw-label prop="data.l2_expected_dateLbl" class="lblHeight lilBot"></aw-label>
+              </aw-flex-row>
+              <aw-separator class="separatorHeight2"></aw-separator>
+              <aw-flex-row>
+                <aw-label prop="data.l2_commentLbl" class="lblHeight"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row id="summernotePosit" height="auto">
+                <aw-flex-column>
+                  <textarea id="commonCommentSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.l2_follow_upLbl" class="lblHeight"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row id="summernotePosit" height="auto">
+                <aw-flex-column>
+                  <textarea id="commonFollowUpSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row> -->
+            </aw-scrollpanel>
+          </aw-panel-section>
+        </aw-tab-set>
+      </aw-panel>
+    </aw-flex-column>
+  </aw-flex-row>
+</aw-flex-column>

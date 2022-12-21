@@ -1,22 +1,33 @@
-div#btnBox {
-  position: absolute;
-  margin-left: 83%;
-  width: 10%;
-  height: auto;
-  z-index: 10;
-  margin-top: -0.5%;
+.createButton button.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 100%;
+  margin-top: -18%;
 }
 
-button.createBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
-  width: 50%;
-  z-index: 15;
-  margin-bottom: 6%;
+.deleteButton button.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 100%;
+  margin-top: -18%;
 }
 
-button.deleteBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
-  width: 50%;
-  z-index: 15;
-  margin-bottom: 6%;
+.topToTable.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  width: 80%;
+}
+
+.createBtn.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-left: 85%;
+}
+
+.createBtn button.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 100%;
+  margin-top: -17%;
+}
+
+.deleteBtn button.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
+  width: 100%;
+  margin-top: -17%;
+}
+
+div#minutesTable {
+  margin-top: 1%;
 }
 
 button.editBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
@@ -24,6 +35,10 @@ button.editBtn.aw-base-iconButton.aw-aria-border.ng-scope.ng-isolate-scope {
   position: absolute;
   margin-left: 75%;
   margin-top: -0.5%;
+}
+
+aw-label.detailLbl.ng-scope.ng-isolate-scope {
+  width: -webkit-fill-available;
 }
 
 .namePosition1.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
@@ -67,7 +82,7 @@ aw-list#failureList {
 }
 
 .summernoteLblPosition.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
-  margin-bottom: -2%;
+  margin-bottom: -1%;
 }
 
 #summernotePosit .aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
@@ -167,6 +182,14 @@ div#summernotePosit {
   margin-top: 1%;
 }
 
+.allMinutesLinkPosit.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-right: 3.2%;
+}
+
+.allMinutesLinkPosit2.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
+  margin-left: 8.4%;
+}
+
 /* 고장 추가 팝업 관련 */
 #failureAddPopup aw-command-bar.aw-layout-justifyFlexEnd.aw-layout-workareaCommandbar.ng-isolate-scope.aw-commands-commandBarHorizontal {
   display: none;
@@ -178,10 +201,12 @@ aw-list#failureControlList {
 
 .linkPosition.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
   width: 10%;
+  margin-left: 18.2%;
 }
 
 .linkPosition2.aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
   width: 19.7%;
+  margin-left: 15.9%;
 }
 
 aw-label.labelMargin.ng-scope.ng-isolate-scope {

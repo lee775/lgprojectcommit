@@ -6,6 +6,8 @@ import common from 'js/utils/lgepCommonUtils';
 import msg from 'js/utils/lgepMessagingUtils';
 import lgepPreferenceUtils from 'js/utils/lgepPreferenceUtils';
 import bomUtils from 'js/utils/lgepBomUtils';
+import popupService from 'js/popupService';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 let exports = [];
 var $ = require('jQuery');
@@ -62,6 +64,55 @@ export async function goToLink(ctx, data) {
   }
 }
 
+async function openMoreInfo(ctx, data) {
+  let obj = ctx.selected;
+  let test = await lgepObjectUtils.getProperties(obj, [
+    'l2_division',
+    'l2_page_type',
+    'l2_page_index',
+    'l2_keywords',
+    'l2_issue_class',
+    'l2_issue_date',
+    'l2_content_string',
+    'l2_comments',
+    'l2_comments_attachments',
+    'l2_comments_string',
+    'l2_contents',
+    'l2_contents_string',
+    'l2_pjt_name',
+    'l2_platform_name',
+    'l2_reference_issues',
+    'l2_reference_posts',
+    'l2_sub_title',
+    'IMAN_reference',
+    'l2_model_name',
+    'l2_doc_no',
+    'l2_image_path',
+    'l2_item',
+    'l2_file_name',
+    'l2_source',
+    'l2_creator',
+    'l2_issue_pred',
+  ]);
+  const inputParam = {
+    declView: 'moreInfo',
+    locals: {
+      caption: '상세정보',
+      anchor: 'closePopupAnchor',
+    },
+    options: {
+      reference: 'referenceID',
+      width: 1500,
+      height: 900,
+      isModal: true,
+      clickOutsideToClose: false,
+      draggable: true,
+    },
+  };
+  popupService.show(inputParam);
+}
+
 export default exports = {
   goToLink,
+  openMoreInfo,
 };

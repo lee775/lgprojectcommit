@@ -8,8 +8,10 @@ import lgepPreferenceUtils from 'js/utils/lgepPreferenceUtils';
 import common from 'js/utils/lgepCommonUtils';
 import treeView from 'js/awTableService';
 import _ from 'lodash';
+import popupService from 'js/popupService';
 import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
+import fmsUtils from 'js/fmsUtils';
 import viewC from 'js/viewModelObjectService';
 import uwPropertySvc from 'js/uwPropertyService';
 import eventBus from 'js/eventBus';
@@ -24,15 +26,35 @@ import L2_DesignStandardService from 'js/L2_DesignStandardService';
 var $ = require('jQuery');
 var JSZip = require('jszip');
 
+/**
+ * 최근 검색 기능을  통해 검색
+ * @param {eventData} eventData - 선택한 최근 검색어
+ */
 function recentAllSearcing(eventData) {
   let searchData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   searchData.searchingName.dbValue = eventData.selectedObjects[0].dbValue;
 }
 
 let tableData;
+/**
+ * 페이지 전체 검색
+ * @param {ctx} ctx - ctx
+ */
 async function pageAllSearching(ctx) {
   let searchData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let searchWord = searchData.searchingName.dbValue;
+  let searchValue = searchWord.replace(/(\s*)/g, '');
+  if (searchValue == null || searchValue.length < 1) {
+    message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'requiredText'), [], []);
+    return;
+  }
+  if (searchValue.length == 1) {
+    let regex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+    if (!regex.test(searchValue)) {
+      message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'twoChar'), [], []);
+      return;
+    }
+  }
   // searchWord = searchWord.replace(/\*/gi, ' ');
   let owningUser = ctx.user.props.user_name.dbValue + ' (' + ctx.user.props.userid.dbValue + ')';
   let policyArr = policy.getEffectivePolicy();
@@ -123,6 +145,9 @@ async function pageAllSearching(ctx) {
   }
 }
 
+/**
+ * 전체 검색 후 팝업에 검색어 전달.
+ */
 async function pageAllSearchingInit() {
   let searchData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let pageSearchData = vms.getViewModelUsingElement(document.getElementById('pageSearchData'));
@@ -130,6 +155,9 @@ async function pageAllSearchingInit() {
   pageSearchData.searchWord.uiValue = searchWord;
 }
 
+/**
+ * 사전에 전체 검색으로 가져온 테이블 데이터를 넣어준다.
+ */
 async function getSearchPageTableData() {
   if (!tableData) {
     return;
@@ -141,6 +169,9 @@ async function getSearchPageTableData() {
   };
 }
 
+/**
+ * 어떤 검색을 했는지 확인
+ */
 async function recentSearchMode() {
   let navData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
   let standardRecentData;
@@ -161,6 +192,9 @@ async function recentSearchMode() {
 
 let searchKeyword = [];
 let manualRecentSearch = [];
+/**
+ * 최근 검색어 호출
+ */
 async function loadSearchList(data, ctx) {
   let owningUser = ctx.user.props.user_name.dbValue + ' (' + ctx.user.props.userid.dbValue + ')';
   let searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [owningUser]);
@@ -221,6 +255,9 @@ function filterRowsWithSort(response, sortCriteria, startIndex, pageSize) {
   return searchResults;
 }
 
+/**
+ * 개정이력 테이블 데이터 조회
+ */
 async function reviseHistoryTableSet() {
   const standardNavData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
   let selValue = standardNavData.selValue;
@@ -244,6 +281,9 @@ async function reviseHistoryTableSet() {
   };
 }
 
+/**
+ * 프리즈 되지 않은 개정 이력을 수정 가능하도록 변경
+ */
 function tableEditStartAction() {
   const reviseHistoryData = vms.getViewModelUsingElement(document.getElementById('reviseHistoryData'));
   let tableData = reviseHistoryData.dataProviders.reviseHistoryTableData.viewModelCollection.loadedVMObjects;
@@ -263,6 +303,9 @@ function tableEditStartAction() {
   }
 }
 
+/**
+ * 개정 이력 수정 저장
+ */
 async function tableEditSaveAction() {
   const reviseHistoryData = vms.getViewModelUsingElement(document.getElementById('reviseHistoryData'));
   let tableData = reviseHistoryData.dataProviders.reviseHistoryTableData.viewModelCollection.loadedVMObjects;
@@ -292,11 +335,17 @@ async function tableEditSaveAction() {
   await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
 }
 
+/**
+ * 테이블 개정 이력 편집모드 취소
+ */
 function cancelMode() {
   const reviseHistoryData = vms.getViewModelUsingElement(document.getElementById('reviseHistoryData'));
   reviseHistoryData.tableEditMode = false;
 }
 
+/**
+ * 리비전 비교 팝업 크기 설정
+ */
 function revisionCompareSizeSet() {
   return {
     compareWidth: window.innerWidth * 0.6 + 'px',
@@ -313,7 +362,11 @@ function loadData() {
 
 let treeABook;
 let treeBBook;
-async function treeALoadData(result, nodeBeingExpanded, input) {
+/**
+ * 리비전 비교의 기준 트리 데이터 설정
+ */
+async function treeALoadData(result, nodeBeingExpanded, input, ctx) {
+  ctx.decoratorToggle = true;
   let homeUid;
   if (nodeBeingExpanded.uid == input.rootNode.uid) {
     nodeBeingExpanded.alternateID = nodeBeingExpanded.uid;
@@ -407,6 +460,9 @@ async function treeALoadData(result, nodeBeingExpanded, input) {
   }
 }
 
+/**
+ * 리비전 비교의 비교 대상 트리 데이터 설정
+ */
 async function treeBLoadData(result, nodeBeingExpanded, input) {
   let homeUid;
   if (nodeBeingExpanded.uid == input.rootNode.uid) {
@@ -502,6 +558,9 @@ async function treeBLoadData(result, nodeBeingExpanded, input) {
   }
 }
 
+/**
+ * 리비전 비교의 리스트를 만들어줌
+ */
 function revisionCompareInit() {
   const compareRevData = vms.getViewModelUsingElement(document.getElementById('compareRevData'));
   compareRevData.compareAListValues.dbValues = [];
@@ -525,6 +584,9 @@ function revisionCompareInit() {
   compareRevData.compareAListValues.dbValue = compareRevData.compareAListValues.dbValues;
 }
 
+/**
+ * 리비전 비교 기준 트리의 리비전이 바뀌면 테이블을 새로 로드 해주는 코드
+ */
 async function standardRevSet() {
   const compareRevData = vms.getViewModelUsingElement(document.getElementById('compareRevData'));
   let bTableReset = compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects;
@@ -577,6 +639,9 @@ async function stdTreeOpen() {
   }
 }
 
+/**
+ * 리비전 비교의 기준 트리를 설정 완료하면 비교 트리의 리스트 박스 잠금이 풀리며 기준 리비전보다 하위인 리비전을 보여줌
+ */
 function compareBSeting() {
   const compareRevData = vms.getViewModelUsingElement(document.getElementById('compareRevData'));
   compareRevData.compareBListValues.dbValues = [];
@@ -605,6 +670,9 @@ function compareBSeting() {
   compareRevData.compareBListValues.dbValue = compareRevData.compareBListValues.dbValues;
 }
 
+/**
+ * 리비전 비교의 비교 트리가 리비전이 선택되면 비교트리를 새로 로드해줌
+ */
 async function compareRevSet() {
   const compareRevData = vms.getViewModelUsingElement(document.getElementById('compareRevData'));
   let aTableReset = compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects;
@@ -656,6 +724,9 @@ async function comTreeOpen() {
   }
 }
 
+/**
+ * 리비전의 bom구조 변경점을 시각적으로 확인하는 코드
+ */
 async function compareTreeDataSet() {
   const compareRevData = vms.getViewModelUsingElement(document.getElementById('compareRevData'));
   let aTreeData = compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects;
@@ -723,61 +794,92 @@ async function compareTreeDataSet() {
     }
   }
 
-  eventBus.publish('compareTreeA.plTable.clientRefresh');
-  eventBus.publish('compareTreeB.plTable.clientRefresh');
-
-  await common.delay(500);
-  let aTreeHtml = document.getElementById('compareATreeId');
-  aTreeHtml = aTreeHtml.children;
-  aTreeHtml = aTreeHtml[0];
-  aTreeHtml = aTreeHtml.children;
-  aTreeHtml = aTreeHtml[0];
-  aTreeHtml = aTreeHtml.children;
-  aTreeHtml = aTreeHtml[2];
-  aTreeHtml = aTreeHtml.children;
-  aTreeHtml = aTreeHtml[1];
-  aTreeHtml = aTreeHtml.children;
-  aTreeHtml = aTreeHtml[0];
-  aTreeHtml = aTreeHtml.children;
-  for (let i = 0; i < aTreeHtml.length; i++) {
-    if (aTreeHtml[i].vmo.props.comparison) {
-      if (aTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
-        aTreeHtml[i].classList.add('reviseBackground');
-      } else if (aTreeHtml[i].vmo.props.comparison.dbValue == createM) {
-        aTreeHtml[i].classList.add('createBackground');
-      } else if (aTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
-        aTreeHtml[i].classList.add('deleteBackground');
+  for (let i of aTreeData) {
+    if (i.props.comparison) {
+      if (i.props.comparison.dbValue == reviseM) {
+        i.gridDecoratorStyle = 'reviseBackground';
+      } else if (i.props.comparison.dbValue == createM) {
+        i.gridDecoratorStyle = 'createBackground';
+      } else if (i.props.comparison.dbValue == deleteM) {
+        i.gridDecoratorStyle = 'deleteBackground';
       }
     }
   }
-
-  let bTreeHtml = document.getElementById('compareBTreeId');
-  bTreeHtml = bTreeHtml.children;
-  bTreeHtml = bTreeHtml[0];
-  bTreeHtml = bTreeHtml.children;
-  bTreeHtml = bTreeHtml[0];
-  bTreeHtml = bTreeHtml.children;
-  bTreeHtml = bTreeHtml[2];
-  bTreeHtml = bTreeHtml.children;
-  bTreeHtml = bTreeHtml[1];
-  bTreeHtml = bTreeHtml.children;
-  bTreeHtml = bTreeHtml[0];
-  bTreeHtml = bTreeHtml.children;
-  for (let i = 0; i < bTreeHtml.length; i++) {
-    if (bTreeHtml[i].vmo.props.comparison) {
-      if (bTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
-        bTreeHtml[i].classList.add('reviseBackground');
-      } else if (bTreeHtml[i].vmo.props.comparison.dbValue == createM) {
-        bTreeHtml[i].classList.add('createBackground');
-      } else if (bTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
-        bTreeHtml[i].classList.add('deleteBackground');
+  for (let i of bTreeData) {
+    if (i.props.comparison) {
+      if (i.props.comparison.dbValue == reviseM) {
+        i.gridDecoratorStyle = 'reviseBackground';
+      } else if (i.props.comparison.dbValue == createM) {
+        i.gridDecoratorStyle = 'createBackground';
+      } else if (i.props.comparison.dbValue == deleteM) {
+        i.gridDecoratorStyle = 'deleteBackground';
       }
     }
   }
+  compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = [];
+  compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = [];
+  await common.delay(100);
+  compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = aTreeData;
+  compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = bTreeData;
+
+  // eventBus.publish('compareTreeA.plTable.clientRefresh');
+  // eventBus.publish('compareTreeB.plTable.clientRefresh');
+
+  // await common.delay(500);
+  // let aTreeHtml = document.getElementById('compareATreeId');
+  // aTreeHtml = aTreeHtml.children;
+  // aTreeHtml = aTreeHtml[0];
+  // aTreeHtml = aTreeHtml.children;
+  // aTreeHtml = aTreeHtml[0];
+  // aTreeHtml = aTreeHtml.children;
+  // aTreeHtml = aTreeHtml[2];
+  // aTreeHtml = aTreeHtml.children;
+  // aTreeHtml = aTreeHtml[1];
+  // aTreeHtml = aTreeHtml.children;
+  // aTreeHtml = aTreeHtml[0];
+  // aTreeHtml = aTreeHtml.children;
+  // for (let i = 0; i < aTreeHtml.length; i++) {
+  //   if (aTreeHtml[i].vmo.props.comparison) {
+  //     if (aTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
+  //       aTreeHtml[i].classList.add('reviseBackground');
+  //     } else if (aTreeHtml[i].vmo.props.comparison.dbValue == createM) {
+  //       aTreeHtml[i].classList.add('createBackground');
+  //     } else if (aTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
+  //       aTreeHtml[i].classList.add('deleteBackground');
+  //     }
+  //   }
+  // }
+
+  // let bTreeHtml = document.getElementById('compareBTreeId');
+  // bTreeHtml = bTreeHtml.children;
+  // bTreeHtml = bTreeHtml[0];
+  // bTreeHtml = bTreeHtml.children;
+  // bTreeHtml = bTreeHtml[0];
+  // bTreeHtml = bTreeHtml.children;
+  // bTreeHtml = bTreeHtml[2];
+  // bTreeHtml = bTreeHtml.children;
+  // bTreeHtml = bTreeHtml[1];
+  // bTreeHtml = bTreeHtml.children;
+  // bTreeHtml = bTreeHtml[0];
+  // bTreeHtml = bTreeHtml.children;
+  // for (let i = 0; i < bTreeHtml.length; i++) {
+  //   if (bTreeHtml[i].vmo.props.comparison) {
+  //     if (bTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
+  //       bTreeHtml[i].classList.add('reviseBackground');
+  //     } else if (bTreeHtml[i].vmo.props.comparison.dbValue == createM) {
+  //       bTreeHtml[i].classList.add('createBackground');
+  //     } else if (bTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
+  //       bTreeHtml[i].classList.add('deleteBackground');
+  //     }
+  //   }
+  // }
 }
 
 let treeADataTemp;
 let treeBDataTemp;
+/**
+ * 리비전 비교 변경 내용만 보기 기능 코드
+ */
 async function tableOnlyChanges() {
   const compareRevData = vms.getViewModelUsingElement(document.getElementById('compareRevData'));
   let reviseM = lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'revise');
@@ -796,112 +898,169 @@ async function tableOnlyChanges() {
     compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = bTreeData;
     eventBus.publish('compareTreeA.plTable.clientRefresh');
     eventBus.publish('compareTreeB.plTable.clientRefresh');
-    await common.delay(500);
-    let aTreeHtml = document.getElementById('compareATreeId');
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[0];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[0];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[2];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[1];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[0];
-    aTreeHtml = aTreeHtml.children;
-    for (let i = 0; i < aTreeHtml.length; i++) {
-      if (aTreeHtml[i].vmo.props.comparison) {
-        if (aTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
-          aTreeHtml[i].classList.add('reviseBackground');
-        } else if (aTreeHtml[i].vmo.props.comparison.dbValue == createM) {
-          aTreeHtml[i].classList.add('createBackground');
-        } else if (aTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
-          aTreeHtml[i].classList.add('deleteBackground');
+    for (let i of aTreeData) {
+      if (i.props.comparison) {
+        if (i.props.comparison.dbValue == reviseM) {
+          i.gridDecoratorStyle = 'reviseBackground';
+        } else if (i.props.comparison.dbValue == createM) {
+          i.gridDecoratorStyle = 'createBackground';
+        } else if (i.props.comparison.dbValue == deleteM) {
+          i.gridDecoratorStyle = 'deleteBackground';
         }
       }
     }
+    for (let i of bTreeData) {
+      if (i.props.comparison) {
+        if (i.props.comparison.dbValue == reviseM) {
+          i.gridDecoratorStyle = 'reviseBackground';
+        } else if (i.props.comparison.dbValue == createM) {
+          i.gridDecoratorStyle = 'createBackground';
+        } else if (i.props.comparison.dbValue == deleteM) {
+          i.gridDecoratorStyle = 'deleteBackground';
+        }
+      }
+    }
+    compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = [];
+    compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = [];
+    await common.delay(100);
+    compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = aTreeData;
+    compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = bTreeData;
+    // await common.delay(500);
+    // let aTreeHtml = document.getElementById('compareATreeId');
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[0];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[0];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[2];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[1];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[0];
+    // aTreeHtml = aTreeHtml.children;
+    // for (let i = 0; i < aTreeHtml.length; i++) {
+    //   if (aTreeHtml[i].vmo.props.comparison) {
+    //     if (aTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
+    //       aTreeHtml[i].classList.add('reviseBackground');
+    //     } else if (aTreeHtml[i].vmo.props.comparison.dbValue == createM) {
+    //       aTreeHtml[i].classList.add('createBackground');
+    //     } else if (aTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
+    //       aTreeHtml[i].classList.add('deleteBackground');
+    //     }
+    //   }
+    // }
 
-    let bTreeHtml = document.getElementById('compareBTreeId');
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[0];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[0];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[2];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[1];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[0];
-    bTreeHtml = bTreeHtml.children;
-    for (let i = 0; i < bTreeHtml.length; i++) {
-      if (bTreeHtml[i].vmo.props.comparison) {
-        if (bTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
-          bTreeHtml[i].classList.add('reviseBackground');
-        } else if (bTreeHtml[i].vmo.props.comparison.dbValue == createM) {
-          bTreeHtml[i].classList.add('createBackground');
-        } else if (bTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
-          bTreeHtml[i].classList.add('deleteBackground');
-        }
-      }
-    }
+    // let bTreeHtml = document.getElementById('compareBTreeId');
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[0];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[0];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[2];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[1];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[0];
+    // bTreeHtml = bTreeHtml.children;
+    // for (let i = 0; i < bTreeHtml.length; i++) {
+    //   if (bTreeHtml[i].vmo.props.comparison) {
+    //     if (bTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
+    //       bTreeHtml[i].classList.add('reviseBackground');
+    //     } else if (bTreeHtml[i].vmo.props.comparison.dbValue == createM) {
+    //       bTreeHtml[i].classList.add('createBackground');
+    //     } else if (bTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
+    //       bTreeHtml[i].classList.add('deleteBackground');
+    //     }
+    //   }
+    // }
   } else {
     compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = treeADataTemp;
     compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = treeBDataTemp;
     eventBus.publish('compareTreeA.plTable.clientRefresh');
     eventBus.publish('compareTreeB.plTable.clientRefresh');
-    await common.delay(500);
-    let aTreeHtml = document.getElementById('compareATreeId');
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[0];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[0];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[2];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[1];
-    aTreeHtml = aTreeHtml.children;
-    aTreeHtml = aTreeHtml[0];
-    aTreeHtml = aTreeHtml.children;
-    for (let i = 0; i < aTreeHtml.length; i++) {
-      if (aTreeHtml[i].vmo.props.comparison) {
-        if (aTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
-          aTreeHtml[i].classList.add('reviseBackground');
-        } else if (aTreeHtml[i].vmo.props.comparison.dbValue == createM) {
-          aTreeHtml[i].classList.add('createBackground');
-        } else if (aTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
-          aTreeHtml[i].classList.add('deleteBackground');
+    for (let i of treeADataTemp) {
+      if (i.props.comparison) {
+        if (i.props.comparison.dbValue == reviseM) {
+          i.gridDecoratorStyle = 'reviseBackground';
+        } else if (i.props.comparison.dbValue == createM) {
+          i.gridDecoratorStyle = 'createBackground';
+        } else if (i.props.comparison.dbValue == deleteM) {
+          i.gridDecoratorStyle = 'deleteBackground';
         }
       }
     }
+    for (let i of treeBDataTemp) {
+      if (i.props.comparison) {
+        if (i.props.comparison.dbValue == reviseM) {
+          i.gridDecoratorStyle = 'reviseBackground';
+        } else if (i.props.comparison.dbValue == createM) {
+          i.gridDecoratorStyle = 'createBackground';
+        } else if (i.props.comparison.dbValue == deleteM) {
+          i.gridDecoratorStyle = 'deleteBackground';
+        }
+      }
+    }
+    compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = [];
+    compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = [];
+    await common.delay(100);
+    compareRevData.dataProviders.compareTreeAData.viewModelCollection.loadedVMObjects = treeADataTemp;
+    compareRevData.dataProviders.compareTreeBData.viewModelCollection.loadedVMObjects = treeBDataTemp;
+    // await common.delay(500);
+    // let aTreeHtml = document.getElementById('compareATreeId');
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[0];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[0];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[2];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[1];
+    // aTreeHtml = aTreeHtml.children;
+    // aTreeHtml = aTreeHtml[0];
+    // aTreeHtml = aTreeHtml.children;
+    // for (let i = 0; i < aTreeHtml.length; i++) {
+    //   if (aTreeHtml[i].vmo.props.comparison) {
+    //     if (aTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
+    //       aTreeHtml[i].classList.add('reviseBackground');
+    //     } else if (aTreeHtml[i].vmo.props.comparison.dbValue == createM) {
+    //       aTreeHtml[i].classList.add('createBackground');
+    //     } else if (aTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
+    //       aTreeHtml[i].classList.add('deleteBackground');
+    //     }
+    //   }
+    // }
 
-    let bTreeHtml = document.getElementById('compareBTreeId');
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[0];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[0];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[2];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[1];
-    bTreeHtml = bTreeHtml.children;
-    bTreeHtml = bTreeHtml[0];
-    bTreeHtml = bTreeHtml.children;
-    for (let i = 0; i < bTreeHtml.length; i++) {
-      if (bTreeHtml[i].vmo.props.comparison) {
-        if (bTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
-          bTreeHtml[i].classList.add('reviseBackground');
-        } else if (bTreeHtml[i].vmo.props.comparison.dbValue == createM) {
-          bTreeHtml[i].classList.add('createBackground');
-        } else if (bTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
-          bTreeHtml[i].classList.add('deleteBackground');
-        }
-      }
-    }
+    // let bTreeHtml = document.getElementById('compareBTreeId');
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[0];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[0];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[2];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[1];
+    // bTreeHtml = bTreeHtml.children;
+    // bTreeHtml = bTreeHtml[0];
+    // bTreeHtml = bTreeHtml.children;
+    // for (let i = 0; i < bTreeHtml.length; i++) {
+    //   if (bTreeHtml[i].vmo.props.comparison) {
+    //     if (bTreeHtml[i].vmo.props.comparison.dbValue == reviseM) {
+    //       bTreeHtml[i].classList.add('reviseBackground');
+    //     } else if (bTreeHtml[i].vmo.props.comparison.dbValue == createM) {
+    //       bTreeHtml[i].classList.add('createBackground');
+    //     } else if (bTreeHtml[i].vmo.props.comparison.dbValue == deleteM) {
+    //       bTreeHtml[i].classList.add('deleteBackground');
+    //     }
+    //   }
+    // }
   }
 }
 
 let cloneBookState;
 let cloneBookRelItem;
+/**
+ * 지침 복사 모드를 실행
+ */
 async function stdBomCopyMode() {
   let treeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let selStdTreeData = treeData.dataProviders.designStandardTreeTableData.selectedObjects[0];
@@ -914,8 +1073,48 @@ async function stdBomCopyMode() {
     );
     return;
   }
+  await com.getProperties(selStdTreeData, ['L2_DesignStandardRel']);
+  if (selStdTreeData.props.L2_DesignStandardRel.dbValues.length > 1) {
+    popupService.show({
+      declView: 'L2_DgnGuideBookCopyPopup',
+      locals: {
+        caption: lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'guideBookSet'),
+        anchor: 'closePopupAnchor',
+      },
+      options: {
+        clickOutsideToClose: true,
+        isModal: false,
+        reference: 'referenceId',
+        placement: 'bottom-start',
+        width: 500,
+      },
+      outputData: {
+        popupId: 'id',
+      },
+    });
+  } else {
+    cloneBookState = true;
+    cloneBookRelItem = selStdTreeData;
+    message.show(
+      0,
+      lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'selItemPlease'),
+      [lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close')],
+      [],
+    );
+  }
+}
+
+let tableGuideBook;
+/**
+ * 복사 대상 지침서 지정
+ */
+function guideBookCopy() {
+  let guideBookCopyData = vms.getViewModelUsingElement(document.getElementById('guideBookCopyData'));
+  let treeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
+  let selStdTreeData = treeData.dataProviders.designStandardTreeTableData.selectedObjects[0];
   cloneBookState = true;
   cloneBookRelItem = selStdTreeData;
+  tableGuideBook = guideBookCopyData.dataProviders.guideBookSelectCopyTableData.selectedObjects[0];
   message.show(
     0,
     lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'selItemPlease'),
@@ -924,6 +1123,9 @@ async function stdBomCopyMode() {
   );
 }
 
+/**
+ * 지침서의 bom구조를 포함하여 모두 복사한다. 이때 복사된 객체는 서로 다른 uid를 가지며 붙여넣기한 구조에 복사된 설계 지침이 삽입된다.
+ */
 async function copyAndPasteBook() {
   if (!cloneBookState || !cloneBookRelItem) {
     return;
@@ -943,79 +1145,66 @@ async function copyAndPasteBook() {
     return;
   }
 
-  loding.openWindow();
-  let nodeItem = await com.getItemFromId(selStdTreeData.props.awb0BomLineItemId.dbValues[0]);
-  let nodeItemRev = com.getObject(nodeItem.props.revision_list.dbValues[nodeItem.props.revision_list.dbValues.length - 1]);
-  let nodeItemClone = await com.getItemFromId(cloneBookRelItem.props.awb0BomLineItemId.dbValues[0]);
-  let nodeItemCloneRev = com.getObject(nodeItemClone.props.revision_list.dbValues[nodeItemClone.props.revision_list.dbValues.length - 1]);
-  await com.getProperties(nodeItemCloneRev, ['L2_DesignStandardRel']);
-  let book = com.getObject(nodeItemCloneRev.props.L2_DesignStandardRel.dbValues[0]);
-  book = com.getObject(book.props.revision_list.dbValues[book.props.revision_list.dbValues.length - 1]);
-  let cloneBookRev = await bomUtils.duplicateFromItemRev(book);
-  cloneBookRev = cloneBookRev.clonedItemRev;
-  await com.getProperties(cloneBookRev, ['item_id']);
-  let cloneBookTemp = await com.getItemFromId(cloneBookRev.props.item_id.dbValues[0]);
-  let propsArr = [nodeItemRev, cloneBookTemp];
-  await com.getProperties(propsArr, ['L2_DesignStandardRel', 'object_name']);
-  loding.closeWindow();
-  if (nodeItemRev.props.L2_DesignStandardRel.dbValues.length > 0) {
-    message.show(
-      1,
-      lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'yesDgnStd'),
-      [
-        lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'change'),
-        lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close'),
-      ],
-      [
-        async function () {
-          let request = {
-            objects: [nodeItemRev],
-            attributes: {
-              L2_DesignStandardRel: {
-                stringVec: [cloneBookTemp.uid],
-              },
-            },
-          };
-          await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
-          eventBus.publish('designStandardTreeTable.plTable.reload');
-          cloneBookTemp = undefined;
-          cloneBookState = undefined;
-          cloneBookRelItem = undefined;
-        },
-        function () {},
-      ],
-    );
-    return;
+  await com.getProperties(cloneBookRelItem, ['L2_DesignStandardRel']);
+  let book;
+  if (tableGuideBook) {
+    book = com.getObject(tableGuideBook.uid);
   } else {
-    message.show(
-      1,
-      selStdTreeData.props.object_string.dbValues[0] + '에 ' + cloneBookTemp.props.object_name.dbValues[0] + '을(를) 추가 하시겠습니까?',
-      [
-        lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'added'),
-        lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close'),
-      ],
-      [
-        async function () {
-          let request = {
-            objects: [nodeItemRev],
-            attributes: {
-              L2_DesignStandardRel: {
-                stringVec: [cloneBookTemp.uid],
-              },
-            },
-          };
-          await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
-          eventBus.publish('designStandardTreeTable.plTable.reload');
-          cloneBookTemp = undefined;
-          cloneBookState = undefined;
-          cloneBookRelItem = undefined;
-        },
-        function () {},
-      ],
-    );
+    book = com.getObject(cloneBookRelItem.props.L2_DesignStandardRel.dbValues[0]);
   }
+  await com.getProperties(book, ['object_name']);
+  message.show(
+    1,
+    selStdTreeData.props.object_string.dbValues[0] + '에 ' + book.props.object_name.dbValues[0] + '을(를) 추가 하시겠습니까?',
+    [
+      lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'added'),
+      lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'copyCancel'),
+      lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close'),
+    ],
+    [
+      async function () {
+        loding.openWindow();
+        if (!book.props.revision_list) {
+          await com.getProperties(book, ['revision_list']);
+        }
+        book = com.getObject(book.props.revision_list.dbValues[book.props.revision_list.dbValues.length - 1]);
+        let cloneBookRev = await bomUtils.duplicateFromItemRev(book);
+        cloneBookRev = cloneBookRev.clonedItemRev;
+        await com.getProperties(cloneBookRev, ['item_id']);
+        let cloneBookTemp = await com.getItemFromId(cloneBookRev.props.item_id.dbValues[0]);
+        let propsArr = [selStdTreeData, cloneBookTemp];
+        await com.getProperties(propsArr, ['L2_DesignStandardRel', 'object_name']);
+        loding.closeWindow();
+        let guideBookArr = selStdTreeData.props.L2_DesignStandardRel.dbValues;
+        guideBookArr.unshift(cloneBookTemp.uid);
+        let request = {
+          objects: [selStdTreeData],
+          attributes: {
+            L2_DesignStandardRel: {
+              stringVec: guideBookArr,
+            },
+          },
+        };
+        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
+        eventBus.publish('designStandardTreeTable.plTable.reload');
+        cloneBookTemp = undefined;
+        cloneBookState = undefined;
+        cloneBookRelItem = undefined;
+        tableGuideBook = undefined;
+      },
+      function () {
+        cloneBookState = undefined;
+        cloneBookRelItem = undefined;
+        tableGuideBook = undefined;
+      },
+      function () {},
+    ],
+  );
 }
 
+/**
+ * 구조트리 폴더 이름 변경 전, 기존 폴더명 설정
+ */
 function folderNameSet() {
   const designStdData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   const data = vms.getViewModelUsingElement(document.getElementById('folderNameData'));
@@ -1023,6 +1212,9 @@ function folderNameSet() {
   data.objName.dbValue = selNode.props.object_name.dbValues[0];
 }
 
+/**
+ * 구조 트리 폴더명 변경
+ */
 async function folderNameEdit() {
   const data = vms.getViewModelUsingElement(document.getElementById('folderNameData'));
   const designStdData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
@@ -1047,6 +1239,260 @@ async function folderNameEdit() {
   } catch (e) {
     console.log(e);
   }
+}
+
+/**
+ * 설계 지침에 첨부된 지침서 ppt를 가져와준다.
+ */
+async function attachPPTFileTableSet() {
+  let book = L2_DesignStandardService.getSelectBook();
+  book = com.getObject(book.uid);
+  await com.getProperties(book, ['item_id']);
+  book = await com.getItemFromId(book.props.item_id.dbValues[0]);
+  await com.getProperties(book, ['IMAN_reference']);
+  let tableData = com.getObject(book.props.IMAN_reference.dbValues);
+  return {
+    result: tableData,
+    totalFound: tableData.length,
+  };
+}
+
+/**
+ * 파일 업로드 버튼을 임의로 눌러줌.
+ */
+function uploadClickBook() {
+  let btn = document.getElementsByClassName('visibleHidden');
+  btn = btn[0];
+  btn = btn.children;
+  btn = btn[0];
+  btn = btn.children;
+  btn = btn[2];
+  btn.click();
+}
+
+/**
+ * 지침서의 첨부된 ppt를 바꿔준다.
+ */
+async function selectedBookReferenceAdd(fileData, ctx) {
+  let attachDataset = fileData.get('fmsFile');
+  console.log(attachDataset);
+  let book = L2_DesignStandardService.getSelectBook();
+  book = com.getObject(book.uid);
+  await com.getProperties(book, ['item_id']);
+  book = await com.getItemFromId(book.props.item_id.dbValues[0]);
+  attachDataset = await lgepSummerNoteUtils.uploadFileToDataset(attachDataset);
+  await lgepSummerNoteUtils.deleteRelationReference(book);
+  await lgepSummerNoteUtils.linkRelationItem(book, attachDataset);
+  eventBus.publish('dgnStandardBookPPTTable.plTable.reload');
+}
+
+/**
+ * 지침서에 첨부된 ppt 다운로드
+ */
+async function pptDown() {
+  let data = vms.getViewModelUsingElement(document.getElementById('pptFileData'));
+  let downloadFile = data.dataProviders.dgnStandardBookPPTTableData.viewModelCollection.loadedVMObjects;
+  let file = downloadFile[0];
+  await com.getProperties(file, ['ref_list']);
+  file = com.getObject(file.props.ref_list.dbValues[0]);
+  let textTicket;
+  try {
+    let inputParam = {
+      files: [file],
+    };
+    let serachResult = await SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', inputParam);
+    textTicket = serachResult.tickets[1][0];
+  } catch (err) {
+    //console.log(err);
+  }
+  let URL = browserUtils.getBaseURL() + 'fms/fmsdownload/' + fmsUtils.getFilenameFromTicket(textTicket) + '?ticket=' + textTicket;
+  const anchorElement = document.createElement('a');
+  document.body.appendChild(anchorElement);
+  anchorElement.download = file.props.object_string.dbValues[0]; // a tag에 download 속성을 줘서 클릭할 때 다운로드가 일어날 수 있도록 하기
+  anchorElement.href = URL; // href에 url 달아주기
+  anchorElement.click(); // 코드 상으로 클릭을 해줘서 다운로드를 트리거
+  document.body.removeChild(anchorElement); // cleanup - 쓰임을 다한 a 태그 삭제
+}
+
+let treeArr = [];
+/**
+ * 리비전 비교 트리 자식 노드 포함 일괄 출력 실험 코드 사용X
+ */
+async function ctxOfTreeSet(ctx, nodeBeingExpanded, input) {
+  ctx.decoratorToggle = true;
+  if (!treeABook) {
+    return {
+      treeLoadResult: {
+        parentNode: nodeBeingExpanded,
+        childNodes: [],
+        totalChildCount: 0,
+        startChildNdx: 0,
+      },
+    };
+  }
+  let revBom = await bomUtils.createBOMWindow(null, treeABook);
+  let revBomChild = await bomUtils.expandPSAllLevels([revBom.bomLine], undefined);
+  let modelObjects = [];
+  let childrenArr = [];
+  let viewModelArr = [];
+  let treeNodeArr = [];
+  for (let i of revBomChild.output) {
+    modelObjects.push(i.parent.itemRevOfBOMLine);
+    childrenArr.push(i.children);
+  }
+  bomUtils.closeBOMWindow(revBom.bomWindow);
+  await com.getProperties(modelObjects, ['object_name', 'item_revision_id']);
+  let propsTemp = [];
+  for (let i of modelObjects) {
+    viewModelArr.push(viewC.constructViewModelObjectFromModelObject(i));
+    propsTemp.push(i);
+  }
+  for (let i = 0; i < viewModelArr.length; i++) {
+    let temp = treeView.createViewModelTreeNode(
+      viewModelArr[i].uid,
+      viewModelArr[i].type,
+      viewModelArr[i].props.object_name.dbValues[0],
+      nodeBeingExpanded.levelNdx + 1,
+      nodeBeingExpanded.levelNdx + 2,
+      viewModelArr[i].typeIconURL,
+    );
+    Object.assign(temp, propsTemp[i]);
+    treeNodeArr.push(temp);
+  }
+  // console.log('트리오비지 모임', { treeNodeArr });
+  // console.log('자식 모임', { childrenArr });
+  treeArr = treeNodeArr;
+  treeArr[treeArr.length - 1].$$treeLevel = 0;
+  treeArr[treeArr.length - 1].childNdx = 1;
+  treeArr[treeArr.length - 1].alternateID = treeArr[treeArr.length - 1].uid + ',top';
+  for (let i of treeArr) {
+    if (i.type.includes('Page')) {
+      i.isLeaf = true;
+    } else {
+      i.isLeaf = false;
+    }
+    i.children = [];
+    i.isExpanded = true;
+  }
+  await treeChildSet(childrenArr);
+  // treeArr.reverse()
+  treeArr = [treeArr[treeArr.length - 1]];
+  console.log('리턴', { treeArr });
+  treeABook = undefined;
+  return {
+    treeLoadResult: {
+      parentNode: nodeBeingExpanded,
+      childNodes: treeArr,
+      totalChildCount: treeArr.length,
+      startChildNdx: 0,
+    },
+  };
+  // let homeUid;
+  // if (nodeBeingExpanded.uid == input.rootNode.uid) {
+  //   nodeBeingExpanded.alternateID = nodeBeingExpanded.uid;
+  // }
+  // if (nodeBeingExpanded.uid == 'top') {
+  //   if (!treeABook) {
+  //     return {
+  //       treeLoadResult: {
+  //         parentNode: nodeBeingExpanded,
+  //         childNodes: [],
+  //         totalChildCount: 0,
+  //         startChildNdx: 0,
+  //       },
+  //     };
+  //   } else {
+  //     return {
+  //       result: undefined,
+  //     };
+  //   }
+  // } else {
+  //   return {
+  //     result: undefined,
+  //   };
+  // }
+}
+
+let childIndexTemp;
+/**
+ * 사용X
+ */
+async function treeChildSet(child, recursiveValue) {
+  if (recursiveValue) {
+    let indexT = childIndexTemp;
+    for (let i = 0; child[indexT].length; i++) {
+      childIndexTemp--;
+      if (!treeArr[childIndexTemp]) return;
+      treeArr[childIndexTemp].$$treeLevel = treeArr[indexT].$$treeLevel + 1;
+      treeArr[childIndexTemp].childNdx = treeArr[indexT].childNdx + 1;
+      treeArr[childIndexTemp].alternateID = treeArr[childIndexTemp].uid + treeArr[indexT].alternateID;
+      treeArr[indexT].children.push(treeArr[childIndexTemp]);
+      if (child[childIndexTemp].length > 0) {
+        await treeChildSet(child, treeArr[childIndexTemp]);
+      }
+    }
+  } else {
+    for (let i = treeArr.length - 1; i >= 0; i--) {
+      let tempIndex = i;
+      for (let j = 0; j < child[tempIndex].length; j++) {
+        i--;
+        childIndexTemp = i;
+        if (!treeArr[i]) return;
+        treeArr[i].$$treeLevel = treeArr[tempIndex].$$treeLevel + 1;
+        treeArr[i].childNdx = treeArr[tempIndex].childNdx + 1;
+        treeArr[i].alternateID = treeArr[i].uid + treeArr[tempIndex].alternateID;
+        treeArr[tempIndex].children.push(treeArr[i]);
+        if (child[childIndexTemp].length > 0) {
+          await treeChildSet(child, treeArr[childIndexTemp]);
+        }
+        i = childIndexTemp;
+      }
+    }
+  }
+}
+
+/**
+ * 구조에 포함 된 설계 지침이 2개 이상일때 모든 설계 지침을 보여주는 코드
+ */
+async function guideBookSelectTableSetting() {
+  const data = vms.getViewModelUsingElement(document.getElementById('guideBookSettingData'));
+  const tableData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
+  let selectTreeValue = tableData.dataProviders.designStandardTreeTableData.selectedObjects[0];
+  await com.getProperties(selectTreeValue, ['L2_DesignStandardRel']);
+  let bookPropsArr = com.getObject(selectTreeValue.props.L2_DesignStandardRel.dbValues);
+  await com.getProperties(bookPropsArr, ['revision_list']);
+  let returnArr = [];
+  for (let i of bookPropsArr) {
+    let rev = com.getObject(i.props.revision_list.dbValues[i.props.revision_list.dbValues.length - 1]);
+    returnArr.push(rev);
+  }
+  await com.getProperties(returnArr, ['item_revision_id', 'object_name']);
+  return {
+    result: returnArr,
+    totalFound: returnArr.length,
+  };
+}
+
+/**
+ * 지침 복사를 사용할때 구조에 포함된 설계 지침이 2개 이상일때 모든 설계지침을 보여주는 코드
+ */
+async function guideBookSelectCopyTableSetting() {
+  const data = vms.getViewModelUsingElement(document.getElementById('guideBookSettingData'));
+  const tableData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
+  let selectTreeValue = tableData.dataProviders.designStandardTreeTableData.selectedObjects[0];
+  await com.getProperties(selectTreeValue, ['L2_DesignStandardRel']);
+  let bookPropsArr = com.getObject(selectTreeValue.props.L2_DesignStandardRel.dbValues);
+  await com.getProperties(bookPropsArr, ['revision_list']);
+  let returnArr = [];
+  for (let i of bookPropsArr) {
+    let rev = com.getObject(i.props.revision_list.dbValues[i.props.revision_list.dbValues.length - 1]);
+    returnArr.push(rev);
+  }
+  await com.getProperties(returnArr, ['item_revision_id', 'object_name']);
+  return {
+    result: returnArr,
+    totalFound: returnArr.length,
+  };
 }
 
 let exports = {};
@@ -1079,6 +1525,14 @@ export default exports = {
   copyAndPasteBook,
   folderNameSet,
   folderNameEdit,
+  attachPPTFileTableSet,
+  uploadClickBook,
+  selectedBookReferenceAdd,
+  pptDown,
+  ctxOfTreeSet,
+  guideBookSelectTableSetting,
+  guideBookSelectCopyTableSetting,
+  guideBookCopy,
 };
 
 app.factory('L2_DesignStandardPopupService', () => exports);

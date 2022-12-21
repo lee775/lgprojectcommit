@@ -36,19 +36,23 @@ const pleaseSelectMinutesForModify = locale.getLocalizedText('lgepChkMinutesMess
 const noFailure = locale.getLocalizedText('lgepChkMinutesMessages', 'noFailure');
 const failureList = locale.getLocalizedText('lgepChkMinutesMessages', 'failureList');
 const createdItemMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'createdItem');
+const enterCommentMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'enterCommentMsg');
+const enterWorkerMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'enterWorkerMsg');
+const createdActionItemMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'createdActionItem');
+const deletedActionItem = locale.getLocalizedText('lgepChkMinutesMessages', 'deletedActionItem');
 
 export async function createActionItem(ctx, data) {
-  let actionItemName = $('#commentSummernote').summernote('code');
-  actionItemName = actionItemName.replaceAll('<p>', '');
-  actionItemName = actionItemName.replaceAll('</p>', '');
+  let actionItemComment = $('#commentSummernote').summernote('code');
+  let setPropComment = $('#commentSummernote').summernote('code');
   let actionItemFollowUp = $('#followUpSummernote').summernote('code');
-  actionItemFollowUp = actionItemFollowUp.replaceAll('<p>', '');
-  actionItemFollowUp = actionItemFollowUp.replaceAll('</p>', '');
+  let setPropFollowUp = $('#followUpSummernote').summernote('code');
   let actionItemRemark = $('#remarkSummernote').summernote('code');
-  actionItemRemark = actionItemRemark.replaceAll('<p>', '');
-  actionItemRemark = actionItemRemark.replaceAll('</p>', '');
+  let setPropRemark = $('#remarkSummernote').summernote('code');
+  setPropComment = setPropComment.replace(/<[^>]*>?/g, '');
+  setPropFollowUp = setPropFollowUp.replace(/<[^>]*>?/g, '');
+  setPropRemark = setPropRemark.replace(/<[^>]*>?/g, '');
   let actionWorker;
-  let actionDate = `${data.l2_expected_date.dateApi.dateValue} ${data.l2_expected_date.dateApi.timeValue}`;
+  let actionDate = `${data.l2_expected_date.dateApi.dateValue}`;
 
   for (let user of searchingUser) {
     if (data.l2_worker.dbValue == user.props.owning_user.dbValues[0]) {
@@ -62,11 +66,16 @@ export async function createActionItem(ctx, data) {
   selectedMinutesItem = selectedMinutesItem.modelObjects[selectedMinutesItem.plain[0]];
   console.log(selectedMinutesItem);
 
-  if (actionItemName != null || actionItemName != '') {
-    let createActionItem = await com.createItem('', 'L2_ActionItem', actionItemName, '', '');
+  if (actionItemComment == null || actionItemComment == '<p><br></p>') {
+    msg.show(1, enterCommentMsg);
+  } else if (actionWorker == undefined || actionWorker == null || actionWorker == '') {
+    msg.show(1, enterWorkerMsg);
+  } else {
+    let createActionItem = await com.createItem('', 'L2_ActionItem', setPropComment, '', '');
     let createdActionItem = createActionItem.output[0].item;
 
     await com.getProperties(createdActionItem, [
+      'IMAN_reference',
       'object_string',
       'contents',
       'object_name',
@@ -84,16 +93,16 @@ export async function createActionItem(ctx, data) {
       objects: [createdActionItem],
       attributes: {
         l2_comment: {
-          stringVec: [actionItemName],
+          stringVec: [setPropComment],
         },
         l2_follow_up: {
-          stringVec: [actionItemFollowUp],
+          stringVec: [setPropFollowUp],
         },
         l2_expected_date: {
           stringVec: [actionDate],
         },
         object_desc: {
-          stringVec: [actionItemRemark],
+          stringVec: [setPropRemark],
         },
         l2_worker: {
           stringVec: [actionWorker.uid],
@@ -102,6 +111,17 @@ export async function createActionItem(ctx, data) {
     };
 
     await SoaService.post('Core-2007-01-DataManagement', 'setProperties', ActionItemParam);
+
+    let text = {};
+    text.comment = actionItemComment;
+    text.followUp = actionItemFollowUp;
+    text.remark = actionItemRemark;
+    console.log(text);
+
+    let setText = JSON.stringify(text);
+    console.log(setText);
+
+    lgepSummerNoteUtils.txtFileToDatasetNoDelete(setText, createActionItem.output[0].itemRev);
 
     let createActionUID = createActionItem.output[0].itemRev.uid;
     let actionArr = [];
@@ -132,10 +152,8 @@ export async function createActionItem(ctx, data) {
       await SoaService.post('Core-2007-01-DataManagement', 'setProperties', actionItemRelationParam);
     }
 
-    msg.show(0, `액션 아이템이 생성되었습니다.`);
+    msg.show(0, createdActionItemMsg);
     appCtxService.registerCtx('show_minutes_mode', 1);
-  } else {
-    msg.show(0, '코멘트를 입력해 주세요');
   }
 }
 
@@ -143,14 +161,12 @@ export function deleteActionItem(ctx, data) {
   let selectActionItemRev = ctx.selectActionItemRev;
   let selectMinutesRev = data.dataProviders.minutesListProvider.selectedObjects[0];
   let minutesHaveActionItemUID = selectMinutesRev.props.L2_ActionItemRelation.dbValue.dbValues;
-  console.log(selectMinutesRev);
   msg.show(
     1,
     deleteMinutes,
     [deleteItem, cancel],
     async function () {
       let revUID = selectActionItemRev.cellHeader2;
-      let revObj = selectActionItemRev;
       let setParentsApi = {
         infos: [
           {
@@ -164,9 +180,28 @@ export function deleteActionItem(ctx, data) {
 
       try {
         await com.getProperties(revParent, ['L2_ActionItemRelation']);
+        await com.getProperties(selectActionItemRev, ['IMAN_specification']);
       } catch (err) {
         //console.log(err);
         notySvc.showError('아이템 속성 불러오기 실패');
+      }
+
+      let dataset = await com.getObject(selectActionItemRev.props.IMAN_specification.dbValues[0]);
+
+      let param = {
+        input: [
+          {
+            clientId: '',
+            relationType: 'IMAN_specification',
+            primaryObject: selectActionItemRev,
+            secondaryObject: dataset,
+          },
+        ],
+      };
+      try {
+        await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', param);
+      } catch (err) {
+        //console.log(err)
       }
 
       let filteredActionItemArr = minutesHaveActionItemUID.filter((element) => element !== selectActionItemRev.uid);
@@ -185,8 +220,15 @@ export function deleteActionItem(ctx, data) {
       let deleteOjt = {
         objects: [revParent],
       };
+      let deleteDatasetOjt = {
+        objects: [dataset],
+      };
 
+      await com.deleteObject(deleteDatasetOjt.objects[0]);
       await com.deleteObject(deleteOjt.objects[0]);
+
+      ctx.selectActionItemRev = null;
+      msg.show(0, deletedActionItem);
     },
     function () {},
   );
@@ -203,7 +245,11 @@ export async function createActionItemInitialize(data) {
   let month = date.getMonth() + 1;
   let days = date.getDate();
   let initTime = '08:00:00';
-  data.l2_expected_date.dateApi.dateValue = `${years}-${month}-${days}`;
+  if (days < 10) {
+    data.l2_expected_date.dateApi.dateValue = `${years}-${month}-0${days}`;
+  } else {
+    data.l2_expected_date.dateApi.dateValue = `${years}-${month}-${days}`;
+  }
   data.l2_expected_date.dateApi.timeValue = initTime;
 }
 

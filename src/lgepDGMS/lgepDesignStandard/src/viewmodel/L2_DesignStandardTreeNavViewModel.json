@@ -346,7 +346,7 @@
         "data": {
           "declView": "L2_EditDesignPagePopup",
           "locals": {
-            "caption": "{{data.i18n.editDgnPage}}",
+            "caption": "{{data.i18n.editDgnPage2}}",
             "anchor": "closePopupAnchor"
           },
           "options": {
@@ -452,7 +452,8 @@
     "createDgnPage2": ["L2_DesignStandardMessages"],
     "editDgnPage": ["L2_DesignStandardMessages"],
     "folderAdd": ["L2_DesignStandardMessages"],
-    "dgnStandard2Tree": ["L2_DesignStandardMessages"]
+    "dgnStandard2Tree": ["L2_DesignStandardMessages"],
+    "editDgnPage2": ["L2_DesignStandardMessages"]
   },
   "lifecycleHooks": {
     "onInit": "treeNavSet"

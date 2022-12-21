@@ -1,0 +1,22 @@
+<aw-popup2>
+    <aw-command-panel caption="{{i18n.connectChecklist}}" context="data" id="checklistConnectPopup">
+      <aw-panel-body>
+        <aw-flex-column>
+          <aw-flex-row>
+            <aw-list dataprovider="data.dataProviders.connectChecklist" id="connectChecklist" show-check-box="true">
+              <aw-default-cell vmo="item"></aw-default-cell>
+            </aw-list>
+          </aw-flex-row>
+        </aw-flex-column>
+      </aw-panel-body>
+      <aw-panel-footer>
+        <aw-flex-column>
+          <aw-button action="connectChecklistAction">{{i18n.connect}}</aw-button>
+        </aw-flex-column>
+        <aw-flex-column>
+          <aw-button action="closePopupWindow">{{i18n.close}}</aw-button>
+        </aw-flex-column>
+      </aw-panel-footer>
+    </aw-command-panel>
+  </aw-popup2>
+  

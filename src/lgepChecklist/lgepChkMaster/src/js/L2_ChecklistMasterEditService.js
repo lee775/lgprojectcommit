@@ -32,9 +32,9 @@ export async function setUidIncontext(failure, txtDataset) {
   await saveViewModelEditAndSubmitWorkflow2([failure], ['l2_reference_dataset'], [txtDataset.uid]);
 }
 
-export async function setValueIncontextByTopEl(failure, value, top) {
+export async function setValuesIncontextByTopEl(failure, props, values, top) {
   await saveUserWorkingContextState2(top.uid);
-  await saveViewModelEditAndSubmitWorkflow2([failure], ['l2_importance'], [value]);
+  await saveViewModelEditAndSubmitWorkflow2([failure], props, values);
 }
 
 export async function setUidIncontextByTopEl(failure, txtDataset, top) {
@@ -43,6 +43,9 @@ export async function setUidIncontextByTopEl(failure, txtDataset, top) {
 }
 
 export const removeTagInStr = (value) => {
+  if (!value) {
+    return '';
+  }
   let replaceSpace = value.replaceAll('<p>', ' ');
   let nonTagValue = replaceSpace.replaceAll(/[<][^>]*[>]/gi, '');
   // 그 외 예외처리

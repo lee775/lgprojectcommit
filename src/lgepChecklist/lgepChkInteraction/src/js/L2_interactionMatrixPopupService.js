@@ -4,6 +4,7 @@ import appCtxService from 'js/appCtxService';
 import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 import { makeTable } from 'js/L2_interactionMatrixPopupTableService';
 import { getLang } from 'js/L2_ChecklistInteractionUtils';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 let langIndex;
 
@@ -23,18 +24,19 @@ export const openInteractionPopup = (ctx) => {
       isModal: true,
       clickOutsideToClose: false,
       draggable: true,
-      closable: true,
       hooks: {
         whenOpened: () => {
           initializePopup(ctx);
         },
-        whenClosed: () => {
-          closePopup(ctx);
-        },
       },
     },
   };
-  popupService.show(inputParam);
+  popupService.show(inputParam).then((response) => {
+    console.log({ response });
+    response.panelEl.id = 'interactionMatrixPopup';
+  });
+  let whetherReleased = ctx.checklist.target.props.release_status_list.dbValues.length;
+  appCtxService.registerCtx('checkReleased', whetherReleased);
 };
 
 const initializePopup = async (ctx) => {
@@ -48,8 +50,8 @@ const initializePopup = async (ctx) => {
 
   await makeTable();
 
-  grid.style.visibility = 'visible';
   appCtxService.registerCtx(FMEA_INERATION_INIT, true);
+  grid.style.visibility = 'visible';
 };
 //// popup make
 const _resizePoup = () => {
@@ -67,11 +69,11 @@ const _resizePoup = () => {
           .getElementsByClassName('aw-popup-contentContainer')[0]
           .children[0].setAttribute('style', 'height: ' + (height - 20) + 'px; width: ' + (width - 40) + 'px;');
       } catch (error) {
-        //console.error("Failed to execute popup resizing");
+        // console.error('Failed to execute popup resizing');
       }
     };
   } catch (error) {
-    //console.error("Failed to execute popup resizing");
+    // console.error('Failed to execute popup resizing');
   }
 };
 
@@ -128,9 +130,7 @@ const _setTextDesc = () => {
   textDescEl.innerHTML = langIndex === 1 ? INTERACTION_DESC_KR : INTERACTION_DESC_EN;
 };
 
-const closePopup = async (ctx) => {
-  lgepCommonUtils.delay(100);
-  appCtxService.updateCtx('norefresh', false);
+const closeInteractionPopup = () => {
   window.onbeforeunload = function (e) {
     return e.preventDefault();
   };

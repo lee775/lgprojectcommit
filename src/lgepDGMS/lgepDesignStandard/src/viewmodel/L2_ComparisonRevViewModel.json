@@ -69,6 +69,19 @@
         "treeBLoadResult": "{{function:treeBLoadData}}"
       },
       "deps": "js/L2_DesignStandardPopupService"
+    },
+    "ctxOfTreeSet": {
+      "actionType": "JSFunction",
+      "method": "ctxOfTreeSet",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "nodeBeingExpanded": "{{data.treeLoadInput.parentNode}}",
+        "input": "{{data.treeLoadInput}}"
+      },
+      "outputData": {
+        "treeALoadResult": "treeLoadResult"
+      },
+      "deps": "js/L2_DesignStandardPopupService"
     }
   },
   "data": {
@@ -247,7 +260,7 @@
   "functions": {
     "treeALoadData": {
       "functionName": "treeALoadData",
-      "parameters": ["{{data.treeLoadInput.parentNode}}", "{{data.treeLoadInput}}"]
+      "parameters": ["{{data.treeLoadInput.parentNode}}", "{{data.treeLoadInput}}", "{{ctx}}"]
     },
     "treeBLoadData": {
       "functionName": "treeBLoadData",

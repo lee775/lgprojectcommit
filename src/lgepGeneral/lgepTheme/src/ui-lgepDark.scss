@@ -97,12 +97,10 @@ $brand_tab_title_selected_border_color_hover: $aw_accent_5;
   width: 100%;
   // background: linear-gradient(90deg, rgba(107,107,107,1) 83%, rgba(255,255,255,1) 100%);
 }
-
 #proceduerThemeRow {
   background: rgb(40, 45, 51);
   color: white;
 }
-
 #sequenceTree > div.aw-splm-tableContainer > div.aw-splm-tableScrollContainer > div.aw-splm-tableViewport.aw-splm-tableCanvas > div div,
 #checkListCopyTable > div.aw-splm-tableContainer > div.aw-splm-tableScrollContainer > div.aw-splm-tableViewport.aw-splm-tableCanvas > div > div,
 #checkListCopyTable
@@ -198,7 +196,7 @@ aw-showobject-header .aw-layout-headerIcon {
   color: white !important;
 }
 .aw-layout-subLocation .aw-layout-splitterLine {
-  border-color: black;
+  border-color: #31393f;
 }
 .aw-commands-showIconLabel aw-command-bar:not(.aw-layout-userSessionCommands) .aw-commands-commandIconButtonText {
   width: auto;
@@ -228,7 +226,6 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 .development-environment {
   background-image: url('./images/lgMainWallDev.jpg') !important;
 }
-
 .aw-session-companyLogo {
   background-repeat: no-repeat;
   width: 281px;
@@ -239,7 +236,6 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   background-size: contain;
   top: 70px;
 }
-
 .afx-checkbox input[type='checkbox']:checked + .afx-checkbox-md-style .check {
   color: white;
 }
@@ -332,6 +328,11 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 #dashboardListSite h3 {
   color: #898b8a;
 }
+#dashboardListSite input[type=text] {
+  background-color: #181c1f !important;
+  color: #c2c2c4 !important;
+}
+
 //내문서
 .aw-flex-row.height-12 {
   background-color: #181c1f;
@@ -369,13 +370,13 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   color: white !important;
   font-weight: bold !important;
 }
-.minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div img {
+.minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-.minColumn aw-list div div div ul li:hover div div div img {
+.minColumn aw-list div div div ul li:hover div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-.minColumn aw-list div div div ul li div div div img {
+.minColumn aw-list div div div ul li div div div.imgBox {
   border: 7px solid white;
 }
 #folderNameData .aw-layout-panelBody {
@@ -509,6 +510,7 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 .splitshadow {
   box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
 }
+
 // 대시보드 차트 css
 #chartDashboardSite text {
   color: white !important;
@@ -550,6 +552,9 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   background-color: #282d33;
   color: white;
 }
+#chartDashboardSite .aw-vertical-separator {
+  margin: 8px 10px;
+}
 // .minColumn {
 //     box-shadow: inset 2px 0px 4px rgba(226, 226, 226, 0.623);
 // }
@@ -557,12 +562,10 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   margin-left: -8px;
   margin-right: -8px;
 }
-
 #wareHouse .seperatorSizeChange {
   border-color: white !important;
   margin: 8px 8px;
 }
-
 #wareHouse .filterBackground {
   color: #bdbdbd !important;
 }
@@ -571,70 +574,56 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 .backGroundWhiteImportant {
   background-color: #ffffff !important;
 }
-
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
   background-color: #ffffff !important;
 }
-
 #wareHouse .aw-layout-panelMain {
   background-color: #282d33;
 }
-
 #mainBgColor {
   background-color: #282d33 !important;
 }
-
-#mainListId div div div ul .aw-widgets-cellListItemSelected div div div img {
+#mainListId div div div ul .aw-widgets-cellListItemSelected div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-
-#mainListId div div div ul li:hover div div div img {
+#mainListId div div div ul li:hover div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-
-#mainListId div div div ul .aw-widgets-cellListItemSelected div div div p {
+#mainListId div div div ul .aw-widgets-cellListItemSelected div div div.imgBox {
   border: 7px solid #d81d3c;
 }
-
-#mainListId div div div ul li:hover div div div p {
+#mainListId div div div ul li:hover div div div.imgBox {
   border: 7px solid #d81d3c;
 }
-
-#mainListId div div div ul li div div div img {
+#mainListId div div div ul li div div div.imgBox {
   border: 7px solid transparent !important;
 }
-
 #mainListId div div div ul li div div div h2 {
   font-weight: 900;
   font-size: 0.95rem !important;
   color: white !important;
 }
-
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: white !important;
 }
-
 #mainListId div div div ul li:hover div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: white !important;
 }
-
 #mainListId div div div ul li {
   border-bottom: 1px solid #464646 !important;
   border-top: 0px !important;
   border-left: 0px !important;
   border-right: 0px !important;
 }
-
 #wareHouse div div div ul li ng-transclude group-header-cell a {
   color: white !important;
 }
-
 #wareHouse .star-ratings-fill {
   color: orangered !important;
   font-size: 1.2rem;
@@ -647,87 +636,69 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   overflow: hidden;
   -webkit-text-fill-color: orangered !important;
 }
-
 #wareHouse .middleMargin {
   margin: 16px;
 }
-
 #wareHouse .listShadow {
   border: 1px solid #32373b;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 #wareHouse .splitShadow {
   box-shadow: inset 2px 0px 4px rgba(0, 0, 0, 0.3), 2px 0px 4px rgba(0, 0, 0, 0.3) !important;
 }
-
 #wareHouse .aw-widgets-modelObjectList {
   margin: 0px;
 }
-
 #awTreeBgColorId ul li {
   background-color: #171b1e !important;
   border-top: 1px solid #464646 !important;
 }
-
 #awTreeBgColorId ul li aw-node ul li {
   border-left: 16px solid #464646;
   border-right: 16px solid #464646;
   border-top: 1px solid #464646 !important;
 }
-
 .backGroundWhiteImportant {
   background-color: #171b1e !important;
   color: white;
 }
-
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
   background-color: #171b1e !important;
   color: white;
 }
-
 #wareHouse .aw-state-selected * {
   color: white !important;
   text-decoration: underline;
   font-weight: bold;
 }
-
 #awTreeBgColorId ul li * {
   color: #8b8b8b !important;
 }
-
 #awTreeBgColorId ul li div:hover * {
   color: white !important;
 }
-
 #awTreeBgColorId ul li aw-node * {
   background-color: #22272d !important;
 }
-
 #wareHouse a.aw-base-tabTitle {
   color: #868686 !important;
 }
-
 #wareHouse a.aw-base-tabTitleSelected,
 #wareHouse .aw-jswidget-tab a.aw-base-tabTitle:hover {
   color: white !important;
   border-bottom-color: white !important;
   transition: border-color 0.2s ease-out;
 }
-
 #wareHouse .aw-layout-panelSectionContent {
   background-color: #282d33;
 }
-
 #showPercent,
 .showReviewText {
   color: #a8a9ab !important;
 }
-
 #wareHouse .aw-layout-panelMain {
   background-color: #171b1e !important;
 }
-
 #wareHouse .aw-layout-panelSectionTitle {
   color: #8a8a8a !important;
   background-color: #171b1e !important;
@@ -735,7 +706,6 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 #wareHouse h3 {
   color: #ffffff !important;
 }
-
 #wareHouse .aw-splm-tableRow {
   background-color: #22272d !important;
   color: #868686 !important;
@@ -752,92 +722,78 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 .split .aw-layout-splitterLine {
   border-color: #464646;
 }
-
 .split2 {
   margin-right: -7px;
   flex: 0 0 8px !important;
 }
-
 .split2 .aw-layout-splitterLine {
   border-color: #464646;
 }
-
 #reviews .aw-widgets-cellListItem {
   border-color: transparent;
 }
-
 #reviews .aw-widgets-cellListWidget .aw-widgets-cellListItem:hover {
   background-color: #ccc !important;
 }
-
 #moreViewLeftSide .aw-jswidget-tabPage {
   background-color: #171b1e;
 }
-
 #reListId div div div ul .aw-widgets-cellListItemSelected {
   border: 7px solid #d81d3c !important;
   background-color: white;
 }
-
 #reListId div div div ul li:hover {
   border: 7px solid #d81d3c !important;
   background-color: white;
 }
-
 #reListId div div div ul li {
   border: 7px solid transparent;
   background-clip: padding-box;
   background-color: transparent;
   color: white !important;
 }
-
 #reListId div div div ul li {
   margin: 3px 0px;
 }
-
+#reListId .aw-widgets-cellListItemCell{
+  overflow: hidden;
+}
 #reListId .aw-widgets-cellListItemContainer {
   justify-content: center !important;
 }
-
 #reListId div div div ul .aw-widgets-cellListItemSelected .textSize {
   color: black !important;
 }
-
 #reListId div div div ul li:hover .textSize {
   color: black !important;
 }
-
+#fileListId .aw-widgets-cellListItemCell{
+  overflow: hidden;
+}
 #fileListId div div div ul .aw-widgets-cellListItemSelected {
   border: 7px solid #d81d3c !important;
   background-color: white;
 }
-
 #fileListId div div div ul li:hover {
   border: 7px solid #d81d3c !important;
   background-color: white;
 }
-
 #fileListId div div div ul li {
   border: 7px solid transparent;
   background-clip: padding-box;
 }
-
 #fileListId div div div ul li {
   margin: 3px 0px;
 }
-
 #fileListId .aw-widgets-cellListItemContainer {
   justify-content: center !important;
 }
-
 #fileListId div div div ul .aw-widgets-cellListItemSelected .textSize {
   color: black !important;
 }
-
 #fileListId div div div ul li:hover .textSize {
   color: black !important;
 }
-
 #test1 .star-ratings-fill {
   color: orangered !important;
   font-size: 1.2rem;
@@ -850,33 +806,26 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   overflow: hidden;
   -webkit-text-fill-color: orangered !important;
 }
-
 #test1 .star-rating :checked ~ label {
   color: orangered !important;
 }
-
 #test1 .star-rating label:hover,
 #test1 .star-rating label:hover ~ label {
   color: orangered !important;
 }
-
 #test1 .leftArrowSpace:hover {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-
 #test1 .rightArrowSpace:hover {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-
 #test1 .rightArrowSpace svg line,
 #test1 .leftArrowSpace svg line {
   stroke: white !important;
 }
-
 #showFullStar svg path {
   fill: orange;
 }
-
 #test1 .aw-layout-panelBody {
   background-color: #181c1f;
 }
@@ -885,30 +834,24 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   background-color: #222222 !important;
   color: white !important;
 }
-
 #test1 .aw-xrt-tabsContainer {
   background-color: black !important;
 }
-
 #test1 a.aw-base-tabTitle {
   color: #868686 !important;
 }
-
 #test1 a.aw-base-tabTitleSelected,
 #test1 .aw-jswidget-tab a.aw-base-tabTitle:hover {
   color: white !important;
   border-bottom-color: white !important;
   transition: border-color 0.2s ease-out;
 }
-
 #test1 .aw-layout-panelMain {
   background-color: #181c1f;
 }
-
 #test1 a {
   color: #d81d3c;
 }
-
 .textSize {
   color: white !important;
 }
@@ -917,11 +860,9 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 #filterView .aw-widgets-propertyContainer {
   color: #868686 !important;
 }
-
 .aw-popup-balloon .popupInner {
   background-color: #171b1e;
 }
-
 // .aw-layout-popup .popupArrow .arrow_bg .arrow_fg {
 //     border-color:#171b1e;
 // }
@@ -930,7 +871,6 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 //     border-right-color: transparent;
 //     border-top-color: transparent;
 // }
-
 // .aw-layout-popup .popupArrow .arrow_bg {
 //     border-color:#868686;
 // }
@@ -938,24 +878,21 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 //     background-color: #464646;
 //     color: white;
 // }
-
 #filterView input[type='text'] {
   background-color: #464646 !important;
   color: white !important;
 }
-
 #searchTableResult a {
   color: #868686 !important;
 }
-
 #searchTableResult .aw-splm-tableHeaderCell {
   background-color: #171b1e;
   color: white;
 }
-
 #searchTableResult .aw-splm-tableHeaderRow {
   background-color: #171b1e;
 }
+
 // Q&A css
 .answerSection .aw-widgets-cellListItem {
   border: solid 1px #31393f !important;
@@ -983,16 +920,17 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   color: #8a8a8a;
   font-weight: bold;
 }
-// #qnaDatas .leftPadding h3 {
-//     background-color: #181c1f !important;
+// #qnaDatas .insideMargin h3 {
+//     background-color: #181c1f;
 //     color: #898b8a;
 // }
-#qnaDatas h3,
-#mainTechnicalData h3 {
+#qnaDatas h3 {
+  // background-color: #282d33;
   color: #898b8a;
 }
-#mainTechnicalData h3 {
-  background-color: #181c1f;
+#mainTechnicalData h3{
+  // background-color: #1e1e1e;
+  color: #898b8a;
 }
 #qnaDatas .aw-splm-tableHeaderRow,
 #qnaDatas .aw-splm-tableHeaderCell,
@@ -1024,17 +962,19 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   // background-color: #282d33 !important;
   color: white;
 }
-.relativeW {
-  background-color: #282d33 !important;
-}
-.relativeE {
-  background-color: #282d33 !important;
-}
-#qnaDatas .aw-flex-row.afx-fill,
-#mainTechnicalData .aw-flex-row.afx-fill {
+// .relativeW {
+//   background-color: #282d33 !important;
+// }
+// .relativeE {
+//   background-color: #282d33 !important;
+// }
+#qnaDatas .aw-flex-row.afx-fill {
   background-color: #181c1f !important;
 }
-#qnaDatas .borderShadow3 .aw-flex-row.afx-fill {
+#mainTechnicalData .aw-layout-panelSection .aw-flex-row.afx-fill {
+  background-color: #282d33 !important;
+}
+#commonLabelRow .aw-flex-row.afx-fill {
   background-color: #282d33 !important;
 }
 // #qnaDatas .aw-flex-row.afx-fill {
@@ -1079,7 +1019,7 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 }
 #qnaDatas span {
   color: white !important;
-  font-weight: bold;
+  // font-weight: bold;
 }
 #qnaDatas p {
   color: white !important;
@@ -1176,6 +1116,7 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 .lblLayout .aw-widgets-propertyContainer {
   border-color: #464f58 !important;
 }
+
 // 기술문서 css
 #mainTechnicalData .aw-commands-commandBarHorizontal .aw-commandIcon {
   display: none !important;
@@ -1189,7 +1130,7 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
 }
 #mainTechnicalData span {
   color: white !important;
-  font-weight: bold;
+  // font-weight: bold;
 }
 #mainTechnicalData a {
   color: #bdbdbd;
@@ -1204,10 +1145,10 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   color: #8a8a8a !important;
   background-color: #171b1e !important;
 }
-#mainTechnicalData .aw-layout-panelSectionContent,
-#mainTechnicalData .rowColor .aw-flex-row.afx-fill {
-  background-color: #282d33 !important;
-}
+// #mainTechnicalData .aw-layout-panelSectionContent,
+// #mainTechnicalData .rowColor .aw-flex-row.afx-fill {
+//   background-color: #282d33 !important;
+// }
 #mainTechnicalData .aw-theme-iconOutline {
   fill: #bdbdbd !important;
 }
@@ -1216,10 +1157,11 @@ button.aw-base-blk-button:not(.disabled).aw-accent-highContrast {
   background-color: #181c1f !important;
   color: #8c8c8c !important;
 }
+
 // 전문가에게 질문해요 css
-#qnaDatas .expertColor .aw-flex-row.afx-fill {
-  background-color: #282d33 !important;
-}
+// #qnaDatas .expertColor .aw-flex-row.afx-fill {
+//   background-color: #282d33 !important;
+// }
 #qnaDatas .expertColor .answerSection .aw-flex-row.afx-fill {
   background-color: #464f58 !important;
 }
@@ -1316,6 +1258,40 @@ aw-secondary-workarea .aw-layout-sublocationContent {
   background-color: #181c1f !important;
   // border: solid 1px #31393f !important;
   color: white !important;
+}
+.aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell,
+.aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected > .ui-grid-cell {
+  color: #bdbdbd !important;
+  border-color: #969696 !important;
+  // width: 100% !important;
+}
+.aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected,
+.aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected {
+  background-color: rgb(60, 72, 83) !important;
+}
+.aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.aw-splm-tableHoverRow,
+.aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.aw-splm-tableHoverRow {
+  background: rgb(88, 102, 117) !important;
+}
+.aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow,
+.aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
+  background: rgb(113, 127, 139) !important;
+}
+.aw-splm-tableHeaderRow, .aw-splm-tableHeaderCell {
+  background-color: #181c1f !important;
+  // border: solid 1px #31393f !important;
+  color: white !important;
+}
+.aw-jswidgets-grid {
+  // background-color: #181c1f !important;
+  border: solid 1px #31393f !important;
+  // color: white !important;
+}
+.aw-jswidgets-grid .aw-splm-tableScrollContainer .ui-grid-row,
+.aw-jswidgets-grid .aw-splm-tablePinnedContainer .ui-grid-row {
+  background-color: #282d33 !important;
+  border-color: #31393f !important;
+  color: #bdbdbd !important;
 }
 #main-view aw-secondary-workarea .aw-jswidgets-grid,
 #main-view aw-primary-workarea .aw-jswidgets-grid {
@@ -1593,47 +1569,12 @@ aw-secondary-workarea .aw-layout-sublocationContent {
 aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
   margin-left: 50px;
 }
-
 .aw-widgets-breadCrumbCompact .aw-layout-eachCrumb:first-child .aw-widgets-primaryCrumb {
   margin-left: -50px !important;
 }
-
 // .note-editor.note-frame .note-editing-area .note-editable[contenteditable=false]{
 //     background-color: white !important;
 // }
-
-// 헬프데스크 메뉴얼
-.noColor {
-  background: rgb(40, 45, 51) !important;
-  color: white;
-}
-.noColor button.aw-base-blk-button:not(.disabled).aw-accent-caution:not(.aw-widgets-staticChip):hover {
-  background-color: #6b6b6b !important;
-}
-.noColor button.aw-base-blk-button:not(.disabled).aw-accent-caution {
-  background-color: #8b8b8b !important;
-  color: black !important;
-  border-color: #6b6b6b !important;
-}
-.aw-flex-row.afx-fill {
-  background-color: #181c1f !important;
-}
-.popupInner input[type='text'] {
-  background-color: #181c1f !important;
-  color: #6b6e74 !important;
-  border-color: #4f545c !important;
-}
-#summernoteBodyId .leftArrowSpace:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-#summernoteBodyId .rightArrowSpace:hover {
-  background-color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.interaction-desc .text-desc,
-.color-desc .color__title {
-  color: #000 !important;
-}
 
 // 타일
 .aw-theme-commandsActionsTile {
@@ -1641,7 +1582,6 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
   fill: #ffffff;
   color: #ffffff;
 }
-
 .aw-tile-tileContainer {
   width: 150px;
   height: 150px;
@@ -1656,29 +1596,24 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
   outline: 0;
   border: transparent solid 2px;
 }
-
 .aw-tile-tileImage .aw-base-icon {
   min-width: 100%;
   max-height: 100%;
 }
-
 .aw-tile-tileContent > .aw-layout-flexColumn {
   -webkit-justify-content: center;
   -ms-flex-pack: justify;
   justify-content: center;
   padding-top: 15px;
 }
-
 #showText {
   color: #ffffff !important;
 }
 
 //좌측 커맨드 바
-
 .awRoot .global-navigation-toolbar aw-command-bar.aw-commands-commandBarVertical {
   width: 72px;
 }
-
 .aw-commands-showIconLabel
   .global-navigation-toolbar
   aw-command-bar:not(.aw-layout-userSessionCommands).aw-commands-commandBarVertical
@@ -1689,8 +1624,8 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
   padding: 0.375rem 0;
   margin: 0;
 }
-//text-View 글자
 
+//text-View 글자
 p#imgSize {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1701,65 +1636,52 @@ p#imgSize {
   line-height: 1rem;
   color: white !important;
 }
-
-#qnaDatas #summaryContentStyle .aw-layout-flexbox {
-  background-color: #282d33 !important;
-}
-
+// #qnaDatas #summaryContentStyle .aw-layout-flexbox {
+//   background-color: #282d33 !important;
+// }
 #summaryContentStyle div#labelHeight {
   color: #bdbdbd;
   background-color: #282d33 !important;
 }
-
 div#fontColorChart {
   color: #bdbdbd;
   background-color: #282d33 !important;
 }
-
 div#fontColorList {
   color: #bdbdbd;
   background-color: #282d33 !important;
 }
-
 #labelHeight .aw-flex-column.ng-scope.ng-isolate-scope.afx-fill {
   background-color: #282d33 !important;
   color: #bdbdbd;
 }
-
 .aw-avatar-layout {
   background-color: #282d33 !important;
-  border-color: #bdbdbd !important;
+  border-color: #4f545c !important;
+  box-shadow: 0 1px 2px 0 rgba(168, 168, 168, 0.719);
   color: #bdbdbd;
 }
-
 #fontColorChart .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
   background-color: #282d33 !important;
 }
-
 #fontColorList .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
   background-color: #282d33 !important;
 }
-
 #mostPosts .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
   background-color: #282d33 !important;
 }
-
 #mostRecommendations .aw-flex-row.ng-scope.ng-isolate-scope.afx-fill {
   background-color: #282d33 !important;
 }
-
 div#labelHeight {
   background-color: #282d33 !important;
 }
-
 .leftSide.aw-flex-column.ng-scope.ng-isolate-scope.afx-static-size {
   background-color: #282d33 !important;
 }
-
 .selectNavigateCommand {
   background-color: rgba(255, 255, 255, 0.2);
 }
-
 aw-search-box .aw-uiwidgets-searchBoxContainer input.aw-uiwidgets-searchBox,
 aw-search-box .aw-uiwidgets-searchBoxContainer,
 aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
@@ -1779,65 +1701,59 @@ aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
 
 // Toast Grid 기본 설정
 .tui-grid-body-area {
-  background-color: #282d33 !important;
+  background-color: #181c1f !important;
   border-color: #31393f !important;
 }
-
 .tui-grid-header-area .tui-grid-cell-header {
   background-color: #181c1f !important;
   border-color: #31393f !important;
   color: white !important;
 }
-
 .tui-grid-body-area .tui-grid-cell {
   background-color: #282d33;
   border-color: #31393f !important;
   color: #bdbdbd !important;
 }
-
 .tui-grid-layer-editing {
   background-color: #505357 !important;
   border-color: #444a4e !important;
   color: #bdbdbd !important;
 }
-
 .tui-grid-cell-content input[type='text'] {
   background-color: #33363a !important;
   color: #bdbdbd !important;
   border: solid 1px #444a4e;
 }
-
 .tui-grid-scrollbar-y-inner-border, .tui-grid-scrollbar-y-outer-border {
   background-color: #282d33 !important;
 }
-
 .tui-grid-border-line-left {
   background-color: #444a4e !important;
 }
-
 .tui-grid-scrollbar-right-bottom, .tui-grid-scrollbar-right-top, .tui-grid-scrollbar-frozen-border, .tui-grid-scrollbar-left-bottom {
   background-color: #181c1f !important;
   border-color: #31393f !important;
 }
-
 .tui-grid-content-area, .tui-grid-border-line-bottom {
   border-color: #31393f !important;
 }
-
 .tui-grid-layer-focus-border {
   background-color: #bdbdbd !important;
 }
-
 .tui-grid-layer-selection {
   background-color: white !important;
   border-color: white !important;
   opacity: 0.1 !important;
 }
-
 .tui-grid-cell.tui-grid-cell-has-input.select {
   background-color: rgb(61, 66, 71) !important;
 }
-
+.tui-grid-header-area {
+  background-color: #181c1f !important;
+}
+.tui-grid-cell-editable {
+  background-color: #33363a !important;
+}
 // .tui-grid-cell.select {
 //   background-color: #d0f5e1;
 // }
@@ -1846,10 +1762,31 @@ aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
 #checklist-tableMode-listbox-view aw-listbox input.aw-jswidgets-choice {
   background-color: rgb(187, 187, 187);
 }
-
 #mainModeNav .aw-widgets-cellListWidget .aw-widgets-cellListCellTitle
 , #mainModeNav .aw-base-scrollPanel .aw-widgets-cellListCellTitle {
   color: white !important;
+}
+.aw-popup-balloon .popupInner {
+  color: #bdbdbd;
+}
+aw-popup-panel2 button.disabled {
+  background-color: #181c1f;
+  border: none;
+}
+.aw-layout-popup .aw-theme-iconOutline aw-popup-panel2 button.disabled {
+  fill: #464646;
+}
+#standardBOMFolderTree .aw-splm-tableMenuButton, #standardBOMTree  .aw-splm-tableMenuButton {
+  background-color: #181c1f;
+}
+.aw-layout-subLocation .structure_info-row {
+  color: #bdbdbd !important;
+}
+.aw-layout-panelMain .aw-layout-popup .aw-theme-iconOutline {
+  fill: #bdbdbd;
+}
+.aw-jswidgets-loading {
+  background-image: url(image/miscSessionProgress32.svg);
 }
 
 // 회의록
@@ -1857,12 +1794,74 @@ aw-search-box .aw-uiwidgets-searchBoxContainer .aw-uiwidgets-searchBoxIcon {
   border: none !important;
   color: #8c8c8c !important;
 }
-
 #failureAddPopup .aw-widgets-cellListWidget .aw-widgets-cellListCellTitle
 , #failureAddPopup .aw-base-scrollPanel .aw-widgets-cellListCellTitle {
   color: white !important;
 }
-
 #failureAddPopup .popupInner .aw-layout-panelBody {
   color: #8c8c8c !important;
+}
+#commonMinutesDetails .aw-flex-row.afx-fill {
+  background-color: #282d33 !important;
+}
+.rightArea .aw-layout-summaryContent {
+  color: #898b8a;
+}
+#commonMinutes .aw-layout-panelSectionTitle {
+  color: #8a8a8a !important;
+  background-color: #171b1e !important;
+}
+.btn-upload {
+  background-color: #282d33 !important;
+  border-color: #282d33 !important;
+}
+.btn-upload:hover {
+  background-color: #3f3f3f !important;
+}
+#editMinutes textarea, #detailsMinutes textarea {
+  background-color: #181c1f !important;
+  color: #c2c2c4 !important;
+  border-color: #4f545c !important;
+}
+#editMinutes textarea.ng-dirty, #detailsMinutes textarea.ng-dirty {
+  background-color: #52575e !important;
+}
+#editMinutes input[type='text'].ng-dirty, #detailsMinutes input[type='text'].ng-dirty {
+  background-color: #52575e !important;
+}
+.aw-uiwidgets-searchBoxContainer input[type=text].ng-dirty {
+  color: #c2c2c4 !important;
+  background-color: #52575e !important;
+}
+
+// 헬프데스크 매뉴얼
+.noColor {
+  background: rgb(40, 45, 51) !important;
+  color: white;
+}
+.noColor button.aw-base-blk-button:not(.disabled).aw-accent-caution:not(.aw-widgets-staticChip):hover {
+  background-color: #6b6b6b !important;
+}
+.noColor button.aw-base-blk-button:not(.disabled).aw-accent-caution {
+  background-color: #8b8b8b !important;
+  color: black !important;
+  border-color: #6b6b6b !important;
+}
+.aw-flex-row.afx-fill {
+  background-color: #181c1f !important;
+}
+.popupInner input[type='text'] {
+  background-color: #181c1f !important;
+  color: #c2c2c4 !important;
+  border-color: #4f545c !important;
+}
+#summernoteBodyId .leftArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+#summernoteBodyId .rightArrowSpace:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.interaction-desc .text-desc,
+.color-desc .color__title {
+  color: #000 !important;
 }

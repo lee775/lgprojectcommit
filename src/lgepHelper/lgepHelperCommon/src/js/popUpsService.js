@@ -34,6 +34,9 @@ let editComplete = lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMe
 let characterLimitMsg = lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'characterLimitMsg');
 let noEmptyContents = lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'noEmptyContents');
 
+let createResult;
+let createItemRevision;
+
 //욱채가 만든 메소드
 export async function getPoint(tmp, ctx) {
   let data = vms.getViewModelUsingElement(document.getElementById('addPop'));
@@ -63,15 +66,17 @@ export async function getPoint(tmp, ctx) {
 //QnA아이템 생성
 export async function createQnaQuestion(data, ctx) {
   var summerContent = $('#qaAddPopSummernote').summernote('code') === null ? '' : $('#qaAddPopSummernote').summernote('code');
+  let title = data.questionTitle.dbValue;
   if (summerContent == null || summerContent == '' || summerContent == '<p><br></p>') {
     notySvc.showError(noEmptyContents);
     return;
+  } else if (!title || title == '') {
+    notySvc.showError('제목을 입력해주세요.');
+    return;
   } else {
     let qnaPoint = data.questionPoint.dbValue;
-    let title = data.questionTitle.dbValue;
     let htmlData = vms.getViewModelUsingElement(document.getElementById('qnaDatas'));
-    let createResult;
-    let createItemRevision;
+
     if (data.listIssue.uiValue == null) {
       data.listIssue.uiValue = '';
     }
@@ -83,103 +88,127 @@ export async function createQnaQuestion(data, ctx) {
     if (data.checkExpertQ.dbValue === true) {
       // AskExpert
       try {
-        if (title && title != '') {
-          let param = {
-            properties: [
-              {
-                name: title,
-                type: 'L2_QuestionExp',
-              },
-            ],
-          };
-          createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
-        }
-
-        // 아이템 리비전 정의
-        createItemRevision = createResult.output[0].itemRev;
+        let param = {
+          properties: [
+            {
+              name: title,
+              type: 'L2_QuestionExp',
+            },
+          ],
+        };
+        createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
       } catch (err) {
         //console.log(err);
         notySvc.showError(characterLimitMsg);
-      }
-      let onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(summerContent);
-      // 아이템 리비전 속성값 넣기
-      param = {
-        objects: [createItemRevision],
-        attributes: {
-          l2_main_category: {
-            stringVec: [data.listPart.uiValue],
-          },
-          l2_subcategory: {
-            stringVec: [data.listIssue.uiValue],
-          },
-          l2_content_string: {
-            stringVec: [onlyString],
-          },
-          l2_experts: {
-            stringVec: [data.listExpert.dbValue],
-          },
-        },
-      };
-      try {
-        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
-        await common.userLogsInsert('Create Expert Question', createItemRevision.uid, 'S', 'Success');
-        await lgepSummerNoteUtils.txtFileToDataset(summerContent, createItemRevision);
-      } catch (err) {
-        //console.log(err);
-        notySvc.showError('질문 내용 저장 실패');
+        return;
       }
 
-      //이욱채가 추가 한 기능
-      await com.getProperties([createItemRevision], ['owning_user']);
-      let owningUser = createItemRevision.props.owning_user.uiValues[0];
-      let searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [owningUser]);
-      if (searchingUser === null) {
-        var regExp = /\(([^)]+)\)/;
-        var matches = regExp.exec(owningUser);
+      // 아이템 리비전 정의
+      createItemRevision = createResult.output[0].itemRev;
+      await com.getProperties([createItemRevision], ['item_id']);
 
-        searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [matches[1]]);
-      }
-      searchingUser = searchingUser[0];
-      await com.getProperties([searchingUser], ['l2_knowledge_count']);
-      let userknowledgeCount = searchingUser.props.l2_knowledge_count.dbValues[0];
-      userknowledgeCount = parseInt(userknowledgeCount);
-      userknowledgeCount++;
-      userknowledgeCount = String(userknowledgeCount);
-      param = {
-        objects: [searchingUser],
-        attributes: {
-          l2_knowledge_count: {
-            stringVec: [userknowledgeCount],
-          },
-        },
-      };
       try {
-        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
+        let onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(summerContent);
+        // 아이템 리비전 속성값 넣기
+        let param = {
+          objects: [createItemRevision],
+          attributes: {
+            l2_main_category: {
+              stringVec: [data.listPart.uiValue],
+            },
+            l2_subcategory: {
+              stringVec: [data.listIssue.uiValue],
+            },
+            l2_content_string: {
+              stringVec: [onlyString],
+            },
+            l2_experts: {
+              stringVec: [data.listExpert.dbValue],
+            },
+          },
+        };
+        try {
+          await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
+          await common.userLogsInsert('Create Expert Question', createItemRevision.uid, 'S', 'Success');
+          await lgepSummerNoteUtils.txtFileToDataset2(summerContent, createItemRevision);
+
+          let target = com.getObject(data.listExpert.dbValue);
+          if (target) {
+            message.sendAlarmMessage(
+              '[' + title + '] 질문의 전문가로 지목되었습니다.',
+              '전문가 지목',
+              createItemRevision.uid,
+              target.props.owning_user.dbValues[0],
+            );
+          }
+        } catch (err) {
+          //console.log(err);
+          notySvc.showError('질문 내용 저장 실패');
+          delItem(createResult.output[0].item);
+        }
+
+        //이욱채가 추가 한 기능
+        await com.getProperties([createItemRevision], ['owning_user']);
+        let owningUser = createItemRevision.props.owning_user.uiValues[0];
+        let searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [owningUser]);
+        if (searchingUser === null) {
+          var regExp = /\(([^)]+)\)/;
+          var matches = regExp.exec(owningUser);
+
+          searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [matches[1]]);
+        }
+        searchingUser = searchingUser[0];
+        await com.getProperties([searchingUser], ['l2_knowledge_count']);
+        let userknowledgeCount = searchingUser.props.l2_knowledge_count.dbValues[0];
+        userknowledgeCount = parseInt(userknowledgeCount);
+        userknowledgeCount++;
+        userknowledgeCount = String(userknowledgeCount);
+        param = {
+          objects: [searchingUser],
+          attributes: {
+            l2_knowledge_count: {
+              stringVec: [userknowledgeCount],
+            },
+          },
+        };
+        try {
+          await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
+        } catch (err) {
+          //console.log(err);
+          notySvc.showError('유저 정보 수정 실패');
+          delItem(createResult.output[0].item);
+        }
+        // if (htmlData != undefined) {
+        //     history.pushState(null, null, '#/askExpert?question=' + createItemRevision.uid);
+        //     htmlData.dataProviders.qaListDataProvider.selectionModel.setSelection(createItemRevision);
+        // }
       } catch (err) {
-        //console.log(err);
-        notySvc.showError('유저 정보 수정 실패');
+        // 잘못 만들어진 아이템 삭제
+        notySvc.showError('아이템 생성 실패');
+        delItem(createResult.output[0].item);
       }
-      // if (htmlData != undefined) {
-      //     history.pushState(null, null, '#/askExpert?question=' + createItemRevision.uid);
-      //     htmlData.dataProviders.qaListDataProvider.selectionModel.setSelection(createItemRevision);
-      // }
     } else {
       // Q&A
       try {
-        if (title && title != '') {
-          let param = {
-            properties: [
-              {
-                name: title,
-                type: 'L2_Question',
-              },
-            ],
-          };
-          createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
-        }
+        let param = {
+          properties: [
+            {
+              name: title,
+              type: 'L2_Question',
+            },
+          ],
+        };
+        createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
+      } catch (err) {
+        //console.log(err);
+        notySvc.showError(characterLimitMsg);
+        return;
+      }
 
+      try {
         // 아이템 리비전 정의
         createItemRevision = createResult.output[0].itemRev;
+        await com.getProperties([createItemRevision], ['item_id']);
         let onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(summerContent);
         // 아이템 리비전 속성값 넣기
         param = {
@@ -199,14 +228,16 @@ export async function createQnaQuestion(data, ctx) {
         try {
           await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
           await common.userLogsInsert('Create Question', createItemRevision.uid, 'S', 'Success');
-          await lgepSummerNoteUtils.txtFileToDataset(summerContent, createItemRevision);
+          await lgepSummerNoteUtils.txtFileToDataset2(summerContent, createItemRevision);
         } catch (err) {
           //console.log(err);
           notySvc.showError('질문 내용 저장 실패');
+          delItem(createResult.output[0].item);
         }
       } catch (err) {
-        //console.log(err);
-        notySvc.showError(characterLimitMsg);
+        // 잘못 만들어진 아이템 삭제
+        notySvc.showError('질문 생성 실패');
+        delItem(createResult.output[0].item);
       }
     }
 
@@ -246,6 +277,7 @@ export async function createQnaQuestion(data, ctx) {
     }
     try {
       await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
+      // message.sendAlarmMessage('[' + title + '] 질문의 전문가로 지목되었습니다.', '전문가 지목', createItemRevision.uid, data.listExpert.dbValue);
     } catch (err) {
       //console.log(err);
       notySvc.showError('전문가 포인트 등록 실패');
@@ -280,7 +312,7 @@ export async function createQnaAnswer(ctx) {
           },
         ],
       };
-      let createResult;
+
       try {
         createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
       } catch (err) {
@@ -288,7 +320,7 @@ export async function createQnaAnswer(ctx) {
         notySvc.showError('댓글 등록 실패');
       }
       // 아이템 리비전 정의
-      let createItemRevision = createResult.output[0].itemRev;
+      createItemRevision = createResult.output[0].itemRev;
       // 아이템 리비전 속성값 넣기
       let param = {
         objects: [createItemRevision],
@@ -367,7 +399,7 @@ export async function createQnaAnswer(ctx) {
           },
         ],
       };
-      let createResult;
+
       try {
         createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
       } catch (err) {
@@ -375,7 +407,7 @@ export async function createQnaAnswer(ctx) {
         notySvc.showError('댓글 등록 실패');
       }
       // 아이템 리비전 정의
-      let createItemRevision = createResult.output[0].itemRev;
+      createItemRevision = createResult.output[0].itemRev;
       // 아이템 리비전 속성값 넣기
       let param = {
         objects: [createItemRevision],
@@ -473,11 +505,11 @@ export async function editQna(data, ctx) {
       let returnValue;
       let onlyString = '';
       try {
-        returnValue = await lgepSummerNoteUtils.txtFileToDataset(answer, selectedA);
+        returnValue = await lgepSummerNoteUtils.txtFileToDataset2(answer, selectedA);
         onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(answer);
       } catch (err) {
         //console.log(err)
-        notySvc.showError('질문 내용 불러오기 실패');
+        notySvc.showError('질문 내용 저장 실패');
       }
       // 아이템 리비전 속성값 넣기
       let param = {
@@ -511,15 +543,18 @@ export async function editQna(data, ctx) {
     if (summerContent == null || summerContent == '' || summerContent == '<p><br></p>') {
       notySvc.showError(noEmptyContents);
       return;
+    } else if (!data.questionTitle.dbValue || data.questionTitle.dbValue == '') {
+      notySvc.showError('제목을 입력해주세요.');
+      return;
     } else {
       let returnValue;
       let onlyString = '';
       try {
-        returnValue = await lgepSummerNoteUtils.txtFileToDataset(summerContent, selected);
+        returnValue = await lgepSummerNoteUtils.txtFileToDataset2(summerContent, selected);
         onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(summerContent);
       } catch (err) {
         //console.log(err)
-        notySvc.showError('전문가 질문 내용 불러오기 실패');
+        notySvc.showError('전문가 질문 내용 저장 실패');
       }
       if (selected.props.l2_main_category != undefined) {
         try {
@@ -964,6 +999,9 @@ export async function addFaq(data, ctx) {
   if (content == null || content == '' || content == '<p><br></p>') {
     notySvc.showError(noEmptyContents);
     return;
+  } else if (!title || title == '') {
+    notySvc.showError('제목을 입력해주세요.');
+    return;
   } else {
     // 중복 생성 방지
     let addBtn = document.querySelector('#addQuestion');
@@ -979,17 +1017,30 @@ export async function addFaq(data, ctx) {
           },
         ],
       };
-      let createResult;
 
       createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError(characterLimitMsg);
+      return;
+    }
 
+    try {
       // 아이템 리비전 정의
-      let createItemRevision = createResult.output[0].itemRev;
+      createItemRevision = createResult.output[0].itemRev;
+      await com.getProperties([createItemRevision], ['item_id']);
       let onlyString = '';
-      await lgepSummerNoteUtils.txtFileToDataset(content, createItemRevision);
-      onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(content);
+
+      try {
+        await lgepSummerNoteUtils.txtFileToDataset2(content, createItemRevision);
+        onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(content);
+      } catch (err) {
+        notySvc.showError('FAQ 내용 추출 실패');
+        delItem(createResult.output[0].item);
+      }
+
       // 아이템 리비전 속성값 넣기
-      param = {
+      let param = {
         objects: [createItemRevision],
         attributes: {
           l2_content_string: {
@@ -1002,7 +1053,8 @@ export async function addFaq(data, ctx) {
         await common.userLogsInsert('Create FAQ', createItemRevision.uid, 'S', 'Success');
       } catch (err) {
         //console.log(err);
-        notySvc.showError('FAQ 생성 실패');
+        notySvc.showError('FAQ 내용 저장 실패');
+        delItem(createResult.output[0].item);
       }
 
       eventBus.publish('awPopup.close');
@@ -1011,8 +1063,9 @@ export async function addFaq(data, ctx) {
       notySvc.showInfo(createComplete);
       htmlData.dataProviders.qaListDataProvider.selectionModel.setSelection(createItemRevision);
     } catch (err) {
-      //console.log(err);
-      notySvc.showError(characterLimitMsg);
+      // 잘못 만들어진 아이템 삭제
+      notySvc.showError('FAQ 생성 실패');
+      delItem(createResult.output[0].item);
     }
   }
 }
@@ -1024,10 +1077,18 @@ export async function editFaq(data, ctx) {
   if (content == null || content == '' || content == '<p><br></p>') {
     notySvc.showError(noEmptyContents);
     return;
+  } else if (!data.questionTitle.dbValue || data.questionTitle.dbValue == '') {
+    notySvc.showError('제목을 입력해주세요.');
+    return;
   } else {
     let onlyString = '';
-    await lgepSummerNoteUtils.txtFileToDataset(content, selected);
-    onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(content);
+
+    try {
+      await lgepSummerNoteUtils.txtFileToDataset2(content, selected);
+      onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(content);
+    } catch (err) {
+      notySvc.showError('FAQ 수정 내용 추출 실패');
+    }
     try {
       let param = {
         objects: [selected],
@@ -1059,11 +1120,15 @@ export async function editFaq(data, ctx) {
 //전문가에게 물어봐요 입력
 export async function createAskExpert(data, ctx) {
   var summerContent = $('#qaAddPopSummernote').summernote('code') === null ? '' : $('#qaAddPopSummernote').summernote('code');
+  let title = data.questionTitle.dbValue;
+
   if (summerContent == null || summerContent == '' || summerContent == '<p><br></p>') {
     notySvc.showError(noEmptyContents);
     return;
+  } else if (!title || title == '') {
+    notySvc.showError('제목을 입력해주세요.');
+    return;
   } else {
-    let title = data.questionTitle.dbValue;
     let htmlData = vms.getViewModelUsingElement(document.getElementById('qnaDatas'));
     let qnaPoint = data.questionPoint.dbValue;
     qnaPoint = parseInt(qnaPoint);
@@ -1085,6 +1150,7 @@ export async function createAskExpert(data, ctx) {
     try {
       let owningUser = ctx.user.props.object_string.uiValue;
       let searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [owningUser]);
+      let param;
       if (searchingUser === null) {
         var regExp = /\(([^)]+)\)/;
         var matches = regExp.exec(owningUser);
@@ -1097,30 +1163,33 @@ export async function createAskExpert(data, ctx) {
         data.listIssue.uiValue = '';
       }
       try {
-        let createResult;
-        let param;
-        if (title && title != '') {
-          param = {
-            properties: [
-              {
-                name: title,
-                type: 'L2_QuestionExp',
-              },
-            ],
-          };
-          createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
-        }
+        param = {
+          properties: [
+            {
+              name: title,
+              type: 'L2_QuestionExp',
+            },
+          ],
+        };
+        createResult = await SoaService.post('Core-2006-03-DataManagement', 'createItems', param);
+      } catch (err) {
+        notySvc.showError(characterLimitMsg);
+        return;
+      }
 
+      try {
         // 아이템 리비전 정의
-        let createItemRevision = createResult.output[0].itemRev;
+        createItemRevision = createResult.output[0].itemRev;
+        await com.getProperties([createItemRevision], ['item_id']);
         let returnValue;
         let onlyString = '';
         try {
-          returnValue = await lgepSummerNoteUtils.txtFileToDataset(summerContent, createItemRevision);
+          returnValue = await lgepSummerNoteUtils.txtFileToDataset2(summerContent, createItemRevision);
           onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(summerContent);
         } catch (err) {
-          //console.log(err)
+          // console.log(err);
           notySvc.showError('텍스트 추출 실패');
+          delItem(createResult.output[0].item);
         }
         // 아이템 리비전 속성값 넣기
         param = {
@@ -1138,6 +1207,16 @@ export async function createAskExpert(data, ctx) {
         }
         await SoaService.post('Core-2007-01-DataManagement', 'setProperties', param);
         await common.userLogsInsert('Create Expert Question', createItemRevision.uid, 'S', 'Success');
+
+        let target = com.getObject(data.listExpert.dbValue);
+        if (target) {
+          message.sendAlarmMessage(
+            '[' + title + '] 질문의 전문가로 지목되었습니다.',
+            '전문가 지목',
+            createItemRevision.uid,
+            target.props.owning_user.dbValues[0],
+          );
+        }
 
         //이욱채가 추가 한 기능
         await com.getProperties([searchingUser], ['l2_knowledge_count']);
@@ -1177,10 +1256,13 @@ export async function createAskExpert(data, ctx) {
           createItemRevision: createItemRevision,
         };
       } catch (err) {
-        notySvc.showError(characterLimitMsg);
+        // 잘못 만들어진 아이템 삭제
+        notySvc.showError('질문 생성 실패');
+        delItem(createResult.output[0].item);
       }
     } catch (err) {
       notySvc.showWarning(String(err));
+      delItem(createResult.output[0].item);
     }
   }
 }
@@ -1244,14 +1326,17 @@ export async function editExpert(data, ctx) {
     if (summerContent == null || summerContent == '' || summerContent == '<p><br></p>') {
       notySvc.showError(noEmptyContents);
       return;
+    } else if (!data.questionTitle.dbValue || data.questionTitle.dbValue == '') {
+      notySvc.showError('제목을 입력해주세요.');
+      return;
     } else {
       let returnValue;
       let onlyString = '';
       try {
-        returnValue = await lgepSummerNoteUtils.txtFileToDataset(summerContent, selected);
+        returnValue = await lgepSummerNoteUtils.txtFileToDataset2(summerContent, selected);
         onlyString = await lgepSummerNoteUtils.imgAndsvgOnlyString(summerContent);
       } catch (err) {
-        //console.log(err)
+        // console.log(err);
         notySvc.showError('텍스트 추출 실패');
       }
       try {
@@ -1470,6 +1555,21 @@ export function checkURL() {
         data.listPart.dbValue = list.propInternalValue;
       }
     }
+  }
+}
+
+export async function delItem(item) {
+  try {
+    let deleteObj = {
+      objects: [item],
+    };
+    await SoaService.post('Core-2006-03-DataManagement', 'deleteObjects', deleteObj);
+
+    let addBtn = document.querySelector('#addQuestion');
+    addBtn.disabled = false;
+    return;
+  } catch (err) {
+    console.log('잘못된 아이템 삭제 실패');
   }
 }
 

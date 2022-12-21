@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-checkbox.directive",
+    "js/aw-command-panel.directive",
+    "js/aw-date.directive",
+    "js/aw-icon-button.directive",
+    "js/aw-list.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "css/minutesMainCss.css"
+  ],
+  "actions": {
+    "reveal": {
+      "actionType": "dataProvider",
+      "methods": ["divisionConditions", "writerConditions"]
+    },
+    "checkboxAction": {
+      "actionType": "JSFunction",
+      "method": "checkboxAction",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "filterReset": {
+      "actionType": "JSFunction",
+      "method": "filterReset",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "loadCheckBoxFilter": {
+      "actionType": "JSFunction",
+      "method": "loadCheckBoxFilter",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "filterDate": {
+      "actionType": "JSFunction",
+      "method": "filterDate",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    }
+  },
+  "data": {
+    "startDate": {
+      "displayName": "",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "endDate": {
+      "displayName": "",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "dateSearch": {
+      "action": "filterDate",
+      "iconName": "Search"
+    }
+  },
+  "dataProviders": {
+    "divisionConditions": {
+      "action": "",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    },
+    "writerConditions": {
+      "action": "",
+      "response": [],
+      "totalFound": 1,
+      "selectionModelMode": "none"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "commonMinutesFilter.contentLoaded",
+      "cacheEventData": true,
+      "action": "reveal"
+    },
+    {
+      "eventId": "commonMinutesFilter.contentLoaded",
+      "cacheEventData": true,
+      "action": "loadCheckBoxFilter"
+    }
+  ],
+  "i18n": {
+    "filterDivision": ["lgepKnowldegeManageMessages"],
+    "filterWriter": ["lgepKnowldegeManageMessages"],
+    "filterCreateDate": ["lgepKnowldegeManageMessages"],
+    "filter": ["lgepKnowldegeManageMessages"],
+    "reset": ["lgepKnowldegeManageMessages"]
+  }
+}

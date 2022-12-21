@@ -17,12 +17,15 @@ import 'summernote/dist/summernote-lite';
 import 'summernote/dist/summernote-lite.css';
 import vms from 'js/viewModelService';
 import message from 'js/utils/lgepMessagingUtils';
+import iconService from 'js/iconService';
 import loding from 'js/utils/lgepLoadingUtils';
 import bomUtils from 'js/utils/lgepBomUtils';
 import browserUtils from 'js/browserUtils';
 import Grid from 'tui-grid';
 import 'tui-grid/dist/tui-grid.css';
 import { consolidateObjects } from 'js/declUtils';
+import { showPre } from 'js/L2_DesignCheckListService';
+import appCtxService from 'js/appCtxService';
 
 var $ = require('jQuery');
 var JSZip = require('jszip');
@@ -70,6 +73,8 @@ common.userLogsInsert('Page Connection', '', 'S', 'Success');
 
 let inputElWidth;
 let id;
+
+// 구조트리 검색
 $(document).on('click', '#pageAllSearchId', async function () {
   id = 'pageAllSearchId';
   inputElWidth = document.querySelector('#pageAllSearchId').offsetWidth;
@@ -89,6 +94,7 @@ $(document).on('click', '#pageAllSearchId', async function () {
   popupId = popupData.id;
 });
 
+// 지침서 트리 검색 긴거
 $(document).on('click', '#dgnPageSearchId', async function () {
   id = 'dgnPageSearchId';
   inputElWidth = document.querySelector('#dgnPageSearchId').offsetWidth;
@@ -108,6 +114,7 @@ $(document).on('click', '#dgnPageSearchId', async function () {
   popupId = popupData.id;
 });
 
+// 지침서 트리 검색 짧은거
 $(document).on('click', '#dgnPageSearchingId', async function () {
   id = 'dgnPageSearchingId';
   inputElWidth = document.querySelector('#dgnPageSearchingId').offsetWidth;
@@ -127,28 +134,32 @@ $(document).on('click', '#dgnPageSearchingId', async function () {
   popupId = popupData.id;
 });
 
-$(document).on('click', '#pxToEmChange', async function () {
-  await popupService.show({
-    declView: 'svgCloseUp',
-    locals: {
-      caption: ' ',
-      anchor: 'closePopupAnchor',
-    },
-    options: {
-      clickOutsideToClose: true,
-      isModal: true,
-      reference: 'referenceId',
-      placement: 'bottom-start',
-      width: window.innerWidth * 0.9 + 'px',
-      height: window.innerHeight * 0.9 + 'px',
-    },
-    outputData: {
-      popupId: 'id',
-    },
-  });
-  eventBus.publish('closeupViewSuccess');
-});
+// 지침서 클릭시 자세히보기 팝업창
+// $(document).on('click', '#pxToEmChange', async function () {
+//   await popupService.show({
+//     declView: 'svgCloseUp',
+//     locals: {
+//       caption: ' ',
+//       anchor: 'closePopupAnchor',
+//     },
+//     options: {
+//       clickOutsideToClose: true,
+//       isModal: true,
+//       reference: 'referenceId',
+//       placement: 'bottom-start',
+//       width: window.innerWidth * 0.9 + 'px',
+//       height: window.innerHeight * 0.9 + 'px',
+//     },
+//     outputData: {
+//       popupId: 'id',
+//     },
+//   });
+//   eventBus.publish('closeupViewSuccess');
+// });
 
+/**
+ * 최근 검색 기록을 모두 지운다.
+ */
 async function delLink(data, ctx) {
   let owningUser = ctx.user.props.user_name.dbValue + ' (' + ctx.user.props.userid.dbValue + ')';
   let searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], [owningUser]);
@@ -185,6 +196,9 @@ async function delLink(data, ctx) {
   });
 }
 
+/**
+ * 지침서 웹에디터를 확대하여 보여준다. 웹에디터 로딩
+ */
 async function closeupInit() {
   $('#closeupSummernoteDgnStd').summernote({
     tabsize: 0,
@@ -194,6 +208,9 @@ async function closeupInit() {
   $('#closeupSummernoteDgnStd').summernote('code', $('#designStandardSummernote').summernote('code'));
 }
 
+/**
+ * 설계지침 트리를 선택한 리비전을 바탕으로 다시 뿌림
+ */
 function treeRevChange() {
   const L2DesignStandardData = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
   L2DesignStandardData.pageOpenState = false;
@@ -201,17 +218,23 @@ function treeRevChange() {
   bomlineTreeSet2(changeRev);
 }
 
+/**
+ * 지침서가 포함되어있는 구조는 버튼을 삽입해준다.
+ *
+ * @param {ModelObject} treeNode - 컬럼 데이터
+ * @param {htmlElement} htmlElement - 컬럼 HTMLElement
+ * @param {String} columnName - 컬럼 명
+ */
 async function buttonSet(treeNode, htmlElement, columnName) {
   try {
-    if (treeNode.props.awb0BomLineItemId) {
-      let nodeItem = await com.getItemFromId(treeNode.props.awb0BomLineItemId.dbValues[0]);
-      let nodeItemRev = com.getObject(nodeItem.props.revision_list.dbValues[nodeItem.props.revision_list.dbValues.length - 1]);
-      await com.getProperties(nodeItemRev, ['L2_DesignStandardRel']);
-      if (nodeItemRev.props.L2_DesignStandardRel.dbValues.length > 0) {
+    if (treeNode.props.L2_DesignStandardRel) {
+      await com.getProperties(treeNode, ['L2_DesignStandardRel']);
+      if (treeNode.props.L2_DesignStandardRel.dbValues.length > 0) {
         let button = document.createElement('button');
         button.type = 'button';
+        button.id = 'dgnStdPopupId';
         button.innerHTML = lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'guideOpen');
-        button.className = 'checkCate mama aw-base-blk-button ng-scope ng-isolate-scope aw-accent-highContrast aw-base-size-auto';
+        button.className = 'checkCate btnOwn aw-base-blk-button ng-scope ng-isolate-scope aw-accent-highContrast aw-base-size-auto';
         button.addEventListener('click', dgnStandardBookBomView);
         htmlElement.appendChild(button);
       }
@@ -223,6 +246,9 @@ async function buttonSet(treeNode, htmlElement, columnName) {
   }
 }
 
+/**
+ * 지침서가 2개 이상 구조는 팝업을 띄워주고 1개만 있으면 바로 BomLine Tree로 만들어 보여준다.
+ */
 async function dgnStandardBookBomView() {
   let treeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let whileTrue = true;
@@ -234,15 +260,66 @@ async function dgnStandardBookBomView() {
       break;
     }
   }
-  let nodeItem = await com.getItemFromId(selTreeData.props.awb0BomLineItemId.dbValues[0]);
-  let nodeItemRev = com.getObject(nodeItem.props.revision_list.dbValues[nodeItem.props.revision_list.dbValues.length - 1]);
-  await com.getProperties(nodeItemRev, ['L2_DesignStandardRel']);
-  let book = com.getObject(nodeItemRev.props.L2_DesignStandardRel.dbValues[0]);
-  book = com.getObject(book.props.revision_list.dbValues[book.props.revision_list.dbValues.length - 1]);
-  await bomlineTreeSet2(book);
-  urlBookUidMapping();
+  await com.getProperties(selTreeData, ['L2_DesignStandardRel']);
+  if (selTreeData.props.L2_DesignStandardRel.dbValues.length > 1) {
+    let heightTemp;
+    if (selTreeData.props.L2_DesignStandardRel.dbValues.length > 10) {
+      heightTemp = 550;
+    } else {
+      heightTemp = 150 + selTreeData.props.L2_DesignStandardRel.dbValues.length * 40;
+    }
+    popupService.show({
+      declView: 'L2_DgnGuideBookOpenPopup',
+      locals: {
+        caption: lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'guideBookSet'),
+        anchor: 'closePopupAnchor',
+      },
+      options: {
+        clickOutsideToClose: true,
+        isModal: true,
+        reference: 'referenceId',
+        placement: 'bottom-start',
+        width: 500,
+        height: heightTemp,
+      },
+      outputData: {
+        popupId: 'id',
+      },
+    });
+  } else {
+    let book = com.getObject(selTreeData.props.L2_DesignStandardRel.dbValues[0]);
+    book = com.getObject(book.props.revision_list.dbValues[book.props.revision_list.dbValues.length - 1]);
+    await bomlineTreeSet2(book);
+    urlBookUidMapping();
+    showPre();
+  }
 }
 
+/**
+ * 지침서가 2개 이상 있는 구조에서 지침서를 선택하여 열었을때 실행되는 메소드
+ */
+async function guideBookOpen() {
+  const data = vms.getViewModelUsingElement(document.getElementById('guideBookSettingData'));
+  if (data.dataProviders.guideBookSelectTableData.selectedObjects.length < 1) {
+    message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'selectGuideBook'), [], []);
+    return {
+      state: false,
+    };
+  }
+  let openBook = data.dataProviders.guideBookSelectTableData.selectedObjects[0];
+  await bomlineTreeSet2(openBook);
+  urlBookUidMapping();
+  showPre();
+  return {
+    state: true,
+  };
+}
+
+/**
+ * SummerNote의 크기를 확대해준다.
+ *
+ * @param {String} value - 배율
+ */
 function updateSliderValue(value, ctx) {
   let plusBtn = document.querySelector('.noColor .aw-widgets-plusButton');
   let minusBtn = document.querySelector('.noColor .aw-widgets-minusButton');
@@ -261,6 +338,11 @@ function updateSliderValue(value, ctx) {
   }, 200);
 }
 
+/**
+ * 페이지에 파일을 첨부해준다. 프리즈 상태이면 개정 후 첨부
+ *
+ * @param {File} fileData - 첨부된 파일
+ */
 async function selectedItemRelationDataset(fileData, ctx) {
   let attachDataset = fileData.get('fmsFile');
   let treeState = await revisePrework();
@@ -354,6 +436,10 @@ async function selectedItemRelationDataset(fileData, ctx) {
   }
 }
 
+/**
+ * 선택 되어 있는 지침서를 프리즈
+ *
+ */
 async function bookFreeze() {
   let data = vms.getViewModelUsingElement(document.getElementById('FreezeMessageData'));
   if (data.FreezeMessage.dbValue == null || data.FreezeMessage.dbValue == '') {
@@ -424,21 +510,33 @@ async function bookFreeze() {
   };
 }
 
+/**
+ * 페이지에 파일을 첨부하기 위해 파일 버튼 클릭
+ *
+ */
 function uploadClick() {
-  if (selectedAwTreeNode.obj.type.includes('Page')) {
-    let btn = document.getElementsByClassName('visibleHidden');
-    btn = btn[0];
-    btn = btn.children;
-    btn = btn[0];
-    btn = btn.children;
-    btn = btn[2];
-    btn.click();
-  } else {
+  if (!selectedAwTreeNode) {
     message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'onlyPageAttach'));
+  } else {
+    if (selectedAwTreeNode.obj.type.includes('Page')) {
+      let btn = document.getElementsByClassName('visibleHidden');
+      btn = btn[0];
+      btn = btn.children;
+      btn = btn[0];
+      btn = btn.children;
+      btn = btn[2];
+      btn.click();
+    } else {
+      message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'onlyPageAttach'));
+    }
   }
 }
 
 let defaultFolder;
+/**
+ * 지침서 페이지에 폴더를 추가
+ *
+ */
 async function addMainFolder() {
   let designStdTreeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let data = vms.getViewModelUsingElement(document.getElementById('createFolderData'));
@@ -476,6 +574,10 @@ async function addMainFolder() {
   };
 }
 
+/**
+ * 페이지 검색을 위해 검색버튼 활성화
+ *
+ */
 function searchIconEvent() {
   const bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
   if (!bomlineTreeData.searchMode) {
@@ -487,14 +589,19 @@ function searchIconEvent() {
   }
 }
 
-function datasetLinkAction(data) {
-  window.open(browserUtils.getBaseURL() + '#/com.siemens.splm.clientfx.tcui.xrt.showObject?uid=' + data.datasetLink.dbValue);
-}
+// function datasetLinkAction(data) {
+//   window.open(browserUtils.getBaseURL() + '#/com.siemens.splm.clientfx.tcui.xrt.showObject?uid=' + data.datasetLink.dbValue);
+// }
 
 let reSearchingArr = [];
 let searchPage = [];
 let searchValueStyle;
 let reSearchValue;
+/**
+ * 선택된 지침서 내에 있는 페이지를 검색한다.
+ *
+ * @param {data} data - 검색 데이터
+ */
 async function awtreeSearching(data, ctx) {
   if (popupId) {
     popupService.hide(popupId);
@@ -502,6 +609,18 @@ async function awtreeSearching(data, ctx) {
   }
   const bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
   let searchValue = data.searchingName.dbValue;
+  let searchValueTemp = searchValue.replace(/(\s*)/g, '');
+  if (searchValueTemp == null || searchValueTemp.length < 1) {
+    message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'requiredText'), [], []);
+    return;
+  }
+  if (searchValueTemp.length == 1) {
+    let regex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+    if (!regex.test(searchValueTemp)) {
+      message.show(0, lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'twoChar'), [], []);
+      return;
+    }
+  }
   let owningUser = ctx.user.props.user_name.dbValue + ' (' + ctx.user.props.userid.dbValue + ')';
   let policyArr = policy.getEffectivePolicy();
   policyArr.types.push({
@@ -548,6 +667,10 @@ async function awtreeSearching(data, ctx) {
     if (treePageContentStringArr[i] == null) {
       treePageContentStringArr[i] = '';
     }
+    treePageNameArr[i] = treePageNameArr[i].replace(/<[^>]*>?/g, '');
+    treePageContentStringArr[i] = treePageContentStringArr[i].replace(/<[^>]*>?/g, '');
+  }
+  for (let i = 0; i < treePageNameArr.length; i++) {
     let state = false;
     if (searchValue.toLowerCase().includes(' and ')) {
       specialCheck = true;
@@ -893,6 +1016,10 @@ async function awtreeSearching(data, ctx) {
   }
 }
 
+/**
+ * 검색이 된 상태에서 위로 올라간다.
+ *
+ */
 function awtreeSearchingBack() {
   if (searchPage.length == 1) {
     return;
@@ -925,6 +1052,10 @@ function awtreeSearchingBack() {
   }
 }
 
+/**
+ * 검색이 된 상태에서 아래로 내려간다.
+ *
+ */
 function awtreeSearchingfront() {
   if (searchPage.length == 1) {
     return;
@@ -960,6 +1091,9 @@ function awtreeSearchingfront() {
   }
 }
 
+/**
+ * svg 파일 및 이미지 파일을 서머노트 크기만큼 늘린다. ( 안씀 )
+ */
 export async function summerNoteImageWidthMax(data) {
   let contents = summernoteCodeTemp;
   let temp = contents;
@@ -1025,6 +1159,9 @@ export async function summerNoteImageWidthMax(data) {
   }
 }
 
+/**
+ * 페이지 컨텐츠 디테일 타입을 생성해준다.
+ */
 async function contentDetailTypeAdd(data) {
   let newLOVName = data.contentDetailType.dbValues[0];
   let createObj = await com.createRelateAndSubmitObjects2('L2_DgnGuideBookContentType', {
@@ -1045,6 +1182,9 @@ async function contentDetailTypeAdd(data) {
   data.contentDetailType.dbOriginalValue = newLOVName;
 }
 
+/**
+ * 페이지 컨텐츠 타입을 생성해준다.
+ */
 async function contentTypeAdd(data) {
   let newLOVName = data.contentType.dbValues[0];
   let createObj = await com.createRelateAndSubmitObjects2('L2_DgnGuideBookContentType', {
@@ -1065,6 +1205,9 @@ async function contentTypeAdd(data) {
   data.contentType.dbOriginalValue = newLOVName;
 }
 
+/**
+ * 선택된 지침과 페이지 또는 챕터의 상세정보를 보여줌
+ */
 async function selectedBookViewDetail() {
   const WHILETRUE = true;
   let data;
@@ -1078,53 +1221,77 @@ async function selectedBookViewDetail() {
   let selectedTreeNode;
   if (selectedAwTreeNode) {
     selectedTreeNode = selectedAwTreeNode.obj;
-  }
-
-  selectedValue = com.getObject(selectedValue.uid);
-  let getItemId = [selectedValue, selectedTreeNode];
-  await com.getProperties(getItemId, ['item_id', 'object_name', 'l2_product_type', 'l2_product_detail_type']);
-  let bookItem = await com.getItemFromId(selectedValue.props.item_id.dbValues[0]);
-  let pageItem = await com.getItemFromId(selectedTreeNode.props.item_id.dbValues[0]);
-  let getProps = [bookItem, pageItem];
-  await com.getProperties(getProps, ['item_id', 'object_name', 'l2_page_index', 'IMAN_reference', 'pageIndex']);
-  if (selectedAwTreeNode) {
+    selectedValue = com.getObject(selectedValue.uid);
+    let getItemId = [selectedValue, selectedTreeNode];
+    await com.getProperties(getItemId, ['item_id', 'object_name', 'l2_product_type', 'l2_product_detail_type']);
+    let bookItem = await com.getItemFromId(selectedValue.props.item_id.dbValues[0]);
+    let pageItem = await com.getItemFromId(selectedTreeNode.props.item_id.dbValues[0]);
+    let getProps = [bookItem, pageItem];
+    await com.getProperties(getProps, [
+      'item_id',
+      'object_name',
+      'l2_page_index',
+      'IMAN_reference',
+      'pageIndex',
+      'l2_product_detail_type',
+      'l2_product_type',
+      'l2_content_type',
+      'l2_content_detail_type',
+      'l2_reference_parts',
+      'l2_keywords',
+    ]);
     if (selectedTreeNode.type.includes('Page')) {
       data.treeType = 'page';
       data.pageName.dbValue = pageItem.props.object_name.dbValues[0];
       data.pageIndex.dbValue = pageItem.props.l2_page_index.dbValues[0];
+      data.contentType.dbValue = pageItem.props.l2_content_type.dbValues[0];
+      data.contentDetailType.dbValue = pageItem.props.l2_content_detail_type.dbValues[0];
+      data.parts.dbValue = pageItem.props.l2_reference_parts.dbValues[0];
+      data.keyword.dbValue = pageItem.props.l2_keywords.dbValues[0];
 
       data.pageName.uiValue = pageItem.props.object_name.dbValues[0];
       data.pageIndex.uiValue = pageItem.props.l2_page_index.dbValues[0];
+      data.contentType.uiValue = pageItem.props.l2_content_type.dbValues[0];
+      data.contentDetailType.uiValue = pageItem.props.l2_content_detail_type.dbValues[0];
+      data.parts.uiValue = pageItem.props.l2_reference_parts.dbValues[0];
+      data.keyword.uiValue = pageItem.props.l2_keywords.dbValues[0];
     } else if (selectedTreeNode.type.includes('Chapter')) {
       data.treeType = 'chapter';
       data.chapterName.dbValue = selectedTreeNode.props.object_name.dbValues[0];
 
       data.chapterName.uiValue = selectedTreeNode.props.object_name.dbValues[0];
     }
+    data.bookId.dbValue = bookItem.props.item_id.dbValues[0];
+    data.bookName.dbValue = bookItem.props.object_name.dbValues[0];
+    data.productType.dbValue = bookItem.props.l2_product_type.dbValues[0];
+    data.productDetailType.dbValue = bookItem.props.l2_product_detail_type.dbValues[0];
+
+    data.bookId.uiValue = bookItem.props.item_id.dbValues[0];
+    data.bookName.uiValue = bookItem.props.object_name.dbValues[0];
+    data.productType.uiValue = bookItem.props.l2_product_type.dbValues[0];
+    data.productDetailType.uiValue = bookItem.props.l2_product_detail_type.dbValues[0];
+  } else {
+    selectedValue = com.getObject(selectedValue.uid);
+    await com.getProperties(selectedValue, ['item_id', 'object_name', 'l2_product_type', 'l2_product_detail_type']);
+    let bookItem = await com.getItemFromId(selectedValue.props.item_id.dbValues[0]);
+    await com.getProperties(bookItem, ['item_id', 'object_name', 'l2_page_index', 'IMAN_reference', 'pageIndex', 'l2_product_detail_type', 'l2_product_type']);
+    data.bookId.dbValue = bookItem.props.item_id.dbValues[0];
+    data.bookName.dbValue = bookItem.props.object_name.dbValues[0];
+    data.productType.dbValue = bookItem.props.l2_product_type.dbValues[0];
+    data.productDetailType.dbValue = bookItem.props.l2_product_detail_type.dbValues[0];
+
+    data.bookId.uiValue = bookItem.props.item_id.dbValues[0];
+    data.bookName.uiValue = bookItem.props.object_name.dbValues[0];
+    data.productType.uiValue = bookItem.props.l2_product_type.dbValues[0];
+    data.productDetailType.uiValue = bookItem.props.l2_product_detail_type.dbValues[0];
   }
-  data.bookId.dbValue = selectedValue.props.item_id.dbValues[0];
-  data.bookName.dbValue = selectedValue.props.object_name.dbValues[0];
-  // data.datasetLink.dbValue = bookItem.props.IMAN_reference.dbValues[0];
-
-  data.bookId.uiValue = selectedValue.props.item_id.dbValues[0];
-  data.bookName.uiValue = selectedValue.props.object_name.dbValues[0];
-  // data.datasetLink.uiValue = bookItem.props.IMAN_reference.uiValues[0];
-}
-
-function chapterSvgAddAc(data) {
-  data.chapterSvgAdd = true;
-  let editView = document.getElementsByClassName('aw-layout-panelContent');
-  editView = editView[editView.length - 1];
-  editView.style.width = window.innerWidth * 0.6 + 'px';
-  editView.style.height = window.innerHeight * 0.6 + 'px';
-  let summernoteSetTemp = summernoteSet;
-  summernoteSetTemp.height = '500px';
-
-  $('#dgnChapterCreateSummernote').summernote(summernoteSetTemp);
 }
 
 let createMode;
 
+/**
+ * 챕터 생성모드 크기 설정
+ */
 function chapterMode(data) {
   createMode = 'Chapter';
   return {
@@ -1133,6 +1300,9 @@ function chapterMode(data) {
   };
 }
 
+/**
+ * 페이지 생성모드 크기 설정
+ */
 function pageMode(data) {
   createMode = 'Page';
   return {
@@ -1141,6 +1311,9 @@ function pageMode(data) {
   };
 }
 
+/**
+ * 상세보기 모드에서 뒤로가기 버튼 클릭시 발동
+ */
 async function backArrowViewDetailAc() {
   let data = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
   data.navMode = 'awTree';
@@ -1156,13 +1329,21 @@ async function backArrowViewDetailAc() {
   }
 }
 
+/**
+ * 상세보기 모드로 전환
+ */
 function viewDetailChangeAc() {
   let data = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
   data.navMode = 'viewDetail';
 }
 
+let dataTemp;
+/**
+ * 네비바를 닫았을때 현재 모드 저장
+ */
 function navModeTemp() {
   let data = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
+  dataTemp = data;
   let designStdTreeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   if (data) {
     lastNavMode = data.navMode;
@@ -1172,7 +1353,15 @@ function navModeTemp() {
   }
 }
 
-function treeNavSet(data) {
+/**
+ * 네비바를 다시 열때 기존 데이터 유지
+ * 오후에 해보기
+ */
+async function treeNavSet(data) {
+  if (dataTemp) {
+    data = dataTemp;
+    dataTemp = undefined;
+  }
   data.navMode = lastNavMode;
   if (!lastNavMode) {
     return;
@@ -1189,8 +1378,34 @@ function treeNavSet(data) {
   // else if(lastNavMode == "bookmark"){
   // }
   let designStdTreeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
+  let bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
+  let selectedValuePage = selectedAwTreeNode.obj;
+  let whileTrue = true;
+  if (!bomlineTreeData) {
+    while (whileTrue) {
+      await common.delay(100);
+      bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
+      if (bomlineTreeData) {
+        break;
+      }
+    }
+  }
+
+  if (bomlineTreeData) {
+    while (whileTrue) {
+      await common.delay(100);
+      if (bomlineTreeData.bomLineTree[0]) {
+        break;
+      }
+    }
+    console.log('dsfdsfds', { bomlineTreeData });
+    treeSelectNone(bomlineTreeData.bomLineTree[0], selectedValuePage);
+  }
 }
 
+/**
+ * 선택된 트리 노드를 BomLine에서 제거, 프리즈 상태 일 경우 개정
+ */
 async function deleteCmdAction() {
   let selectedDeleteValue = selectedAwTreeNode.obj;
   if (deletePageParent) {
@@ -1244,6 +1459,9 @@ async function deleteCmdAction() {
   await common.userLogsInsert('Delete dgnPage2', selectedDeleteValue.uid, 'S', 'Success');
 }
 
+/**
+ * 설계지침 트리에서 부모를 찾는 메소드
+ */
 function findParent(parent, uid) {
   let result;
   for (let i of parent.children) {
@@ -1264,6 +1482,9 @@ function findParent(parent, uid) {
   }
 }
 
+/**
+ * 설계지침서에 웹에디터에 있는 뒤로가기 버튼 클릭시 발동하는 메소드
+ */
 function backPage() {
   let selTreeNode = selectedAwTreeNode.obj;
   for (let i = 0; i < treePageArr.length; i++) {
@@ -1290,6 +1511,9 @@ function backPage() {
   }
 }
 
+/**
+ * 설계지침서 웹에디터에 있는 앞으로가기 버튼 클릭시 발동하는 메소드
+ */
 function frontPage() {
   let selTreeNode = selectedAwTreeNode.obj;
   for (let i = 0; i < treePageArr.length; i++) {
@@ -1316,20 +1540,26 @@ function frontPage() {
   }
 }
 
-async function revisePage() {
-  // let selectedValue = selectedAwTreeNode.obj;
-  // await com.reviseObject(selectedValue);
-  console.log('북먼저 확인', {
-    selectedValue,
-  });
-}
+// async function revisePage() {
+//   // let selectedValue = selectedAwTreeNode.obj;
+//   // await com.reviseObject(selectedValue);
+//   console.log('북먼저 확인', {
+//     selectedValue,
+//   });
+// }
 
+/**
+ * 설계지침 트리로 전환
+ */
 function treeViewChangeAc() {
   return {
     navMode: 'awTree',
   };
 }
 
+/**
+ * n차원 배열을 1차원 배열로 풀어주는 메소드
+ */
 function flatAr(arr) {
   let result = arr.slice();
   for (let i = 0; i < result.length; i++) {
@@ -1340,6 +1570,10 @@ function flatAr(arr) {
   return result;
 }
 
+/**
+ * 지침이나 챕터를 선택하였을때 선택한 아이템 기준으로 하위에 있는 모든 페이지를 가져와 1차원 배열 형태로 만들어 보내준다
+ * @param {bomLine} bomLine - 선택된 아이템의 봄라인
+ */
 async function getBomChildPage(bomLine) {
   let getBomChild = await bomUtils.expandPSOneLevel([bomLine]);
   if (getBomChild.output[0].children.length < 1) {
@@ -1356,6 +1590,10 @@ async function getBomChildPage(bomLine) {
   return flatAr(result);
 }
 
+/**
+ * 지침이나 챕터를 열건지 선택 여부를 정해줌 (사용안함)
+ * @param {value} value - 선택된 아이템
+ */
 async function childViewOpen(value) {
   if (!value.type.includes('Page')) {
     let state;
@@ -1387,6 +1625,11 @@ async function childViewOpen(value) {
   return true;
 }
 
+/**
+ * 모든 트리의 선택상태를 false로 지정 한 뒤 선택된 아이템만 선택해줌
+ * @param {tree} tree - 트리구조
+ * @param {value} value - 선택된 아이템
+ */
 function treeSelectNone(tree, value) {
   if (tree.obj.uid == value.uid) {
     tree.selected = true;
@@ -1398,6 +1641,10 @@ function treeSelectNone(tree, value) {
   }
 }
 
+/**
+ * 선택된 지침서, 챕터, 페이지에 해당하는 내용들을 모두 불러와 웹에디터로 보여줌
+ * @param {eventData} eventData - 선택된 아이템이 담긴 Object
+ */
 async function pageContentView(eventData) {
   $('#designStandardSummernote').summernote('reset');
   const data = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
@@ -1405,13 +1652,17 @@ async function pageContentView(eventData) {
   const L2DesignStandardData = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
   let selectedValuePage = eventData.node.obj;
   let whileTrue = true;
-  while (whileTrue) {
-    await common.delay(100);
-    if (bomlineTreeData.bomLineTree[0]) {
-      break;
+
+  if (bomlineTreeData) {
+    while (whileTrue) {
+      await common.delay(100);
+      if (bomlineTreeData.bomLineTree[0]) {
+        break;
+      }
     }
+    treeSelectNone(bomlineTreeData.bomLineTree[0], selectedValuePage);
   }
-  treeSelectNone(bomlineTreeData.bomLineTree[0], selectedValuePage);
+
   if (!selectedValuePage.type.includes('Page')) {
     // let yn = await childViewOpen(selectedValuePage);
 
@@ -1573,45 +1824,52 @@ async function pageContentView(eventData) {
     $('#designStandardSummernote').summernote('reset');
     //써머노트 내용 삽입
     $('#designStandardSummernote').summernote('code', temp + '<br>');
-    if (bomlineTreeData.searchMode) {
-      if (Array.isArray(searchValueStyle)) {
-        searchDataLength = 0;
-        // let tspanTemp = $('#designStandardSummernote').summernote('code').split("</tspan>");
-        // for (let i = 0; i < tspanTemp.length; i++) {
-        //     if (tspanTemp[i].toLowerCase().includes(searchValueStyle.toLowerCase())) {
-        //         tspanTemp[i] = tspanTemp[i].replace("<tspan", "<tspan fill='#ff00ff'");
-        //         if (tspanTemp[i].includes("font-weight")) {
-        //             tspanTemp[i] = tspanTemp[i].replace(/font-weight="*"/ig, "font-weight='900'");
-        //         } else {
-        //             tspanTemp[i] = tspanTemp[i].replace("<tspan", "<tspan font-weight='900'");
-        //         }
-        //     }
-        //     tspanTemp[i] = tspanTemp[i] + "</tspan>";
-        // }
-        // tspanTemp = tspanTemp.join('');
-        let textTemp = $('#designStandardSummernote').summernote('code').split('</text>');
-        for (let i = 0; i < textTemp.length; i++) {
-          for (let tempWord of searchValueStyle) {
-            if (textTemp[i].toLowerCase().includes(tempWord.toLowerCase())) {
-              let regexAllCase = new RegExp(tempWord, 'gi');
-              // if(!textTemp[i].includes("tspan")){
-              textTemp[i] = textTemp[i].replace(
-                regexAllCase,
-                "<tspan class='searchFocusClass' style='fill: #ff00ff !important;font-weight: 900 !important;'>" + tempWord + '</tspan>',
-              );
-              // }
-              // if (textTemp[i].includes("font-weight")) {
-              //     textTemp[i] = textTemp[i].replace(/font-weight="*"/ig, "font-weight='900'");
-              // } else {
-              //     textTemp[i] = textTemp[i].replace("<text", "<text font-weight='900'");
-              // }
+    if (bomlineTreeData) {
+      if (bomlineTreeData.searchMode) {
+        if (Array.isArray(searchValueStyle)) {
+          searchDataLength = 0;
+          // let tspanTemp = $('#designStandardSummernote').summernote('code').split("</tspan>");
+          // for (let i = 0; i < tspanTemp.length; i++) {
+          //     if (tspanTemp[i].toLowerCase().includes(searchValueStyle.toLowerCase())) {
+          //         tspanTemp[i] = tspanTemp[i].replace("<tspan", "<tspan fill='#ff00ff'");
+          //         if (tspanTemp[i].includes("font-weight")) {
+          //             tspanTemp[i] = tspanTemp[i].replace(/font-weight="*"/ig, "font-weight='900'");
+          //         } else {
+          //             tspanTemp[i] = tspanTemp[i].replace("<tspan", "<tspan font-weight='900'");
+          //         }
+          //     }
+          //     tspanTemp[i] = tspanTemp[i] + "</tspan>";
+          // }
+          // tspanTemp = tspanTemp.join('');
+          let textTemp = $('#designStandardSummernote').summernote('code').split('</text>');
+          for (let i = 0; i < textTemp.length; i++) {
+            for (let tempWord of searchValueStyle) {
+              if (textTemp[i].toLowerCase().includes(tempWord.toLowerCase())) {
+                let contentOnly = textTemp[i].replace(/<[^>]*>?/g, '');
+                let contentTemp = contentOnly;
+                let regexAllCase = new RegExp(tempWord, 'gi');
+                let text = textTemp[i].match(regexAllCase);
+                text = text[0];
+                // if(!textTemp[i].includes("tspan")){
+                contentOnly = contentOnly.replace(
+                  regexAllCase,
+                  "<tspan class='searchFocusClass' style='fill: #ff00ff !important;font-weight: 900 !important;'>" + text + '</tspan>',
+                );
+                textTemp[i] = textTemp[i].replace(contentTemp, contentOnly);
+                // }
+                // if (textTemp[i].includes("font-weight")) {
+                //     textTemp[i] = textTemp[i].replace(/font-weight="*"/ig, "font-weight='900'");
+                // } else {
+                //     textTemp[i] = textTemp[i].replace("<text", "<text font-weight='900'");
+                // }
+              }
             }
+            textTemp[i] = textTemp[i] + '</text>';
           }
-          textTemp[i] = textTemp[i] + '</text>';
+          textTemp = textTemp.join('');
+          $('#designStandardSummernote').summernote('reset');
+          $('#designStandardSummernote').summernote('code', textTemp + '<br>');
         }
-        textTemp = textTemp.join('');
-        $('#designStandardSummernote').summernote('reset');
-        $('#designStandardSummernote').summernote('code', textTemp + '<br>');
       }
     }
     summernoteCodeTemp = $('#designStandardSummernote').summernote('code');
@@ -1632,6 +1890,10 @@ async function pageContentView(eventData) {
 let widthTemp;
 let heightTemp;
 
+/**
+ * 챕터를 생성한다. 지첨서가 개정된 상태면 개정 후 정보를 가져와 생성해준다.
+ * @param {data} data - 사용자가 입력한 정보가 담긴 data
+ */
 async function createDgnChapter(data) {
   loding.openWindow();
   let parentObj = selectedAwTreeNode.obj;
@@ -1703,6 +1965,11 @@ function nullCheck(value) {
   }
 }
 
+/**
+ * 페이지를 생성한다. 지첨서가 개정된 상태면 개정 후 정보를 가져와 생성해준다.
+ * @param {data} data - 사용자가 입력한 정보가 담긴 data
+ * @param {ctx} ctx - ctx
+ */
 async function createDgnPage(data, ctx) {
   let parentObj = selectedAwTreeNode.obj;
   let contentsType = data.contentType.dbValue;
@@ -1852,8 +2119,14 @@ async function createDgnPage(data, ctx) {
   };
 }
 
+/**
+ * 챕터를 편집한다. 지첨서가 개정된 상태면 개정 후 정보를 가져와 편집해준다.
+ * @param {data} data - 사용자가 입력한 정보가 담긴 data
+ * @param {ctx} ctx - ctx
+ */
 async function editDgnChapter(data, ctx) {
   let name = data.objName.dbValue;
+  let reviseBook;
 
   if (reviseToEditObj) {
     let today = new Date();
@@ -1875,7 +2148,6 @@ async function editDgnChapter(data, ctx) {
     await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
 
     await lgepSummerNoteUtils.txtFileToDataset($('#dgnPageEditSummernote').summernote('code'), reviseToEditObj);
-    let reviseBook;
     let doubleBom = [];
     for (let i of reviseObj) {
       if (i.type.includes('Book')) {
@@ -1950,7 +2222,11 @@ async function editDgnChapter(data, ctx) {
       [lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close')],
       [
         function () {
-          bomlineTreeSet2();
+          if (reviseBook) {
+            bomlineTreeSet2(reviseBook);
+          } else {
+            bomlineTreeSet2(selectedValue);
+          }
         },
       ],
     );
@@ -1960,10 +2236,16 @@ async function editDgnChapter(data, ctx) {
   }
 }
 
+/**
+ * 페이지를 편집한다. 지첨서가 개정된 상태면 개정 후 정보를 가져와 편집해준다.
+ * @param {data} data - 사용자가 입력한 정보가 담긴 data
+ * @param {ctx} ctx - ctx
+ */
 async function editDgnPage(data, ctx) {
   let name = data.objName.dbValue;
   let contents = $('#dgnPageEditSummernote').summernote('code');
   let contentsString = lgepSummerNoteUtils.stripTags(contents);
+  let reviseBook;
   if (name == '' || name == null) {
     message.show(
       0,
@@ -2001,7 +2283,6 @@ async function editDgnPage(data, ctx) {
     await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
 
     await lgepSummerNoteUtils.txtFileToDataset($('#dgnPageEditSummernote').summernote('code'), reviseToEditObj);
-    let reviseBook;
     let doubleBom = [];
     for (let i of reviseObj) {
       if (i.type.includes('Book')) {
@@ -2061,7 +2342,11 @@ async function editDgnPage(data, ctx) {
       [lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close')],
       [
         function () {
-          bomlineTreeSet2();
+          if (reviseBook) {
+            bomlineTreeSet2(reviseBook);
+          } else {
+            bomlineTreeSet2(selectedValue);
+          }
         },
       ],
     );
@@ -2077,6 +2362,9 @@ async function editDgnPage(data, ctx) {
   }
 }
 
+/**
+ * 페이지를 생성할때 설계 세부 속성 LOV를 가져와 리스트 박스에 값을 넣어준다.
+ */
 async function typeOrDetailTypeSet() {
   let data = vms.getViewModelUsingElement(document.getElementById('dgnPageCreateData'));
   data.createType = createMode;
@@ -2094,11 +2382,6 @@ async function typeOrDetailTypeSet() {
         propInternalValue: contentType[i].propInternalValues.object_name[0],
       });
     }
-    // data.contentTypeValues.dbValue.push({
-    //     propDisplayValue: "추가",
-    //     propInternalValue: "추가",
-    //     iconName: "cmdAdd"
-    // });
     for (let i = 0; i < contentDetailType.length; i++) {
       data.contentDetailTypeValues.dbValue.push({
         propDisplayValue: contentDetailType[i].propDisplayValues.object_name[0],
@@ -2111,18 +2394,50 @@ async function typeOrDetailTypeSet() {
   createMode = undefined;
 }
 
+/**
+ * 챕터를 편집하기 전, 기존 챕터의 내용을 화면에 보여준다.
+ */
 async function editChapterSet() {
   let selectedObj = selectedAwTreeNode.obj;
   let data = vms.getViewModelUsingElement(document.getElementById('dgnChapterEditData'));
   data.objName.dbValue = selectedObj.props.object_name.dbValues[0];
 }
 
+/**
+ * 페이지를 편집하기 전, 기존 페이지의 내용을 화면에 보여준다.
+ */
 async function editPageSet() {
   let selectedObj = selectedAwTreeNode.obj;
   let data = vms.getViewModelUsingElement(document.getElementById('dgnPageEditData'));
   await com.getProperties(selectedObj, ['l2_content_type', 'l2_content_detail_type', 'l2_reference_parts', 'l2_keywords', 'item_id']);
+  try {
+    let contentType = await com.getInitialLOVValues('L2_DgnPageRevision', 'Create', 'l2_content_type');
+    let contentDetailType = await com.getInitialLOVValues('L2_DgnPageRevision', 'Create', 'l2_content_detail_type');
+    contentType = contentType.lovValues;
+    contentDetailType = contentDetailType.lovValues;
+    for (let i = 0; i < contentType.length; i++) {
+      data.contentTypeValues.dbValue.push({
+        propDisplayValue: contentType[i].propDisplayValues.object_name[0],
+        propInternalValue: contentType[i].propInternalValues.object_name[0],
+      });
+    }
+    for (let i = 0; i < contentDetailType.length; i++) {
+      data.contentDetailTypeValues.dbValue.push({
+        propDisplayValue: contentDetailType[i].propDisplayValues.object_name[0],
+        propInternalValue: contentDetailType[i].propInternalValues.object_name[0],
+      });
+    }
+  } catch (err) {
+    //console.log(err);
+  }
   let content = await lgepSummerNoteUtils.readHtmlToSummernoteEdit(selectedObj);
   data.objName.dbValue = selectedObj.props.object_name.dbValues[0];
+  data.parts.dbValue = selectedObj.props.l2_reference_parts.dbValues[0];
+  data.keyword.dbValue = selectedObj.props.l2_keywords.dbValues[0];
+  data.contentType.dbValue = selectedObj.props.l2_content_type.dbValues[0];
+  data.contentType.uiValue = selectedObj.props.l2_content_type.dbValues[0];
+  data.contentDetailType.dbValue = selectedObj.props.l2_content_detail_type.dbValues[0];
+  data.contentDetailType.uiValue = selectedObj.props.l2_content_detail_type.dbValues[0];
   let summernoteSetTemp = summernoteSet;
   summernoteSetTemp.height = '700px';
   $('#dgnPageEditSummernote').summernote(summernoteSetTemp);
@@ -2131,13 +2446,23 @@ async function editPageSet() {
   $('#dgnPageEditSummernote').summernote('code', content);
 }
 
+/**
+ * 선택된 지침서 트리 아이템을 전역 변수에 담아준다.
+ * @param {eventData} eventData - 선택된 트리
+ */
 function selectedTreeNode(eventData) {
   selectedAwTreeNode = eventData.node;
+  const bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
   const L2DesignStandardData = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
   L2DesignStandardData.selectedTreeNodeType = !selectedAwTreeNode.obj.type.includes('Chapter');
-  searchValueStyle = undefined;
+  if (!bomlineTreeData.searchMode) {
+    searchValueStyle = undefined;
+  }
 }
 
+/**
+ * 봄 구조를 추가 하기 전 선택된 아이템이 페이지인지 확인하여 걸러준다.
+ */
 function bomlineAdd() {
   if (selectedAwTreeNode == undefined) {
     message.show(
@@ -2152,12 +2477,6 @@ function bomlineAdd() {
   } else {
     let parentObj = selectedAwTreeNode.obj;
     if (parentObj.type.includes('Page')) {
-      message.show(
-        0,
-        lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'pageAddBookChapter'),
-        [lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close')],
-        [],
-      );
       return {
         treeSelect: false,
       };
@@ -2169,6 +2488,9 @@ function bomlineAdd() {
   }
 }
 
+/**
+ * 선택된 아이템에 추가 및 편집, 삭제 기능을 실행하기 전 최상위 지침서를 가져와 프리즈 상태인지 확인한다. 개정여부를 판단하여 개정이 필요한 아이템만 담아서 넘겨준다.
+ */
 function revisePrework() {
   if (selectedAwTreeNode == undefined) {
     message.show(
@@ -2180,6 +2502,7 @@ function revisePrework() {
     return;
   }
   let data = vms.getViewModelUsingElement(document.getElementById('dgnStdViewDetailData'));
+  // L2_DesignStandardLIstOrTreeView.html
   const bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
   let parentArr = [];
   let whileTrue = true;
@@ -2215,6 +2538,9 @@ function revisePrework() {
 let reviseToEditObj;
 let reviseObj = [];
 
+/**
+ * 선택된 아이템 편집 전 개정 여부를 확인하고, 개정이 필요하면 개정먼저 진행 한뒤 편집한다.
+ */
 function reviseCheck() {
   let result = revisePrework();
   let releseCheck = result.releseCheck;
@@ -2261,6 +2587,9 @@ function reviseCheck() {
   }
 }
 
+/**
+ * 선택된 아이템 편집 전 편집 모드를 지정해준다.
+ */
 function bomlineEdit() {
   if (selectedAwTreeNode.obj.type.includes('Chapter')) {
     return {
@@ -2286,6 +2615,10 @@ function bomlineEdit() {
 let deletePageParent;
 let deleteSuccessBomTreeBook;
 
+/**
+ * 선택된 아이템 삭제 전 개정 여부를 확인하고, 개정이 필요하면 개정먼저 진행 후 삭제한다.
+ * @param {ctx} ctx - 선택된 트리
+ */
 function reviseCheckToDelete(ctx) {
   let result = revisePrework();
   let releseCheck = result.releseCheck;
@@ -2377,8 +2710,11 @@ function reviseCheckToDelete(ctx) {
 
 let addToParent;
 let newBomTreeBook;
-
-async function reviseCheckToChildAdd(ctx, eventData) {
+/**
+ * 선택된 아이템 추가 전 개정 여부를 확인하고, 개정이 필요하면 개정먼저 진행 후 추가한다.
+ * @param {ctx} ctx - 선택된 트리
+ */
+async function reviseCheckToChildAdd(ctx) {
   if (selectedAwTreeNode.obj.type.includes('Page')) {
     message.show(
       0,
@@ -2478,14 +2814,21 @@ async function reviseCheckToChildAdd(ctx, eventData) {
   }
 }
 
+/**
+ * 설계지침 추가 전 선택되어 있는 아이템이 구조 아이템인지 확인한다.
+ */
 async function selFolderCheck() {
   let value = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   value = value.dataProviders.designStandardTreeTableData.selectedObjects[0];
-  let valueObj = await com.getItemFromId(value.props.awb0BomLineItemId.dbValues[0]);
-  let valueObRev;
-  if (valueObj.props.revision_list) {
-    valueObRev = com.getObject(valueObj.props.revision_list.dbValues[valueObj.props.revision_list.dbValues.length - 1]);
-  } else {
+  if (!value) {
+    message.show(
+      0,
+      lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'structureSel'),
+      [lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'close')],
+      [],
+    );
+  }
+  if (!value.props.revision_list) {
     message.show(
       0,
       lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'bookAddFolder'),
@@ -2496,8 +2839,8 @@ async function selFolderCheck() {
       folder: false,
     };
   }
-  await com.getProperties(valueObRev, ['L2_DesignStandardRel']);
-  if (valueObRev && valueObRev.type.includes('Structure')) {
+  await com.getProperties(value, ['L2_DesignStandardRel']);
+  if (value && value.type.includes('Structure')) {
     return {
       folder: true,
     };
@@ -2514,6 +2857,11 @@ async function selFolderCheck() {
   }
 }
 
+/**
+ * 설계지침을 추가한다.
+ * @param {data} data - 사용자가 입력한 데이터
+ * @param {ctx} ctx - 선택된 트리
+ */
 async function createDgnBook(data, ctx) {
   let itemName = data.objName.dbValues[0];
   let type = data.objType.dbValues[0];
@@ -2528,10 +2876,8 @@ async function createDgnBook(data, ctx) {
   if (itemName && itemName != '') {
     let value = vms.getViewModelUsingElement(document.getElementById('designStdData'));
     value = value.dataProviders.designStandardTreeTableData.selectedObjects[0];
-    let valueItem = await com.getItemFromId(value.props.awb0BomLineItemId.dbValues[0]);
-    let valueItemRev = com.getObject(valueItem.props.revision_list.dbValues[valueItem.props.revision_list.dbValues.length - 1]);
-    await com.getProperties(valueItemRev, ['L2_DesignStandardRel']);
-    let bookPropsArr = valueItemRev.props.L2_DesignStandardRel.dbValues;
+    await com.getProperties(value, ['L2_DesignStandardRel']);
+    let bookPropsArr = value.props.L2_DesignStandardRel.dbValues;
     try {
       let request = {
         properties: [
@@ -2581,7 +2927,7 @@ async function createDgnBook(data, ctx) {
       await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
       bookPropsArr.unshift(createItem.uid);
       request = {
-        objects: [valueItemRev],
+        objects: [value],
         attributes: {
           L2_DesignStandardRel: {
             stringVec: bookPropsArr,
@@ -2591,7 +2937,7 @@ async function createDgnBook(data, ctx) {
       await SoaService.post('Core-2007-01-DataManagement', 'setProperties', request);
       common.userLogsInsert('Create DgnBook2', createItem.uid, 'S', 'Success');
     } catch (err) {
-      //console.log(err);
+      console.log('error', { err });
     }
     eventBus.publish('designStandardTreeTable.plTable.reload');
     return {
@@ -2611,40 +2957,43 @@ async function createDgnBook(data, ctx) {
 }
 
 let bookmarkModeTemp;
+// 즐겨찾기용 메서드
+// function backArrowBookmark() {
+//   const standardNavData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
+//   standardNavData.navMode = bookmarkModeTemp;
+// }
 
-function backArrowBookmark() {
-  const standardNavData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
-  standardNavData.navMode = bookmarkModeTemp;
-}
+// async function bookmark() {
+//   const standardNavData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
+//   bookmarkModeTemp = standardNavData.bookMarkMode;
+//   standardNavData.navMode = 'bookmark';
+//   let policyArr = policy.getEffectivePolicy();
+//   policyArr.types.push({
+//     name: 'Folder',
+//     properties: [
+//       {
+//         name: 'contents',
+//       },
+//     ],
+//   });
 
-async function bookmark() {
-  const standardNavData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
-  bookmarkModeTemp = standardNavData.bookMarkMode;
-  standardNavData.navMode = 'bookmark';
-  let policyArr = policy.getEffectivePolicy();
-  policyArr.types.push({
-    name: 'Folder',
-    properties: [
-      {
-        name: 'contents',
-      },
-    ],
-  });
+//   let loadObj;
+//   let bookmarkFolderUid = await lgepPreferenceUtils.getPreference('L2_DesignGuide_DesignStandards');
+//   bookmarkFolderUid = bookmarkFolderUid.Preferences.prefs[0].values[0].value;
+//   try {
+//     let getPropertiesParam = {
+//       uids: [bookmarkFolderUid],
+//     };
+//     loadObj = await SoaService.post('Core-2007-09-DataManagement', 'loadObjects', getPropertiesParam, policyArr);
+//   } catch (err) {
+//     //console.log(err);
+//   }
+//   let bookmarkFolder = loadObj.modelObjects[bookmarkFolderUid];
+// }
 
-  let loadObj;
-  let bookmarkFolderUid = await lgepPreferenceUtils.getPreference('L2_DesignGuide_DesignStandards');
-  bookmarkFolderUid = bookmarkFolderUid.Preferences.prefs[0].values[0].value;
-  try {
-    let getPropertiesParam = {
-      uids: [bookmarkFolderUid],
-    };
-    loadObj = await SoaService.post('Core-2007-09-DataManagement', 'loadObjects', getPropertiesParam, policyArr);
-  } catch (err) {
-    //console.log(err);
-  }
-  let bookmarkFolder = loadObj.modelObjects[bookmarkFolderUid];
-}
-
+/**
+ * 지침서 트리 화면에서 뒤로가기를 누른 후 앞으로 가기를 다시 누른 상태
+ */
 function forwardArrow() {
   selectedValue = selectedValueTemp;
   selectedValueTemp = undefined;
@@ -2664,8 +3013,10 @@ let selectBookTemp;
 let selectedValueTemp;
 let selectedAwTreeNodeTemp;
 
+/**
+ * 지침서 트리 화면에서 뒤로가기를 누른 상태
+ */
 async function backArrow() {
-  //포탈
   const standardNavData = vms.getViewModelUsingElement(document.getElementById('stdTreeNavData'));
   const designStdTreeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   const L2DesignStandardData = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
@@ -2726,47 +3077,50 @@ async function getLastRevision(response) {
   return targetRevisioList;
 }
 
-async function getColumnChartData(data) {
-  await common.delay(200);
-  let arrayOfSeriesDataForChartLine = [];
-  //차트 데이터가 들어가는 배열
-  let keyValueDataForChart = [];
-  //차트 항목
-  let chartData = [];
-  //차트 항목당 개수
-  let chartCount = [];
+// async function getColumnChartData(data) {
+//   await common.delay(200);
+//   let arrayOfSeriesDataForChartLine = [];
+//   //차트 데이터가 들어가는 배열
+//   let keyValueDataForChart = [];
+//   //차트 항목
+//   let chartData = [];
+//   //차트 항목당 개수
+//   let chartCount = [];
 
-  //데이터에서 차트의 항목이 되는 데이터별로 개수를 세어서 배열에 담아줌
-  let count = {};
-  //키 : 값 형태로 되어있는 항목 개수의 값만 따로 배열로 가져옴
-  chartCount = Object.values(count);
+//   //데이터에서 차트의 항목이 되는 데이터별로 개수를 세어서 배열에 담아줌
+//   let count = {};
+//   //키 : 값 형태로 되어있는 항목 개수의 값만 따로 배열로 가져옴
+//   chartCount = Object.values(count);
 
-  //모든 차트 데이터 삽입
-  // for (let i = 0; i < chartData.length; i++) {
-  keyValueDataForChart.push({
-    label: 'hihihi',
-    value: 5,
-  });
-  // }
+//   //모든 차트 데이터 삽입
+//   // for (let i = 0; i < chartData.length; i++) {
+//   keyValueDataForChart.push({
+//     label: 'hihihi',
+//     value: 5,
+//   });
+//   // }
 
-  //내림차순 정렬
-  // keyValueDataForChart.sort((a, b) => {
-  //     return b.value - a.value;
-  // });
+//   //내림차순 정렬
+//   // keyValueDataForChart.sort((a, b) => {
+//   //     return b.value - a.value;
+//   // });
 
-  //상위 10개의 데이터만 잘라서 가져옴
-  const lineList = keyValueDataForChart.slice(0, 10);
+//   //상위 10개의 데이터만 잘라서 가져옴
+//   const lineList = keyValueDataForChart.slice(0, 10);
 
-  //상위 10개의 데이터만 최종 차트 데이터로 삽입
-  arrayOfSeriesDataForChartLine.push({
-    seriesName: '개수',
-    keyValueDataForChart: lineList,
-    chartPointsConfig: 'colorOverrides',
-  });
+//   //상위 10개의 데이터만 최종 차트 데이터로 삽입
+//   arrayOfSeriesDataForChartLine.push({
+//     seriesName: '개수',
+//     keyValueDataForChart: lineList,
+//     chartPointsConfig: 'colorOverrides',
+//   });
 
-  return arrayOfSeriesDataForChartLine;
-}
+//   return arrayOfSeriesDataForChartLine;
+// }
 
+/**
+ * 모든 유저 정보를 가져옴
+ */
 async function getUserList() {
   let userData = await query.executeSavedQuery('KnowledgeUserSearch', 'L2_user_id', '*');
   return {
@@ -2774,12 +3128,18 @@ async function getUserList() {
   };
 }
 
+/**
+ * 모든 유저의 수를 가져옴
+ */
 async function loadPostList(data) {
   return {
     postTotalFound: data.userList.length,
   };
 }
 
+/**
+ * 사용X
+ */
 async function setPostList(response, data) {
   response = data.userList;
   if (data.dataProviders.postList.viewModelCollection.loadedVMObjects.length === 0) {
@@ -2806,6 +3166,9 @@ async function setPostList(response, data) {
   }
 }
 
+/**
+ * 선택된 지침서에 첨부된 데이터셋을 가져옴
+ */
 async function loadList() {
   let listData = com.getObject(selectedValue.props.IMAN_reference.dbValues);
   let listViewData = [];
@@ -2817,7 +3180,12 @@ async function loadList() {
     listsFound: listViewData.length,
   };
 }
+
 let TreeNodeTemp = [];
+/**
+ * 선택 된 지침서를 bomline형태로 만든 뒤 aw-tree로 만들어줌(구)
+ * @param {data} data - 사용자 데이터
+ */
 async function bomlineTreeSet(data) {
   try {
     const standardData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
@@ -2864,7 +3232,12 @@ async function bomlineTreeSet(data) {
     }
   }
 }
+
 let limit = 1;
+/**
+ * 선택 된 지침서를 bomline형태로 만든 뒤 aw-tree로 만들어줌
+ * @param {ModelObject} passItem - 임의로 넣어준 지침서
+ */
 async function bomlineTreeSet2(passItem) {
   const standardData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   const L2DesignStandardData = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
@@ -2891,10 +3264,8 @@ async function bomlineTreeSet2(passItem) {
           // selectedValue = standardData.dataProviders.designStandardTreeTableData.selectedObjects[0];
           // tempValue = selectedValue;
           let selItem = standardData.dataProviders.designStandardTreeTableData.selectedObjects[0];
-          let itemObj = await com.getItemFromId(selItem.props.awb0BomLineItemId.dbValues[0]);
-          let itemObjRev = com.getObject(itemObj.props.revision_list.dbValues[itemObj.props.revision_list.dbValues.length - 1]);
-          await com.getProperties(itemObjRev, ['L2_DesignStandardRel']);
-          let dgnStdTemp = com.getObject(itemObjRev.props.L2_DesignStandardRel.dbValues[0]);
+          await com.getProperties(selItem, ['L2_DesignStandardRel']);
+          let dgnStdTemp = com.getObject(selItem.props.L2_DesignStandardRel.dbValues[0]);
           dgnStdTemp = com.getObject(dgnStdTemp.props.revision_list.dbValues[dgnStdTemp.props.revision_list.dbValues.length - 1]);
           selectedValue = dgnStdTemp;
           tempValue = selectedValue;
@@ -2986,6 +3357,11 @@ async function bomlineTreeSet2(passItem) {
   // }
 }
 
+/**
+ * 모든 Bom 구조를 precise로 만들어줌
+ * @param {BomLineArr} allLevels - 전체 봄라인
+ * @param {BomLine} bomTemp - 전체 봄라인을 가져온 봄라인
+ */
 async function preciseSet(allLevels, bomTemp) {
   let bomLineArr = [];
   for (let i of allLevels.output) {
@@ -3002,12 +3378,20 @@ async function preciseSet(allLevels, bomTemp) {
   await bomUtils.saveBOMWindow(bomTemp.bomWindow);
 }
 
+/**
+ * 개정 작업이 끝난 후 봄구조를 업데이트 해줌
+ * @param {bomLineArr} bomLineArr - 전체 봄라인
+ * @param {bomWindowArr} bomWindowArr - 전체 봄라인을 가져온 봄라인
+ */
 async function preciseDoubleSet(bomLineArr, bomWindowArr) {
   await bomUtils.togglePrecision(bomLineArr);
   await bomUtils.togglePrecision(bomLineArr);
   await bomUtils.saveBOMWindows(bomWindowArr);
 }
 
+/**
+ * 뒤로가기 이후 기존 봄라인으로 돌아오기 위한 작업
+ */
 async function bomlineTreeSet3() {
   let whileTrue = true;
   let bomlineTreeData;
@@ -3067,6 +3451,10 @@ async function bomlineTreeSet4(value) {
   }
 }
 
+/**
+ * 봄 구조의 부모 자식관계를 맺어줌(구)
+ * @param {ModelObject} obj - 전체 봄라인
+ */
 async function treeChild(obj) {
   let name = obj.output[0].parent.bomLine.props.object_string.dbValues[0].split('-');
   if (name.length > 3) {
@@ -3097,6 +3485,11 @@ let childIndexTemp;
 let treePageArr = [];
 let treePageNameArr = [];
 let treePageContentStringArr = [];
+/**
+ * 봄 구조의 부모 자식관계를 맺어줌
+ * @param {ModelObject} obj - 최상위 봄라인 아이템
+ * @param {ModelObject} recursiveValue - 재귀 아이템
+ */
 async function treeChild2(obj, recursiveValue) {
   let name;
   let result = [];
@@ -3178,6 +3571,11 @@ async function treeChild2(obj, recursiveValue) {
   }
 }
 
+/**
+ * 선택된 설계 지침을 로딩하면서 해당 지침의 리비전 리스트를 로딩해줌
+ * @param {ctx} ctx - ctx
+ * @param {data} data - 사용자 데이터
+ */
 async function designStdContentLoad(ctx, data) {
   await common.delay(200);
   const standardData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
@@ -3207,7 +3605,7 @@ async function designStdContentLoad(ctx, data) {
   let reviseDate = lgepLocalizationUtils.getLocalizedText('L2_DesignStandardMessages', 'reviseDate');
   let bookItemRev = com.getObject(selectedValue.uid);
   await com.getProperties(bookItemRev, ['revision_list', 'l2_revise_date', 'current_revision_id', 'item_revision_id', 'object_name']);
-  L2DesignStandardData.selBookName = bookItemRev.props.object_name.dbValue;
+  L2DesignStandardData.selBookName = bookItemRev.props.object_name.dbValues[0];
   let revArr = com.getObject(bookItemRev.props.revision_list.dbValues);
   await com.getProperties(revArr, ['revision_list', 'l2_revise_date', 'current_revision_id', 'item_revision_id']);
   for (let i = 0; i < bookItemRev.props.revision_list.dbValues.length; i++) {
@@ -3230,6 +3628,11 @@ async function designStdContentLoad(ctx, data) {
   };
 }
 
+/**
+ * 선택되어있는 아이템이 있으면 선택 된 상태를 유지해줌
+ * @param {tree} tree - 봄라인 트리
+ * @param {ModelObject} selectValue - 선택된 아이템
+ */
 function treeSelect(tree, selectValue) {
   if (tree.value == selectValue) {
     tree.selected = true;
@@ -3242,6 +3645,10 @@ function treeSelect(tree, selectValue) {
   }
 }
 
+/**
+ * 트리의 순서를 뒤집어줌
+ * @param {tree} tree - 봄라인 트리
+ */
 function treeReverse(tree) {
   if (tree.children.length > 0) {
     for (let i = 0; i < tree.children.length; i++) {
@@ -3283,23 +3690,22 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
   }
   let treeObj = loadObj.modelObjects[homeUid];
   let response;
-  await com.getProperties(treeObj, ['bl_all_child_lines', 'bl_child_item', 'bl_child_lines', 'nx0AllChildren', 'contents']);
+  await com.getProperties(treeObj, ['bl_all_child_lines', 'bl_child_item', 'bl_child_lines', 'nx0AllChildren', 'contents', 'ps_children']);
   if (treeObj.props.contents) {
     response = com.getObject(treeObj.props.contents.dbValues);
+    await com.getProperties(response, ['revision_list']);
+    let temp = response;
+    response = [];
+    for (let i of temp) {
+      if (i.props.revision_list) {
+        response.push(com.getObject(i.props.revision_list.dbValues[i.props.revision_list.dbValues.length - 1]));
+      } else {
+        response.push(i);
+      }
+    }
   } else {
-    response = com.getObject(treeObj.props.bl_all_child_lines.dbValues);
+    response = com.getObject(treeObj.props.ps_children.dbValues);
   }
-  // if (treeObj.props.awb0BomLineItemId) {
-  //     let itemObj = await com.getItemFromId(treeObj.props.awb0BomLineItemId.dbValues[0]);
-  //     let itemObjRev = com.getObject(itemObj.props.revision_list.dbValues[itemObj.props.revision_list.dbValues.length - 1]);
-  //     await com.getProperties(itemObjRev, ["L2_DesignStandardRel"]);
-  //     if (itemObjRev.props.L2_DesignStandardRel.dbValues.length > 0) {
-  //         let iTemp = com.getObject(itemObjRev.props.L2_DesignStandardRel.dbValues);
-  //         iTemp = await getLastRevision(iTemp);
-  //         response.push(iTemp);
-  //         response = flatAr(response);
-  //     }
-  // }
   if (firstCheck) {
     let temp = [];
     let groupFolder = false;
@@ -3350,12 +3756,9 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
   }
   await com.getProperties(response, [
     'object_string',
-    'awb0BomLineItemId',
     'contents',
-    'l2_reference_book',
+    'l2_reference_book2',
     'object_desc',
-    'fnd0InProcess',
-    'ics_subclass_name',
     'object_type',
     'checked_out',
     'owning_user',
@@ -3364,40 +3767,26 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
     'release_statuses',
     'object_name',
     'revision_list',
-    'bl_all_child_lines',
-    'bl_child_item',
-    'bl_child_lines',
-    'nx0AllChildren',
+    'ps_children',
   ]);
 
   let viewArr = [];
   response = response.filter((element, i) => element != null);
   let resTemp = response;
   response = [];
-  for (let temp of resTemp) {
-    if (temp.type.includes('Structure')) {
-      let propsTemp = temp;
-      temp = com.getObject(temp.props.revision_list.dbValues[temp.props.revision_list.dbValues.length - 1]);
-      Object.assign(temp.props, propsTemp.props);
-      let bomTemp = await bomUtils.createBOMWindow(null, temp);
-      bomUtils.closeBOMWindow(bomTemp.bomWindow);
-      response.push(bomTemp.bomLine);
-    } else {
-      response.push(temp);
+  for (let i of resTemp) {
+    if (!i.type.includes('Function') && !i.type.includes('Failure')) {
+      response.push(i);
     }
   }
-  await com.getProperties(response, ['bl_all_child_lines', 'bl_child_item', 'bl_child_lines', 'nx0AllChildren', 'awb0BomLineItemId']);
-  let idx = 0;
+  await com.getProperties(response, ['L2_DesignStandardRel', 'l2_is_checklist', 'item_id']);
   for (let treeNode of response) {
-    let nodeName = treeNode.props.object_string.dbValues[0];
+    let nodeName = treeNode.props.object_name.dbValues[0];
     let vmo = viewC.constructViewModelObjectFromModelObject(treeNode);
     let temp = vmo;
-    if (treeNode.props.awb0BomLineItemId) {
-      let objItem = await com.getItemFromId(treeNode.props.awb0BomLineItemId.dbValues[0]);
-      let objItemRev = com.getObject(objItem.props.revision_list.dbValues[objItem.props.revision_list.dbValues.length - 1]);
-      await com.getProperties(objItemRev, ['L2_DesignStandardRel']);
+    if (treeNode.props.L2_DesignStandardRel) {
       temp.props.dgnStdStatus = {};
-      if (objItemRev.props.L2_DesignStandardRel.dbValues.length > 0) {
+      if (treeNode.props.L2_DesignStandardRel.dbValues.length > 0) {
         temp.props.dgnStdStatus.dbValues = [];
         temp.props.dgnStdStatus.uiValues = [];
         temp.props.dgnStdStatus.dbValues[0] = 'O';
@@ -3415,10 +3804,16 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
     }
     vmo = treeView.createViewModelTreeNode(vmo.uid, vmo.type, nodeName, nodeBeingExpanded.levelNdx + 1, nodeBeingExpanded.levelNdx + 2, vmo.typeIconURL);
     Object.assign(vmo, temp);
+    if (vmo.type.includes('Structure') && treeNode.props.L2_DesignStandardRel.dbValues.length > 0) {
+      vmo.typeIconURL = iconService.getTypeIconFileUrl('typeElementGreen48.svg');
+    } else if (vmo.type.includes('Structure')) {
+      vmo.typeIconURL = iconService.getTypeIconFileUrl('typeElementGray48.svg');
+    }
+
     if (temp.props.contents == undefined || temp.props.contents.dbValues.length < 1) {
-      if (temp.props.bl_all_child_lines) {
-        if (temp.props.bl_all_child_lines.dbValues.length > 0) {
-          let childT = com.getObject(temp.props.bl_all_child_lines.dbValues);
+      if (temp.props.ps_children) {
+        if (temp.props.ps_children.dbValues.length > 0) {
+          let childT = com.getObject(temp.props.ps_children.dbValues);
           let state = false;
           for (let i = 0; i < childT.length; i++) {
             if (!childT[i].props.object_string.dbValues[0].includes('[기능]') && !childT[i].props.object_string.dbValues[0].includes('[고장]')) {
@@ -3452,7 +3847,6 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
     vmo.levelNdx = nodeBeingExpanded.levelNdx + 1;
     viewArr.push(vmo);
   }
-
   return {
     parentNode: nodeBeingExpanded,
     childNodes: viewArr,
@@ -3462,6 +3856,9 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
   // }
 }
 
+/**
+ * 지침서 하위에 있는 모든 페이지의 첨부파일을 가져와줌
+ */
 async function attachAllFileTableSet() {
   await com.getProperties(treePageArr, ['IMAN_reference']);
   let result = [];
@@ -3486,6 +3883,9 @@ async function attachAllFileTableSet() {
   };
 }
 
+/**
+ * 선택되어있는 페이지의 첨부파일을 가져와줌
+ */
 async function attachFileTableSet() {
   let value = selectedAwTreeNode.obj;
   if (value.type.includes('Page')) {
@@ -3538,6 +3938,9 @@ function filterRowsWithSort(response, sortCriteria, startIndex, pageSize) {
   return searchResults;
 }
 
+/**
+ * 페이지 첨부파일 팝업을 띄우기 전 선택된 페이지 데이터를 넣어준다.
+ */
 function attachPopupStart() {
   let data = vms.getViewModelUsingElement(document.getElementById('attachFileData'));
   let value = selectedAwTreeNode.obj;
@@ -3545,6 +3948,9 @@ function attachPopupStart() {
   // eventBus.publish("manualAttachFileTable.plTable.reload");
 }
 
+/**
+ * 페이지 첨부파일에서 선택된 아이템을 다운로드 2개이상 일시 .zip으로 만들어줌
+ */
 async function selectDown() {
   let data = vms.getViewModelUsingElement(document.getElementById('attachFileData'));
   let downloadFile = data.dataProviders.dgnStandardAttachFileTableData.selectedObjects;
@@ -3610,6 +4016,9 @@ async function selectDown() {
   }
 }
 
+/**
+ * 테이블에 표시되어 있는 모든 첨부파일을 다운로드 해준다. 2개이상이면 zip파일로 압축
+ */
 async function downloadAll() {
   let data = vms.getViewModelUsingElement(document.getElementById('attachFileData'));
   let downloadFile = data.dataProviders.dgnStandardAttachFileTableData.viewModelCollection.loadedVMObjects;
@@ -3675,6 +4084,9 @@ async function downloadAll() {
   }
 }
 
+/**
+ * 선택되어있는 아이템을 다운로드 해준다. 2개 이상이면 zip파일로 압축
+ */
 async function selectDownAllFile() {
   let data = vms.getViewModelUsingElement(document.getElementById('attachFileData'));
   let downloadFile = data.dataProviders.dgnStandardAllAttachFileTableData.selectedObjects;
@@ -3740,6 +4152,9 @@ async function selectDownAllFile() {
   }
 }
 
+/**
+ * 테이블에 표시되어 있는 모든 아이템을 다운로드 해준다. 2개이상이면 zip파일로 압축
+ */
 async function downloadAllPage() {
   let data = vms.getViewModelUsingElement(document.getElementById('attachFileData'));
   let downloadFile = data.dataProviders.dgnStandardAllAttachFileTableData.viewModelCollection.loadedVMObjects;
@@ -3804,7 +4219,9 @@ async function downloadAllPage() {
     document.body.removeChild(anchorElement); // cleanup - 쓰임을 다한 a 태그 삭제
   }
 }
-
+/**
+ * 지침서 또는 페이지를 선택할때 URL에 uid를 매핑해줌
+ */
 function urlBookUidMapping() {
   if (selectedValue) {
     // let pUid = selectedValue.alternateID.split(",");
@@ -3833,6 +4250,9 @@ function urlBookUidMapping() {
   }
 }
 
+/**
+ * 페이지 로드시 uid를 확인하여 지침 트리를 바로 열어준다. 페이지 선택이 페이지 또한 선택 해준다.
+ */
 async function parameterCheck() {
   let url = document.URL;
   let basicUrl = browserUtils.getBaseURL();
@@ -3863,6 +4283,7 @@ async function parameterCheck() {
       selectedTreeNode(pageObject);
       pageContentView(pageObject);
     }
+    showPre();
   } else {
     bookUID = url;
     if (!bookUID) {
@@ -3903,12 +4324,16 @@ async function parameterCheck() {
     // }
     // standardData.dataProviders.designStandardTreeTableData.selectedObjects[0] = book;
     await bomlineTreeSet2(book);
+    showPre();
   }
 }
 
 let searchTableDataTemp = [];
 let tempSearchText;
 let pageAllSearchState;
+/**
+ * 페이지 전체 검색에서 선택한 페이지로 이동.
+ */
 async function pageMove() {
   let standardData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let searchWord = standardData.searchingName.dbValue;
@@ -3943,11 +4368,17 @@ async function pageMove() {
   pageContentView(page);
 }
 
+/**
+ * 검색 모드 시작
+ */
 function pageSearchModeStart() {
   let designStdTreeData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   designStdTreeData.pageSearchMode = true;
 }
 
+/**
+ * 페이지 첨부파일 테이블에서 선택된 파일을 삭제
+ */
 async function fileDelete() {
   let data = vms.getViewModelUsingElement(document.getElementById('attachFileData'));
   let item = selectedAwTreeNode.obj;
@@ -3955,6 +4386,7 @@ async function fileDelete() {
     let deleteFile = data.dataProviders.dgnStandardAttachFileTableData.selectedObjects;
     await lgepSummerNoteUtils.selectFileRelationDelete(item, deleteFile);
     eventBus.publish('dgnStandardAttachFileTable.plTable.reload');
+    eventBus.publish('dgnStandardAllAttachFileTable.plTable.reload');
   }
   // else if(data.selectedTab.tabKey == "book"){
   //     let deleteFile = data.dataProviders.manualAllAttachFileTableData.selectedObjects
@@ -3963,18 +4395,27 @@ async function fileDelete() {
   // }
 }
 
+/**
+ * 최근 검색기록으로 검색
+ */
 function listPageSearching(eventData, ctx) {
   const bomlineTreeData = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
   bomlineTreeData.searchingName.dbValue = eventData.selectedObjects[0].dbValue;
   awtreeSearching(bomlineTreeData, ctx);
 }
 
+/**
+ * 선택된 지침서를 보내준다.
+ */
 function getSelectBook() {
   return selectedValue;
 }
 
 let searchDataLength = 0;
 
+/**
+ * 현재 보고있는 검색어를 강조 해준다.
+ */
 function pageInSearching() {
   let searchData = document.getElementsByClassName('searchFocusClass');
   for (let i of searchData) {
@@ -3990,6 +4431,9 @@ function pageInSearching() {
 }
 
 let standardTreeNode;
+/**
+ * 페이지 순서를 변경하기 위해 실행
+ */
 function changePositionSet() {
   if (selectedAwTreeNode) {
     standardTreeNode = selectedAwTreeNode.obj;
@@ -3997,6 +4441,9 @@ function changePositionSet() {
   }
 }
 
+/**
+ * 페이지 순서 변경
+ */
 async function pagePositionChange() {
   if (standardTreeNode) {
     let bomLineTemp = [];
@@ -4060,6 +4507,9 @@ async function pagePositionChange() {
   }
 }
 
+/**
+ * 구조 트리의 폴더의 이름을 변경 전 선택된 아이템이 폴더인지 확인
+ */
 function folderNameEditCheck() {
   const designStdData = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   let selNode = designStdData.dataProviders.designStandardTreeTableData.selectedObjects[0];
@@ -4085,12 +4535,12 @@ export default exports = {
   loadPostList,
   setPostList,
   getUserList,
-  getColumnChartData,
+  // getColumnChartData,
   loadList,
   backArrow,
   forwardArrow,
-  bookmark,
-  backArrowBookmark,
+  // bookmark,
+  // backArrowBookmark,
   createDgnBook,
   selFolderCheck,
   bomlineAdd,
@@ -4100,7 +4550,6 @@ export default exports = {
   pageContentView,
   treeViewChangeAc,
   bomlineTreeSet2,
-  revisePage,
   deleteCmdAction,
   bomlineEdit,
   editPageSet,
@@ -4118,8 +4567,7 @@ export default exports = {
   contentTypeAdd,
   contentDetailTypeAdd,
   summerNoteImageWidthMax,
-  chapterSvgAddAc,
-  datasetLinkAction,
+  // datasetLinkAction,
   backPage,
   frontPage,
   treeChild,
@@ -4160,6 +4608,8 @@ export default exports = {
   changePositionSet,
   pagePositionChange,
   folderNameEditCheck,
+  guideBookOpen,
+  dgnStandardBookBomView,
 };
 
 app.factory('L2_DesignStandardService', () => exports);

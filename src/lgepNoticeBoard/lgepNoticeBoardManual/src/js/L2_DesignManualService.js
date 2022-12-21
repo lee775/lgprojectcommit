@@ -2396,7 +2396,7 @@ async function loadEmployeeTreeTableData(result, nodeBeingExpanded, sortCriteria
         let folderData = {
           folders: [
             {
-              name: '메뉴얼',
+              name: '매뉴얼',
             },
           ],
           container: response[0],

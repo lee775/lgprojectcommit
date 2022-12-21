@@ -1372,7 +1372,16 @@ export async function addRecentSearch(data, ctx) {
     };
 
     await SoaService.post('Core-2007-01-DataManagement', 'setProperties', setPropsItem);
-    await common.userLogsInsert('Load Page', data.eventData.selectedUids[0].uid, 'S', 'Success');
+    let eventObj = data.eventData.selectedUids[0];
+    await common.userLogsInsert(
+      'Load Page',
+      eventObj.uid,
+      'S',
+      'Success',
+      eventObj.props.l2_clsf_no.dbValues[0],
+      eventObj.props.l2_item.dbValues[0],
+      eventObj.props.l2_issue_classes.dbValues[0],
+    );
   } catch (err) {
     //console.log(err);
     notySvc.showError('최근 검색 페이지 등록 실패');

@@ -25,8 +25,11 @@
                         </aw-flex-column>
                     </aw-flex-row>
                     <aw-flex-row>
+                        <aw-label prop="data.l2_meeting_detailLbl" class="detailLbl"></aw-label>
+                    </aw-flex-row>
+                    <aw-flex-row>
                         <aw-flex-column>
-                            <aw-textarea prop="data.l2_meeting_details"></aw-textarea>
+                            <textarea id="createMinutesSummernote"></textarea>
                         </aw-flex-column>
                     </aw-flex-row>
                     <aw-flex-row>
@@ -39,7 +42,7 @@
                     </aw-flex-row>
                     <aw-flex-row class="fileLabel">
                         <label for="createFileUpload">
-                            <div class="btn-upload">파일 업로드</div>
+                            <div class="btn-upload">{{i18n.fileUpload}}</div>
                         </label>
                         <input type="file" id="createFileUpload" multiple='multiple'
                             accept=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"></input>

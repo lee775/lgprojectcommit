@@ -58,7 +58,7 @@ const onMount = async (ctx, data) => {
     contextMenu: null,
   });
 
-  setTuiGridStyle();
+  setTuiGridStyle(ctx);
   // apCalculation();
   events(ctx, data);
   // tableResize();

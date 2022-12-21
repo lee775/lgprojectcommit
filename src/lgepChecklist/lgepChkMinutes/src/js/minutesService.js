@@ -4,7 +4,7 @@ import SoaService from 'soa/kernel/soaService';
 import 'summernote/dist/summernote-lite';
 import 'summernote/dist/summernote-lite.css';
 import com from 'js/utils/lgepObjectUtils';
-import lgepMessagingUtils from 'js/utils/lgepMessagingUtils';
+import policy from 'js/soa/kernel/propertyPolicyService';
 import msg from 'js/utils/lgepMessagingUtils';
 import common from 'js/utils/lgepCommonUtils';
 import vms from 'js/viewModelObjectService';
@@ -12,11 +12,12 @@ import vmSer from 'js/viewModelService';
 import eventBus from 'js/eventBus';
 import popupService from 'js/popupService';
 import browserUtils from 'js/browserUtils';
-import * as fs from 'fs';
 import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import notySvc from 'js/NotyModule';
 import locale from 'js/utils/lgepLocalizationUtils';
+import query from 'js/utils/lgepQueryUtils';
 import _ from 'lodash';
+import checklist from 'js/utils/checklistUtils';
 import { failureLoad2 } from 'js/showAllMinutesService';
 import { makeVmProperty } from 'js/utils/fmeaTableMakeUtils';
 import AwPromiseService from 'js/awPromiseService';
@@ -44,6 +45,12 @@ const pleaseSelectMinutesForModify = locale.getLocalizedText('lgepChkMinutesMess
 const noFailure = locale.getLocalizedText('lgepChkMinutesMessages', 'noFailure');
 const failureList = locale.getLocalizedText('lgepChkMinutesMessages', 'failureList');
 const createdItemMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'createdItem');
+const notFailureMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'notFailureMsg');
+const proceed = locale.getLocalizedText('lgepChkMinutesMessages', 'proceed');
+const deselectFailureMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'deselectFailureMsg');
+const enterTitleMsg = locale.getLocalizedText('lgepChkMinutesMessages', 'enterTitleMsg');
+const pleaseSelectActionItemForModify = locale.getLocalizedText('lgepChkMinutesMessages', 'pleaseSelectActionItemForModify');
+const selectMinutesToFailure = locale.getLocalizedText('lgepChkMinutesMessages', 'selectMinutesToFailure');
 
 export function changePanelStatus(ctx) {
   if (!ctx.panelOn) {
@@ -58,27 +65,17 @@ export function changePanelStatus(ctx) {
 }
 
 export async function openMinutes() {
-  const selectRow = appCtxService.ctx.checklist.selectedRow;
   let ctx = appCtxService.ctx;
   if (!ctx.panelOn) {
     ctx.panelOn = true;
   }
 
-  if (!selectRow) {
-    // 전체 회의록 조회
-    ctx.show_minutes_mode = 0;
-  } else if (selectRow.type == 'L2_StructureRevision') {
-    // 전체 회의록 조회
-    ctx.show_minutes_mode = 0;
-  } else {
-    // 선택된 체크리스트의 회의록 조회
-    ctx.show_minutes_mode = 1;
-  }
+  ctx.show_minutes_mode = 1;
 
   const popupData = {
     id: 'checklist_minutes',
     includeView: 'minutesShowMode',
-    closeWhenCommandHidden: true,
+    closeWhenCommandHidden: false,
     keepOthersOpen: true,
     commandId: 'checklist_minutes',
     config: {
@@ -89,35 +86,6 @@ export async function openMinutes() {
     },
   };
   eventBus.publish('awsidenav.openClose', popupData);
-
-  // let selectedRow = appCtxService.ctx.checklist.selectedRow;
-  // let selectType = appCtxService.ctx.checklist.selectedRow.type;
-  // if (selectType == "L2_FailureRevision") {
-  //   if (selectType != "L2_FailureRevision") {
-  //     msg.show(2, afterSelectingTheFailure, [close], [
-  //       function () { }
-  //     ]);
-  //   } else {
-  //     const data = {
-  //       id: "checklist_minutes",
-  //       includeView: "minutesMain",
-  //       closeWhenCommandHidden: true,
-  //       keepOthersOpen: true,
-  //       commandId: "checklist_minutes",
-  //       config: {
-  //         width: "WIDE",
-  //       },
-  //       outputData: {
-  //         popupId: "mainMinutes"
-  //       }
-  //     };
-  //     eventBus.publish("awsidenav.openClose", data);
-  //   }
-  // } else {
-  //   msg.show(2, afterSelectingTheFailure, [close], [
-  //     function () { }
-  //   ]);
-  // }
 }
 
 export async function panelReload() {
@@ -150,68 +118,44 @@ export async function panelReload() {
   }
 }
 
-export function backMinutes(ctx) {
-  let test = vmSer.getViewModelUsingElement(document.getElementById('mainModeNav'));
-
-  console.log(test);
-
-  if (test.viewName == 'all') {
-    appCtxService.registerCtx('show_minutes_mode', 0);
+export function cancelActionItemEdit(ctx, data) {
+  if (data.actionItemEditMode) {
+    data.actionItemEditMode = false;
   } else {
-    appCtxService.registerCtx('show_minutes_mode', 1);
+    data.actionItemEditMode = true;
   }
 
-  // const createData = {
-  //   id: "checklist_createMinutes",
-  //   includeView: "createMinutes",
-  //   closeWhenCommandHidden: true,
-  //   keepOthersOpen: true,
-  //   commandId: "checklist_createMinutes",
-  //   config: {
-  //     width: "WIDE",
-  //   },
-  // };
-  // eventBus.publish("awsidenav.openClose", createData);
+  data.l2_workerValues.dbValue = [];
 
-  // const data = {
-  //   id: "checklist_minutes",
-  //   includeView: "minutesMain",
-  //   closeWhenCommandHidden: true,
-  //   keepOthersOpen: true,
-  //   commandId: "checklist_minutes",
-  //   config: {
-  //     width: "WIDE",
-  //   },
-  // };
-  // eventBus.publish("awsidenav.openClose", data);
+  let commentDetail = ctx.selectActionItemRev.props.l2_comment.uiValue;
+  $('#commentDetailsSummernote').summernote('reset');
+  $('#commentDetailsSummernote').summernote('code', commentDetail);
+  $('#commentDetailsSummernote').summernote('disable');
+
+  let followUpDetail = ctx.selectActionItemRev.props.l2_follow_up.uiValue;
+  $('#followUpDetailsSummernote').summernote('reset');
+  $('#followUpDetailsSummernote').summernote('code', followUpDetail);
+  $('#followUpDetailsSummernote').summernote('disable');
+}
+
+export function backMinutes(ctx) {
+  appCtxService.registerCtx('show_minutes_mode', 1);
 }
 
 export function openCreateMinutes() {
-  appCtxService.registerCtx('show_minutes_mode', 2);
-
-  // const mainData = {
-  //   id: "checklist_minutes",
-  //   includeView: "minutesMain",
-  //   closeWhenCommandHidden: true,
-  //   keepOthersOpen: true,
-  //   commandId: "checklist_minutes",
-  //   config: {
-  //     width: "WIDE",
-  //   }
-  // };
-  // eventBus.publish("awsidenav.openClose", mainData);
-
-  // const data = {
-  //   id: "checklist_createMinutes",
-  //   includeView: "createMinutes",
-  //   closeWhenCommandHidden: true,
-  //   keepOthersOpen: true,
-  //   commandId: "checklist_createMinutes",
-  //   config: {
-  //     width: "WIDE",
-  //   },
-  // };
-  // eventBus.publish("awsidenav.openClose", data);
+  if (!appCtxService.ctx.checklist.selectedRow) {
+    msg.show(
+      1,
+      notFailureMsg,
+      [proceed, cancel],
+      async function () {
+        appCtxService.registerCtx('show_minutes_mode', 2);
+      },
+      function () {},
+    );
+  } else {
+    appCtxService.registerCtx('show_minutes_mode', 2);
+  }
 }
 
 export function openCreateMinutesInShowAllMinutes() {
@@ -223,189 +167,452 @@ export function openCreateActionItem() {
 }
 
 export async function loadMinutes(data) {
-  let test = vmSer.getViewModelUsingElement(document.getElementById('mainModeNav'));
-  test.viewName = 'selected';
-
-  let topObjRev = appCtxService.ctx.checklist.target;
-  console.log('topObjRev', topObjRev);
-
-  try {
-    await com.getProperties(topObjRev, ['L2_MinutesRelation']);
-  } catch (err) {
-    //console.log(err);
-    notySvc.showError('아이템 속성 불러오기 실패');
-  }
-
-  ctx.tabKey;
-  let selectOrigin = appCtxService.ctx.checklist.selectedRow.getOriginalObject();
-  let selectUID = [selectOrigin.uid];
-  let selectLoadObj = await com.loadObjects(selectUID);
-  //console.log("BeforeLoadOBJ", { selectLoadObj });
-  let selectLoadObjRev = selectLoadObj.modelObjects[selectLoadObj.plain[0]];
-
-  try {
-    await com.getProperties(selectLoadObjRev, ['L2_MinutesRelation']);
-  } catch (err) {
-    //console.log(err);
-    notySvc.showError('아이템 속성 불러오기 실패');
-  }
-  //console.log("AfterLoadOBJ", { selectLoadObjRev });
-
-  let uidLength = selectLoadObjRev.props.L2_MinutesRelation.dbValues.length;
   let minutesRelationArr = [];
-  let minutesRevRelationArr = [];
-  let arr = [];
-  let arr2 = [];
-  for (let i = 0; i < topObjRev.props.L2_MinutesRelation.dbValues.length; i++) {
-    for (let j = 0; j < uidLength; j++) {
-      if (topObjRev.props.L2_MinutesRelation.dbValues[i] == selectLoadObjRev.props.L2_MinutesRelation.dbValues[j]) {
-        arr.push(com.getObject(selectLoadObjRev.props.L2_MinutesRelation.dbValues[j]));
+  if (!appCtxService.ctx.checklist.selectedRow) {
+    appCtxService.registerCtx('checked_all_revision', false);
+    let test = vmSer.getViewModelUsingElement(document.getElementById('mainModeNav'));
+    test.viewName = 'all';
+
+    let selectOrigin = appCtxService.ctx.checklist.target;
+    data.allRevisionsMinutes.dbValue = appCtxService.ctx.checked_all_revision;
+
+    try {
+      await com.getProperties(selectOrigin, ['L2_MinutesRelation']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    let arr = [];
+    let arr2 = [];
+
+    // 모든 리비전의 회의록을 아이템으로 변환하여 담아줌.
+    let a = 0;
+    for (let rev of com.getObject(selectOrigin.props.L2_MinutesRelation.dbValues)) {
+      let item = com.getObject(rev.props.items_tag.dbValues[0]);
+
+      try {
+        await com.getProperties(item, [
+          'IMAN_reference',
+          'creation_date',
+          'l2_meeting_date',
+          'l2_meeting_place',
+          'l2_meeting_participants',
+          'l2_meeting_details',
+          'l2_meeting_agenda',
+          'l2_meeting_related_schedule',
+          'l2_related_failure',
+          'L2_ActionItemRelation',
+        ]);
+      } catch (err) {
+        //console.log(err);
+        notySvc.showError('아이템 속성 불러오기 실패');
+      }
+
+      arr.push(rev);
+      // const property = makeVmProperty("checklist_rev_id", itemsRevList[i][0]);
+      arr[a].props.checklist_rev_id = appCtxService.ctx.checklist.target.props.item_revision_id.uiValues[0];
+      arr[a].props.l2_meeting_date = item.props.l2_meeting_date.uiValues[0];
+      arr[a].props.l2_meeting_place = item.props.l2_meeting_place.dbValues[0];
+      arr[a].props.l2_meeting_participants = item.props.l2_meeting_participants.dbValues[0];
+      arr[a].props.l2_meeting_details = item.props.l2_meeting_details.dbValues[0];
+      arr[a].props.l2_meeting_agenda = item.props.l2_meeting_agenda.dbValues[0];
+      arr[a].props.l2_meeting_related_schedule = item.props.l2_meeting_related_schedule.dbValues[0];
+      arr[a].props.l2_related_failure = item.props.l2_related_failure.dbValues;
+      arr[a].props.item_IMAN_reference = item.props.IMAN_reference;
+      arr[a].props.L2_ActionItemRelation = item.props.L2_ActionItemRelation;
+
+      a++;
+    }
+
+    try {
+      await com.getProperties(arr, ['creation_date']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      arr2.push(vms.constructViewModelObjectFromModelObject(arr[i]));
+
+      arr2[i].props['checklist_rev_id'] = makeVmProperty('checklist_rev_id', arr[i].props.checklist_rev_id);
+      arr2[i].props['l2_meeting_date'] = makeVmProperty('l2_meeting_date', arr[i].props.l2_meeting_date);
+      arr2[i].props['l2_meeting_place'] = makeVmProperty('l2_meeting_place', arr[i].props.l2_meeting_place);
+      arr2[i].props['l2_meeting_participants'] = makeVmProperty('l2_meeting_participants', arr[i].props.l2_meeting_participants);
+      arr2[i].props['l2_meeting_details'] = makeVmProperty('l2_meeting_details', arr[i].props.l2_meeting_details);
+      arr2[i].props['l2_meeting_agenda'] = makeVmProperty('l2_meeting_agenda', arr[i].props.l2_meeting_agenda);
+      arr2[i].props['l2_meeting_related_schedule'] = makeVmProperty('l2_meeting_related_schedule', arr[i].props.l2_meeting_related_schedule);
+      arr2[i].props['l2_related_failure'] = makeVmProperty('l2_related_failure', arr[i].props.l2_related_failure);
+      arr2[i].props['item_IMAN_reference'] = makeVmProperty('item_IMAN_reference', arr[i].props.item_IMAN_reference);
+      arr2[i].props['L2_ActionItemRelation'] = makeVmProperty('L2_ActionItemRelation', arr[i].props.L2_ActionItemRelation);
+
+      minutesRelationArr.push(arr2[i]);
+    }
+
+    minutesRelationArr.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
+
+    data.dataProviders.minutesListProvider.viewModelCollection.setViewModelObjects(minutesRelationArr);
+
+    let firstItem = data.dataProviders.minutesListProvider.viewModelCollection.loadedVMObjects[0];
+    data.dataProviders.minutesListProvider.selectionModel.setSelection(firstItem);
+  } else {
+    let test = vmSer.getViewModelUsingElement(document.getElementById('mainModeNav'));
+    test.viewName = 'selected';
+
+    let topObjRev = appCtxService.ctx.checklist.target;
+    console.log('topObjRev', topObjRev);
+
+    try {
+      await com.getProperties(topObjRev, ['L2_MinutesRelation']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    ctx.tabKey;
+    let selectOrigin = appCtxService.ctx.checklist.selectedRow.getOriginalObject();
+    let selectUID = [selectOrigin.uid];
+    let selectLoadObj = await com.loadObjects(selectUID);
+    let selectLoadObjRev = selectLoadObj.modelObjects[selectLoadObj.plain[0]];
+
+    try {
+      await com.getProperties(selectLoadObjRev, ['L2_MinutesRelation']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    let uidLength = selectLoadObjRev.props.L2_MinutesRelation.dbValues.length;
+    let minutesRevRelationArr = [];
+    let arr = [];
+    let arr2 = [];
+    for (let i = 0; i < topObjRev.props.L2_MinutesRelation.dbValues.length; i++) {
+      for (let j = 0; j < uidLength; j++) {
+        if (topObjRev.props.L2_MinutesRelation.dbValues[i] == selectLoadObjRev.props.L2_MinutesRelation.dbValues[j]) {
+          arr.push(com.getObject(selectLoadObjRev.props.L2_MinutesRelation.dbValues[j]));
+        }
       }
     }
+    await com.getProperties(arr, ['creation_date', 'items_tag']);
+
+    let i = 0;
+    for (let rev of arr) {
+      let item = com.getObject(rev.props.items_tag.dbValues[0]);
+      await com.getProperties(item, [
+        'l2_meeting_date',
+        'item_revision',
+        'creation_date',
+        'l2_meeting_place',
+        'l2_meeting_participants',
+        'l2_meeting_details',
+        'l2_meeting_agenda',
+        'l2_meeting_related_schedule',
+        'IMAN_reference',
+        'L2_ActionItemRelation',
+      ]);
+      arr2.push(vms.constructViewModelObjectFromModelObject(rev));
+      arr2[i].props['l2_meeting_date'] = makeVmProperty('l2_meeting_date', item.props.l2_meeting_date.uiValues[0]);
+      arr2[i].props['checklist_rev_id'] = makeVmProperty('checklist_rev_id', topObjRev.props.item_revision_id.uiValues[0]);
+      arr2[i].props['L2_ActionItemRelation'] = makeVmProperty('L2_ActionItemRelation', item.props.L2_ActionItemRelation);
+      minutesRelationArr.push(arr2[i]);
+      i++;
+    }
+
+    minutesRelationArr.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
+
+    data.dataProviders.minutesListProvider.viewModelCollection.setViewModelObjects(minutesRelationArr);
+
+    let firstItem = data.dataProviders.minutesListProvider.viewModelCollection.loadedVMObjects[0];
+    data.dataProviders.minutesListProvider.selectionModel.setSelection(firstItem);
+
+    await common.userLogsInsert('Load Dashboard', '', 'S', 'Success');
   }
-  // arr.push(com.getObject(selectLoadObjRev.props.L2_MinutesRelation.dbValues));
-  // let target = appCtxService.ctx.checklist.target;
-  await com.getProperties(arr, ['creation_date', 'items_tag']);
-
-  let i = 0;
-  for (let rev of arr) {
-    let item = com.getObject(rev.props.items_tag.dbValues[0]);
-    await com.getProperties(item, [
-      'l2_meeting_date',
-      'item_revision',
-      'creation_date',
-      'l2_meeting_date',
-      'l2_meeting_place',
-      'l2_meeting_participants',
-      'l2_meeting_details',
-      'l2_meeting_agenda',
-      'l2_meeting_related_schedule',
-      'IMAN_reference',
-      'L2_ActionItemRelation',
-    ]);
-    arr2.push(vms.constructViewModelObjectFromModelObject(rev));
-    arr2[i].props['meeting_date'] = makeVmProperty('meeting_date', item.props.l2_meeting_date.uiValues[0]);
-    arr2[i].props['item_revision_id'] = makeVmProperty('item_revision_id', topObjRev.props.item_revision_id.uiValues[0]);
-    arr2[i].props['L2_ActionItemRelation'] = makeVmProperty('L2_ActionItemRelation', item.props.L2_ActionItemRelation);
-    minutesRelationArr.push(arr2[i]);
-    i++;
-  }
-
-  minutesRelationArr.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
-
-  data.dataProviders.minutesListProvider.viewModelCollection.setViewModelObjects(minutesRelationArr);
-
-  let firstItem = data.dataProviders.minutesListProvider.viewModelCollection.loadedVMObjects[0];
-  data.dataProviders.minutesListProvider.selectionModel.setSelection(firstItem);
-  // let revUID = data.dataProviders.minutesListProvider.selectedObjects[0].cellHeader2;
-  // let setParentsApi = {
-  //   infos: [{
-  //     itemId: revUID
-  //   }]
-  // }
-  // let revItemParant = await SoaService.post("Core-2007-01-DataManagement", "getItemFromId", setParentsApi);
-
-  // let selectMinutes = revItemParant.output[0].item;
-  // await com.getProperties(selectMinutes, ["l2_related_failure", "creation_date", "l2_meeting_date", "l2_meeting_place", "l2_meeting_participants",
-  //   "l2_meeting_details", "l2_meeting_agenda", "l2_meeting_related_schedule"]);
-  // console.log(selectMinutes);
-
-  // let failureArr = data.dataProviders.minutesListProvider.selectedObjects[0].props.l2_related_failure.dbValues;
-  // cconsole.log(failureArr);
-
-  await common.userLogsInsert('Load Dashboard', '', 'S', 'Success');
   return {
     minutes: minutesRelationArr,
     minutesLength: minutesRelationArr.length,
   };
 }
 
+export async function showAllRevisionsMinutes(ctx, data) {
+  let selectOrigin = appCtxService.ctx.checklist.target;
+  if (data.allRevisionsMinutes.dbValue) {
+    console.log('모든 리비전 보여줘');
+    appCtxService.registerCtx('checked_all_revision', true);
+
+    let allUidList = [];
+    let itemsRevList = [];
+    let items = [];
+
+    // 최상위 구조의 리비전 리스트를 담아줌.
+    items.push(com.getObject(selectOrigin.props.revision_list.dbValues));
+
+    console.log('items', items);
+    // 최상위 구조의 모든 리비전의 회의록과 리비전 ID를 불러옴.
+    try {
+      await com.getProperties(items[0], ['L2_MinutesRelation', 'item_revision_id']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    // 최상위 구조의 모든 리비전의 회의록과 리비전 ID를 담아줌.
+    for (let item of items[0]) {
+      allUidList.push(item.props.L2_MinutesRelation.dbValues);
+      itemsRevList.push(item.props.item_revision_id.dbValues);
+    }
+
+    let minutesRelationArr = [];
+    let arr = [];
+    let arr2 = [];
+
+    // 모든 리비전의 회의록을 아이템으로 변환하여 한 배열에 체크리스트의 리비전 아이디와 함께 담아줌.
+    let a = 0;
+    for (let i = 0; i < allUidList.length; i++) {
+      if (allUidList[i].length > 0) {
+        for (let rev of com.getObject(allUidList[i])) {
+          let item = com.getObject(rev.props.items_tag.dbValues[0]);
+
+          try {
+            await com.getProperties(item, [
+              'IMAN_reference',
+              'creation_date',
+              'l2_meeting_date',
+              'l2_meeting_place',
+              'l2_meeting_participants',
+              'l2_meeting_details',
+              'l2_meeting_agenda',
+              'l2_meeting_related_schedule',
+              'l2_related_failure',
+            ]);
+          } catch (err) {
+            //console.log(err);
+            notySvc.showError('아이템 속성 불러오기 실패');
+          }
+
+          arr.push(rev);
+          // const property = makeVmProperty("checklist_rev_id", itemsRevList[i][0]);
+          arr[a].props.checklist_rev_id = itemsRevList[i][0];
+          arr[a].props.l2_meeting_date = item.props.l2_meeting_date.uiValues[0];
+          arr[a].props.l2_meeting_place = item.props.l2_meeting_place.dbValues[0];
+          arr[a].props.l2_meeting_participants = item.props.l2_meeting_participants.dbValues[0];
+          arr[a].props.l2_meeting_details = item.props.l2_meeting_details.dbValues[0];
+          arr[a].props.l2_meeting_agenda = item.props.l2_meeting_agenda.dbValues[0];
+          arr[a].props.l2_meeting_related_schedule = item.props.l2_meeting_related_schedule.dbValues[0];
+          arr[a].props.l2_related_failure = item.props.l2_related_failure.dbValues;
+          arr[a].props.item_IMAN_reference = item.props.IMAN_reference;
+
+          a++;
+        }
+      }
+    }
+
+    console.log('회의록 객체', arr);
+
+    try {
+      await com.getProperties(arr, ['creation_date']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      // arr[0][i].props.checklist_rev_id.dbValue = "A";
+      arr2.push(vms.constructViewModelObjectFromModelObject(arr[i]));
+
+      arr2[i].props['checklist_rev_id'] = makeVmProperty('checklist_rev_id', arr[i].props.checklist_rev_id);
+      arr2[i].props['l2_meeting_date'] = makeVmProperty('l2_meeting_date', arr[i].props.l2_meeting_date);
+      arr2[i].props['l2_meeting_place'] = makeVmProperty('l2_meeting_place', arr[i].props.l2_meeting_place);
+      arr2[i].props['l2_meeting_participants'] = makeVmProperty('l2_meeting_participants', arr[i].props.l2_meeting_participants);
+      arr2[i].props['l2_meeting_details'] = makeVmProperty('l2_meeting_details', arr[i].props.l2_meeting_details);
+      arr2[i].props['l2_meeting_agenda'] = makeVmProperty('l2_meeting_agenda', arr[i].props.l2_meeting_agenda);
+      arr2[i].props['l2_meeting_related_schedule'] = makeVmProperty('l2_meeting_related_schedule', arr[i].props.l2_meeting_related_schedule);
+      arr2[i].props['l2_related_failure'] = makeVmProperty('l2_related_failure', arr[i].props.l2_related_failure);
+      arr2[i].props['item_IMAN_reference'] = makeVmProperty('item_IMAN_reference', arr[i].props.item_IMAN_reference);
+
+      minutesRelationArr.push(arr2[i]);
+    }
+    minutesRelationArr.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
+
+    data.dataProviders.minutesListProvider.viewModelCollection.setViewModelObjects(minutesRelationArr);
+  } else {
+    console.log('현재것만 보여줘');
+    appCtxService.registerCtx('checked_all_revision', false);
+
+    console.log(selectOrigin);
+
+    let minutesRelationArr = [];
+    let arr = [];
+    let arr2 = [];
+
+    // 모든 리비전의 회의록을 아이템으로 변환하여 담아줌.
+    let a = 0;
+    for (let rev of com.getObject(selectOrigin.props.L2_MinutesRelation.dbValues)) {
+      let item = com.getObject(rev.props.items_tag.dbValues[0]);
+
+      try {
+        await com.getProperties(item, [
+          'IMAN_reference',
+          'creation_date',
+          'l2_meeting_date',
+          'l2_meeting_place',
+          'l2_meeting_participants',
+          'l2_meeting_details',
+          'l2_meeting_agenda',
+          'l2_meeting_related_schedule',
+          'l2_related_failure',
+        ]);
+      } catch (err) {
+        //console.log(err);
+        notySvc.showError('아이템 속성 불러오기 실패');
+      }
+
+      arr.push(rev);
+      // const property = makeVmProperty("checklist_rev_id", itemsRevList[i][0]);
+      arr[a].props.checklist_rev_id = appCtxService.ctx.checklist.target.props.item_revision_id.uiValues[0];
+      arr[a].props.l2_meeting_date = item.props.l2_meeting_date.uiValues[0];
+      arr[a].props.l2_meeting_place = item.props.l2_meeting_place.dbValues[0];
+      arr[a].props.l2_meeting_participants = item.props.l2_meeting_participants.dbValues[0];
+      arr[a].props.l2_meeting_details = item.props.l2_meeting_details.dbValues[0];
+      arr[a].props.l2_meeting_agenda = item.props.l2_meeting_agenda.dbValues[0];
+      arr[a].props.l2_meeting_related_schedule = item.props.l2_meeting_related_schedule.dbValues[0];
+      arr[a].props.l2_related_failure = item.props.l2_related_failure.dbValues;
+      arr[a].props.item_IMAN_reference = item.props.IMAN_reference;
+
+      a++;
+    }
+
+    try {
+      await com.getProperties(arr, ['creation_date']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      arr2.push(vms.constructViewModelObjectFromModelObject(arr[i]));
+
+      arr2[i].props['checklist_rev_id'] = makeVmProperty('checklist_rev_id', arr[i].props.checklist_rev_id);
+      arr2[i].props['l2_meeting_date'] = makeVmProperty('l2_meeting_date', arr[i].props.l2_meeting_date);
+      arr2[i].props['l2_meeting_place'] = makeVmProperty('l2_meeting_place', arr[i].props.l2_meeting_place);
+      arr2[i].props['l2_meeting_participants'] = makeVmProperty('l2_meeting_participants', arr[i].props.l2_meeting_participants);
+      arr2[i].props['l2_meeting_details'] = makeVmProperty('l2_meeting_details', arr[i].props.l2_meeting_details);
+      arr2[i].props['l2_meeting_agenda'] = makeVmProperty('l2_meeting_agenda', arr[i].props.l2_meeting_agenda);
+      arr2[i].props['l2_meeting_related_schedule'] = makeVmProperty('l2_meeting_related_schedule', arr[i].props.l2_meeting_related_schedule);
+      arr2[i].props['l2_related_failure'] = makeVmProperty('l2_related_failure', arr[i].props.l2_related_failure);
+      arr2[i].props['item_IMAN_reference'] = makeVmProperty('item_IMAN_reference', arr[i].props.item_IMAN_reference);
+
+      minutesRelationArr.push(arr2[i]);
+    }
+
+    // console.log("minutesRelationArr", minutesRelationArr);
+    minutesRelationArr.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
+
+    data.dataProviders.minutesListProvider.viewModelCollection.setViewModelObjects(minutesRelationArr);
+
+    // await common.userLogsInsert("Load Dashboard", "", "S", "Success");
+  }
+}
+
 export async function loadActionItem(data) {
-  // await common.delay(200);
+  await common.delay(200);
   ctx.selectActionItemRev = null;
 
-  // 회의록 불러오기
-  let parentUID = [data.dataProviders.minutesListProvider.selectedObjects[0].props.items_tag.dbValue];
-  let parentsObj = await com.loadObjects(parentUID);
-  parentsObj = parentsObj.modelObjects[parentsObj.plain[0]];
-  await com.getProperties(parentsObj, ['L2_ActionItemRelation']);
+  if (data.dataProviders.minutesListProvider.selectedObjects[0]) {
+    // 회의록 불러오기
+    let parentUID = [data.dataProviders.minutesListProvider.selectedObjects[0].props.items_tag.dbValue];
+    let parentsObj = await com.loadObjects(parentUID);
+    parentsObj = parentsObj.modelObjects[parentsObj.plain[0]];
+    await com.getProperties(parentsObj, ['L2_ActionItemRelation']);
 
-  // 액션 아이템 불러오기
+    // 액션 아이템 불러오기
 
-  let haveActionItemRevUID = parentsObj.props.L2_ActionItemRelation.dbValues;
-  let haveActionItemRevObj = await com.getObject(haveActionItemRevUID);
-  let haveActionItemUID = [];
-  for (let i = 0; i < haveActionItemRevObj.length; i++) {
-    haveActionItemUID.push(haveActionItemRevObj[i].props.items_tag.dbValues);
+    let haveActionItemRevUID = parentsObj.props.L2_ActionItemRelation.dbValues;
+    let haveActionItemRevObj = await com.getObject(haveActionItemRevUID);
+    let haveActionItemUID = [];
+    for (let i = 0; i < haveActionItemRevObj.length; i++) {
+      haveActionItemUID.push(haveActionItemRevObj[i].props.items_tag.dbValues);
+    }
+    let haveActionItemObj = await com.getObject(haveActionItemUID);
+    let arr2 = [];
+    let actionItemArr = [];
+    await com.getProperties(haveActionItemObj, [
+      'creation_date',
+      'l2_number',
+      'l2_comment',
+      'l2_follow_up',
+      'l2_worker',
+      'l2_expected_date',
+      'l2_finish_date',
+      'l2_state',
+    ]);
+
+    for (let i = 0; i < haveActionItemRevObj.length; i++) {
+      arr2.push(vms.constructViewModelObjectFromModelObject(haveActionItemRevObj[i]));
+      arr2[i].props['creation_date'] = makeVmProperty('creation_date', haveActionItemObj[i].props.creation_date.dbValues[0]);
+      arr2[i].props['l2_number'] = makeVmProperty('l2_number', haveActionItemObj[i].props.l2_number.uiValues[0]);
+      arr2[i].props['l2_comment'] = makeVmProperty('l2_comment', haveActionItemObj[i].props.l2_comment.uiValues[0]);
+      arr2[i].props['l2_follow_up'] = makeVmProperty('l2_follow_up', haveActionItemObj[i].props.l2_follow_up.uiValues[0]);
+      arr2[i].props['l2_worker'] = makeVmProperty('l2_worker', haveActionItemObj[i].props.l2_worker.uiValues[0]);
+      arr2[i].props['l2_expected_date'] = makeVmProperty('l2_expected_date', haveActionItemObj[i].props.l2_expected_date.uiValues[0]);
+      arr2[i].props['l2_finish_date'] = makeVmProperty('l2_finish_date', haveActionItemObj[i].props.l2_finish_date.uiValues[0]);
+      arr2[i].props['l2_state'] = makeVmProperty('l2_state', haveActionItemObj[i].props.l2_state.uiValues[0]);
+      actionItemArr.push(arr2[i]);
+    }
+    let actionTable = vmSer.getViewModelUsingElement(document.getElementById('actionItemTable'));
+    actionItemArr.sort((a, b) => new Date(b.props.creation_date.dbValue) - new Date(a.props.creation_date.dbValue));
+    actionTable.dataProviders.actionItemTableProvider.viewModelCollection.setViewModelObjects(actionItemArr);
+    let actionTableView = document.getElementById('actionItemTable');
+    if (actionTableView.children[1].children[0].children[0].children.length != 0) {
+      let selectRow = actionTableView.children[1].children[0].children[0].children[0].children[1].children[2].children[1].children[0].children;
+      let rowLength = actionTableView.children[1].children[0].children[0].children[0].children[1].children[2].children[1].children[0].children.length;
+      let selectRowIcon = actionTableView.children[1].children[0].children[0].children[0].children[1].children[2].children[1].children[0].children;
+      for (let i = 0; i < rowLength; i++) {
+        selectRow[i].style.backgroundColor = 'rgb(255, 255, 255)';
+        selectRowIcon[i].style.backgroundColor = 'rgb(255, 255, 255)';
+      }
+    }
+
+    $('#commentDetailsSummernote').summernote({
+      height: 200,
+      width: '100%',
+      styleWithSpan: true,
+      toolbar: [
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['picture', 'link']],
+        ['codeview'],
+      ],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+    });
+    $('#commentDetailsSummernote').summernote('disable');
+    $('#commentDetailsSummernote').css('background-color', 'white');
+
+    $('#followUpDetailsSummernote').summernote({
+      height: 200,
+      width: '100%',
+      styleWithSpan: true,
+      toolbar: [
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['picture', 'link']],
+        ['codeview'],
+      ],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+    });
+    $('#followUpDetailsSummernote').summernote('disable');
+    $('#followUpDetailsSummernote').css('background-color', 'white');
+
+    return {
+      actionItem: actionItemArr,
+      actionItemLength: actionItemArr.length,
+    };
   }
-  let haveActionItemObj = await com.getObject(haveActionItemUID);
-  let arr2 = [];
-  let actionItemArr = [];
-  await com.getProperties(haveActionItemObj, ['l2_number', 'l2_comment', 'l2_follow_up', 'l2_worker', 'l2_expected_date', 'l2_finish_date', 'l2_state']);
-
-  for (let i = 0; i < haveActionItemRevObj.length; i++) {
-    arr2.push(vms.constructViewModelObjectFromModelObject(haveActionItemRevObj[i]));
-    arr2[i].props['l2_number'] = makeVmProperty('l2_number', haveActionItemObj[i].props.l2_number.uiValues[0]);
-    arr2[i].props['l2_comment'] = makeVmProperty('l2_comment', haveActionItemObj[i].props.l2_comment.uiValues[0]);
-    arr2[i].props['l2_follow_up'] = makeVmProperty('l2_follow_up', haveActionItemObj[i].props.l2_follow_up.uiValues[0]);
-    arr2[i].props['l2_worker'] = makeVmProperty('l2_worker', haveActionItemObj[i].props.l2_worker.uiValues[0]);
-    arr2[i].props['l2_expected_date'] = makeVmProperty('l2_expected_date', haveActionItemObj[i].props.l2_expected_date.uiValues[0]);
-    arr2[i].props['l2_finish_date'] = makeVmProperty('l2_finish_date', haveActionItemObj[i].props.l2_finish_date.uiValues[0]);
-    arr2[i].props['l2_state'] = makeVmProperty('l2_state', haveActionItemObj[i].props.l2_state.uiValues[0]);
-    actionItemArr.push(arr2[i]);
-  }
-  let actionTable = vmSer.getViewModelUsingElement(document.getElementById('actionItemTable'));
-  console.log(actionTable);
-  actionTable.dataProviders.actionItemTableProvider.viewModelCollection.setViewModelObjects(actionItemArr);
-  let actionTableView = document.getElementById('actionItemTable');
-  let selectRow = actionTableView.children[1].children[0].children[0].children[1].children[2].children[1].children[0].children;
-  let rowLength = actionTableView.children[1].children[0].children[0].children[1].children[2].children[1].children[0].children.length;
-  let selectRowIcon = actionTableView.children[1].children[0].children[0].children[1].children[1].children[1].children[0].children;
-  for (let i = 0; i < rowLength; i++) {
-    selectRow[i].style.backgroundColor = 'rgb(255, 255, 255)';
-    selectRowIcon[i].style.backgroundColor = 'rgb(255, 255, 255)';
-  }
-
-  $('#commentDetailsSummernote').summernote({
-    height: 200,
-    width: '100%',
-    styleWithSpan: true,
-    toolbar: [
-      ['fontsize', ['fontsize']],
-      ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-      ['color', ['forecolor', 'color']],
-      ['table', ['table']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['insert', ['picture', 'link']],
-      ['codeview'],
-    ],
-    fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-  });
-  $('#commentDetailsSummernote').summernote('disable');
-  $('#commentDetailsSummernote').css('background-color', 'white');
-
-  $('#followUpDetailsSummernote').summernote({
-    height: 200,
-    width: '100%',
-    styleWithSpan: true,
-    toolbar: [
-      ['fontsize', ['fontsize']],
-      ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-      ['color', ['forecolor', 'color']],
-      ['table', ['table']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['insert', ['picture', 'link']],
-      ['codeview'],
-    ],
-    fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-  });
-  $('#followUpDetailsSummernote').summernote('disable');
-  $('#followUpDetailsSummernote').css('background-color', 'white');
-
-  return {
-    actionItem: actionItemArr,
-    actionItemLength: actionItemArr.length,
-  };
 }
 
 export async function failureLoad(ctx, data) {
@@ -430,13 +637,13 @@ export async function failureLoad(ctx, data) {
     }
   });
 
-  let a = vmSer.getViewModelUsingElement(document.getElementById('minutesTable'));
-  if (!a) {
+  let minutesTable = vmSer.getViewModelUsingElement(document.getElementById('minutesTable'));
+  if (!minutesTable) {
     failureLoad2(ctx, data);
   } else {
-    if (a.dataProviders.minutesListProvider.selectedObjects.length == 1) {
+    if (minutesTable.dataProviders.minutesListProvider.selectedObjects.length == 1) {
       if (ctx.tabKey == 1) {
-        let revUID = a.dataProviders.minutesListProvider.selectedObjects[0].cellHeader2;
+        let revUID = minutesTable.dataProviders.minutesListProvider.selectedObjects[0].cellHeader2;
         let setParentsApi = {
           infos: [
             {
@@ -482,21 +689,50 @@ export async function failureLoad(ctx, data) {
             'release_status_list',
           ]);
           for (let i = 0; i < failureArr[0].length; i++) {
-            let vmo = vms.constructViewModelObjectFromModelObject(failureArr[0][i]);
-            let failureName = vmo.props.object_string.dbValue.replaceAll('\n', ' ');
-            vmo.cellHeader1 = failureName;
-            failureVMOArr.push(vmo);
+            if (failureArr[0][i]) {
+              let vmo = vms.constructViewModelObjectFromModelObject(failureArr[0][i]);
+              let failureName = vmo.props.object_string.dbValue.replaceAll('\n', ' ');
+              vmo.cellHeader1 = failureName;
+              failureVMOArr.push(vmo);
+            }
           }
-          a.dataProviders.failureList.viewModelCollection.setViewModelObjects(failureVMOArr);
+          let failureData = ctx.checklist.grid.store.data.rawData;
+          let failureDataArr = [];
+
+          for (let fail of failureData) {
+            failureDataArr.push(fail.getOriginalObject());
+          }
+          for (let i = 0; i < failureVMOArr.length; i++) {
+            for (let j = 0; j < failureDataArr.length; j++) {
+              if (failureVMOArr[i].uid == failureDataArr[j].uid) {
+                let effect = failureData[j].failureEffect;
+                let detail = failureData[j].failureDetail;
+                if (effect) {
+                  effect = effect.replace(/<[^>]*>?/g, ' ');
+                }
+                if (detail) {
+                  detail = detail.replace(/<[^>]*>?/g, ' ');
+                } else {
+                  detail = '-';
+                }
+                failureVMOArr[i].cellHeader2 = effect;
+                failureVMOArr[i].cellProperties.리비전 = {
+                  key: '메커니즘',
+                  value: detail,
+                };
+              }
+            }
+          }
+          minutesTable.dataProviders.failureList.viewModelCollection.setViewModelObjects(failureVMOArr);
         } else {
-          a.dataProviders.failureList.viewModelCollection.clear();
+          minutesTable.dataProviders.failureList.viewModelCollection.clear();
           // msg.show(1, noFailure, [close], [
           //   function () { }
           // ]);
         }
       }
     } else {
-      a.dataProviders.failureList.viewModelCollection.clear();
+      minutesTable.dataProviders.failureList.viewModelCollection.clear();
     }
   }
 }
@@ -528,11 +764,10 @@ function sortActionItem(response, startIndex, pageSize) {
 }
 
 export async function loadMinutesDetails(ctx, data) {
-  let a = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
   let tableMinutesRev = data.dataProviders.minutesListProvider.selectedObjects[0];
   ctx.selectedminutes = tableMinutesRev;
   try {
-    await com.getProperties(tableMinutesRev, ['IMAN_reference']);
+    await com.getProperties(tableMinutesRev, ['TC_Attaches']);
   } catch (err) {
     //console.log(err);
     notySvc.showError('아이템 속성 불러오기 실패');
@@ -552,7 +787,7 @@ export async function loadMinutesDetails(ctx, data) {
     let preRevItem = revItemParant.output[0].item;
 
     await com.getProperties(preRevItem, [
-      'IMAN_reference',
+      'TC_Attaches',
       'object_string',
       'object_name',
       'owning_user',
@@ -564,7 +799,10 @@ export async function loadMinutesDetails(ctx, data) {
       'l2_meeting_title',
       'l2_meeting_related_schedule',
       'l2_minutes_writer',
+      'l2_related_failure',
     ]);
+
+    await com.getProperties(tableMinutesRev, ['IMAN_specification', 'TC_Attaches']);
 
     let titleData = preRevItem.props.object_name.uiValues[0];
     let dateData = preRevItem.props.l2_meeting_date.dbValues[0];
@@ -573,8 +811,7 @@ export async function loadMinutesDetails(ctx, data) {
     let participants = preRevItem.props.l2_meeting_participants.uiValues[0];
     let agendaData = preRevItem.props.l2_meeting_agenda.uiValues[0];
     let scheduleData = preRevItem.props.l2_meeting_related_schedule.uiValues[0];
-    let detailsData = preRevItem.props.l2_meeting_details.uiValues[0];
-    let fileValue = tableMinutesRev.props.IMAN_reference;
+    let fileValue = tableMinutesRev.props.TC_Attaches;
 
     dateData = dateData.split('T');
     let dateData1 = dateData[0];
@@ -583,10 +820,9 @@ export async function loadMinutesDetails(ctx, data) {
     let dateDataT = dateDataTime[0] + ':' + dateDataTime[1];
     dateData = dateData1 + ' ' + dateDataT;
 
-    detailsData = detailsData.replaceAll('\n', '<br>');
-    detailsData = detailsData.replaceAll('<pre>', '');
-    detailsData = detailsData.replaceAll('</pre>', '');
-    detailsData = `<pre>${detailsData}</pre>`;
+    let datesetUID = tableMinutesRev.props.IMAN_specification.dbValue[0];
+    let text = await checklist.readPropertiesFromTextFile(datesetUID);
+    console.log(text);
 
     data.object_nameLbl.uiValue = titleData;
     data.l2_meeting_dateLbl.uiValue = dateData;
@@ -594,35 +830,38 @@ export async function loadMinutesDetails(ctx, data) {
     data.proceedWriterLink.uiValue = writerData;
     data.l2_meeting_participantsLbl.uiValue = participants;
     data.l2_meeting_agendaLbl.uiValue = agendaData;
-    data.proceedDetails.uiValue = detailsData;
     data.l2_meeting_related_scheduleLbl.uiValue = scheduleData;
 
     let datasetLinkArr = [];
 
-    for (let i = 0; i < fileValue.uiValues.length; i++) {
-      datasetLinkArr.push(fileValue.uiValues[i]);
-    }
+    if (fileValue.uiValues.length != 0) {
+      for (let i = 0; i < fileValue.uiValues.length; i++) {
+        datasetLinkArr.push(fileValue.uiValues[i]);
+      }
 
-    let referenceUID = data.dataProviders.minutesListProvider.selectedObjects[0].props.IMAN_reference.dbValues;
-    data.datasetLink.dbValue = [];
-    for (let i = 0; i < fileValue.uiValues.length; i++) {
-      data.datasetLink.dbValue.push({
-        displayName: datasetLinkArr[i],
-        isRequired: 'false',
-        uiValue: datasetLinkArr[i],
-        isNull: 'false',
-        uid: referenceUID[i],
-      });
+      let referenceUID = data.dataProviders.minutesListProvider.selectedObjects[0].props.TC_Attaches.dbValues;
+      data.datasetLink.dbValue = [];
+      for (let i = 0; i < fileValue.uiValues.length; i++) {
+        data.datasetLink.dbValue.push({
+          displayName: datasetLinkArr[i],
+          isRequired: 'false',
+          uiValue: datasetLinkArr[i],
+          isNull: 'false',
+          uid: referenceUID[i],
+        });
+      }
     }
 
     $('#minutesMainSummernote').summernote('reset');
-    $('#minutesMainSummernote').summernote('code', detailsData + '<br>');
+    $('#minutesMainSummernote').summernote('code', text.detail + '<br>');
   }
 }
 
 export async function initialize() {
+  await common.delay(200);
+
   $('#minutesMainSummernote').summernote({
-    height: 450,
+    height: 200,
     width: '100%',
     styleWithSpan: true,
     toolbar: [
@@ -638,6 +877,28 @@ export async function initialize() {
   });
   $('#minutesMainSummernote').summernote('disable');
   $('#minutesMainSummernote').css('background-color', 'white');
+}
+
+export async function createMinutesInitialize() {
+  await common.delay(200);
+
+  $('#createMinutesSummernote').summernote({
+    height: 'auto',
+    width: '100%',
+    styleWithSpan: true,
+    toolbar: [
+      ['fontsize', ['fontsize']],
+      ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+      ['color', ['forecolor', 'color']],
+      ['table', ['table']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['insert', ['picture', 'link']],
+      ['codeview'],
+    ],
+    fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+  });
+  $('#createMinutesSummernote').summernote('enable');
+  $('#createMinutesSummernote').css('background-color', 'white');
 }
 
 export async function createInitialize() {
@@ -698,6 +959,88 @@ export async function createInitialize() {
   $('#remarkSummernote').css('background-color', 'white');
 }
 
+export async function saveActionItem(ctx, data) {
+  if (data.actionItemEditMode) {
+    data.actionItemEditMode = false;
+  } else {
+    data.actionItemEditMode = true;
+  }
+
+  let workerData = data.l2_worker.dbValue;
+  let lblWorkerData = data.l2_worker.uiValue;
+  let DateData = data.l2_expected_date.dateApi.dateValue;
+  DateData = L2_StandardBOMService.dateTo_GMTString(DateData);
+  let lblDate = DateData.split('T');
+  lblDate = lblDate[0];
+  let modifyComment = $('#commentDetailsSummernote').summernote('code');
+  let modifyFollowUp = $('#followUpDetailsSummernote').summernote('code');
+
+  let setPropComment = $('#commentDetailsSummernote').summernote('code');
+  let setPropFollowUp = $('#followUpDetailsSummernote').summernote('code');
+  setPropComment = setPropComment.replace(/<[^>]*>?/g, '');
+  setPropFollowUp = setPropFollowUp.replace(/<[^>]*>?/g, '');
+
+  let datesetUID = ctx.selectActionItemRev.props.IMAN_specification.dbValues[0];
+  let text = await checklist.readPropertiesFromTextFile(datesetUID);
+  console.log(text);
+
+  text.comment = modifyComment;
+  text.followUp = modifyFollowUp;
+  console.log(text);
+
+  let setText = JSON.stringify(text);
+  console.log(setText);
+
+  await lgepSummerNoteUtils.txtFileToDatasetNoDelete(setText, ctx.selectActionItemRev);
+
+  let actionItemRevID = ctx.selectActionItemRev.cellHeader2;
+
+  let setParentsApi = {
+    infos: [
+      {
+        itemId: actionItemRevID,
+      },
+    ],
+  };
+  let actionItemObj = await SoaService.post('Core-2007-01-DataManagement', 'getItemFromId', setParentsApi);
+  let actionItem = actionItemObj.output[0].item;
+
+  let actionItemParam = {
+    objects: [actionItem],
+    attributes: {
+      l2_worker: {
+        stringVec: [workerData],
+      },
+      l2_expected_date: {
+        stringVec: [DateData],
+      },
+      l2_comment: {
+        stringVec: [setPropComment],
+      },
+      l2_follow_up: {
+        stringVec: [setPropFollowUp],
+      },
+    },
+  };
+
+  await SoaService.post('Core-2007-01-DataManagement', 'setProperties', actionItemParam);
+
+  data.l2_workerLbl.uiValue = lblWorkerData;
+  data.l2_expected_dateLbl.uiValue = lblDate;
+
+  $('#commentDetailsSummernote').summernote('reset');
+  $('#commentDetailsSummernote').summernote('code', modifyComment);
+  $('#commentDetailsSummernote').summernote('disable');
+
+  $('#followUpDetailsSummernote').summernote('reset');
+  $('#followUpDetailsSummernote').summernote('code', modifyFollowUp);
+  $('#followUpDetailsSummernote').summernote('disable');
+
+  loadActionItem(data);
+
+  data.l2_workerValues.dbValue = [];
+}
+
 export async function saveMinutesMain(ctx, data) {
   if (data.editMode) {
     data.editMode = false;
@@ -705,10 +1048,6 @@ export async function saveMinutesMain(ctx, data) {
     data.editMode = true;
   }
 
-  let a = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
-  let revMinutes = data.dataProviders.minutesListProvider.selectedObjects[0];
-  let fileValue = revMinutes.props.IMAN_reference;
-  let savedFile = data.datasetLink.dbValue; // A배열
   let revUID = data.dataProviders.minutesListProvider.selectedObjects[0].cellHeader2;
   let setParentsApi = {
     infos: [
@@ -776,7 +1115,7 @@ export async function saveMinutesMain(ctx, data) {
 
   let selectedTableMinutes = data.dataProviders.minutesListProvider.selectedObjects[0];
   try {
-    await com.getProperties(selectedTableMinutes, ['IMAN_reference']);
+    await com.getProperties(selectedTableMinutes, ['IMAN_reference', 'TC_Attaches']);
   } catch (err) {
     //console.log(err);
     notySvc.showError('아이템 속성 불러오기 실패');
@@ -812,7 +1151,7 @@ export async function saveMinutesMain(ctx, data) {
       input: [
         {
           clientId: '',
-          relationType: 'IMAN_reference',
+          relationType: 'TC_Attaches',
           primaryObject: selectedTableMinutes,
           secondaryObject: originFile[i],
         },
@@ -824,7 +1163,44 @@ export async function saveMinutesMain(ctx, data) {
       //console.log(err)
     }
   }
-  let deleteDataset = [];
+
+  let fileDataset = await lgepSummerNoteUtils.uploadFileToDataset(newFileArr);
+  if (Array.isArray(fileDataset)) {
+    for (let i = 0; i < fileDataset.length; i++) {
+      var jsoObj = {
+        input: [
+          {
+            clientId: '',
+            relationType: 'TC_Attaches',
+            primaryObject: selectedTableMinutes,
+            secondaryObject: fileDataset[i],
+          },
+        ],
+      };
+      try {
+        await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
+      } catch (err) {
+        //console.log(err);
+      }
+    }
+  } else {
+    var jsoObj = {
+      input: [
+        {
+          clientId: '',
+          relationType: 'TC_Attaches',
+          primaryObject: selectedTableMinutes,
+          secondaryObject: fileDataset,
+        },
+      ],
+    };
+    try {
+      await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
+    } catch (err) {
+      //console.log(err);
+    }
+  }
+  newFileArr = [];
 
   if (deleteSameUID.length != 0) {
     let deleteDatasetOjt = {
@@ -864,6 +1240,7 @@ export async function saveMinutesMain(ctx, data) {
   data.l2_meeting_related_scheduleLbl.uiValue = scheduleData;
   $('#minutesMainSummernote').summernote('reset');
   $('#minutesMainSummernote').summernote('code', modifyDetails);
+  await common.delay(100);
   $('#minutesMainSummernote').summernote('disable');
 
   msg.show(0, `${data.object_name.dbValue} ${editedMinutes}`);
@@ -873,7 +1250,7 @@ export async function createMinutesInShowAllMinutes(ctx, data) {
   console.log('회의록 생성');
 
   if (appCtxService.ctx.checklist.selectedRow) {
-    msg.show(1, '체크리스트 하위에 있는 고장 선택을 해제해주세요.');
+    msg.show(1, deselectFailureMsg);
   } else {
     let topObjRev = ctx.checklist.target;
 
@@ -897,7 +1274,7 @@ export async function createMinutesInShowAllMinutes(ctx, data) {
 
     try {
       if (minutesName == null || minutesName == undefined || minutesName == '') {
-        msg.show(1, '회의록 제목을 입력해주세요.');
+        msg.show(1, enterTitleMsg);
         return;
       } else {
         let createMinutesItem = await com.createItem('', 'L2_Minutes', minutesName, minutesSchedule, '');
@@ -992,12 +1369,63 @@ export async function createMinutesInShowAllMinutes(ctx, data) {
           //console.log(err);
         }
         datasetUid = null;
-        msg.show(0, `${minutesName} ${createdItemMsg}`, [close], [function () {}]);
+        msg.show(0, `${minutesName} ${notFailureMsg}`, [close], [function () {}]);
       }
       appCtxService.registerCtx('show_minutes_mode', 0);
     } catch (err) {
       console.log(err);
     }
+  }
+}
+
+export async function actionItemEditMode(ctx, data) {
+  let actionTable = vmSer.getViewModelUsingElement(document.getElementById('actionItemTable'));
+  console.log(actionTable);
+
+  if (!ctx.selectActionItemRev || ctx.selectActionItemRev == null) {
+    msg.show(0, pleaseSelectActionItemForModify);
+  } else {
+    if (data.actionItemEditMode) {
+      data.actionItemEditMode = false;
+    } else {
+      data.actionItemEditMode = true;
+    }
+    console.log(ctx.selectActionItemRev);
+    let policyArr = policy.getEffectivePolicy();
+    policyArr.types.push({
+      name: 'L2_User',
+      properties: [
+        {
+          name: 'l2_divisions',
+        },
+      ],
+    });
+    let searchingUser = await query.executeSavedQuery('KnowledgeUserSearch', ['L2_user_id'], ['*'], policyArr);
+    console.log(searchingUser);
+
+    for (let user of searchingUser) {
+      data.l2_workerValues.dbValue.push({
+        propDisplayValue: user.props.l2_user_id.dbValues[0],
+        propInternalValue: user.uid,
+      });
+    }
+
+    let originUser;
+
+    for (let user of searchingUser) {
+      if (ctx.selectActionItemRev.props.l2_worker.dbValue == user.props.object_name.dbValues[0]) {
+        originUser = user.props.owning_user.uiValues[0];
+      }
+    }
+
+    data.l2_worker.dbValue = originUser;
+    data.l2_worker.dbValues[0] = originUser;
+    data.l2_worker.uiValue = originUser;
+    data.l2_worker.uiValues[0] = originUser;
+    data.l2_expected_date.dateApi.dateValue = ctx.selectActionItemRev.props.l2_expected_date.dbValue;
+
+    $('#commentDetailsSummernote').summernote('enable');
+    $('#followUpDetailsSummernote').summernote('enable');
   }
 }
 
@@ -1008,8 +1436,7 @@ export async function editMinutesMain(ctx, data) {
   let fileInput = document.getElementById('fileUpload');
   let selectedFile = [...fileInput.files];
 
-  let selectOrigin = appCtxService.ctx.checklist.selectedRow.getOriginalObject();
-  console.log(selectOrigin);
+  // let selectOrigin = appCtxService.ctx.checklist.selectedRow.getOriginalObject();
 
   if (data.dataProviders.minutesListProvider.selectedObjects.length == 0) {
     msg.show(0, pleaseSelectMinutesForModify);
@@ -1019,7 +1446,6 @@ export async function editMinutesMain(ctx, data) {
     } else {
       data.editMode = true;
     }
-    let a = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
     let revUID = data.dataProviders.minutesListProvider.selectedObjects[0].cellHeader2;
     let setParentsApi = {
       infos: [
@@ -1075,8 +1501,8 @@ export async function editMinutesMain(ctx, data) {
 
     const preview = document.querySelector('#preview');
 
-    let savedFileUID = data.dataProviders.minutesListProvider.selectedObjects[0].props.IMAN_reference.dbValue;
-    let savedFileName = data.dataProviders.minutesListProvider.selectedObjects[0].props.IMAN_reference.uiValues;
+    let savedFileUID = data.dataProviders.minutesListProvider.selectedObjects[0].props.TC_Attaches.dbValue;
+    let savedFileName = data.dataProviders.minutesListProvider.selectedObjects[0].props.TC_Attaches.uiValues;
     for (let i = 0; i < savedFileName.length; i++) {
       originFileArr.push(savedFileUID[i]);
       preview.innerHTML += `
@@ -1089,8 +1515,6 @@ export async function editMinutesMain(ctx, data) {
 }
 
 export function resetDetails(ctx, data) {
-  let a = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
-
   if (data.dataProviders.minutesListProvider.selectedObjects.length == 0) {
     data.object_nameLbl.uiValue = '';
     data.l2_meeting_placeLbl.uiValue = '';
@@ -1117,7 +1541,6 @@ export async function cancelMinutesMain(ctx, data) {
   originFileArr = [];
   lastModifiedArr = [];
 
-  let a = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
   let revUID = data.dataProviders.minutesListProvider.selectedObjects[0].cellHeader2;
   let setParentsApi = {
     infos: [
@@ -1165,25 +1588,112 @@ export async function deleteMinutesMain(ctx, data) {
           },
         ],
       };
+
       let revItemParant = await SoaService.post('Core-2007-01-DataManagement', 'getItemFromId', setParentsApi);
       let revParent = revItemParant.output[0].item;
 
-      let selectOrigin = appCtxService.ctx.checklist.selectedRow.getOriginalObject();
-      let selectUID = [selectOrigin.uid];
-      let selectLoadObj = await com.loadObjects(selectUID);
-      let selectLoadObjRev = selectLoadObj.modelObjects[selectLoadObj.plain[0]];
+      // 열려있는 체크리스트에서 최상위 불러오기
+      let topObjRev = ctx.checklist.target;
+      try {
+        await com.getProperties(topObjRev, ['L2_MinutesRelation']);
+        await com.getProperties(revParent, ['L2_ActionItemRelation']);
+      } catch (err) {
+        //console.log(err);
+        notySvc.showError('아이템 속성 불러오기 실패');
+      }
 
-      // 첨부파일 삭제
-      let datasetRelation = com.getObject(revParent.props.IMAN_reference.dbValues);
+      // 선택한 고장 불러오기
+      if (ctx.checklist.selectedRow) {
+        let selectOrigin = ctx.checklist.selectedRow.getOriginalObject();
+        let selectUID = [selectOrigin.uid];
+        let selectLoadObj = await com.loadObjects(selectUID);
+        let selectLoadObjRev = selectLoadObj.modelObjects[selectLoadObj.plain[0]];
 
-      for (let i = 0; i < datasetRelation.length; i++) {
+        try {
+          await com.getProperties(selectLoadObjRev, ['L2_MinutesRelation']);
+        } catch (err) {
+          //console.log(err);
+          notySvc.showError('아이템 속성 불러오기 실패');
+        }
+
+        // 선택한 고장과의 릴레이션 제거
+        let relationUIDLeng = selectLoadObjRev.props.L2_MinutesRelation.dbValues.length;
+        let relationArr = selectLoadObjRev.props.L2_MinutesRelation.dbValues;
+        let relationUID = selectLoadObjRev.uid;
+
+        for (let i = relationUIDLeng - 1; i >= 0; i--) {
+          if (relationArr[i] === data.dataProviders.minutesListProvider.selectedObjects[0].uid) {
+            relationArr.splice(i, 1);
+          }
+        }
+
+        let minutesRelationParam = {
+          objects: [selectLoadObjRev],
+          attributes: {
+            L2_MinutesRelation: {
+              stringVec: relationArr,
+            },
+          },
+        };
+        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', minutesRelationParam);
+
+        let relation = await com.getObject([relationUID]);
         let param = {
           input: [
             {
               clientId: '',
-              relationType: 'item_IMAN_reference',
-              primaryObject: revParent,
-              secondaryObject: datasetRelation[i],
+              relationType: 'L2_MinutesRelation',
+              primaryObject: relation[0],
+              secondaryObject: revParent,
+            },
+          ],
+        };
+        try {
+          await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', param);
+        } catch (err) {
+          //console.log(err)
+        }
+      } else {
+        let selectUID = data.dataProviders.minutesListProvider.selectedObjects[0].props.l2_related_failure.dbValue;
+        let selectLoadObj = await com.loadObjects(selectUID);
+        let selectLoadObjRev = selectLoadObj.modelObjects[selectLoadObj.plain[0]];
+
+        try {
+          await com.getProperties(selectLoadObjRev, ['L2_MinutesRelation']);
+        } catch (err) {
+          //console.log(err);
+          notySvc.showError('아이템 속성 불러오기 실패');
+        }
+
+        // 선택한 고장과의 릴레이션 제거
+        let relationUIDLeng = selectLoadObjRev.props.L2_MinutesRelation.dbValues.length;
+        let relationArr = selectLoadObjRev.props.L2_MinutesRelation.dbValues;
+        let relationUID = selectLoadObjRev.uid;
+
+        for (let i = relationUIDLeng - 1; i >= 0; i--) {
+          if (relationArr[i] === data.dataProviders.minutesListProvider.selectedObjects[0].uid) {
+            relationArr.splice(i, 1);
+          }
+        }
+
+        let minutesRelationParam = {
+          objects: [selectLoadObjRev],
+          attributes: {
+            L2_MinutesRelation: {
+              stringVec: relationArr,
+            },
+          },
+        };
+        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', minutesRelationParam);
+
+        let relation = await com.getObject([relationUID]);
+        let param = {
+          input: [
+            {
+              clientId: '',
+              relationType: 'L2_MinutesRelation',
+              primaryObject: relation[0],
+              secondaryObject: revParent,
             },
           ],
         };
@@ -1193,156 +1703,14 @@ export async function deleteMinutesMain(ctx, data) {
           //console.log(err)
         }
       }
-      let testParam = {
-        objects: datasetRelation,
-      };
-      try {
-        await SoaService.post('Core-2006-03-DataManagement', 'deleteObjects', testParam);
-      } catch (err) {
-        //console.log(err)
-      }
 
-      let topOrigin = appCtxService.ctx.checklist.structure[0].getOriginalObject();
-      let topUID = [topOrigin.uid];
-      let topObj = await com.loadObjects(topUID);
-      let topObjRev = topObj.modelObjects[topObj.plain[0]];
-
-      try {
-        await com.getProperties(selectLoadObjRev, ['L2_MinutesRelation']);
-        await com.getProperties(topObjRev, ['L2_MinutesRelation']);
-        await com.getProperties(revParent, ['L2_ActionItemRelation']);
-      } catch (err) {
-        //console.log(err);
-        notySvc.showError('아이템 속성 불러오기 실패');
-      }
-      let deleteActionItem = [];
-      let actionItemID;
-      let revActionItem;
-      let actionItemName = revParent.props.L2_ActionItemRelation.uiValues;
-      for (let i = 0; i < actionItemName.length; i++) {
-        actionItemID = actionItemName[i].split('/');
-        actionItemID = actionItemID[0];
-        let setActionItemApi = {
-          infos: [
-            {
-              itemId: actionItemID,
-            },
-          ],
-        };
-        revActionItem = await SoaService.post('Core-2007-01-DataManagement', 'getItemFromId', setActionItemApi);
-        deleteActionItem.push(revActionItem.output[0].item);
-      }
-      console.log(deleteActionItem);
-      let relationUIDLeng = selectLoadObjRev.props.L2_MinutesRelation.dbValues.length;
-      let relationArr = selectLoadObjRev.props.L2_MinutesRelation.dbValues;
-      let relationUID;
-      for (let i = 0; i < relationUIDLeng; i++) {
-        if (data.dataProviders.minutesListProvider.selectedObjects[0].uid == selectLoadObjRev.props.L2_MinutesRelation.dbValues[i]) {
-          relationUID = selectLoadObjRev.uid;
-          for (let i = 0; i < relationUIDLeng; i++) {
-            if (relationArr[i] === data.dataProviders.minutesListProvider.selectedObjects[0].uid) {
-              relationArr.splice(i, 1);
-              i--;
-            }
-          }
-        }
-      }
-
+      // 현재 열려있는 체크리스트와의 릴레이션 제거
       let relationTopUIDLeng = topObjRev.props.L2_MinutesRelation.dbValues.length;
       let relationTopArr = topObjRev.props.L2_MinutesRelation.dbValues;
-      let relationTopUID;
-      for (let i = 0; i < relationTopUIDLeng; i++) {
-        if (data.dataProviders.minutesListProvider.selectedObjects[0].uid == topObjRev.props.L2_MinutesRelation.dbValues[i]) {
-          relationTopUID = topObjRev.uid;
-          for (let i = 0; i < relationTopUIDLeng; i++) {
-            if (relationTopArr[i] === data.dataProviders.minutesListProvider.selectedObjects[0].uid) {
-              relationTopArr.splice(i, 1);
-              i--;
-            }
-          }
-        }
-      }
-
-      let relationActionItemUIDLeng = revParent.props.L2_ActionItemRelation.dbValues.length;
-      let relationActionItemArr = revParent.props.L2_ActionItemRelation.dbValues;
-      let relationActionItemUID;
-      for (let i = 0; i < relationActionItemUIDLeng; i++) {
-        if (
-          data.dataProviders.minutesListProvider.selectedObjects[0].props.L2_ActionItemRelation.dbValue.dbValues[i] ==
-          revParent.props.L2_ActionItemRelation.dbValues[i]
-        ) {
-          relationActionItemUID = revParent.uid;
-          for (let i = 0; i < relationActionItemUIDLeng; i++) {
-            if (
-              relationActionItemArr[i] === data.dataProviders.minutesListProvider.selectedObjects[0].props.L2_ActionItemRelation.dbValue.dbValues[i] &&
-              i != 0
-            ) {
-              relationActionItemArr.splice(i, 1);
-              i--;
-            }
-          }
-        }
-      }
-
-      let minutesRelationParam = {
-        objects: [selectLoadObjRev],
-        attributes: {
-          L2_MinutesRelation: {
-            stringVec: relationArr,
-          },
-        },
-      };
-      await SoaService.post('Core-2007-01-DataManagement', 'setProperties', minutesRelationParam);
-
-      let relation = com.getObject([relationUID]);
-
-      let deleteOjt = {
-        objects: [revItemParant.output[0].item],
-      };
-      let deleteActionItemOjt = {
-        objects: deleteActionItem,
-      };
-      let param = {
-        input: [
-          {
-            clientId: '',
-            relationType: 'L2_MinutesRelation',
-            primaryObject: relation[0],
-            secondaryObject: revParent,
-          },
-        ],
-      };
-      try {
-        await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', param);
-      } catch (err) {
-        //console.log(err)
-      }
-
-      let actionItemRelationParam = {
-        objects: [revParent],
-        attributes: {
-          L2_ActionItemRelation: {
-            stringVec: relationActionItemArr,
-          },
-        },
-      };
-      await SoaService.post('Core-2007-01-DataManagement', 'setProperties', actionItemRelationParam);
-
-      if (revActionItem != undefined || revActionItem != null) {
-        let actionItemParam = {
-          input: [
-            {
-              clientId: '',
-              relationType: 'L2_ActionItemRelation',
-              primaryObject: revParent,
-              secondaryObject: revActionItem.output[0].item,
-            },
-          ],
-        };
-        try {
-          await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', actionItemParam);
-        } catch (err) {
-          //console.log(err)
+      let relationTopUID = topObjRev.uid;
+      for (let i = relationTopUIDLeng - 1; i >= 0; i--) {
+        if (relationTopArr[i] === data.dataProviders.minutesListProvider.selectedObjects[0].uid) {
+          relationTopArr.splice(i, 1);
         }
       }
 
@@ -1355,8 +1723,9 @@ export async function deleteMinutesMain(ctx, data) {
         },
       };
       await SoaService.post('Core-2007-01-DataManagement', 'setProperties', topMinutesRelationParam);
+
       let topTargetUID = ctx.checklist.target.uid;
-      let topRelation = com.getObject([topTargetUID]);
+      let topRelation = await com.getObject([topTargetUID]);
 
       let topParam = {
         input: [
@@ -1373,7 +1742,135 @@ export async function deleteMinutesMain(ctx, data) {
       } catch (err) {
         //console.log(err)
       }
-      msg.show(0, `"${data.dataProviders.minutesListProvider.selectedObjects[0].cellHeader1}" ${deletedMinutes}`);
+
+      // 연결된 액션 아이템 불러오기
+      let deleteActionItem = [];
+      let actionItemID;
+      let revActionItem;
+      let actionItemName = revParent.props.L2_ActionItemRelation.uiValues;
+      let actionItemRevUID = revParent.props.L2_ActionItemRelation.dbValues;
+      for (let i = 0; i < actionItemName.length; i++) {
+        actionItemID = actionItemName[i].split('/');
+        actionItemID = actionItemID[0];
+        let setActionItemApi = {
+          infos: [
+            {
+              itemId: actionItemID,
+            },
+          ],
+        };
+        revActionItem = await SoaService.post('Core-2007-01-DataManagement', 'getItemFromId', setActionItemApi);
+        deleteActionItem.push(revActionItem.output[0].item);
+      }
+      let actionItemRev = await com.getObject(actionItemRevUID);
+
+      if (actionItemRev.length != 0) {
+        for (let i = 0; i < actionItemRev.length; i++) {
+          await com.getProperties(actionItemRev[i], ['IMAN_specification']);
+        }
+        console.log(actionItemRev);
+        let textObj;
+
+        for (let i = 0; i < actionItemRev.length; i++) {
+          let textObjUID = actionItemRev[i].props.IMAN_specification.dbValues[0];
+          textObj = await com.getObject(textObjUID);
+          let actionItemParam = {
+            input: [
+              {
+                clientId: '',
+                relationType: 'IMAN_specification',
+                primaryObject: actionItemRev[i],
+                secondaryObject: textObj,
+              },
+            ],
+          };
+          try {
+            await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', actionItemParam);
+          } catch (err) {
+            //console.log(err)
+          }
+          // 텍스트 삭제
+          let deleteTextOjt = {
+            objects: [textObj],
+          };
+          await com.deleteObject(deleteTextOjt.objects[0]);
+        }
+      }
+
+      // 연결된 액션아이템과의 릴레이션 제거
+      if (revParent.props.L2_ActionItemRelation.dbValues.length != 0) {
+        let relationActionItemArr = revParent.props.L2_ActionItemRelation.dbValues;
+        let relationActionItemUIDLeng = relationActionItemArr.length;
+        for (let j = relationActionItemUIDLeng - 1; j >= 0; j--) {
+          if (relationActionItemArr[j] === data.dataProviders.minutesListProvider.selectedObjects[0].props.L2_ActionItemRelation.dbValue.dbValues[j]) {
+            relationActionItemArr.splice(j, 1);
+          }
+        }
+
+        let actionItemRelationParam = {
+          objects: [revParent],
+          attributes: {
+            L2_ActionItemRelation: {
+              stringVec: relationActionItemArr,
+            },
+          },
+        };
+        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', actionItemRelationParam);
+
+        if (revActionItem != undefined || revActionItem != null) {
+          let actionItemParam = {
+            input: [
+              {
+                clientId: '',
+                relationType: 'L2_ActionItemRelation',
+                primaryObject: revParent,
+                secondaryObject: revActionItem.output[0].item,
+              },
+            ],
+          };
+          try {
+            await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', actionItemParam);
+          } catch (err) {
+            //console.log(err)
+          }
+        }
+      }
+
+      // 첨부파일 릴레이션 제거
+      await com.getProperties(revParent, ['TC_Attaches']);
+      console.log(revParent);
+      if (revObj.props.TC_Attaches.dbValues.length != 0) {
+        let datasetRelation = await com.getObject(revObj.props.TC_Attaches.dbValues);
+
+        for (let i = 0; i < datasetRelation.length; i++) {
+          let param = {
+            input: [
+              {
+                clientId: '',
+                relationType: 'TC_Attaches',
+                primaryObject: revObj,
+                secondaryObject: datasetRelation[i],
+              },
+            ],
+          };
+          try {
+            await SoaService.post('Core-2006-03-DataManagement', 'deleteRelations', param);
+          } catch (err) {
+            //console.log(err)
+          }
+        }
+
+        // 첨부파일 삭제
+        let testParam = {
+          objects: datasetRelation,
+        };
+        try {
+          await SoaService.post('Core-2006-03-DataManagement', 'deleteObjects', testParam);
+        } catch (err) {
+          //console.log(err)
+        }
+      }
+
       data.object_nameLbl.uiValue = '';
       data.l2_meeting_placeLbl.uiValue = '';
       data.l2_meeting_participantsLbl.uiValue = '';
@@ -1384,31 +1881,46 @@ export async function deleteMinutesMain(ctx, data) {
       data.datasetLink.dbValue = [];
       $('#minutesMainSummernote').summernote('reset');
       $('#minutesMainSummernote').summernote('disable');
+
+      // 회의록 삭제
+      let deleteOjt = {
+        objects: [revItemParant.output[0].item],
+      };
       await com.deleteObject(deleteOjt.objects[0]);
+
+      // 액션 아이템 삭제
+      let deleteActionItemOjt = {
+        objects: deleteActionItem,
+      };
       for (let i = 0; i < deleteActionItem.length; i++) {
         await com.deleteObject(deleteActionItemOjt.objects[i]);
       }
+      eventBus.publish('minutesTable.plTable.reload');
+      msg.show(0, `"${data.dataProviders.minutesListProvider.selectedObjects[0].cellHeader1}" ${deletedMinutes}`);
     },
     function () {},
   );
 }
 
-export function failureAddPopupAction() {
-  console.log('고장 추가');
-  popupService.show({
-    declView: 'popupFailureList',
-    options: {
-      clickOutsideToClose: true,
-      isModal: false,
-      reference: 'referenceId',
-      placement: 'center',
-      width: 500,
-      height: 500,
-    },
-    outputData: {
-      popupId: 'id',
-    },
-  });
+export function failureAddPopupAction(ctx, data) {
+  if (data.dataProviders.minutesListProvider.selectedObjects.length != 0) {
+    popupService.show({
+      declView: 'popupFailureList',
+      options: {
+        clickOutsideToClose: true,
+        isModal: false,
+        reference: 'referenceId',
+        placement: 'center',
+        width: 500,
+        height: 500,
+      },
+      outputData: {
+        popupId: 'id',
+      },
+    });
+  } else {
+    msg.show(0, selectMinutesToFailure);
+  }
 }
 
 export async function failureLoadAction(ctx, data) {
@@ -1421,13 +1933,14 @@ export async function failureLoadAction(ctx, data) {
     originFailureObj.push(originFailure[i].getOriginalObject());
     originFailureUID.push(originFailureObj[i].uid);
   }
-  console.log('오브젝트', { originFailureObj });
-  console.log('UID', { originFailureUID });
   objToOriginFailure.push(com.getObject(originFailureUID));
-  console.log('after오브젝트', { objToOriginFailure });
+
+  let mainData = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
+  let relatedFailure = mainData.dataProviders.failureList.viewModelCollection.loadedVMObjects;
 
   await com.getProperties(objToOriginFailure[0], [
     'L2_MinutesRelation',
+    'IMAN_reference',
     'awp0CellProperties',
     'awp0ConfiguredRevision',
     'awp0ThumbnailImageTicket',
@@ -1445,6 +1958,7 @@ export async function failureLoadAction(ctx, data) {
     'owning_user',
     'release_status_list',
   ]);
+
   for (let i = 0; i < objToOriginFailure[0].length; i++) {
     let vmo = vms.constructViewModelObjectFromModelObject(objToOriginFailure[0][i]);
     let failureName = vmo.props.object_string.dbValue.replaceAll('\n', ' ');
@@ -1452,31 +1966,60 @@ export async function failureLoadAction(ctx, data) {
     lastFailureArr.push(vmo);
   }
 
-  console.log('last', { lastFailureArr });
-  data.dataProviders.failureControlList.viewModelCollection.setViewModelObjects(lastFailureArr);
+  let lastFailureUIDArr = [];
+  let relatedFailureUIDArr = [];
+  let realLastFailureArr = [];
+  for (let all of lastFailureArr) {
+    lastFailureUIDArr.push(all.uid);
+  }
+  for (let rel of relatedFailure) {
+    relatedFailureUIDArr.push(rel.uid);
+  }
+
+  let realLastFailureUIDArr = lastFailureUIDArr.filter((x) => !relatedFailureUIDArr.includes(x));
+
+  for (let i = 0; i < lastFailureArr.length; i++) {
+    for (let j = 0; j < realLastFailureUIDArr.length; j++) {
+      if (lastFailureArr[i].uid == realLastFailureUIDArr[j]) {
+        realLastFailureArr.push(lastFailureArr[i]);
+      }
+    }
+  }
+  let failureData = ctx.checklist.grid.store.data.rawData;
+  let failureDataArr = [];
+
+  for (let fail of failureData) {
+    failureDataArr.push(fail.getOriginalObject());
+  }
+  for (let i = 0; i < realLastFailureArr.length; i++) {
+    for (let j = 0; j < failureDataArr.length; j++) {
+      if (realLastFailureArr[i].uid == failureDataArr[j].uid) {
+        let effect = failureData[j].failureEffect;
+        let detail = failureData[j].failureDetail;
+        if (effect) {
+          effect = effect.replace(/<[^>]*>?/g, ' ');
+        }
+        if (detail) {
+          detail = detail.replace(/<[^>]*>?/g, ' ');
+        } else {
+          detail = '-';
+        }
+        realLastFailureArr[i].cellHeader2 = effect;
+        realLastFailureArr[i].cellProperties.리비전 = {
+          key: '메커니즘',
+          value: detail,
+        };
+      }
+    }
+  }
+
+  data.dataProviders.failureControlList.viewModelCollection.setViewModelObjects(realLastFailureArr);
 }
 
 export async function failureAddAction(ctx, data) {
-  let a = vmSer.getViewModelUsingElement(document.getElementById('minutesTable'));
-  if (!a) {
-    // a = vmSer.getViewModelUsingElement(document.getElementById("show-all-minutes"));
-    // console.log(a);
+  let minutesTable = vmSer.getViewModelUsingElement(document.getElementById('minutesTable'));
+  if (!minutesTable) {
     let selectTableItem = com.getObject([ctx.target_uid]);
-    // let revUID = selectTableItem.cellHeader2;
-    //   let setParentsApi = {
-    //     infos: [{
-    //       itemId: revUID
-    //     }]
-    //   }
-    //   let revItemParant = await SoaService.post("Core-2007-01-DataManagement", "getItemFromId", setParentsApi);
-
-    //   let selectMinutes = revItemParant.output[0].item;
-    // await com.getProperties(selectMinutes, ["l2_related_failure"]);
-    // console.log(selectMinutes);
-
-    // await com.getProperties(selectTableItem, ["object_string", "object_name", "owning_user", "l2_meeting_agenda",
-    //   "l2_meeting_date", "l2_meeting_details", "l2_meeting_participants", "l2_meeting_place", "l2_meeting_title",
-    //   "l2_meeting_related_schedule", "l2_minutes_writer", "l2_related_failure"]);
 
     let selectListUIDArr = [];
     let originFailureUIDArr = selectTableItem[0].props.l2_related_failure;
@@ -1503,8 +2046,7 @@ export async function failureAddAction(ctx, data) {
     await SoaService.post('Core-2007-01-DataManagement', 'setProperties', minutesParam);
     selectTableItem[0].props.l2_related_failure = originFailureUIDArr;
   } else {
-    console.log(a);
-    let selectTableItem = a.dataProviders.minutesListProvider.selectedObjects[0];
+    let selectTableItem = minutesTable.dataProviders.minutesListProvider.selectedObjects[0];
     let topObjRev = appCtxService.ctx.checklist.target;
     let revUID = selectTableItem.cellHeader2;
     let setParentsApi = {
@@ -1547,18 +2089,20 @@ export async function failureAddAction(ctx, data) {
 
     for (let i = 0; i < addFailure.length; i++) {
       let addFailureArr = addFailure[i].props.L2_MinutesRelation.dbValues;
-      addFailure[i].props.L2_MinutesRelation.dbValues.push(selectTableItem.uid);
-      addFailure[i].props.L2_MinutesRelation.dbValues.flat();
-      addFailureArr = addFailureArr.filter((v, i) => addFailureArr.indexOf(v) === i);
-      let addMinutesInFailureParam = {
-        objects: [addFailure[i]],
-        attributes: {
-          L2_MinutesRelation: {
-            stringVec: addFailureArr,
+      if (addFailureArr) {
+        addFailure[i].props.L2_MinutesRelation.dbValues.push(selectTableItem.uid);
+        addFailure[i].props.L2_MinutesRelation.dbValues.flat();
+        addFailureArr = addFailureArr.filter((v, i) => addFailureArr.indexOf(v) === i);
+        let addMinutesInFailureParam = {
+          objects: [addFailure[i]],
+          attributes: {
+            L2_MinutesRelation: {
+              stringVec: addFailureArr,
+            },
           },
-        },
-      };
-      await SoaService.post('Core-2007-01-DataManagement', 'setProperties', addMinutesInFailureParam);
+        };
+        await SoaService.post('Core-2007-01-DataManagement', 'setProperties', addMinutesInFailureParam);
+      }
     }
     let targetArr = topObjRev.props.L2_MinutesRelation.dbValues;
     targetArr.push(selectTableItem.uid);
@@ -1686,8 +2230,6 @@ export async function editFileView(data) {
 
   editFileInput.addEventListener('change', async (e) => {
     const selectedFile = [...editFileInput.files];
-    console.log(selectedFile);
-    console.dir(editFileInput);
     const files = Array.from(editFileInput.files);
     files.forEach((file) => {
       lastModifiedArr.push(String(file.lastModified));
@@ -1712,7 +2254,11 @@ export async function editFileView(data) {
       .forEach((file) => {
         dataTranster.items.add(file);
       });
-
+    newFileArr = [];
+    for (let file of dataTranster.files) {
+      newFileArr.push(file);
+    }
+    console.log(newFileArr);
     document.querySelector('#fileUpload').files = dataTranster.files;
 
     removeTarget.remove();
@@ -1726,19 +2272,29 @@ export async function loadCreateMinutes(ctx, data) {
   let month = date.getMonth() + 1;
   let days = date.getDate();
   let initTime = '08:00:00';
-  data.l2_meeting_date.dateApi.dateValue = `${years}-${month}-${days}`;
+  if (days < 10) {
+    data.l2_meeting_date.dateApi.dateValue = `${years}-${month}-0${days}`;
+  } else {
+    data.l2_meeting_date.dateApi.dateValue = `${years}-${month}-${days}`;
+  }
+  // if (days < 10) {
+  //   data.l2_expected_date.dateApi.dateValue = `${years}-${month}-0${days}`;
+  // } else {
+  //   data.l2_expected_date.dateApi.dateValue = `${years}-${month}-${days}`;
+  // }
   data.l2_meeting_date.dateApi.timeValue = initTime;
-  data.l2_expected_date.dateApi.dateValue = `${years}-${month}-${days}`;
-  data.l2_expected_date.dateApi.timeValue = initTime;
+  // data.l2_expected_date.dateApi.timeValue = initTime;
 }
 
 export async function tableSelect(ctx, data, eventData) {
   await lgepCommonUtils.delay(100);
   ctx.selectActionItemRev = eventData.selectedVmo;
   let actionTable = document.getElementById('actionItemTable');
-  let selectRow = actionTable.children[1].children[0].children[0].children[1].children[2].children[1].children[0].children;
-  let rowLength = actionTable.children[1].children[0].children[0].children[1].children[2].children[1].children[0].children.length;
-  let selectRowIcon = actionTable.children[1].children[0].children[0].children[1].children[1].children[1].children[0].children;
+  let selectRow = actionTable.children[1].children[0].children[0].children[0].children[1].children[2].children[1].children[0].children;
+  let rowLength = actionTable.children[1].children[0].children[0].children[0].children[1].children[2].children[1].children[0].children.length;
+  let selectRowIcon = actionTable.children[1].children[0].children[0].children[0].children[1].children[2].children[1].children[0].children;
+  console.dir(selectRow);
+
   for (let i = 0; i < rowLength; i++) {
     selectRow[i].style.backgroundColor = 'rgb(255, 255, 255)';
     selectRowIcon[i].style.backgroundColor = 'rgb(255, 255, 255)';
@@ -1747,8 +2303,17 @@ export async function tableSelect(ctx, data, eventData) {
       selectRowIcon[i].style.backgroundColor = 'rgb(240, 240, 240)';
     }
   }
+  // 데이터셋 불러올 때 사용
+  // let parseText = JSON.parse(setText);
+  // console.log(parseText);
+
+  await com.getProperties(ctx.selectActionItemRev, ['IMAN_reference', 'IMAN_specification']);
+  let datesetUID = ctx.selectActionItemRev.props.IMAN_specification.dbValue[0];
+  let text = await checklist.readPropertiesFromTextFile(datesetUID);
+
+  let parentUID = ctx.selectActionItemRev.props.items_tag.dbValue;
+  let actionItem = await com.getObject([parentUID]);
   let mainData = vmSer.getViewModelUsingElement(document.getElementById('mainNav'));
-  console.log('click~~', { mainData });
   mainData.l2_workerLbl.uiValue = ctx.selectActionItemRev.props.l2_worker.uiValue;
   mainData.l2_expected_dateLbl.uiValue = ctx.selectActionItemRev.props.l2_expected_date.uiValue;
   let commentDetails = ctx.selectActionItemRev.props.l2_comment.uiValue;
@@ -1758,18 +2323,21 @@ export async function tableSelect(ctx, data, eventData) {
 
   $('#commentDetailsSummernote').summernote('reset');
   $('#followUpDetailsSummernote').summernote('reset');
-  $('#commentDetailsSummernote').summernote('code', commentDetails + '<br>');
-  $('#followUpDetailsSummernote').summernote('code', followUpDetails + '<br>');
+  $('#commentDetailsSummernote').summernote('code', text.comment + '<br>');
+  $('#followUpDetailsSummernote').summernote('code', text.followUp + '<br>');
 }
 
 let exports = {};
 
 export default exports = {
+  actionItemEditMode,
   backMinutes,
+  cancelActionItemEdit,
   cancelMinutesMain,
   changePanelStatus,
-  createMinutesInShowAllMinutes,
   createInitialize,
+  createMinutesInitialize,
+  createMinutesInShowAllMinutes,
   datasetLinkAction,
   deleteMinutesMain,
   editMinutesMain,
@@ -1792,6 +2360,8 @@ export default exports = {
   openMinutes,
   panelReload,
   resetDetails,
+  saveActionItem,
+  showAllRevisionsMinutes,
   saveMinutesMain,
   sortAction,
   sortActionItem,

@@ -17,6 +17,7 @@ import viewModelService from 'js/viewModelObjectService';
 import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
 import lgepPreferenceUtils from 'js/utils/lgepPreferenceUtils';
 import fmsUtils from 'js/fmsUtils';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 var $ = require('jQuery');
 
 let objString;
@@ -37,11 +38,21 @@ let realThumbnail = null;
 let recList = {};
 let totalList = {};
 let beforeSelect;
-function leftClick() {
-  document.getElementsByClassName('leftArrow')[0].click();
+function leftClick(e) {
+  if (e.wheelDelta && e.wheelDelta >= 120) {
+    // console.log('leftClick', e.wheelDelta);
+    document.getElementsByClassName('leftArrow')[0].click();
+  } else if (!e.wheelDelta) {
+    document.getElementsByClassName('leftArrow')[0].click();
+  }
 }
-function rightClick() {
-  document.getElementsByClassName('rightArrow')[0].click();
+function rightClick(e) {
+  if (e.wheelDelta && e.wheelDelta <= -120) {
+    // console.log('rightClick', e.wheelDelta);
+    document.getElementsByClassName('rightArrow')[0].click();
+  } else if (!e.wheelDelta) {
+    document.getElementsByClassName('rightArrow')[0].click();
+  }
 }
 // 선택한 데이터 불러오기
 export async function getData(data, actions, ctx) {
@@ -54,7 +65,11 @@ export async function getData(data, actions, ctx) {
     selectedObj = select.dataProviders.selectedTreeResult.selectedObjects[0];
   } else {
     select = vms.getViewModelUsingElement(document.getElementById('myDocument'));
-    selectedObj = select.eventData.selectedObjects[0];
+    if (!select) {
+      selectedObj = ctx.selected;
+    } else {
+      selectedObj = select.eventData.selectedObjects[0];
+    }
     // data.dataProviders.fileList.selectionModel.addToSelection(selectedObj);
   }
   beforeSelect = selectedObj;
@@ -112,6 +127,11 @@ export async function getData(data, actions, ctx) {
   var check2 = document.getElementsByClassName('rightArrowSpace')[0];
   check2.removeEventListener('click', rightClick);
   check2.addEventListener('click', rightClick);
+  var space = document.getElementsByClassName('spaceTest')[0];
+  space.removeEventListener('wheel', leftClick);
+  space.addEventListener('wheel', leftClick);
+  space.removeEventListener('wheel', rightClick);
+  space.addEventListener('wheel', rightClick);
   eventBus.publish('providerTest');
 }
 
@@ -313,6 +333,8 @@ export async function loadLists(data) {
   } else if (window.location.href.includes('MyDocument')) {
     htmlData = vms.getViewModelUsingElement(document.getElementById('myDocument'));
     select = htmlData.eventData.selectedObjects[0];
+  } else {
+    select = appCtx.ctx.selected;
   }
   let fileList = '';
   let origin = null;
@@ -815,7 +837,11 @@ export function selectionAdd(data) {
       selectedObj = select.dataProviders.selectedTreeResult.selectedObjects[0];
     } else {
       select = vms.getViewModelUsingElement(document.getElementById('myDocument'));
-      selectedObj = select.eventData.selectedObjects[0];
+      if (!select) {
+        selectedObj = appCtx.ctx.selected;
+      } else {
+        selectedObj = select.eventData.selectedObjects[0];
+      }
       // data.dataProviders.fileList.selectionModel.addToSelection(selectedObj);
     }
     let compareUid;
@@ -882,7 +908,11 @@ export async function loadRecommend(data) {
     let htmlData = vms.getViewModelUsingElement(document.getElementById('wareHouse'));
     if (!htmlData) {
       htmlData = vms.getViewModelUsingElement(document.getElementById('myDocument'));
-      select = htmlData.eventData.selectedObjects[0];
+      if (!htmlData) {
+        select = appCtx.ctx.selected;
+      } else {
+        select = htmlData.eventData.selectedObjects[0];
+      }
     } else {
       select = htmlData.dataProviders.selectedTreeResult.selectedObjects[0];
     }

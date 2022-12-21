@@ -7,6 +7,7 @@
       "type": "STRING",
       "isRequired": "false",
       "isEditable": "true",
+      "maxLength": 128,
       "dbValue": "",
       "dispValue": "{{i18n.questionContent}}"
     },

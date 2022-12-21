@@ -203,6 +203,7 @@ aw-page .aw-layout-breadCrumbs,
   background-color: #daecf0 !important;
   color: #464646;
 }
+
 // 페이징 칩 css
 #summaryContentStyle .aw-widgets-chip:not(.disabled).aw-accent-midContrast {
   background-color: #ffffff !important;
@@ -272,39 +273,33 @@ aw-page .aw-layout-breadCrumbs,
 //     margin-top: 5px !important;
 //     border-color:#eaeaea !important;
 // }
-.minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div img {
+.minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-
-.minColumn aw-list div div div ul li:hover div div div img {
+.minColumn aw-list div div div ul li:hover div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-
-.minColumn aw-list div div div ul li div div div img {
+.minColumn aw-list div div div ul li div div div.imgBox {
   border: 7px solid white;
 }
-
 .minColumn aw-list div div div ul .aw-widgets-cellListItemSelected div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 .minColumn aw-list div div div ul li:hover div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 .minColumn aw-list div div div ul li {
   border-bottom: 0px !important;
   border-top: 0px !important;
   border-left: 0px !important;
   border-right: 0px !important;
 }
-
 .minColumn .star-ratings-fill {
   color: orangered !important;
   font-size: 1.2rem;
@@ -317,19 +312,15 @@ aw-page .aw-layout-breadCrumbs,
   overflow: hidden;
   -webkit-text-fill-color: orangered !important;
 }
-
 #folderNameData .aw-avatar-layout {
   background-color: #eaeaea;
 }
-
 #linkTableAllId {
   background-color: #eaeaea !important;
 }
-
 .inBgColor {
   background-color: #eaeaea !important;
 }
-
 #addFolder {
   margin: 10px;
   padding: 5px;
@@ -337,7 +328,6 @@ aw-page .aw-layout-breadCrumbs,
   border-radius: 10px;
   background-color: white;
 }
-
 #addFolder div a {
   color: black !important;
 }
@@ -347,26 +337,24 @@ aw-page .aw-layout-breadCrumbs,
   border: solid 1px lightgray;
   box-shadow: 1px 4px 2px 0px lightgray !important;
 }
-
 #chartDashboardSite .aw-widgets-cellListItemContainer {
   border-bottom: solid 1px lightgray;
 }
-
 #chartDashboardSite .aw-widgets-cellListCellImage img {
   border-radius: 70% !important;
   // overflow: hidden !important;
 }
-
+#chartDashboardSite .aw-vertical-separator {
+  margin: 8px 10px;
+}
 // #expertListId div div div ul li ng-transclude group-header-cell a{
 //     color: black !important;
 // }
-
 #wareHouse .split {
   margin-right: 0px;
   flex: 0 0 8px;
   box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
 }
-
 #wareHouse .seperatorSizeChange {
   border-color: black;
   margin: 8px 8px;
@@ -376,60 +364,48 @@ aw-page .aw-layout-breadCrumbs,
 .backGroundWhiteImportant {
   background-color: #ffffff !important;
 }
-
 .backGroundWhiteImportant .aw-ui-treeNodeValue.ng-scope.aw-state-selected * {
   background-color: #ffffff !important;
 }
-
 #mainBgColor {
   background-color: #eaeaea !important;
 }
-
-#mainListId div div div ul .aw-widgets-cellListItemSelected div div div img {
+#mainListId div div div ul .aw-widgets-cellListItemSelected div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-
-#mainListId div div div ul li:hover div div div img {
+#mainListId div div div ul li:hover div div div.imgBox {
   border: 7px solid #d81d3c !important;
 }
-
-#mainListId div div div ul .aw-widgets-cellListItemSelected div div div p {
+#mainListId div div div ul .aw-widgets-cellListItemSelected div div div.imgBox {
   border: 7px solid #d81d3c;
 }
-
-#mainListId div div div ul li:hover div div div p {
+#mainListId div div div ul li:hover div div div.imgBox {
   border: 7px solid #d81d3c;
 }
-
-#mainListId div div div ul li div div div img {
+#mainListId div div div ul li div div div.imgBox {
   border: 7px solid white !important;
 }
-
 #mainListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 #mainListId div div div ul li:hover div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 #mainListId div div div ul li {
   border-bottom: 1px solid #eaeaea !important;
   border-top: 0px !important;
   border-left: 0px !important;
   border-right: 0px !important;
 }
-
 // #wareHouse div div div ul li ng-transclude group-header-cell a {
 //     color: black !important;
 // }
-
 #wareHouse .star-ratings-fill {
   color: orangered !important;
   font-size: 1.2rem;
@@ -442,16 +418,13 @@ aw-page .aw-layout-breadCrumbs,
   overflow: hidden;
   -webkit-text-fill-color: orangered !important;
 }
-
 #wareHouse .listShadow {
   border: 1px solid #eaeaea;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 #wareHouse .middleMargin {
   margin: 16px;
 }
-
 #wareHouse .aw-widgets-modelObjectList {
   margin: 0px;
 }
@@ -461,73 +434,67 @@ aw-page .aw-layout-breadCrumbs,
   border: 7px solid #d81d3c !important;
   background-color: #eaeaea;
 }
-
 #reListId div div div ul li:hover {
   border: 7px solid #d81d3c !important;
   background-color: #eaeaea;
 }
-
 #reListId div div div ul li {
   border: 7px solid white;
+  overflow: hidden;
+}
+#reListId .aw-widgets-cellListItemCell {
+  overflow: hidden;
 }
 #reListId .aw-widgets-cellListItemContainer {
   justify-content: center !important;
 }
-
 #reListId div div div ul li {
   margin: 3px 0px;
 }
-
 #reListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 #reListId div div div ul li:hover div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
+#fileListId .aw-widgets-cellListItemCell{
+  overflow: hidden;
+}
 #fileListId div div div ul .aw-widgets-cellListItemSelected {
   border: 7px solid #d81d3c !important;
   background-color: #eaeaea;
 }
-
 #fileListId div div div ul li:hover {
   border: 7px solid #d81d3c !important;
   background-color: #eaeaea;
 }
-
 #fileListId div div div ul li {
   border: 7px solid white;
 }
-
 #fileListId div div div ul li {
   margin: 3px 0px;
 }
-
 #fileListId .aw-widgets-cellListItemContainer {
   justify-content: center !important;
 }
-
 #fileListId div div div ul .aw-widgets-cellListItemSelected div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 #fileListId div div div ul li:hover div div div h2 {
   font-weight: 900;
   text-decoration: underline;
   font-size: 0.95rem !important;
   color: black !important;
 }
-
 #test1 .star-ratings-fill {
   color: orangered !important;
   font-size: 1.2rem;
@@ -540,29 +507,23 @@ aw-page .aw-layout-breadCrumbs,
   overflow: hidden;
   -webkit-text-fill-color: orangered !important;
 }
-
 #test1 .star-rating :checked ~ label {
   color: orangered !important;
 }
-
 #test1 .star-rating label:hover,
 #test1 .star-rating label:hover ~ label {
   color: orangered !important;
 }
-
 #test1 .leftArrowSpace:hover {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-
 #test1 .rightArrowSpace:hover {
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
-
 #test1 .rightArrowSpace svg line,
 #test1 .leftArrowSpace svg line {
   stroke: white !important;
 }
-
 #showFullStar svg path {
   fill: orange;
 }
@@ -577,28 +538,22 @@ aw-page .aw-layout-breadCrumbs,
 #qnaDatas .aw-commands-commandBarHorizontal .aw-commandIcon {
   display: none !important;
 }
-
 aw-splm-table .aw-splm-table .aw-splm-tableCanvas .ui-grid-row .aw-splm-tableCellSelected {
   border-color: rgb(240, 240, 240);
 }
-
 .aw-jswidgets-grid .ui-grid-row .ui-grid-cell {
   background-color: #ffffff;
   border-color: rgb(240, 240, 240);
 }
-
 aw-splm-table .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected {
   background: rgb(240, 240, 240);
 }
-
 .aw-splm-table .ui-grid-row.aw-splm-tableHoverRow {
   background: rgb(231, 231, 231);
 }
-
 .aw-splm-table .ui-grid-row.ui-grid-row-selected.aw-splm-tableHoverRow {
   background: rgb(207, 207, 207);
 }
-
 #qnaDatas .aw-splm-tableHeaderRow,
 #qnaDatas .aw-splm-tableHeaderCell {
   background-color: #ffffff;
@@ -609,7 +564,6 @@ aw-splm-table .aw-jswidgets-grid .ui-grid-row.ui-grid-row-selected {
 #mainTechnicalData .aw-commands-commandBarHorizontal .aw-commandIcon {
   display: none !important;
 }
-
 #mainTechnicalData .aw-splm-tableHeaderRow,
 #mainTechnicalData .aw-splm-tableHeaderCell {
   background-color: #ffffff;
@@ -631,23 +585,19 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
   margin-left: 50px;
   background-color: none;
 }
-
 .note-editor.note-frame .note-editing-area .note-editable[contenteditable='false'] {
   background-color: white !important;
 }
-
 .aw-widgets-breadCrumbCompact .aw-layout-eachCrumb:first-child .aw-widgets-primaryCrumb {
   margin-left: -50px !important;
 }
 
 //타일
-
 .aw-theme-commandsActionsTile {
   background-color: #c82254 !important;
   fill: #ffffff;
   color: #ffffff;
 }
-
 .aw-tile-tileContainer {
   width: 150px;
   height: 150px;
@@ -662,12 +612,10 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
   outline: 0;
   border: transparent solid 2px;
 }
-
 .aw-tile-tileImage .aw-base-icon {
   min-width: 100%;
   max-height: 100%;
 }
-
 .aw-tile-tileContent > .aw-layout-flexColumn {
   -webkit-justify-content: center;
   -ms-flex-pack: justify;
@@ -676,11 +624,9 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
 }
 
 //좌측 커맨드 바
-
 .awRoot .global-navigation-toolbar aw-command-bar.aw-commands-commandBarVertical {
   width: 72px;
 }
-
 .aw-commands-showIconLabel
   .global-navigation-toolbar
   aw-command-bar:not(.aw-layout-userSessionCommands).aw-commands-commandBarVertical
@@ -696,7 +642,6 @@ aw-navigate-breadcrumb .aw-layout-fxbreadCrumbs > div {
 .leftSide.aw-flex-column.ng-scope.ng-isolate-scope.afx-static-size {
   background-color: rgb(234, 234, 234);
 }
-
 .selectNavigateCommand {
   background-color: rgba(0, 0, 0, 0.2);
 }

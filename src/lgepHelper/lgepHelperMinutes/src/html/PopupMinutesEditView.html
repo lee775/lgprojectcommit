@@ -1,0 +1,55 @@
+<aw-popup2>
+    <aw-panel>
+        <aw-panel-body id="editMinutes">
+            <aw-flex-row>
+                <aw-textbox prop="data.minutesTitle" class="addPopupLabelCSS"></aw-textbox>
+            </aw-flex-row>
+            <aw-flex-row>
+                <aw-flex-column>
+                    <aw-datetime prop="data.l2_meeting_date" class="addPopupLabelCSS"></aw-datetime>
+                </aw-flex-column>
+                <aw-flex-column width="1f"></aw-flex-column>
+                <aw-flex-column>
+                    <aw-textbox prop="data.l2_meeting_place" class="addPopupLabelCSS"></aw-textbox>
+                </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+                <aw-flex-column width="fill">
+                    <aw-textarea prop="data.l2_meeting_participants" class="addPopupLabelCSS"></aw-textarea>
+                </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+                <aw-textbox prop="data.l2_meeting_agenda" class="addPopupLabelCSS"></aw-textbox>
+            </aw-flex-row>
+            <aw-flex-row>     
+                <aw-flex-column width="fill">
+                    <aw-textarea prop="data.l2_meeting_related_schedule" class="addPopupLabelCSS"></aw-textarea>
+                </aw-flex-column>           
+            </aw-flex-row>
+            <aw-flex-row>
+                <aw-label prop="data.l2_meeting_detailsLbl" class="addPopupLabelCSS"></aw-label>
+            </aw-flex-row>
+            <aw-flex-row>
+                <textarea id="editMinutesSummernote"></textarea>
+            </aw-flex-row>
+            <aw-flex-row>
+                <aw-label prop="data.attachFileLbl" class="addPopupLabelCSS"></aw-label>
+            </aw-flex-row>
+            <aw-flex-row class="fileLabel">
+                <label for="editFileUpload">
+                    <div class="btn-upload">{{i18n.fileUpload}}</div>
+                </label>
+                <input type="file" id="editFileUpload" multiple='multiple'
+                    accept=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"></input>
+            </aw-flex-row>
+            <aw-flex-row id="editUploadList">
+                <div id="editPreview"></div>
+            </aw-flex-row>
+        </aw-panel-body>
+    </aw-panel>
+    <aw-panel-footer>
+      <aw-button button-type="base" size="auto" action="editMinutes">{{i18n.save}}</aw-button>
+      <aw-button size="auto" action="closePopupWindow">{{i18n.close}}</aw-button>
+    </aw-panel-footer>
+  </aw-popup2>
+  

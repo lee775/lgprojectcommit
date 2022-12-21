@@ -1,33 +1,38 @@
 <aw-flex-row id="mainAllMinutesInCheckList">
   <aw-panel>
     <aw-panel-body>
-      <aw-panel-section caption="필터">
+      <aw-panel-section caption="{{i18n.filter}}">
         <aw-flex-row>
-          <aw-flex-column class="checkboxLabel"> 프로젝트명 </aw-flex-column>
-          <aw-flex-column class="checkbox">
-            <aw-list dataprovider="data.dataProviders.projectCode">
-              <aw-checkbox prop="item" action="checkboxAction"></aw-checkbox>
-            </aw-list>
-          </aw-flex-column>
+          <aw-flex-column class="checkboxLabel"> {{i18n.projectName}} </aw-flex-column>
+          <aw-panel-body style="height: 8em;">
+            <aw-flex-column class="checkbox">
+              <aw-list dataprovider="data.dataProviders.projectCode">
+                <aw-checkbox prop="item" action="checkboxAction"></aw-checkbox>
+              </aw-list>
+            </aw-flex-column>
+          </aw-panel-body>
         </aw-flex-row>
+        <aw-separator></aw-separator>
         <aw-flex-row>
-          <aw-flex-column class="checkboxLabel1"> 제품코드 </aw-flex-column>
-          <aw-flex-column class="checkbox">
-            <aw-list dataprovider="data.dataProviders.productCode">
-              <aw-checkbox prop="item" action="checkboxAction"></aw-checkbox>
-            </aw-list>
-          </aw-flex-column>
+          <aw-flex-column class="checkboxLabel1"> {{i18n.prodCode}} </aw-flex-column>
+          <aw-panel-body style="height: 8em;">
+            <aw-flex-column class="checkbox">
+              <aw-list dataprovider="data.dataProviders.productCode">
+                <aw-checkbox prop="item" action="checkboxAction"></aw-checkbox>
+              </aw-list>
+            </aw-flex-column>
+          </aw-panel-body>
         </aw-flex-row>
       </aw-panel-section>
-      <aw-separator id="separatorInAllMinutes"></aw-separator>
-      <aw-panel-section caption="회의록">
+      <!-- <aw-separator id="separatorInAllMinutes"></aw-separator> -->
+    </aw-panel-body>
+    <aw-panel-footer>
+      <aw-panel-section caption="{{i18n.minutes}}">
         <aw-flex-row id="allMinutesTableGrid">
           <aw-splm-table gridid="allMinutesTable" use-tree="false" show-decorate="true"> </aw-splm-table>
         </aw-flex-row>
       </aw-panel-section>
-    </aw-panel-body>
-    <aw-panel-footer>
-      <aw-button action="minutesView">조회</aw-button>
+      <aw-button action="minutesView">{{i18n.view}}</aw-button>
     </aw-panel-footer>
   </aw-panel>
 </aw-flex-row>

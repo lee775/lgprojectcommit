@@ -26,7 +26,6 @@ const INTERACTION_CELL_HEADER_CLASS = ['Class', '구분'];
 const INTERACTION_CELL_HEADER_SIDE = ['Influencing side', '영향주는 측'];
 
 export const makeTable = async () => {
-  appCtxService.registerCtx('norefresh', true);
   structureInfo = appCtxService.ctx.checklist[STRUCTURE_INFO];
   const tableInfo = getTableInfo();
   const { columnInfo, datas } = tableInfo;
@@ -64,11 +63,15 @@ export const makeTable = async () => {
       },
     });
   }
+  appCtxService.registerCtx('norefresh', true);
 
-  gridTable.on('dblclick', () => {
-    _hello();
+  gridTable.on('dblclick', (ev) => {
+    if (appCtxService.ctx.checkReleased > 0) {
+      ev.stop();
+    } else {
+      _hello();
+    }
   });
-  _disableCells(datas);
 
   // gridTable.on('click', (ev) => {
   //   // 토스트그리드 클릭시 이벤트 추가
@@ -83,8 +86,6 @@ export const makeTable = async () => {
 
   noRefresh();
   _interactionHeaderInit();
-
-  return gridTable;
 };
 
 const _makeListItmes = () => {
@@ -204,7 +205,7 @@ const _getData = (parentAssy) => {
   if (!parentAssy.getChildren()) return null;
   const datas = parentAssy
     .getChildren()
-    .filter((e) => e.type == 'L2_StructureRevision')
+    .filter((e) => e.type == 'L2_StructureRevision' && e.getObject().props.l2_is_IM_target.dbValues[0] == 'Y')
     .map((subAssy) => {
       const subAssyName = subAssy.name;
       return {
@@ -214,7 +215,6 @@ const _getData = (parentAssy) => {
         interactionHeader: subAssyName,
       };
     });
-  console.log(datas);
   return datas;
 };
 
@@ -262,7 +262,7 @@ const _getSubAssyColumns = (parentAssy, listItems) => {
   if (!parentAssy.getChildren()) return null;
   const subAssyColumns = parentAssy
     .getChildren()
-    .filter((e) => e.type == 'L2_StructureRevision')
+    .filter((e) => e.type == 'L2_StructureRevision' && e.getObject().props.l2_is_IM_target.dbValues[0] == 'Y')
     .map((subAssy) => {
       const columnName = subAssy.getOriginalObject().uid;
       const columnHeader = subAssy.name;
@@ -309,7 +309,6 @@ async function _hello() {
   const grid2 = document.getElementsByClassName('tui-grid-cell-disabled');
   await lgepCommonUtils.delay(100);
   document.querySelector('.tui-grid-cell-disabled').setAttribute('id', 'test');
-  console.log(document.getElementById('test'));
 
   grid2[0].addEventListener('mousedown', function (event) {
     document.getElementById('test').click();
@@ -319,8 +318,6 @@ async function _hello() {
     document.getElementsByClassName('tui-select-box-item')[i].addEventListener('click', function (event) {
       divclick();
     });
-
-    console.log({ grid1 });
   }
 }
 
@@ -328,16 +325,13 @@ async function divclick() {
   await lgepCommonUtils.delay(100);
   const grid1 = document.getElementsByClassName('tui-select-box-item');
   lgepCommonUtils.delay(200);
-  console.log(document.getElementById('test'));
-  console.log(gridTable);
   gridTable.focusAt(0, 0, false);
-  document.getElementById('test').click();
+  // document.getElementById('test').click();
 }
 
 async function noRefresh() {
   let ctx = appCtxService.ctx;
   await lgepCommonUtils.delay(200);
-  console.log(ctx.norefresh);
   if (ctx.norefresh == true) {
     window.onbeforeunload = function (e) {
       return 0;

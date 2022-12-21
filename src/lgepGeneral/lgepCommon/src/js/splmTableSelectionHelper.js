@@ -41,12 +41,12 @@ const selectCell = function (cell, gridOptions, columnDefs, idx, cellRenderer, s
   }
   cellRenderer.resetHoverCommandElement();
   // process OOTB cmd cell
-  if (cellTop.lastChild && cellTop.lastChild.classList && cellTop.lastChild.classList.contains(_t.Const.CLASS_NATIVE_CELL_COMMANDS)) {
+  if (cellTop && cellTop.lastChild && cellTop.lastChild.classList && cellTop.lastChild.classList.contains(_t.Const.CLASS_NATIVE_CELL_COMMANDS)) {
     _t.util.destroyNgElement(cellTop.lastChild);
   }
 
   // process customize cmd cell
-  if (cellTop.lastChild && cellTop.lastChild.classList && cellTop.lastChild.classList.contains(_t.Const.CLASS_AW_CELL_COMMANDS)) {
+  if (cellTop && cellTop.lastChild && cellTop.lastChild.classList && cellTop.lastChild.classList.contains(_t.Const.CLASS_AW_CELL_COMMANDS)) {
     if (selectionModel.multiSelectEnabled) {
       cellTop.lastChild.style.display = 'none';
     }
@@ -56,7 +56,7 @@ const selectCell = function (cell, gridOptions, columnDefs, idx, cellRenderer, s
     pinElem.getElementsByClassName(_t.Const.CLASS_CELL_CHECKBOX_BUTTON)[0].checked = true;
   }
 
-  if (rowElem.vmo.props) {
+  if (rowElem.vmo.props && cellTop) {
     if (!cellTop.lastChild || (cellTop.lastChild && cellTop.lastChild.classList && !cellTop.lastChild.classList.contains(_t.Const.CLASS_AW_CELL_COMMANDS))) {
       if (!selectionModel.multiSelectEnabled && selectionModel.getCurrentSelectedCount() === 1) {
         const markElem = awSPLMTableCellRendererFactory.createCellCommandElement(columnDefs[idx], rowElem.vmo, table, true);

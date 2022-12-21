@@ -1,6 +1,11 @@
 {
   "schemaVersion": "1.0.0",
-  "imports": ["js/aw-panel.directive"],
+  "imports": [
+    "js/aw-panel.directive"
+  ],
+  "lifecycleHooks": {
+    "onInit": "onMount"
+  },
   "actions": {
     "onMount": {
       "actionType": "JSFunction",
@@ -11,21 +16,59 @@
       },
       "deps": "js/L2_StandardBOMSearchDetailService"
     },
-    "standardBOMTreeSelectionChangeEvent": {
+    "standardselectBomTreeNodeChangeEvent": {
       "actionType": "JSFunction",
-      "method": "standardBOMTreeSelectionChangeEvent",
+      "method": "standardselectBomTreeNodeChangeEvent",
       "inputData": {
         "ctx": "{{ctx}}",
         "data": "{{data}}",
         "eventData": "{{parameters.eventData}}"
       },
       "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "loadStandardBOMTreeDetailPartial": {
+      "actionType": "JSFunctionAsync",
+      "method": "loadStandardBOMTreeDetailPartial",
+      "inputData": {
+        "dpName": "standardBOMTreeDetailDataProvider",
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "treeLoadResult2": "standardBOMTreeDetailResult"
+      },
+      "deps": "js/L2_StandardBOMSearchDetailService"
+    },
+    "loadStandardBOMTreeDetail": {
+      "actionType": "JSFunction",
+      "method": "loadStandardBOMTreeDetail",
+      "inputData": {
+        "dpName": "standardBOMTreeDetailDataProvider",
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "treeLoadResult2": "standardBOMTreeDetailResult"
+      },
+      "deps": "js/L2_StandardBOMSearchDetailService"
+    },
+    "interactionMatrixInit": {
+      "actionType": "JSFunction",
+      "method": "interactionMatrixInit",
+      "deps": "js/L2_InteractionMatrixAddService"
     }
   },
   "functions": {},
   "data": {},
   "dataProviders": {
-    "standardBOMTreeDetailDataProvider": {}
+    "standardBOMTreeDetailDataProvider": {
+      "action": "loadStandardBOMTreeDetailPartial",
+      "initializeAction": "loadStandardBOMTreeDetail",
+      "treeLoadResult": "{{data.treeLoadResult2}}",
+      "inputData": {
+        "accessMode": "tree"
+      }
+    }
   },
   "columnProviders": {
     "standardBOMFolderTreeColumnProvider": {
@@ -48,6 +91,13 @@
           "minWidth": 150,
           "width": 400,
           "isTreeNavigation": true
+        },
+        {
+          "name": "interaction_target",
+          "displayName": "인터랙션?",
+          "minWidth": 50,
+          "width": 100,
+          "isTreeNavigation": true
         }
       ]
     }
@@ -69,17 +119,18 @@
     {
       "eventId": "standardBOMTreeDetailDataProvider.selectionChangeEvent",
       "cacheEventData": true,
-      "action": "standardBOMTreeSelectionChangeEvent",
+      "action": "standardselectBomTreeNodeChangeEvent",
       "inputArgs": {
         "eventData": "{{eventData}}"
       }
+    },
+    {
+      "eventId": "tableDestroyed",
+      "action": "interactionMatrixInit"
     }
   ],
   "conditions": {},
   "i18n": {
     "name": ["TCUICommandPanelsMessages"]
-  },
-  "lifecycleHooks": {
-    "onMount": "onMount"
   }
 }

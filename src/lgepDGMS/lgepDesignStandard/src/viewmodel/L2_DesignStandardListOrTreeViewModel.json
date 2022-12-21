@@ -18,8 +18,8 @@
       "action": "searchIconEvent"
     },
     {
-    "eventId": "changePositionEvent",
-    "action": "changePositionSet"
+      "eventId": "changePositionEvent",
+      "action": "changePositionSet"
     }
   ],
   "actions": {
@@ -35,7 +35,9 @@
     },
     "listReload": {
       "actionType": "dataProvider",
-      "methods": ["fileList"]
+      "methods": [
+        "fileList"
+      ]
     },
     "loadList": {
       "actionType": "JSFunction",
@@ -111,8 +113,14 @@
     }
   },
   "i18n": {
-    "search": ["L2_DesignStandardMessages"],
-    "requiredText": ["L2_DesignStandardMessages"],
-    "searchingInPage": ["L2_DesignStandardMessages"]
+    "search": [
+      "L2_DesignStandardMessages"
+    ],
+    "requiredText": [
+      "L2_DesignStandardMessages"
+    ],
+    "searchingInPage": [
+      "L2_DesignStandardMessages"
+    ]
   }
 }

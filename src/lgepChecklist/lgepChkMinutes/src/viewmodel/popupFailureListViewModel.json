@@ -98,5 +98,8 @@
   },
   "functions": {},
   "lifecycleHooks": {},
-  "i18n": {}
+  "i18n": {
+    "addFailure": ["lgepChkMinutesMessages"],
+    "cancel": ["lgepChkMinutesMessages"]    
+  }
 }

@@ -2,7 +2,7 @@
     "schemaVersion": "1.0.0",
     "imports": [
       "js/aw-button.directive",
-      "js/aw-datetime.directive",
+      "js/aw-date.directive",
       "js/aw-flex-column.directive",
       "js/aw-flex-row.directive",
       "js/aw-label.directive",
@@ -61,40 +61,40 @@
     },
     "data": {
       "l2_commentLbl": {
-        "displayName": "코멘트",
+        "displayName": "{{i18n.comment}}",
         "type": "STRING",
         "isRequired": "false",
         "isEditable": "true"
       },
       "l2_follow_upLbl": {
-        "displayName": "F/up",
+        "displayName": "{{i18n.followUp}}",
         "type": "STRING",
         "isRequired": "false",
         "isEditable": "true"
       },
       "l2_workerTxt": {
-        "displayName": "담당자",
+        "displayName": "{{i18n.worker}}",
         "type": "STRING",
         "isRequired": "false",
         "isEditable": "true",
         "numberOfLines": 3
       },
       "object_descLbl": {
-        "displayName": "비고",
+        "displayName": "{{i18n.remark}}",
         "type": "STRING",
         "isRequired": "false",
         "isEditable": "true"
       },
       "l2_expected_date": {
-        "displayName": "일정",
-        "type": "DATETIME",
+        "displayName": "{{i18n.expectedDate}}",
+        "type": "DATE",
         "isRequired": "false",
         "isEditable": "true",
         "dispValue": "",
         "labelPosition": "PROPERTY_LABEL_AT_SIDE"
       },
       "l2_worker": {
-          "displayName": "담당자",
+          "displayName": "{{i18n.worker}}",
           "type": "STRING",
           "isRequired": "true",
           "hasLov": "true",
@@ -116,21 +116,13 @@
       "onMount": "createActionItemInitialize"
     },
     "i18n": {
-      "minutesTitle": ["lgepChkMinutesMessages"],
-      "date": ["lgepChkMinutesMessages"],
-      "place": ["lgepChkMinutesMessages"],
-      "participants": ["lgepChkMinutesMessages"],
-      "meetingDetails": ["lgepChkMinutesMessages"],
-      "meetingAgenda": ["lgepChkMinutesMessages"],
-      "relatedSchedule": ["lgepChkMinutesMessages"],
-      "writer": ["lgepChkMinutesMessages"],
-      "detail": ["lgepChkMinutesMessages"],
-      "minutesList": ["lgepChkMinutesMessages"],
-      "minutes": ["lgepChkMinutesMessages"],
       "create": ["lgepChkMinutesMessages"],
       "back": ["lgepChkMinutesMessages"],
-      "createMinutes": ["lgepChkMinutesMessages"],
-      "fileDataSet": ["lgepChkMinutesMessages"]
+      "comment": ["lgepChkMinutesMessages"],
+      "followUp": ["lgepChkMinutesMessages"],
+      "worker": ["lgepChkMinutesMessages"],
+      "expectedDate": ["lgepChkMinutesMessages"],
+      "remark": ["lgepChkMinutesMessages"]
     }
   }
   

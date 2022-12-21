@@ -206,7 +206,26 @@ export function searchList(data) {
   }
 }
 
-export function checkURL(data) {
+export async function checkURL(data) {
+  let searchSource = await showFaceset();
+  let sources = searchSource.searchFilterMap['L2_PageRevision.l2_source'];
+  let sourceValues = [
+    {
+      propDisplayValue: null,
+      propInternalValue: null,
+    },
+  ];
+
+  for (let source of sources) {
+    if (source.stringValue !== '$NONE') {
+      let tempInput = {
+        propDisplayValue: source.stringValue,
+        propInternalValue: source.stringValue,
+      };
+      sourceValues.push(tempInput);
+    }
+  }
+
   let periodValues = [
     {
       propDisplayValue: '',
@@ -229,26 +248,7 @@ export function checkURL(data) {
       propInternalValue: 2592000000,
     },
   ];
-  data.listPeriodValues.dbValue = periodValues;
-  let sourceValues = [
-    {
-      propDisplayValue: null,
-      propInternalValue: null,
-    },
-    {
-      propDisplayValue: 'DGMS',
-      propInternalValue: 'DGMS',
-    },
-    {
-      propDisplayValue: 'DQMS',
-      propInternalValue: 'DQMS',
-    },
-    {
-      propDisplayValue: 'GPDM',
-      propInternalValue: 'GPDM',
-    },
-  ];
-  data.listSourceValues.dbValue = sourceValues;
+
   let allignValues = [
     {
       propDisplayValue: null,
@@ -267,6 +267,8 @@ export function checkURL(data) {
       propInternalValue: 'accuracy',
     },
   ];
+  data.listPeriodValues.dbValue = periodValues;
+  data.listSourceValues.dbValue = sourceValues;
   data.listAllignValues.dbValue = allignValues;
   let qnaData = vms.getViewModelUsingElement(document.getElementById('wareHouse'));
   let treeArray = qnaData.treeArray;
@@ -346,6 +348,46 @@ export function panelDataReset(data) {
   data.listAllign.dbValue = '';
   data.listAllign.uiValue = '';
   loadOutputData = undefined;
+}
+
+async function showFaceset() {
+  let ctx = appCtx.ctx;
+  let inputData = {
+    facetSearchInput: {
+      providerName: 'Awp0FullTextSearchProvider',
+      searchCriteria: {
+        searchString: '*',
+        forceThreshold: 'false',
+        categoryForFacetSearch: 'L2_PageRevision.l2_source',
+        facetSearchString: '',
+      },
+      searchFilterMap: {
+        'WorkspaceObject.object_type': [
+          {
+            searchFilterType: 'StringFilter',
+            stringValue: 'L2_IssuePageRevision',
+            colorValue: '',
+            stringDisplayValue: '',
+            startDateValue: '',
+            endDateValue: '',
+            startNumericValue: 0,
+            endNumericValue: 0,
+            count: 0,
+            selected: false,
+            startEndRange: '',
+          },
+        ],
+      },
+      startIndex: 0,
+      maxToReturn: 100,
+    },
+  };
+  try {
+    return SoaService.post('Internal-AWS2-2018-05-Finder', 'performFacetSearch', inputData);
+  } catch (err) {
+    message.show(1, '검색중 오류가 발생하였습니다.');
+    return;
+  }
 }
 
 let exports = {};

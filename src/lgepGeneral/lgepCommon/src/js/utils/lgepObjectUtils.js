@@ -1064,14 +1064,14 @@ export function createPolicies(properties, objectTypes = []) {
     useRefCount: false,
   };
   for (const objectType of objectTypes) {
-    policy.types.push({
-      name: objectType,
-      properties: [],
-    });
-    let propertyContainer = policy.types[0].properties;
+    let propertyContainer = [];
     for (const property of properties) {
       propertyContainer.push({ name: property });
     }
+    policy.types.push({
+      name: objectType,
+      properties: propertyContainer,
+    });
   }
   return policy;
 }

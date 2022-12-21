@@ -8,7 +8,6 @@
     "js/aw-panel-footer.directive",
     "js/aw-popup2.directive",
     "js/aw-scrollpanel.directive",
-    "js/aw-listbox.directive",
     "js/aw-textbox.directive",
     "js/aw-label.directive",
     "js/visible-when.directive",

@@ -12,6 +12,7 @@
     "js/aw-listbox.directive",
     "js/aw-toolbar.directive",
     "js/aw-textbox.directive",
+    "js/aw-textarea.directive",
     "js/aw-scrollpanel.directive",
     "css/L2_StandardBOMSearchAndSelectView.css"
   ],
@@ -34,7 +35,7 @@
       "outputData": {
         "treeLoadResult": "{{function:loadStandardBOMFolderTreeData}}"
       },
-      "deps": "js/L2_StandardBOMSearchAndSelectService"
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateService"
     },
     "loadStandardBOMTree": {
       "actionType": "JSFunction",
@@ -92,11 +93,11 @@
         "data": "{{data}}",
         "eventData": "{{parameters.eventData}}"
       },
-      "deps": "js/L2_StandardBOMSearchAndSelectService"
+      "deps": "js/L2_StandardBOMSearchAndSelectTemplateService"
     },
-    "standardBOMTreeSelectionChangeEvent": {
+    "standardselectBomTreeNodeChangeEvent": {
       "actionType": "JSFunction",
-      "method": "standardBOMTreeSelectionChangeEvent",
+      "method": "standardselectBomTreeNodeChangeEvent",
       "inputData": {
         "ctx": "{{ctx}}",
         "data": "{{data}}",
@@ -112,15 +113,6 @@
         "eventData": "{{parameters.eventData}}"
       },
       "deps": "js/L2_StandardBOMSearchAndSelectService"
-    },
-    "editOpen": {
-      "actionType": "JSFunction",
-      "method": "editOpen",
-      "inputData": {
-        "data": "{{data}}",
-        "ctx": "{{ctx}}"
-      },
-      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
     },
     "editSave": {
       "actionType": "JSFunction",
@@ -157,6 +149,16 @@
         "ctx": "{{ctx}}"
       },
       "deps": "js/L2_StandardBOMSearchAndSelectService"
+    },
+    "partSave":{
+      "actionType": "JSFunction",
+      "method": "savePart",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectEditService"
+
     }
   },
   "functions": {
@@ -170,6 +172,13 @@
     }
   },
   "data": {
+    "partSaveDisabledButtonChk": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false
+    },
     "disabledButtonChk": {
       "displayName": "",
       "type": "BOOLEAN",
@@ -294,8 +303,7 @@
     },
     "importanceValues": {
       "type": "STRING",
-      "dbValue": [
-        {
+      "dbValue": [{
           "propDisplayValue": "",
           "dispValue": "",
           "propInternalValue": ""
@@ -351,6 +359,22 @@
           "propInternalValue": "10"
         }
       ]
+    },
+    "l2_comments":{
+      "displayName": "",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "comments":{
+      "displayName": "비고",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
     }
   },
   "dataProviders": {
@@ -380,7 +404,8 @@
         "displayName": "{{i18n.name}}",
         "minWidth": 150,
         "width": 300,
-        "isTreeNavigation": true
+        "isTreeNavigation": true,
+        "enableColumnMenu": false
       }],
       "frozenColumnIndex": -1
     },
@@ -390,8 +415,10 @@
         "displayName": "{{i18n.name}}",
         "minWidth": 150,
         "width": 400,
-        "isTreeNavigation": true
-      }]
+        "isTreeNavigation": true,
+        "enableColumnMenu": false
+      }],
+      "frozenColumnIndex": -1
     }
   },
   "grids": {
@@ -415,12 +442,12 @@
         "enableGridMenu": true,
         "enablePinning": false,
         "enableSorting": false,
-        "isFilteringEnabled": false
+        "isFilteringEnabled": false,
+        "maxRowsToShow": 30
       }
     }
   },
-  "onEvent": [
-    {
+  "onEvent": [{
       "eventId": "standardBOMTree.delete.item",
       "cacheEventData": true,
       "action": "deleteChecklist"
@@ -436,7 +463,7 @@
     {
       "eventId": "standardBOMTreeDataProvider.selectionChangeEvent",
       "cacheEventData": true,
-      "action": "standardBOMTreeSelectionChangeEvent",
+      "action": "standardselectBomTreeNodeChangeEvent",
       "inputArgs": {
         "eventData": "{{eventData}}"
       }
@@ -465,7 +492,7 @@
   },
   "i18n": {
     "CancelText": ["TCUICommandPanelsMessages"],
-    "confirm": ["InboxMessages"],
+    "createChecklist": ["L2_ChkMainMessages"],
     "description": ["TCUICommandPanelsMessages"],
     "isChecklistTarget": ["L2_ChkStandardBOMMessages"],
     "name": ["TCUICommandPanelsMessages"],
@@ -488,7 +515,16 @@
     "openChecklistBomSave": ["L2_ChkMainMessages"],
     "openChecklistBomCancelEdit": ["L2_ChkMainMessages"],
     "editorSave": ["L2_ChkMainMessages"],
-    "failureImportance": ["L2_ChkMainMessages"]
+    "failureImportance": ["L2_ChkMainMessages"],
+    "partSave": ["L2_ChkStandardBOMMessages"],
+    "masterList": ["L2_ChkMainMessages"],
+    "master": ["L2_ChkMainMessages"],
+    "editMaster": ["L2_ChkMainMessages"],
+    "structureName": ["L2_ChkMainMessages"],
+    "productType": ["L2_ChkMainMessages"],
+    "productClass": ["L2_ChkMainMessages"],
+    "note": ["L2_ChkMainMessages"],
+    "attachmentImage": ["L2_ChkMainMessages"]
   },
   "lifecycleHooks": {
     "onInit": "onInit",

@@ -811,14 +811,17 @@ export async function relationItemSetting(value, data) {
   } else {
     let htmlData = vms.getViewModelUsingElement(document.getElementById('qnaDatas'));
     if (htmlData.window == 'askExpert') {
+      eventBus.publish('pageChipDataProvider.reset');
       history.pushState(null, null, '#/askExpert?question=' + value.uid);
       htmlData.dataProviders.qaListDataProvider.selectionModel.setSelection(value);
     } else if (htmlData.window == 'qna') {
       eventBus.publish('qaList.plTable.reload');
+      eventBus.publish('pageChipDataProvider.reset');
       history.pushState(null, null, '#/questionAnswer?question=' + value.uid);
       htmlData.dataProviders.qaListDataProvider.selectionModel.setSelection(value);
     } else {
       eventBus.publish('qaList.plTable.reload');
+      eventBus.publish('pageChipDataProvider.reset');
     }
   }
   if (value) {

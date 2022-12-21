@@ -1,0 +1,52 @@
+<aw-popup2 caption="{{i18n.actionItem}}">
+    <aw-panel>
+        <aw-panel-body>
+            <aw-flex-column class="actionCSS">
+                <aw-flex-row>
+                  <aw-flex-column width="6.35f" class="lilBot">
+                    <aw-label prop="data.l2_workerLbl"></aw-label>
+                  </aw-flex-column>
+                  <aw-flex-column class="linkCSS3 lilBot">
+                    <aw-link prop="data.workerLink" action="goUserDetailAI"></aw-link>
+                  </aw-flex-column>
+                </aw-flex-row>
+                <aw-separator class="AISeparatorHeight"></aw-separator>
+                <aw-flex-row>
+                  <aw-label prop="data.l2_expected_dateLbl" id="actionItemDateLbl"></aw-label>
+                </aw-flex-row>
+                <aw-separator class="AISeparatorHeight"></aw-separator>
+              <aw-flex-row>
+                <aw-label prop="data.l2_commentLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonEditCommentDetailsSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.l2_follow_upLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonEditFollowUpDetailsSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-label prop="data.object_descLbl"></aw-label>
+              </aw-flex-row>
+              <aw-flex-row>
+                <aw-flex-column>
+                  <textarea id="commonEditRemarkDetailsSummernote"></textarea>
+                </aw-flex-column>
+              </aw-flex-row>
+            </aw-flex-column>
+        </aw-panel-body>
+    </aw-panel>
+    <!-- <aw-panel-footer>
+        <aw-flex-row>
+            <aw-flex-column>
+                <aw-button action="closePopupWindow">{{i18n.close}}</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+    </aw-panel-footer> -->
+</aw-popup2>

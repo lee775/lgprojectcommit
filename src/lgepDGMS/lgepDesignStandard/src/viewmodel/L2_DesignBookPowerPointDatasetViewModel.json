@@ -1,0 +1,151 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+      "js/aw-button.directive",
+      "js/aw-panel-body.directive",
+      "js/aw-balloon-popup-panel.directive",
+      "js/aw-splm-table.directive",
+      "js/aw-file-upload.directive",
+      "js/aw-flex-row.directive",
+      "js/aw-separator.directive",
+      "js/aw-flex-column.directive"
+    ],
+    "onEvent": [
+    ],
+    "actions": {
+      "pptDown": {
+        "actionType": "JSFunction",
+        "method": "pptDown",
+        "deps": "js/L2_DesignStandardPopupService"
+      },
+      "uploadClickBook": {
+        "actionType": "JSFunction",
+        "method": "uploadClickBook",
+        "deps": "js/L2_DesignStandardPopupService"
+      },
+      "updateFormData": {
+        "actionType": "JSFunction",
+        "method": "updateFormData",
+        "inputData": {
+          "fileData": {
+            "key": "name",
+            "value": "{{data.fileName}}"
+          },
+          "data": "{{data}}"
+        },
+        "deps": "js/declUtils"
+      },
+      "selectedBookReferenceAdd": {
+        "actionType": "JSFunction",
+        "method": "selectedBookReferenceAdd",
+        "inputData": {
+          "fileData": "{{data.formData}}",
+          "ctx": "{{ctx}}"
+        },
+        "deps": "js/L2_DesignStandardPopupService"
+      },
+      "attachPPTFileTableSet": {
+        "actionType": "JSFunction",
+        "method": "attachPPTFileTableSet",
+        "outputData": {
+          "filterResults": "{{function:filterRowsWithSort}}",
+          "totalFound": "totalFound"
+        },
+        "deps": "js/L2_DesignStandardPopupService"
+      },
+      "closePopupWindow": {
+        "actionType": "JSFunction",
+        "method": "hide",
+        "inputData": {
+          "popupId": "{{data.popupId}}"
+        },
+        "deps": "js/popupService"
+      },
+      "linkRelationsManualBat": {
+        "actionType": "batchJob",
+        "steps": [
+          {
+            "action": "updateFormData"
+          },
+          {
+            "action": "selectedBookReferenceAdd"
+          }
+        ]
+      }
+    },
+    "data": {
+      "pageSize": 40
+    },
+    "dataProviders": {
+      "dgnStandardBookPPTTableData": {
+        "action": "attachPPTFileTableSet",
+        "response": "{{data.filterResults}}",
+        "totalFound": "{{data.totalFound}}"
+      }
+    },
+    "columnProviders": {
+      "dgnStandardBookPPTTableColumn": {
+        "frozenColumnIndex": -1,
+        "columns": [
+          {
+            "name": "object_name",
+            "displayName": "{{i18n.dataset}}",
+            "width": 300,
+            "pinnedLeft": true,
+            "enableColumnMenu": false,
+            "enableColumnMoving": false
+          }
+        ]
+      }
+    },
+    "grids": {
+      "dgnStandardBookPPTTable": {
+        "dataProvider": "dgnStandardBookPPTTableData",
+        "columnProvider": "dgnStandardBookPPTTableColumn",
+        "addIconColumn": true,
+        "gridOptions": {
+          "enableGridMenu": false,
+          "enablePinning": true,
+          "enableSorting": true
+        }
+      }
+    },
+    "functions": {
+      "filterRowsWithSort": {
+        "functionName": "filterRowsWithSort",
+        "parameters": [
+          "{{data.columnProviders.dgnStandardBookPPTTableColumn.sortCriteria}}",
+          "{{data.dataProviders.dgnStandardBookPPTTableData.startIndex}}",
+          "{{data.pageSize}}"
+        ]
+      }
+    },
+    "conditions": {
+      "state": {
+        "expression": "data.state=='1'"
+      },
+      "popup": {
+        "expression": "data.popupState===true"
+      }
+    },
+    "i18n": {
+      "ok": ["lgepDesignSequenceMessages"],
+      "close": ["lgepDesignSequenceMessages"],
+      "name": ["L2_DesignStandardMessages"],
+      "objType": ["L2_DesignStandardMessages"],
+      "objDetailType": ["L2_DesignStandardMessages"],
+      "fileSize": ["L2_DesignStandardMessages"],
+      "selectDownload": ["L2_DesignStandardMessages"],
+      "downloadAll": ["L2_DesignStandardMessages"],
+      "dateCreated": ["L2_DesignStandardMessages"],
+      "user": ["L2_DesignStandardMessages"],
+      "datasetType": ["L2_DesignStandardMessages"],
+      "dataset": ["L2_DesignStandardMessages"],
+      "page": ["L2_DesignStandardMessages"],
+      "book": ["L2_DesignStandardMessages"],
+      "fileDelete": ["L2_DesignStandardMessages"],
+      "download": ["L2_DesignStandardMessages"],
+      "pptChange": ["L2_DesignStandardMessages"]
+    }
+  }
+  

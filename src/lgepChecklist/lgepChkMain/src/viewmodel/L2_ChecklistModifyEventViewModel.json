@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-command-panel.directive",
+    "js/aw-listbox.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-body.directive",
+    "js/aw-panel-footer.directive",
+    "js/aw-button.directive",
+    "js/exist-when.directive"
+  ],
+  "onEvent": [
+    {
+      "eventId": "L2_ChecklistModifyEvent.contentLoaded",
+      "action": "initialize"
+    }
+  ],
+  "data": {
+    "checklistEvent": {
+      "displayName": "이벤트 단계",
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": " ",
+      "dispValue": " "
+    },
+    "checklistEventValues": {
+      "type": "STRING",
+      "dbValue": [
+          {
+              "propDisplayValue": " ",
+              "propDisplayDescription": " ",
+              "dispValue": " ",
+              "propInternalValue": " "
+          },
+          {
+              "propDisplayValue": "PP",
+              "propDisplayDescription": "",
+              "dispValue": "PP",
+              "propInternalValue": "1"
+          },
+          {
+              "propDisplayValue": "DV",
+              "propDisplayDescription": "",
+              "dispValue": "DV",
+              "propInternalValue": "2"
+          },
+          {
+              "propDisplayValue": "PV",
+              "propDisplayDescription": "",
+              "dispValue": "PV",
+              "propInternalValue": "3"
+          }
+      ]
+    }
+  },
+  "actions": {
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "modifyRevisionEvent",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/L2_ChecklistOpenService"
+    },
+    "confirm": {
+      "actionType": "JSFunction",
+      "method": "confirmRevisionEvent",
+      "inputData": {
+        "checklistEvent": "{{data.checklistEvent.dbValue}}"
+      },
+      "deps": "js/L2_ChecklistOpenService"
+    }
+  },
+  "dataProviders": {},
+  "lifecycleHooks": {
+  },
+  "i18n": {
+    "openChecklistFreeze": ["L2_ChkMainMessages"],
+    "save": ["L2_ChkMainMessages"]
+  }
+}

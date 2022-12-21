@@ -2,6 +2,7 @@ import localeService from 'js/localeService';
 import appCtxService from 'js/appCtxService';
 
 import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 export const TOP = 'top';
 export const PARENT_ASSY = 'parentAssy';
@@ -72,7 +73,7 @@ export const getLang = () => {
   return localeService.getLocale() === 'ko_KR' ? 1 : 2;
 };
 
-export const getInteractionStructureInfo = () => {
+export const getInteractionStructureInfo = async () => {
   const allChecklistRows = appCtxService.ctx.checklist.allChecklistRows;
   const topLine = allChecklistRows[appCtxService.ctx.checklist.topLine.uid];
   const structureInfo = {
@@ -83,15 +84,12 @@ export const getInteractionStructureInfo = () => {
   structureInfo[TOP] = topLine; // 시트
   let parentArray = [];
   let subArray = [];
-  for (const failure of appCtxService.ctx.checklist.failure) {
+  for (const structure of Object.values(allChecklistRows)) {
     try {
-      let functionObj = failure.getParent();
-      let structure = functionObj.getParent();
-
-      if (structure.level == 3) {
+      await lgepObjectUtils.getProperties(structure.getObject(), 'l2_is_IM_target');
+      if (structure.type == 'L2_StructureRevision' && structure.getObject().props.l2_is_IM_target.dbValues[0] == 'Y') {
         let parentAssy = structure.getParent();
         let subAssy = structure;
-
         if (!parentArray.includes(parentAssy.getOriginalObject().uid)) {
           structureInfo[PARENT_ASSY] = [...structureInfo[PARENT_ASSY], parentAssy];
           parentArray.push(parentAssy.getOriginalObject().uid);

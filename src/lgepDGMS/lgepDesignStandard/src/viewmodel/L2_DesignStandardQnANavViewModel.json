@@ -3,7 +3,6 @@
   "imports": [
     "js/aw-panel-section.directive",
     "js/aw-label.directive",
-    "js/aw-link.directive",
     "js/visible-when.directive",
     "js/aw-sidenav.directive",
     "css/designStandardInfoCss.css",

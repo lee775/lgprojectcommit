@@ -5,6 +5,7 @@ import appCtxService from 'js/appCtxService';
 import soaService from 'soa/kernel/soaService';
 import viewModelService from 'js/viewModelService';
 
+import Grid from 'tui-grid';
 import 'summernote/dist/summernote-lite';
 import 'summernote/dist/summernote-lite.css';
 
@@ -16,7 +17,7 @@ import { show, ERROR } from 'js/utils/lgepMessagingUtils';
 import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
 import { loadAndRefreshOpenGrid } from 'js/L2_ChecklistOpenService';
-import { fixedOff, autoResize } from 'js/L2_ExportExcelService';
+import { fixedOff, autoResize, tableResize } from 'js/L2_ExportExcelService';
 import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 
 let MSG = 'L2_ChkMainMessages';
@@ -39,6 +40,32 @@ export async function openChecklistBomEdit(data, ctx) {
   fixedOff(data, ctx);
   delete ctx.hideColumn;
   delete ctx.fixed;
+  if (ctx.theme == 'ui-lgepDark') {
+    Grid.applyTheme('custom', {
+      scrollbar: {
+        border: '#444a4e',
+        background: '#282d33',
+      },
+      row: {
+        hover: {
+          background: 'rgb(56, 66, 77)',
+        },
+      },
+    });
+  } else {
+    Grid.applyTheme('custom', {
+      scrollbar: {
+        border: '#eee',
+        background: '#fff',
+      },
+      row: {
+        hover: {
+          background: '#e5f6ff',
+        },
+      },
+    });
+  }
+
   ctx.checklist.grid.setFrozenColumnCount(0);
   try {
     let listboxElem = document.getElementById('checklist-tableMode-listbox');
@@ -54,7 +81,8 @@ export async function openChecklistBomEdit(data, ctx) {
     }
 
     await lgepCommonUtils.delay(100);
-    autoResize(null, ctx);
+    await tableResize();
+    await autoResize(null, ctx);
   } catch (error) {
     show(ERROR, i18n.chkRowEditFailed + error.name + ': ' + error.message);
   }
@@ -119,6 +147,40 @@ export async function openChecklistBomSave(data, ctx) {
     //saveViewModelEditAndSubmitWorkflow2를 통해, SOD 및 NEW SOD 변경 내용을 저장한다.
     await soaService.post('Internal-AWS2-2018-05-DataManagement', 'saveViewModelEditAndSubmitWorkflow2', saveViewModelEditAndSubmitWorkflow2Param);
 
+    //rawDatas에서 첨부된 파일이 있을 경우 target에 l2_files에 저장한다.
+    const FUNCTION_EDITOR_IDS = ['function', 'requirement'];
+    const FAILURE_EDITOR_IDS = ['failureMode', 'failureEffect', 'failureDetail', 'prevention', 'referenceData', 'detectivity', 'classification'];
+
+    let regEx = /(?<=datauid=")(.*?)(?=")/g;
+    let attachFiles = [];
+
+    for (let row of rawDatas) {
+      for (let key of FAILURE_EDITOR_IDS) {
+        if (row[key]) {
+          let uids = row[key].match(regEx);
+          if (uids) {
+            for (let uid of uids) {
+              attachFiles.push(uid);
+            }
+          }
+        }
+      }
+      for (let key of FUNCTION_EDITOR_IDS) {
+        if (row[key]) {
+          let uids = row[key].match(regEx);
+          if (uids) {
+            for (let uid of uids) {
+              attachFiles.push(uid);
+            }
+          }
+        }
+      }
+    }
+    if (attachFiles.length > 0) {
+      let target = ctx.checklist.target;
+      lgepObjectUtils.setProperties([target], ['l2_files'], [attachFiles]);
+    }
+
     //Dataset의 내용을 수정하기 위해, editingStack를 조사한다.
     //editingStack 은 checklistUtils에서 확인 가능하며, 내용이 편집될때마다 stack이 한칸씩 쌓인다.
     if (ctx.checklist.editingStacks) {
@@ -157,7 +219,7 @@ export async function openChecklistBomSave(data, ctx) {
           //
         }
         if (textUid == '' || !text) {
-          text = await lgepSummerNoteUtils.stringToDataset('details', JSON.stringify(properties));
+          text = await lgepSummerNoteUtils.stringToDataset(bomLine.props.awb0ArchetypeId.dbValues[0], JSON.stringify(properties));
           propertyMap.set(bomLine.uid, text.uid);
         }
         if (!appCtxService.ctx.checklist.target.props.IMAN_reference.dbValues.includes(text.uid))
@@ -207,7 +269,7 @@ export async function openChecklistBomSave(data, ctx) {
     loadAndRefreshOpenGrid();
 
     await lgepCommonUtils.delay(100);
-    autoResize(null, ctx);
+    await autoResize(null, ctx);
 
     lgepLoadingUtils.closeWindow();
     try {

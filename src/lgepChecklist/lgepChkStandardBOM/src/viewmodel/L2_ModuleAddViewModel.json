@@ -5,10 +5,21 @@
     "js/aw-panel.directive",
     "js/aw-panel-body.directive",
     "js/aw-textbox.directive",
-    "js/aw-listbox.directive",
+    "js/aw-radiobutton.directive",
     "js/aw-button.directive"
   ],
   "data": {
+    "isChecklistTarget": {
+      "displayName": "{{i18n.isChecklistTarget}}",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": true,
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE",
+      "vertical": true,
+      "propertyRadioTrueText": "Yes",
+      "propertyRadioFalseText": "No"
+  },
     "disabledButtonChk": {
       "displayName": "",
       "type": "BOOLEAN",
@@ -23,30 +34,6 @@
       "isEditable": "true",
       "dbValue": "",
       "dispValue": ""
-    },
-    "productTypeText": {
-      "displayName": "{{i18n.chkColumnProductType}}",
-      "type": "STRING",
-      "isRequired": "true",
-      "isEditable": "true",
-      "dbValue": "",
-      "dispValue": ""
-    },
-    "productClassText": {
-      "displayName": "{{i18n.chkColumnProductClass}}",
-      "type": "STRING",
-      "isRequired": "true",
-      "isEditable": "true",
-      "dbValue": "",
-      "dispValue": ""
-    },
-    "isChecklistTarget": {
-      "displayName": "{{i18n.isChecklistTarget}}",
-      "type": "STRING",
-      "isRequired": "true",
-      "hasLov": "true",
-      "dbValue": "Showcase",
-      "dispValue": "Showcase"
     },
     "isChecklistTargetValues": {
       "type": "STRING",
@@ -71,7 +58,18 @@
         "data": "{{data}}"
       },
       "deps": "js/L2_StandardBOMSearchAndSelectAddRemoveService"
+    },
+    "unMount": {
+      "actionType": "JSFunction",
+      "method": "unmountModulePanel",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/L2_StandardBOMSearchAndSelectAddRemoveService"
     }
+  },
+  "lifecycleHooks": {
+    "onUnmount": "unMount"
   },
   "i18n": {
     "addModuleAssy": ["L2_ChkMainMessages"],

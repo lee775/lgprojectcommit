@@ -115,6 +115,11 @@
         }
       ]
     },
+    "dgnStandardBookBomView": {
+      "actionType": "JSFunction",
+      "method": "dgnStandardBookBomView",
+      "deps": "js/L2_DesignStandardService"
+    },
     "copyAndPasteBook": {
       "actionType": "JSFunction",
       "method": "copyAndPasteBook",

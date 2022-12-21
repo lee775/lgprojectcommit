@@ -1,0 +1,1443 @@
+{
+    "schemaVersion": "1.0.0",
+    "commands": {
+        "expandGroupCommand": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": true,
+            "title": "{{i18n.unfold}}"
+        },
+        "expandLevel1": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "1레벨"
+        },
+        "expandLevel2": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "2레벨"
+        },
+        "expandLevel3": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "3레벨"
+        },
+        "expandLevel4": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "4레벨"
+        },
+        "expandLevelStructure": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 펼치기"
+        },
+        "expandLevelFunction": {
+            "iconId": "typeQcFMEAFunctionSpecification",
+            "isGroup": false,
+            "title": "기능 펼치기"
+        },
+        "expandLevelAll": {
+            "iconId": "cmdExpandAll",
+            "isGroup": false,
+            "title": "전체 펼치기"
+        },
+        "filterGroupCommand": {
+            "iconId": "cmdfilter",
+            "isGroup": true,
+            "title": "{{i18n.filterChecklist}}"
+        },
+        "filterStructure": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 보기"
+        },
+        "unfilterStructure": {
+            "iconId": "cmdRefreshFilter",
+            "isGroup": false,
+            "title": "전체 보기"
+        },
+        "expandGroupCreateCommand": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": true,
+            "title": "{{i18n.unfold}}"
+        },
+        "expandLevel1Create": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "1레벨"
+        },
+        "expandLevel2Create": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "2레벨"
+        },
+        "expandLevel3Create": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "3레벨"
+        },
+        "expandLevel4Create": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "4레벨"
+        },
+        "expandLevelStructureCreate": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 펼치기"
+        },
+        "expandLevelFunctionCreate": {
+            "iconId": "typeQcFMEAFunctionSpecification",
+            "isGroup": false,
+            "title": "기능 펼치기"
+        },
+        "expandLevelAllCreate": {
+            "iconId": "cmdExpandAll",
+            "isGroup": false,
+            "title": "전체 펼치기"
+        },
+        "filterGroupCreateCommand": {
+            "iconId": "cmdfilter",
+            "isGroup": true,
+            "title": "{{i18n.filterChecklist}}"
+        },
+        "filterStructureCreate": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 보기"
+        },
+        "unfilterStructureCreate": {
+            "iconId": "cmdRefreshFilter",
+            "isGroup": false,
+            "title": "전체 보기"
+        },
+        "expandGroupEditCommand": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": true,
+            "title": "{{i18n.unfold}}"
+        },
+        "expandLevel1Edit": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "1레벨"
+        },
+        "expandLevel2Edit": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "2레벨"
+        },
+        "expandLevel3Edit": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "3레벨"
+        },
+        "expandLevel4Edit": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "4레벨"
+        },
+        "expandLevelStructureEdit": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 펼치기"
+        },
+        "expandLevelFunctionEdit": {
+            "iconId": "typeQcFMEAFunctionSpecification",
+            "isGroup": false,
+            "title": "기능 펼치기"
+        },
+        "expandLevelAllEdit": {
+            "iconId": "cmdExpandAll",
+            "isGroup": false,
+            "title": "전체 펼치기"
+        },
+        "filterGroupEditCommand": {
+            "iconId": "cmdfilter",
+            "isGroup": true,
+            "title": "{{i18n.filterChecklist}}"
+        },
+        "filterStructureEdit": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 보기"
+        },
+        "unfilterStructureEdit": {
+            "iconId": "cmdRefreshFilter",
+            "isGroup": false,
+            "title": "전체 보기"
+        },
+        "expandGroupSaveAsCommand": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": true,
+            "title": "{{i18n.unfold}}"
+        },
+        "expandLevel1SaveAs": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "1레벨"
+        },
+        "expandLevel2SaveAs": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "2레벨"
+        },
+        "expandLevel3SaveAs": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "3레벨"
+        },
+        "expandLevel4SaveAs": {
+            "iconId": "cmdExpandBelow",
+            "isGroup": false,
+            "title": "4레벨"
+        },
+        "expandLevelStructureSaveAs": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 펼치기"
+        },
+        "expandLevelFunctionSaveAs": {
+            "iconId": "typeQcFMEAFunctionSpecification",
+            "isGroup": false,
+            "title": "기능 펼치기"
+        },
+        "expandLevelAllSaveAs": {
+            "iconId": "cmdExpandAll",
+            "isGroup": false,
+            "title": "전체 펼치기"
+        },
+        "filterGroupSaveAsCommand": {
+            "iconId": "cmdfilter",
+            "isGroup": true,
+            "title": "{{i18n.filterChecklist}}"
+        },
+        "filterStructureSaveAs": {
+            "iconId": "typeQcFMEASystemElementSpecification",
+            "isGroup": false,
+            "title": "구조 보기"
+        },
+        "unfilterStructureSaveAs": {
+            "iconId": "cmdRefreshFilter",
+            "isGroup": false,
+            "title": "전체 보기"
+        }
+    },
+    "commandHandlers": {
+        "expandGroupCommandHandler": {
+            "id": "expandGroupCommand",
+            "action": "expandGroupCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevel1Handler": {
+            "id": "expandLevel1",
+            "action": "expandLevel1Action",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevel2Handler": {
+            "id": "expandLevel2",
+            "action": "expandLevel2Action",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevel3Handler": {
+            "id": "expandLevel3",
+            "action": "expandLevel3Action",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevel4Handler": {
+            "id": "expandLevel4",
+            "action": "expandLevel4Action",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevelStructureHandler": {
+            "id": "expandLevelStructure",
+            "action": "expandLevelStructureAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevelFunctionHandler": {
+            "id": "expandLevelFunction",
+            "action": "expandLevelFunctionAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "expandLevelAllHandler": {
+            "id": "expandLevelAll",
+            "action": "expandLevelAllAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "filterGroupCommandHandler": {
+            "id": "filterGroupCommand",
+            "action": "expandGroupCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "filterStructureHandler": {
+            "id": "filterStructure",
+            "action": "filterStructureAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+        "unfilterStructureHandler": {
+            "id": "unfilterStructure",
+            "action": "unfilterStructureAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.moduleNonEditSaving"
+            },
+            "visibleWhen": {
+                "condition": "conditions.standardBOMEdit"
+            }
+        },
+
+
+
+
+        "expandGroupCreateCommandHandler": {
+            "id": "expandGroupCreateCommand",
+            "action": "expandGroupCreateCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel1CreateHandler": {
+            "id": "expandLevel1Create",
+            "action": "expandLevel1CreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel2CreateHandler": {
+            "id": "expandLevel2Create",
+            "action": "expandLevel2CreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel3CreateHandler": {
+            "id": "expandLevel3Create",
+            "action": "expandLevel3CreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel4CreateHandler": {
+            "id": "expandLevel4Create",
+            "action": "expandLevel4CreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelStructureCreateHandler": {
+            "id": "expandLevelStructureCreate",
+            "action": "expandLevelStructureCreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelFunctionCreateHandler": {
+            "id": "expandLevelFunctionCreate",
+            "action": "expandLevelFunctionCreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelAllCreateHandler": {
+            "id": "expandLevelAllCreate",
+            "action": "expandLevelAllCreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "filterGroupCreateCommandHandler": {
+            "id": "filterGroupCreateCommand",
+            "action": "expandGroupCreateCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "filterStructureCreateHandler": {
+            "id": "filterStructureCreate",
+            "action": "filterStructureCreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "unfilterStructureCreateHandler": {
+            "id": "unfilterStructureCreate",
+            "action": "unfilterStructureCreateAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+
+
+
+
+
+        "expandGroupEditCommandHandler": {
+            "id": "expandGroupEditCommand",
+            "action": "expandGroupEditCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel1EditHandler": {
+            "id": "expandLevel1Edit",
+            "action": "expandLevel1EditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel2EditHandler": {
+            "id": "expandLevel2Edit",
+            "action": "expandLevel2EditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel3EditHandler": {
+            "id": "expandLevel3Edit",
+            "action": "expandLevel3EditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel4EditHandler": {
+            "id": "expandLevel4Edit",
+            "action": "expandLevel4EditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelStructureEditHandler": {
+            "id": "expandLevelStructureEdit",
+            "action": "expandLevelStructureEditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelFunctionEditHandler": {
+            "id": "expandLevelFunctionEdit",
+            "action": "expandLevelFunctionEditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelAllEditHandler": {
+            "id": "expandLevelAllEdit",
+            "action": "expandLevelAllEditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "filterGroupEditCommandHandler": {
+            "id": "filterGroupEditCommand",
+            "action": "expandGroupEditCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "filterStructureEditHandler": {
+            "id": "filterStructureEdit",
+            "action": "filterStructureEditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "unfilterStructureEditHandler": {
+            "id": "unfilterStructureEdit",
+            "action": "unfilterStructureEditAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandGroupSaveAsCommandHandler": {
+            "id": "expandGroupSaveAsCommand",
+            "action": "expandGroupSaveAsCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel1SaveAsHandler": {
+            "id": "expandLevel1SaveAs",
+            "action": "expandLevel1SaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel2SaveAsHandler": {
+            "id": "expandLevel2SaveAs",
+            "action": "expandLevel2SaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel3SaveAsHandler": {
+            "id": "expandLevel3SaveAs",
+            "action": "expandLevel3SaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevel4SaveAsHandler": {
+            "id": "expandLevel4SaveAs",
+            "action": "expandLevel4SaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelStructureSaveAsHandler": {
+            "id": "expandLevelStructureSaveAs",
+            "action": "expandLevelStructureSaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelFunctionSaveAsHandler": {
+            "id": "expandLevelFunctionSaveAs",
+            "action": "expandLevelFunctionSaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "expandLevelAllSaveAsHandler": {
+            "id": "expandLevelAllSaveAs",
+            "action": "expandLevelAllSaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "filterGroupSaveAsCommandHandler": {
+            "id": "filterGroupSaveAsCommand",
+            "action": "expandGroupSaveAsCommandAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "filterStructureSaveAsHandler": {
+            "id": "filterStructureSaveAs",
+            "action": "filterStructureSaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        },
+        "unfilterStructureSaveAsHandler": {
+            "id": "unfilterStructureSaveAs",
+            "action": "unfilterStructureSaveAsAction",
+            "activeWhen": {
+                "condition": "conditions.true"
+            },
+            "enableWhen": {
+                "condition": "conditions.true"
+            },
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        }
+    },
+    "commandPlacements": {
+        "expandGroupCommandPlacement": {
+            "id": "expandGroupCommand",
+            "uiAnchor": "standardBomTreeAnchor",
+            "priority": 104
+        },
+        "expandLevel1Placement": {
+            "id": "expandLevel1",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 1
+        },
+        "expandLevel2Placement": {
+            "id": "expandLevel2",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 2
+        },
+        "expandLevel3Placement": {
+            "id": "expandLevel3",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 3
+        },
+        "expandLevel4Placement": {
+            "id": "expandLevel4",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 4
+        },
+        "expandLevelStructurePlacement": {
+            "id": "expandLevelStructure",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 5
+        },
+        "expandLevelFunctionPlacement": {
+            "id": "expandLevelFunction",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 6
+        },
+        "expandLevelAllPlacement": {
+            "id": "expandLevelAll",
+            "parentGroupId": "expandGroupCommand",
+            "priority": 7
+        },
+        "filterGroupCommand": {
+            "id": "filterGroupCommand",
+            "uiAnchor": "standardBomTreeAnchor",
+            "priority": 1
+        },
+        "filterStructurePlacement": {
+            "id": "filterStructure",
+            "parentGroupId": "filterGroupCommand",
+            "priority": 8
+        },
+        "unfilterStructurePlacement": {
+            "id": "unfilterStructure",
+            "parentGroupId": "filterGroupCommand",
+            "priority": 9
+        },
+        "expandGroupCreateCommandPlacement": {
+            "id": "expandGroupCreateCommand",
+            "uiAnchor": "checklistCreateTreeAnchor",
+            "priority": 104
+        },
+        "expandLevel1CreatePlacement": {
+            "id": "expandLevel1Create",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 1
+        },
+        "expandLevel2CreatePlacement": {
+            "id": "expandLevel2Create",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 2
+        },
+        "expandLevel3CreatePlacement": {
+            "id": "expandLevel3Create",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 3
+        },
+        "expandLevel4CreatePlacement": {
+            "id": "expandLevel4Create",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 4
+        },
+        "expandLevelStructureCreatePlacement": {
+            "id": "expandLevelStructureCreate",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 5
+        },
+        "expandLevelFunctionCreatePlacement": {
+            "id": "expandLevelFunctionCreate",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 6
+        },
+        "expandLevelAllCreatePlacement": {
+            "id": "expandLevelAllCreate",
+            "parentGroupId": "expandGroupCreateCommand",
+            "priority": 7
+        },
+        "filterGroupCreateCommand": {
+            "id": "filterGroupCreateCommand",
+            "uiAnchor": "checklistCreateTreeAnchor",
+            "priority": 1
+        },
+        "filterStructureCreatePlacement": {
+            "id": "filterStructureCreate",
+            "parentGroupId": "filterGroupCreateCommand",
+            "priority": 8
+        },
+        "unfilterStructureCreatePlacement": {
+            "id": "unfilterStructureCreate",
+            "parentGroupId": "filterGroupCreateCommand",
+            "priority": 9
+        },
+        "expandGroupEditCommandPlacement": {
+            "id": "expandGroupEditCommand",
+            "uiAnchor": "checklistStructureEditTreeAnchor",
+            "priority": 104
+        },
+        "expandLevel1EditPlacement": {
+            "id": "expandLevel1Edit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 1
+        },
+        "expandLevel2EditPlacement": {
+            "id": "expandLevel2Edit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 2
+        },
+        "expandLevel3EditPlacement": {
+            "id": "expandLevel3Edit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 3
+        },
+        "expandLevel4EditPlacement": {
+            "id": "expandLevel4Edit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 4
+        },
+        "expandLevelStructureEditPlacement": {
+            "id": "expandLevelStructureEdit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 5
+        },
+        "expandLevelFunctionEditPlacement": {
+            "id": "expandLevelFunctionEdit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 6
+        },
+        "expandLevelAllEditPlacement": {
+            "id": "expandLevelAllEdit",
+            "parentGroupId": "expandGroupEditCommand",
+            "priority": 7
+        },
+        "filterGroupEditCommand": {
+            "id": "filterGroupEditCommand",
+            "uiAnchor": "checklistStructureEditTreeAnchor",
+            "priority": 1
+        },
+        "filterStructureEditPlacement": {
+            "id": "filterStructureEdit",
+            "parentGroupId": "filterGroupEditCommand",
+            "priority": 8
+        },
+        "unfilterStructureEditPlacement": {
+            "id": "unfilterStructureEdit",
+            "parentGroupId": "filterGroupEditCommand",
+            "priority": 9
+        },
+        "expandGroupSaveAsCommandPlacement": {
+            "id": "expandGroupSaveAsCommand",
+            "uiAnchor": "checklistSaveAsTreeAnchor",
+            "priority": 104
+        },
+        "expandLevel1SaveAsPlacement": {
+            "id": "expandLevel1SaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 1
+        },
+        "expandLevel2SaveAsPlacement": {
+            "id": "expandLevel2SaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 2
+        },
+        "expandLevel3SaveAsPlacement": {
+            "id": "expandLevel3SaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 3
+        },
+        "expandLevel4SaveAsPlacement": {
+            "id": "expandLevel4SaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 4
+        },
+        "expandLevelStructureSaveAsPlacement": {
+            "id": "expandLevelStructureSaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 5
+        },
+        "expandLevelFunctionSaveAsPlacement": {
+            "id": "expandLevelFunctionSaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 6
+        },
+        "expandLevelAllSaveAsPlacement": {
+            "id": "expandLevelAllSaveAs",
+            "parentGroupId": "expandGroupSaveAsCommand",
+            "priority": 7
+        },
+        "filterGroupSaveAsCommand": {
+            "id": "filterGroupSaveAsCommand",
+            "uiAnchor": "checklistSaveAsTreeAnchor",
+            "priority": 1
+        },
+        "filterStructureSaveAsPlacement": {
+            "id": "filterStructureSaveAs",
+            "parentGroupId": "filterGroupSaveAsCommand",
+            "priority": 8
+        },
+        "unfilterStructureSaveAsPlacement": {
+            "id": "unfilterStructureSaveAs",
+            "parentGroupId": "filterGroupSaveAsCommand",
+            "priority": 9
+        }
+    },
+    "actions": {
+        "expandGroupCommandAction": {
+            "actionType": "JSFunction",
+            "method": "expandGroupCommandAction",
+            "inputData": {},
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevel1Action": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "1"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevel2Action": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "2"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevel3Action": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "3"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevel4Action": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "4"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevelStructureAction": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevelFunctionAction": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision,L2_FunctionRevision"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandLevelAllAction": {
+            "actionType": "JSFunction",
+            "method": "loadStandardBOMTreeDetail",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "filterStructureAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "unfilterStructureAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "dpName": "standardBOMTreeDetailDataProvider",
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": null
+            },
+            "deps": "js/L2_StandardBOMSearchDetailService"
+        },
+        "expandGroupEditCommandAction": {
+            "actionType": "JSFunction",
+            "method": "expandGroupCommandAction",
+            "inputData": {},
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevel1EditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "1"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevel2EditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "2"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevel3EditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "3"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevel4EditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "4"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevelStructureEditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevelFunctionEditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision,L2_FunctionRevision"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandLevelAllEditAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistStructureEditTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "filterStructureEditAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "unfilterStructureEditAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": null
+            },
+            "deps": "js/L2_ChecklistStructureEditService"
+        },
+        "expandGroupCreateCommandAction": {
+            "actionType": "JSFunction",
+            "method": "expandGroupCommandAction",
+            "inputData": {},
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevel1CreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "1"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevel2CreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "2"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevel3CreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "3"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevel4CreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "4"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevelStructureCreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevelFunctionCreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision,L2_FunctionRevision"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandLevelAllCreateAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistCreateTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "filterStructureCreateAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "unfilterStructureCreateAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": null
+            },
+            "deps": "js/L2_ChecklistCreateService"
+        },
+        "expandGroupSaveAsCommandAction": {
+            "actionType": "JSFunction",
+            "method": "expandGroupCommandAction",
+            "inputData": {},
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevel1SaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "1"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevel2SaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "2"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevel3SaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "3"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevel4SaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": "4"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevelStructureSaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevelFunctionSaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "expandLevel": null,
+                "expandType": "L2_StructureRevision,L2_FunctionRevision"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "expandLevelAllSaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "initializeChecklistSaveAsTree",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "filterStructureSaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": "L2_StructureRevision"
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        },
+        "unfilterStructureSaveAsAction": {
+            "actionType": "JSFunction",
+            "method": "setIncludeTypes",
+            "inputData": {
+                "ctx": "{{ctx}}",
+                "data": "{{data}}",
+                "includeType": null
+            },
+            "deps": "js/L2_ChecklistSaveAsService"
+        }
+    },
+    "onEvent": [],
+    "conditions": {
+        "standardBOMEdit": {
+            "expression": "ctx.checklist.standardBOM.isEditing === true"
+        },
+        "moduleNonEditSaving": {
+            "expression": "!ctx.checklist.standardBOM.moduleSaving"
+        }
+    },
+    "messages": {},
+    "i18n": {
+        "unfold": ["L2_ChkStandardBOMMessages"],
+        "filterChecklist": ["L2_ChkMainMessages"]
+    }
+}

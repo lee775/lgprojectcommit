@@ -32,7 +32,7 @@ const loadColumns = (dataProvider) => {
  */
 const loadData = async (ctx) => {
   const results = await loadTableData(prop.QUERY_FMEA_SOD, TABLE_COLS);
-  //console.log("results", results);
+  console.log('results', results);
   ctx.ap_edited = false;
   appCtxService.registerCtx(constants.FMEA_SET_VMO, results);
   return {
@@ -76,9 +76,21 @@ const makeTableDatas = async (queryResults, revProps) => {
 };
 
 const setVmoXrt = async () => {
-  const results = await loadTableData(prop.QUERY_FMEA_SOD, TABLE_COLS);
-  //console.log("results", results);
-  appCtxService.registerCtx(constants.FMEA_SET_VMO, results);
+  let product;
+  if (localStorage.getItem('locale:/') == 'en_US') {
+    product = 'vacuum cleaner';
+  } else {
+    product = getProductNameByGroup();
+  }
+
+  const queryResults = await queryUtil.executeSavedQuery(
+    prop.QUERY_FMEA_SOD,
+    [prop.QUERY_ENTRY_NAME, prop.QUERY_DFMEA_MASTER_PRODUCT],
+    ['*', product],
+    lgepObjectUtils.createPolicy(['l2_severity_table', 'l2_occurence_table', 'l2_detection_table', 'l2_product', 'object_name', 'l2_ap_table'], 'L2_SODTable'),
+  );
+
+  appCtxService.registerCtx(constants.FMEA_SET_VMO, queryResults);
 };
 
 export default {

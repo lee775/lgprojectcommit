@@ -23,9 +23,9 @@
       },
       "deps": "js/popupService"
     },
-    "createInitialize": {
+    "createMinutesInitialize": {
       "actionType": "JSFunction",
-      "method": "createInitialize",
+      "method": "createMinutesInitialize",
       "deps": "js/minutesService"
     },
     "createproceed": {
@@ -105,6 +105,14 @@
       "isEditable": "true",
       "numberOfLines": 3
     },
+    "l2_meeting_detailLbl": {
+      "displayName": "회의 내용 ",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
     "l2_meeting_details": {
       "displayName": "{{i18n.meetingDetails}}",
       "type": "STRING",
@@ -132,39 +140,6 @@
       "isEditable": "false",
       "dbValue": "",
       "dispValue": ""
-    },
-    "l2_commentLbl": {
-      "displayName": "코멘트",
-      "type": "STRING",
-      "isRequired": "false",
-      "isEditable": "true"
-    },
-    "l2_follow_upLbl": {
-      "displayName": "F/up",
-      "type": "STRING",
-      "isRequired": "false",
-      "isEditable": "true"
-    },
-    "l2_workerTxt": {
-      "displayName": "담당자",
-      "type": "STRING",
-      "isRequired": "false",
-      "isEditable": "true",
-      "numberOfLines": 3
-    },
-    "object_descLbl": {
-      "displayName": "비고",
-      "type": "STRING",
-      "isRequired": "false",
-      "isEditable": "true"
-    },
-    "l2_expected_date": {
-      "displayName": "일정",
-      "type": "DATETIME",
-      "isRequired": "false",
-      "isEditable": "true",
-      "dispValue": "",
-      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
     }
   },
   "onEvent": [
@@ -178,7 +153,7 @@
     }
   ],
   "lifecycleHooks": {
-    "onMount": "createInitialize"
+    "onMount": "createMinutesInitialize"
   },
   "i18n": {
     "minutesTitle": ["lgepChkMinutesMessages"],
@@ -195,6 +170,7 @@
     "create": ["lgepChkMinutesMessages"],
     "back": ["lgepChkMinutesMessages"],
     "createMinutes": ["lgepChkMinutesMessages"],
-    "fileDataSet": ["lgepChkMinutesMessages"]
+    "fileDataSet": ["lgepChkMinutesMessages"],
+    "fileUpload": ["lgepChkMinutesMessages"]
   }
 }

@@ -204,6 +204,7 @@
     "create": ["lgepChkMinutesMessages"],
     "back": ["lgepChkMinutesMessages"],
     "createMinutes": ["lgepChkMinutesMessages"],
-    "fileDataSet": ["lgepChkMinutesMessages"]
+    "fileDataSet": ["lgepChkMinutesMessages"],
+    "fileUpload": ["lgepChkMinutesMessages"]
   }
 }

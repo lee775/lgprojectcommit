@@ -15,6 +15,7 @@ import soaService from 'soa/kernel/soaService';
 import _ from 'lodash';
 import * as standardBOMConstants from 'js/L2_StandardBOMConstants';
 import appCtxService, { ctx } from 'js/appCtxService';
+import lgepBomUtils from 'js/utils/lgepBomUtils';
 
 let exports = {};
 
@@ -302,6 +303,7 @@ function getSaveViewModelEditAndSubmitWorkflow2Param(loadedVMObjects, saveAsData
         isModifiable: true,
       },
     ];
+
     if (matchedDataset) {
       viewModelProperties.push({
         propertyName: standardBOMConstants.l2_reference_dataset,
@@ -365,7 +367,7 @@ function getSaveViewModelEditAndSubmitWorkflow2ParamForSodCopy(loadedVMObjects, 
       {
         propertyName: standardBOMConstants.l2_ref_detection,
         dbValues: loadedVMObject.props[standardBOMConstants.l2_result_detection].dbValues,
-        uiValues: loadedVMObject.props[standardBOMConstants.l2_result_detection].uiValues,
+        uiValues: loadedVMObject.props[standardBOMConstants.l2_result_detection].dbValues,
         intermediateObjectUids: [],
         srcObjLsd: srcObjLsd,
         isModifiable: true,
@@ -566,7 +568,7 @@ async function referenceDatasetsSaveAs(srcItemRevision, destItemRevision) {
   return saveAsDatasets;
 }
 
-function saveAsNewItem(itemRevision, name) {
+function saveAsNewItem(itemRevision, name, policy) {
   const requestParam = {
     info: [
       {
@@ -581,7 +583,7 @@ function saveAsNewItem(itemRevision, name) {
       },
     ],
   };
-  return soaService.post('Core-2007-01-DataManagement', 'saveAsNewItem', requestParam).then((response) => {
+  return soaService.post('Core-2007-01-DataManagement', 'saveAsNewItem', requestParam, policy).then((response) => {
     const inputToNewItem = response.inputToNewItem[itemRevision.uid];
     return inputToNewItem;
   });
@@ -627,6 +629,87 @@ export async function expand2(dataCtxNode, node) {
   }
 }
 
+export async function expandBySaveAsBom(topItemRevision, dataProvider, policy) {
+  const saveAsBomLines = await expandSaveasBom(topItemRevision, policy);
+
+  const loadedVMObjects = dataProvider.getViewModelCollection().loadedVMObjects;
+  for (const saveAsBomLine of saveAsBomLines) {
+    const saveAsBomlineRevUid = saveAsBomLine.props.awb0Archetype.dbValues[0];
+    const loadedVMObject = _getCheckVmo(loadedVMObjects, saveAsBomlineRevUid);
+    if (loadedVMObject) {
+      saveAsBomLine.selected = loadedVMObject.selected;
+    } else {
+      saveAsBomLine.selected = false;
+    }
+  }
+  return saveAsBomLines;
+}
+
+export async function expandSaveasBom(topItemRevision, policy) {
+  let parentOccurrence;
+
+  return lgepBomUtils
+    .getOccurrences3(topItemRevision)
+    .then((response) => {
+      let rootProductContext = response.rootProductContext;
+      let parentOccurrenceObject = lgepObjectUtils.getObject(response.parentOccurrence.occurrenceId);
+      return lgepBomUtils.getOccurrences3(topItemRevision, rootProductContext, parentOccurrenceObject);
+    })
+    .then((response) => {
+      parentOccurrence = response.parentOccurrence;
+      // getOccurrence3의 response들을 분석하여, 부모-자식 관계를 Map에 할당한다.
+      let infos = response.parentChildrenInfos;
+      if (infos.length == 0) {
+        return {
+          ServiceData: {
+            modelObjects: [lgepObjectUtils.getObject(parentOccurrence.occurrenceId)],
+          },
+        };
+      }
+      let allObjectUids = [];
+      for (const info of infos) {
+        if (!allObjectUids.includes(info.parentInfo.occurrenceId)) allObjectUids.push(info.parentInfo.occurrenceId);
+        if (info.parentInfo.numberOfChildren > 0) {
+          let _children = [];
+          for (const childInfo of info.childrenInfo) {
+            if (!allObjectUids.includes(childInfo.occurrenceId)) allObjectUids.push(childInfo.occurrenceId);
+            _children.push(childInfo.occurrenceId);
+          }
+        }
+      }
+      // 3. 해당 BOM을 In-Context 모드로 변경한다.
+      return lgepBomUtils.saveUserWorkingContextState2(parentOccurrence.occurrenceId).then(() => {
+        return lgepBomUtils.getTableViewModelProperties(allObjectUids, policy);
+      });
+    })
+    .then((getTableViewModelPropsResp) => {
+      let responseModelObjects = getTableViewModelPropsResp.ServiceData.modelObjects;
+      let modelObjects = Object.values(responseModelObjects);
+      let allObjects = modelObjects.filter((mo) => mo.type === 'Awb0DesignElement');
+      appCtxService.ctx.checklist.created = allObjects;
+      return allObjects.filter((mo) => mo.props.awb0UnderlyingObject.dbValues[0] !== topItemRevision.uid);
+    });
+}
+
+function _getCheckVmo(loadedVMObjects, saveAsBomlineRevUid) {
+  for (const loadedVMObject of loadedVMObjects) {
+    const loadedVmoRevUid = loadedVMObject.props.awb0Archetype.dbValues[0];
+    if (saveAsBomlineRevUid === loadedVmoRevUid) {
+      return loadedVMObject;
+    }
+  }
+}
+
+export async function getRefrenceDatasets(itemRev) {
+  let saveAsDatasets;
+  await lgepObjectUtils.getProperties(itemRev, [standardBOMConstants.IMAN_reference, 'item_id']);
+  const saveAsReference = await lgepObjectUtils.loadObjects2(itemRev.props[standardBOMConstants.IMAN_reference].dbValues);
+  if (saveAsReference) {
+    saveAsDatasets = Object.values(saveAsReference);
+  }
+  return saveAsDatasets;
+}
+
 export default exports = {
   dateTo_GMTString,
   expandAll,
@@ -649,6 +732,9 @@ export default exports = {
 
   saveAsNewItem,
   getSelectFailureNodes,
+  expandBySaveAsBom,
+  expandSaveasBom,
+  getRefrenceDatasets,
 };
 /**
  * @memberof NgServices

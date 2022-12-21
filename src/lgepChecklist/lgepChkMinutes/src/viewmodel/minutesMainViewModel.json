@@ -2,14 +2,15 @@
   "schemaVersion": "1.0.0",
   "imports": [
     "js/aw-button.directive",
+    "js/aw-checkbox.directive",
     "js/aw-command-bar.directive",
     "js/aw-command-panel.directive",
+    "js/aw-date.directive",
     "js/aw-datetime.directive",
     "js/aw-file-upload.directive",
     "js/aw-flex-column.directive",
     "js/aw-flex-row.directive",
     "js/aw-icon-button.directive",
-    "js/aw-include.directive",
     "js/aw-label.directive",
     "js/aw-link.directive",
     "js/aw-list.directive",
@@ -164,15 +165,6 @@
           "action": "backMinutes"
         }
       ]
-    },
-    "deleteProceed": {
-      "actionType": "JSFunction",
-      "method": "deleteProceed",
-      "inputData": {
-        "ctx": "{{ctx}}",
-        "data": "{{data}}"
-      },
-      "deps": "js/proceedingService"
     },
     "editProceed": {
       "actionType": "JSFunction",
@@ -382,6 +374,64 @@
         "data": "{{data}}"
       },
       "deps": "js/createActionItemService"
+    },
+    "loadActionItem": {
+      "actionType": "JSFunction",
+      "method": "loadActionItem",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "actionItem": "{{function:sortActionItem}}",
+        "actionItemLength": "actionItemLength"
+      },
+      "deps": "js/minutesService"
+    },
+    "actionItemEditMode": {
+      "actionType": "JSFunction",
+      "method": "actionItemEditMode",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "cancelActionItemEdit": {
+      "actionType": "JSFunction",
+      "method": "cancelActionItemEdit",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "saveActionItem": {
+      "actionType": "JSFunction",
+      "method": "saveActionItem",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "showAllRevisionsMinutes": {
+      "actionType": "JSFunction",
+      "method": "showAllRevisionsMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/minutesService"
+    },
+    "tableSelect": {
+      "actionType": "JSFunction",
+      "method": "tableSelect",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}",
+        "eventData": "{{parameters.eventData}}"
+      },
+      "deps": "js/minutesService"
     }
   },
   "data": {
@@ -395,7 +445,7 @@
         "tabKey": "referencePage"
       },
       {
-        "name": "액션 아이템",
+        "name": "{{i18n.actionItem}}",
         "tabKey": "actionItemPage"
       }
     ],
@@ -561,7 +611,7 @@
       "dispValue": ""
     },
     "l2_workerLbl": {
-      "displayName": "담당자 ",
+      "displayName": "{{i18n.worker}}",
       "type": "STRING",
       "isRequired": "false",
       "isEditable": "true",
@@ -569,7 +619,7 @@
       "dispValue": ""
     },
     "l2_expected_dateLbl": {
-      "displayName": "일시 ",
+      "displayName": "{{i18n.expectedDate}}",
       "type": "STRING",
       "isRequired": "false",
       "isEditable": "true",
@@ -577,7 +627,7 @@
       "dispValue": ""
     },
     "l2_commentLbl": {
-      "displayName": "코멘트 ",
+      "displayName": "{{i18n.comment}}",
       "type": "STRING",
       "isRequired": "false",
       "isEditable": "true",
@@ -585,12 +635,41 @@
       "dispValue": ""
     },
     "l2_follow_upLbl": {
-      "displayName": "F/up ",
+      "displayName": "{{i18n.followUp}}",
       "type": "STRING",
       "isRequired": "false",
       "isEditable": "true",
       "dbValue": "",
       "dispValue": ""
+    },
+    "l2_expected_date": {
+      "displayName": "{{i18n.expectedDate}}",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_worker": {
+        "displayName": "{{i18n.worker}}",
+        "type": "STRING",
+        "isRequired": "true",
+        "hasLov": "true",
+        "dbValue": "",
+        "dispValue": ""
+    },
+    "l2_workerValues": {
+        "type": "STRING",
+        "dbValue": []
+    },
+    "allRevisionsMinutes": {
+      "displayName": "{{i18n.showAllMinutesRev}}",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": "{{i18n.showAllMinutesRev}}",
+      "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
     }
   },
   "conditions": {
@@ -629,13 +708,8 @@
     },
     {
       "eventId": "awTab.selected",
-      "condition": "conditions.showReferencePage",
+      "condition": "data.selectedTab.tabKey === 'referencePage'",
       "action": "failureLoad"
-    },
-    {
-      "eventId": "awTab.selected",
-      "condition": "conditions.actionItemPage",
-      "action": "loadActionItem"
     },
     {
       "eventId": "minutesMain.contentLoaded",
@@ -661,6 +735,24 @@
     {
       "eventId": "start.editMode",
       "action": "editFileView"
+    },
+    {
+      "eventId": "minutesListProvider.selectionChangeEvent",
+      "condition": "conditions.actionItemPage",
+      "action": "loadActionItem"
+    },
+    {
+      "eventId": "awTab.selected",
+      "condition": "conditions.actionItemPage",
+      "action": "loadActionItem"
+    },
+    {
+      "eventId": "actionItemTable.gridSelection",
+      "action": "tableSelect",
+      "cacheEventData": true,
+      "inputArgs": {
+        "eventData": "{{eventData}}"
+      }
     }
   ],
   "dataProviders": {
@@ -674,6 +766,11 @@
       "action": "loadMinutes",
       "response": "{{data.minutes}}",
       "totalFound": "{{data.minutesLength}}"
+    },
+    "actionItemTableProvider": {
+      "action": "loadActionItem",
+      "response": "{{data.actionItem}}",
+      "totalFound": "{{data.actionItemLength}}"
     }
   },
   "columnProviders": {
@@ -682,19 +779,48 @@
       "columns": [
         {
           "name": "object_name",
-          "displayName": "이름",
+          "displayName": "{{i18n.minutesTitle}}",
           "minWidth": 60,
           "width": 150
         },
         {
-          "name": "meeting_date",
-          "displayName": "일시",
+          "name": "l2_meeting_date",
+          "displayName": "{{i18n.date}}",
           "minWidth": 60,
           "width": 150
         },
         {
-          "name": "item_revision_id",
-          "displayName": "체크리스트의 리비전ID",
+          "name": "checklist_rev_id",
+          "displayName": "{{i18n.revisionIDOfChecklist}}",
+          "minWidth": 60,
+          "width": 150
+        }
+      ]
+    },
+    "actionItemColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "l2_comment",
+          "displayName": "{{i18n.comment}}",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "l2_follow_up",
+          "displayName": "{{i18n.followUp}}",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "l2_worker",
+          "displayName": "{{i18n.worker}}",
+          "minWidth": 60,
+          "width": 150
+        },
+        {
+          "name": "l2_expected_date",
+          "displayName": "{{i18n.expectedDate}}",
           "minWidth": 60,
           "width": 150
         }
@@ -711,12 +837,26 @@
         "enableSorting": true,
         "enableGridMenu": true
       }
+    },
+    "actionItemTable": {
+      "dataProvider": "actionItemTableProvider",
+      "columnProvider": "actionItemColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": true,
+        "enableGridMenu": true
+      }
     }
   },
   "functions": {
     "sortAction": {
       "functionName": "sortAction",
       "parameters": ["{{data.dataProviders.minutesListProvider.startIndex}}", "{{data.minutesPageSize}}"]
+    },
+    "sortActionItem": {
+      "functionName": "sortActionItem",
+      "parameters": ["{{data.dataProviders.actionItemTableProvider.startIndex}}", "{{data.actionItemPageSize}}"]
     }
   },
   "lifecycleHooks": {
@@ -736,6 +876,25 @@
     "minutes": ["lgepChkMinutesMessages"],
     "failureList": ["lgepChkMinutesMessages"],
     "noFailure": ["lgepChkMinutesMessages"],
-    "detailsFile": ["lgepChkMinutesMessages"]
+    "detailsFile": ["lgepChkMinutesMessages"],
+    "revisionIDOfChecklist": ["lgepChkMinutesMessages"],
+    "actionItem": ["lgepChkMinutesMessages"],
+    "comment": ["lgepChkMinutesMessages"],
+    "followUp": ["lgepChkMinutesMessages"],
+    "worker": ["lgepChkMinutesMessages"],
+    "remark": ["lgepChkMinutesMessages"],
+    "showAllMinutesRev": ["lgepChkMinutesMessages"],
+    "editMinutes": ["lgepChkMinutesMessages"],
+    "addFailure": ["lgepChkMinutesMessages"],
+    "removeFailure": ["lgepChkMinutesMessages"],
+    "addActionItem": ["lgepChkMinutesMessages"],
+    "editActionItem": ["lgepChkMinutesMessages"],
+    "deleteActionItem": ["lgepChkMinutesMessages"],
+    "save": ["lgepChkMinutesMessages"],
+    "back": ["lgepChkMinutesMessages"],
+    "fileUpload": ["lgepChkMinutesMessages"],
+    "cancel": ["lgepChkMinutesMessages"],
+    "expectedDate": ["lgepChkMinutesMessages"],
+    "noPost": ["lgepKnowldegeManageMessages"]
   }
 }

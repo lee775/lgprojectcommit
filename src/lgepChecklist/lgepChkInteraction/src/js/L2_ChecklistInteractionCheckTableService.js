@@ -1,5 +1,6 @@
 import appCtxService from 'js/appCtxService';
 import viewModelObjectService from 'js/viewModelObjectService';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
 import { getHeaderData, makeVmProperty } from 'js/utils/fmeaTableMakeUtils';
@@ -34,22 +35,48 @@ const loadColumns = (dataProvider) => {
 // 영향 주는 측
 const loadDataInfluencing = async (data) => {
   const tableRows = await _getInteractionTable(PROP_PRIMARY, PROP_SECONDARY, data);
-
+  let results = deduplication(tableRows);
   return {
-    influencingResults: tableRows,
-    influencingTotalFound: tableRows.length,
+    influencingResults: results,
+    influencingTotalFound: results.length,
   };
 };
 
 // 영향 받는 측
 const loadDataAffected = async (data) => {
   const tableRows = await _getInteractionTable(PROP_SECONDARY, PROP_PRIMARY, data);
-
+  let results = deduplication(tableRows);
   return {
-    affectedResults: tableRows,
-    affecteTotalFound: tableRows.length,
+    affectedResults: results,
+    affecteTotalFound: results.length,
   };
 };
+
+function isDuplicate(tableRows) {
+  const isDup = tableRows.some(function (x) {
+    return tableRows.indexOf(x) !== tableRows.lastIndexOf(x);
+  });
+  console.log('isDup', isDup);
+  return isDup;
+}
+
+// 임시
+const deduplication = (tableRows) => {
+  let dupMap = new Map();
+  for (const tableRow of tableRows) {
+    dupMap.set(tableRow.uid, tableRow);
+  }
+  return Array.from(dupMap.values());
+};
+
+// const deduplication = (tableRows) => {
+//   console.log('tableRows', tableRows);
+//   let dupMap = new Map();
+//   for (const tableRow of tableRows) {
+//     dupMap.set(tableRow.uid, tableRow);
+//   }
+//   return Array.from(dupMap.values());
+// };
 
 const _checkEffectType = (targetEffectType, effectTypes) => {
   for (const effectType of effectTypes) {
@@ -60,7 +87,7 @@ const _checkEffectType = (targetEffectType, effectTypes) => {
 
   return false;
 };
-import lgepObjectUtils from 'js/utils/lgepObjectUtils';
+
 const _delete = async (interactionTable) => {
   for (const interactionRow of interactionTable) {
     console.log('interactionRow', interactionRow);

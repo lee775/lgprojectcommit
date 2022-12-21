@@ -38,6 +38,41 @@
       "iconId": "cmdReuseDocument",
       "title": "{{i18n.cmdKnowledgeManagementTitle}}",
       "description": "{{i18n.cmdKnowledgeManagementTitle}}"
+    },
+    "filterMinutes": {
+      "iconId": "cmdFilter",
+      "isGroup": false,
+      "title": "{{i18n.filter}}"
+    },
+    "createMinutes": {
+      "iconId": "cmdAdd",
+      "isGroup": false,
+      "title": "{{i18n.add}}"
+    },
+    "editMinutes": {
+      "iconId": "cmdEdit",
+      "isGroup": false,
+      "title": "{{i18n.edit}}"
+    },
+    "deleteMinutes": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "{{i18n.delete}}"
+    },
+    "createActionItem": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "{{i18n.add}}"
+    },
+    "editActionItem": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "{{i18n.edit}}"
+    },
+    "deleteActionItem": {
+      "iconId": "cmdDelete",
+      "isGroup": false,
+      "title": "{{i18n.delete}}"
     }
   },
   "commandHandlers": {
@@ -86,6 +121,55 @@
     "cmdKnowledgeManagementHandler": {
       "id": "cmdKnowledgeManagement",
       "action": "cmdKnowledgeManagementAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "createMinutesHandler": {
+      "id": "createMinutes",
+      "action": "addMinutesAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "editMinutesHandler": {
+      "id": "editMinutes",
+      "action": "editMinutesAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "deleteMinutesHandler": {
+      "id": "deleteMinutes",
+      "action": "deleteMinutesAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "filterMinutesHandler": {
+      "id": "filterMinutes",
+      "action": "filterMinutesAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "createActionItemHandler": {
+      "id": "createActionItem",
+      "action": "createActionItemAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "editActionItemHandler": {
+      "id": "editActionItem",
+      "action": "editActionItemAction",
+      "activeWhen": true,
+      "visibleWhen": true,
+      "enableWhen": true
+    },
+    "deleteActionItemHandler": {
+      "id": "deleteActionItem",
+      "action": "deleteActionItemAction",
       "activeWhen": true,
       "visibleWhen": true,
       "enableWhen": true
@@ -149,6 +233,41 @@
     "deleteFaqListCommandPlace": {
       "id": "deleteQaListCommand",
       "uiAnchor": "faqCommand",
+      "priority": 300
+    },
+    "filterMinutesCommandPlace": {
+      "id": "filterMinutes",
+      "uiAnchor": "minutesCommand",
+      "priority": 100
+    },
+    "createMinutesCommandPlace": {
+      "id": "createMinutes",
+      "uiAnchor": "minutesCommand",
+      "priority": 200
+    },
+    "editMinutesCommandPlace": {
+      "id": "editMinutes",
+      "uiAnchor": "minutesCommand",
+      "priority": 300
+    },
+    "deleteMinutesCommandPlace": {
+      "id": "deleteMinutes",
+      "uiAnchor": "minutesCommand",
+      "priority": 400
+    },
+    "createActionItemCommandPlace": {
+      "id": "createActionItem",
+      "uiAnchor": "ActionItemCommand",
+      "priority": 100
+    },
+    "editActionItemCommandPlace": {
+      "id": "editActionItem",
+      "uiAnchor": "ActionItemCommand",
+      "priority": 200
+    },
+    "deleteActionItemCommandPlace": {
+      "id": "deleteActionItem",
+      "uiAnchor": "ActionItemCommand",
       "priority": 300
     }
   },
@@ -219,6 +338,83 @@
         ]
       }
     },
+    "addMinutesAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "minutes.add"
+          }
+        ]
+      }
+    },
+    "editMinutesAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "minutes.edit"
+          }
+        ]
+      }
+    },
+    "deleteMinutesAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "minutes.delete"
+          }
+        ]
+      }
+    },
+    "filterMinutesAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "minutes.filter"
+          }
+        ]
+      }
+    },
+    "createActionItemAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "actionItem.create"
+          }
+        ]
+      }
+    },
+    "editActionItemAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "actionItem.edit"
+          }
+        ]
+      }
+    },
+    "deleteActionItemAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "actionItem.delete"
+          }
+        ]
+      }
+    },
     "cmdKnowledgeManagementAction": {
       "actionType": "Navigate",
       "navigateTo": "KnowledgeManageDashboardList",
@@ -243,6 +439,7 @@
     "delete": ["lgepTechnicalMessages"],
     "ok": ["lgepKnowldegeManageMessages"],
     "addQuestion": ["lgepKnowldegeManageMessages"],
-    "addAnswer": ["lgepKnowldegeManageMessages"]
+    "addAnswer": ["lgepKnowldegeManageMessages"],
+    "filter": ["lgepKnowldegeManageMessages"]
   }
 }

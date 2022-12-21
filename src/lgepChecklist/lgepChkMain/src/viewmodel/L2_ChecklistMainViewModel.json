@@ -146,6 +146,13 @@
       "action": "initSliderValue",
       "iconName": "Refresh",
       "tooltip": "100%"
+    },
+    "freeze": {
+      "slide": "FLOAT",
+      "direction": "RIGHT_TO_LEFT",
+      "animation": false,
+      "width": "WIDE",
+      "height": "FULL"
     }
   },
   "actions": {

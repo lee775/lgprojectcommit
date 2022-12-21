@@ -1,0 +1,58 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+      "js/aw-button.directive",
+      "js/aw-panel-body.directive",
+      "js/visible-when.directive"
+    ],
+    "onEvent": [
+    {
+      "eventId": "occTreeTable.plTable.loadMorePages",
+      "cacheEventData": true,
+      "action": "hideButton"
+    },
+    {
+      "eventId": "occDataProvider.selectionChangeEvent",
+      "cacheEventData": true,
+      "action": "hideButton"
+    }
+    ],
+    "actions": {
+      "goToCheckList": {
+        "actionType": "JSFunction",
+        "method": "goToCheckList",
+        "inputData": {
+          "ctx": "{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/L2_DesignProjectService"
+      },
+      "hideButton": {
+        "actionType": "JSFunction",
+        "method": "hideButton",
+        "inputData": {
+          "ctx":"{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/L2_DesignProjectService"
+      }
+    },
+    "data": {
+      "checkListButton": {
+        "displayName": "체크리스트",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dbValue": "",
+        "dispValue": ""
+      }
+    },
+    "conditions": {
+      "showCheckViewButton":{
+        "expression": "data.hideB === true"
+      }
+    },
+    "i18n": {
+    }
+  }
+  

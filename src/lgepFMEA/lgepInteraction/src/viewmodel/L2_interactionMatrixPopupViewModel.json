@@ -25,7 +25,7 @@
     "beforeClose":{
       "actionType": "JSFunction",
       "method": "beforeClose",
-      "deps": "js/interactionMatrixService"
+      "deps": "js/L2_ChecklistMatrixPopupSaveService"
     },
     "setTuiGridStyle": {
       "actionType": "JSFunction",
@@ -37,7 +37,7 @@
     }
   },
   "i18n": {
-    "save": ["lgepMasterViewMessages"],
+    "save": ["lgepInteractionMatrixMessages"],
     "interactionPopupDescRightTitle": ["lgepInteractionMatrixMessages"],
     "interactionTypeA": ["lgepInteractionMatrixMessages"],
     "interactionTypeB": ["lgepInteractionMatrixMessages"],

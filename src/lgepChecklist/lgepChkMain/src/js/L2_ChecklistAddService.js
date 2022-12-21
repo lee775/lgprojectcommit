@@ -71,7 +71,7 @@ export function addChecklistFailure(data, ctx) {
   const inputParam = {
     declView: 'L2_ChecklistAdd',
     locals: {
-      caption: 'Checklist Add',
+      caption: '추가',
       anchor: 'closePopupAnchor',
     },
     options: {
@@ -128,7 +128,6 @@ function _getSelectedRowInfo() {
     ctx.checklist.addInfo.functionContent = functionContent;
     // parent에 붙은 기능인 경우
     if (!selectedRow.parent.parent.parent) {
-      console.log('요기');
       return {
         level: STRUCTURE_LEVEL_PARENT,
         [STRUCTURE_LEVEL_TOP]: selectedRow.parent.parent,
@@ -228,7 +227,6 @@ async function _getProductContext(product) {
   const parentOccurrenceId = parentOccurrence.occurrenceId;
 
   // Product Context
-
   const getTableViewModelPropertiesResponse = await L2_StandardBOMService.getTableViewModelProperties([parentOccurrenceId]);
 
   const topObject = getTableViewModelPropertiesResponse.ServiceData.modelObjects[parentOccurrenceId];
@@ -356,7 +354,7 @@ async function okAction(data) {
     await saveViewModelEditAndSubmitWorkflow2ForIsSelected(failureNode);
 
     // 5. SOD
-    saveViewModelEditAndSubmitWorkflow2ForSod(failureNode, data);
+    // saveViewModelEditAndSubmitWorkflow2ForSod(failureNode, data);
 
     // 7. dataset 고장에 add
     const txtDataset = await _stringToDataset(failureItem.props.item_id.dbValues[0], JSON.stringify(properties));

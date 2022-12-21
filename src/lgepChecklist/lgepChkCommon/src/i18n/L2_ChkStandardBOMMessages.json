@@ -9,5 +9,9 @@
   "templateList": "Template List",
   "templateEdit": "Template Edit",
   "pinPanel": "Panel Fastening",
-  "unPinPanel" : "Unfreeze"
+  "unPinPanel": "Unfreeze",
+  "partSave": "Save",
+  "expand": "Expand",
+  "collapse": "Collapse",
+  "unfold":"Unfold"
 }

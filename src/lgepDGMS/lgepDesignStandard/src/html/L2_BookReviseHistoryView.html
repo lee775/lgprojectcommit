@@ -12,9 +12,12 @@
     <aw-flex-row height="3f" justify="center">
       <aw-panel class="aw-layout-workareaCommandbar">
         <aw-flex-row>
-          <aw-command-bar anchor="editAnchor" alignment="HORIZONTAL" visible-when="!conditions.tableEditMode"></aw-command-bar>
-          <aw-command-bar anchor="cancelAnchor" alignment="HORIZONTAL" visible-when="conditions.tableEditMode"></aw-command-bar>
-          <aw-command-bar anchor="saveAnchor" alignment="HORIZONTAL" visible-when="conditions.tableEditMode"></aw-command-bar>
+          <!-- <aw-command-bar anchor="editAnchor" alignment="HORIZONTAL" exist-when="!conditions.tableEditMode"></aw-command-bar>
+          <aw-command-bar anchor="cancelAnchor" alignment="HORIZONTAL" exist-when="conditions.tableEditMode"></aw-command-bar>
+          <aw-command-bar anchor="saveAnchor" alignment="HORIZONTAL" exist-when="conditions.tableEditMode"></aw-command-bar>-->
+         <aw-command-bar anchor="editAnchor" alignment="HORIZONTAL"></aw-command-bar>
+          <aw-command-bar anchor="cancelAnchor" alignment="HORIZONTAL"></aw-command-bar>
+          <aw-command-bar anchor="saveAnchor" alignment="HORIZONTAL"></aw-command-bar> 
         </aw-flex-row>
       </aw-panel>
     </aw-flex-row>

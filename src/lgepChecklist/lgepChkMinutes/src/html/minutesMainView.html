@@ -1,13 +1,30 @@
 <aw-panel-section>
     <aw-panel id="mainNav">
         <aw-panel-body>
-            <aw-flex-row id="btnBox">
-                <aw-icon-button command="data.createproceed" class="createBtn">
-                </aw-icon-button>
-                <aw-icon-button command="data.deleteproceed" class="deleteBtn">
-                </aw-icon-button>
-            </aw-flex-row>
             <aw-panel-section caption="i18n.minutesList" id="minutesTable">
+                <aw-flex-row visible-when="!ctx.checklist.selectedRow">
+                    <aw-flex-column class="topToTable">
+                        <aw-checkbox prop="data.allRevisionsMinutes" action="showAllRevisionsMinutes"></aw-checkbox>
+                    </aw-flex-column>
+                    <aw-flex-column class="createButton">
+                        <aw-icon-button command="data.createproceed">
+                        </aw-icon-button>
+                    </aw-flex-column>
+                    <aw-flex-column class="deleteButton">
+                        <aw-icon-button command="data.deleteproceed">
+                        </aw-icon-button>
+                    </aw-flex-column>
+                </aw-flex-row>
+                <aw-flex-row height="2f" visible-when="ctx.checklist.selectedRow">
+                    <aw-flex-column class="createBtn">
+                        <aw-icon-button command="data.createproceed">
+                        </aw-icon-button>
+                    </aw-flex-column>
+                    <aw-flex-column class="deleteBtn">
+                        <aw-icon-button command="data.deleteproceed">
+                        </aw-icon-button>
+                    </aw-flex-column>
+                </aw-flex-row>
                 <aw-splm-table gridid="minutesTable" use-tree="false" show-decorate="true">
                 </aw-splm-table>
             </aw-panel-section>
@@ -76,7 +93,7 @@
                                 </aw-flex-row>
                                 <aw-flex-row class="fileLabel">
                                     <label for="fileUpload">
-                                        <div class="btn-upload">파일 업로드</div>
+                                        <div class="btn-upload">{{i18n.fileUpload}}</div>
                                     </label>
                                     <input type="file" id="fileUpload" multiple='multiple'
                                         accept=".xls, .xlsx, .ppt, .pptx, .doc, .docx, .pdf, .PDF, .MSExcel, .MSExcelX, .MSPowerPoint, .MSPowerPointX, .MSWord, .MSWordX"></input>
@@ -100,6 +117,11 @@
                                 </aw-flex-row>
                             </aw-flex-column>
                         </aw-flex-row>
+                        <aw-flex-row>
+                            <aw-flex-column>
+                                <aw-label prop="data.proceedDetails"></aw-label>
+                            </aw-flex-column>
+                        </aw-flex-row>
                         <aw-flex-row id="summernotePosit" height="auto">
                             <aw-flex-column>
                                 <textarea id="minutesMainSummernote"></textarea>
@@ -111,7 +133,7 @@
                     <aw-flex-column>
                         <div style="text-align: center;"
                             exist-when="data.dataProviders.failureList.viewModelCollection.loadedVMObjects.length == 0">
-                            <h3>관련된 고장이 없습니다.</h3>
+                            <h3>{{i18n.noFailure}}</h3>
                         </div>
                         <aw-flex-row height="auto">
                             <aw-list dataprovider="data.dataProviders.failureList" id="failureList">
@@ -123,25 +145,34 @@
                 <aw-panel-body visible-when="conditions.actionItemPage">
                     <aw-flex-column>
                         <aw-flex-row>
-                            <aw-include name="actionItemTable"></aw-include>
+                            <aw-panel-section caption="{{i18n.actionItem}}" id="actionItemTable">
+                                <div style="text-align: center" exist-when="data.dataProviders.minutesListProvider.selectedObjects[0].props.L2_ActionItemRelation.dbValue.dbValues.length === 0">
+                                  <h3>{{i18n.noPost}}</h3>
+                                </div>
+                                <aw-flex-row exist-when="data.dataProviders.minutesListProvider.selectedObjects[0].props.L2_ActionItemRelation.dbValue.dbValues.length !== 0">
+                                    <aw-splm-table gridid="actionItemTable" use-tree="false" show-decorate="true"></aw-splm-table>
+                                </aw-flex-row>
+                              </aw-panel-section>
                         </aw-flex-row>
                         <div style="text-align: center;"
                             exist-when="!ctx.selectActionItemRev">
-                            <h3>조회할 액션 아이템을 선택해 주세요.</h3>
+                            <h3>{{i18n.selectActionItemInChecklist}}</h3>
                         </div>
                         <aw-flex-row visible-when="ctx.selectActionItemRev">
                             <aw-flex-column class="namePosition">
-                                <aw-label prop="data.l2_workerLbl"></aw-label>
+                                <aw-label prop="data.l2_workerLbl" visible-when="!data.actionItemEditMode"></aw-label>
+                                <aw-listbox prop="data.l2_worker" list="data.l2_workerValues.dbValue" visible-when="data.actionItemEditMode"></aw-listbox>
                             </aw-flex-column>
                         </aw-flex-row>
                         <aw-flex-row visible-when="ctx.selectActionItemRev">
                             <aw-flex-column class="namePosition">
-                                <aw-label prop="data.l2_expected_dateLbl"></aw-label>
+                                <aw-label prop="data.l2_expected_dateLbl" visible-when="!data.actionItemEditMode"></aw-label>
+                                <aw-date prop="data.l2_expected_date"  visible-when="data.actionItemEditMode"></aw-date>
                             </aw-flex-column>
                         </aw-flex-row>
                         <aw-flex-row visible-when="ctx.selectActionItemRev">
                             <aw-flex-column class="summernoteLblPosition">
-                                <aw-label prop="data.l2_commentLbl"></aw-label>
+                                <aw-label prop="data.l2_commentLbl" visible-when="!data.actionItemEditMode"></aw-label>
                             </aw-flex-column>
                         </aw-flex-row>
                         <aw-flex-row id="summernotePosit" height="auto" visible-when="ctx.selectActionItemRev">
@@ -167,32 +198,43 @@
     <aw-panel-footer>
         <aw-flex-row visible-when="conditions.showDetailsPage">
             <aw-flex-column>
-                <aw-button action="editMinutesMain" visible-when="!data.editMode">회의록 편집</aw-button>
+                <aw-button action="editMinutesMain" visible-when="!data.editMode && data.dataProviders.minutesListProvider.selectedObjects.length == 1">{{i18n.editMinutes}}</aw-button>
             </aw-flex-column>
         </aw-flex-row>
         <aw-flex-row visible-when="conditions.showDetailsPage">
             <aw-flex-column>
-                <aw-button action="saveMinutesBatch" visible-when="data.editMode">편집 저장</aw-button>
+                <aw-button action="saveMinutesBatch" visible-when="data.editMode">{{i18n.save}}</aw-button>
             </aw-flex-column>
             <aw-flex-column>
-                <aw-button action="cancelMinutesMain" visible-when="data.editMode">편집 취소</aw-button>
+                <aw-button action="cancelMinutesMain" visible-when="data.editMode">{{i18n.cancel}}</aw-button>
             </aw-flex-column>
         </aw-flex-row>
         <aw-flex-row visible-when="conditions.showReferencePage">
             <aw-flex-column>
-                <aw-button action="failureAdd">고장 추가</aw-button>
+                <aw-button action="failureAdd">{{i18n.addFailure}}</aw-button>
             </aw-flex-column>
             <aw-flex-column>
-                <aw-button action="deleteFailureBatchAction">고장 제거</aw-button>
+                <aw-button action="deleteFailureBatchAction">{{i18n.removeFailure}}</aw-button>
             </aw-flex-column>
         </aw-flex-row>
         <aw-flex-row visible-when="conditions.actionItemPage">
             <aw-flex-column>
-                <aw-button action="openCreateActionItem">액션아이템 추가</aw-button>
+                <aw-button action="openCreateActionItem" visible-when="!data.actionItemEditMode">{{i18n.addActionItem}}</aw-button>
             </aw-flex-column>
             <aw-flex-column>
-                <aw-button action="deleteActionItem">액션아이템 제거</aw-button>
+                <aw-button action="actionItemEditMode" visible-when="!data.actionItemEditMode">{{i18n.editActionItem}}</aw-button>
             </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="deleteActionItem" visible-when="!data.actionItemEditMode">{{i18n.deleteActionItem}}</aw-button>
+            </aw-flex-column>
+        </aw-flex-row>
+        <aw-flex-row visible-when="conditions.actionItemPage">
+            <aw-flex-column>
+                <aw-button action="saveActionItem" visible-when="data.actionItemEditMode">{{i18n.save}}</aw-button>
+            </aw-flex-column>
+            <aw-flex-column>
+                <aw-button action="cancelActionItemEdit" visible-when="data.actionItemEditMode">{{i18n.cancel}}</aw-button>
+            </aw-flex-column>            
         </aw-flex-row>
     </aw-panel-footer>
 </aw-panel-section>

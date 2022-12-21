@@ -36,6 +36,33 @@
     }
   ],
   "actions": {
+    "pptDownPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+            "declView": "L2_DesignBookPowerPointDataset",
+            "options": {
+                "clickOutsideToClose": true,
+                "placement": "bottom-start",
+                "reference": "pptDownPopupId",
+                "width": 350,
+                "height": 160
+            },
+            "locals": {
+                "hasCloseButton": true
+            }
+        }
+    },
+      "events": {
+        "success": [
+          {
+            "name": "pptDownPopupSuccess"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
     "openNewTabofToast": {
       "actionType": "batchJob",
       "steps": [
@@ -141,7 +168,7 @@
             "clickOutsideToClose": false,
             "draggable": true,
             "placement": "bottom-start",
-            "height": "550",
+            "height": "420",
             "width": "750"
           }
         }
@@ -605,6 +632,9 @@
     },
     "showNewTab": {
       "expression": "data.showNewTab === true"
+    },
+    "showCheckButton": {
+      "expression": "data.selectedBook != undefined && data.showButton != false"
     }
   },
   "i18n": {
@@ -629,7 +659,8 @@
     "name": ["L2_DesignStandardMessages"],
     "openNewTap": ["L2_DesignStandardMessages"],
     "createDgnBook2": ["L2_DesignStandardMessages"],
-    "revCompare": ["L2_DesignStandardMessages"]
+    "revCompare": ["L2_DesignStandardMessages"],
+    "bookPptDown": ["L2_DesignStandardMessages"]
   },
   "lifecycleHooks": {
     "onInit": "initialize"

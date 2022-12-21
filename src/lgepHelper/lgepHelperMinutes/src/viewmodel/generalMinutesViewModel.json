@@ -1,0 +1,930 @@
+{
+  "schemaVersion": "1.0.0",
+  "imports": [
+    "js/aw-button.directive",
+    "js/aw-chip-list.directive",
+    "js/aw-command-bar.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-flex-row.directive",
+    "js/aw-label.directive",
+    "js/aw-link.directive",
+    "js/aw-panel.directive",
+    "js/aw-panel-section.directive",
+    "js/aw-radiobutton.directive",
+    "js/aw-search-box.directive",
+    "js/aw-separator.directive",
+    "js/aw-sidenav.directive",
+    "js/aw-splitter.directive",
+    "js/aw-splm-table.directive",
+    "js/aw-tab-set.directive",
+    "css/generalMinutesCSS.css"
+  ],
+  "actions": {
+    "closePopupWindow": {
+      "actionType": "JSFunction",
+      "method": "hide",
+      "inputData": {
+        "popupId": "{{data.popupId}}"
+      },
+      "deps": "js/popupService"
+    },
+    "loadGeneralMinutes": {
+      "actionType": "JSFunction",
+      "method": "loadGeneralMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "generalMinutes": "{{function:sortAction}}",
+        "generalMinutesLength": "generalMinutesLength"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "loadActionItem": {
+      "actionType": "JSFunction",
+      "method": "loadActionItem",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "actionItem": "{{function:sortActionItem}}",
+        "actionItemLength": "actionItemLength"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "addMinutes": {
+      "actionType": "JSFunction",
+      "method": "addMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "editMinutes": {
+      "actionType": "JSFunction",
+      "method": "editMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "deleteMinutes": {
+      "actionType": "JSFunction",
+      "method": "deleteMinutes",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "deleteActionItem": {
+      "actionType": "JSFunction",
+      "method": "deleteActionItem",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "loadMinutesDetails": {
+      "actionType": "JSFunction",
+      "method": "loadMinutesDetails",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "openFilter": {
+      "actionType": "JSFunction",
+      "method": "openFilter",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "loadActionItemDetails": {
+      "actionType": "JSFunction",
+      "method": "loadActionItemDetails",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "goUserDetailMinutes": {
+      "actionType": "JSFunction",
+      "method": "goUserDetailMinutes",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "closeFilterAction": {
+      "actionType": "JSFunction",
+      "method": "closeFilterAction",
+      "deps": "js/generalMinutesService"
+    },
+    "goUserDetailAI": {
+      "actionType": "JSFunction",
+      "method": "goUserDetailAI",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "datasetLinkEvent": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "datasetLinkEvent"
+          }
+        ]
+      }
+    },
+    "datasetLinkAction": {
+      "actionType": "JSFunction",
+      "method": "datasetLinkAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "initialize": {
+      "actionType": "JSFunction",
+      "method": "initialize",
+      "deps": "js/generalMinutesService"
+    },
+    "tableRefresh": {
+      "actionType": "JSFunction",
+      "method": "tableRefresh",
+      "deps": "js/generalMinutesService"
+    },
+    "checklistConnectPopup": {
+      "actionType": "JSFunction",
+      "method": "checklistConnectPopup",
+      "deps": "js/generalMinutesService"
+    },
+    "minutesSearch": {
+      "actionType": "JSFunction",
+      "method": "minutesSearch",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "selectMinutes": {
+      "actionType": "JSFunction",
+      "method": "selectMinutes",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "setPageNumber": {
+      "actionType": "JSFunction",
+      "method": "setPageNumber",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "outputData": {
+        "pageResponse": "pageResponse",
+        "pageLength": "pageLength"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "firstPageAction": {
+      "actionType": "JSFunction",
+      "method": "firstPageAction",
+      "inputData": {
+        "data": "{{data}}",
+        "ctx": "{{ctx}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "pagingBeforeAction": {
+      "actionType": "JSFunction",
+      "method": "pagingBeforeAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "pagingAfterAction": {
+      "actionType": "JSFunction",
+      "method": "pagingAfterAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "lastPageAction": {
+      "actionType": "JSFunction",
+      "method": "lastPageAction",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "clickedPageAction": {
+      "actionType": "JSFunction",
+      "method": "clickedPageAction",
+      "inputData": {
+        "data": "{{data}}",
+        "subPanelContext": "{{subPanelContext}}",
+        "chip": "{{chip}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "openEditPopup": {
+      "actionType": "JSFunction",
+      "method": "openEditPopup",
+      "inputData": {
+        "data": "{{data}}"
+      },
+      "deps": "js/generalMinutesService"
+    },
+    "addPopupAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "actionItem.add"
+          }
+        ]
+      }
+    },
+    "editPopupAction": {
+      "actionType": "Event",
+      "method": "Event",
+      "inputData": {
+        "events": [
+          {
+            "name": "actionItem.edit"
+          }
+        ]
+      }
+    },
+    "minutesAddPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupMinutesAdd",
+          "locals": {
+            "caption": "{{i18n.minutesAdd}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 950,
+            "width": 1300
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "addPopupOpen.complete"
+          }
+        ]
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "deps": "js/popupService"
+    },
+    "minutesEditPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupMinutesEdit",
+          "locals": {
+            "caption": "{{i18n.minutesEdit}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 900,
+            "width": 1100
+          }
+        }
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "events": {
+        "success": [
+          {
+            "name": "editPopupOpen.complete"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "actionItemAddPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupActionItemAdd",
+          "locals": {
+            "caption": "{{i18n.actionItemAdd}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 950,
+            "width": 1300
+          }
+        }
+      },
+      "events": {
+        "success": [
+          {
+            "name": "addActionItemPopupOpen.complete"
+          }
+        ]
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "deps": "js/popupService"
+    },
+    "actionItemEditPopup": {
+      "actionType": "JSFunction",
+      "method": "show",
+      "inputData": {
+        "data": {
+          "declView": "PopupActionItemEdit",
+          "locals": {
+            "caption": "{{i18n.actionItemEdit}}",
+            "anchor": "closePopupAnchor"
+          },
+          "options": {
+            "reference": "referenceId",
+            "isModal": true,
+            "clickOutsideToClose": false,
+            "draggable": true,
+            "placement": "bottom-start",
+            "height": 900,
+            "width": 1100
+          }
+        }
+      },
+      "outputData": {
+        "popupId": "id"
+      },
+      "events": {
+        "success": [
+          {
+            "name": "editActionItemPopupOpen.complete"
+          }
+        ]
+      },
+      "deps": "js/popupService"
+    },
+    "loadActionTableBatchAction": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "loadActionItem"
+        },
+        {
+          "action": "tableRefresh"
+        }
+      ]
+    }
+  },
+  "data": {
+    "tabDetails": [
+      {
+        "name": "{{i18n.detail}}",
+        "tabKey": "detailsPage"
+      },
+      {
+        "name": "{{i18n.actionItem}}",
+        "tabKey": "actionItemPage"
+      }
+    ],
+    "commonMinutesFilterInfo": {
+      "slide": "PUSH",
+      "direction": "LEFT_TO_RIGHT",
+      "animation": true,
+      "width": "STANDARD",
+      "height": "FULL"
+    },
+    "datasetLink": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "object_name": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_date": {
+      "displayName": "{{i18n.minutesDate}}",
+      "type": "DATETIME",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_meeting_place": {
+      "displayName": "{{i18n.minutesPlace}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_participants": {
+      "displayName": "{{i18n.minutesParticipants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 3
+    },
+    "l2_meeting_details": {
+      "displayName": "{{i18n.minutesDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 10
+    },
+    "l2_meeting_agenda": {
+      "displayName": "{{i18n.minutesAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true"
+    },
+    "l2_meeting_related_schedule": {
+      "displayName": "{{i18n.minutesSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "numberOfLines": 5
+    },
+    "object_nameLbl": {
+      "displayName": "{{i18n.minutesTitle}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_dateLbl": {
+      "displayName": "{{i18n.minutesDate}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_placeLbl": {
+      "displayName": "{{i18n.minutesPlace}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriter": {
+      "displayName": "{{i18n.minutesWriter}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedWriterLink": {
+      "displayName": "",
+      "type": "STRING",
+      "isEditable": "false"
+    },
+    "workerLink": {
+      "displayName": "",
+      "type": "STRING",
+      "isEditable": "false"
+    },
+    "l2_meeting_participantsLbl": {
+      "displayName": "{{i18n.minutesParticipants}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_agendaLbl": {
+      "displayName": "{{i18n.minutesAgenda}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "proceedDetails": {
+      "displayName": "{{i18n.minutesDetails}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_meeting_related_scheduleLbl": {
+      "displayName": "{{i18n.minutesSchedule}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "createDateLbl": {
+      "displayName": "{{i18n.minutesCreateDate}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "fileDataSet": {
+      "displayName": "{{i18n.minutesAttachesFile}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_workerLbl": {
+      "displayName": "{{i18n.worker}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_expected_dateLbl": {
+      "displayName": "{{i18n.expectedDate}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_commentLbl": {
+      "displayName": "{{i18n.comment}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_follow_upLbl": {
+      "displayName": "{{i18n.followUp}}",
+      "type": "STRING",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_expected_date": {
+      "displayName": "{{i18n.expectedDate}}",
+      "type": "DATE",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dispValue": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "l2_worker": {
+      "displayName": "{{i18n.worker}}",
+      "type": "STRING",
+      "isRequired": "true",
+      "hasLov": "true",
+      "dbValue": "",
+      "dispValue": ""
+    },
+    "l2_workerValues": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "pageSize": 40,
+    "linkRepeat": {
+      "type": "STRING",
+      "dbValue": []
+    },
+    "firstPage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "lastPage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "beforePage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "afterPage": {
+      "displayName": "",
+      "uiValue": "",
+      "type": "STRING",
+      "isRequired": "false"
+    },
+    "detailStatusRadio": {
+      "displayName": "",
+      "type": "BOOLEAN",
+      "isRequired": "false",
+      "isEditable": "true",
+      "dbValue": false,
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE",
+      "vertical": false,
+      "propertyRadioTrueText": "{{i18n.newTab}}",
+      "propertyRadioFalseText": "{{i18n.popup}}"
+    },
+    "searchBox": {
+      "displayName": "",
+      "type": "STRING"
+    },
+    "searchBoxPlaceHolder": {
+      "dbValue": "{{i18n.enterSearch}}"
+    }
+  },
+  "dataProviders": {
+    "generalMinutesListProvider": {
+      "action": "loadGeneralMinutes",
+      "response": "{{data.generalMinutes}}",
+      "totalFound": "{{data.generalMinutesLength}}"
+    },
+    "pageChipDataProvider": {
+      "type": "Static",
+      "action": "setPageNumber",
+      "response": "{{data.pageResponse}}",
+      "totalFound": "{{data.pageLength}}"
+    },
+    "actionItemTableProvider": {
+      "action": "loadActionItem",
+      "response": "{{data.actionItem}}",
+      "totalFound": "{{data.actionItemLength}}"
+    }
+  },
+  "columnProviders": {
+    "generalMinutesListColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "object_name2",
+          "displayName": "{{i18n.minutesTitle}}",
+          "minWidth": 80,
+          "width": 300,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "owning_group",
+          "displayName": "{{i18n.division}}",
+          "minWidth": 80,
+          "width": 70,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "owning_user",
+          "displayName": "{{i18n.minutesWriter}}",
+          "minWidth": 80,
+          "width": 100,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "creation_date",
+          "displayName": "{{i18n.minutesCreateDate}}",
+          "minWidth": 80,
+          "width": 100,
+          "enableColumnMenu": false
+        }
+      ]
+    },
+    "actionItemColumnProvider": {
+      "frozenColumnIndex": -1,
+      "columns": [
+        {
+          "name": "l2_comment",
+          "displayName": "{{i18n.comment}}",
+          "minWidth": 60,
+          "width": 410
+        },
+        {
+          "name": "l2_follow_up",
+          "displayName": "{{i18n.followUp}}",
+          "minWidth": 60,
+          "width": 410
+        },
+        {
+          "name": "l2_worker",
+          "displayName": "{{i18n.worker}}",
+          "minWidth": 60,
+          "width": 100
+        },
+        {
+          "name": "l2_expected_date",
+          "displayName": "{{i18n.expectedDate}}",
+          "minWidth": 60,
+          "width": 120
+        },
+        {
+          "name": "detailsBtn",
+          "displayName": "{{i18n.details}}",
+          "minWidth": 60,
+          "width": 150
+        }
+      ]
+    }
+  },
+  "grids": {
+    "commonMinutesTable": {
+      "dataProvider": "generalMinutesListProvider",
+      "columnProvider": "generalMinutesListColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false
+      }
+    },
+    "actionItemTable": {
+      "dataProvider": "actionItemTableProvider",
+      "columnProvider": "actionItemColumnProvider",
+      "addIconColumn": false,
+      "gridOptions": {
+        "enablePinning": true,
+        "enableSorting": false,
+        "rowHeight": "XLARGE",
+        "maxRowsToShow": 10
+      }
+    }
+  },
+  "conditions": {
+    "showDetailsPage": {
+      "expression": "data.selectedTab.tabKey === 'detailsPage'"
+    },
+    "actionItemPage": {
+      "expression": "data.selectedTab.tabKey === 'actionItemPage'"
+    }
+  },
+  "onEvent": [
+    {
+      "eventId": "minutes.filter",
+      "action": "openFilter"
+    },
+    {
+      "eventId": "minutes.add",
+      "action": "minutesAddPopup"
+    },
+    {
+      "eventId": "minutes.edit",
+      "condition": "data.dataProviders.generalMinutesListProvider.selectedObjects.length == 1",
+      "action": "openEditPopup"
+    },
+    {
+      "eventId": "minutes.edit",
+      "condition": "data.dataProviders.generalMinutesListProvider.selectedObjects.length != 1",
+      "message": "pleaseSelectMinutes"
+    },
+    {
+      "eventId": "actionItem.edit",
+      "condition": "data.dataProviders.actionItemTableProvider.selectedObjects.length == 1",
+      "action": "actionItemEditPopup"
+    },
+    {
+      "eventId": "actionItem.edit",
+      "condition": "data.dataProviders.actionItemTableProvider.selectedObjects.length != 1",
+      "message": "pleaseSelectActionItemForModify"
+    },
+    {
+      "eventId": "minutes.delete",
+      "action": "deleteMinutes"
+    },
+    {
+      "eventId": "datasetLinkEvent",
+      "cacheEventData": true,
+      "action": "datasetLinkAction"
+    },
+    {
+      "eventId": "generalMinutesListProvider.selectionChangeEvent",
+      "action": "loadMinutesDetails"
+    },
+    {
+      "eventId": "generalMinutesListProvider.selectionChangeEvent",
+      "action": "selectMinutes"
+    },
+    {
+      "eventId": "generalMinutesListProvider.selectionChangeEvent",
+      "action": "tableRefresh"
+    },
+    {
+      "eventId": "actionItemTableProvider.selectionChangeEvent",
+      "action": "loadActionItemDetails"
+    },
+    {
+      "eventId": "actionItem.create",
+      "action": "actionItemAddPopup"
+    },
+    {
+      "eventId": "actionItem.delete",
+      "action": "deleteActionItem"
+    },
+    {
+      "eventId": "commonMinutesFilter.contentUnloaded",
+      "action": "closeFilterAction"
+    }
+  ],
+  "lifecycleHooks": {
+    "onMount": "initialize"
+  },
+  "functions": {
+    "sortAction": {
+      "functionName": "sortAction",
+      "parameters": ["{{data.dataProviders.generalMinutesListProvider.startIndex}}", "{{data.pageSize}}"]
+    },
+    "sortActionItem": {
+      "functionName": "sortActionItem",
+      "parameters": ["{{data.dataProviders.actionItemTableProvider.startIndex}}", "{{data.pageSize}}"]
+    }
+  },
+  "i18n": {
+    "detail": ["lgepChkMinutesMessages"],
+    "actionItem": ["lgepChkMinutesMessages"],
+    "comment": ["lgepChkMinutesMessages"],
+    "followUp": ["lgepChkMinutesMessages"],
+    "worker": ["lgepChkMinutesMessages"],
+    "remark": ["lgepChkMinutesMessages"],
+    "expectedDate": ["lgepChkMinutesMessages"],
+    "pleaseSelectMinutes": ["lgepKnowldegeManageMessages"],
+    "pleaseSelectActionItemForModify": ["lgepChkMinutesMessages"],
+    "pleaseSelectViewMinutes": ["lgepKnowldegeManageMessages"],
+    "property": ["lgepKnowldegeManageMessages"],
+    "actionItemList": ["lgepKnowldegeManageMessages"],
+    "actionItemAdd": ["lgepKnowldegeManageMessages"],
+    "actionItemEdit": ["lgepKnowldegeManageMessages"],
+    "actionItemDelete": ["lgepKnowldegeManageMessages"],
+    "minutesTitle": ["lgepKnowldegeManageMessages"],
+    "minutesEdit": ["lgepKnowldegeManageMessages"],
+    "minutesAdd": ["lgepKnowldegeManageMessages"],
+    "minutesDate": ["lgepKnowldegeManageMessages"],
+    "minutesPlace": ["lgepKnowldegeManageMessages"],
+    "minutesParticipants": ["lgepKnowldegeManageMessages"],
+    "minutesDetails": ["lgepKnowldegeManageMessages"],
+    "minutesAgenda": ["lgepKnowldegeManageMessages"],
+    "minutesSchedule": ["lgepKnowldegeManageMessages"],
+    "minutesWriter": ["lgepKnowldegeManageMessages"],
+    "minutesCreateDate": ["lgepKnowldegeManageMessages"],
+    "minutesAttachesFile": ["lgepKnowldegeManageMessages"],
+    "connectChecklist": ["lgepKnowldegeManageMessages"],
+    "noPost": ["lgepKnowldegeManageMessages"],
+    "details": ["lgepKnowldegeManageMessages"],
+    "division": ["lgepKnowldegeManageMessages"],
+    "enterSearch": ["lgepKnowldegeManageMessages"],
+    "newTab": ["lgepKnowldegeManageMessages"],
+    "popup": ["lgepKnowldegeManageMessages"],
+    "dontEditOtherDivision": ["lgepKnowldegeManageMessages"]
+  },
+  "messages": {
+    "pleaseSelectMinutes": {
+      "messageType": "WARNING",
+      "messageText": "{{i18n.pleaseSelectMinutes}}"
+    },
+    "pleaseSelectActionItemForModify": {
+      "messageType": "WARNING",
+      "messageText": "{{i18n.pleaseSelectActionItemForModify}}"
+    },
+    "dontEditOtherDivision": {
+      "messageType": "WARNING",
+      "messageText": "{{i18n.dontEditOtherDivision}}"
+    }
+  }
+}

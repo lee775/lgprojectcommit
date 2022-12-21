@@ -4,5 +4,7 @@
   "actions": {},
   "data": {},
   "onEvent": [],
-  "i18n": {}
+  "i18n": {
+    "viewAllMinutes": ["lgepChkMinutesMessages"]    
+  }
 }

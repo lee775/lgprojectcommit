@@ -1,8 +1,9 @@
 import app from 'app';
 import bomUtils from 'js/utils/lgepBomUtils';
-import { ctx } from 'js/appCtxService';
+import appCtxService, { ctx } from 'js/appCtxService';
 import soaService from 'soa/kernel/soaService';
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
+import lgepMessagingUtils from 'js/utils/lgepMessagingUtils';
 import { loadObjectByPolicy } from 'js/utils/fmeaTcUtils';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
@@ -151,36 +152,38 @@ const getStructureInfomation = (childLine) => {
 };
 
 export async function buttonAction(data, ctx) {
-  let bomWindow;
-  try {
-    const fmeaRevision = await loadObjectByPolicy('eOqNCesr5p7XAC', prop.TYPE_DFMEA_MASTER_REVISION);
-    bomWindow = await bomUtils.createBOMWindow(null, fmeaRevision);
-    let bomDatas = await bomUtils.expandPSAllLevels([bomWindow.bomLine], null, lgepObjectUtils.createPolicy(getBomLineProperties(), 'BOMLine'));
-    let bomLineOutput = bomDatas.output;
-    let topLine = bomLineOutput.find((i) => i.parent.itemRevOfBOMLine.uid === 'eOqNCesr5p7XAC');
+  lgepMessagingUtils.sendAlarmMessage('테스트 제목', '테스트 내용', appCtxService.ctx.user.uid, appCtxService.ctx.user.uid);
 
-    if (topLine) {
-      for (const childLine of topLine.children) {
-        childLine['parentInfo'] = {};
-        getStructureInfomation(childLine);
-        getChildBOM(bomLineOutput, childLine);
-      }
-    }
+  // let bomWindow;
+  // try {
+  //   const fmeaRevision = await loadObjectByPolicy('eOqNCesr5p7XAC', prop.TYPE_DFMEA_MASTER_REVISION);
+  //   bomWindow = await bomUtils.createBOMWindow(null, fmeaRevision);
+  //   let bomDatas = await bomUtils.expandPSAllLevels([bomWindow.bomLine], null, lgepObjectUtils.createPolicy(getBomLineProperties(), 'BOMLine'));
+  //   let bomLineOutput = bomDatas.output;
+  //   let topLine = bomLineOutput.find((i) => i.parent.itemRevOfBOMLine.uid === 'eOqNCesr5p7XAC');
 
-    // for (let i = 0; i < bomLineDatas.length; i++) {
-    //     const bomLineData = bomLineDatas[i];
-    //     let parentBOMLine = bomLineData.parent;
-    //     let childList = bomLineData.children;
+  //   if (topLine) {
+  //     for (const childLine of topLine.children) {
+  //       childLine['parentInfo'] = {};
+  //       getStructureInfomation(childLine);
+  //       getChildBOM(bomLineOutput, childLine);
+  //     }
+  //   }
 
-    //     if(childList.length !== 0){
-    //         parentBOMLine = parentBOMLine.itemRevOfBOMLine.uid;
-    //     }
-    // }
-  } catch (e) {
-    //console.log('loadTableDatas', e);
-  } finally {
-    await bomUtils.closeBOMWindow(bomWindow.bomWindow);
-  }
+  //   // for (let i = 0; i < bomLineDatas.length; i++) {
+  //   //     const bomLineData = bomLineDatas[i];
+  //   //     let parentBOMLine = bomLineData.parent;
+  //   //     let childList = bomLineData.children;
+
+  //   //     if(childList.length !== 0){
+  //   //         parentBOMLine = parentBOMLine.itemRevOfBOMLine.uid;
+  //   //     }
+  //   // }
+  // } catch (e) {
+  //   //console.log('loadTableDatas', e);
+  // } finally {
+  //   await bomUtils.closeBOMWindow(bomWindow.bomWindow);
+  // }
 
   //alert("!!");
   // lgepObjectUtils.createRelateAndSubmitObjects2("Fnd0Message",{

@@ -1,0 +1,44 @@
+<aw-balloon-popup-panel>
+  <style>
+    .noColor {
+      background: none !important;
+    }
+
+    .visibleHidden {
+      visibility: hidden !important;
+    }
+
+    #dgnStandardBookPPTTable>div>div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft>div.aw-splm-tableHeaderRow {
+      display: none !important;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    #closeMargin {
+      margin-top: 10px;
+    }
+  </style>
+  <aw-panel-body id="pptFileData">
+    <aw-flex-row height="5">
+      <aw-flex-column width="4">
+      </aw-flex-column>
+      <aw-flex-column width="8">
+        <aw-flex-row justify="right" class="noColor">
+          <aw-button button-type="base" action="uploadClickBook" size="auto">{{i18n.pptChange}}</aw-button>
+          <aw-button button-type="base" action="pptDown" size="auto">{{i18n.download}}</aw-button>
+        </aw-flex-row>
+      </aw-flex-column>
+    </aw-flex-row>
+    <aw-separator></aw-separator>
+    <aw-flex-row height="4">
+      <aw-splm-table gridid="dgnStandardBookPPTTable"></aw-splm-table>
+    </aw-flex-row>
+    <aw-flex-row justify="right" class="noColor" id="closeMargin">
+      <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+    </aw-flex-row>
+  </aw-panel-body>
+  <aw-file-upload class="visibleHidden" type-filter=".ppt, .pptx, .pdf, .PDF, .MSPowerPoint, .MSPowerPointX"
+    file-change-action="linkRelationsManualBat"></aw-file-upload>
+</aw-balloon-popup-panel>

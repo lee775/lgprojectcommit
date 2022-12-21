@@ -76,6 +76,15 @@
       },
       "deps": "js/showAllMinutesInCheckListService"
     },
+    "selectMainTable": {
+      "actionType": "JSFunction",
+      "method": "selectMainTable",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "deps": "js/showAllMinutesInCheckListService"
+    },
     "prodAction": {
       "actionType": "JSFunction",
       "method": "prodAction",
@@ -123,31 +132,31 @@
       "columns": [
         {
           "name": "object_name",
-          "displayName": "이름",
+          "displayName": "{{i18n.minutesName}}",
           "minWidth": 60,
           "width": 150
         },
         {
           "name": "project_code",
-          "displayName": "프로젝트 명",
+          "displayName": "{{i18n.projectName}}",
           "minWidth": 60,
           "width": 150
         },
         {
           "name": "l2_product_code",
-          "displayName": "제품 코드",
+          "displayName": "{{i18n.prodCode}}",
           "minWidth": 60,
           "width": 150
         },
         {
           "name": "top_checklist",
-          "displayName": "상위 체크리스트",
+          "displayName": "{{i18n.topChecklist}}",
           "minWidth": 60,
           "width": 150
         },
         {
           "name": "item_revision_id",
-          "displayName": "리비전ID",
+          "displayName": "{{i18n.revisionID}}",
           "minWidth": 60,
           "width": 150
         }
@@ -182,7 +191,20 @@
       "eventId": "loadCheckBoxList",
       "cacheEventData": true,
       "action": "reveal"
+    },
+    {
+      "eventId": "allMinutesListInCheckListDataProvider.selectionChangeEvent",
+      "action": "selectMainTable"
     }
   ],
-  "i18n": {}
+  "i18n": {
+    "minutesName": ["lgepChkMinutesMessages"],
+    "projectName": ["lgepChkMinutesMessages"],
+    "prodCode": ["lgepChkMinutesMessages"],
+    "topChecklist": ["lgepChkMinutesMessages"],
+    "revisionID": ["lgepChkMinutesMessages"],
+    "view": ["lgepChkMinutesMessages"],
+    "filter": ["lgepChkMinutesMessages"],
+    "minutes": ["lgepChkMinutesMessages"]
+  }
 }

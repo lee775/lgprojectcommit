@@ -9,6 +9,7 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 let exports = {};
 
+export const INFO = 'info';
 export const INFORMATION = 'INFO';
 export const WARNING = 'WARNING';
 export const ERROR = 'ERROR';
@@ -113,7 +114,7 @@ export function sendAlarmMessage(
   sender = appCtxService.ctx.user.uid,
   date = new Date(),
   priorty = 'Normal',
-  msgType = 'SUB_MAN',
+  msgType = 'REPORTS',
 ) {
   return lgepObjectUtils.createRelateAndSubmitObjects2('Fnd0Message', {
     fnd0Subject: [title],

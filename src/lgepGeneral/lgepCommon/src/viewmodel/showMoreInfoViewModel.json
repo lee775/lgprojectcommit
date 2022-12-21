@@ -1,0 +1,26 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": ["js/aw-panel-body.directive", "js/aw-button.directive"],
+    "data": {},
+    "actions": {
+      "navigationAction": {
+        "actionType": "Navigate",
+        "navigateIn": "newTab",
+        "navigateTo": "",
+        "navigationParams": {}
+      },
+      "openMoreInfo": {
+        "actionType": "JSFunction",
+        "method": "openMoreInfo",
+        "inputData": {
+          "ctx": "{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/buttonForCheck"
+      }
+    },
+    "i18n": {
+      "open": ["lgepCommonMessages"]
+    }
+  }
+  

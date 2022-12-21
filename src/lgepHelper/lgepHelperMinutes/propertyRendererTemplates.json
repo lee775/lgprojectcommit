@@ -1,0 +1,12 @@
+{
+  "actionItemView": {
+    "grids": ["actionItemTable"],
+    "columns": ["detailsBtn"],
+    "tooltip": [],
+    "template": "",
+    "templateUrl": "",
+    "renderFunction": "buttonSet",
+    "deps": "js/generalMinutesService",
+    "dependentServices": []
+  }
+}

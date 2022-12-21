@@ -30,6 +30,9 @@
     "bookFreeze": {
       "actionType": "JSFunction",
       "method": "bookFreeze",
+      "outputData": {
+        "result" : "result"
+      },
       "deps": "js/L2_DesignStandardService"
     },
     "bookFreezeBat": {

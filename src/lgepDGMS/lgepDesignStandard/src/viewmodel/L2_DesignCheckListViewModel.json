@@ -11,13 +11,22 @@
         "data": "{{data}}"
       },
       "deps": "js/L2_DesignCheckListService"
+    },
+    "showPre": {
+      "actionType": "JSFunction",
+      "method": "showPre",
+      "deps": "js/L2_DesignCheckListService"
     }
   },
   "lifecycleHooks": {
     "onMount": "loadData"
   },
   "data": {},
-  "conditions": {},
+  "conditions": {
+    "showCheckButton": {
+      "expression": "data.selectedBook !== undefined"
+    }
+  },
   "i18n": {
     "summerNoteWidthMax": ["lgepDesignSequenceMessages"],
     "treeShowTooltip": ["lgepDesignSequenceMessages"],

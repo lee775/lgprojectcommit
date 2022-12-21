@@ -18,6 +18,7 @@ import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
 import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import common from 'js/utils/lgepCommonUtils';
 import advancedSearchUtils from 'js/advancedSearchUtils';
+import lgepLoadingUtils from 'js/utils/lgepLoadingUtils';
 var $ = require('jQuery');
 
 let selectAnswer = [];
@@ -176,6 +177,8 @@ export async function adopt(data, value, valueQuestion) {
 //욱채가 만든 메소드
 
 export async function loadQaList(data, ctx) {
+  lgepLoadingUtils.openWindow();
+
   data.showCategory = 'show';
   data.window = 'askExpert';
 
@@ -201,6 +204,9 @@ export async function loadQaList(data, ctx) {
   }
 
   await common.userLogsInsert('Load Expert Q&A', '', 'S', 'Success');
+
+  lgepLoadingUtils.closeWindow();
+  ctx.qnaEList = searchingQuestion.length;
 
   return {
     qaList: searchingQuestion,
@@ -598,6 +604,7 @@ export async function askExpertDelete(data, lists, ctx, id, title, writer, write
             history.pushState(null, null, '#/askExpert');
             eventBus.publish('qaAnswerList.listUpdated');
             eventBus.publish('qaList.plTable.reload');
+            eventBus.publish('pageChipDataProvider.reset');
             notySvc.showInfo(deleteComplete);
           },
         });

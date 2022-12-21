@@ -1,4 +1,4 @@
-<aw-panel-section caption="액션 아이템">
+<aw-panel-section caption="{{i18n.actionItem}}">
     <aw-panel>
         <aw-panel-body>
             <aw-flex-column class="actionCSS">
@@ -22,7 +22,7 @@
                 <aw-listbox prop="data.l2_worker" list="data.l2_workerValues.dbValue"></aw-listbox>
               </aw-flex-row>
               <aw-flex-row>
-                <aw-datetime prop="data.l2_expected_date"></aw-datetime>
+                <aw-date prop="data.l2_expected_date"></aw-date>
               </aw-flex-row>
               <aw-flex-row>
                 <aw-label prop="data.object_descLbl"></aw-label>
@@ -38,10 +38,10 @@
     <aw-panel-footer>
         <aw-flex-row>
             <aw-flex-column>
-                <aw-button action="createActionItem">생성</aw-button>
+                <aw-button action="createActionItem">{{i18n.create}}</aw-button>
             </aw-flex-column>
             <aw-flex-column>
-                <aw-button action="backPage">뒤로가기</aw-button>
+                <aw-button action="backPage">{{i18n.back}}</aw-button>
             </aw-flex-column>
         </aw-flex-row>
     </aw-panel-footer>

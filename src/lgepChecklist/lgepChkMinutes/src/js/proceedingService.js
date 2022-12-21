@@ -34,6 +34,8 @@ const close = locale.getLocalizedText('lgepChkMinutesMessages', 'close');
 var $ = require('jQuery');
 let datasetUid = null;
 let newFileArr = [];
+let lastModifiedArr = [];
+let originFileArr = [];
 
 export async function initialize() {
   $('#DetailsSummernote').summernote({
@@ -153,7 +155,171 @@ export async function createproceed(ctx, data) {
   console.log('회의록 생성');
 
   if (!appCtxService.ctx.checklist.selectedRow) {
-    msg.show(1, '체크리스트를 선택해 주세요.');
+    let topObjRev = ctx.checklist.target;
+
+    try {
+      await com.getProperties(topObjRev, ['L2_MinutesRelation']);
+    } catch (err) {
+      //console.log(err);
+      notySvc.showError('아이템 속성 불러오기 실패');
+    }
+
+    let minutesName = data.object_name.uiValue;
+    let minutesDate = `${data.l2_meeting_date.dateApi.dateValue} ${data.l2_meeting_date.dateApi.timeValue}`;
+    let minutesPlace = data.l2_meeting_place.uiValue;
+    let minutesParticipants = data.l2_meeting_participants.uiValue;
+    let minutesSubjects = data.l2_meeting_agenda.uiValue;
+    let minutesDetail = $('#createMinutesSummernote').summernote('code');
+    let minutesDetailString = $('#createMinutesSummernote').summernote('code');
+    minutesDetailString = minutesDetailString.replace(/<[^>]*>?/g, '');
+    let minutesSchedule = data.l2_meeting_related_schedule.uiValue;
+
+    try {
+      minutesDate = L2_StandardBOMService.dateTo_GMTString(minutesDate);
+    } catch (err) {
+      console.log(err);
+    }
+
+    if (minutesName == null || minutesName == undefined || minutesName == '') {
+      notySvc.showWarning('회의록의 제목을 입력해 주세요.');
+    } else {
+      let createMinutesItem = await com.createItem('', 'L2_Minutes', minutesName, minutesSchedule, '');
+      let createdItem = createMinutesItem.output[0].item;
+
+      await com.getProperties(createdItem, [
+        'object_string',
+        'contents',
+        'object_name',
+        'l2_meeting_agenda',
+        'l2_meeting_date',
+        'l2_meeting_details',
+        'l2_meeting_participants',
+        'l2_meeting_place',
+        'l2_meeting_title',
+        'l2_meeting_related_schedule',
+        'l2_minutes_writer',
+        'IMAN_reference',
+        'TC_Attaches',
+        'L2_ActionItemRelation',
+        'l2_is_checklist_minutes',
+      ]);
+
+      let minutesItemParam = {
+        objects: [createdItem],
+        attributes: {
+          object_name: {
+            stringVec: [minutesName],
+          },
+          object_desc: {
+            stringVec: [minutesSubjects],
+          },
+          l2_meeting_agenda: {
+            stringVec: [minutesSubjects],
+          },
+          l2_meeting_date: {
+            stringVec: [minutesDate],
+          },
+          l2_meeting_details: {
+            stringVec: [minutesDetailString],
+          },
+          l2_meeting_participants: {
+            stringVec: [minutesParticipants],
+          },
+          l2_meeting_place: {
+            stringVec: [minutesPlace],
+          },
+          l2_meeting_related_schedule: {
+            stringVec: [minutesSchedule],
+          },
+          l2_is_checklist_minutes: {
+            stringVec: ['Y'],
+          },
+        },
+      };
+
+      await SoaService.post('Core-2007-01-DataManagement', 'setProperties', minutesItemParam);
+
+      let text = {};
+      text.detail = minutesDetail;
+
+      let setText = JSON.stringify(text);
+
+      lgepSummerNoteUtils.txtFileToDatasetNoDelete(setText, createMinutesItem.output[0].itemRev);
+
+      let createUID = createMinutesItem.output[0].itemRev.uid;
+      let allbeforeUID = topObjRev.props.L2_MinutesRelation.dbValues;
+      let allMinutesArr = [];
+
+      if (allbeforeUID.length != 0) {
+        allMinutesArr.push(allbeforeUID);
+        allMinutesArr.push(createUID);
+        allMinutesArr = allMinutesArr.filter((element, index) => {
+          return allMinutesArr.indexOf(element) === index;
+        });
+      } else {
+        allMinutesArr.push(createUID);
+      }
+
+      allMinutesArr = allMinutesArr.flat();
+
+      let allMinutesRelationParam = {
+        objects: [topObjRev],
+        attributes: {
+          L2_MinutesRelation: {
+            stringVec: allMinutesArr,
+          },
+        },
+      };
+      await SoaService.post('Core-2007-01-DataManagement', 'setProperties', allMinutesRelationParam);
+      const fileInput = document.getElementById('createFileUpload');
+      console.log(createdItem);
+      try {
+        await com.getProperties(createMinutesItem.output[0].itemRev, ['IMAN_reference', 'TC_Attaches']);
+      } catch (err) {
+        //console.log(err);
+        notySvc.showError('아이템 속성 불러오기 실패');
+      }
+      let fileDataset = await lgepSummerNoteUtils.uploadFileToDataset(newFileArr);
+      if (Array.isArray(fileDataset)) {
+        for (let i = 0; i < fileDataset.length; i++) {
+          var jsoObj = {
+            input: [
+              {
+                clientId: '',
+                relationType: 'TC_Attaches',
+                primaryObject: createMinutesItem.output[0].itemRev,
+                secondaryObject: fileDataset[i],
+              },
+            ],
+          };
+          try {
+            await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
+          } catch (err) {
+            //console.log(err);
+          }
+        }
+      } else {
+        var jsoObj = {
+          input: [
+            {
+              clientId: '',
+              relationType: 'TC_Attaches',
+              primaryObject: createMinutesItem.output[0].itemRev,
+              secondaryObject: fileDataset,
+            },
+          ],
+        };
+        try {
+          await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
+        } catch (err) {
+          //console.log(err);
+        }
+      }
+      newFileArr = [];
+
+      msg.show(0, `${minutesName} ${createdItemMsg}`);
+      appCtxService.registerCtx('show_minutes_mode', 1);
+    }
   } else {
     let selectOrigin = appCtxService.ctx.checklist.selectedRow.getOriginalObject();
     try {
@@ -182,7 +348,9 @@ export async function createproceed(ctx, data) {
     let minutesPlace = data.l2_meeting_place.uiValue;
     let minutesParticipants = data.l2_meeting_participants.uiValue;
     let minutesSubjects = data.l2_meeting_agenda.uiValue;
-    let minutesDetail = data.l2_meeting_details.uiValue;
+    let minutesDetail = $('#createMinutesSummernote').summernote('code');
+    let minutesDetailString = $('#createMinutesSummernote').summernote('code');
+    minutesDetailString = minutesDetailString.replace(/<[^>]*>?/g, '');
     let minutesSchedule = data.l2_meeting_related_schedule.uiValue;
     let failureUID = selectLoadObjRev.uid;
 
@@ -190,8 +358,7 @@ export async function createproceed(ctx, data) {
 
     try {
       if (minutesName == null || minutesName == undefined || minutesName == '') {
-        // const createItemNameNoty = locale.getLocalizedText("lgepSpecManagementMessages", "createItemNameNoty");
-        // notySvc.showWarning(createItemNameNoty);
+        notySvc.showWarning('회의록의 제목을 입력해 주세요.');
       } else {
         let createMinutesItem = await com.createItem('', 'L2_Minutes', minutesName, minutesSchedule, '');
         let createdItem = createMinutesItem.output[0].item;
@@ -209,7 +376,9 @@ export async function createproceed(ctx, data) {
           'l2_meeting_related_schedule',
           'l2_minutes_writer',
           'IMAN_reference',
+          'TC_Attaches',
           'L2_ActionItemRelation',
+          'l2_is_checklist_minutes',
         ]);
 
         let minutesItemParam = {
@@ -228,7 +397,7 @@ export async function createproceed(ctx, data) {
               stringVec: [minutesDate],
             },
             l2_meeting_details: {
-              stringVec: [minutesDetail],
+              stringVec: [minutesDetailString],
             },
             l2_meeting_participants: {
               stringVec: [minutesParticipants],
@@ -242,10 +411,20 @@ export async function createproceed(ctx, data) {
             l2_related_failure: {
               stringVec: [failureUID],
             },
+            l2_is_checklist_minutes: {
+              stringVec: ['Y'],
+            },
           },
         };
 
         await SoaService.post('Core-2007-01-DataManagement', 'setProperties', minutesItemParam);
+
+        let text = {};
+        text.detail = minutesDetail;
+
+        let setText = JSON.stringify(text);
+
+        lgepSummerNoteUtils.txtFileToDatasetNoDelete(setText, createMinutesItem.output[0].itemRev);
 
         let createUID = createMinutesItem.output[0].itemRev.uid;
         let beforeUID = selectLoadObjRev.props.L2_MinutesRelation.dbValues;
@@ -297,18 +476,52 @@ export async function createproceed(ctx, data) {
         const fileInput = document.getElementById('createFileUpload');
         console.log(createdItem);
         try {
-          await com.getProperties(createMinutesItem.output[0].itemRev, ['IMAN_reference']);
+          await com.getProperties(createMinutesItem.output[0].itemRev, ['IMAN_reference', 'TC_Attaches']);
         } catch (err) {
           //console.log(err);
           notySvc.showError('아이템 속성 불러오기 실패');
         }
         let fileDataset = await lgepSummerNoteUtils.uploadFileToDataset(newFileArr);
-        await lgepSummerNoteUtils.linkRelationItem(createMinutesItem.output[0].itemRev, fileDataset);
+        if (Array.isArray(fileDataset)) {
+          for (let i = 0; i < fileDataset.length; i++) {
+            var jsoObj = {
+              input: [
+                {
+                  clientId: '',
+                  relationType: 'TC_Attaches',
+                  primaryObject: createMinutesItem.output[0].itemRev,
+                  secondaryObject: fileDataset[i],
+                },
+              ],
+            };
+            try {
+              await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
+            } catch (err) {
+              //console.log(err);
+            }
+          }
+        } else {
+          var jsoObj = {
+            input: [
+              {
+                clientId: '',
+                relationType: 'TC_Attaches',
+                primaryObject: createMinutesItem.output[0].itemRev,
+                secondaryObject: fileDataset,
+              },
+            ],
+          };
+          try {
+            await SoaService.post('Core-2006-03-DataManagement', 'createRelations', jsoObj);
+          } catch (err) {
+            //console.log(err);
+          }
+        }
         newFileArr = [];
 
         msg.show(0, `${minutesName} ${createdItemMsg}`);
+        appCtxService.registerCtx('show_minutes_mode', 1);
       }
-      appCtxService.registerCtx('show_minutes_mode', 1);
     } catch (err) {
       console.log(err);
     }
@@ -319,14 +532,13 @@ export async function fileView() {
   await common.delay(200);
 
   const fileInput = document.querySelector('#createFileUpload');
+  const preview = document.querySelector('#createPreview');
 
   fileInput.addEventListener('change', async (e) => {
-    const preview = document.querySelector('#createPreview');
     const selectedFile = [...fileInput.files];
-    console.log(selectedFile);
-    console.dir(fileInput);
     const files = Array.from(fileInput.files);
     files.forEach((file) => {
+      lastModifiedArr.push(String(file.lastModified));
       newFileArr.push(file);
       preview.innerHTML += `
           <p id="${file.lastModified}" class='uploadFileList'>
@@ -334,24 +546,28 @@ export async function fileView() {
               <button data-index='${file.lastModified}' class='file-remove'>X</button>
           </p>`;
     });
+  });
 
-    document.addEventListener('click', (e) => {
-      if (e.target.className !== 'file-remove') return;
-      const removeTargetId = e.target.dataset.index;
-      const removeTarget = document.getElementById(removeTargetId);
-      const files = document.querySelector('#createFileUpload').files;
-      const dataTranster = new DataTransfer();
+  preview.addEventListener('click', (e) => {
+    if (e.target.className !== 'file-remove') return;
+    const removeTargetId = e.target.dataset.index;
+    const removeTarget = document.getElementById(removeTargetId);
+    const files = document.querySelector('#createFileUpload').files;
+    const dataTranster = new DataTransfer();
 
-      Array.from(files)
-        .filter((file) => file.lastModified != removeTargetId)
-        .forEach((file) => {
-          dataTranster.items.add(file);
-        });
+    Array.from(files)
+      .filter((file) => file.lastModified != removeTargetId)
+      .forEach((file) => {
+        dataTranster.items.add(file);
+      });
+    newFileArr = [];
+    for (let file of dataTranster.files) {
+      newFileArr.push(file);
+    }
+    console.log(newFileArr);
+    document.querySelector('#createFileUpload').files = dataTranster.files;
 
-      document.querySelector('#createFileUpload').files = dataTranster.files;
-
-      removeTarget.remove();
-    });
+    removeTarget.remove();
   });
 }
 
@@ -401,6 +617,7 @@ export async function editProceed(ctx, data) {
 
   let detailsSummernote = vms.getViewModelUsingElement(document.getElementById('DetailsSummernote'));
 
+  lastModifiedArr = [];
   $('#DetailsSummernote').summernote('enable');
 }
 

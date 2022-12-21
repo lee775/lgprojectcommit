@@ -1,17 +1,16 @@
 <aw-flex-column class="afx-alt-content-background" color="white" id="qnaDatas">
   <aw-flex-row>
     <aw-flex-column width="4" justify="top" class="leftPadding insideMargin" id="summaryContentStyle">
-      <aw-search-box prop="data.searchBox" action="questionSearch"></aw-search-box>
+      <aw-search-box prop="data.searchBox" action="questionSearch" placeholder="data.searchBoxPlaceHolder"></aw-search-box>
       <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadowFaq2">
         <aw-command-bar anchor="faqCommand" alignment="HORIZONTAL" id="commandColorId"></aw-command-bar>
       </aw-flex-row>
-      <div style="text-align: center" visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length === 0">
+      <div style="text-align: center" visible-when="ctx.faqList === 0">
         <h3>{{i18n.noPost}}</h3>
       </div>
-      <aw-flex-row height="fill" class="borderShadowFaq">
+      <aw-flex-row height="fill" class="borderShadowFaq" visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0">
         <aw-splm-table
           gridid="qaList"
-          visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
           align-content="center"
         ></aw-splm-table>
       </aw-flex-row>
@@ -32,7 +31,7 @@
         <h3 class="h3TopMargin">{{i18n.pleaseSelectDocument}}</h3>
       </aw-flex-row>
       <aw-tab-set tabs="data.faqTabModel" visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length > 0">
-        <aw-panel-body visible-when="conditions.showProps">
+        <aw-panel-body visible-when="conditions.showProps" id="commonLabelRow">
           <aw-command-panel-section caption="{{i18n.property}}" anchor="data.qaOptionAnchor" collapsed="false" class="faqBorder">
             <aw-flex-row>
               <aw-label prop="data.qaID" class="marginUp lblLayout"></aw-label>

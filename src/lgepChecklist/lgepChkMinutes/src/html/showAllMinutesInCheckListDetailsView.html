@@ -1,108 +1,133 @@
-<aw-flex-row id="show-all-minutes-detailes-checklist">
+<aw-panel-section id="show-all-minutes-detailes-checklist">
   <aw-panel>
     <aw-panel-body>
-      <aw-scrollpanel>
-        <aw-tab-set tabs="data.tabDetails" height="10">
-          <aw-panel-body visible-when="conditions.showDetailsPage">
-            <aw-flex-column>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition">
-                  <aw-label prop="data.object_nameLbl" visible-when="!data.editMode" id="title"> </aw-label>
-                  <aw-textarea prop="data.object_name" visible-when="data.editMode"></aw-textarea>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition">
-                  <aw-label prop="data.l2_meeting_dateLbl" id="date"></aw-label>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition">
-                  <aw-label prop="data.l2_meeting_placeLbl" visible-when="!data.editMode" id="place"> </aw-label>
-                  <aw-textarea prop="data.l2_meeting_place" visible-when="data.editMode"> </aw-textarea>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition1">
-                  <aw-label prop="data.proceedWriter"></aw-label>
-                </aw-flex-column>
-                <aw-flex-column class="linkPosit">
-                  <aw-link prop="data.proceedWriterLink" action="goUserDetail"></aw-link>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition">
-                  <aw-label prop="data.l2_meeting_participantsLbl" visible-when="!data.editMode" id="participant"></aw-label>
-                  <aw-textarea prop="data.l2_meeting_participants" visible-when="data.editMode"> </aw-textarea>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition">
-                  <aw-label prop="data.l2_meeting_agendaLbl" visible-when="!data.editMode" id="subject"> </aw-label>
-                  <aw-textarea prop="data.l2_meeting_agenda" visible-when="data.editMode"> </aw-textarea>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column class="namePosition">
-                  <aw-label prop="data.l2_meeting_related_scheduleLbl" visible-when="!data.editMode" id="schedule"></aw-label>
-                  <aw-textarea prop="data.l2_meeting_related_schedule" visible-when="data.editMode"> </aw-textarea>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row>
-                <aw-flex-column class="namePosition2">
-                  <aw-label prop="data.fileDataSet"></aw-label>
-                </aw-flex-column>
-                <aw-flex-column>
-                  <aw-flex-row aw-repeat="result : data.datasetLink.dbValue">
-                    <aw-link prop="result" exist-when="data.datasetLink.dbValue.length > 0" action="datasetLinkEvent"> </aw-link>
-                    <p exist-when="result.displayName != data.datasetLink.dbValue[data.datasetLink.dbValue.length - 1].displayName">
-                      <br />
-                    </p>
-                  </aw-flex-row>
-                </aw-flex-column>
-              </aw-flex-row>
-              <aw-flex-row height="auto">
-                <aw-flex-column>
-                  <textarea id="showAllMinutesInCheckListSummernote"></textarea>
-                </aw-flex-column>
-              </aw-flex-row>
-            </aw-flex-column>
-          </aw-panel-body>
-          <aw-panel-body visible-when="conditions.showReferencePage">
-            <aw-flex-column>
-              <div style="text-align: center" exist-when="data.dataProviders.failureList.viewModelCollection.loadedVMObjects.length == 0">
-                <h3>관련된 고장이 없습니다.</h3>
-              </div>
-              <aw-flex-row height="auto">
-                <aw-list dataprovider="data.dataProviders.failureList" id="failureList">
-                  <aw-default-cell vmo="item"></aw-default-cell>
-                </aw-list>
-              </aw-flex-row>
-            </aw-flex-column>
-          </aw-panel-body>
-        </aw-tab-set>
-      </aw-scrollpanel>
+      <aw-tab-set tabs="data.tabDetails" height="10">
+        <aw-panel-body visible-when="conditions.showDetailsPage">
+          <aw-flex-column>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.object_nameLbl" id="title"> </aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_meeting_dateLbl" id="date"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_meeting_placeLbl" id="place"> </aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition1" width="11.75f">
+                <aw-label prop="data.proceedWriter"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column class="allMinutesLinkPosit">
+                <aw-link prop="data.proceedWriterLink" action="goUserDetail"></aw-link>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_meeting_participantsLbl" id="participant"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_meeting_agendaLbl" id="subject"> </aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_meeting_related_scheduleLbl" id="schedule"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row>
+              <aw-flex-column class="namePosition2">
+                <aw-label prop="data.fileDataSet"></aw-label>
+              </aw-flex-column>
+              <aw-flex-column class="allMinutesLinkPosit2">
+                <aw-flex-row aw-repeat="result : data.datasetLink.dbValue">
+                  <aw-link prop="result" exist-when="data.datasetLink.dbValue.length > 0" action="datasetLinkEvent"> </aw-link>
+                  <p exist-when="result.displayName != data.datasetLink.dbValue[data.datasetLink.dbValue.length - 1].displayName">
+                    <br />
+                  </p>
+                </aw-flex-row>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row height="auto">
+              <aw-flex-column>
+                <textarea id="showAllMinutesInCheckListSummernote"></textarea>
+              </aw-flex-column>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-panel-body>
+        <aw-panel-body visible-when="conditions.showReferencePage">
+          <aw-flex-column>
+            <div style="text-align: center" exist-when="data.dataProviders.failureList.viewModelCollection.loadedVMObjects.length == 0">
+              <h3>{{i18n.noFailure}}</h3>
+            </div>
+            <aw-flex-row height="auto">
+              <aw-list dataprovider="data.dataProviders.failureList" id="failureList">
+                <aw-default-cell vmo="item"></aw-default-cell>
+              </aw-list>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-panel-body>
+        <aw-panel-body visible-when="conditions.actionItemPage">
+          <aw-flex-column>
+            <aw-flex-row>
+              <aw-panel-section caption="{{i18n.actionItemLIst}}" id="actionItemTable">
+                <div style="text-align: center" exist-when="data.dataProviders.actionItemTableProvider.viewModelCollection.loadedVMObjects.length === 0">
+                  <h3>{{i18n.noPost}}</h3>
+                </div>
+                <aw-flex-row exist-when="data.dataProviders.actionItemTableProvider.viewModelCollection.loadedVMObjects.length !== 0">
+                  <aw-panel-section caption="{{i18n.actionItemLIst}}" id="actionItemTable">
+                    <aw-splm-table gridid="actionItemTable" use-tree="false" show-decorate="true"></aw-splm-table>
+                  </aw-panel-section>
+                </aw-flex-row>
+              </aw-panel-section>
+            </aw-flex-row>
+            <aw-separator></aw-separator>
+            <div style="text-align: center" exist-when="data.dataProviders.actionItemTableProvider.selectedObjects.length == 0 && data.dataProviders.actionItemTableProvider.viewModelCollection.loadedVMObjects.length !== 0">
+              <h3>{{i18n.selectActionItemInChecklist}}</h3>
+            </div>
+            <aw-flex-row visible-when="data.dataProviders.actionItemTableProvider.selectedObjects.length != 0">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_workerLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row visible-when="data.dataProviders.actionItemTableProvider.selectedObjects.length != 0">
+              <aw-flex-column class="namePosition">
+                <aw-label prop="data.l2_expected_dateLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row visible-when="data.dataProviders.actionItemTableProvider.selectedObjects.length != 0">
+              <aw-flex-column class="summernoteLblPosition">
+                <aw-label prop="data.l2_commentLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row id="summernotePosit" height="auto" visible-when="data.dataProviders.actionItemTableProvider.selectedObjects.length != 0">
+              <aw-flex-column>
+                <textarea id="commentDetailsSummernote"></textarea>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row visible-when="data.dataProviders.actionItemTableProvider.selectedObjects.length != 0">
+              <aw-flex-column class="summernoteLblPosition">
+                <aw-label prop="data.l2_follow_upLbl"></aw-label>
+              </aw-flex-column>
+            </aw-flex-row>
+            <aw-flex-row id="summernotePosit" height="auto" visible-when="data.dataProviders.actionItemTableProvider.selectedObjects.length != 0">
+              <aw-flex-column>
+                <textarea id="followUpDetailsSummernote"></textarea>
+              </aw-flex-column>
+            </aw-flex-row>
+          </aw-flex-column>
+        </aw-panel-body>
+      </aw-tab-set>
     </aw-panel-body>
-    <aw-panel-footer>
-      <aw-flex-row>
-        <aw-flex-column>
-          <aw-button action="returnToView">뒤로 가기</aw-button>
-        </aw-flex-column>
-        <!-- <aw-flex-column>
-                    <aw-button action="editMinutesMain" exist-when="conditions.showDetailsPage && !data.editMode">{{i18n.edit}}
-                    </aw-button>
-                    <aw-button action="saveMinutesMain" exist-when="conditions.showDetailsPage && data.editMode">{{i18n.save}}
-                    </aw-button>
-                    <aw-button action="failureAdd" exist-when="conditions.showReferencePage">{{i18n.add}}</aw-button>
-                </aw-flex-column>
-                <aw-flex-column exist-when="conditions.showReferencePage">
-                    <aw-button action="deleteFailureBatchAction" exist-when="conditions.showReferencePage">{{i18n.delete}}</aw-button>
-                </aw-flex-column>
-                <aw-flex-column>
-                    <aw-button action="backMinutes" exist-when="!data.editMode">{{i18n.back}}</aw-button>
-                    <aw-button action="cancelMinutesMain" exist-when="conditions.showDetailsPage && data.editMode">{{i18n.cancel}}</aw-button>
-                </aw-flex-column> -->
-      </aw-flex-row>
-    </aw-panel-footer>
   </aw-panel>
-</aw-flex-row>
+  <aw-panel-footer>
+    <aw-button action="backPage">{{i18n.back}}</aw-button>
+  </aw-panel-footer>
+</aw-panel-section>

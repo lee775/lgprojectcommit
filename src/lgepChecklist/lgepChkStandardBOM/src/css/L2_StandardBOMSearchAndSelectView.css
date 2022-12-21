@@ -47,8 +47,42 @@
 
 .aw-sidenav-float-right .aw-layout-panel {
   z-index: 9999 !important;
-} 
+}
 
-aw-popup-panel2 {
-  z-index: 888 !important;
+aw-include[name="L2_ChecklistMain"]>div>aside {
+  z-index: 9999999 !important;
+}
+
+.structure_info-row {
+  margin-top: 10px;
+}
+
+.stnd_editor-section:first-child {
+  margin-top: 10px;
+}
+
+.standardBomListEditCmds .aw-commandBars.aw-commandBar-horizontal.ng-scope {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.partsavesection button {
+  width: 100px !important;
+  margin: 0;
+}
+
+.searchTextHighLight{
+  background: #ffff00 !important;
+}
+
+.standardBomListEditCmds .aw-commands-showIconLabel.aw-commands-commandIconButtonText.ng-binding {
+  width: 100% !important;
+}
+
+b {
+  font-weight: 600;
+}
+
+u {
+  text-decoration: underline;
 }

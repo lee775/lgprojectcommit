@@ -22,6 +22,8 @@ import { getInteractionStructureInfo } from 'js/L2_ChecklistInteractionUtils';
 import { backToSelectionPage, loadAndRefreshGrid, setTuiGridStyle } from 'js/L2_ChecklistMainService';
 import { setSublocationTitle, checklistRowColumns, readPropertiesFromTextFile, checklistProperties, getColumnBalloonData } from 'js/utils/checklistUtils';
 import { fixedOff, autoResize } from 'js/L2_ExportExcelService';
+import lgepPopupUtils from 'js/utils/lgepPopupUtils';
+import lgepFileTicket from 'js/utils/lgepTicketUtils';
 
 let MSG = 'L2_ChkMainMessages';
 let i18n = {
@@ -68,6 +70,12 @@ export class ChecklistRow {
         let originalUid = targetElement.props.awb0UnderlyingObject.dbValues[0];
         let originalObject = lgepObjectUtils.getObject(originalUid);
         return vmoService.constructViewModelObjectFromModelObject(originalObject);
+      };
+
+      this.getImageTicket = async function () {
+        let originalUid = targetElement.props.awb0UnderlyingObject.dbValues[0];
+        let originalObject = lgepObjectUtils.getObject(originalUid);
+        return lgepFileTicket.getFileTicket(originalObject);
       };
 
       /**
@@ -206,10 +214,8 @@ async function _createOpenGridWithData(datas, tableMode) {
     options.columnOptions = {
       resizable: true,
     };
-    options.minRowHeight = 100;
-  } else {
-    delete options.minRowHeight;
   }
+  options.minRowHeight = 100;
   const grid = new Grid(options);
   //Grid 내에 row에 마우스 커서가 Hovering 되는 경우, 푸른 색으로 하이라이트 시켜준다.
   // Grid.applyTheme('custom', {
@@ -228,35 +234,10 @@ async function _createOpenGridWithData(datas, tableMode) {
   headerLayout.style.width = document.querySelector('#openGrid').offsetWidth + 'px';
 
   for (const column of document.getElementsByClassName('tui-grid-cell tui-grid-cell-header')) {
-    column.addEventListener('mouseover', (e) => {
-      let element = e.target;
-      let columnName = element.getAttribute('data-column-name');
-      for (const popup of document.getElementsByTagName('aw-popup-panel2')) {
-        popup.parentElement.removeChild(popup);
-      }
-      ctx.checklist.currentColumn = getColumnBalloonData(columnName);
-      // console.log({ ctx: ctx.checklist.currentColumn });
-      if (ctx.checklist.currentColumn == ' ') return;
-      popupService.show({
-        declView: 'L2_ChecklistMouserOver',
-        options: {
-          clickOutsideToClose: true,
-          placement: 'bottom-start',
-          reference: element,
-          width: element.offsetWidth > 350 ? element.offsetWidth : 350,
-          height: 40,
-          hasArrow: false,
-        },
-      });
-    });
-    column.addEventListener('mouseout', (e) => {
-      let element = e.target;
-      let columnName = element.getAttribute('data-column-name');
-      for (const popup of document.getElementsByTagName('aw-popup-panel2')) {
-        popup.parentElement.removeChild(popup);
-      }
-      delete ctx.checklist.currentColumn;
-    });
+    column.removeEventListener('mouseover', _mouseMoveEvent);
+    column.removeEventListener('mouseout', _mouseOutEvent);
+    column.addEventListener('mouseover', _mouseMoveEvent);
+    column.addEventListener('mouseout', _mouseOutEvent);
   }
 
   grid.store.contextMenu.createMenuGroups = (ev) => {
@@ -332,6 +313,45 @@ async function _createOpenGridWithData(datas, tableMode) {
   }
 
   return grid;
+}
+
+function _mouseMoveEvent(e) {
+  let element = e.target;
+  let columnName = element.getAttribute('data-column-name');
+  let popupId = element.getAttribute('data-popup-id');
+  for (const popup of document.getElementsByTagName('aw-popup-panel2')) {
+    if (popupId == popup.id) {
+      popup.parentElement.removeChild(popup);
+      break;
+    }
+  }
+  ctx.checklist.currentColumn = getColumnBalloonData(columnName);
+  // console.log({ ctx: ctx.checklist.currentColumn });
+  if (ctx.checklist.currentColumn == ' ') return;
+  popupService.show({
+    declView: 'L2_ChecklistMouserOver',
+    options: {
+      clickOutsideToClose: true,
+      placement: 'bottom-start',
+      reference: element,
+      width: element.offsetWidth > 350 ? element.offsetWidth : 350,
+      height: 40,
+      hasArrow: false,
+    },
+  });
+}
+
+function _mouseOutEvent(e) {
+  let element = e.target;
+  let columnName = element.getAttribute('data-column-name');
+  let popupId = element.getAttribute('data-popup-id');
+  for (const popup of document.getElementsByTagName('aw-popup-panel2')) {
+    if (popupId == popup.id) {
+      popup.parentElement.removeChild(popup);
+      break;
+    }
+  }
+  delete ctx.checklist.currentColumn;
 }
 
 /**
@@ -434,26 +454,21 @@ export function sodApMappingProcess(head = 'ref') {
  * @param {*} ctx
  */
 export function openChecklistFreeze(data, ctx) {
-  show(
-    INFORMATION,
-    i18n.chkRowFreezeCheck,
-    ['YES', 'NO'],
-    [
-      function () {
-        lgepObjectUtils
-          .createInstance(ctx.checklist.target, 'L2_Checklist_Freeze')
-          .then(() => {
-            ctx.checklist.target.isFreezed = true;
-            eventBus.publish('removeMessages');
-            show(INFORMATION, i18n.chkRowFreezeComplete);
-          })
-          .catch((e) => {
-            show(ERROR, i18n.chkRowFreezeFailed + e.code + '\n' + e.message);
-          });
-      },
-      function () {},
-    ],
-  );
+  eventBus.publish('complete', {
+    source: 'toolAndInfoPanel',
+  });
+
+  const open = {
+    id: 'checklist_freeze',
+    includeView: 'L2_ChecklistModifyEvent',
+    closeWhenCommandHidden: true,
+    keepOthersOpen: true,
+    commandId: 'checklist_freeze',
+    config: {
+      width: 'WIDE',
+    },
+  };
+  eventBus.publish('awsidenav.openClose', open);
 }
 
 export function openChecklistFreezeCancel(data, ctx) {
@@ -698,6 +713,7 @@ export function openAwcBomWithInContext() {
               'awb0OccName',
               'l2_result_severity',
               'awb0UnderlyingObjectType',
+              'l2_comments',
             ],
             'Awb0DesignElement',
           ),
@@ -775,6 +791,7 @@ export function openAwcBomWithInContext() {
               'awb0OccName',
               'l2_result_severity',
               'awb0UnderlyingObjectType',
+              'l2_comments',
             ],
             'Awb0DesignElement',
           ),
@@ -867,18 +884,18 @@ export function openAwcBomWithInContext() {
       for (const checklistRow of Object.values(allChecklistRows)) {
         if (checklistRow.type == 'L2_FunctionRevision') {
           ctx.checklist.function.push(checklistRow);
-          checklistRow.upperAssy = checklistRow.getParent().upperAssy;
-          checklistRow.lowerAssy = checklistRow.getParent().lowerAssy;
-          checklistRow.single = checklistRow.getParent().single;
-          checklistRow.function = checklistRow.getObject().props.l2_function.dbValues[0];
-          checklistRow.requirement = checklistRow.getObject().props.l2_requirement.dbValues[0];
+          checklistRow.upperAssy = checklistRow.getParent()?.upperAssy ?? '';
+          checklistRow.lowerAssy = checklistRow.getParent()?.lowerAssy ?? '';
+          checklistRow.single = checklistRow.getParent()?.single ?? '';
+          checklistRow.function = checklistRow.getObject().props.l2_function.dbValues[0] ?? '';
+          checklistRow.requirement = checklistRow.getObject().props.l2_requirement.dbValues[0] ?? '';
         } else if (checklistRow.type == 'L2_FailureRevision') {
           ctx.checklist.failure.push(checklistRow);
-          checklistRow.upperAssy = checklistRow.getParent().getParent().upperAssy;
-          checklistRow.lowerAssy = checklistRow.getParent().getParent().lowerAssy;
-          checklistRow.single = checklistRow.getParent().getParent().single;
-          checklistRow.function = checklistRow.getParent().getObject().props.l2_function.dbValues[0];
-          checklistRow.requirement = checklistRow.getParent().getObject().props.l2_requirement.dbValues[0];
+          checklistRow.upperAssy = checklistRow.getParent()?.getParent()?.upperAssy ?? '';
+          checklistRow.lowerAssy = checklistRow.getParent()?.getParent()?.lowerAssy ?? '';
+          checklistRow.single = checklistRow.getParent()?.getParent()?.single ?? '';
+          checklistRow.function = checklistRow.getParent()?.getObject().props.l2_function.dbValues[0] ?? '';
+          checklistRow.requirement = checklistRow.getParent()?.getObject().props.l2_requirement.dbValues[0] ?? '';
           if (
             checklistRow.getObject().props.l2_reference_dataset &&
             checklistRow.getObject().props.l2_reference_dataset.dbValues &&
@@ -997,6 +1014,55 @@ export const tableResize = async () => {
   return;
 };
 
+export function modifyRevisionEvent(data, ctx) {
+  try {
+    let eventValue = ctx.checklist.target.props.l2_event_phase.dbValues[0];
+    if (eventValue.length > 0) data.checklistEvent.dbValue = eventValue;
+  } catch (error) {
+    // show(ERROR, error.message);
+  }
+}
+
+export function confirmRevisionEvent(itemName) {
+  try {
+    show(
+      INFORMATION,
+      i18n.chkRowFreezeCheck,
+      ['YES', 'NO'],
+      [
+        function () {
+          const open = {
+            id: 'checklist_freeze',
+            includeView: 'L2_ChecklistModifyEvent',
+            closeWhenCommandHidden: true,
+            keepOthersOpen: true,
+            commandId: 'checklist_freeze',
+            config: {
+              width: 'WIDE',
+            },
+          };
+          eventBus.publish('awsidenav.openClose', open);
+          lgepObjectUtils.setProperty(ctx.checklist.target, 'l2_event_phase', itemName).then(() => {
+            return lgepObjectUtils
+              .createInstance(ctx.checklist.target, 'L2_Checklist_Freeze')
+              .then(() => {
+                ctx.checklist.target.isFreezed = true;
+                eventBus.publish('removeMessages');
+                show(INFORMATION, i18n.chkRowFreezeComplete);
+              })
+              .catch((e) => {
+                show(ERROR, i18n.chkRowFreezeFailed + e.code + '\n' + e.message);
+              });
+          });
+        },
+        function () {},
+      ],
+    );
+  } catch (error) {
+    show(ERROR, error.message);
+  }
+}
+
 export default exports = {
   ChecklistRow,
   initialize,
@@ -1010,6 +1076,8 @@ export default exports = {
   openChecklistAllLineView,
   openChecklistExcludeLineView,
   tableResize,
+  modifyRevisionEvent,
+  confirmRevisionEvent,
 };
 
 app.factory('lgepChecklistOpenService', () => exports);

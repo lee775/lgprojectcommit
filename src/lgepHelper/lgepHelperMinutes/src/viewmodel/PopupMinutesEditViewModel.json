@@ -1,0 +1,137 @@
+{
+    "schemaVersion": "1.0.0",
+    "imports": [
+      "js/aw-button.directive",
+      "js/aw-datetime.directive",
+      "js/aw-flex-column.directive",
+      "js/aw-flex-row.directive",
+      "js/aw-label.directive",
+      "js/aw-panel.directive",
+      "js/aw-panel-body.directive",
+      "js/aw-panel-footer.directive",
+      "js/aw-popup2.directive",
+      "js/aw-textarea.directive",
+      "js/aw-textbox.directive"
+    ],
+    "actions": {
+      "initializeEditPopup": {
+        "actionType": "JSFunction",
+        "method": "initializeEditPopup",
+        "inputData": {
+          "data": "{{data}}"
+        },
+        "deps": "js/generalMinutesService"
+      },
+      "minutesTableRefresh": {
+        "actionType": "JSFunction",
+        "method": "minutesTableRefresh",
+        "deps": "js/generalMinutesService"
+      },
+      "closePopupWindow": {
+        "actionType": "JSFunction",
+        "method": "hide",
+        "inputData": {
+          "popupId": "{{data.popupId}}"
+        },
+        "deps": "js/popupService"
+      },
+      "editMinutes": {
+        "actionType": "JSFunction",
+        "method": "editMinutes",
+        "inputData": {
+          "ctx": "{{ctx}}",
+          "data": "{{data}}"
+        },
+        "deps": "js/generalMinutesService"
+      },
+      "editFileView": {
+        "actionType": "JSFunction",
+        "method": "editFileView",
+        "deps": "js/generalMinutesService"
+      }
+    },
+    "data": {
+      "minutesTitle": {
+        "displayName": "{{i18n.minutesTitle}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dbValue": "",
+        "dispValue": "{{i18n.minutesTitle}}"
+      },
+      "l2_meeting_date": {
+        "displayName": "{{i18n.minutesDate}}",
+        "type": "DATETIME",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dispValue": "",
+        "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+      },
+      "l2_meeting_place": {
+        "displayName": "{{i18n.minutesPlace}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dbValue": "",
+        "dispValue": "{{i18n.minutesPlace}}"
+      },
+      "l2_meeting_participants": {
+        "displayName": "{{i18n.minutesParticipants}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "numberOfLines": 4
+      },
+      "l2_meeting_related_schedule": {
+        "displayName": "{{i18n.minutesSchedule}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "numberOfLines": 4
+      },
+      "l2_meeting_agenda": {
+        "displayName": "{{i18n.minutesAgenda}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true",
+        "dbValue": "",
+        "dispValue": "{{i18n.minutesAgenda}}"
+      },
+      "l2_meeting_detailsLbl": {
+        "displayName": "{{i18n.minutesDetails}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      },
+      "attachFileLbl": {
+        "displayName": "{{i18n.minutesAttachesFile}}",
+        "type": "STRING",
+        "isRequired": "false",
+        "isEditable": "true"
+      }
+    },
+    "onEvent": [
+      {
+        "eventId": "PopupMinutesEdit.contentLoaded",
+        "action": "initializeEditPopup"
+      },
+      {
+        "eventId": "PopupMinutesEdit.contentLoaded",
+        "action": "editFileView"
+      }
+    ],
+    "i18n": {
+      "save": ["lgepKnowldegeManageMessages"],
+      "close": ["lgepKnowldegeManageMessages"],
+      "fileUpload": ["lgepKnowldegeManageMessages"],
+      "minutesTitle": ["lgepKnowldegeManageMessages"],
+      "minutesDate": ["lgepKnowldegeManageMessages"],
+      "minutesPlace": ["lgepKnowldegeManageMessages"],
+      "minutesParticipants": ["lgepKnowldegeManageMessages"],
+      "minutesDetails": ["lgepKnowldegeManageMessages"],
+      "minutesAgenda": ["lgepKnowldegeManageMessages"],
+      "minutesSchedule": ["lgepKnowldegeManageMessages"],
+      "minutesAttachesFile": ["lgepKnowldegeManageMessages"]
+    }
+  }
+  

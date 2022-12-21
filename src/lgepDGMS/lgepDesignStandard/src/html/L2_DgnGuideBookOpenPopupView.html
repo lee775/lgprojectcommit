@@ -1,0 +1,32 @@
+<aw-popup2>
+    <style>
+      .noColor {
+        background: none !important;
+      }
+  
+      .visibleHidden {
+        visibility: hidden !important;
+      }
+  
+      #dgnStandardBookPPTTable>div>div.aw-splm-tablePinnedContainer.aw-splm-tablePinnedContainerLeft>div.aw-splm-tableHeaderRow {
+        display: none !important;
+      }
+  
+      ::-webkit-scrollbar {
+        display: none;
+      }
+  
+      #closeMargin {
+        margin-top: 10px;
+      }
+    </style>
+    <aw-panel-body id="guideBookSettingData">
+      <aw-flex-row>
+        <aw-splm-table gridid="guideBookSelectTable" show-check-box=true></aw-splm-table>
+      </aw-flex-row>
+    </aw-panel-body>
+    <aw-panel-footer>
+      <aw-button button-type="base" action="closePopupWindow" size="auto">{{i18n.close}}</aw-button>
+      <aw-button action="guideBookOpen" size="auto">{{i18n.open}}</aw-button>
+  </aw-panel-footer>
+  </aw-popup2>

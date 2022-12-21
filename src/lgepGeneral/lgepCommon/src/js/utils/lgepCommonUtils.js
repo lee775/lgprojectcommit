@@ -145,9 +145,11 @@ export const isEmpty = function (target) {
  * @param {String} targets => 해당 동작이 수행되었을 때 대상 객체. 단, 전체 조회같이 객체에 의존하지 않는 작업은 공란으로 입력.
  * @param {String} results => S (성공) / E (실패)
  * @param {String} log_comments => "Success" 혹은 Error Stack Message 전송
+ * @param {String} clsf_no - 개발지식 전용
+ * @param {String} part_classification - 개발지식 전용
+ * @param {String} issue_classification - 개발지식 전용
  */
-export async function userLogsInsert(actionName, targets, results, log_comments) {
-  return;
+export async function userLogsInsert(actionName, targets, results, log_comments, clsf_no, part_classification, issue_classification) {
   //사용자 접속정보 구하기.
   let getTcSession = await com.getTCSessionInfo();
 
@@ -184,19 +186,19 @@ export async function userLogsInsert(actionName, targets, results, log_comments)
   // 날짜 구하기
   let today = new Date();
 
-  var year = today.getFullYear();
-  var month = ('0' + (today.getMonth() + 1)).slice(-2);
-  var day = ('0' + today.getDate()).slice(-2);
+  let year = today.getFullYear();
+  let month = ('0' + (today.getMonth() + 1)).slice(-2);
+  let day = ('0' + today.getDate()).slice(-2);
 
-  var dateString = year + month + day; //20220202
+  let dateString = year + month + day; //20220202
 
-  var hours = ('0' + today.getHours()).slice(-2);
-  var minutes = ('0' + today.getMinutes()).slice(-2);
-  var seconds = ('0' + today.getSeconds()).slice(-2);
+  let hours = ('0' + today.getHours()).slice(-2);
+  let minutes = ('0' + today.getMinutes()).slice(-2);
+  let seconds = ('0' + today.getSeconds()).slice(-2);
 
-  var timeString = hours + ':' + minutes + ':' + seconds; // 15:05:05
+  let timeString = hours + ':' + minutes + ':' + seconds; // 15:05:05
 
-  var update_date = dateString + ' ' + timeString;
+  let update_date = dateString + ' ' + timeString;
 
   // 프리퍼런스로 주소 가져오기
   let serviceData = await lgepPreferenceUtils.getPreference('BatchServerRestfulHosting.URL');
@@ -211,6 +213,10 @@ export async function userLogsInsert(actionName, targets, results, log_comments)
   dataMap.set('results', results);
   dataMap.set('log_comments', log_comments);
   dataMap.set('update_date', update_date);
+  dataMap.set('server_ip', document.location.hostname);
+  if (clsf_no) dataMap.set('clsf_no', clsf_no);
+  if (part_classification) dataMap.set('part_classification', part_classification);
+  if (issue_classification) dataMap.set('issue_classification', issue_classification);
 
   await fetch(batchServerAddress + '/userLog/insertUserLogs', {
     method: 'POST',

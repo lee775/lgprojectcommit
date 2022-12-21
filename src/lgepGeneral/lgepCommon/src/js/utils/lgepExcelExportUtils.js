@@ -62,7 +62,8 @@ export async function exportExcel(grid, templatesUid, fileName, templateNumber) 
       templateNumber = 1;
     }
     //엑셀 workSheet 생성
-    await loadWorkBook(grid, templatesUid, templateNumber);
+    let checkUid = await loadWorkBook(grid, templatesUid, templateNumber);
+    templatesUid = checkUid;
 
     //toastGrid의 헤더 확인
     header = toastGridTableStyle(grid);
@@ -92,6 +93,8 @@ export async function exportExcel(grid, templatesUid, fileName, templateNumber) 
     worksheet.views = [{ state: 'frozen', ySplit: headerRow }];
 
     await excelInteraction(workbook);
+
+    appCtxService.ctx.excel = worksheet;
 
     //엑셀 파일 다운로드
     downloadExcel(fileName);
@@ -135,11 +138,20 @@ function inputValues(grid, rowIndex) {
 async function loadWorkBook(gridData, templatesUid, templateNumber) {
   if (templatesUid) {
     workbook = await loadExcelFile(templatesUid);
-    worksheet = workbook.getWorksheet(templateNumber);
+    if (workbook) {
+      worksheet = workbook.getWorksheet(templateNumber);
+      return templatesUid;
+    } else {
+      workbook = new Excel.Workbook();
+      workbook.addWorksheet('sheet1');
+      worksheet = workbook.getWorksheet(1);
+      return '';
+    }
   } else {
     workbook = new Excel.Workbook();
     workbook.addWorksheet('sheet1');
     worksheet = workbook.getWorksheet(1);
+    return '';
   }
 }
 
@@ -229,6 +241,7 @@ async function loadExcelFile(uid) {
   } catch (err) {
     console.log(err);
     message.show(2, templateError);
+    return '';
   }
 }
 
@@ -417,6 +430,9 @@ const _addImage = (tableIndex, imageDataValue, key) => {
   const imgTag = _getImageTag(imgTags, imageDataValue);
   const width = imgTag.offsetWidth;
   const height = imgTag.offsetHeight;
+  if (!imgTag.src.includes('base64')) {
+    imgTag.src = getBase64Image(imgTag);
+  }
   const imageId = workbook.addImage({
     base64: imgTag.src,
     extension: 'png',
@@ -442,12 +458,14 @@ const _getImageTag = (imgTags, imageDataValue) => {
     const test = imageDataValue.split(` ${IS_IMAGE}`)[1];
     if (imgTag.src === test.split('"')[1]) {
       return imgTag;
+    } else if (imgTag.src === test) {
+      return imgTag;
     }
   }
 };
 
 const _getImageColumnIndex = (key) => {
-  for (let index = 1; index <= maxColumnNum; index++) {
+  for (let index = 0; index < maxColumnNum; index++) {
     const col = worksheet.columns[index];
     if (col.key) {
       let colKey = col.key.replaceAll(' ', '');
@@ -606,6 +624,16 @@ const downloadExcel = (fmeaName) => {
     window.URL.revokeObjectURL(url);
   });
 };
+
+function getBase64Image(img) {
+  var canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL('image/png');
+  return dataURL;
+}
 
 export default {
   exportExcel,

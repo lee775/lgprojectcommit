@@ -157,12 +157,12 @@
       "iconName": "cmdAdd"
     },
     "allRevisionsMinutes": {
-      "displayName": "모든 리비전의 회의록 보기",
+      "displayName": "{{i18n.showAllMinutesRev}}",
       "type": "BOOLEAN",
       "isRequired": "false",
       "isEditable": "true",
       "dbValue": "",
-      "dispValue": "모든 리비전의 회의록 보기",
+      "dispValue": "{{i18n.showAllMinutesRev}}",
       "labelPosition": "PROPERTY_LABEL_AT_RIGHT"
     },
     "pageSize": 40
@@ -187,7 +187,7 @@
       "columns": [
         {
           "name": "object_name",
-          "displayName": "이름",
+          "displayName": "{{i18n.minutesName}}",
           "minWidth": 60,
           "width": 200
         },
@@ -199,7 +199,7 @@
         },
         {
           "name": "checklist_rev_id",
-          "displayName": "체크리스트의 리비전 ID",
+          "displayName": "{{i18n.revisionIDOfChecklist}}",
           "minWidth": 60,
           "width": 200
         }
@@ -226,6 +226,7 @@
   },
   "lifecycleHooks": {},
   "i18n": {
+    "minutesName": ["lgepChkMinutesMessages"],
     "minutesTitle": ["lgepChkMinutesMessages"],
     "date": ["lgepChkMinutesMessages"],
     "place": ["lgepChkMinutesMessages"],
@@ -236,6 +237,8 @@
     "writer": ["lgepChkMinutesMessages"],
     "detail": ["lgepChkMinutesMessages"],
     "minutesList": ["lgepChkMinutesMessages"],
-    "minutes": ["lgepChkMinutesMessages"]
+    "minutes": ["lgepChkMinutesMessages"],
+    "showAllMinutesRev": ["lgepChkMinutesMessages"],
+    "revisionIDOfChecklist": ["lgepChkMinutesMessages"]
   }
 }

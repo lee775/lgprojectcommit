@@ -53,6 +53,17 @@
         }
       ]
     },
+    "locationChangeEvent": {
+      "actionType": "batchJob",
+      "steps": [
+        {
+          "action": "iconClick"
+        },
+        {
+          "action": "loadUnreadMessages"
+        }
+      ]
+    },
     "getShowUserSettingsBarValueInLocalStorage": {
       "actionType": "JSFunction",
       "method": "get",
@@ -301,7 +312,7 @@
     },
     {
       "eventId": "$locationChangeSuccess",
-      "action": "iconClick",
+      "action": "locationChangeEvent",
       "cacheEventData": true
     }
   ],

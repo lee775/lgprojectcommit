@@ -5,12 +5,22 @@
     "js/aw-flex-row.directive",
     "js/aw-panel-body.directive",
     "js/aw-panel-footer.directive",
+    "js/aw-flex-column.directive",
+    "js/aw-icon-button.directive",
     "js/aw-popup2.directive",
     "js/aw-splm-table.directive",
+    "js/visible-when.directive",
     "js/aw-textbox.directive",
-    "js/enable-when.directive"
+    "js/enable-when.directive",
+    "js/aw-enter-key.directive",
+    "css/L2_StandardBOMSearchAndSelectView.css"
   ],
   "actions": {
+    "searchStart": {
+      "actionType": "JSFunction",
+      "method": "searchStart",
+      "deps": "js/L2_ChecklistStructureEditService"
+    },
     "closePopupWindow": {
       "actionType": "JSFunction",
       "method": "hide",
@@ -105,28 +115,56 @@
         "eventData": "{{parameters.eventData}}"
       },
       "deps": "js/L2_ChecklistStructureEditService"
+    },
+    "initializeChecklistStructureEditTree": {
+      "actionType": "JSFunction",
+      "method": "initializeChecklistStructureEditTree",
+      "inputData": {
+        "ctx": "{{ctx}}",
+        "data": "{{data}}"
+      },
+      "outputData": {
+        "treeLoadResult": "treeLoadResult"
+      },
+      "deps": "js/L2_ChecklistStructureEditService"
+    },
+    "interactionMatrixInit": {
+      "actionType": "JSFunction",
+      "method": "interactionMatrixInit",
+      "deps": "js/L2_InteractionMatrixAddService"
     }
   },
   "functions": {
     "loadChecklistStructureEditTreeData": {
       "functionName": "loadChecklistStructureEditTreeData",
-      "parameters": ["{{data.treeLoadInput.parentNode}}"]
+      "parameters": [
+        "{{data.treeLoadInput.parentNode}}"
+      ]
     }
   },
   "data": {
+    "searchTextBox": {
+      "displayName": "",
+      "type": "STRING",
+      "isEditable": "true",
+      "requiredText": "",
+      "labelPosition": "PROPERTY_LABEL_AT_SIDE"
+    },
+    "searchIconCmd": {
+      "action": "searchStart",
+      "iconName": "Search"
+    },
     "productIdTextBox": {
       "displayName": "Product ID",
       "type": "STRING",
-      "isRequired": "true",
-      "isEditable": "true",
+      "isEditable": "false",
       "requiredText": "Product ID",
       "labelPosition": "PROPERTY_LABEL_AT_SIDE"
     },
     "projectIdTextBox": {
       "displayName": "Project ID",
       "type": "STRING",
-      "isRequired": "true",
-      "isEditable": "true",
+      "isEditable": "false",
       "requiredText": "Project ID",
       "labelPosition": "PROPERTY_LABEL_AT_SIDE"
     }
@@ -134,7 +172,7 @@
   "dataProviders": {
     "checklistStructureEditTreeDataProvider": {
       "action": "loadChecklistStructureEditTree",
-      "initializeAction": "loadChecklistStructureEditTree",
+      "initializeAction": "initializeChecklistStructureEditTree",
       "treeLoadResult": "{{data.treeLoadResult}}",
       "inputData": {
         "accessMode": "tree",
@@ -151,85 +189,113 @@
           "displayName": "{{i18n.name}}",
           "minWidth": 150,
           "width": 500,
-          "isTreeNavigation": true
+          "isTreeNavigation": true,
+          "enableColumnMenu": false
         },
         {
           "name": "awb0ArchetypeRevId",
           "displayName": "리비전",
           "minWidth": 70,
-          "width": 70
+          "width": 70,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_is_selected",
           "displayName": "선택됨?",
           "minWidth": 100,
-          "width": 100
+          "width": 100,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "interaction_target",
+          "displayName": "인터랙션?",
+          "minWidth": 50,
+          "width": 100,
+          "enableColumnMenu": false
+        },
+        {
+          "name": "l2_comments",
+          "displayName": "비고",
+          "minWidth": 70,
+          "width": 140,
+          "enableColumnMenu": false
         },
         {
           "name": "failrue_effect",
           "displayName": "고장의 영향",
           "minWidth": 200,
-          "width": 500
+          "width": 500,
+          "enableColumnMenu": false
         },
         {
           "name": "failure_mechanism",
           "displayName": "고장 매커니즘",
           "minWidth": 200,
-          "width": 500
+          "width": 500,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_importance",
           "displayName": "중요도",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_ref_detection",
           "displayName": "검출도(Detection)",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_ref_occurence",
           "displayName": "발생도(Occurence)",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_ref_severity",
           "displayName": "심각도(Severity)",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_ref_ap",
           "displayName": "AP",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_result_detection",
           "displayName": "NEW DET",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_result_occurence",
           "displayName": "NEW OCC",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_result_severity",
           "displayName": "NEW SEV",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         },
         {
           "name": "l2_result_ap",
           "displayName": "NEW AP",
           "minWidth": 100,
-          "width": 150
+          "width": 150,
+          "enableColumnMenu": false
         }
       ]
     }
@@ -269,24 +335,63 @@
       "inputArgs": {
         "eventData": "{{eventData}}"
       }
+    },
+    {
+      "eventId": "tableDestroyed",
+      "action": "interactionMatrixInit"
     }
   ],
+  "conditions": {
+    "searchCond": {
+      "expression": "data.searchMode === true"
+    }
+  },
   "i18n": {
-    "back": ["Awv0threeDViewerMessages"],
-    "CancelText": ["TCUICommandPanelsMessages"],
-    "confirm": ["InboxMessages"],
-    "description": ["TCUICommandPanelsMessages"],
-    "isSelect": ["L2_ChkStandardBOMMessages"],
-    "name": ["TCUICommandPanelsMessages"],
-    "propertyRequired": ["UIMessages"],
-    "revision": ["TCUICommandPanelsMessages"],
-    "saveAsOperationSuccessful": ["TCUICommandPanelsMessages"],
-    "select": ["SearchMessages"],
-    "sequence": ["lgepChecklist2Messages"],
-    "standardBOMSearchAndSelect": ["L2_ChkStandardBOMMessages"],
-    "standardBOMSelectAndChecklistCreate": ["L2_ChkStandardBOMMessages"],
-    "template": ["L2_ChkStandardBOMMessages"],
-    "templateList": ["L2_ChkStandardBOMMessages"]
+    "back": [
+      "Awv0threeDViewerMessages"
+    ],
+    "CancelText": [
+      "TCUICommandPanelsMessages"
+    ],
+    "confirm": [
+      "InboxMessages"
+    ],
+    "description": [
+      "TCUICommandPanelsMessages"
+    ],
+    "isSelect": [
+      "L2_ChkStandardBOMMessages"
+    ],
+    "name": [
+      "TCUICommandPanelsMessages"
+    ],
+    "propertyRequired": [
+      "UIMessages"
+    ],
+    "revision": [
+      "TCUICommandPanelsMessages"
+    ],
+    "saveAsOperationSuccessful": [
+      "TCUICommandPanelsMessages"
+    ],
+    "select": [
+      "SearchMessages"
+    ],
+    "sequence": [
+      "lgepChecklist2Messages"
+    ],
+    "standardBOMSearchAndSelect": [
+      "L2_ChkStandardBOMMessages"
+    ],
+    "standardBOMSelectAndChecklistCreate": [
+      "L2_ChkStandardBOMMessages"
+    ],
+    "template": [
+      "L2_ChkStandardBOMMessages"
+    ],
+    "templateList": [
+      "L2_ChkStandardBOMMessages"
+    ]
   },
   "lifecycleHooks": {
     "onInit": "onInit",

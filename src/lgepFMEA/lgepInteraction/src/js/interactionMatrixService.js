@@ -13,11 +13,15 @@ import { initTable } from 'js/interactionMatrixTableService';
 import * as prop from 'js/constants/fmeaProperty';
 import * as constants from 'js/constants/fmeaConstants';
 
+import { gridTable, INTERACTION_TABLES } from 'js/L2_interactionMatrixPopupTableService';
+import { PROP_PRIMARY, PROP_SECONDARY, PROP_GRADE, PROP_INTERACTION_TABLE, TOP, STRUCTURE_INFO } from 'js/L2_ChecklistInteractionUtils';
+
 var $ = require('jQuery');
 
 var exports = {};
 let grid;
 
+let hi = null;
 export async function initialize(data, ctx) {
   // 0. Waiting for Popup Opened
   await _waitPopupOpen();
@@ -111,21 +115,80 @@ const saveInteractionMatrix = async () => {
     eventBus.publish('removeMessages');
     globalDocument.classList.remove('dfmea-job-progressing');
     lgepMessagingUtils.show('INFO', '편집이 완료되었습니다.');
+    hi = true;
   }
 };
 export async function beforeClose() {
-  lgepMessagingUtils.show(
-    0,
-    `창을 닫으시면 변경된 사항이 저장되지 않습니다. 닫으시겠습니까?`,
-    ['취소', '닫기'],
-    [
-      function () {},
-      function () {
-        lgepPopupUtils.closePopup();
-      },
-    ],
-  );
+  const rows = gridTable.getData();
+  const structureNames = _getStructures(rows[0]);
+  const topObject = appCtxService.ctx.checklist[STRUCTURE_INFO][TOP].getOriginalObject();
+  for (const row of rows) {
+    const primaryUid = row.id;
+    for (const structureName of structureNames) {
+      let interactionType = row[structureName];
+      if (!interactionType) {
+        continue;
+      }
+      const secondaryObjectUid = gridTable.getColumn(structureName).className;
+      const existRow = _getExistTableRow(primaryUid, secondaryObjectUid);
+      if (!existRow) {
+        // 생성
+        hi = true;
+      } else {
+        // type 다르면 setProeprty
+        const existRowInteractionType = existRow.props[PROP_GRADE].dbValues[0];
+        if (interactionType !== existRowInteractionType) {
+          hi = true;
+        }
+      }
+    }
+  }
+
+  if (hi == true) {
+    lgepMessagingUtils.show(
+      0,
+      `창을 닫으시면 변경된 사항이 저장되지 않습니다. 닫으시겠습니까?`,
+      ['취소', '창 닫기', '저장 후 닫기'],
+      [
+        function () {},
+        function () {
+          lgepPopupUtils.closePopup();
+        },
+        function () {
+          lgepCommonUtils.delay(100);
+          lgepPopupUtils.closePopup();
+        },
+      ],
+    );
+  } else {
+    lgepPopupUtils.closePopup();
+  }
 }
+
+// interaction row 이미 존재하면 반환
+const _getExistTableRow = (primaryUid, secondaryUid) => {
+  for (const interactionRow of INTERACTION_TABLES) {
+    const rowPrimaryObjectUid = interactionRow.props[PROP_PRIMARY].dbValues[0];
+    const rowSecondaryUid = interactionRow.props[PROP_SECONDARY].dbValues[0];
+    if (rowPrimaryObjectUid === primaryUid && secondaryUid === rowSecondaryUid) {
+      return interactionRow;
+    }
+  }
+};
+
+const _getStructures = (row) => {
+  const propKeys = ['id', 'interactionHeader', 'name', 'rowKey', '_attributes', 'classHeader'];
+  const structures = Object.keys(row).filter((r) => {
+    for (const key of propKeys) {
+      if (r === key) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  return structures;
+};
 
 export default exports = {
   initialize,

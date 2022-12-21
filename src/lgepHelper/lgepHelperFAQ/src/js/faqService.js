@@ -14,6 +14,7 @@ import lgepSummerNoteUtils from 'js/utils/lgepSummerNoteUtils';
 import common from 'js/utils/lgepCommonUtils';
 import message from 'js/utils/lgepMessagingUtils';
 import advancedSearchUtils from 'js/advancedSearchUtils';
+import lgepLoadingUtils from 'js/utils/lgepLoadingUtils';
 
 var $ = require('jQuery');
 
@@ -32,6 +33,8 @@ let checkDeleteQuestion = lgepLocalizationUtils.getLocalizedText('lgepKnowldegeM
 let notQuestionCreator = lgepLocalizationUtils.getLocalizedText('lgepKnowldegeManageMessages', 'notQuestionCreator');
 
 export async function loadQaList(data, ctx) {
+  lgepLoadingUtils.openWindow();
+
   let element = document.getElementsByClassName('leftPadding');
   let tableSize = localStorage.getItem('tableSize');
   element[0].style.flexBasis = tableSize != '' ? tableSize : '630px';
@@ -49,6 +52,9 @@ export async function loadQaList(data, ctx) {
   }
 
   // searchingQuestion.sort((a, b) => new Date(b.props.creation_date.dbValues[0]) - new Date(a.props.creation_date.dbValues[0]));
+  lgepLoadingUtils.closeWindow();
+  ctx.faqList = searchingQuestion.length;
+
   return {
     qaList: searchingQuestion,
     totalFound: searchingQuestion.length,
@@ -163,6 +169,7 @@ export async function faqDelete(data, id, title, writer, writerDate, ctx) {
         $('#qaContentSummernoteA').summernote('code', '' + '<br>');
         writer.uiValue = '';
         writerDate.uiValue = '';
+        data.qaListDataProvider.selectedObjects = [];
         history.pushState(null, null, '#/faq');
         notySvc.showInfo(textDeleteComplete);
       },

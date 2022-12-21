@@ -190,7 +190,9 @@
         "lgepXcelerator",
         "lgepChkMainSubLocation",
         "lgepChkOpenSubLocation",
-        "L2_DesignStandardEnterTree"
+        "L2_DesignStandardEnterTree",
+        "generalMinutes",
+        "actionItemDetails"
     ],
     "excludedCommands": [
         "GoToCommandBuilder",

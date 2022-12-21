@@ -19,11 +19,6 @@ import { checkIfSearchCtxExists, ifFilterSelectedForCategory } from 'js/filterPa
 import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import loadUtils from 'js/utils/lgepLoadingUtils';
 import awTableStateService from 'js/awTableStateService';
-import navigationSvc from 'js/navigationService';
-import { constructViewModelObject } from 'js/viewModelObjectService';
-import { item_id } from 'js/L2_StandardBOMConstants';
-import { constructViewModelObjectFromModelObject } from 'js/viewModelObjectService';
-import { forEach } from 'angular';
 
 let _scope;
 
@@ -31,7 +26,7 @@ var $ = require('jQuery');
 export async function showTableCheck(ctx) {
   // await lgepCommonUtils.delay(1000);
   loadUtils.openWindow();
-
+  console.log(localStorage.getItem('selectedObForCheck'));
   let headData;
 
   let data = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
@@ -54,166 +49,177 @@ export async function showTableCheck(ctx) {
       ],
     );
   } else {
-    let ctx = appCtxService.ctx;
-    let searchInput = {
-      attributesToInflate: ['object_name', 'object_desc', 'L2_DesignStandardRel', 'item_id'],
-      maxToLoad: -1,
-      maxToReturn: -1,
-      providerName: 'Awp0FullTextSearchProvider',
-      searchCriteria: {
-        searchString: '*',
-      },
-      searchFilterFieldSortType: 'Priority',
-      searchFilterMap6: {
-        'WorkspaceObject.object_type': [
-          {
-            searchFilterType: 'StringFilter',
-            stringValue: 'L2_StructureRevision',
-            colorValue: '',
-            stringDisplayValue: '',
-            startDateValue: '',
-            endDateValue: '',
-            startNumericValue: 0,
-            endNumericValue: 0,
-            count: 0,
-            selected: false,
-            startEndRange: '',
-          },
-        ],
-      },
-      searchSortCriteria: [],
-      startIndex: 0,
-    };
+    // let ctx = appCtxService.ctx;
+    // let searchInput = {
+    //   attributesToInflate: ['object_name', 'object_desc', 'L2_DesignStandardRel', 'item_id'],
+    //   maxToLoad: -1,
+    //   maxToReturn: -1,
+    //   providerName: 'Awp0FullTextSearchProvider',
+    //   searchCriteria: {
+    //     searchString: '*',
+    //   },
+    //   searchFilterFieldSortType: 'Priority',
+    //   searchFilterMap6: {
+    //     'WorkspaceObject.object_type': [
+    //       {
+    //         searchFilterType: 'StringFilter',
+    //         stringValue: 'L2_StructureRevision',
+    //         colorValue: '',
+    //         stringDisplayValue: '',
+    //         startDateValue: '',
+    //         endDateValue: '',
+    //         startNumericValue: 0,
+    //         endNumericValue: 0,
+    //         count: 0,
+    //         selected: false,
+    //         startEndRange: '',
+    //       },
+    //     ],
+    //   },
+    //   searchSortCriteria: [],
+    //   startIndex: 0,
+    // };
 
-    let params = {
-      types: [
-        {
-          name: 'WorkspaceObject',
-          properties: [{ name: 'object_name' }, { name: 'creation_date' }, { name: 'items_tag' }, { name: 'L2_DesignStandardRel' }, { name: 'item_id' }],
-        },
-      ],
-    };
+    // let params = {
+    //   types: [
+    //     {
+    //       name: 'WorkspaceObject',
+    //       properties: [{ name: 'object_name' }, { name: 'creation_date' }, { name: 'items_tag' }, { name: 'L2_DesignStandardRel' }, { name: 'item_id' }],
+    //     },
+    //   ],
+    // };
 
-    let result = await query.performSearchViewModel4(null, searchInput, params);
-    result = result.searchResults;
-    com.getProperties(result, ['L2_DesignStandardRel']);
+    // let result = await query.performSearchViewModel4(null, searchInput, params);
+    // result = result.searchResults;
+    // com.getProperties(result, ['L2_DesignStandardRel']);
 
-    // let book = com.getObject(
-    //   treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]
-    // );
-    // console.log(book);
-    // console.log(await com.whereReferenced([book], 1));
-    let home = [];
-    for (let i = 0; i < result.length; i++) {
-      if (result[i].props.L2_DesignStandardRel.dbValues.length > 0) {
-        if (result[i].props.L2_DesignStandardRel.dbValues[0] == treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]) {
-          home.push(result[i]);
-        }
-      }
+    // // let book = com.getObject(
+    // //   treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]
+    // // );
+    // // console.log(book);
+    // // console.log(await com.whereReferenced([book], 1));
+    // let home = [];
+    // for (let i = 0; i < result.length; i++) {
+    //   if (result[i].props.L2_DesignStandardRel.dbValues.length > 0) {
+    //     if (result[i].props.L2_DesignStandardRel.dbValues[0] == treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]) {
+    //       home.push(result[i]);
+    //     }
+    //   }
+    // }
+    // com.getProperties(home, ['item_id']);
+
+    // let treeData = treeD.dataProviders.designStandardTreeTableData.viewModelCollection.loadedVMObjects;
+    // // console.log({treeData});
+    // let info = await lgepPreferenceUtils.getPreference('L2_Checklist_Structure');
+    // info = com.getObject(info.Preferences.prefs[0].values[0].value);
+    // // console.log(info);
+
+    // // console.log(ctx);
+    // let folderUser;
+    // for (let i = 0; i < info.props.contents.dbValues.length; i++) {
+    //   if (ctx.userSession.props.group.displayValues[0] == info.props.contents.uiValues[i]) {
+    //     folderUser = await com.getObject(info.props.contents.dbValues[i]);
+    //   }
+    // }
+
+    // // console.log(folderUser);
+    // let underFolder = [];
+    // for (let i = 0; i < folderUser.props.contents.dbValues.length; i++) {
+    //   underFolder.push(com.getObject(folderUser.props.contents.dbValues[i]));
+    // }
+    // // console.log({ underFolder });
+
+    // let template = [];
+    // for (let i = 0; i < underFolder.length; i++) {
+    //   if (underFolder[i].props.contents.dbValues.length > 0 && underFolder[i].props.contents !== undefined) {
+    //     for (let l = 0; l < underFolder[i].props.contents.dbValues.length; l++) {
+    //       template.push(await com.getObject(underFolder[i].props.contents.dbValues[l]));
+    //     }
+    //   }
+    // }
+    // await com.getProperties(template, ['item_id', 'contents', 'ps_children']);
+
+    // let templateRev = [];
+    // for (let i = 0; i < template.length; i++) {
+    //   if (template[i].props.item_id !== undefined) {
+    //     templateRev.push(await com.getLatestItemRevisionByItemId(template[i].props.item_id.dbValues[0]));
+    //   }
+    // }
+
+    // await com.getProperties(templateRev, ['contents', 'ps_children']);
+
+    // let children = [];
+    // for (let i = 0; i < templateRev.length; i++) {
+    //   for (let l = 0; l < templateRev[i].props.ps_children.dbValues.length; l++) {
+    //     children.push(await com.getObject(templateRev[i].props.ps_children.dbValues[l]));
+    //   }
+    // }
+
+    // let test = [];
+
+    // for (let i = 0; i < templateRev.length; i++) {
+    //   test.push(await bomUtils.createBOMWindow(null, templateRev[i]));
+    //   await bomUtils.closeBOMWindow(test[i].bomWindow);
+    // }
+
+    // // console.log({topBom});
+
+    // //         if(expandResult.output[0].children.length > 0){
+    // //         eResult = expandResult.output[0].children;
+    // //         }
+    // //         for(let i = 0; i<eResult.length; i++){
+    // //         await com.getProperties(eResult[i].bomLine,["bl_child_lines","object_name","bl_item_object_name","bl_rev_item_revision","bl_rev_item_revision_id","bl_item","bl_rev_current_id_uid","bl_rev_revision_list"]);
+    // //
+    // // console.log({test});
+    // let firstS = [];
+    // for (let i = 0; i < test.length; i++) {
+    //   if (test[i].bomLine.props.bl_child_lines !== undefined) {
+    //     for (let l = 0; l < test[i].bomLine.props.bl_child_lines.dbValues.length; l++) {
+    //       firstS.push(com.getObject(test[i].bomLine.props.bl_child_lines.dbValues[l]));
+    //     }
+    //   }
+    // }
+    // let headItem = await com.loadObject(localStorage.getItem('selectedObForCheck'));
+    // console.log({ headItem });
+    headData = await com.getLatestItemRevisionByItemId(localStorage.getItem('selectedObForCheck'));
+    if (headData == null || headData == undefined) {
+      headData = JSON.parse(localStorage.getItem('selectedObForCheck'));
     }
-    com.getProperties(home, ['item_id']);
 
-    let treeData = treeD.dataProviders.designStandardTreeTableData.viewModelCollection.loadedVMObjects;
-    // console.log({treeData});
-    let info = await lgepPreferenceUtils.getPreference('L2_Checklist_Structure');
-    info = com.getObject(info.Preferences.prefs[0].values[0].value);
-    // console.log(info);
-
-    // console.log(ctx);
-    let folderUser;
-    for (let i = 0; i < info.props.contents.dbValues.length; i++) {
-      if (ctx.userSession.props.group.displayValues[0] == info.props.contents.uiValues[i]) {
-        folderUser = await com.getObject(info.props.contents.dbValues[i]);
-      }
-    }
-
-    // console.log(folderUser);
-    let underFolder = [];
-    for (let i = 0; i < folderUser.props.contents.dbValues.length; i++) {
-      underFolder.push(com.getObject(folderUser.props.contents.dbValues[i]));
-    }
-    // console.log({underFolder});
-
-    let template = [];
-    for (let i = 0; i < underFolder.length; i++) {
-      if (underFolder[i].props.contents.dbValues.length > 0 && underFolder[i].props.contents !== undefined) {
-        for (let l = 0; l < underFolder[i].props.contents.dbValues.length; l++) {
-          template.push(await com.getObject(underFolder[i].props.contents.dbValues[l]));
-        }
-      }
-    }
-    await com.getProperties(template, ['item_id', 'contents', 'ps_children']);
-    // console.log(template);
-    let templateRev = [];
-    for (let i = 0; i < template.length; i++) {
-      templateRev.push(await com.getLatestItemRevisionByItemId(template[i].props.item_id.dbValues[0]));
-    }
-
-    await com.getProperties(templateRev, ['contents', 'ps_children']);
-    let children = [];
-    for (let i = 0; i < templateRev.length; i++) {
-      for (let l = 0; l < templateRev[i].props.ps_children.dbValues.length; l++) {
-        children.push(await com.getObject(templateRev[i].props.ps_children.dbValues[l]));
-      }
-    }
-    let test = [];
-
-    for (let i = 0; i < templateRev.length; i++) {
-      test.push(await bomUtils.createBOMWindow(null, templateRev[i]));
-      await bomUtils.closeBOMWindow(test[i].bomWindow);
-    }
-
-    // console.log({topBom});
-
-    //         if(expandResult.output[0].children.length > 0){
-    //         eResult = expandResult.output[0].children;
+    let test = await bomUtils.createBOMWindow(null, headData);
+    // if (headData == undefined) {
+    //   let getRev = [];
+    //   await com.getProperties(firstS, ['awb0BomLineItemId']);
+    //   for (let i = 0; i < firstS.length; i++) {
+    //     getRev[i] = await com.getLatestItemRevisionByItemId(firstS[i].props.awb0BomLineItemId.dbValues[0]);
+    //   }
+    //   // console.log({getRev});
+    //   await com.getProperties(getRev, ['L2_DesignStandardRel']);
+    //   let selected;
+    //   for (let i = 0; i < getRev.length; i++) {
+    //     if (getRev[i].props.L2_DesignStandardRel.dbValues.length > 0) {
+    //       for (let l = 0; l < getRev[i].props.L2_DesignStandardRel.dbValues.length; l++) {
+    //         if (getRev[i].props.L2_DesignStandardRel.dbValues[l] == treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]) {
+    //           selected = getRev[i];
     //         }
-    //         for(let i = 0; i<eResult.length; i++){
-    //         await com.getProperties(eResult[i].bomLine,["bl_child_lines","object_name","bl_item_object_name","bl_rev_item_revision","bl_rev_item_revision_id","bl_item","bl_rev_current_id_uid","bl_rev_revision_list"]);
-    //
-    // console.log({test});
-    let firstS = [];
-    for (let i = 0; i < test.length; i++) {
-      if (test[i].bomLine.props.bl_child_lines !== undefined) {
-        for (let l = 0; l < test[i].bomLine.props.bl_child_lines.dbValues.length; l++) {
-          firstS.push(com.getObject(test[i].bomLine.props.bl_child_lines.dbValues[l]));
-        }
-      }
-    }
+    //       }
+    //     }
+    //   }
+    //   // console.log(treeC.bomLineTree[0].obj.props.items_tag.dbValues[0])
+    //   // console.log(selected);
+    //   await com.getProperties(selected, ['item_id', 'owning_group']);
 
-    headData = treeD.dataProviders.designStandardTreeTableData.selectedObjects[0];
-    // console.log(headData);
-    if (headData == undefined) {
-      let getRev = [];
-      await com.getProperties(firstS, ['awb0BomLineItemId']);
-      for (let i = 0; i < firstS.length; i++) {
-        getRev[i] = await com.getLatestItemRevisionByItemId(firstS[i].props.awb0BomLineItemId.dbValues[0]);
-      }
-      // console.log({getRev});
-      await com.getProperties(getRev, ['L2_DesignStandardRel']);
-      let selected;
-      for (let i = 0; i < getRev.length; i++) {
-        if (getRev[i].props.L2_DesignStandardRel.dbValues.length > 0) {
-          if (getRev[i].props.L2_DesignStandardRel.dbValues[0] == treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]) {
-            selected = getRev[i];
-          }
-        }
-      }
-      // console.log(treeC.bomLineTree[0].obj.props.items_tag.dbValues[0])
-      // console.log(selected);
-      await com.getProperties(selected, ['item_id', 'owning_group']);
-
-      for (let i = 0; i < firstS.length; i++) {
-        if (firstS[i].props.awb0BomLineItemId.dbValues[0] == selected.props.item_id.dbValues[0]) {
-          headData = firstS[i];
-        }
-      }
-    }
-    await com.getProperties(headData, ['bl_child_lines']);
+    //   for (let i = 0; i < firstS.length; i++) {
+    //     if (firstS[i].props.awb0BomLineItemId.dbValues[0] == selected.props.item_id.dbValues[0]) {
+    //       headData = firstS[i];
+    //     }
+    //   }
+    // }
+    // await com.getProperties(headData, ['bl_child_lines']);
 
     let headExpand;
-    headExpand = await bomUtils.expandPSAllLevels([headData]);
-
+    headExpand = await bomUtils.expandPSAllLevels([test.bomLine]);
+    await bomUtils.closeBOMWindow;
     let failGroup = [];
 
     for (let i = 0; i < headExpand.output.length; i++) {
@@ -223,13 +229,16 @@ export async function showTableCheck(ctx) {
     }
     await com.getProperties(failGroup, ['L2_ReferenceDataset']);
 
-    // console.log({ failGroup });
     let predataset = [];
     let datasetInfo = [];
     for (let i = 0; i < failGroup.length; i++) {
       if (failGroup[i].props.L2_ReferenceDataset.dbValues[0] !== '') {
-        datasetInfo.push(com.getObject(failGroup[i].props.L2_ReferenceDataset.dbValues[0]));
+        predataset.push(await com.loadObject(failGroup[i].props.L2_ReferenceDataset.dbValues[0]));
       }
+    }
+
+    for (let i = 0; i < predataset.length; i++) {
+      datasetInfo.push(predataset[i].modelObjects[predataset[i].plain[0]]);
     }
 
     datasetInfo = datasetInfo.filter((element, i) => element != null);
@@ -238,8 +247,8 @@ export async function showTableCheck(ctx) {
       data.showToast = false;
     }
 
-    // console.log(datasetInfo);
     getDataset(datasetInfo);
+    // console.log({ datasetInfo });
   }
 }
 async function getDataset(itemRev) {
@@ -317,9 +326,9 @@ async function getDataset(itemRev) {
       }
     }
     list = list.filter((element) => element !== undefined);
-
     localStorage.setItem('datasetInfo', JSON.stringify(list));
 
+    // console.log({ list });
     // var testList = [];
     let data = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
     if (list.length == 0) {
@@ -385,7 +394,7 @@ async function getDataset(itemRev) {
     loadUtils.closeWindow();
     return msg.show(
       1,
-      '설계지침서가 없습니다',
+      '체크리스트가 없습니다',
       ['닫기'],
       [
         function () {
@@ -396,10 +405,24 @@ async function getDataset(itemRev) {
   }
 
   if (!data.showToast) {
-    return loadUtils.closeWindow();
+    loadUtils.closeWindow();
+    return msg.show(
+      1,
+      '체크리스트가 없습니다',
+      ['닫기'],
+      [
+        function () {
+          data.showToast = false;
+        },
+      ],
+    );
   } else {
     loadUtils.closeWindow();
-    var win = window.open('http://localhost:3001/#/L2_DesignStandardEnterTree');
+
+    let url = window.location.href.split('/');
+
+    var win = window.open('http://' + url[2] + '/#/' + 'L2_DesignStandardEnterTree');
+    console.timeEnd();
   }
 }
 function flatAr(arr) {
@@ -446,7 +469,6 @@ async function getDatasetNewTab(list) {
       };
       rowData.push(rowData2);
     }
-    // console.log(rowData);
 
     let columns = [
       {
@@ -506,22 +528,6 @@ async function getDatasetNewTab(list) {
         resizable: true,
       },
     });
-
-    if (appCtxService.ctx.theme == 'ui-lgepDark') {
-      Grid.applyTheme('default', {
-        scrollbar: {
-          border: '#444a4e',
-          background: '#282d33',
-        },
-      });
-    } else {
-      Grid.applyTheme('default', {
-        scrollbar: {
-          border: '#eee',
-          background: '#fff',
-        },
-      });
-    }
   }
 }
 
@@ -550,7 +556,7 @@ export async function treeUp(data, ctx) {
       node.loadingStatus = true;
       node._expandRequested = true;
       awTableStateService.saveRowExpanded(treeD, 'designStandardTreeTable', node);
-      treeD.dataProviders.designStandardTreeTableData.selectionModel.addToSelection(node);
+      // treeD.dataProviders.designStandardTreeTableData.selectionModel.addToSelection(node);
       try {
         const updatedViewModelCollection = await treeD.dataProviders.designStandardTreeTableData.expandObject(_scope, node);
         delete node.loadingStatus;
@@ -568,12 +574,13 @@ export async function treeUp(data, ctx) {
       } finally {
         delete node.loadingStatus;
         delete node._expandRequested;
-        treeD.dataProviders.designStandardTreeTableData.selectNone();
+        // treeD.dataProviders.designStandardTreeTableData.selectNone();
       }
     };
 
     const loadedVMObjects = treeD.dataProviders.designStandardTreeTableData.getViewModelCollection().loadedVMObjects;
     for (let i = 0; i < loadedVMObjects.length; i++) {
+      treeD.dataProviders.designStandardTreeTableData.selectionModel.addToSelection(loadedVMObjects[0]);
       const loadedVMObject = loadedVMObjects[i];
       if (!loadedVMObject.isExpanded) {
         await expandAll(loadedVMObject);
@@ -628,7 +635,7 @@ export async function treeShrink() {
   let treeD = vms.getViewModelUsingElement(document.getElementById('designStdData'));
   treeD.open = true;
   treeD.dataProviders.designStandardTreeTableData.selectNone();
-  _scope = null;
+  // _scope = null;
 
   const loadedVMObjects = treeD.dataProviders.designStandardTreeTableData.getViewModelCollection().loadedVMObjects;
   const findExpandedNodes = awTableStateService.findExpandedNodes(treeD, 'designStandardTreeTable', loadedVMObjects);
@@ -647,6 +654,7 @@ export async function treeShrink() {
         .finally(() => {
           awTableStateService.saveRowCollapsed(treeD, 'designStandardTreeTable', expandedNode);
           delete expandedNode.loadingStatus;
+          treeD.dataProviders.designStandardTreeTableData.selectNone();
         });
     });
   }
@@ -794,7 +802,6 @@ export async function toastNewTab() {
 //     appCtxService.registerCtx("info",information);
 //     navigationSvc.navigate(action,information);
 //   };
-
 export async function callToast() {
   // console.log("hello world")
   await lgepCommonUtils.delay(100);
@@ -804,6 +811,389 @@ export async function callToast() {
 
   let list = JSON.parse(localStorage.getItem('datasetInfo'));
   getDatasetNewTab(list);
+}
+
+export async function showPre() {
+  let data = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
+
+  // if(data.showToast == true){
+  //     data.showToast == false
+  // }
+  let treeD = vms.getViewModelUsingElement(document.getElementById('designStdData'));
+  let treeC = vms.getViewModelUsingElement(document.getElementById('bomlineTreeData'));
+  if (treeD.dataProviders.designStandardTreeTableData.selectedObjects.length > 0) {
+    localStorage.setItem('selectedObForCheck', treeD.dataProviders.designStandardTreeTableData.selectedObjects[0].props.item_id.dbValues[0]);
+  }
+  let tree = treeD.dataProviders.designStandardTreeTableData.selectedObjects[0];
+  if (tree !== undefined) {
+    await com.getProperties(tree, ['l2_is_checklist']);
+    data.showButton = true;
+    //   localStorage.setItem('treeSelected', tree.props.l2_is_checklist.dbValues[0]);
+    //   if (tree.props.l2_is_checklist === 'Y') {
+    //     // data.showButton = true;
+    //   } else {
+    //     // data.showButton = false;
+    //   }
+    // } else {
+    //   let selectedOb = localStorage.getItem('treeSelected');
+
+    //   await lgepCommonUtils.delay(100);
+    //   if (selectedOb == 'Y') {
+    //     // data.showButton = true;
+    //   } else {
+    //     // data.showButton = false;
+    //   }
+    //   // data.showButton = false;
+    //   // await lgepCommonUtils.delay(100);
+  }
+  // let headData;
+  // if(data.showToast == true){
+  //     data.showToast == false
+  // }
+
+  // if (treeC === undefined) {
+  //   // msg.show(
+  //   //   1,
+  //   //   '설계지침서를 열어주세요',
+  //   //   ['닫기'],
+  //   //   [
+  //   //     function () {
+  //   //       data.showToast = false;
+  //   //     },
+  //   //   ],
+  //   // );
+  // } else {
+  //   let ctx = appCtxService.ctx;
+  //   let searchInput = {
+  //     attributesToInflate: ['object_name', 'object_desc', 'L2_DesignStandardRel', 'item_id'],
+  //     maxToLoad: -1,
+  //     maxToReturn: -1,
+  //     providerName: 'Awp0FullTextSearchProvider',
+  //     searchCriteria: {
+  //       searchString: '*',
+  //     },
+  //     searchFilterFieldSortType: 'Priority',
+  //     searchFilterMap6: {
+  //       'WorkspaceObject.object_type': [
+  //         {
+  //           searchFilterType: 'StringFilter',
+  //           stringValue: 'L2_StructureRevision',
+  //           colorValue: '',
+  //           stringDisplayValue: '',
+  //           startDateValue: '',
+  //           endDateValue: '',
+  //           startNumericValue: 0,
+  //           endNumericValue: 0,
+  //           count: 0,
+  //           selected: false,
+  //           startEndRange: '',
+  //         },
+  //       ],
+  //     },
+  //     searchSortCriteria: [],
+  //     startIndex: 0,
+  //   };
+
+  //   let params = {
+  //     types: [
+  //       {
+  //         name: 'WorkspaceObject',
+  //         properties: [{ name: 'object_name' }, { name: 'creation_date' }, { name: 'items_tag' }, { name: 'L2_DesignStandardRel' }, { name: 'item_id' }],
+  //       },
+  //     ],
+  //   };
+
+  //   let result = await query.performSearchViewModel4(null, searchInput, params);
+  //   result = result.searchResults;
+  //   com.getProperties(result, ['L2_DesignStandardRel']);
+
+  //   // let book = com.getObject(
+  //   //   treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]
+  //   // );
+  //   // console.log(book);
+  //   // console.log(await com.whereReferenced([book], 1));
+  //   let home = [];
+  //   for (let i = 0; i < result.length; i++) {
+  //     if (result[i].props.L2_DesignStandardRel.dbValues.length > 0) {
+  //       if (result[i].props.L2_DesignStandardRel.dbValues[0] == treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]) {
+  //         home.push(result[i]);
+  //       }
+  //     }
+  //   }
+  //   com.getProperties(home, ['item_id']);
+
+  //   let info = await lgepPreferenceUtils.getPreference('L2_Checklist_Structure');
+  //   info = com.getObject(info.Preferences.prefs[0].values[0].value);
+
+  //   // console.log(ctx);
+  //   let folderUser;
+  //   for (let i = 0; i < info.props.contents.dbValues.length; i++) {
+  //     if (ctx.userSession.props.group.displayValues[0] == info.props.contents.uiValues[i]) {
+  //       folderUser = await com.getObject(info.props.contents.dbValues[i]);
+  //     }
+  //   }
+
+  //   let underFolder = [];
+  //   for (let i = 0; i < folderUser.props.contents.dbValues.length; i++) {
+  //     underFolder.push(com.getObject(folderUser.props.contents.dbValues[i]));
+  //   }
+
+  //   let template = [];
+  //   for (let i = 0; i < underFolder.length; i++) {
+  //     if (underFolder[i].props.contents.dbValues.length > 0 && underFolder[i].props.contents !== undefined) {
+  //       for (let l = 0; l < underFolder[i].props.contents.dbValues.length; l++) {
+  //         template.push(await com.getObject(underFolder[i].props.contents.dbValues[l]));
+  //       }
+  //     }
+  //   }
+  //   await com.getProperties(template, ['item_id', 'contents', 'ps_children']);
+  //   // console.log(template);
+  //   let templateRev = [];
+  //   for (let i = 0; i < template.length; i++) {
+  //     templateRev.push(await com.getLatestItemRevisionByItemId(template[i].props.item_id.dbValues[0]));
+  //   }
+
+  //   await com.getProperties(templateRev, ['contents', 'ps_children']);
+  //   let children = [];
+  //   for (let i = 0; i < templateRev.length; i++) {
+  //     for (let l = 0; l < templateRev[i].props.ps_children.dbValues.length; l++) {
+  //       children.push(await com.getObject(templateRev[i].props.ps_children.dbValues[l]));
+  //     }
+  //   }
+  //   let test = [];
+
+  //   for (let i = 0; i < templateRev.length; i++) {
+  //     test.push(await bomUtils.createBOMWindow(null, templateRev[i]));
+  //     await bomUtils.closeBOMWindow(test[i].bomWindow);
+  //   }
+
+  //   //         if(expandResult.output[0].children.length > 0){
+  //   //         eResult = expandResult.output[0].children;
+  //   //         }
+  //   //         for(let i = 0; i<eResult.length; i++){
+  //   //         await com.getProperties(eResult[i].bomLine,["bl_child_lines","object_name","bl_item_object_name","bl_rev_item_revision","bl_rev_item_revision_id","bl_item","bl_rev_current_id_uid","bl_rev_revision_list"]);
+  //   //
+
+  //   let firstS = [];
+  //   for (let i = 0; i < test.length; i++) {
+  //     if (test[i].bomLine.props.bl_child_lines !== undefined) {
+  //       for (let l = 0; l < test[i].bomLine.props.bl_child_lines.dbValues.length; l++) {
+  //         firstS.push(com.getObject(test[i].bomLine.props.bl_child_lines.dbValues[l]));
+  //       }
+  //     }
+  //   }
+
+  //   headData = treeD.dataProviders.designStandardTreeTableData.selectedObjects[0];
+
+  //   if (headData == undefined) {
+  //     let getRev = [];
+  //     await com.getProperties(firstS, ['awb0BomLineItemId']);
+  //     for (let i = 0; i < firstS.length; i++) {
+  //       getRev[i] = await com.getLatestItemRevisionByItemId(firstS[i].props.awb0BomLineItemId.dbValues[0]);
+  //     }
+  //     // console.log({getRev});
+  //     await com.getProperties(getRev, ['L2_DesignStandardRel']);
+  //     let selected;
+  //     for (let i = 0; i < getRev.length; i++) {
+  //       if (getRev[i].props.L2_DesignStandardRel.dbValues.length > 0) {
+  //         if (getRev[i].props.L2_DesignStandardRel.dbValues[0] == treeC.bomLineTree[0].obj.props.items_tag.dbValues[0]) {
+  //           selected = getRev[i];
+  //         }
+  //       }
+  //     }
+
+  //     await com.getProperties(selected, ['item_id', 'owning_group']);
+
+  //     for (let i = 0; i < firstS.length; i++) {
+  //       if (firstS[i].props.awb0BomLineItemId.dbValues[0] == selected.props.item_id.dbValues[0]) {
+  //         headData = firstS[i];
+  //       }
+  //     }
+  //   }
+  //   await com.getProperties(headData, ['bl_child_lines']);
+
+  //   let headExpand;
+  //   headExpand = await bomUtils.expandPSAllLevels([headData]);
+  //   let failGroup = [];
+
+  //   for (let i = 0; i < headExpand.output.length; i++) {
+  //     if (headExpand.output[i].parent.bomLine.props.object_string.dbValues[0].includes('고장')) {
+  //       failGroup.push(headExpand.output[i].parent.bomLine);
+  //     }
+  //   }
+  //   await com.getProperties(failGroup, ['L2_ReferenceDataset']);
+
+  //   let predataset = [];
+  //   let datasetInfo = [];
+  //   for (let i = 0; i < failGroup.length; i++) {
+  //     if (failGroup[i].props.L2_ReferenceDataset.dbValues[0] !== '') {
+  //       predataset.push(await com.loadObject(failGroup[i].props.L2_ReferenceDataset.dbValues[0]));
+  //     }
+  //   }
+
+  //   for (let i = 0; i < predataset.length; i++) {
+  //     datasetInfo.push(predataset[i].modelObjects[predataset[i].plain[0]]);
+  //   }
+
+  //   datasetInfo = datasetInfo.filter((element, i) => element != null);
+
+  //   // if (datasetInfo.length == 0) {
+  //   //   data.showButton = false;
+  //   // } else {
+  //   //   data.showButton = true;
+  //   // }
+
+  //   if (datasetInfo.length > 0) {
+  //     getDataset2(datasetInfo);
+  //   } else {
+  //     data.showButton = false;
+  //   }
+  // }
+}
+async function getDataset2(itemRev) {
+  let dataset = [];
+  let data = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
+  //     let datasetTemp = [];
+  //     if (itemRev[l].props.L2_ReferenceDataset.dbValues.length > 0) {
+  //         datasetTemp.push(com.getObjects(itemRev[l].props.L2_ReferenceDataset.dbValues[0]));
+  //     }
+  //     let video = [];
+  //     if (datasetTemp == null) {
+  //       console.log(datasetTemp);
+  //         return;
+  //     } else {
+
+  if (!Array.isArray(dataset)) {
+    dataset = [dataset];
+  }
+
+  // console.log(itemRev);
+  await com.getProperties(itemRev[0], ['ref_list']);
+  let file = [];
+
+  file.push(com.getObject(itemRev[0].props.ref_list.dbValues[0]));
+
+  file = flatAr(file);
+  // console.log(file);
+
+  if (itemRev[0].type == 'Text') {
+    dataset.push(file[0]);
+  }
+
+  await com.getProperties(dataset, ['file_size', 'byte_size']);
+  let fileSize = 0;
+
+  fileSize = fileSize + Number(dataset[0].props.byte_size.dbValues[0]);
+
+  if (dataset.length > 0) {
+    //파일티켓 읽기
+    let textTicket;
+    let string;
+    let list = [];
+    let num = 0;
+    let searchGroup = [];
+    let inputParam;
+
+    inputParam = {
+      files: [dataset[0]],
+    };
+    searchGroup.push(await SoaService.post('Core-2006-03-FileManagement', 'getFileReadTickets', inputParam));
+
+    let stringTemp = '';
+    textTicket = searchGroup[0].tickets[1][0];
+    let textURL = browserUtils.getBaseURL() + 'fms/fmsdownload/' + fmsUtils.getFilenameFromTicket(textTicket) + '?ticket=' + textTicket;
+    const res = await fetch(textURL);
+
+    const arrayBuffer = await res.arrayBuffer();
+    const chars = new Uint8Array(arrayBuffer);
+
+    stringTemp = stringTemp + new TextDecoder().decode(chars);
+
+    string = JSON.parse(stringTemp);
+    list[0] = string;
+
+    let index = [];
+    // for (let i = 0; i < list.length; i++) {
+    //   if (list[i]['detectivity'] == '' && list[i]['failureDetail'] == '' && list[i]['prevention'] == '') {
+    //     delete list[i];
+    //   }
+    // }
+    list = list.filter((element) => element !== undefined);
+
+    // var testList = [];
+    let data = vms.getViewModelUsingElement(document.getElementById('L2DesignStandardData'));
+    if (list[0]['detectivity'] !== '' && list[0]['failureDetail'] !== '' && list[0]['prevention'] !== '') {
+      data.showButton = true;
+    } else {
+      data.showButton = false;
+    }
+    // var arrData = [];
+    // // console.log(list);
+    // // console.log(list[0]["detectivity"]);
+    // for (let i = 0; i < list.length; i++) {
+    //   const rowData2 = {
+    //     detectivity: list[i]["detectivity"],
+    //     failureDetail: list[i]["failureDetail"],
+    //     prevention: list[i]["prevention"],
+    //   };
+    //   rowData.push(rowData2);
+    // }
+    // // console.log(rowData);
+
+    // let columns = [
+    //   {
+    //     header: "결함",
+    //     name: "detectivity",
+    //     // or regardless of version
+    //     width: 700,
+    //   },
+    //   {
+    //     header: "고장원인",
+    //     name: "failureDetail",
+    //     // or regardless of version
+    //   },
+    //   {
+    //     header: "예방",
+    //     name: "prevention",
+    //     // or regardless of version
+    //     width: 800,
+    //   },
+    // ];
+
+    // testList.push(columns);
+
+    // // const columns1 = _getColumns(columns, widthArray);
+    // // console.log(testList);
+
+    // // console.log(testList);
+    // try {
+    //   const grid = new Grid({
+    //     el: document.getElementById("checkToast"),
+    //     data: rowData,
+    //     columns: columns,
+    //     rowHeight: 400,
+    //     bodyHeight: 500,
+    //     bodyWidth: 800,
+    //     scrollX: false,
+    //     scrollY: false,
+    //   });
+    // } catch {
+    //   loadUtils.closeWindow();
+    // }
+  } else {
+    data.showToast = false;
+    loadUtils.closeWindow();
+    return msg.show(
+      1,
+      '체크리스트가 없습니다',
+      ['닫기'],
+      [
+        function () {
+          data.showToast = false;
+        },
+      ],
+    );
+  }
 }
 
 let exports = [];
@@ -817,4 +1207,5 @@ export default exports = {
   toastNewTab,
   reload,
   treeSelectionChangeEvent,
+  showPre,
 };

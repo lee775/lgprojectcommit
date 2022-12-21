@@ -79,6 +79,38 @@
     "type": "subLocation",
     "parent": "lgepKnowledgeManageLocation"
   },
+  "generalMinutes": {
+    "url": "/generalMinutes",
+    "data": {
+      "label": {
+        "source": "/i18n/lgepKnowldegeManageMessages",
+        "key": "generalMinutesSubLocationTitle"
+      },
+      "nameToken": "generalMinutes",
+      "clientScopeURI": ""
+    },
+    "view": "generalMinutes",
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "parent": "lgepKnowledgeManageLocation"
+  },
+  "actionItemDetails": {
+    "url": "/actionItemDetails",
+    "data": {
+      "label": {
+        "source": "/i18n/lgepKnowldegeManageMessages",
+        "key": "actionItemDetailsSubLocationTitle"
+      },
+      "nameToken": "actionItemDetails",
+      "clientScopeURI": ""
+    },
+    "view": "actionItemDetails",
+    "dependencies": ["js/aw.native.sublocation.controller"],
+    "templateUrl": "/html/aw.native.sublocation.html",
+    "type": "subLocation",
+    "parent": "lgepKnowledgeManageLocation"
+  },
   "expertManage": {
     "url": "/expertManage",
     "data": {

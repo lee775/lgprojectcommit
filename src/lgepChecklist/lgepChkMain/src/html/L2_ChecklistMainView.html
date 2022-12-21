@@ -9,7 +9,7 @@
             <aw-listbox class="checklist-draggable-false" prop="data.tableMode" list="data.tableModeValues.dbValue" style="margin-top: -15px"></aw-listbox>
           </aw-flex-column>
           <aw-flex-column>
-            <aw-command-bar anchor="L2_ChecklistMainAnchor" alignment="HORIZONTAL"></aw-command-bar>
+            <aw-command-bar class="main-anchor-cmds" anchor="L2_ChecklistMainAnchor" alignment="HORIZONTAL"></aw-command-bar>
           </aw-flex-column>
         </aw-flex-row>
         <div id="grid" exist-when="ctx.checklist.browseMode=='0'"></div>
@@ -36,6 +36,7 @@
 <aw-sidenav id="checklist_createStructure" config="data.createStructureInfo"></aw-sidenav>
 <aw-sidenav id="checklist_addStructure" config="data.addStructureInfo"></aw-sidenav>
 <aw-sidenav id="checklist_createMinutes" class="veryBigPanel" config="data.createMinutesInfo"></aw-sidenav>
+<aw-sidenav id="checklist_freeze" config="data.freeze"></aw-sidenav>
 <aw-row exist-when="ctx.checklist.browseMode=='1' && ctx.checklist.failure.length > 0" class="sliderBtn">
   <aw-slider prop="data.zoomSliderProp" class="zoom-slider"></aw-slider>
   <aw-icon-button size="large" command="data.zoomSliderInit" class="zoom-sliderBtn"></aw-icon-button>

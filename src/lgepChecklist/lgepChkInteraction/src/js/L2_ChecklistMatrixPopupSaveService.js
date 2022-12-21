@@ -7,9 +7,18 @@ import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 import { showErrorMessage, showInfoMessage } from 'js/utils/fmeaMessageUtils';
 import { gridTable, INTERACTION_TABLES } from 'js/L2_interactionMatrixPopupTableService';
 import { PROP_PRIMARY, PROP_SECONDARY, PROP_GRADE, PROP_INTERACTION_TABLE, TOP, STRUCTURE_INFO } from 'js/L2_ChecklistInteractionUtils';
+import lgepPopupUtils from 'js/utils/lgepPopupUtils';
+import lgepMessagingUtils from 'js/utils/lgepMessagingUtils';
+import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
 
 const TYPE_TABLE_ROW = 'L2_InteractionTableRow';
-
+let cancel = lgepLocalizationUtils.getLocalizedText('lgepInteractionMatrixMessages', 'cancel');
+let justClose = lgepLocalizationUtils.getLocalizedText('lgepInteractionMatrixMessages', 'justClose');
+let closeAfterSave = lgepLocalizationUtils.getLocalizedText('lgepInteractionMatrixMessages', 'closeAfterSave');
+let askQuestion = lgepLocalizationUtils.getLocalizedText('lgepInteractionMatrixMessages', 'askQuestion');
+let checkSave;
+let savePass = false;
+let test = null;
 const saveInteractionMatrix = () => {
   _beforeSaveAction();
   try {
@@ -111,6 +120,7 @@ const _afterSaveAction = () => {
   const globalDocument = document.children[0];
   globalDocument.classList.remove('dfmea-job-progressing');
   showInfoMessage('successComplete');
+  savePass = true;
 };
 
 const _keepDisable = (rowD) => {
@@ -119,6 +129,86 @@ const _keepDisable = (rowD) => {
   }
 };
 
+const _closePopup = () => {
+  let nowPopup = document.getElementById('interactionMatrixPopup');
+  nowPopup.parentElement.removeChild(nowPopup);
+  window.onbeforeunload = function (e) {
+    return e.preventDefault();
+  };
+};
+
+export async function beforeClose() {
+  if (savePass) {
+    _closePopup();
+    savePass = false;
+  } else {
+    checkSave = false;
+    const rows = gridTable.getData();
+    if (rows.length == 0) {
+      _closePopup();
+      return;
+    } else {
+      const structureNames = _getStructures(rows[0]);
+      const topObject = appCtxService.ctx.checklist[STRUCTURE_INFO][TOP].getOriginalObject();
+      for (const row of rows) {
+        const primaryUid = row.id;
+        for (const structureName of structureNames) {
+          let interactionType = row[structureName];
+          if (!interactionType) {
+            continue;
+          }
+          const secondaryObjectUid = gridTable.getColumn(structureName).className;
+
+          const existRow = _getExistTableRow(primaryUid, secondaryObjectUid);
+
+          if (!existRow) {
+            // 생성
+            if (interactionType == '-') {
+              checkSave = false;
+            } else {
+              checkSave = true;
+            }
+          } else {
+            // type 다르면 setProeprty
+            const existRowInteractionType = existRow.props[PROP_GRADE].dbValues[0];
+            if (interactionType !== existRowInteractionType) {
+              if (interactionType === '-' && existRowInteractionType == null) {
+                checkSave = false;
+              } else {
+                checkSave = true;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (checkSave == true) {
+      lgepMessagingUtils.show(
+        0,
+        askQuestion,
+        [cancel, justClose, closeAfterSave],
+        [
+          function () {},
+          function () {
+            _closePopup();
+            savePass = false;
+          },
+          function () {
+            saveInteractionMatrix();
+            _closePopup();
+            savePass = false;
+          },
+        ],
+      );
+    } else {
+      _closePopup();
+      savePass = false;
+    }
+  }
+}
+
 export default {
   saveInteractionMatrix,
+  beforeClose,
 };

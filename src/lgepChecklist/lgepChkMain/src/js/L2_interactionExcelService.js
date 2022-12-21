@@ -11,8 +11,8 @@ import lgepCommonUtils from 'js/utils/lgepCommonUtils';
 import message from 'js/utils/lgepMessagingUtils';
 import * as datas from 'js/L2_interactionExcelServiceData';
 import $ from 'jquery';
-
 import { TOP, getInteractionTable } from 'js/L2_ChecklistInteractionUtils';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 
 let workbook;
 let worksheet;
@@ -22,6 +22,8 @@ const startRow = 12;
 const startCell = 2;
 let endRow = 12;
 let endCell = 2;
+const FONT = 'LG스마트체2.0 Regular';
+const FONT_STYLE = { name: FONT, size: 11 };
 const BORDER_STYLE = {
   top: { style: 'thin' },
   left: { style: 'thin' },
@@ -52,30 +54,46 @@ export async function excelInteraction(workbook) {
 }
 
 const addInteraction = async (data, ctx) => {
-  ctx = appCtxService.ctx;
-  workbook = new Excel.Workbook();
-  workbook.addWorksheet('interaction');
-  worksheet = workbook.getWorksheet('interaction');
-  worksheet.views = [
-    {
-      showGridLines: false,
-    },
-  ];
-  addExplainRow();
+  for (const editInfo of ctx.checklist.standardBOM.editNodes) {
+    let values = Array.values(editInfo);
+    console.log('values', { values });
+  }
+  // let param = {
+  //   uids: uids,
+  // };
+  // try {
+  //   await SoaService.post('Core-2007-09-DataManagement', 'loadObjects', param);
+  //   let objs = lgepObjectUtils.getObjects(uids);
+  //   console.log(objs);
+  //   lgepObjectUtils.deleteObjects(objs).then(() => {});
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
-  await getValues(ctx);
+  // ctx = appCtxService.ctx;
+  // workbook = new Excel.Workbook();
+  // workbook.addWorksheet('interaction');
+  // worksheet = workbook.getWorksheet('interaction');
+  // worksheet.views = [
+  //   {
+  //     showGridLines: false,
+  //   },
+  // ];
+  // addExplainRow();
 
-  addHeader();
+  // await getValues(ctx);
 
-  addValues();
+  // addHeader();
 
-  setGridBorder();
+  // addValues();
 
-  mergeFirst();
+  // setGridBorder();
 
-  ctx.testWorkSheet = worksheet;
+  // mergeFirst();
 
-  downloadExcel('test');
+  // ctx.testWorkSheet = worksheet;
+
+  // downloadExcel('test');
 };
 
 function addExplainRow() {
@@ -88,12 +106,14 @@ function addExplainRow() {
   }
   let explainCell = worksheet.getCell(datas.explainCell);
   explainCell.value = datas.explain;
+  explainCell.font = FONT_STYLE;
   explainCell.alignment = { vertical: 'top', wrapText: true };
   //
   worksheet.mergeCells(`${datas.explainCell}:${datas.mergeExplainCell}`);
   let mergeCell = worksheet.getCell(`${datas.explainCell}:${datas.mergeExplainCell}`);
   mergeCell.border = BORDER_STYLE;
   mergeCell.fill = datas.textBg;
+  mergeCell.font = FONT_STYLE;
 
   for (let val of datas.divValues) {
     let Cell = worksheet.getCell(val['cell']);
@@ -101,6 +121,7 @@ function addExplainRow() {
       Cell.fill = val['color'];
     } else {
       Cell.value = val['val'];
+      Cell.font = FONT_STYLE;
     }
     if (val['mergeCell']) {
       Cell.alignment = { vertical: 'middle', horizontal: 'center' };
@@ -124,21 +145,26 @@ async function getValues(ctx) {
   let idData = {};
   let compData = [];
   let arrayData = [];
-  for (let upper of structureInfo.parentAssy) {
-    let lowers = upper.getChildren();
+  for (let assy of structureInfo.parentAssy) {
+    // let lowerValue = {};
+    // lowerValue['upperAssy'] = assy.lowerAssy;
+    // lowerValue['lowerAssy'] = assy.single;
+    // idData[assy.icon] = assy.single;
+    // arrayData.push(lowerValue);
+    let lowers = assy.getChildren();
     if (Array.isArray(lowers)) {
       for (let lower of lowers) {
         let lowerValue = {};
-        lowerValue['upperAssy'] = lower.upperAssy;
+        lowerValue['upperAssy'] = assy.name;
         lowerValue['lowerAssy'] = lower.name;
-        idData[lower.icon] = lower.lowerAssy;
+        idData[lower.icon] = assy.name;
         arrayData.push(lowerValue);
       }
     } else {
       let lowerValue = {};
-      lowerValue['upperAssy'] = lowers.upperAssy;
+      lowerValue['upperAssy'] = assy.name;
       lowerValue['lowerAssy'] = lowers.name;
-      idData[lowers.icon] = lowers.lowerAssy;
+      idData[lowers.icon] = assy.name;
       arrayData.push(lowerValue);
     }
   }
@@ -158,8 +184,8 @@ async function getValues(ctx) {
       return 0;
     }
   });
-  console.log('comp', compData);
-  console.log('array', arrayData);
+  // console.log('comp', compData);
+  // console.log('array', arrayData);
 
   compareData = compData;
   tableData = arrayData;
@@ -232,6 +258,7 @@ function setGridBorder() {
     for (let j = startCell; j <= endCell; j++) {
       let checkCell = worksheet.getRow(i).getCell(j);
       checkCell.border = BORDER_STYLE;
+      checkCell.font = FONT_STYLE;
       if (!checkCell.alignment) {
         checkCell.alignment = { vertical: 'middle', wrapText: true };
       }
@@ -245,6 +272,9 @@ function mergeFirst() {
   for (let i = startCell + 2; i <= endCell; i++) {
     let mergeData = {};
     let Cell = firstRow.getCell(i);
+    if (i > 12) {
+      Cell.width = datas.cellWidth;
+    }
     if (mergeRow[Cell.value]) {
       mergeRow[Cell.value]['mergeCell'] = Cell.address;
     } else {

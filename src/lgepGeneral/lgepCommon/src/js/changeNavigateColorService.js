@@ -2,6 +2,8 @@ import app from 'app';
 import lgepLocalizationUtils from 'js/utils/lgepLocalizationUtils';
 import appCtxSvc from 'js/appCtxService';
 import common from 'js/utils/lgepCommonUtils';
+import browserUtils from 'js/browserUtils';
+import lgepObjectUtils from 'js/utils/lgepObjectUtils';
 var $ = require('jQuery');
 
 const guideCommandTitle = lgepLocalizationUtils.getLocalizedText('cmdDesignGuideSystemMessages', 'cmdDesignGuideSystemMessagesTitle');
@@ -51,9 +53,35 @@ async function iconClick(data) {
     }
   }
 }
+
+export function cmdNavigateToTargetAction(messageUid, targetUid) {
+  let message = lgepObjectUtils.getObject(messageUid);
+  let target = lgepObjectUtils.getObject(targetUid);
+  // // 여기에 각자 객체 별로 페이지 UID를 넣어주세요. (예: 개발지식)
+  // if (target.type == 'L2_ItemRevision') {
+  //   window.location.href = browserUtils.getBaseURL() + '#/com.siemens.splm.clientfx.tcui.xrt.showObject?uid=' + targetUid;
+  // } else {
+  //   window.location.href = browserUtils.getBaseURL() + '#/com.siemens.splm.clientfx.tcui.xrt.showObject?uid=' + messageUid;
+  // }
+
+  // 공통모듈 일반 댓글, 전문가 댓글 알림 navigate
+  if (target.type == 'L2_QuestionRevision') {
+    window.location.href = browserUtils.getBaseURL() + '#/questionAnswer?question=' + targetUid;
+  } else if (target.type == 'L2_QuestionExpRevision') {
+    window.location.href = browserUtils.getBaseURL() + '#/askExpert?question=' + targetUid;
+  }
+
+  for (const tag of document.getElementsByTagName('aw-popup-panel2')) {
+    tag.parentElement.removeChild(tag);
+  }
+  lgepObjectUtils.setProperty(message, 'fnd0MessageReadFlag', 'true');
+  console.log({ messageUid, targetUid });
+}
+
 let exports = {};
 
 export default exports = {
   iconClick,
+  cmdNavigateToTargetAction,
 };
 app.factory('changeNavigateColorService', () => exports);

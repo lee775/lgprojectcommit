@@ -1,17 +1,16 @@
 <aw-flex-column id="qnaDatas" width="fill">
   <aw-flex-row height="fill" class="expertColor">
     <aw-flex-column width="4" justify="top" class="leftPadding insideMargin" id="summaryContentStyle">
-      <aw-search-box prop="data.searchBox" action="questionSearch"></aw-search-box>
+      <aw-search-box prop="data.searchBox" action="questionSearch" placeholder="data.searchBoxPlaceHolder"></aw-search-box>
       <aw-flex-row height="auto" justify="right" class="afx-alt-content-background borderShadow2">
         <aw-command-bar anchor="qaCommand" alignment="HORIZONTAL" id="commandColorId"></aw-command-bar>
       </aw-flex-row>
-      <div style="text-align: center" visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length === 0">
+      <div style="text-align: center" visible-when="ctx.qnaEList === 0">
         <h3>{{i18n.noPost}}</h3>
       </div>
-      <aw-flex-row class="borderShadow">
+      <aw-flex-row class="borderShadow" visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0">
         <aw-splm-table
           gridid="qaList"
-          visible-when="data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
           align-content="center"
         ></aw-splm-table>
       </aw-flex-row>
@@ -30,7 +29,7 @@
         exist-when="data.dataProviders.qaListDataProvider.selectedObjects.length == 0 && data.dataProviders.qaListDataProvider.viewModelCollection.loadedVMObjects.length != 0"
       >
       </aw-include>
-      <aw-panel-body visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length > 0">
+      <aw-panel-body visible-when="data.dataProviders.qaListDataProvider.selectedObjects.length > 0" id="commonLabelRow">
         <aw-command-panel-section caption="i18n.property" anchor="data.qaOptionAnchor" collapsed="false" class="question">
           <aw-flex-row>
             <aw-flex-column class="firstRow1">
