@@ -1,0 +1,123 @@
+states.json
+
+{
+    "MainLocation": {
+        "abstract": true,
+        "data": {
+            "headerTitle": {
+                "source": "/i18n/testModuleMessages",
+                "key": "myTestLocationTitle"
+            },
+            "context": {
+                "hideRightWall": true
+            },
+            "hideRightWall": true
+        },
+        "type": "location"
+    },
+    "myTest": {
+        "data": {
+            "context": {
+                "hideRightWall": true
+            },
+            "hideRightWall": true
+        },
+        "parent": "MainLocation",
+        "view": "Main",
+        "url": "/Main"
+    }
+}
+
+module.json
+
+{
+    "name": "testModule",
+    "description": "This is the testModule module"
+}
+
+MainView.html
+
+<aw-base-sublocation provider="data._sublocation"> <!--provider="data._sublocation" -->
+    <aw-panel>
+        <aw-panel-body>
+            <w-py-test></w-py-test>
+        </aw-panel-body>
+    </aw-panel>
+</aw-base-sublocation>
+
+MainViewModel.json
+
+{
+    "schemaVersion": "1.0.0",
+    "data": {},
+    "actions": {},
+    "functions": {},
+    "i18n": {},
+    "ctx":{
+        "objTest": true
+    }
+}
+
+WPyTestViewModel.json
+
+{
+    "schemaVersion": "1.0.0",
+    "data":{},
+    "lifecycleHooks": {
+        "render": "render"
+    },
+    "actions": {
+        "render": {
+            "method": "S5HomeRenderFunction",
+            "deps": "js/WPyTestService"
+        }
+    },
+    "props": {},
+    "functions": {
+    },
+    "i18n": {
+        "search": ["S5DashboardMessages"],
+        "searchDesc" : ["S5DashboardMessages"]
+      }
+}
+
+WPyTestService.js
+
+import {useInitHook, useReducer} from 'js/reactHelper'
+import eventBus from 'js/eventBus';
+import appCtxService from 'js/appCtxService';
+import AwButton from 'viewmodel/AwButtonViewModel';
+
+const spawn = require('child_process').spawn;
+
+export const S5HomeRenderFunction = props => {
+    
+    const fileInput = React.useRef(null)
+    const handleButtonClick = e => {
+        fileInput.current.click();
+    };
+    const handleChange = e => {
+        let file = e.target.files[0];
+        let filePath = e.target.value;
+        let pathSplit = filePath.replaceAll('\\','\/');
+        console.log("파일 업로드",{e});
+        console.log("패스",{filePath});
+        console.log("패스2",{pathSplit});
+        console.log(e.target.files[0]);
+        // const result = spawn('python', ['C:\Siemens\Teamcenter14\aws2\korean_ocr_using_pororo-main\korean_ocr_using_pororo-main\main.py',pathSplit]);
+        // result.stdout.on('data', function(data) {
+        //     console.log('파이썬');
+        //     console.log(data.toString());
+        // });
+    };
+
+    return (
+        <>
+            <div>여기 실행</div>
+            <AwButton action={handleButtonClick}>파일 업로드</AwButton>
+            <React.Fragment>
+                <input type="file" ref={fileInput} style={{ display: "none" }} onChange={handleChange} />
+            </React.Fragment>
+        </>
+    );
+};
